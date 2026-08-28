@@ -1,0 +1,575 @@
+@import "tailwindcss";
+
+@layer base {
+  /* 🦇 Batman / Gotham Dark Knight Theme (Batcave Pitch Black & Gotham Gold) */
+  html.batman,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) {
+    background-color: #07080b;
+    color: #f3f4f6;
+  }
+
+  html.batman aside,
+  html.batman header,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) aside,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) header {
+    background-color: #0b0d13;
+    border-color: #1a1e2a;
+  }
+
+  html.batman .bg-slate-900,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .bg-slate-900 {
+    background-color: #0f121a;
+    border-color: #1a1e2a;
+  }
+
+  html.batman .bg-slate-950,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .bg-slate-950 {
+    background-color: #07080b;
+  }
+
+  html.batman .border-slate-800,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .border-slate-800 {
+    border-color: #1a1e2a;
+  }
+
+  html.batman .border-slate-700,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .border-slate-700 {
+    border-color: #242b3b;
+  }
+
+  /* Gotham Gold Highlights in Batman Theme */
+  html.batman .batman-gold-glow,
+  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .batman-gold-glow {
+    box-shadow: 0 0 20px -2px rgba(250, 204, 21, 0.35);
+  }
+
+  /* ☀️ Light Clean Mode (Crisp Daytime Study Canvas) */
+  html.light {
+    background-color: #f8fafc;
+    color: #0f172a;
+  }
+
+  html.light aside,
+  html.light header {
+    background-color: #ffffff !important;
+    border-color: #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  html.light .bg-slate-900,
+  html.light .dark\:bg-\[\#0b0d13\] {
+    background-color: #1e293b;
+    color: #ffffff;
+    border-color: #334155;
+  }
+
+  html.light header .text-white,
+  html.light aside .text-white {
+    color: #0f172a !important;
+  }
+
+  html.light header .text-slate-400,
+  html.light aside .text-slate-400 {
+    color: #64748b !important;
+  }
+
+  html.light header .bg-\[\#090d19\],
+  html.light header .bg-\[\#161e33\] {
+    background-color: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #334155 !important;
+  }
+
+  html.light .border-slate-800,
+  html.light .border-slate-700 {
+    border-color: #e2e8f0;
+  }
+
+  /* 📖 Warm Sepia Theme (Eye-Care Relaxed Tone) */
+  html.sepia {
+    background-color: #fbf0d9;
+    color: #433422;
+  }
+
+  html.sepia aside,
+  html.sepia header,
+  html.sepia article,
+  html.sepia .bg-white {
+    background-color: #f4e8c1 !important;
+    color: #433422 !important;
+    border-color: #e5d3a5 !important;
+  }
+
+  html.sepia .bg-slate-50 {
+    background-color: #ede0b4;
+    color: #433422;
+  }
+
+  html.sepia .bg-slate-900,
+  html.sepia .bg-slate-950,
+  html.sepia .dark\:bg-\[\#0b0d13\] {
+    background-color: #3d3021 !important;
+    color: #fef8ee !important;
+    border-color: #584735 !important;
+  }
+
+  html.sepia header .bg-\[\#090d19\],
+  html.sepia header .bg-\[\#161e33\] {
+    background-color: #ebdcb2 !important;
+    border-color: #d8c292 !important;
+    color: #433422 !important;
+  }
+
+  html.sepia .text-slate-400,
+  html.sepia .text-slate-500 {
+    color: #785e40 !important;
+  }
+
+  /* ⚡ Cyber Energy Theme (Electric Dark Neon & Indigo-Cyan Glow) */
+  html.cyber-energy {
+    background-color: #060814;
+    color: #f1f5f9;
+  }
+
+  html.cyber-energy header,
+  html.cyber-energy aside,
+  html.cyber-energy .bg-white {
+    background-color: #0c1024 !important;
+    color: #f1f5f9 !important;
+    border-color: rgba(99, 102, 241, 0.35) !important;
+  }
+
+  html.cyber-energy .bg-slate-50,
+  html.cyber-energy .bg-slate-900,
+  html.cyber-energy .dark\:bg-\[\#0b0d13\] {
+    background-color: #0f1530 !important;
+    border-color: rgba(129, 140, 248, 0.3) !important;
+  }
+
+  html.cyber-energy .bg-slate-950 {
+    background-color: #070a17 !important;
+  }
+
+  html.cyber-energy .text-slate-900 {
+    color: #ffffff;
+  }
+
+  html.cyber-energy .text-slate-700,
+  html.cyber-energy .text-slate-600 {
+    color: #cbd5e1;
+  }
+
+  /* 🌅 Sunset Pulse Theme (Solar Radiant & Fiery Amber) */
+  html.sunset-pulse {
+    background-color: #120804;
+    color: #fef2f2;
+  }
+
+  html.sunset-pulse header,
+  html.sunset-pulse aside,
+  html.sunset-pulse .bg-white {
+    background-color: #1f0e08 !important;
+    color: #fef2f2 !important;
+    border-color: rgba(249, 115, 22, 0.35) !important;
+  }
+
+  html.sunset-pulse .bg-slate-50,
+  html.sunset-pulse .bg-slate-900,
+  html.sunset-pulse .dark\:bg-\[\#0b0d13\] {
+    background-color: #2b140b !important;
+    border-color: rgba(251, 146, 60, 0.3) !important;
+  }
+
+  html.sunset-pulse .bg-slate-950 {
+    background-color: #150904 !important;
+  }
+
+  html.sunset-pulse .text-slate-900 {
+    color: #ffffff;
+  }
+
+  html.sunset-pulse .text-slate-700,
+  html.sunset-pulse .text-slate-600 {
+    color: #fdba74;
+  }
+
+  /* 🔋 Emerald Flow Theme (Neon Matrix & Electric Mint) */
+  html.emerald-flow {
+    background-color: #030d0a;
+    color: #ecfdf5;
+  }
+
+  html.emerald-flow header,
+  html.emerald-flow aside,
+  html.emerald-flow .bg-white {
+    background-color: #081d16 !important;
+    color: #ecfdf5 !important;
+    border-color: rgba(16, 185, 129, 0.35) !important;
+  }
+
+  html.emerald-flow .bg-slate-50,
+  html.emerald-flow .bg-slate-900,
+  html.emerald-flow .dark\:bg-\[\#0b0d13\] {
+    background-color: #0d291f !important;
+    border-color: rgba(52, 211, 153, 0.3) !important;
+  }
+
+  html.emerald-flow .bg-slate-950 {
+    background-color: #04100c !important;
+  }
+
+  html.emerald-flow .text-slate-900 {
+    color: #ffffff;
+  }
+
+  html.emerald-flow .text-slate-700,
+  html.emerald-flow .text-slate-600 {
+    color: #a7f3d0;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(99, 102, 241, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(168, 85, 247, 0.55);
+  }
+}
+
+.tab-active-glow {
+  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ==========================================================================
+   📄 PRINT MEDIA QUERY (PDF-Optimized Lesson & Study Sheet Formatter)
+   ========================================================================== */
+@media print {
+  @page {
+    margin: 1.5cm 1.2cm 1.6cm 1.2cm;
+    size: A4 portrait;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.55 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* 🚫 Hide Screen-Only Navigation & Interactive Widgets */
+  header,
+  aside,
+  nav,
+  #cookie-push-notification-banner,
+  #chapter-progress-bar,
+  #section-video,
+  #section-practice,
+  #section-visuals,
+  .no-print,
+  [aria-label="Lesson Outline Tabs"],
+  [aria-label="Lesson Navigation"],
+  [aria-live="polite"],
+  .pointer-events-none {
+    display: none !important;
+  }
+
+  /* Hide interactive action buttons in sections while keeping text content */
+  button:not(#section-quiz button):not(.print-keep) {
+    display: none !important;
+  }
+
+  /* 📖 Main Article & Page Setup */
+  article {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  /* Print Document Header Stamp */
+  .print-header-banner {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2pt solid #0f172a;
+    padding-bottom: 6pt;
+    margin-bottom: 14pt;
+    font-size: 8.5pt;
+    font-family: monospace;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  /* Lesson Hero Card Formatted for Crisp Print */
+  article > section:first-of-type {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1.5pt solid #cbd5e1 !important;
+    border-radius: 8pt !important;
+    padding: 14pt 18pt !important;
+    margin-bottom: 16pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  article > section:first-of-type * {
+    color: #0f172a !important;
+  }
+
+  article > section:first-of-type h1 {
+    font-size: 20pt !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    margin: 6pt 0 !important;
+    color: #0f172a !important;
+  }
+
+  article > section:first-of-type p {
+    font-size: 11pt !important;
+    color: #334155 !important;
+    line-height: 1.5 !important;
+  }
+
+  /* Universal Section Cards */
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 14pt !important;
+    padding: 12pt 14pt !important;
+    border-radius: 6pt !important;
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+  }
+
+  /* Typographic Hierarchy & Page-Break Protections */
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    color: #0f172a !important;
+    font-weight: 800 !important;
+  }
+
+  h2 {
+    font-size: 13.5pt !important;
+    margin-top: 10pt !important;
+    margin-bottom: 6pt !important;
+    border-bottom: 1pt solid #cbd5e1 !important;
+    padding-bottom: 3pt !important;
+  }
+
+  h3 {
+    font-size: 11.5pt !important;
+    margin-top: 8pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  p, li {
+    color: #334155 !important;
+    font-size: 10pt !important;
+    line-height: 1.55 !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  ul, ol {
+    margin-top: 4pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  /* 🎯 Learning Objectives Block */
+  #section-objectives {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-left: 4pt solid #4f46e5 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-objectives ul li {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+
+  /* 💡 Real-World Mental Model / Analogy */
+  #section-analogy {
+    background: #fffdf5 !important;
+    border: 1pt solid #fde68a !important;
+    border-left: 4pt solid #d97706 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-analogy p {
+    background: #ffffff !important;
+    border: 1pt solid #fef3c7 !important;
+    color: #451a03 !important;
+    font-style: italic !important;
+  }
+
+  /* 💻 Annotated Code Breakdown (Crisp High-Contrast Print View) */
+  #section-code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #ffffff !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  #section-code .bg-slate-950,
+  #section-code pre,
+  code {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1pt solid #e2e8f0 !important;
+    border-radius: 4pt !important;
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace !important;
+    font-size: 9pt !important;
+    line-height: 1.45 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  #section-code pre {
+    padding: 8pt 10pt !important;
+    margin: 0 !important;
+  }
+
+  #section-code .bg-slate-900\/90,
+  #section-code .bg-slate-900\/80 {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  #section-code .text-slate-100,
+  #section-code .text-slate-300,
+  #section-code .text-slate-400 {
+    color: #334155 !important;
+  }
+
+  #section-code .bg-slate-950 div {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  /* 📝 Checkpoint Quiz Questions & Explanations */
+  #section-quiz {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  #section-quiz button {
+    display: flex !important;
+    border: 1pt solid #cbd5e1 !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    padding: 4pt 8pt !important;
+    border-radius: 4pt !important;
+    margin-bottom: 3pt !important;
+    font-size: 9pt !important;
+    cursor: default !important;
+  }
+
+  /* 📌 Student Notes Box */
+  #section-notes {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #fefce8 !important;
+    border: 1pt dashed #ca8a04 !important;
+  }
+
+  #section-notes textarea {
+    border: 1pt solid #fef08a !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    font-size: 9.5pt !important;
+    height: auto !important;
+    min-height: 50pt !important;
+    resize: none !important;
+  }
+
+  /* 🌟 Summary & Key Takeaways */
+  #section-summary {
+    background: #f0fdf4 !important;
+    border: 1pt solid #bbf7d0 !important;
+    border-left: 4pt solid #16a34a !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-summary h2 {
+    color: #14532d !important;
+    border-bottom: none !important;
+  }
+
+  #section-summary li {
+    color: #166534 !important;
+  }
+
+  /* 🔗 Related References */
+  #section-related {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-related .bg-white,
+  #section-related .dark\:bg-slate-900 {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+  }
+
+  /* Print Footer Stamp */
+  .print-footer-banner {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1pt solid #cbd5e1;
+    padding-top: 8pt;
+    margin-top: 20pt;
+    font-size: 8pt;
+    color: #64748b;
+    font-family: monospace;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+

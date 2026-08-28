@@ -1,0 +1,7 @@
+{
+  "name": "WZ Storehouse",
+  "description": "Interactive digital web development textbook with visual diagrams, video lessons, and hands-on coding practice sandboxes.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
