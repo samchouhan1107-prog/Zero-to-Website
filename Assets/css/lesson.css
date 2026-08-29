@@ -1,0 +1,108 @@
+/* ==================================================
+   WZ Storehouse - lesson.css
+   Author  : Sameer Chouhan
+   Version : 2.0 (Red Volcanic & Volcanic Porcelain)
+================================================== */
+
+.lesson-page {
+    background: var(--background);
+    color: var(--text);
+}
+
+.lesson-header {
+    margin-bottom: 24px;
+}
+
+.lesson-header h1 {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text);
+    margin: 8px 0;
+}
+
+.lesson-header p {
+    color: var(--muted);
+    font-size: 1.1rem;
+}
+
+.code-playground {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 24px 0;
+}
+
+@media (max-width: 768px) {
+    .code-playground {
+        grid-template-columns: 1fr;
+    }
+}
+
+.editor-panel, .preview-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.editor-panel h3, .preview-panel h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--primary);
+}
+
+.editor-panel textarea {
+    width: 100%;
+    min-height: 220px;
+    background: var(--white);
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+.editor-panel button {
+    margin-top: 12px;
+    padding: 10px 20px;
+    background: var(--primary);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: flex-start;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.editor-panel button:hover {
+    transform: translateY(-2px);
+    background: var(--secondary);
+}
+
+.preview-panel iframe {
+    width: 100%;
+    min-height: 220px;
+    flex: 1;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #ffffff;
+}
+
+.callout-box {
+    border-left: 4px solid var(--primary);
+    background: rgba(255, 45, 85, 0.06);
+    padding: 16px 20px;
+    border-radius: 0 12px 12px 0;
+    margin: 20px 0;
+}
+
+.callout-box h4 {
+    color: var(--primary);
+    margin-bottom: 6px;
+}

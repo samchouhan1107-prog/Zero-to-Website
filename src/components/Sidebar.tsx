@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
 import {
-  BookOpen,
+  Award,
   CheckCircle2,
   ChevronDown,
   ChevronRight,
-  Code2,
-  Tv,
-  Layers,
-  Sparkles,
-  Flame,
-  Award,
-  Search,
-  X,
-  Compass,
   ChevronsUpDown,
-  Shield,
-  Zap,
+  Code2,
+  Flame,
   GraduationCap,
+  Layers,
+  Search,
+  Sparkles,
+  X,
 } from 'lucide-react';
 import { Chapter, UserProgress } from '../types';
 import { WebZoneBrandLogo } from './WebZoneBrandLogo';
@@ -62,285 +57,108 @@ export const Sidebar: React.FC<SidebarProps> = ({
   };
 
   const toggleAllChapters = () => {
-    const anyCollapsed = chapters.some((c) => !expandedChapters[c.id]);
-    const newState: Record<string, boolean> = {};
-    chapters.forEach((c) => {
-      newState[c.id] = anyCollapsed;
+    const anyCollapsed = chapters.some((chapter) => !expandedChapters[chapter.id]);
+    const next: Record<string, boolean> = {};
+    chapters.forEach((chapter) => {
+      next[chapter.id] = anyCollapsed;
     });
-    setExpandedChapters(newState);
+    setExpandedChapters(next);
   };
 
-  const totalLessons = chapters.flatMap((c) => c.lessons).length;
+  const totalLessons = chapters.reduce((total, chapter) => total + chapter.lessons.length, 0);
   const completedCount = Object.values(progress.completedLessons).filter(Boolean).length;
   const progressPercent = Math.round((completedCount / (totalLessons || 1)) * 100);
-
+  const normalizedQuery = filterQuery.trim().toLowerCase();
   const filteredChapters = chapters
     .map((chapter) => {
-      const matchingLessons = chapter.lessons.filter(
-        (l) =>
-          l.title.toLowerCase().includes(filterQuery.toLowerCase()) ||
-          chapter.title.toLowerCase().includes(filterQuery.toLowerCase())
-      );
-      return { ...chapter, lessons: matchingLessons };
+      const chapterMatches = chapter.title.toLowerCase().includes(normalizedQuery);
+      const lessons = chapterMatches
+        ? chapter.lessons
+        : chapter.lessons.filter((lesson) => lesson.title.toLowerCase().includes(normalizedQuery));
+      return { ...chapter, lessons };
     })
-    .filter((c) => c.lessons.length > 0 || c.title.toLowerCase().includes(filterQuery.toLowerCase()));
+    .filter((chapter) => chapter.lessons.length > 0);
+
+  const closeAfter = (action: () => void) => {
+    action();
+    onCloseMobile();
+  };
 
   return (
     <>
-      {/* Mobile Backdrop */}
       {isOpen && (
-        <div
+        <button
+          type="button"
           onClick={onCloseMobile}
-          className="fixed inset-0 bg-slate-950/70 backdrop-blur-xs z-40 lg:hidden animate-fade-in"
+          className="fixed inset-0 z-40 bg-slate-950/65 lg:hidden"
+          aria-label="Close course outline"
         />
       )}
 
       <aside
         id="curriculum-sidebar"
-        className={`fixed lg:sticky top-0 left-0 h-screen w-80 bg-white dark:bg-[#0d0f15] border-r border-slate-200 dark:border-[#1a1e2a] flex flex-col z-50 transition-transform duration-300 shadow-xl lg:shadow-none ${
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        }`}
+        aria-label="Course outline"
+        className={`fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-[min(304px,calc(100vw-24px))] min-w-0 -translate-x-full flex-col border-r border-app-border bg-app-surface text-app-ink transition-transform duration-200 lg:static lg:z-auto lg:h-[100dvh] lg:w-full lg:translate-x-0 ${isOpen ? 'translate-x-0' : ''}`}
       >
-        {/* Sidebar Brand Header */}
-        <div className="p-3.5 sm:p-4 border-b border-slate-200 dark:border-[#1a1e2a] flex items-center justify-between bg-slate-50/70 dark:bg-[#0a0b10]">
-          <div className="flex items-center gap-2">
-            <WebZoneBrandLogo size="sm" showSubtitle={true} />
-            <span className="text-[9px] font-mono font-bold px-1.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-cyan-400 border border-blue-500/20">
-              STUDIO
-            </span>
+        <div className="flex min-h-16 shrink-0 items-center justify-between border-b border-app-border bg-app-inset px-4">
+          <div className="flex min-w-0 items-center gap-2">
+            <WebZoneBrandLogo size="sm" showSubtitle />
+            <span className="rounded-control border border-app-border bg-app-active px-2 py-1 font-mono text-[10px] font-bold tracking-[0.12em] text-app-muted">STUDIO</span>
           </div>
-          <button
-            onClick={onCloseMobile}
-            className="lg:hidden p-1.5 rounded-lg text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-800 transition-colors cursor-pointer"
-            aria-label="Close navigation"
-          >
-            <X className="w-4 h-4" />
+          <button type="button" onClick={onCloseMobile} className="flex min-h-11 min-w-11 items-center justify-center rounded-control text-app-muted transition-colors hover:bg-app-active hover:text-app-ink lg:hidden" aria-label="Close course outline">
+            <X className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
 
-        {/* Quick Action Navigation Hub */}
-        <div className="p-3 border-b border-slate-200 dark:border-[#1a1e2a] grid grid-cols-3 gap-1.5 bg-slate-100/60 dark:bg-[#07090e]">
-          <button
-            onClick={() => {
-              onOpenPracticeHub();
-              onCloseMobile();
-            }}
-            className="p-2 rounded-xl border border-slate-200 dark:border-[#1f2536] bg-white dark:bg-[#10131d] text-left hover:border-emerald-500 hover:shadow-xs transition-all group cursor-pointer"
-          >
-            <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800 dark:text-slate-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400">
-              <Code2 className="w-3 h-3 text-emerald-500 group-hover:scale-110 transition-transform" />
-              Practice
-            </div>
-            <span className="text-[9px] text-slate-500 dark:text-slate-400">Sandbox</span>
+        <div className="grid shrink-0 grid-cols-3 gap-2 border-b border-app-border bg-app-surface p-3">
+          <button type="button" onClick={() => closeAfter(onOpenPracticeHub)} className="group min-h-16 rounded-control border border-app-border bg-app-inset p-2 text-left transition-colors hover:border-emerald-400/70 hover:bg-app-active">
+            <span className="flex items-center gap-1 text-xs font-bold text-app-ink"><Code2 className="h-4 w-4 text-emerald-400" aria-hidden="true" /> Practice</span>
+            <span className="mt-1 block text-[11px] text-app-muted">Sandbox</span>
           </button>
-
-          <button
-            onClick={() => {
-              onOpenVisualLab();
-              onCloseMobile();
-            }}
-            className="p-2 rounded-xl border border-slate-200 dark:border-[#1f2536] bg-white dark:bg-[#10131d] text-left hover:border-amber-500 dark:hover:border-yellow-400 hover:shadow-xs transition-all group cursor-pointer"
-          >
-            <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800 dark:text-slate-200 group-hover:text-amber-600 dark:group-hover:text-yellow-400">
-              <Layers className="w-3 h-3 text-amber-500 dark:text-yellow-400 group-hover:scale-110 transition-transform" />
-              Visual
-            </div>
-            <span className="text-[9px] text-slate-500 dark:text-slate-400">3D Models</span>
+          <button type="button" onClick={() => closeAfter(onOpenVisualLab)} className="group min-h-16 rounded-control border border-app-border bg-app-inset p-2 text-left transition-colors hover:border-violet-400/70 hover:bg-app-active">
+            <span className="flex items-center gap-1 text-xs font-bold text-app-ink"><Layers className="h-4 w-4 text-violet-400" aria-hidden="true" /> Visual</span>
+            <span className="mt-1 block text-[11px] text-app-muted">3D models</span>
           </button>
-
           {onOpenActivities && (
-            <button
-              onClick={() => {
-                onOpenActivities();
-                onCloseMobile();
-              }}
-              className="p-2 rounded-xl border border-slate-200 dark:border-[#1f2536] bg-white dark:bg-[#10131d] text-left hover:border-indigo-500 hover:shadow-xs transition-all group cursor-pointer"
-            >
-              <div className="flex items-center gap-1 text-[11px] font-bold text-slate-800 dark:text-slate-200 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
-                <GraduationCap className="w-3 h-3 text-indigo-500 group-hover:scale-110 transition-transform" />
-                Activities
-              </div>
-              <span className="text-[9px] text-slate-500 dark:text-slate-400">After Class</span>
+            <button type="button" onClick={() => closeAfter(onOpenActivities)} className="group min-h-16 rounded-control border border-app-border bg-app-inset p-2 text-left transition-colors hover:border-cyan-400/70 hover:bg-app-active">
+              <span className="flex items-center gap-1 text-xs font-bold text-app-ink"><GraduationCap className="h-4 w-4 text-cyan-400" aria-hidden="true" /> Activities</span>
+              <span className="mt-1 block text-[11px] text-app-muted">After class</span>
             </button>
           )}
         </div>
 
-        {/* Course Progress & Daily Streak Widget */}
-        <div
-          onClick={() => {
-            onOpenMilestones();
-            onCloseMobile();
-          }}
-          className="p-3 mx-3 my-2.5 rounded-xl bg-slate-50 dark:bg-[#10131d] border border-slate-200 dark:border-[#1f2536] cursor-pointer hover:border-amber-400 dark:hover:border-yellow-400/80 hover:shadow-md transition-all group"
-          title="Click to view XP Milestones & Level Roadmap"
-        >
-          <div className="flex items-center justify-between text-xs font-bold text-slate-900 dark:text-white">
-            <span className="flex items-center gap-1.5">
-              <Award className="w-3.5 h-3.5 text-amber-500 dark:text-yellow-400 group-hover:rotate-12 transition-transform" />
-              <span>Progress & Mastery</span>
-            </span>
-            <span className="font-mono text-amber-600 dark:text-yellow-400 font-extrabold">{progressPercent}%</span>
-          </div>
+        <button type="button" onClick={() => closeAfter(onOpenMilestones)} className="mx-3 my-3 shrink-0 rounded-control border border-app-border bg-app-inset p-3 text-left transition-colors hover:border-app-amber/70 hover:bg-app-active" title="Open XP milestones and level roadmap">
+          <span className="flex items-center justify-between gap-3 text-xs font-bold"><span className="flex items-center gap-2 text-app-ink"><Award className="h-4 w-4 text-app-amber" aria-hidden="true" /> Progress &amp; mastery</span><span className="font-mono tabular-nums text-app-amber">{progressPercent}%</span></span>
+          <span className="mt-3 block h-2 overflow-hidden rounded-full bg-app-active"><span className="block h-full rounded-full bg-app-amber transition-[width] duration-500" style={{ width: `${progressPercent}%` }} /></span>
+          <span className="mt-2 flex items-center justify-between gap-2 font-mono text-[11px] text-app-muted"><span>{completedCount} of {totalLessons} lessons</span><span className="flex items-center gap-2"><span className="flex items-center gap-1 text-orange-400"><Flame className="h-3.5 w-3.5" aria-hidden="true" />{progress.streakDays}d</span><span className="text-app-subtle">·</span><span className="text-app-amber">{progress.xpPoints} XP</span></span></span>
+        </button>
 
-          <div className="w-full h-2 bg-slate-200 dark:bg-[#1c2230] rounded-full mt-2 overflow-hidden relative">
-            <div
-              className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-500 shadow-xs"
-              style={{ width: `${progressPercent}%` }}
-            />
-          </div>
-
-          <div className="flex justify-between items-center text-[10px] text-slate-600 dark:text-slate-300 mt-2 font-medium">
-            <span>{completedCount} of {totalLessons} Lessons</span>
-            <div className="flex items-center gap-1.5 font-bold font-mono">
-              <span className="flex items-center gap-0.5 text-orange-600 dark:text-orange-400">
-                <Flame className="w-3 h-3 fill-current text-orange-500" /> {progress.streakDays}d
-              </span>
-              <span className="text-slate-300 dark:text-slate-700">•</span>
-              <span className="flex items-center gap-0.5 text-amber-600 dark:text-yellow-400">
-                {progress.xpPoints} XP
-              </span>
-            </div>
-          </div>
+        <div className="flex shrink-0 items-center gap-2 px-3 pb-3">
+          <label className="relative min-w-0 flex-1"><span className="sr-only">Search chapters or topics</span><Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-app-subtle" aria-hidden="true" /><input type="search" placeholder="Search chapters or topics..." value={filterQuery} onChange={(event) => setFilterQuery(event.target.value)} className="h-11 w-full rounded-control border border-app-border bg-app-inset pl-9 pr-9 text-sm text-app-ink placeholder:text-app-subtle" />{filterQuery && <button type="button" onClick={() => setFilterQuery('')} className="absolute right-1 top-1/2 flex min-h-9 min-w-9 -translate-y-1/2 items-center justify-center rounded-control text-app-subtle hover:bg-app-active hover:text-app-ink" aria-label="Clear chapter search"><X className="h-4 w-4" aria-hidden="true" /></button>}</label>
+          <button type="button" onClick={toggleAllChapters} className="flex min-h-11 min-w-11 items-center justify-center rounded-control border border-app-border bg-app-inset text-app-muted transition-colors hover:bg-app-active hover:text-app-ink" title="Expand or collapse all chapters" aria-label="Expand or collapse all chapters"><ChevronsUpDown className="h-4 w-4" aria-hidden="true" /></button>
         </div>
 
-        {/* Filter & Collapse Controls */}
-        <div className="px-3 pb-2 flex items-center gap-1.5">
-          <div className="relative flex-1">
-            <Search className="w-3.5 h-3.5 text-slate-400 absolute left-2.5 top-2.5" />
-            <input
-              type="text"
-              placeholder="Search chapters or topics..."
-              value={filterQuery}
-              onChange={(e) => setFilterQuery(e.target.value)}
-              className="w-full pl-8 pr-7 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-[#1f2536] bg-slate-50 dark:bg-[#07090e] text-slate-900 dark:text-slate-100 outline-none focus:border-amber-400 dark:focus:border-yellow-400/80 transition-all placeholder:text-slate-400"
-            />
-            {filterQuery && (
-              <button
-                onClick={() => setFilterQuery('')}
-                className="absolute right-2 top-2 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 cursor-pointer"
-              >
-                <X className="w-3.5 h-3.5" />
-              </button>
-            )}
-          </div>
-          <button
-            onClick={toggleAllChapters}
-            className="p-1.5 rounded-lg border border-slate-200 dark:border-[#1f2536] text-slate-500 hover:text-slate-900 dark:hover:text-white bg-slate-50 dark:bg-[#07090e] hover:bg-slate-100 dark:hover:bg-[#10131d] cursor-pointer"
-            title="Expand/Collapse All Chapters"
-          >
-            <ChevronsUpDown className="w-3.5 h-3.5" />
-          </button>
-        </div>
-
-        {/* Chapter List */}
-        <div className="flex-1 overflow-y-auto px-3 py-1 space-y-2 text-xs scrollbar-thin">
-          {filteredChapters.map((chapter) => {
+        <div className="min-h-0 flex-1 space-y-2 overflow-y-auto px-3 pb-3 scrollbar-thin">
+          {filteredChapters.length === 0 ? (
+            <div className="rounded-control border border-dashed border-app-border bg-app-inset p-4 text-center"><p className="text-sm font-bold text-app-ink">No chapters or lessons match</p><p className="mt-1 text-xs leading-relaxed text-app-muted">Try a broader search or return to the full outline.</p><button type="button" onClick={() => setFilterQuery('')} className="mt-3 min-h-11 rounded-control border border-app-amber/70 px-3 text-xs font-bold text-app-amber hover:bg-app-active">Clear search</button></div>
+          ) : filteredChapters.map((chapter) => {
             const isExpanded = expandedChapters[chapter.id];
-            const chapterCompletedCount = chapter.lessons.filter((l) => progress.completedLessons[l.id]).length;
+            const chapterCompletedCount = chapter.lessons.filter((lesson) => progress.completedLessons[lesson.id]).length;
             const isChapterAllDone = chapterCompletedCount === chapter.lessons.length && chapter.lessons.length > 0;
-
             return (
-              <div
-                key={chapter.id}
-                className="rounded-xl border border-slate-200/90 dark:border-[#1a1e2a] overflow-hidden bg-white dark:bg-[#0d0f15] transition-all"
-              >
-                {/* Chapter Title Bar */}
-                <button
-                  onClick={() => toggleChapter(chapter.id)}
-                  className={`w-full text-left p-2.5 flex items-center justify-between transition-colors cursor-pointer ${
-                    isExpanded
-                      ? 'bg-slate-100/90 dark:bg-[#141722] text-slate-900 dark:text-white font-bold'
-                      : 'bg-white dark:bg-[#0d0f15] text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-[#12151e]'
-                  }`}
-                >
-                  <div className="flex items-center gap-2 truncate">
-                    <span className="w-5 h-5 rounded-md bg-amber-100 dark:bg-yellow-400/15 text-amber-800 dark:text-yellow-400 font-mono text-[10px] font-bold flex items-center justify-center shrink-0 border border-amber-300/40 dark:border-yellow-400/30">
-                      {chapter.number}
-                    </span>
-                    <span className="truncate text-xs font-bold">{chapter.title}</span>
-                  </div>
-
-                  <div className="flex items-center gap-1.5 shrink-0 ml-1">
-                    <span className="text-[10px] font-mono text-slate-400">
-                      {chapterCompletedCount}/{chapter.lessons.length}
-                    </span>
-                    {isChapterAllDone ? (
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                    ) : (
-                      isExpanded ? (
-                        <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
-                      ) : (
-                        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-                      )
-                    )}
-                  </div>
+              <div key={chapter.id} className="overflow-hidden rounded-control border border-app-border bg-app-inset">
+                <button type="button" onClick={() => toggleChapter(chapter.id)} className={`flex min-h-12 w-full items-center justify-between gap-2 px-3 text-left transition-colors ${isExpanded ? 'bg-app-active text-app-ink' : 'text-app-muted hover:bg-app-active hover:text-app-ink'}`} aria-expanded={isExpanded} aria-controls={`chapter-lessons-${chapter.id}`}>
+                  <span className="flex min-w-0 items-center gap-2"><span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-control border border-app-amber/40 bg-app-amber/15 font-mono text-[11px] font-bold text-app-amber">{chapter.number}</span><span className="truncate text-sm font-bold">{chapter.title}</span></span>
+                  <span className="flex shrink-0 items-center gap-1.5"><span className="font-mono text-[11px] text-app-subtle">{chapterCompletedCount}/{chapter.lessons.length}</span>{isChapterAllDone ? <CheckCircle2 className="h-4 w-4 text-emerald-400" aria-label="Chapter complete" /> : isExpanded ? <ChevronDown className="h-4 w-4" aria-hidden="true" /> : <ChevronRight className="h-4 w-4" aria-hidden="true" />}</span>
                 </button>
-
-                {/* Lessons in Chapter */}
-                {isExpanded && (
-                  <div className="bg-slate-50/70 dark:bg-[#08090e] divide-y divide-slate-100 dark:divide-[#141722]">
-                    {chapter.lessons.map((lesson) => {
-                      const isSelected = currentLessonId === lesson.id;
-                      const isDone = progress.completedLessons[lesson.id];
-
-                      return (
-                        <button
-                          key={lesson.id}
-                          onClick={() => {
-                            onSelectLesson(lesson.id);
-                            onCloseMobile();
-                          }}
-                          className={`w-full text-left py-2 px-3 pl-8 flex items-center justify-between text-xs transition-all cursor-pointer ${
-                            isSelected
-                              ? 'bg-amber-500/15 dark:bg-yellow-400/10 text-amber-900 dark:text-yellow-300 font-bold border-l-3 border-amber-500 dark:border-yellow-400 shadow-xs'
-                              : 'text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-[#12151e] hover:text-slate-900 dark:hover:text-slate-200'
-                          }`}
-                        >
-                          <span className="truncate">{lesson.title}</span>
-                          {isDone ? (
-                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0 ml-1.5" />
-                          ) : (
-                            <span className={`w-2 h-2 rounded-full shrink-0 ml-1.5 ${isSelected ? 'bg-amber-500 dark:bg-yellow-400' : 'bg-slate-300 dark:bg-slate-700'}`} />
-                          )}
-                        </button>
-                      );
-                    })}
-                  </div>
-                )}
+                {isExpanded && <div id={`chapter-lessons-${chapter.id}`} className="divide-y divide-app-border/70 border-t border-app-border bg-app-canvas/50">{chapter.lessons.map((lesson) => { const isSelected = currentLessonId === lesson.id; const isDone = progress.completedLessons[lesson.id]; return <button type="button" key={lesson.id} onClick={() => closeAfter(() => onSelectLesson(lesson.id))} className={`flex min-h-11 w-full items-center justify-between gap-2 border-l-2 px-3 pl-10 text-left text-sm transition-colors ${isSelected ? 'border-app-amber bg-app-amber/12 font-bold text-app-amber' : 'border-transparent text-app-muted hover:bg-app-active hover:text-app-ink'}`} aria-current={isSelected ? 'page' : undefined}><span className="truncate">{lesson.title}</span>{isDone ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" aria-label="Lesson complete" /> : <span className={`h-2 w-2 shrink-0 rounded-full ${isSelected ? 'bg-app-amber' : 'bg-app-subtle'}`} aria-hidden="true" />}</button>; })}</div>}
               </div>
             );
           })}
         </div>
 
-        {/* 24/7 AI Tutor Card */}
-        {onOpenTutor && (
-          <div className="p-3 border-t border-slate-200 dark:border-[#1a1e2a] bg-slate-50/90 dark:bg-[#0a0b10]">
-            <button
-              onClick={() => {
-                onOpenTutor();
-                onCloseMobile();
-              }}
-              className="w-full p-2.5 rounded-xl bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 dark:from-[#141722] dark:via-[#1c2230] dark:to-[#141722] hover:brightness-115 text-white flex items-center justify-between text-xs font-bold transition-all shadow-md border border-amber-400/30 dark:border-yellow-400/30 group cursor-pointer"
-            >
-              <div className="flex items-center gap-2">
-                <div className="p-1 rounded-lg bg-amber-400/20 text-yellow-400">
-                  <Sparkles className="w-3.5 h-3.5 animate-pulse" />
-                </div>
-                <div className="text-left">
-                  <div className="text-[11px] leading-tight text-white flex items-center gap-1">
-                    Ask 24/7 AI Tutor
-                  </div>
-                  <div className="text-[9px] text-amber-200/80 dark:text-yellow-300/80 font-normal">Resolve code doubts instantly</div>
-                </div>
-              </div>
-              <span className="text-[9px] font-mono font-black px-1.5 py-0.5 rounded bg-yellow-400 text-slate-950">
-                AI 24/7
-              </span>
-            </button>
-          </div>
-        )}
+        {onOpenTutor && <div className="shrink-0 border-t border-app-border bg-app-inset p-3"><button type="button" onClick={() => closeAfter(onOpenTutor)} className="flex min-h-14 w-full items-center justify-between gap-3 rounded-control border border-app-amber/40 bg-app-active px-3 text-left transition-colors hover:border-app-amber hover:bg-app-surface"><span className="flex min-w-0 items-center gap-2"><Sparkles className="h-5 w-5 shrink-0 text-app-amber" aria-hidden="true" /><span className="min-w-0"><span className="block truncate text-xs font-bold text-app-ink">Ask 24/7 AI tutor</span><span className="block truncate text-[11px] text-app-muted">Resolve code doubts instantly</span></span></span><span className="shrink-0 rounded-control bg-app-amber px-2 py-1 font-mono text-[10px] font-black text-slate-950">AI 24/7</span></button></div>}
       </aside>
     </>
   );
 };
-

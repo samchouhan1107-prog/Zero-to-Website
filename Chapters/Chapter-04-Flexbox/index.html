@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Chapter 04 | Flexbox</title>
+
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+
+    <script src="../../Assets/js/main.js" defer></script>
+
+</head>
+
+<body>
+
+    <!-- ==========================
+         HEADER
+    =========================== -->
+
+    <header>
+        <div class="logo">
+            <a href="../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+
+        <nav>
+            <a href="../../index.html">🏠 Home</a>
+            <a href="../Chapter-03-CSS/index.html">⬅ Previous</a>
+            <a href="../Chapter-05-CSS%20Grid/index.html">Next ➜</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <section class="chapter-summary chapter-block">
+        <h2>📝 Chapter Summary</h2>
+        <p>
+            In this chapter you explored the fundamentals of CSS Flexbox.
+            You learned how Flexbox simplifies layouts by organizing elements
+            along a single axis, controlling spacing, alignment, and responsiveness.
+            The following lessons will explain each Flexbox property in detail
+            with examples and hands-on practice.
+        </p>
+    </section>
+
+    <!-- ==========================
+         SETTINGS PANEL
+    =========================== -->
+
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-panel-header">
+            <h3>Settings</h3>
+        </div>
+        <button id="darkModeBtn" type="button" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+    </div>
+
+    <!-- ==========================
+         MAIN LAYOUT
+    =========================== -->
+
+    <main class="container chapter-page">
+
+        <!-- Sidebar -->
+
+        <aside class="sidebar">
+
+            <!-- Sidebar code goes here -->
+
+        </aside>
+
+        <!-- Main Content -->
+
+
+<!-- ==========================
+     CONTENT
+=========================== -->
+
+<section class="content">
+
+    <!-- Chapter Title -->
+
+    <section class="chapter-header">
+
+        <h1>📐 Chapter 04 — CSS Flexbox</h1>
+
+        <p>
+
+            Learn how to build modern layouts using CSS Flexbox.
+            This chapter introduces one-dimensional layouts,
+            alignment, spacing, and responsive positioning.
+
+        </p>
+
+    </section>
+
+    <hr>
+
+    <!-- Chapter Overview -->
+
+    <section class="chapter-overview">
+
+        <h2>📖 Chapter Overview</h2>
+
+        <p>
+
+            Flexbox makes arranging website layouts much easier.
+            Instead of using floats or complicated positioning,
+            Flexbox allows you to align, distribute and organize
+            elements with only a few CSS properties.
+
+        </p>
+
+        <p class="chapter-connection-note">This chapter connects directly with the lessons below. Each lesson card opens the corresponding Flexbox topic, so you can continue learning in the right order.</p>
+
+    </section>
+
+    <hr>
+
+    <!-- Learning Objectives -->
+
+    <section class="learning-objectives">
+
+        <h2>🎯 What You'll Learn</h2>
+
+        <ul>
+
+            <li>✔ What Flexbox is</li>
+
+            <li>✔ Flex Containers</li>
+
+            <li>✔ Flex Items</li>
+
+            <li>✔ Main Axis & Cross Axis</li>
+
+            <li>✔ Justify Content</li>
+
+            <li>✔ Align Items</li>
+
+            <li>✔ Flex Wrap</li>
+
+            <li>✔ Building Responsive Layouts</li>
+
+        </ul>
+
+    </section>
+
+    <hr>
+
+    <!-- Lessons -->
+
+    <section class="chapter-lessons">
+
+        <h2>📚 Lessons</h2>
+
+        <div class="lesson-grid">
+
+            <a href="Lesson-01-Introduction/lesson.html" class="lesson-card">
+
+                <h3>Lesson 01</h3>
+
+                <p>Introduction to Flexbox</p>
+
+            </a>
+
+            <a href="Lesson-02-Flex-Container/lesson.html" class="lesson-card">
+
+                <h3>Lesson 02</h3>
+
+                <p>Flex Container</p>
+
+            </a>
+
+            <a href="Lesson-03-Flex-Items/lesson.html" class="lesson-card">
+
+                <h3>Lesson 03</h3>
+
+                <p>Flex Items</p>
+
+            </a>
+
+            <a href="Lesson-04-Justify-Content/lesson.html" class="lesson-card">
+
+                <h3>Lesson 04</h3>
+
+                <p>Justify Content</p>
+
+            </a>
+
+            <a href="Lesson-05-Align-Items/lesson.html" class="lesson-card">
+
+                <h3>Lesson 05</h3>
+
+                <p>Align Items</p>
+
+            </a>
+
+            <a href="Lesson-06-Flex-Wrap/lesson.html" class="lesson-card">
+                <h3>Lesson 06</h3>
+                <p>Flex Wrap</p>
+            </a>
+            <a href="Lesson-07-Mini-Project/lesson.html" class="lesson-card">
+                <h3>Lesson 07</h3>
+                <p>Mini Project</p>
+            </a>
+        </div>
+    </section>
+
+    <section class="chapter-start chapter-block">
+        <h2>🚀 Ready to Start?</h2>
+        <p>
+            Begin with Lesson 01 where you'll learn what Flexbox is and why modern websites rely on it.
+        </p>
+        <a href="Lesson-01-Introduction/index.html" class="btn primary">Start Lesson 01</a>
+    </section>
+
+        </div>
+
+    </section>
+
+    <section class="chapter-visual">
+        <h2>🧠 Flexbox Visual Guide</h2>
+        <p>Use the diagram below to understand the container, item spacing, and margin relationships.</p>
+        <div class="flex-visual-card">
+            <div class="flex-illustration">
+                <svg class="flex-image" viewBox="0 0 680 260" aria-hidden="true">
+                    <rect x="20" y="20" width="640" height="180" rx="24" fill="#eff6ff" stroke="#0ea5e9" stroke-width="4"/>
+                    <rect x="48" y="70" width="140" height="100" rx="18" fill="#38bdf8"/>
+                    <rect x="270" y="70" width="140" height="100" rx="18" fill="#7dd3fc"/>
+                    <rect x="492" y="70" width="140" height="100" rx="18" fill="#38bdf8"/>
+                    <text x="118" y="128" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="700">Item 1</text>
+                    <text x="340" y="128" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="700">Item 2</text>
+                    <text x="562" y="128" text-anchor="middle" fill="#0f172a" font-size="24" font-weight="700">Item 3</text>
+                    <line x1="190" y1="190" x2="250" y2="190" stroke="#0ea5e9" stroke-width="4"/>
+                    <line x1="410" y1="190" x2="470" y2="190" stroke="#0ea5e9" stroke-width="4"/>
+                </svg>
+                <div class="margin-label margin-label-left">Margin-left</div>
+                <div class="margin-label margin-label-right">Margin-right</div>
+            </div>
+            <div class="flex-notes">
+                <div class="note-row"><strong>Flex container</strong> encloses items and defines the main axis.</div>
+                <div class="note-row"><strong>Flex item</strong> follows alignment and spacing rules inside the container.</div>
+                <div class="note-row"><strong>Margin labels</strong> show the space added on each side of the flex items.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tabs-wrapper">
+        <div class="tabs-header" role="tablist" aria-label="Flexbox section tabs">
+            <button class="tab-button active" role="tab" aria-selected="true" aria-controls="panel-container" id="tab-container-btn" data-panel="panel-container">Container</button>
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel-margin" id="tab-margin-btn" data-panel="panel-margin">Margin</button>
+            <button class="tab-button" role="tab" aria-selected="false" aria-controls="panel-responsive" id="tab-responsive-btn" data-panel="panel-responsive">Responsive</button>
+        </div>
+
+        <div class="tab-panels">
+            <article id="panel-container" class="tab-panel active" role="tabpanel" aria-labelledby="tab-container-btn">
+                <h3>Flex Container</h3>
+                <p>The flex container controls layout with <code>display: flex;</code> and determines the main axis. It can wrap items and center them with <code>justify-content</code> and <code>align-items</code>.</p>
+            </article>
+            <article id="panel-margin" class="tab-panel" role="tabpanel" aria-labelledby="tab-margin-btn">
+                <h3>Margin Labels</h3>
+                <p>Margins add spacing around flex items. Common margin labels include:</p>
+                <ul>
+                    <li><strong>margin-left</strong> – pushes an item from the left edge.</li>
+                    <li><strong>margin-right</strong> – pushes an item from the right edge.</li>
+                    <li><strong>margin-top</strong> / <strong>margin-bottom</strong> – control vertical spacing in wrapped rows.</li>
+                </ul>
+            </article>
+            <article id="panel-responsive" class="tab-panel" role="tabpanel" aria-labelledby="tab-responsive-btn">
+                <h3>Responsive Tabs</h3>
+                <p>On smaller screens, flexbox content can stack or wrap. Use <code>flex-wrap: wrap;</code> and percentage widths to make items adapt.</p>
+            </article>
+        </div>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabsWrapper = document.querySelector('.tabs-wrapper');
+            if (!tabsWrapper) return;
+            const tabs = tabsWrapper.querySelectorAll('.tab-button');
+            const panels = tabsWrapper.querySelectorAll('.tab-panel');
+
+            tabs.forEach((tab, index) => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(btn => {
+                        btn.classList.remove('active');
+                        btn.setAttribute('aria-selected', 'false');
+                    });
+                    panels.forEach(panel => panel.classList.remove('active'));
+
+                    tab.classList.add('active');
+                    tab.setAttribute('aria-selected', 'true');
+                    const target = tabsWrapper.querySelector('#' + tab.dataset.panel);
+                    if (target) target.classList.add('active');
+                });
+
+                tab.addEventListener('keydown', event => {
+                    const currentIndex = index;
+                    let nextIndex = null;
+                    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+                        nextIndex = (currentIndex + 1) % tabs.length;
+                    } else if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+                        nextIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+                    }
+                    if (nextIndex !== null) {
+                        event.preventDefault();
+                        tabs[nextIndex].focus();
+                        tabs[nextIndex].click();
+                    }
+                });
+            });
+        });
+    </script>
+
+    <hr>
+
+
+
+    <section class="chapter-actions">
+        <a href="../Chapter-03-CSS/index.html" class="btn secondary">⬅ Previous Chapter</a>
+        <a href="../Chapter-05-CSS%20Grid/index.html" class="btn primary">Next Chapter ➜</a>
+    </section>
+
+</section>
+
+</main>
+
+
+   <!-- ==========================
+         FOOTER
+    =========================== -->
+
+    <footer>
+
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+
+
+
+    </footer>
+
+</body>
+
+</html>

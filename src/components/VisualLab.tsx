@@ -1,92 +1,72 @@
 import React, { useState } from 'react';
-import { Layers, Layout, Grid, Terminal, GitBranch, Globe } from 'lucide-react';
-import { BoxModelVisualizer } from './Visualizers/BoxModelVisualizer';
-import { FlexboxVisualizer } from './Visualizers/FlexboxVisualizer';
-import { GridVisualizer } from './Visualizers/GridVisualizer';
-import { DomTreeVisualizer } from './Visualizers/DomTreeVisualizer';
-import { GitFlowVisualizer } from './Visualizers/GitFlowVisualizer';
-import { NetworkFlowVisualizer } from './Visualizers/NetworkFlowVisualizer';
+import { GitBranch, Globe, Grid, Layers, Layout, Terminal } from 'lucide-react';
+import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
+import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
+import { GridVisualizer } from './visualizers/GridVisualizer';
+import { DomTreeVisualizer } from './visualizers/DomTreeVisualizer';
+import { GitFlowVisualizer } from './visualizers/GitFlowVisualizer';
+import { NetworkFlowVisualizer } from './visualizers/NetworkFlowVisualizer';
+
+type VisualizerId = 'box' | 'flex' | 'grid' | 'dom' | 'git' | 'net';
+
+type VisualizerTool = {
+  id: VisualizerId;
+  name: string;
+  shortName: string;
+  icon: typeof Layers;
+  description: string;
+  tone: string;
+};
+
+const tools: VisualizerTool[] = [
+  { id: 'box', name: 'CSS box model', shortName: 'CSS model', icon: Layers, description: 'Margin, border, padding, and content depth.', tone: 'text-app-amber' },
+  { id: 'flex', name: 'Flexbox studio', shortName: 'Flexbox', icon: Layout, description: 'Main and cross-axis alignment.', tone: 'text-violet-400' },
+  { id: 'grid', name: 'CSS grid matrix', shortName: 'Grid matrix', icon: Grid, description: 'Two-dimensional tracks and auto-fit sizing.', tone: 'text-teal-400' },
+  { id: 'dom', name: 'DOM tree inspector', shortName: 'DOM explorer', icon: Terminal, description: 'HTML hierarchy and selected nodes.', tone: 'text-cyan-400' },
+  { id: 'git', name: 'Git commit DAG', shortName: 'Git history', icon: GitBranch, description: 'Branches, commits, and merge flow.', tone: 'text-pink-400' },
+  { id: 'net', name: 'HTTP & DNS flow', shortName: 'Network trace', icon: Globe, description: 'Client, DNS, server, and asset requests.', tone: 'text-emerald-400' },
+];
 
 export const VisualLab: React.FC = () => {
-  const [activeVisualizer, setActiveVisualizer] = useState<'box' | 'flex' | 'grid' | 'dom' | 'git' | 'net'>('box');
-
-  const tools = [
-    { id: 'box', name: 'CSS Box Model', icon: Layers, desc: 'Margin, Border, Padding 3D Depth' },
-    { id: 'flex', name: 'Flexbox Studio', icon: Layout, desc: 'Main vs Cross Axis Alignment' },
-    { id: 'grid', name: 'CSS Grid Matrix', icon: Grid, desc: '2D Tracks & Auto-Fit Sizing' },
-    { id: 'dom', name: 'DOM Tree Inspector', icon: Terminal, desc: 'HTML Hierarchy & JS Nodes' },
-    { id: 'git', name: 'Git Commit DAG', icon: GitBranch, desc: 'Branching & Merge simulator' },
-    { id: 'net', name: 'HTTP & DNS Flow', icon: Globe, desc: 'Client-Server Packet Cycle' },
-  ];
+  const [activeVisualizer, setActiveVisualizer] = useState<VisualizerId>('box');
+  const activeTool = tools.find((tool) => tool.id === activeVisualizer) || tools[0];
 
   return (
-    <div id="visual-lab-view" className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-10 sm:py-14 space-y-12">
-      {/* 1. Atmospheric Hero Presentation */}
-      <section className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-[#0b0d13] border border-slate-800 dark:border-[#1a1e2a] p-8 sm:p-12 text-white shadow-2xl">
-        {/* Ambient Glow Gradients */}
-        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-80 h-80 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 -mb-12 w-72 h-72 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 space-y-3 max-w-3xl">
-          <div className="flex items-center gap-3">
-            <span className="text-xs px-3.5 py-1.5 rounded-full font-bold uppercase tracking-wider bg-cyan-400/15 text-cyan-300 border border-cyan-400/30 flex items-center gap-2 shadow-xs">
-              <Layers className="w-3.5 h-3.5 text-cyan-400" /> Visual Explainer Studio
-            </span>
+    <div id="visual-lab-view" className="mx-auto w-full max-w-[1180px] min-w-0 space-y-8 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <section className="panel-surface p-6 sm:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-6">
+          <div className="min-w-0 max-w-3xl">
+            <p className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-violet-400"><Layers className="h-4 w-4" aria-hidden="true" /> Visual explainer studio</p>
+            <h1 className="mt-3 text-3xl font-black leading-tight tracking-[-0.03em] text-app-ink sm:text-4xl">See the system behind the syntax.</h1>
+            <p className="mt-3 max-w-2xl text-base leading-relaxed text-app-muted">Use the stored React visualizers as working mental models. Change the controls, inspect the result, and connect the diagram back to the code you are learning.</p>
           </div>
-
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-white leading-[1.2]">
-            Interactive Concept <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-amber-300">
-              Visualizers & Simulators
-            </span>
-          </h1>
-          <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed pt-1">
-            Explore mental models directly with hands-on sliders, live graph rendering, 3D depth simulations, and instant code generation.
-          </p>
+          <div className="border-l border-app-border pl-4 text-right"><p className="font-mono text-[11px] uppercase tracking-[0.12em] text-app-subtle">Active instrument</p><p className="mt-2 text-sm font-bold text-app-ink">{activeTool.shortName}</p><p className="mt-1 max-w-[180px] text-xs leading-relaxed text-app-muted">{activeTool.description}</p></div>
         </div>
       </section>
 
-      {/* Tool Selector Tabs */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5">
-        {tools.map((t) => {
-          const Icon = t.icon;
-          const isSelected = activeVisualizer === t.id;
-          return (
-            <button
-              key={t.id}
-              onClick={() => setActiveVisualizer(t.id as any)}
-              className={`p-4 rounded-2xl border text-left transition-all relative overflow-hidden cursor-pointer ${
-                isSelected
-                  ? 'bg-slate-900 dark:bg-[#0b0d13] border-cyan-400 text-white shadow-xl ring-2 ring-cyan-400/50 scale-[1.02]'
-                  : 'bg-white dark:bg-slate-900/80 border-slate-200 dark:border-slate-800 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01]'
-              }`}
-            >
-              {isSelected && (
-                <span className="absolute top-0 right-0 w-12 h-12 bg-cyan-500/20 rounded-bl-3xl pointer-events-none" />
-              )}
-              <div className="flex items-center justify-between mb-3">
-                <div className={`p-2.5 rounded-xl ${isSelected ? 'bg-cyan-500 text-slate-950 shadow-xs font-black' : 'bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400'}`}>
-                  <Icon className="w-4 h-4" />
-                </div>
-                {isSelected && (
-                  <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 animate-pulse shadow-sm shadow-cyan-400/80" />
-                )}
-              </div>
-              <h4 className="text-xs font-black text-slate-900 dark:text-white tracking-tight">{t.name}</h4>
-              <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 line-clamp-2 leading-relaxed">{t.desc}</p>
-            </button>
-          );
-        })}
-      </div>
+      <div className="grid min-w-0 gap-5 lg:grid-cols-[224px_minmax(0,1fr)] lg:items-start">
+        <aside className="panel-surface min-w-0 overflow-hidden" aria-label="Visualizer instruments">
+          <div className="border-b border-app-border px-4 py-3"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-subtle">Instrument rail</p><p className="mt-1 text-xs leading-relaxed text-app-muted">Choose a model to explore.</p></div>
+          <div className="divide-y divide-app-border">
+            {tools.map((tool) => {
+              const Icon = tool.icon;
+              const isSelected = activeVisualizer === tool.id;
+              return <button key={tool.id} type="button" onClick={() => setActiveVisualizer(tool.id)} aria-pressed={isSelected} aria-controls="visualizer-stage" className={`group flex min-h-16 w-full min-w-0 items-center gap-3 px-4 py-3 text-left transition-colors ${isSelected ? 'bg-app-active' : 'hover:bg-app-inset'}`}><span className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-control border border-app-border bg-app-inset ${isSelected ? tool.tone : 'text-app-muted'}`}><Icon className="h-4 w-4" aria-hidden="true" /></span><span className="min-w-0"><span className={`block truncate text-sm font-bold ${isSelected ? 'text-app-ink' : 'text-app-muted group-hover:text-app-ink'}`}>{tool.name}</span><span className="mt-0.5 block truncate font-mono text-[10px] uppercase tracking-[0.1em] text-app-subtle">{tool.shortName}</span></span>{isSelected && <span className="ml-auto h-2 w-2 shrink-0 rounded-full bg-app-amber" aria-hidden="true" />}</button>;
+            })}
+          </div>
+        </aside>
 
-      {/* Active Visualizer Card */}
-      <div className="mt-6">
-        {activeVisualizer === 'box' && <BoxModelVisualizer />}
-        {activeVisualizer === 'flex' && <FlexboxVisualizer />}
-        {activeVisualizer === 'grid' && <GridVisualizer />}
-        {activeVisualizer === 'dom' && <DomTreeVisualizer />}
-        {activeVisualizer === 'git' && <GitFlowVisualizer />}
-        {activeVisualizer === 'net' && <NetworkFlowVisualizer />}
+        <section id="visualizer-stage" aria-label={`${activeTool.name} teaching stage`} className="min-w-0">
+          <div className="mb-3 flex items-center justify-between gap-3"><div className="min-w-0"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">Teaching stage</p><h2 className="mt-1 truncate text-lg font-bold text-app-ink">{activeTool.name}</h2></div><span className="shrink-0 rounded-control border border-app-border bg-app-inset px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-app-subtle">Live model</span></div>
+          <div className="min-w-0 overflow-hidden rounded-panel border border-app-border bg-app-surface">
+            {activeVisualizer === 'box' && <BoxModelVisualizer />}
+            {activeVisualizer === 'flex' && <FlexboxVisualizer />}
+            {activeVisualizer === 'grid' && <GridVisualizer />}
+            {activeVisualizer === 'dom' && <DomTreeVisualizer />}
+            {activeVisualizer === 'git' && <GitFlowVisualizer />}
+            {activeVisualizer === 'net' && <NetworkFlowVisualizer />}
+          </div>
+        </section>
       </div>
     </div>
   );

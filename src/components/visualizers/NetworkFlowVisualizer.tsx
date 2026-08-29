@@ -50,7 +50,7 @@ export const NetworkFlowVisualizer: React.FC = () => {
   }, [isPlaying]);
 
   return (
-    <div id="network-flow-visualizer" className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+    <div id="network-flow-visualizer" className="panel-surface min-w-0 overflow-hidden p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -85,7 +85,7 @@ export const NetworkFlowVisualizer: React.FC = () => {
 
       <div className="mt-8 space-y-8">
         {/* Nodes Flow */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 relative">
+        <div className="grid min-w-0 grid-cols-1 gap-4 relative md:grid-cols-4">
           {/* Node 1: Browser */}
           <div
             className={`p-4 rounded-xl border text-center transition-all duration-300 ${

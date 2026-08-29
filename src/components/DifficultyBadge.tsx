@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sparkles, Zap, Shield, Flame, Gauge } from 'lucide-react';
-import { DifficultyLevel } from '../types';
+import { DifficultyLevel } from '../utils/types';
 
 interface DifficultyBadgeProps {
   level: DifficultyLevel | 'Easy' | 'Medium' | 'Hard' | string;

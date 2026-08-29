@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Award, X, Download, Printer, CheckCircle, Sparkles } from 'lucide-react';
-import { UserProgress } from '../types';
+import { UserProgress } from '../utils/types';
 
 interface CertificateModalProps {
   isOpen: boolean;

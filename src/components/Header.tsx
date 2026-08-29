@@ -1,26 +1,22 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
-  Menu,
-  Search,
-  Sparkles,
-  BookOpen,
-  Settings,
-  Flame,
-  Award,
-  Sun,
-  Moon,
-  Zap,
-  Code2,
-  Layers,
-  Compass,
-  Calendar,
-  Trophy,
-  X,
   Bell,
   BellRing,
+  Calendar,
+  Code2,
+  Compass,
+  Flame,
   GraduationCap,
+  Layers,
+  Menu,
+  Moon,
+  Search,
+  Settings,
+  Sun,
+  Trophy,
+  X,
 } from 'lucide-react';
-import { UserProgress, AppTheme, ViewMode } from '../types';
+import { UserProgress, AppTheme, ViewMode } from '../utils/types';
 import { getWeeklyStreakDays } from '../utils/streakUtils';
 import { WebZoneBrandLogo } from './WebZoneBrandLogo';
 
@@ -46,10 +42,8 @@ interface HeaderProps {
 export const Header: React.FC<HeaderProps> = ({
   onToggleSidebar,
   onOpenSearch,
-  onOpenTutor,
   onOpenMilestones,
   onOpenSettings,
-  onOpenCertificate,
   onNavigateHome,
   onNavigatePractice,
   onNavigateVisualLab,
@@ -63,374 +57,146 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [streakOpen, setStreakOpen] = useState(false);
   const streakRef = useRef<HTMLDivElement>(null);
+  const weeklyDays = getWeeklyStreakDays(progress.streakDays || 1, true);
+  const themeLabel = theme === 'dark' ? 'Switch to light reading' : 'Switch to dark reading';
 
-  // Close streak popover when clicking outside
   useEffect(() => {
+    if (!streakOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
       if (streakRef.current && !streakRef.current.contains(event.target as Node)) {
         setStreakOpen(false);
       }
     };
-    if (streakOpen) {
-      document.addEventListener('mousedown', handleClickOutside);
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [streakOpen]);
 
-  const weeklyDays = getWeeklyStreakDays(progress.streakDays || 1, true);
+  const desktopNavClass = (view: ViewMode) =>
+    `flex min-h-11 items-center gap-2 rounded-control px-3 text-xs font-bold transition-colors ${
+      activeView === view
+        ? 'bg-app-active text-app-ink ring-1 ring-app-amber/60'
+        : 'text-app-muted hover:bg-app-active hover:text-app-ink'
+    }`;
 
-  const getThemeIcon = () => {
-    switch (theme) {
-      case 'batman':
-      case 'dark':
-        return (
-          <div className="relative flex items-center justify-center">
-            <Moon className="w-4 h-4 text-yellow-400 fill-yellow-400/40" />
-            <span className="absolute -top-1 -right-1 flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-yellow-500"></span>
-            </span>
-          </div>
-        );
-      case 'cyber-energy':
-        return <Zap className="w-4 h-4 text-cyan-400 fill-cyan-400/30 animate-pulse" />;
-      case 'sunset-pulse':
-        return <Flame className="w-4 h-4 text-orange-400 fill-orange-400/30 animate-pulse" />;
-      case 'emerald-flow':
-        return <Sparkles className="w-4 h-4 text-emerald-400 animate-pulse" />;
-      case 'sepia':
-        return <BookOpen className="w-4 h-4 text-amber-600" />;
-      case 'light':
-      default:
-        return <Sun className="w-4 h-4 text-amber-500 fill-amber-400/20" />;
-    }
-  };
+  const mobileNavClass = (view: ViewMode) =>
+    `flex min-h-10 items-center justify-center gap-1.5 rounded-control px-3 text-xs font-bold transition-colors ${
+      activeView === view ? 'bg-app-active text-app-ink' : 'text-app-muted hover:bg-app-active hover:text-app-ink'
+    }`;
 
   return (
-    <header
-      id="app-header"
-      className="sticky top-0 z-30 w-full bg-[#07090f] dark:bg-[#07090f] border-b border-[#141b2d] px-3 sm:px-5 py-2.5 shadow-xl select-none"
-    >
-      <div className="flex items-center justify-between gap-2 sm:gap-4 max-w-[1700px] mx-auto">
-        
-        {/* Left: Hamburger & Brand Identity */}
-        <div className="flex items-center gap-2.5 sm:gap-3">
-          <button
-            onClick={onToggleSidebar}
-            className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-[#121829] transition-colors cursor-pointer"
-            aria-label="Toggle navigation curriculum"
-          >
-            <Menu className="w-5 h-5" />
-          </button>
+    <header id="app-header" className="sticky top-0 z-30 border-b border-app-border bg-app-surface text-app-ink">
+      <div className="mx-auto flex min-h-16 min-w-0 max-w-[1700px] items-center gap-2 px-3 sm:gap-3 sm:px-5">
+        <button
+          type="button"
+          onClick={onToggleSidebar}
+          className="flex min-h-11 min-w-11 shrink-0 items-center justify-center rounded-control text-app-muted transition-colors hover:bg-app-active hover:text-app-ink lg:hidden"
+          aria-label="Open course outline"
+        >
+          <Menu className="h-5 w-5" aria-hidden="true" />
+        </button>
 
-          <button
-            onClick={onNavigateHome}
-            className="flex items-center gap-3 text-left group cursor-pointer transition-transform hover:opacity-95"
-            title="SC WebZone Knowledge Base"
-          >
-            {/* Official SC WebZone Brand Logo */}
-            <WebZoneBrandLogo size="md" showSubtitle={true} />
-            
-            <span className="hidden sm:inline-block text-[9px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-[#1c1444] border border-[#6366f1]/50 text-[#c084fc] tracking-wider shadow-[0_0_10px_rgba(99,102,241,0.2)]">
-              INTERACTIVE
-            </span>
-          </button>
-        </div>
+        <button type="button" onClick={onNavigateHome} className="flex min-w-0 shrink-0 items-center text-left" aria-label="Open curriculum map">
+          <span className="hidden sm:block"><WebZoneBrandLogo size="sm" showSubtitle /></span>
+          <span className="sm:hidden"><WebZoneBrandLogo size="sm" showSubtitle={false} /></span>
+        </button>
+        <span className="hidden shrink-0 rounded-control border border-app-border bg-app-inset px-2 py-1 font-mono text-[10px] font-bold tracking-[0.12em] text-app-amber sm:inline-block">INTERACTIVE</span>
 
-        {/* Center: Segmented Navigation Capsule (Matching Screenshot Exactly) */}
-        <nav className="hidden lg:flex items-center p-1 rounded-2xl bg-[#090d19] border border-[#1b233a] shadow-inner">
-          {/* Curriculum Map */}
-          <button
-            onClick={onNavigateHome}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-2 cursor-pointer ${
-              activeView === 'home'
-                ? 'bg-[#13233c] text-[#38bdf8] border border-[#1e3a5f] shadow-[0_0_12px_rgba(56,189,248,0.2)]'
-                : 'text-slate-400 hover:text-white hover:bg-[#121829]'
-            }`}
-          >
-            <Compass className={`w-3.5 h-3.5 ${activeView === 'home' ? 'text-[#38bdf8]' : 'text-slate-400'}`} />
-            <span>Curriculum Map</span>
+        <nav aria-label="Primary navigation" className="ml-auto hidden min-w-0 items-center gap-1 rounded-panel border border-app-border bg-app-inset p-1 xl:flex">
+          <button type="button" onClick={onNavigateHome} className={desktopNavClass('home')} aria-current={activeView === 'home' ? 'page' : undefined}>
+            <Compass className="h-4 w-4 text-app-amber" aria-hidden="true" /> Curriculum map
           </button>
-
-          {/* Practice Arena */}
-          <button
-            onClick={onNavigatePractice}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeView === 'practice-hub'
-                ? 'bg-[#0f2d25] text-[#34d399] border border-[#059669]/60 shadow-[0_0_12px_rgba(52,211,153,0.2)]'
-                : 'text-slate-400 hover:text-white hover:bg-[#121829]'
-            }`}
-          >
-            <span className="font-mono text-xs opacity-75">&lt;/&gt;</span>
-            <span>Practice Arena</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold bg-[#064e3b] text-[#34d399] border border-[#059669]/40 flex items-center gap-0.5">
-              ⚡ Live
-            </span>
+          <button type="button" onClick={onNavigatePractice} className={desktopNavClass('practice-hub')} aria-current={activeView === 'practice-hub' ? 'page' : undefined}>
+            <Code2 className="h-4 w-4 text-emerald-400" aria-hidden="true" /> Practice arena
           </button>
-
-          {/* Visual Lab */}
-          <button
-            onClick={onNavigateVisualLab}
-            className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer ${
-              activeView === 'visual-lab'
-                ? 'bg-[#29173b] text-[#d8b4fe] border border-[#7e22ce]/60 shadow-[0_0_12px_rgba(216,180,254,0.2)]'
-                : 'text-slate-400 hover:text-white hover:bg-[#121829]'
-            }`}
-          >
-            <Layers className={`w-3.5 h-3.5 ${activeView === 'visual-lab' ? 'text-[#d8b4fe]' : 'text-slate-400'}`} />
-            <span>Visual Lab</span>
-            <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold bg-[#3b0764] text-[#d8b4fe] border border-[#7e22ce]/40">
-              3D
-            </span>
+          <button type="button" onClick={onNavigateVisualLab} className={desktopNavClass('visual-lab')} aria-current={activeView === 'visual-lab' ? 'page' : undefined}>
+            <Layers className="h-4 w-4 text-violet-400" aria-hidden="true" /> Visual lab
           </button>
-
-          {/* Post-Class Activities Hub */}
           {onNavigateActivities && (
-            <button
-              onClick={onNavigateActivities}
-              className={`px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition-all flex items-center gap-1.5 cursor-pointer ${
-                activeView === 'activities'
-                  ? 'bg-[#1e1a38] text-[#c084fc] border border-[#a855f7]/60 shadow-[0_0_12px_rgba(192,132,252,0.2)]'
-                  : 'text-slate-400 hover:text-white hover:bg-[#121829]'
-              }`}
-            >
-              <GraduationCap className={`w-3.5 h-3.5 ${activeView === 'activities' ? 'text-[#c084fc]' : 'text-slate-400'}`} />
-              <span>Activities</span>
-              <span className="text-[9px] px-1.5 py-0.2 rounded-full font-mono font-bold bg-[#4c1d95] text-[#c084fc] border border-[#a855f7]/40">
-                Hub
-              </span>
+            <button type="button" onClick={onNavigateActivities} className={desktopNavClass('activities')} aria-current={activeView === 'activities' ? 'page' : undefined}>
+              <GraduationCap className="h-4 w-4 text-cyan-400" aria-hidden="true" /> Activities
             </button>
           )}
         </nav>
 
-        {/* Right Controls: Search, Days Streak, XP, Actions */}
-        <div className="flex items-center gap-2 sm:gap-2.5">
-          
-          {/* Search Bar Capsule */}
+        <div className="ml-auto flex min-w-0 shrink-0 items-center gap-1 sm:gap-2 xl:ml-3">
           <button
+            type="button"
             onClick={onOpenSearch}
-            className="flex items-center gap-2.5 px-3 py-1.5 rounded-2xl border border-[#1b233a] bg-[#090d19] text-slate-400 hover:text-white hover:border-slate-700 text-xs transition-colors cursor-pointer"
+            className="flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-control border border-app-border bg-app-inset px-2 text-app-muted transition-colors hover:bg-app-active hover:text-app-ink sm:px-3 md:min-w-36 md:justify-start"
+            aria-label="Search textbook"
           >
-            <Search className="w-3.5 h-3.5 text-slate-400" />
-            <span className="hidden md:inline text-slate-400">Search textbook...</span>
-            <kbd className="hidden md:inline text-[10px] font-mono px-1.5 py-0.5 rounded bg-[#161e33] text-slate-400 border border-slate-700/50">
-              ⌘K
-            </kbd>
+            <Search className="h-4 w-4 shrink-0" aria-hidden="true" />
+            <span className="hidden text-xs md:inline">Search textbook...</span>
+            <kbd className="hidden rounded border border-app-border bg-app-active px-1.5 py-0.5 font-mono text-[10px] text-app-subtle md:ml-auto md:inline">⌘K</kbd>
           </button>
 
-          {/* Days Streak Capsule (Matching Screenshot Exactly) */}
           <div className="relative" ref={streakRef}>
             <button
+              type="button"
               id="daily-streak-badge"
-              onClick={() => setStreakOpen((prev) => !prev)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-2xl border text-xs font-bold font-mono transition-all cursor-pointer relative ${
-                streakOpen
-                  ? 'bg-[#2a170a] text-orange-400 border-orange-500 shadow-[0_0_15px_rgba(249,115,22,0.35)]'
-                  : 'bg-gradient-to-r from-[#1c1108] to-[#26150a] border-amber-500/50 text-amber-400 hover:border-amber-400 shadow-[0_0_12px_rgba(245,158,11,0.2)]'
-              }`}
-              title="Daily Learning Streak: Click for breakdown & weekly progress"
-              aria-label={`Daily Streak: ${progress.streakDays} Days`}
+              onClick={() => setStreakOpen((previous) => !previous)}
+              className={`flex min-h-11 items-center gap-1.5 rounded-control border px-2 font-mono text-xs font-bold transition-colors sm:px-3 ${streakOpen ? 'border-app-amber bg-app-active text-app-amber' : 'border-app-border bg-app-inset text-app-amber hover:bg-app-active'}`}
+              title="Open daily learning streak"
+              aria-label={`Daily streak: ${progress.streakDays} days`}
+              aria-expanded={streakOpen}
+              aria-controls="streak-popover"
             >
-              <div className="relative flex items-center justify-center">
-                <Flame className="w-3.5 h-3.5 text-orange-500 fill-orange-500 group-hover:scale-115 transition-transform" />
-                <span className="absolute -top-0.5 -right-0.5 flex h-1.5 w-1.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-500"></span>
-                </span>
-              </div>
-              <span className="font-black text-orange-400">{progress.streakDays}</span>
-              <span className="hidden sm:inline font-extrabold text-amber-300">
-                Days Streak
-              </span>
+              <Flame className="h-4 w-4 text-orange-400" aria-hidden="true" />
+              <span className="tabular-nums">{progress.streakDays}</span>
+              <span className="hidden sm:inline">day streak</span>
             </button>
 
-            {/* Streak Popover */}
             {streakOpen && (
-              <div
-                id="streak-popover"
-                className="absolute right-0 mt-2 w-72 sm:w-80 p-4 rounded-2xl bg-[#0d1222] border border-orange-500/40 shadow-2xl z-50 animate-in fade-in slide-in-from-top-2 duration-200"
-              >
-                <div className="flex items-center justify-between pb-3 border-b border-[#1b233a]">
+              <div id="streak-popover" role="dialog" aria-label="Daily learning streak" className="absolute right-0 top-[calc(100%+8px)] z-50 w-[min(320px,calc(100vw-24px))] rounded-panel border border-app-border bg-app-surface p-4 text-app-ink shadow-2xl">
+                <div className="flex items-start justify-between gap-3 border-b border-app-border pb-3">
                   <div className="flex items-center gap-2">
-                    <div className="p-2 rounded-xl bg-orange-500 text-white shadow-xs">
-                      <Flame className="w-4 h-4 fill-white" />
-                    </div>
-                    <div>
-                      <h4 className="text-xs font-black text-white uppercase tracking-wider">
-                        Daily Learning Streak
-                      </h4>
-                      <p className="text-[11px] font-bold text-orange-400">
-                        🔥 {progress.streakDays} Consecutive {progress.streakDays === 1 ? 'Day' : 'Days'}
-                      </p>
-                    </div>
+                    <span className="flex h-9 w-9 items-center justify-center rounded-control bg-app-amber text-slate-950"><Flame className="h-4 w-4" aria-hidden="true" /></span>
+                    <div><h2 className="text-sm font-bold">Daily learning streak</h2><p className="font-mono text-xs text-orange-400">{progress.streakDays} consecutive {progress.streakDays === 1 ? 'day' : 'days'}</p></div>
                   </div>
-                  <button
-                    onClick={() => setStreakOpen(false)}
-                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-[#161e33]"
-                  >
-                    <X className="w-3.5 h-3.5" />
-                  </button>
+                  <button type="button" onClick={() => setStreakOpen(false)} className="flex min-h-11 min-w-11 items-center justify-center rounded-control text-app-muted hover:bg-app-active hover:text-app-ink" aria-label="Close streak details"><X className="h-4 w-4" aria-hidden="true" /></button>
                 </div>
-
-                <div className="py-3.5 space-y-2">
-                  <div className="flex items-center justify-between text-[11px] font-bold text-slate-300">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3 text-orange-500" /> This Week's Rhythm
-                    </span>
-                    <span className="text-[10px] text-emerald-400 font-mono">
-                      Active Today ✓
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-7 gap-1 pt-1">
-                    {weeklyDays.map((d, i) => (
-                      <div
-                        key={i}
-                        className={`flex flex-col items-center p-1.5 rounded-xl border text-center transition-all ${
-                          d.isToday
-                            ? 'bg-orange-500/20 border-orange-400 text-orange-300 ring-1 ring-orange-400/40 font-black'
-                            : d.isActive
-                            ? 'bg-emerald-950/60 border-emerald-800/80 text-emerald-300 font-bold'
-                            : 'bg-[#080c17] border-[#1b233a] text-slate-500'
-                        }`}
-                      >
-                        <span className="text-[9px] font-mono uppercase">{d.dayName}</span>
-                        <div className="my-1">
-                          {d.isActive ? (
-                            <Flame className={`w-3.5 h-3.5 ${d.isToday ? 'text-orange-500 fill-orange-500 animate-bounce' : 'text-emerald-500 fill-emerald-500'}`} />
-                          ) : (
-                            <div className="w-3.5 h-3.5 rounded-full border border-dashed border-slate-700 flex items-center justify-center text-[8px]">
-                              •
-                            </div>
-                          )}
-                        </div>
-                        {d.isToday && (
-                          <span className="text-[8px] font-mono uppercase text-orange-400 font-bold">
-                            Today
-                          </span>
-                        )}
+                <div className="space-y-2 py-4">
+                  <div className="flex items-center justify-between text-xs font-bold"><span className="flex items-center gap-1.5"><Calendar className="h-4 w-4 text-app-amber" aria-hidden="true" /> This week</span><span className="text-emerald-400">Active today</span></div>
+                  <div className="grid grid-cols-7 gap-1">
+                    {weeklyDays.map((day) => (
+                      <div key={`${day.dayName}-${day.isToday}`} className={`flex min-h-14 flex-col items-center justify-center rounded-control border text-center ${day.isToday ? 'border-app-amber bg-app-amber/15 text-app-amber' : day.isActive ? 'border-emerald-400/40 bg-emerald-400/10 text-emerald-400' : 'border-app-border bg-app-inset text-app-subtle'}`}>
+                        <span className="font-mono text-[10px] uppercase">{day.dayName}</span>
+                        <Flame className={`my-1 h-4 w-4 ${day.isActive ? 'text-orange-400' : 'text-app-subtle'}`} aria-hidden="true" />
+                        {day.isToday && <span className="font-mono text-[9px] uppercase">Today</span>}
                       </div>
                     ))}
                   </div>
                 </div>
-
-                <div className="p-2.5 rounded-xl bg-[#141b2f] border border-orange-500/30 space-y-1.5">
-                  <div className="flex items-center gap-1.5 text-[11px] font-bold text-orange-300">
-                    <Trophy className="w-3.5 h-3.5 text-amber-400" />
-                    <span>Streak Continuity Bonus</span>
-                  </div>
-                  <p className="text-[10px] text-slate-300 leading-relaxed">
-                    Complete any lesson or challenge daily for <strong className="text-orange-400">+25 XP</strong> daily bonus!
-                  </p>
-                </div>
-
-                <div className="mt-3 pt-2.5 border-t border-[#1b233a] flex items-center justify-between">
-                  <button
-                    onClick={() => {
-                      setStreakOpen(false);
-                      onOpenMilestones();
-                    }}
-                    className="text-[11px] font-bold text-cyan-400 hover:underline flex items-center gap-1 cursor-pointer"
-                  >
-                    View Milestones ➔
-                  </button>
-                  <span className="text-[10px] font-mono text-slate-400">
-                    {progress.streakDays >= 7 ? '🌟 Habit Formed' : `${7 - (progress.streakDays % 7)}d to next badge`}
-                  </span>
-                </div>
+                <div className="rounded-control border border-app-border bg-app-inset p-3 text-xs leading-relaxed text-app-muted"><span className="flex items-center gap-1.5 font-bold text-app-ink"><Trophy className="h-4 w-4 text-app-amber" aria-hidden="true" /> Streak continuity bonus</span><p className="mt-1">Complete any lesson or challenge daily for <strong className="text-app-amber">+25 XP</strong>.</p></div>
+                <div className="mt-3 flex items-center justify-between gap-3 border-t border-app-border pt-3"><button type="button" onClick={() => { setStreakOpen(false); onOpenMilestones(); }} className="min-h-11 text-xs font-bold text-app-amber hover:underline">View milestones →</button><span className="font-mono text-[11px] text-app-subtle">{progress.streakDays >= 7 ? 'Habit formed' : `${7 - (progress.streakDays % 7)}d to next badge`}</span></div>
               </div>
             )}
           </div>
 
-          {/* 170 XP Badge Capsule (Matching Screenshot Exactly) */}
-          <button
-            onClick={onOpenMilestones}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-gradient-to-r from-[#1c1505] to-[#261d06] border border-yellow-500/50 text-yellow-400 text-xs font-bold font-mono hover:border-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.2)] transition-all cursor-pointer group"
-            title="View XP Milestones & Level Roadmap"
-            aria-label="View XP Milestones"
-          >
-            <Flame className="w-3.5 h-3.5 text-yellow-400 fill-current group-hover:scale-110 transition-transform" />
-            <span className="font-black text-yellow-300">{progress.xpPoints} XP</span>
+          <button type="button" onClick={onOpenMilestones} className="hidden min-h-11 items-center gap-1.5 rounded-control border border-app-border bg-app-inset px-3 font-mono text-xs font-bold text-app-amber transition-colors hover:bg-app-active sm:flex" title="View XP milestones" aria-label={`View ${progress.xpPoints} XP milestones`}>
+            <span className="text-app-subtle">XP</span><span className="tabular-nums">{progress.xpPoints}</span>
           </button>
 
-          {/* Release News & Push Notifications Bell */}
-          <button
-            onClick={onOpenNotifications}
-            className="p-2 rounded-2xl border border-[#1b233a] bg-[#090d19] text-slate-400 hover:text-white hover:border-slate-700 transition-colors cursor-pointer relative group"
-            title="Notifications, News & Push Updates"
-            aria-label="Notifications and Updates"
-          >
-            {unreadNewsCount > 0 ? (
-              <>
-                <BellRing className="w-4 h-4 text-amber-400" />
-                <span className="absolute -top-1 -right-1 w-4 h-4 bg-amber-500 text-slate-950 rounded-full text-[9px] font-black flex items-center justify-center shadow-xs">
-                  {unreadNewsCount}
-                </span>
-              </>
-            ) : (
-              <Bell className="w-4 h-4" />
-            )}
+          <button type="button" onClick={onOpenNotifications} className="relative flex min-h-11 min-w-11 items-center justify-center rounded-control border border-app-border bg-app-inset text-app-muted transition-colors hover:bg-app-active hover:text-app-ink" title="Notifications and release news" aria-label="Notifications and release news">
+            {unreadNewsCount > 0 ? <BellRing className="h-4 w-4 text-app-amber" aria-hidden="true" /> : <Bell className="h-4 w-4" aria-hidden="true" />}
+            {unreadNewsCount > 0 && <span className="absolute right-0.5 top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-app-amber px-1 font-mono text-[9px] font-black text-slate-950">{unreadNewsCount}</span>}
           </button>
 
-          {/* Quick Theme Switcher */}
-          <button
-            onClick={onToggleTheme}
-            className="p-2 rounded-2xl border border-[#1b233a] bg-[#090d19] text-slate-400 hover:text-white hover:border-slate-700 transition-colors cursor-pointer relative group"
-            title={`Current Theme: ${theme}. Click to switch theme`}
-          >
-            {getThemeIcon()}
+          <button type="button" onClick={onToggleTheme} className="flex min-h-11 min-w-11 items-center justify-center rounded-control border border-app-border bg-app-inset text-app-muted transition-colors hover:bg-app-active hover:text-app-ink" title={themeLabel} aria-label={themeLabel}>
+            {theme === 'dark' ? <Sun className="h-4 w-4 text-app-amber" aria-hidden="true" /> : <Moon className="h-4 w-4 text-app-amber" aria-hidden="true" />}
           </button>
-
-          {/* Settings Modal */}
-          <button
-            onClick={onOpenSettings}
-            className="p-2 rounded-2xl border border-[#1b233a] bg-[#090d19] text-slate-400 hover:text-white hover:border-slate-700 transition-colors cursor-pointer"
-            title="Settings & Themes"
-          >
-            <Settings className="w-4 h-4" />
+          <button type="button" onClick={onOpenSettings} className="flex min-h-11 min-w-11 items-center justify-center rounded-control border border-app-border bg-app-inset text-app-muted transition-colors hover:bg-app-active hover:text-app-ink" title="Open settings" aria-label="Open settings">
+            <Settings className="h-4 w-4" aria-hidden="true" />
           </button>
         </div>
       </div>
 
-      {/* Mobile Sub-Navigation Tabs */}
-      <div className="flex lg:hidden items-center justify-around mt-2 pt-2 border-t border-[#141b2d] text-xs font-semibold">
-        <button
-          onClick={onNavigateHome}
-          className={`px-3 py-1 rounded-lg flex items-center gap-1 ${
-            activeView === 'home'
-              ? 'bg-[#13233c] text-[#38bdf8] font-bold'
-              : 'text-slate-400'
-          }`}
-        >
-          <Compass className="w-3.5 h-3.5" />
-          Curriculum
-        </button>
-        <button
-          onClick={onNavigatePractice}
-          className={`px-3 py-1 rounded-lg flex items-center gap-1 ${
-            activeView === 'practice-hub'
-              ? 'bg-[#0f2d25] text-[#34d399] font-bold'
-              : 'text-slate-400'
-          }`}
-        >
-          <Code2 className="w-3.5 h-3.5" />
-          Arena
-        </button>
-        <button
-          onClick={onNavigateVisualLab}
-          className={`px-3 py-1 rounded-lg flex items-center gap-1 ${
-            activeView === 'visual-lab'
-              ? 'bg-[#29173b] text-[#d8b4fe] font-bold'
-              : 'text-slate-400'
-          }`}
-        >
-          <Layers className="w-3.5 h-3.5" />
-          Visual Lab
-        </button>
-      </div>
+      <nav aria-label="Compact navigation" className="flex min-w-0 items-center gap-1 overflow-x-auto border-t border-app-border bg-app-inset px-3 py-1 xl:hidden">
+        <button type="button" onClick={onNavigateHome} className={mobileNavClass('home')} aria-current={activeView === 'home' ? 'page' : undefined}><Compass className="h-4 w-4 text-app-amber" aria-hidden="true" /> Curriculum</button>
+        <button type="button" onClick={onNavigatePractice} className={mobileNavClass('practice-hub')} aria-current={activeView === 'practice-hub' ? 'page' : undefined}><Code2 className="h-4 w-4 text-emerald-400" aria-hidden="true" /> Arena</button>
+        <button type="button" onClick={onNavigateVisualLab} className={mobileNavClass('visual-lab')} aria-current={activeView === 'visual-lab' ? 'page' : undefined}><Layers className="h-4 w-4 text-violet-400" aria-hidden="true" /> Visual lab</button>
+        {onNavigateActivities && <button type="button" onClick={onNavigateActivities} className={mobileNavClass('activities')} aria-current={activeView === 'activities' ? 'page' : undefined}><GraduationCap className="h-4 w-4 text-cyan-400" aria-hidden="true" /> Activities</button>}
+      </nav>
     </header>
   );
 };
-

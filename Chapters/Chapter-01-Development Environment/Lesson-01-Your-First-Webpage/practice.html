@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 01 | Your First Webpage - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+
+<body class="lesson-page">
+
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 1.1</span>
+            <h1>Build Your First Interactive Card</h1>
+            <p>Modify the starter HTML code to add your custom heading, personal bio, and an interactive call to action.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Change the <code>&lt;h1&gt;</code> tag to say <strong>"Welcome to My Profile"</strong>.</li>
+                <li>2. Add a <code>&lt;p&gt;</code> tag describing what you hope to build as a web developer.</li>
+                <li>3. Add a <code>&lt;button&gt;Explore Projects&lt;/button&gt;</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML)</h3>
+                    <textarea id="htmlEditor">&lt;div style="padding: 24px; border: 2px solid #ef233c; border-radius: 12px; background: #fff1f2; color: #1c0b0f; font-family: sans-serif; text-align: center;"&gt;
+  &lt;h1&gt;Welcome to My Profile&lt;/h1&gt;
+  &lt;p&gt;I am learning full-stack web development with WZ Storehouse!&lt;/p&gt;
+  &lt;button style="background: #ef233c; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;"&gt;Explore Projects 🚀&lt;/button&gt;
+&lt;/div&gt;</textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 01</a>
+            <a href="../../Chapter-02-HTML/index.html">Start Chapter 02: HTML ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

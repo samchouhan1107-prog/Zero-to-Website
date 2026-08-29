@@ -27,13 +27,13 @@ import {
   GraduationCap,
   Bug,
 } from 'lucide-react';
-import { Lesson, Chapter } from '../types';
-import { BoxModelVisualizer } from './Visualizers/BoxModelVisualizer';
-import { FlexboxVisualizer } from './Visualizers/FlexboxVisualizer';
-import { GridVisualizer } from './Visualizers/GridVisualizer';
-import { DomTreeVisualizer } from './Visualizers/DomTreeVisualizer';
-import { GitFlowVisualizer } from './Visualizers/GitFlowVisualizer';
-import { NetworkFlowVisualizer } from './Visualizers/NetworkFlowVisualizer';
+import { Lesson, Chapter } from '../utils/types';
+import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
+import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
+import { GridVisualizer } from './visualizers/GridVisualizer';
+import { DomTreeVisualizer } from './visualizers/DomTreeVisualizer';
+import { GitFlowVisualizer } from './visualizers/GitFlowVisualizer';
+import { NetworkFlowVisualizer } from './visualizers/NetworkFlowVisualizer';
 import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
@@ -98,14 +98,12 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const scrollToSection = (id: string) => {
     setActiveSection(id);
     const el = document.getElementById(id);
-    if (el) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-      window.scrollTo({
-        top: offsetPosition,
+    const scrollContainer = document.getElementById('main-content');
+    if (el && scrollContainer) {
+      const containerRect = scrollContainer.getBoundingClientRect();
+      const elementRect = el.getBoundingClientRect();
+      scrollContainer.scrollTo({
+        top: scrollContainer.scrollTop + elementRect.top - containerRect.top - 16,
         behavior: 'smooth',
       });
     }
@@ -168,7 +166,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
   };
 
   return (
-    <article id={`lesson-${lesson.id}`} className="max-w-5xl mx-auto px-6 sm:px-10 py-10 sm:py-14 space-y-12">
+    <article id={`lesson-${lesson.id}`} className="mx-auto w-full max-w-[960px] min-w-0 space-y-12 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
       {/* Printable Document Header (Visible only on Print / PDF) */}
       <div className="hidden print-header-banner">
         <span>WEBZONE FULL-STACK ACADEMY • OFFLINE STUDY GUIDE</span>
@@ -176,12 +174,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </div>
 
       {/* 1. Spacious Hero Lesson Header Card */}
-      <section className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-[#0b0d13] border border-slate-800 dark:border-[#1a1e2a] p-8 sm:p-12 text-white shadow-2xl">
-        {/* Ambient Glow Gradients matching Home Hero */}
-        <div className="absolute top-0 right-0 -mt-12 -mr-12 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/4 -mb-12 w-72 h-72 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="panel-surface relative overflow-hidden p-5 sm:p-8">
+        <div className="relative z-10">
 
-        <div className="relative z-10 space-y-6">
+        <div className="space-y-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2.5">
               <span className="text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 dark:text-cyan-400 border border-indigo-500/30">
@@ -332,7 +328,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </section>
 
       {/* Modern Sticky Section Tab Bar */}
-      <nav aria-label="Lesson Outline Tabs" className="sticky top-[58px] z-20 -mx-2 px-2 py-2 bg-white/90 dark:bg-slate-950/90 backdrop-blur-md border-y border-slate-200/80 dark:border-slate-800/80">
+      <nav aria-label="Lesson Outline Tabs" className="sticky top-[104px] z-20 -mx-2 border-y border-app-border bg-app-canvas px-2 py-2 lg:top-16">
         <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
           {sectionTabs.map((tab) => {
             const Icon = tab.icon;

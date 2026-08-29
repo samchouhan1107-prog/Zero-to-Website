@@ -1,244 +1,234 @@
 @import "tailwindcss";
 
+@theme inline {
+  --color-app-canvas: var(--app-canvas);
+  --color-app-surface: var(--app-surface);
+  --color-app-active: var(--app-active);
+  --color-app-inset: var(--app-inset);
+  --color-app-border: var(--app-border);
+  --color-app-ink: var(--app-ink);
+  --color-app-muted: var(--app-muted);
+  --color-app-subtle: var(--app-subtle);
+  --color-app-amber: var(--app-amber);
+  --color-app-amber-hover: var(--app-amber-hover);
+  --color-app-focus: var(--app-focus);
+  --color-app-lesson-strip: var(--app-lesson-strip);
+  --color-app-lesson-strip-ink: var(--app-lesson-strip-ink);
+  --font-sans: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Recursive Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --radius-panel: 18px;
+  --radius-control: 8px;
+}
+
 @layer base {
-  /* 🦇 Batman / Gotham Dark Knight Theme (Batcave Pitch Black & Gotham Gold) */
-  html.batman,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) {
-    background-color: #07080b;
-    color: #f3f4f6;
+  :root,
+  html.dark {
+    color-scheme: dark;
+    --app-canvas: #070a12;
+    --app-surface: #101624;
+    --app-active: #182238;
+    --app-inset: #0c1320;
+    --app-border: #263148;
+    --app-ink: #f4f6fb;
+    --app-muted: #b7c0d2;
+    --app-subtle: #8490a5;
+    --app-amber: #f6b900;
+    --app-amber-hover: #ffd054;
+    --app-focus: #ffd054;
+    --app-lesson-strip: #dde5f1;
+    --app-lesson-strip-ink: #111827;
+    --app-panel-shadow: 0 18px 36px -28px rgb(0 0 0 / 0.9);
   }
 
-  html.batman aside,
-  html.batman header,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) aside,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) header {
-    background-color: #0b0d13;
-    border-color: #1a1e2a;
-  }
-
-  html.batman .bg-slate-900,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .bg-slate-900 {
-    background-color: #0f121a;
-    border-color: #1a1e2a;
-  }
-
-  html.batman .bg-slate-950,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .bg-slate-950 {
-    background-color: #07080b;
-  }
-
-  html.batman .border-slate-800,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .border-slate-800 {
-    border-color: #1a1e2a;
-  }
-
-  html.batman .border-slate-700,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .border-slate-700 {
-    border-color: #242b3b;
-  }
-
-  /* Gotham Gold Highlights in Batman Theme */
-  html.batman .batman-gold-glow,
-  html.dark:not(.cyber-energy):not(.sunset-pulse):not(.emerald-flow) .batman-gold-glow {
-    box-shadow: 0 0 20px -2px rgba(250, 204, 21, 0.35);
-  }
-
-  /* ☀️ Light Clean Mode (Crisp Daytime Study Canvas) */
   html.light {
-    background-color: #f8fafc;
-    color: #0f172a;
+    color-scheme: light;
+    --app-canvas: #e9eef6;
+    --app-surface: #f9fbff;
+    --app-active: #eef3fa;
+    --app-inset: #e1e8f2;
+    --app-border: #cbd5e3;
+    --app-ink: #111827;
+    --app-muted: #526078;
+    --app-subtle: #6b778d;
+    --app-amber: #b87900;
+    --app-amber-hover: #9a6500;
+    --app-focus: #182238;
+    --app-lesson-strip: #182238;
+    --app-lesson-strip-ink: #ffffff;
+    --app-panel-shadow: 0 18px 36px -30px rgb(48 63 88 / 0.28);
   }
 
-  html.light aside,
-  html.light header {
-    background-color: #ffffff !important;
-    border-color: #e2e8f0 !important;
-    color: #0f172a !important;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
 
-  html.light .bg-slate-900,
-  html.light .dark\:bg-\[\#0b0d13\] {
-    background-color: #1e293b;
-    color: #ffffff;
-    border-color: #334155;
+  html,
+  body,
+  #root {
+    min-height: 100%;
   }
 
-  html.light header .text-white,
-  html.light aside .text-white {
-    color: #0f172a !important;
+  html {
+    background: var(--app-canvas);
   }
 
-  html.light header .text-slate-400,
-  html.light aside .text-slate-400 {
-    color: #64748b !important;
+  body {
+    margin: 0;
+    overflow-x: clip;
+    background: var(--app-canvas);
+    color: var(--app-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
   }
 
-  html.light header .bg-\[\#090d19\],
-  html.light header .bg-\[\#161e33\] {
-    background-color: #f1f5f9 !important;
-    border-color: #cbd5e1 !important;
-    color: #334155 !important;
+  #root {
+    min-width: 0;
   }
 
-  html.light .border-slate-800,
-  html.light .border-slate-700 {
-    border-color: #e2e8f0;
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
   }
 
-  /* 📖 Warm Sepia Theme (Eye-Care Relaxed Tone) */
-  html.sepia {
-    background-color: #fbf0d9;
-    color: #433422;
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--app-focus);
+    outline-offset: 3px;
   }
 
-  html.sepia aside,
-  html.sepia header,
-  html.sepia article,
-  html.sepia .bg-white {
-    background-color: #f4e8c1 !important;
-    color: #433422 !important;
-    border-color: #e5d3a5 !important;
-  }
-
-  html.sepia .bg-slate-50 {
-    background-color: #ede0b4;
-    color: #433422;
-  }
-
-  html.sepia .bg-slate-900,
-  html.sepia .bg-slate-950,
-  html.sepia .dark\:bg-\[\#0b0d13\] {
-    background-color: #3d3021 !important;
-    color: #fef8ee !important;
-    border-color: #584735 !important;
-  }
-
-  html.sepia header .bg-\[\#090d19\],
-  html.sepia header .bg-\[\#161e33\] {
-    background-color: #ebdcb2 !important;
-    border-color: #d8c292 !important;
-    color: #433422 !important;
-  }
-
-  html.sepia .text-slate-400,
-  html.sepia .text-slate-500 {
-    color: #785e40 !important;
-  }
-
-  /* ⚡ Cyber Energy Theme (Electric Dark Neon & Indigo-Cyan Glow) */
-  html.cyber-energy {
-    background-color: #060814;
-    color: #f1f5f9;
-  }
-
-  html.cyber-energy header,
-  html.cyber-energy aside,
-  html.cyber-energy .bg-white {
-    background-color: #0c1024 !important;
-    color: #f1f5f9 !important;
-    border-color: rgba(99, 102, 241, 0.35) !important;
-  }
-
-  html.cyber-energy .bg-slate-50,
-  html.cyber-energy .bg-slate-900,
-  html.cyber-energy .dark\:bg-\[\#0b0d13\] {
-    background-color: #0f1530 !important;
-    border-color: rgba(129, 140, 248, 0.3) !important;
-  }
-
-  html.cyber-energy .bg-slate-950 {
-    background-color: #070a17 !important;
-  }
-
-  html.cyber-energy .text-slate-900 {
-    color: #ffffff;
-  }
-
-  html.cyber-energy .text-slate-700,
-  html.cyber-energy .text-slate-600 {
-    color: #cbd5e1;
-  }
-
-  /* 🌅 Sunset Pulse Theme (Solar Radiant & Fiery Amber) */
-  html.sunset-pulse {
-    background-color: #120804;
-    color: #fef2f2;
-  }
-
-  html.sunset-pulse header,
-  html.sunset-pulse aside,
-  html.sunset-pulse .bg-white {
-    background-color: #1f0e08 !important;
-    color: #fef2f2 !important;
-    border-color: rgba(249, 115, 22, 0.35) !important;
-  }
-
-  html.sunset-pulse .bg-slate-50,
-  html.sunset-pulse .bg-slate-900,
-  html.sunset-pulse .dark\:bg-\[\#0b0d13\] {
-    background-color: #2b140b !important;
-    border-color: rgba(251, 146, 60, 0.3) !important;
-  }
-
-  html.sunset-pulse .bg-slate-950 {
-    background-color: #150904 !important;
-  }
-
-  html.sunset-pulse .text-slate-900 {
-    color: #ffffff;
-  }
-
-  html.sunset-pulse .text-slate-700,
-  html.sunset-pulse .text-slate-600 {
-    color: #fdba74;
-  }
-
-  /* 🔋 Emerald Flow Theme (Neon Matrix & Electric Mint) */
-  html.emerald-flow {
-    background-color: #030d0a;
-    color: #ecfdf5;
-  }
-
-  html.emerald-flow header,
-  html.emerald-flow aside,
-  html.emerald-flow .bg-white {
-    background-color: #081d16 !important;
-    color: #ecfdf5 !important;
-    border-color: rgba(16, 185, 129, 0.35) !important;
-  }
-
-  html.emerald-flow .bg-slate-50,
-  html.emerald-flow .bg-slate-900,
-  html.emerald-flow .dark\:bg-\[\#0b0d13\] {
-    background-color: #0d291f !important;
-    border-color: rgba(52, 211, 153, 0.3) !important;
-  }
-
-  html.emerald-flow .bg-slate-950 {
-    background-color: #04100c !important;
-  }
-
-  html.emerald-flow .text-slate-900 {
-    color: #ffffff;
-  }
-
-  html.emerald-flow .text-slate-700,
-  html.emerald-flow .text-slate-600 {
-    color: #a7f3d0;
+  ::selection {
+    background: color-mix(in srgb, var(--app-amber) 34%, transparent);
+    color: var(--app-ink);
   }
 }
 
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(99, 102, 241, 0.35);
-  }
-  50% {
-    box-shadow: 0 0 25px rgba(168, 85, 247, 0.55);
+@utility panel-surface {
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--app-panel-shadow);
+}
+
+@utility inset-surface {
+  background-color: var(--app-inset);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-control);
+}
+
+@utility ledger-rule {
+  border-color: var(--app-border);
+  border-style: solid;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }
 
-.tab-active-glow {
-  box-shadow: 0 4px 20px -2px rgba(99, 102, 241, 0.3);
+@utility scrollbar-thin {
+  scrollbar-color: var(--app-border) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--app-border);
+    border-radius: 999px;
+  }
+}
+
+/* Compatibility aliases for the existing lesson/activity surfaces while they migrate to semantic tokens. */
+@layer utilities {
+  html.dark .bg-white,
+  html.dark .bg-slate-50,
+  html.dark .bg-slate-100 {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.dark .bg-slate-800 {
+    background-color: var(--app-active) !important;
+  }
+
+  html.dark .bg-slate-900 {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.dark .bg-slate-950 {
+    background-color: var(--app-canvas) !important;
+  }
+
+  html.dark .border-slate-100,
+  html.dark .border-slate-200,
+  html.dark .border-slate-300,
+  html.dark .border-slate-700,
+  html.dark .border-slate-800 {
+    border-color: var(--app-border) !important;
+  }
+
+  html.dark .text-white,
+  html.dark .text-slate-100,
+  html.dark .text-slate-200,
+  html.dark .text-slate-700,
+  html.dark .text-slate-800,
+  html.dark .text-slate-900 {
+    color: var(--app-ink) !important;
+  }
+
+  html.dark .text-slate-300,
+  html.dark .text-slate-400,
+  html.dark .text-slate-500,
+  html.dark .text-slate-600 {
+    color: var(--app-muted) !important;
+  }
+
+  html.light .bg-white {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.light .bg-slate-50,
+  html.light .bg-slate-100 {
+    background-color: var(--app-active) !important;
+  }
+
+  html.light .border-slate-100,
+  html.light .border-slate-200,
+  html.light .border-slate-300,
+  html.light .border-slate-700,
+  html.light .border-slate-800 {
+    border-color: var(--app-border) !important;
+  }
+
+  html.light .text-slate-900,
+  html.light .text-slate-800,
+  html.light .text-slate-700 {
+    color: var(--app-ink) !important;
+  }
+
+  html.light .text-slate-600,
+  html.light .text-slate-500,
+  html.light .text-slate-400 {
+    color: var(--app-muted) !important;
+  }
 }
 
 @keyframes fadeIn {
@@ -256,9 +246,9 @@
   animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* ==========================================================================
-   📄 PRINT MEDIA QUERY (PDF-Optimized Lesson & Study Sheet Formatter)
-   ========================================================================== */
+/* ========================================================================
+   PRINT MEDIA QUERY (PDF-Optimized Lesson & Study Sheet Formatter)
+   ======================================================================== */
 @media print {
   @page {
     margin: 1.5cm 1.2cm 1.6cm 1.2cm;
@@ -289,7 +279,7 @@
     overflow: visible !important;
   }
 
-  /* 🚫 Hide Screen-Only Navigation & Interactive Widgets */
+  /* Hide screen-only navigation and interactive widgets */
   header,
   aside,
   nav,
@@ -299,19 +289,17 @@
   #section-practice,
   #section-visuals,
   .no-print,
-  [aria-label="Lesson Outline Tabs"],
-  [aria-label="Lesson Navigation"],
-  [aria-live="polite"],
+  [aria-label='Lesson Outline Tabs'],
+  [aria-label='Lesson Navigation'],
+  [aria-live='polite'],
   .pointer-events-none {
     display: none !important;
   }
 
-  /* Hide interactive action buttons in sections while keeping text content */
   button:not(#section-quiz button):not(.print-keep) {
     display: none !important;
   }
 
-  /* 📖 Main Article & Page Setup */
   article {
     max-width: 100% !important;
     margin: 0 !important;
@@ -322,7 +310,6 @@
     overflow: visible !important;
   }
 
-  /* Print Document Header Stamp */
   .print-header-banner {
     display: flex !important;
     justify-content: space-between;
@@ -336,7 +323,6 @@
     color: #475569;
   }
 
-  /* Lesson Hero Card Formatted for Crisp Print */
   article > section:first-of-type {
     background: #f8fafc !important;
     color: #0f172a !important;
@@ -366,7 +352,6 @@
     line-height: 1.5 !important;
   }
 
-  /* Universal Section Cards */
   section {
     page-break-inside: avoid;
     break-inside: avoid;
@@ -377,8 +362,12 @@
     border: 1pt solid #e2e8f0 !important;
   }
 
-  /* Typographic Hierarchy & Page-Break Protections */
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     page-break-after: avoid;
     break-after: avoid;
     color: #0f172a !important;
@@ -399,7 +388,8 @@
     margin-bottom: 4pt !important;
   }
 
-  p, li {
+  p,
+  li {
     color: #334155 !important;
     font-size: 10pt !important;
     line-height: 1.55 !important;
@@ -407,12 +397,12 @@
     widows: 3;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin-top: 4pt !important;
     margin-bottom: 6pt !important;
   }
 
-  /* 🎯 Learning Objectives Block */
   #section-objectives {
     background: #f8fafc !important;
     border: 1pt solid #cbd5e1 !important;
@@ -427,7 +417,6 @@
     color: #1e293b !important;
   }
 
-  /* 💡 Real-World Mental Model / Analogy */
   #section-analogy {
     background: #fffdf5 !important;
     border: 1pt solid #fde68a !important;
@@ -443,7 +432,6 @@
     font-style: italic !important;
   }
 
-  /* 💻 Annotated Code Breakdown (Crisp High-Contrast Print View) */
   #section-code {
     page-break-inside: avoid;
     break-inside: avoid;
@@ -489,7 +477,6 @@
     color: #0f172a !important;
   }
 
-  /* 📝 Checkpoint Quiz Questions & Explanations */
   #section-quiz {
     page-break-inside: avoid;
     break-inside: avoid;
@@ -509,7 +496,6 @@
     cursor: default !important;
   }
 
-  /* 📌 Student Notes Box */
   #section-notes {
     page-break-inside: avoid;
     break-inside: avoid;
@@ -527,7 +513,6 @@
     resize: none !important;
   }
 
-  /* 🌟 Summary & Key Takeaways */
   #section-summary {
     background: #f0fdf4 !important;
     border: 1pt solid #bbf7d0 !important;
@@ -545,7 +530,6 @@
     color: #166534 !important;
   }
 
-  /* 🔗 Related References */
   #section-related {
     page-break-inside: avoid;
     break-inside: avoid;
@@ -557,7 +541,6 @@
     border: 1pt solid #e2e8f0 !important;
   }
 
-  /* Print Footer Stamp */
   .print-footer-banner {
     display: flex !important;
     justify-content: space-between;
@@ -572,4 +555,3 @@
     break-inside: avoid;
   }
 }
-

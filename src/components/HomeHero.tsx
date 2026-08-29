@@ -1,23 +1,19 @@
 import React from 'react';
 import {
-  BookOpen,
-  CheckCircle2,
-  Play,
-  Code2,
-  Layers,
   ArrowRight,
-  Flame,
   Award,
-  Sparkles,
-  Compass,
-  Clock,
-  Check,
-  Zap,
-  Terminal,
   BrainCircuit,
+  CheckCircle2,
+  Code2,
+  Compass,
+  Flame,
   GraduationCap,
+  Layers,
+  Play,
+  Sparkles,
+  Terminal,
 } from 'lucide-react';
-import { Chapter, UserProgress } from '../types';
+import { Chapter, UserProgress } from '../utils/types';
 
 interface HomeHeroProps {
   chapters: Chapter[];
@@ -30,6 +26,15 @@ interface HomeHeroProps {
   onOpenMilestones: () => void;
 }
 
+type ToolItem = {
+  label: string;
+  detail: string;
+  description: string;
+  icon: typeof Code2;
+  tone: string;
+  action: () => void;
+};
+
 export const HomeHero: React.FC<HomeHeroProps> = ({
   chapters,
   progress,
@@ -40,296 +45,143 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
   onOpenTutor,
   onOpenMilestones,
 }) => {
-  const allLessons = chapters.flatMap((c) => c.lessons);
+  const allLessons = chapters.flatMap((chapter) => chapter.lessons);
   const completedCount = Object.values(progress.completedLessons).filter(Boolean).length;
   const progressPercent = Math.round((completedCount / (allLessons.length || 1)) * 100);
+  const nextIncompleteLesson = allLessons.find((lesson) => !progress.completedLessons[lesson.id]) || allLessons[0];
+  const nextChapter = chapters.find((chapter) => chapter.lessons.some((lesson) => lesson.id === nextIncompleteLesson?.id)) || chapters[0];
+  const level = Math.floor(progress.xpPoints / 100) + 1;
 
-  // Resume last visited or first incomplete lesson
-  const nextIncompleteLesson = allLessons.find((l) => !progress.completedLessons[l.id]) || allLessons[0];
-  const nextChapter = chapters.find((c) => c.lessons.some((l) => l.id === nextIncompleteLesson?.id)) || chapters[0];
+  const tools: ToolItem[] = [
+    {
+      label: 'Practice Arena',
+      detail: 'Sandbox',
+      description: 'Edit HTML, CSS, and JavaScript with a live preview and verification.',
+      icon: Code2,
+      tone: 'text-emerald-400',
+      action: onOpenPracticeHub,
+    },
+    {
+      label: 'Visual Lab',
+      detail: '3D models',
+      description: 'Use six interactive instruments to see layout, DOM, Git, and network concepts.',
+      icon: Layers,
+      tone: 'text-violet-400',
+      action: onOpenVisualLab,
+    },
+    ...(onOpenActivities
+      ? [{
+          label: 'Activities',
+          detail: 'After class',
+          description: 'Revisit lessons with flashcards, bug hunts, code ordering, and speed checks.',
+          icon: GraduationCap,
+          tone: 'text-cyan-400',
+          action: onOpenActivities,
+        }]
+      : []),
+    {
+      label: 'Ask the tutor',
+      detail: '24 / 7 help',
+      description: 'Bring a confusing concept or code snippet to the guided AI tutor.',
+      icon: BrainCircuit,
+      tone: 'text-app-amber',
+      action: onOpenTutor,
+    },
+    {
+      label: 'Milestones',
+      detail: 'XP roadmap',
+      description: 'Track your learning rhythm and see which badges are next.',
+      icon: Award,
+      tone: 'text-app-amber',
+      action: onOpenMilestones,
+    },
+  ];
 
   return (
-    <div id="home-dashboard" className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-14 py-12 sm:py-16 space-y-16 sm:space-y-20">
-      
-      {/* 1. Spacious Hero Presentation */}
-      <section className="relative rounded-3xl overflow-hidden bg-slate-900 dark:bg-[#0b0d13] border border-slate-800 dark:border-[#1a1e2a] p-8 sm:p-14 lg:p-16 text-white shadow-2xl">
-        {/* Subtle Ambient Background Gradients */}
-        <div className="absolute top-0 right-0 -mt-16 -mr-16 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/3 -mb-16 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative z-10 max-w-4xl space-y-8">
-          <div className="flex flex-wrap items-center gap-3">
-            <span className="text-xs px-3.5 py-1.5 rounded-full font-bold uppercase tracking-wider bg-amber-400/15 text-amber-300 dark:text-yellow-400 border border-amber-400/30 flex items-center gap-2 shadow-xs">
-              <Sparkles className="w-3.5 h-3.5 text-yellow-400" /> Complete Web Engineering Curriculum
-            </span>
-            <span className="text-xs font-mono text-slate-400 bg-slate-800/60 dark:bg-[#141722] px-3.5 py-1.5 rounded-full border border-slate-700/50 dark:border-[#1f2536]">
-              {chapters.length} Chapters • {allLessons.length} Interactive Lessons
-            </span>
-          </div>
-
-          <div className="space-y-4">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.15]">
-              Master Modern <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 dark:from-yellow-400 dark:via-amber-300 dark:to-yellow-200">
-                Web Development
+    <div id="home-dashboard" className="mx-auto w-full max-w-[1180px] min-w-0 space-y-10 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+      <section className="panel-surface relative overflow-hidden p-6 sm:p-9 lg:p-10">
+        <div className="grid min-w-0 gap-8 lg:grid-cols-[minmax(0,1fr)_220px] lg:items-end">
+          <div className="min-w-0 space-y-6">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="inline-flex items-center gap-2 rounded-control border border-app-amber/60 bg-app-amber/12 px-3 py-1.5 font-mono text-[11px] font-bold uppercase tracking-[0.12em] text-app-amber">
+                <Sparkles className="h-3.5 w-3.5" aria-hidden="true" /> Complete web engineering curriculum
               </span>
-            </h1>
-            <p className="text-base sm:text-lg text-slate-300 dark:text-slate-300 leading-relaxed max-w-3xl pt-2">
-              An interactive textbook engineered for deep comprehension. Learn HTML, CSS layout engines, JavaScript fundamentals, responsive paradigms, and modern component architecture with real-time 3D models and instant code sandboxes.
-            </p>
-          </div>
-
-          {/* Primary Action Buttons */}
-          <div className="flex flex-wrap items-center gap-4 pt-4">
-            <button
-              onClick={() => onSelectLesson(nextIncompleteLesson.id)}
-              className="px-7 py-3.5 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 font-black text-sm flex items-center gap-2.5 transition-all shadow-lg shadow-amber-500/20 hover:shadow-amber-500/30 hover:scale-[1.02] cursor-pointer"
-            >
-              <Play className="w-4 h-4 fill-current text-slate-950" />
-              {completedCount > 0 ? `Resume: ${nextIncompleteLesson.title}` : 'Start First Lesson'}
-            </button>
-
-            <button
-              onClick={onOpenPracticeHub}
-              className="px-6 py-3.5 rounded-xl bg-slate-800/90 dark:bg-[#141722] hover:bg-slate-800 dark:hover:bg-[#1a1e2a] text-slate-200 font-bold text-sm flex items-center gap-2 border border-slate-700 dark:border-[#1f2536] hover:border-slate-500 transition-all cursor-pointer"
-            >
-              <Code2 className="w-4 h-4 text-emerald-400" />
-              Coding Arena
-            </button>
-
-            <button
-              onClick={onOpenVisualLab}
-              className="px-6 py-3.5 rounded-xl bg-slate-800/90 dark:bg-[#141722] hover:bg-slate-800 dark:hover:bg-[#1a1e2a] text-slate-200 font-bold text-sm flex items-center gap-2 border border-slate-700 dark:border-[#1f2536] hover:border-slate-500 transition-all cursor-pointer"
-            >
-              <Layers className="w-4 h-4 text-amber-400 dark:text-yellow-400" />
-              Visual Lab
-            </button>
-
-            {onOpenActivities && (
+              <span className="rounded-control border border-app-border bg-app-inset px-3 py-1.5 font-mono text-[11px] text-app-muted">
+                {chapters.length} chapters · {allLessons.length} interactive lessons
+              </span>
+            </div>
+            <div className="max-w-3xl space-y-4">
+              <h1 className="text-4xl font-black leading-[1.05] tracking-[-0.04em] text-app-ink sm:text-5xl lg:text-6xl">
+                Master modern <span className="block text-app-amber">web development.</span>
+              </h1>
+              <p className="max-w-2xl text-base leading-relaxed text-app-muted sm:text-lg">
+                An interactive textbook for learning HTML, CSS layout engines, JavaScript fundamentals, responsive paradigms, and modern component architecture through practice—not passive reading.
+              </p>
+            </div>
+            {nextIncompleteLesson && (
               <button
-                onClick={onOpenActivities}
-                className="px-6 py-3.5 rounded-xl bg-slate-800/90 dark:bg-[#141722] hover:bg-slate-800 dark:hover:bg-[#1a1e2a] text-indigo-300 font-bold text-sm flex items-center gap-2 border border-indigo-700/60 hover:border-indigo-500 transition-all cursor-pointer"
+                type="button"
+                onClick={() => onSelectLesson(nextIncompleteLesson.id)}
+                className="inline-flex min-h-12 items-center gap-2 rounded-control bg-app-amber px-5 text-sm font-black text-slate-950 transition-colors hover:bg-app-amber-hover active:scale-[0.98]"
               >
-                <GraduationCap className="w-4 h-4 text-indigo-400" />
-                Activities Hub
+                <Play className="h-4 w-4 fill-current" aria-hidden="true" />
+                {completedCount > 0 ? 'Continue lesson' : 'Start first lesson'}
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
               </button>
             )}
+          </div>
+
+          <div className="border-t border-app-border pt-5 lg:border-l lg:border-t-0 lg:pl-6 lg:pt-0">
+            <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-subtle">Current route</p>
+            <p className="mt-2 text-sm font-bold leading-snug text-app-ink">{nextChapter?.title || 'Curriculum map'}</p>
+            <div className="mt-5 flex items-end justify-between gap-3 border-t border-app-border pt-4">
+              <span className="font-mono text-3xl font-black tabular-nums text-app-amber">{progressPercent}%</span>
+              <span className="pb-1 text-right text-xs text-app-muted">{completedCount} of {allLessons.length}<br />lessons complete</span>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* 2. Spacious Up Next Focus Card */}
       {nextIncompleteLesson && (
-        <section className="p-6 sm:p-8 rounded-3xl bg-slate-50 dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] flex flex-col md:flex-row items-start md:items-center justify-between gap-6 shadow-sm">
-          <div className="space-y-2 max-w-2xl">
-            <div className="flex items-center gap-2">
-              <span className="text-[11px] font-mono font-bold uppercase tracking-wider text-amber-700 dark:text-yellow-400 bg-amber-100 dark:bg-yellow-400/10 px-2.5 py-0.5 rounded-md border border-amber-300/40 dark:border-yellow-400/30">
-                Recommended Next Step
-              </span>
-              <span className="text-xs text-slate-400">Chapter {nextChapter?.number}</span>
+        <section className="grid min-w-0 gap-5 rounded-panel border border-app-amber/50 bg-app-active p-5 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-center sm:p-6">
+          <div className="min-w-0">
+            <div className="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em]">
+              <span className="rounded-control bg-app-amber px-2.5 py-1 font-bold text-slate-950">Recommended next step</span>
+              <span className="text-app-subtle">Chapter {nextChapter?.number}</span>
             </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
-              {nextIncompleteLesson.title}
-            </h3>
-            <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
-              Continue your structured path through {nextChapter?.title}. Includes live code sandboxes, visual breakdown, and self-assessment quiz.
-            </p>
+            <h2 className="mt-3 truncate text-xl font-bold text-app-ink sm:text-2xl">{nextIncompleteLesson.title}</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-app-muted">Continue through {nextChapter?.title}. Each lesson pairs a clear mental model with a stored visual, a code example, a sandbox, and a checkpoint.</p>
           </div>
-
-          <button
-            onClick={() => onSelectLesson(nextIncompleteLesson.id)}
-            className="px-6 py-3 rounded-xl bg-slate-900 dark:bg-white text-white dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-slate-100 font-bold text-sm flex items-center gap-2 transition-all shrink-0 cursor-pointer shadow-md"
-          >
-            <span>Jump to Lesson</span>
-            <ArrowRight className="w-4 h-4" />
+          <button type="button" onClick={() => onSelectLesson(nextIncompleteLesson.id)} className="inline-flex min-h-11 items-center justify-center gap-2 rounded-control border border-app-border bg-app-surface px-4 text-sm font-bold text-app-ink transition-colors hover:border-app-amber hover:bg-app-inset">
+            Open lesson <ArrowRight className="h-4 w-4" aria-hidden="true" />
           </button>
         </section>
       )}
 
-      {/* 3. Spacious Stats & Mastery Rhythm Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
-        <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] shadow-xs space-y-4">
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-            <span>Curriculum Progress</span>
-            <Award className="w-4 h-4 text-amber-500 dark:text-yellow-400" />
-          </div>
-          <div className="flex items-baseline gap-2.5">
-            <span className="text-3xl font-black text-slate-900 dark:text-white font-mono">{progressPercent}%</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 font-medium">{completedCount} of {allLessons.length} Completed</span>
-          </div>
-          <div className="w-full h-2 bg-slate-100 dark:bg-[#1a1e2a] rounded-full overflow-hidden">
-            <div className="h-full bg-gradient-to-r from-amber-500 to-yellow-400 rounded-full transition-all duration-500" style={{ width: `${progressPercent}%` }} />
-          </div>
-        </div>
-
-        <div className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] shadow-xs space-y-4">
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-            <span>Daily Streak</span>
-            <Flame className="w-4 h-4 text-orange-500 fill-current" />
-          </div>
-          <div className="flex items-baseline gap-2.5">
-            <span className="text-3xl font-black text-orange-600 dark:text-orange-400 font-mono">{progress.streakDays} Days</span>
-            <span className="text-xs text-emerald-600 dark:text-emerald-400 font-bold">Active Rhythm</span>
-          </div>
-          <p className="text-xs text-slate-500 dark:text-slate-400">Complete any quiz or challenge daily for +25 XP</p>
-        </div>
-
-        <div
-          onClick={onOpenMilestones}
-          className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] shadow-xs cursor-pointer hover:border-amber-400 dark:hover:border-yellow-400/80 hover:shadow-md transition-all group space-y-4"
-          title="Click to view full XP Milestones & Level Roadmap"
-        >
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-            <span>Mastery Experience</span>
-            <Sparkles className="w-4 h-4 text-amber-500 dark:text-yellow-400 group-hover:rotate-12 transition-transform" />
-          </div>
-          <div className="flex items-baseline gap-2.5">
-            <span className="text-3xl font-black text-amber-600 dark:text-yellow-400 font-mono">{progress.xpPoints} XP</span>
-            <span className="text-xs font-bold text-slate-700 dark:text-slate-300">Level {Math.floor(progress.xpPoints / 100) + 1}</span>
-          </div>
-          <div className="flex items-center justify-between text-xs text-amber-700 dark:text-yellow-400 font-bold group-hover:underline">
-            <span>Milestones Roadmap</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </div>
-        </div>
-
-        <div
-          onClick={onOpenTutor}
-          className="p-6 sm:p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] shadow-xs cursor-pointer hover:border-indigo-400 dark:hover:border-indigo-500/80 hover:shadow-md transition-all group space-y-4"
-          title="Click to open 24/7 Web Dev Tutor"
-        >
-          <div className="flex items-center justify-between text-slate-500 dark:text-slate-400 text-xs font-bold uppercase tracking-wider">
-            <span>24/7 AI Code Tutor</span>
-            <BrainCircuit className="w-4 h-4 text-indigo-500 group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="flex items-baseline gap-2.5">
-            <span className="text-3xl font-black text-slate-900 dark:text-white">Online</span>
-            <span className="text-xs text-emerald-500 font-bold flex items-center gap-1.5">
-              <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" /> Always Ready
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-xs text-indigo-600 dark:text-indigo-400 font-bold group-hover:underline">
-            <span>Ask Tutor Questions</span>
-            <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
-          </div>
+      <section aria-labelledby="progress-ledger-heading" className="panel-surface overflow-hidden">
+        <div className="border-b border-app-border px-5 py-4 sm:px-6"><h2 id="progress-ledger-heading" className="font-mono text-xs font-bold uppercase tracking-[0.14em] text-app-subtle">Learning ledger</h2></div>
+        <div className="grid divide-y divide-app-border sm:grid-cols-2 sm:divide-x sm:divide-y-0 xl:grid-cols-4">
+          <div className="min-w-0 p-5"><div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[0.08em] text-app-muted">Curriculum progress</span><Compass className="h-4 w-4 text-app-amber" aria-hidden="true" /></div><p className="mt-3 font-mono text-2xl font-black tabular-nums text-app-ink">{completedCount} <span className="text-sm font-bold text-app-muted">/ {allLessons.length}</span></p><div className="mt-3 h-2 overflow-hidden rounded-full bg-app-inset"><span className="block h-full rounded-full bg-app-amber" style={{ width: `${progressPercent}%` }} /></div></div>
+          <div className="min-w-0 p-5"><div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[0.08em] text-app-muted">Daily streak</span><Flame className="h-4 w-4 text-orange-400" aria-hidden="true" /></div><p className="mt-3 font-mono text-2xl font-black tabular-nums text-orange-400">{progress.streakDays} days</p><p className="mt-2 text-xs leading-relaxed text-app-muted">Complete a quiz or challenge each day to keep the rhythm.</p></div>
+          <button type="button" onClick={onOpenMilestones} className="group min-w-0 p-5 text-left transition-colors hover:bg-app-active"><div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[0.08em] text-app-muted">Mastery experience</span><Award className="h-4 w-4 text-app-amber" aria-hidden="true" /></div><p className="mt-3 font-mono text-2xl font-black tabular-nums text-app-amber">{progress.xpPoints} XP</p><p className="mt-2 flex items-center gap-2 text-xs font-bold text-app-muted group-hover:text-app-ink">Level {level} · View roadmap <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></p></button>
+          <button type="button" onClick={onOpenTutor} className="group min-w-0 p-5 text-left transition-colors hover:bg-app-active"><div className="flex items-center justify-between gap-3"><span className="text-xs font-bold uppercase tracking-[0.08em] text-app-muted">Tutor availability</span><BrainCircuit className="h-4 w-4 text-violet-400" aria-hidden="true" /></div><p className="mt-3 text-2xl font-black text-app-ink">Online</p><p className="mt-2 flex items-center gap-2 text-xs font-bold text-emerald-400 group-hover:text-app-ink"><span className="h-2 w-2 rounded-full bg-emerald-400" aria-hidden="true" /> Ask a question <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" /></p></button>
         </div>
       </section>
 
-      {/* 4. Interactive Learning Pillars */}
-      <section className="space-y-6">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">
-            Designed for Deep Retention
-          </h2>
-          <p className="text-sm text-slate-600 dark:text-slate-400">
-            Combine three interactive paradigms to build real developer muscle memory.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-          <div className="p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-amber-100 dark:bg-yellow-400/10 text-amber-800 dark:text-yellow-400 flex items-center justify-center font-bold">
-              <Layers className="w-5 h-5" />
-            </div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">3D Spatial Visualizers</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Explore the CSS Box Model, Flexbox axis physics, and the DOM tree as rotatable 3D mental models.
-            </p>
-          </div>
-
-          <div className="p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 flex items-center justify-center font-bold">
-              <Terminal className="w-5 h-5" />
-            </div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">Live Code Arena</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Type HTML, CSS, and JS into synchronized browser previews with instant console logging and validation.
-            </p>
-          </div>
-
-          <div className="p-7 rounded-2xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] space-y-3">
-            <div className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-500/10 text-indigo-700 dark:text-indigo-400 flex items-center justify-center font-bold">
-              <Sparkles className="w-5 h-5" />
-            </div>
-            <h3 className="text-base font-bold text-slate-900 dark:text-white">24/7 AI Code Mentor</h3>
-            <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
-              Highlight confusing lines, generate tailored practice quizzes, and get step-by-step code explanations.
-            </p>
-          </div>
+      <section aria-labelledby="tools-heading" className="space-y-4">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-b border-app-border pb-4"><div><p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">Teaching tools</p><h2 id="tools-heading" className="mt-1 text-2xl font-black text-app-ink">Practice what you read.</h2></div><p className="max-w-md text-sm leading-relaxed text-app-muted">Move between explanation, experimentation, and recall without losing your place.</p></div>
+        <div className="divide-y divide-app-border border-y border-app-border">
+          {tools.map((tool) => { const Icon = tool.icon; return <button key={tool.label} type="button" onClick={tool.action} className="group grid min-w-0 gap-4 py-4 text-left transition-colors hover:bg-app-active sm:grid-cols-[auto_minmax(150px,0.8fr)_minmax(0,1.6fr)_auto] sm:items-center sm:px-3"><span className={`flex h-11 w-11 items-center justify-center rounded-control border border-app-border bg-app-inset ${tool.tone}`}><Icon className="h-5 w-5" aria-hidden="true" /></span><span className="min-w-0"><span className="block text-sm font-bold text-app-ink">{tool.label}</span><span className="font-mono text-[11px] uppercase tracking-[0.1em] text-app-subtle">{tool.detail}</span></span><span className="text-sm leading-relaxed text-app-muted">{tool.description}</span><ArrowRight className={`h-5 w-5 text-app-subtle transition-transform group-hover:translate-x-1 ${tool.tone}`} aria-hidden="true" /></button>; })}
         </div>
       </section>
 
-      {/* 5. Complete Curriculum Roadmap Grid */}
-      <section className="space-y-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-2 border-b border-slate-200 dark:border-[#1a1e2a]">
-          <div>
-            <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white flex items-center gap-3">
-              <Compass className="w-7 h-7 text-amber-500 dark:text-yellow-400" />
-              Curriculum Roadmap
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
-              Select any chapter below to explore interactive lessons, diagrams, and coding sandboxes.
-            </p>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section aria-labelledby="roadmap-heading" className="space-y-5 pb-8">
+        <div className="flex flex-wrap items-end justify-between gap-3 border-b border-app-border pb-4"><div><p className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber"><Compass className="h-4 w-4" aria-hidden="true" /> Curriculum roadmap</p><h2 id="roadmap-heading" className="mt-1 text-2xl font-black text-app-ink">The course outline.</h2></div><p className="max-w-md text-sm leading-relaxed text-app-muted">A route from browser fundamentals to shipping a responsive portfolio.</p></div>
+        <div className="grid min-w-0 gap-x-8 xl:grid-cols-2">
           {chapters.map((chapter) => {
-            const completedInChapter = chapter.lessons.filter((l) => progress.completedLessons[l.id]).length;
+            const completedInChapter = chapter.lessons.filter((lesson) => progress.completedLessons[lesson.id]).length;
             const isAllDone = completedInChapter === chapter.lessons.length && chapter.lessons.length > 0;
-
-            return (
-              <div
-                key={chapter.id}
-                className="p-7 sm:p-8 rounded-3xl bg-white dark:bg-[#0d0f15] border border-slate-200/90 dark:border-[#1a1e2a] hover:border-amber-400 dark:hover:border-yellow-400/60 hover:shadow-lg transition-all space-y-6 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between pb-4 border-b border-slate-100 dark:border-[#1a1e2a]">
-                    <span className="text-xs font-mono font-bold px-3 py-1 rounded-lg bg-amber-100 dark:bg-yellow-400/10 text-amber-800 dark:text-yellow-400 border border-amber-300/40 dark:border-yellow-400/30">
-                      CHAPTER {chapter.number}
-                    </span>
-                    <span className="text-xs text-slate-500 dark:text-slate-400 font-mono font-bold">
-                      {completedInChapter}/{chapter.lessons.length} Completed
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white mt-4">
-                    {chapter.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">
-                    {chapter.description}
-                  </p>
-                </div>
-
-                {/* Lesson List within Card */}
-                <div className="space-y-2 pt-2">
-                  {chapter.lessons.map((lesson) => {
-                    const isLessonDone = progress.completedLessons[lesson.id];
-                    return (
-                      <button
-                        key={lesson.id}
-                        onClick={() => onSelectLesson(lesson.id)}
-                        className="w-full text-left p-3 sm:p-3.5 rounded-xl border border-slate-100 dark:border-[#1a1e2a] bg-slate-50/70 dark:bg-[#07090e] hover:bg-amber-50/70 dark:hover:bg-yellow-400/10 hover:border-amber-300 dark:hover:border-yellow-400/40 transition-all flex items-center justify-between group cursor-pointer"
-                      >
-                        <div className="flex items-center gap-3 truncate pr-2">
-                          <span className="text-xs font-mono font-bold text-slate-400 dark:text-slate-500 group-hover:text-amber-600 dark:group-hover:text-yellow-400">
-                            {lesson.number}
-                          </span>
-                          <span className="text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200 truncate group-hover:text-slate-950 dark:group-hover:text-white">
-                            {lesson.title}
-                          </span>
-                        </div>
-                        {isLessonDone ? (
-                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
-                        ) : (
-                          <ArrowRight className="w-4 h-4 text-slate-400 opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
-                        )}
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-            );
+            return <article key={chapter.id} className="min-w-0 border-b border-app-border py-5"><div className="flex items-start justify-between gap-3"><span className="rounded-control border border-app-amber/60 bg-app-amber/12 px-2.5 py-1 font-mono text-[11px] font-bold text-app-amber">CHAPTER {chapter.number}</span><span className="font-mono text-[11px] tabular-nums text-app-subtle">{completedInChapter}/{chapter.lessons.length} complete</span></div><div className="mt-4 flex items-start gap-3"><span className={`mt-1 h-2.5 w-2.5 shrink-0 rounded-full ${isAllDone ? 'bg-emerald-400' : 'bg-app-amber'}`} aria-hidden="true" /><div className="min-w-0"><h3 className="text-lg font-bold text-app-ink">{chapter.title}</h3><p className="mt-2 text-sm leading-relaxed text-app-muted">{chapter.description}</p></div></div><div className="mt-4 space-y-2 pl-5">{chapter.lessons.map((lesson) => { const isDone = progress.completedLessons[lesson.id]; return <button key={lesson.id} type="button" onClick={() => onSelectLesson(lesson.id)} className="group flex min-h-11 w-full min-w-0 items-center justify-between gap-3 rounded-control border border-app-border bg-app-inset px-3 text-left transition-colors hover:border-app-amber/70 hover:bg-app-active"><span className="flex min-w-0 items-center gap-3"><span className="shrink-0 font-mono text-[11px] text-app-subtle group-hover:text-app-amber">{lesson.number}</span><span className="truncate text-sm font-bold text-app-ink">{lesson.title}</span></span>{isDone ? <CheckCircle2 className="h-4 w-4 shrink-0 text-emerald-400" aria-label="Lesson complete" /> : <ArrowRight className="h-4 w-4 shrink-0 text-app-subtle transition-transform group-hover:translate-x-1 group-hover:text-app-amber" aria-hidden="true" />}</button>; })}</div></article>;
           })}
         </div>
       </section>

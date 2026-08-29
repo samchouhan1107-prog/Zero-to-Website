@@ -41,7 +41,7 @@ export const FlexboxVisualizer: React.FC = () => {
   };
 
   return (
-    <div id="flexbox-visualizer" className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+    <div id="flexbox-visualizer" className="panel-surface min-w-0 overflow-hidden p-5 sm:p-6">
       <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-slate-100 dark:border-slate-800">
         <div>
           <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
@@ -70,7 +70,7 @@ export const FlexboxVisualizer: React.FC = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+      <div className="grid min-w-0 grid-cols-1 gap-6 mt-6 lg:grid-cols-12">
         {/* Visual Stage */}
         <div className="lg:col-span-7 flex flex-col justify-between p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800 min-h-[360px]">
           {/* Axis Indicator Banner */}

@@ -1,0 +1,23 @@
+/* ==================================================
+   WZ Storehouse - home.css
+   Author  : Sameer Chouhan
+   Version : 2.0 (Red Volcanic & Volcanic Porcelain)
+================================================== */
+
+.home-hero-banner {
+    padding: 60px 0 40px;
+    background: radial-gradient(circle at 50% 0%, rgba(255, 45, 85, 0.15), transparent 70%);
+}
+
+.home-stat-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 6px 16px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--text);
+}

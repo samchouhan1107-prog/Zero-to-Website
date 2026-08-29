@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Lesson 01 | What is HTML?</title>
+
+
+<link rel="stylesheet" href="../../../Assets/css/main.css">
+
+<script src="../../../Assets/js/main.js" defer></script>
+
+</head>
+
+
+
+<body class="lesson-page">
+
+
+
+<header>
+
+
+<div class="logo">
+
+<a href="../../../index.html" class="logo-link">
+
+<h1>
+WZ STOREHOUSE
+</h1>
+
+<p>
+Learn • Practice • Build • Share
+</p>
+
+</a>
+
+</div>
+
+
+
+<nav>
+
+
+<a href="../../../index.html">
+🏠 Home
+</a>
+
+
+<a href="../index.html">
+⬅ Chapter 02
+</a>
+
+
+<button id="settingsBtn">
+⚙ Settings
+</button>
+
+
+</nav>
+
+
+</header>
+
+
+
+
+
+
+
+
+<!-- SETTINGS -->
+
+
+<div id="settingsPanel" class="settings-panel">
+
+
+<h3>
+⚙ Settings
+</h3>
+
+
+<button id="darkModeBtn">
+🌙 Dark Mode
+</button>
+
+
+<button id="searchBtn">
+🔍 Search Lessons
+</button>
+
+
+<button id="fontSizeBtn">
+🔤 Font Size
+</button>
+
+
+<button id="languageBtn">
+🌐 Language
+</button>
+
+
+<button id="readingModeBtn">
+📖 Reading Mode
+</button>
+
+
+<button id="helpBtn">
+❓ Help
+</button>
+
+
+<button id="aboutBtn">
+ℹ About
+</button>
+
+
+<button id="closeSettingsBtn" class="close-btn">
+✖ Close
+</button>
+
+
+</div>
+
+
+
+
+
+
+
+
+<main>
+
+
+
+
+
+
+<!-- LESSON HEADER -->
+
+
+<section class="container">
+
+
+<div class="chapter-hero">
+
+
+<span class="chapter-badge">
+Chapter 02
+</span>
+
+
+<h1>
+Lesson 01
+</h1>
+
+
+<h2>
+What is HTML?
+</h2>
+
+
+<p>
+
+Understand the foundation of every website
+and learn how browsers display webpages.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- CONCEPT -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+📖 What is HTML?
+</h2>
+
+
+<p>
+
+HTML stands for:
+
+<strong>
+HyperText Markup Language
+</strong>
+
+</p>
+
+
+<p>
+
+HTML is used to create the structure of webpages.
+
+It tells the browser what content exists
+and how information should be organized.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- REAL WORLD -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+🏠 Real World Example
+</h2>
+
+
+
+<p>
+
+Think about building a house.
+
+</p>
+
+
+
+<ul class="chapter-list">
+
+
+<li>
+🏗 HTML = Structure of the house
+</li>
+
+
+<li>
+🎨 CSS = Paint and decoration
+</li>
+
+
+<li>
+⚡ JavaScript = Electricity and automation
+</li>
+
+
+</ul>
+
+
+
+<p>
+
+A website follows the same idea.
+
+HTML creates the foundation.
+
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- VISUAL -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+👀 Website Structure Visual
+</h2>
+
+
+
+<pre>
+
+Website
+
+|
+|
+├── HTML
+|     |
+|     ├── Heading
+|     ├── Paragraph
+|     ├── Image
+|     └── Button
+|
+|
+├── CSS
+|     |
+|     └── Design
+|
+|
+└── JavaScript
+      |
+      └── Interaction
+
+
+</pre>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PLAYGROUND -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+💻 Code Playground
+</h2>
+
+
+
+<p>
+
+Write HTML code and see the result instantly.
+
+</p>
+
+
+
+
+<div class="code-playground">
+
+
+
+<div class="editor-panel">
+
+
+<h3>
+HTML Editor
+</h3>
+
+
+
+<textarea id="htmlEditor">
+
+
+<h1>Hello World</h1>
+
+<p>
+My first webpage.
+</p>
+
+
+</textarea>
+
+
+
+<button onclick="runHTML()">
+
+Run Code
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+<div class="preview-panel">
+
+
+<h3>
+Live Preview
+</h3>
+
+
+
+<iframe id="previewWindow">
+
+</iframe>
+
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- CODE EXPLANATION -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+🧠 Understanding The Code
+</h2>
+
+
+
+<ul class="chapter-list">
+
+
+<li>
+&lt;h1&gt; creates a main heading.
+</li>
+
+
+<li>
+&lt;p&gt; creates a paragraph.
+</li>
+
+
+<li>
+Browser reads HTML and displays the result.
+</li>
+
+
+</ul>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- PRACTICE -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+✍ Practice Challenge
+</h2>
+
+
+<p>
+
+Create a webpage containing:
+
+</p>
+
+
+
+<ul class="chapter-list">
+
+
+<li>
+Your name as a heading.
+</li>
+
+
+<li>
+A short introduction paragraph.
+</li>
+
+
+<li>
+One more heading.
+</li>
+
+
+</ul>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- SUMMARY -->
+
+
+<section class="container">
+
+
+<div class="chapter-section">
+
+
+<h2>
+Summary
+</h2>
+
+
+<ul class="chapter-list">
+
+
+<li>
+HTML creates webpage structure.</li>
+
+<li>
+HTML is the foundation of websites.</li>
+
+<li>
+Browsers convert HTML code into webpages.</li>
+
+<li>
+Every website starts with HTML.</li>
+
+
+</ul>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- NAVIGATION -->
+
+
+<section class="container">
+
+
+<div class="chapter-nav-links">
+
+
+<a href="../index.html">
+
+← Chapter 02
+
+</a>
+
+
+
+<a href="lesson-02-html-document-structure.html">
+
+Next Lesson →
+
+</a>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+</main>
+
+
+
+
+
+
+
+
+<footer>
+
+
+<p>
+
+WZ Storehouse | Version 1.0 |
+Developed by Sameer Chouhan |
+© 2026 All Rights Reserved.
+
+</p>
+
+
+</footer>
+
+
+
+
+
+
+
+<script>
+
+function runHTML(){
+
+
+let code =
+document.getElementById("htmlEditor").value;
+
+
+
+document.getElementById("previewWindow").srcdoc = code;
+
+
+}
+
+
+</script>
+
+
+
+
+
+</body>
+
+</html>

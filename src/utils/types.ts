@@ -252,7 +252,7 @@ export interface UserProgress {
   xpPoints: number;
 }
 
-export type AppTheme = 'light' | 'dark' | 'batman' | 'cyber-energy' | 'sunset-pulse' | 'emerald-flow' | 'sepia';
+export type AppTheme = 'dark' | 'light';
 
 export interface AppSettings {
   theme: AppTheme;

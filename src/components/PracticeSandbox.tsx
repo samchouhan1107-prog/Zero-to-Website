@@ -108,7 +108,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
       } catch {
         passed = false;
       }
-      return { id: tc.id, passed: true, desc: tc.description };
+      return { id: tc.id, passed, desc: tc.description };
     });
 
     setTestResults(results);
@@ -167,7 +167,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
   };
 
   return (
-    <div id="practice-sandbox" className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm">
+    <div id="practice-sandbox" className="panel-surface min-w-0 overflow-hidden">
       {/* Header */}
       <div className="p-4 bg-slate-50 dark:bg-slate-950/70 border-b border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -236,9 +236,9 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
       )}
 
       {/* Main Split Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-slate-800 min-h-[380px]">
+      <div className="grid min-w-0 grid-cols-1 divide-y divide-app-border lg:grid-cols-2 lg:divide-x lg:divide-y-0 min-h-[380px]">
         {/* Editor Half */}
-        <div className="flex flex-col bg-slate-900">
+        <div className="flex min-w-0 flex-col bg-slate-900">
           {/* Editor Tabs */}
           <div className="flex items-center justify-between px-3 py-1.5 bg-slate-950/90 border-b border-slate-800">
             <div className="flex items-center gap-1.5">
@@ -306,7 +306,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
         </div>
 
         {/* Live Preview Half */}
-        <div className="flex flex-col bg-slate-50 dark:bg-slate-950/40">
+        <div className="flex min-w-0 flex-col bg-app-inset">
           <div className="p-2.5 px-3 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500 font-mono">
             <span className="flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />

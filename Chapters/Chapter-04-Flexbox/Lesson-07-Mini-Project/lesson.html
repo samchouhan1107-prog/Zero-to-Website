@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 07 | Flexbox Mini Project</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+</head>
+<body class="chapter-flexbox">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Back to Chapter</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+    <div id="settingsPanel" class="settings-panel"></div>
+    <main class="container chapter-page">
+        <section class="chapter-header">
+            <span class="chapter-badge">Chapter 04</span>
+            <h1>Lesson 07 — Flexbox Mini Project</h1>
+            <p>Apply the full Flexbox chapter by building a responsive layout with container and item rules.</p>
+        </section>
+
+        <section class="chapter-overview chapter-block">
+            <h2>Lesson Overview</h2>
+            <p>This mini project combines container setup, item sizing, alignment, and wrapping into a single responsive Flexbox page.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Introduction</h2>
+            <p>In this mini project, you'll use Flexbox to create a responsive interface that adapts to different screen sizes while keeping items aligned and spaced.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>Apply the entire Flexbox workflow in a practical layout.</li>
+                <li>Use <code>display: flex;</code>, <code>justify-content</code>, <code>align-items</code>, and <code>flex-wrap</code>.</li>
+                <li>Build a responsive layout using item growth and wrapping.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Theory</h2>
+            <p>Successful Flexbox layouts combine container properties and item behavior. The project should use alignment and sizing rules that adapt to screen width.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Real World Example</h2>
+            <p>Many dashboard cards, pricing tables, and feature sections use Flexbox for both structure and responsiveness.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Visual Explanation</h2>
+            <p>Picture a row of cards that remain aligned with equal spacing, then wrap into a multi-row layout on tablets and phones.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Example</h2>
+            <div class="code-box">
+                <pre><code>.project-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+.project-card {
+    flex: 1 1 250px;
+    min-width: 220px;
+}
+</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Breakdown</h2>
+            <p>The row uses flex wrapping and stretching so cards can flow into new lines and keep matching heights. Each card can grow and shrink based on the available width.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Related Topics</h2>
+            <p>This project uses everything learned from the previous Flexbox lessons and prepares you for responsive layouts in Chapter 07.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Practice Challenge</h2>
+            <p>Build a set of responsive cards that adjust from three columns on desktop to one column on mobile.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Mini Project</h2>
+            <p>Create a dashboard hero section with three cards, each using flex item sizing and alignment to stay balanced.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Summary</h2>
+            <p>This mini project demonstrates how Flexbox can create flexible, responsive layouts with strong alignment and wrapping behavior.</p>
+        </section>
+
+        <section class="chapter-actions chapter-block">
+            <a href="../index.html" class="btn secondary">⬅ Back to Chapter</a>
+            <a href="../../Chapter-05-CSS Grid/index.html" class="btn primary">Next Chapter ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

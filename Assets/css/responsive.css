@@ -1,0 +1,33 @@
+/* ==================================================
+   WZ Storehouse - responsive.css
+   Author  : Sameer Chouhan
+   Version : 2.0 (Red Volcanic & Volcanic Porcelain)
+================================================== */
+
+@media (max-width: 1024px) {
+    header {
+        padding: 16px 24px;
+    }
+    
+    .content, .container {
+        width: 94%;
+    }
+}
+
+@media (max-width: 640px) {
+    header {
+        padding: 12px 16px;
+    }
+    
+    .chapter-hero h1 {
+        font-size: 1.85rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chapter-actions {
+        flex-direction: column;
+    }
+}

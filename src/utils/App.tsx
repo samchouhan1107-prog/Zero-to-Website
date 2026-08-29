@@ -1,26 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { CHAPTERS_DATA } from './data/chaptersData';
+import { CHAPTERS_DATA } from '../data/chaptersData';
 import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
-import { XP_MILESTONES } from './data/milestonesData';
-import { calculateDailyStreak, getLocalDateString } from './utils/streakUtils';
-import { Sidebar } from './components/Sidebar';
-import { Header } from './components/Header';
-import { HomeHero } from './components/HomeHero';
-import { LessonView } from './components/LessonView';
-import { PracticeHub } from './components/PracticeHub';
-import { VisualLab } from './components/VisualLab';
-import { ActivitiesView } from './components/ActivitiesView';
-import { SearchModal } from './components/SearchModal';
-import { TutorModal } from './components/TutorModal';
-import { SettingsModal } from './components/SettingsModal';
-import { CertificateModal } from './components/CertificateModal';
-import { XpMilestoneModal } from './components/XpMilestoneModal';
-import { XpMilestonesRoadmapModal } from './components/XpMilestonesRoadmapModal';
-import { CookieNotificationBanner } from './components/CookieNotificationBanner';
-import { NotificationCenterModal } from './components/NotificationCenterModal';
-import { ToastNotification, ToastMessage } from './components/ToastNotification';
-import { NEWS_UPDATES } from './data/newsData';
+import { applyAppTheme, normalizeAppTheme } from './theme';
+import { XP_MILESTONES } from '../data/milestonesData';
+import { calculateDailyStreak, getLocalDateString } from './streakUtils';
+import { Sidebar } from '../components/Sidebar';
+import { Header } from '../components/Header';
+import { HomeHero } from '../components/HomeHero';
+import { LessonView } from '../components/LessonView';
+import { PracticeHub } from '../components/PracticeHub';
+import { VisualLab } from '../components/VisualLab';
+import { ActivitiesView } from '../components/ActivitiesView';
+import { SearchModal } from '../components/SearchModal';
+import { TutorModal } from '../components/TutorModal';
+import { SettingsModal } from '../components/SettingsModal';
+import { CertificateModal } from '../components/CertificateModal';
+import { XpMilestoneModal } from '../components/XpMilestoneModal';
+import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
+import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
+import { NotificationCenterModal } from '../components/NotificationCenterModal';
+import { ToastNotification, ToastMessage } from '../components/ToastNotification';
+import { NEWS_UPDATES } from '../data/newsData';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
@@ -61,14 +62,15 @@ export default function App() {
   };
 
   const unreadNewsCount = NEWS_UPDATES.filter((n) => n.isUnread).length;
+  const mainContentRef = useRef<HTMLElement>(null);
 
-  // Settings State
+  // Keep the reading mode migration-safe: all legacy themes resolve to dark.
   const [theme, setTheme] = useState<AppTheme>(() => {
     try {
-      const savedTheme = localStorage.getItem('wz_storehouse_theme');
-      if (savedTheme) return savedTheme as AppTheme;
-    } catch {}
-    return 'batman'; // Batcave Dark Knight theme by default
+      return normalizeAppTheme(localStorage.getItem('wz_storehouse_theme'));
+    } catch {
+      return 'dark';
+    }
   });
   const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
   const [fontFamily, setFontFamily] = useState<'sans' | 'serif' | 'mono'>('sans');
@@ -107,10 +109,11 @@ export default function App() {
     } catch {}
   }, [progress]);
 
-  // Save theme to localStorage
+  // Save theme to localStorage (synchronizing both React SPA and standalone keys)
   useEffect(() => {
     try {
       localStorage.setItem('wz_storehouse_theme', theme);
+      localStorage.setItem('wz-theme', theme);
     } catch {}
   }, [theme]);
 
@@ -131,24 +134,9 @@ export default function App() {
     }
   }, [progress.xpPoints]);
 
-  // Apply Batman Dark Knight, Light, and energetic themes to document
+  // Apply the selected reading mode without leaving legacy classes behind.
   useEffect(() => {
-    const root = document.documentElement;
-    root.classList.remove('dark', 'batman', 'light', 'sepia', 'cyber-energy', 'sunset-pulse', 'emerald-flow');
-    
-    if (theme === 'batman' || theme === 'dark') {
-      root.classList.add('dark', 'batman');
-    } else if (theme === 'light') {
-      root.classList.add('light');
-    } else if (theme === 'sepia') {
-      root.classList.add('sepia');
-    } else if (theme === 'cyber-energy') {
-      root.classList.add('dark', 'cyber-energy');
-    } else if (theme === 'sunset-pulse') {
-      root.classList.add('dark', 'sunset-pulse');
-    } else if (theme === 'emerald-flow') {
-      root.classList.add('dark', 'emerald-flow');
-    }
+    applyAppTheme(theme);
   }, [theme]);
 
   // Global Keyboard shortcuts
@@ -176,15 +164,19 @@ export default function App() {
     }
   }
 
+  const scrollMainToTop = () => {
+    mainContentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const navigateToView = (view: ViewMode) => {
     setActiveView(view);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollMainToTop();
   };
 
   const handleSelectLesson = (lessonId: string) => {
     setCurrentLessonId(lessonId);
     setActiveView('lesson');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollMainToTop();
   };
 
   const handleNavigateActivities = (lessonId?: string) => {
@@ -192,7 +184,7 @@ export default function App() {
       setCurrentLessonId(lessonId);
     }
     setActiveView('activities');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    scrollMainToTop();
   };
 
   const handleCompleteActivity = (activityId: string, xpReward: number) => {
@@ -286,10 +278,8 @@ export default function App() {
   const sizeClass =
     fontSize === 'sm' ? 'text-sm leading-relaxed' : fontSize === 'lg' ? 'text-lg leading-loose' : 'text-base leading-normal';
 
-  const THEMES: AppTheme[] = ['batman', 'light', 'cyber-energy', 'sunset-pulse', 'emerald-flow', 'sepia'];
   const handleCycleTheme = () => {
-    const nextIdx = (THEMES.indexOf(theme) + 1) % THEMES.length;
-    setTheme(THEMES[nextIdx]);
+    setTheme(theme === 'dark' ? 'light' : 'dark');
   };
 
   const totalLessons = chapters.flatMap((c) => c.lessons).length;
@@ -297,7 +287,7 @@ export default function App() {
   return (
     <div
       id="wz-storehouse-app"
-      className={`min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 flex ${fontClass}`}
+      className={`grid h-[100dvh] min-w-0 grid-cols-1 overflow-hidden bg-app-canvas text-app-ink lg:grid-cols-[304px_minmax(0,1fr)] ${fontClass}`}
     >
       {/* Sidebar Navigation */}
       <Sidebar
@@ -315,7 +305,7 @@ export default function App() {
       />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col min-w-0">
+      <div className="flex min-h-0 min-w-0 flex-col overflow-hidden">
         {/* Sticky Header */}
         <Header
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
@@ -336,15 +326,15 @@ export default function App() {
           onToggleTheme={handleCycleTheme}
         />
 
-        {/* View Router with Fluid Transitions */}
-        <main className={`flex-1 ${sizeClass} overflow-x-hidden relative`}>
+        {/* View Router with one independent scroll region */}
+        <main ref={mainContentRef} id="main-content" className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
           <AnimatePresence mode="wait" initial={false}>
             {activeView === 'home' && (
               <motion.div
                 key="home-view"
-                initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
@@ -364,9 +354,9 @@ export default function App() {
             {activeView === 'lesson' && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
-                initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
@@ -391,9 +381,9 @@ export default function App() {
             {activeView === 'activities' && (
               <motion.div
                 key="activities-view"
-                initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
@@ -411,9 +401,9 @@ export default function App() {
             {activeView === 'practice-hub' && (
               <motion.div
                 key="practice-hub-view"
-                initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
@@ -428,9 +418,9 @@ export default function App() {
             {activeView === 'visual-lab' && (
               <motion.div
                 key="visual-lab-view"
-                initial={{ opacity: 0, y: 14, filter: 'blur(3px)' }}
-                animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-                exit={{ opacity: 0, y: -10, filter: 'blur(3px)' }}
+initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >

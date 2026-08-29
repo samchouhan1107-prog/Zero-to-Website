@@ -121,7 +121,7 @@ export const DomTreeVisualizer: React.FC = () => {
   };
 
   return (
-    <div id="dom-tree-visualizer" className="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm">
+    <div id="dom-tree-visualizer" className="panel-surface min-w-0 overflow-hidden p-5 sm:p-6">
       <div className="pb-4 border-b border-slate-100 dark:border-slate-800">
         <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
           <Terminal className="w-5 h-5 text-amber-600 dark:text-amber-400" />
@@ -132,7 +132,7 @@ export const DomTreeVisualizer: React.FC = () => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-6">
+      <div className="grid min-w-0 grid-cols-1 gap-6 mt-6 lg:grid-cols-12">
         {/* Left: Interactive Tree */}
         <div className="lg:col-span-6 p-4 bg-slate-50 dark:bg-slate-950/60 rounded-xl border border-slate-200 dark:border-slate-800 max-h-[360px] overflow-y-auto">
           <div className="text-[11px] font-semibold text-slate-400 uppercase tracking-wider mb-2">

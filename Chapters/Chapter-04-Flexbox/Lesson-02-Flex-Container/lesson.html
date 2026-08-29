@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | Flex Container</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+</head>
+<body class="chapter-flexbox">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Back to Chapter</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+    <div id="settingsPanel" class="settings-panel"></div>
+    <main class="container chapter-page">
+        <section class="chapter-header">
+            <span class="chapter-badge">Chapter 04</span>
+            <h1>Lesson 02 — Flex Container</h1>
+            <p>Learn how a flex container defines layout direction, axes, and wrapping behavior for its child items.</p>
+        </section>
+
+        <section class="chapter-overview chapter-block">
+            <h2>Lesson Overview</h2>
+            <p>This lesson explains <code>display: flex;</code>, the flex container, the main axis, the cross axis, and the core flex item sizing rules.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Introduction</h2>
+            <p>The flex container is the parent element that enables Flexbox layout. Once it is set with <code>display: flex;</code>, its children become flex items that respond to the flex layout rules.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>Understand <code>display: flex;</code> and how to create a flex container.</li>
+                <li>Learn the difference between the main axis and cross axis.</li>
+                <li>Explore flex item properties: <code>order</code>, <code>flex-grow</code>, <code>flex-shrink</code>, and <code>flex-basis</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Theory</h2>
+            <p>When an element becomes a flex container, the default main axis runs left-to-right and the cross axis runs top-to-bottom. Flex items can change their order, grow to fill space, shrink to fit, and use a base size.</p>
+            <ul class="chapter-list">
+                <li><strong><code>order</code></strong>: changes the visual order of flex items without changing HTML.</li>
+                <li><strong><code>flex-grow</code></strong>: allows an item to expand and take available space.</li>
+                <li><strong><code>flex-shrink</code></strong>: lets an item shrink when space is limited.</li>
+                <li><strong><code>flex-basis</code></strong>: sets the starting size of a flex item before growing or shrinking.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Real World Example</h2>
+            <p>Flex containers are often used for navigation bars, card rows, and feature sections. Each item can adapt to the available width while maintaining alignment and spacing.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Visual Explanation</h2>
+            <p>The main axis runs in the direction of the chosen layout (usually row). The cross axis is perpendicular. <code>justify-content</code> aligns items along the main axis, while <code>align-items</code> aligns along the cross axis.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Example</h2>
+            <div class="code-box">
+                <pre><code>&lt;div class="flex-container"&gt;
+    &lt;div class="item"&gt;One&lt;/div&gt;
+    &lt;div class="item"&gt;Two&lt;/div&gt;
+    &lt;div class="item"&gt;Three&lt;/div&gt;
+&lt;/div&gt;
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.item {
+    flex: 1 1 180px;
+}
+</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Breakdown</h2>
+            <p><code>display: flex;</code> activates Flexbox. <code>justify-content</code> distributes items along the main axis. <code>align-items</code> sets cross-axis alignment. <code>flex: 1 1 180px;</code> combines grow, shrink, and basis.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Related Topics</h2>
+            <p>These concepts matter before you use <code>justify-content</code>, <code>align-items</code>, and <code>flex-wrap</code> in later lessons.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Practice Challenge</h2>
+            <p>Create a navigation row with three items where the middle item takes extra space and the right item stays aligned at the end.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Mini Project</h2>
+            <p>Build a responsive card row that wraps on smaller screens and keeps a balanced gap between cards.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Summary</h2>
+            <p>The flex container starts the Flexbox layout. The main axis and cross axis define alignment directions, and flex item properties control order, growth, shrinkage, and base size.</p>
+        </section>
+
+        <section class="chapter-actions chapter-block">
+            <a href="../index.html" class="btn secondary">⬅ Back to Chapter</a>
+            <a href="../Lesson-03-Flex-Items/lesson.html" class="btn primary">Next Lesson ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

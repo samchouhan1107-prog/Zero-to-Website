@@ -1,5 +1,17 @@
-import React from 'react';
-import { Settings, X, Moon, Sun, Type, RotateCcw, Download, Upload, Check, Zap, Flame, Sparkles, BookOpen } from 'lucide-react';
+import React, { useEffect } from 'react';
+import {
+  BookOpen,
+  Check,
+  Download,
+  Moon,
+  RotateCcw,
+  Settings,
+  Sun,
+  Type,
+  Upload,
+  X,
+} from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
 import { UserProgress, AppTheme } from '../types';
 
 interface SettingsModalProps {
@@ -15,6 +27,43 @@ interface SettingsModalProps {
   progress: UserProgress;
 }
 
+type ThemeOption = {
+  id: AppTheme;
+  label: string;
+  description: string;
+  icon: LucideIcon;
+  swatchClass: string;
+};
+
+const themeOptions: ThemeOption[] = [
+  {
+    id: 'dark',
+    label: 'Dark reading',
+    description: 'Low-glare navy canvas for focused study sessions.',
+    icon: Moon,
+    swatchClass: 'bg-slate-900 border-slate-600',
+  },
+  {
+    id: 'light',
+    label: 'Light reading',
+    description: 'Crisp paper-like surfaces for bright environments.',
+    icon: Sun,
+    swatchClass: 'bg-slate-100 border-slate-300',
+  },
+];
+
+const fontSizeOptions = [
+  { id: 'sm', label: 'Compact', detail: '14px' },
+  { id: 'md', label: 'Standard', detail: '16px' },
+  { id: 'lg', label: 'Large', detail: '18px' },
+] as const;
+
+const fontFamilyOptions = [
+  { id: 'sans', label: 'Modern Sans', className: 'font-sans' },
+  { id: 'serif', label: 'Editorial Serif', className: 'font-serif' },
+  { id: 'mono', label: 'Technical Mono', className: 'font-mono' },
+] as const;
+
 export const SettingsModal: React.FC<SettingsModalProps> = ({
   isOpen,
   onClose,
@@ -27,6 +76,17 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onResetProgress,
   progress,
 }) => {
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') onClose();
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   const exportData = () => {
@@ -39,192 +99,195 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
     downloadAnchor.remove();
   };
 
-  const themeOptions: { id: AppTheme; label: string; desc: string; icon: any; colorDot: string; isSpecial?: boolean; isEnergetic?: boolean }[] = [
-    { id: 'batman', label: '🌙 Obsidian Dark Knight', desc: 'Deep Obsidian & Amber Gold Glow', icon: Moon, colorDot: 'bg-yellow-400 ring-2 ring-yellow-500/80', isSpecial: true },
-    { id: 'light', label: '☀️ Light Clean', desc: 'Crisp Daytime Study Canvas', icon: Sun, colorDot: 'bg-amber-400 ring-2 ring-amber-300' },
-    { id: 'cyber-energy', label: '⚡ Cyber Energy', desc: 'Electric Neon & Violet Pulse', icon: Zap, colorDot: 'bg-cyan-400 ring-2 ring-purple-500', isEnergetic: true },
-    { id: 'sunset-pulse', label: '🌅 Sunset Pulse', desc: 'Solar Radiant & Fiery Amber', icon: Flame, colorDot: 'bg-orange-500 ring-2 ring-amber-400', isEnergetic: true },
-    { id: 'emerald-flow', label: '🔋 Emerald Flow', desc: 'Matrix Mint & Neon Lime', icon: Sparkles, colorDot: 'bg-emerald-400 ring-2 ring-teal-500', isEnergetic: true },
-    { id: 'sepia', label: '📖 Warm Sepia', desc: 'Eye-Strain Relaxed Tone', icon: BookOpen, colorDot: 'bg-amber-700 ring-2 ring-amber-600' },
-  ];
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/75 backdrop-blur-sm">
-      <div className="w-full max-w-xl bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden animate-fade-in max-h-[90vh] flex flex-col">
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between bg-slate-50/50 dark:bg-slate-950/50">
-          <div className="flex items-center gap-2">
-            <div className="p-1.5 rounded-lg bg-indigo-100 dark:bg-indigo-950/80 text-indigo-600 dark:text-indigo-400">
-              <Settings className="w-4 h-4" />
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/70 p-4"
+      role="presentation"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) onClose();
+      }}
+    >
+      <div
+        className="flex max-h-[min(90dvh,720px)] w-full max-w-2xl flex-col overflow-hidden rounded-panel border border-app-border bg-app-surface text-app-ink shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="settings-dialog-title"
+      >
+        <header className="flex items-center justify-between gap-4 border-b border-app-border bg-app-inset px-5 py-4">
+          <div className="flex min-w-0 items-center gap-3">
+            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-control border border-app-border bg-app-active text-app-amber">
+              <Settings className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <div className="min-w-0">
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.16em] text-app-subtle">Workspace settings</p>
+              <h2 id="settings-dialog-title" className="truncate text-lg font-bold text-app-ink">Reading preferences</h2>
             </div>
-            <h3 className="font-extrabold text-sm text-slate-900 dark:text-white">
-              Studio Themes & Reading Preferences
-            </h3>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 cursor-pointer"
+            className="flex min-h-11 min-w-11 items-center justify-center rounded-control border border-app-border text-app-muted transition-colors hover:bg-app-active hover:text-app-ink"
+            aria-label="Close reading preferences"
           >
-            <X className="w-5 h-5" />
+            <X className="h-5 w-5" aria-hidden="true" />
           </button>
-        </div>
+        </header>
 
-        <div className="p-5 sm:p-6 space-y-6 text-xs overflow-y-auto">
-          {/* Theme Mode Grid */}
-          <div className="space-y-2.5">
-            <div className="flex items-center justify-between">
-              <label className="font-extrabold text-slate-900 dark:text-white block uppercase tracking-wider text-[11px]">
-                Active Color Theme & Atmosphere
-              </label>
-              <span className="text-[10px] text-indigo-600 dark:text-cyan-400 font-bold font-mono">
-                {themeOptions.find((t) => t.id === theme)?.label}
-              </span>
+        <div className="min-h-0 space-y-7 overflow-y-auto p-5 sm:p-6">
+          <section className="space-y-3" aria-labelledby="theme-heading">
+            <div className="flex flex-wrap items-end justify-between gap-2">
+              <div>
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">01 / Reading mode</p>
+                <h3 id="theme-heading" className="mt-1 text-base font-bold text-app-ink">Choose your study canvas</h3>
+              </div>
+              <span className="font-mono text-xs font-bold text-app-amber">{theme === 'dark' ? 'Dark reading' : 'Light reading'}</span>
             </div>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
-              {themeOptions.map((t) => {
-                const Icon = t.icon;
-                const isSelected = theme === t.id;
+            <div className="grid gap-3 sm:grid-cols-2">
+              {themeOptions.map((option) => {
+                const Icon = option.icon;
+                const isSelected = theme === option.id;
                 return (
                   <button
-                    key={t.id}
-                    onClick={() => onSelectTheme(t.id)}
-                    className={`p-3 rounded-xl border text-left transition-all relative overflow-hidden cursor-pointer ${
+                    key={option.id}
+                    type="button"
+                    onClick={() => onSelectTheme(option.id)}
+                    aria-pressed={isSelected}
+                    className={`group flex min-h-28 items-start gap-3 rounded-control border p-4 text-left transition-colors ${
                       isSelected
-                        ? 'border-indigo-500 bg-indigo-50/90 dark:bg-indigo-950/70 shadow-md ring-2 ring-indigo-500/80 scale-[1.02]'
-                        : 'border-slate-200 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-950/50 hover:border-slate-300 dark:hover:border-slate-700 hover:scale-[1.01]'
+                        ? 'border-app-amber bg-app-active ring-2 ring-app-amber/35'
+                        : 'border-app-border bg-app-inset hover:border-app-amber/70 hover:bg-app-active'
                     }`}
                   >
-                    {t.isSpecial && (
-                      <span className="absolute top-2 right-2 text-[8px] font-mono font-black uppercase px-1.5 py-0.5 rounded bg-yellow-400/20 text-yellow-500 dark:text-yellow-400 border border-yellow-400/30">
-                        Knight
+                    <span className={`mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-control border ${option.swatchClass}`}>
+                      <Icon className={`h-5 w-5 ${isSelected ? 'text-app-amber' : 'text-app-muted'}`} aria-hidden="true" />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-center gap-2 text-sm font-bold text-app-ink">
+                        {option.label}
+                        {isSelected && <Check className="h-4 w-4 text-app-amber" aria-hidden="true" />}
                       </span>
-                    )}
-                    {t.isEnergetic && (
-                      <span className="absolute top-2 right-2 text-[8px] font-mono font-black uppercase px-1 rounded bg-indigo-500/20 text-indigo-600 dark:text-cyan-300 border border-indigo-500/30">
-                        Vibrant
-                      </span>
-                    )}
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <span className={`w-3 h-3 rounded-full ${t.colorDot}`} />
-                      <span className="font-bold text-slate-900 dark:text-white text-xs">{t.label}</span>
-                    </div>
-                    <p className="text-[10px] text-slate-500 dark:text-slate-400 leading-snug">{t.desc}</p>
+                      <span className="mt-1 block text-xs leading-relaxed text-app-muted">{option.description}</span>
+                    </span>
                   </button>
                 );
               })}
             </div>
-          </div>
+          </section>
 
-          {/* Typography Scale */}
-          <div className="space-y-2">
-            <label className="font-extrabold text-slate-900 dark:text-white block uppercase tracking-wider text-[11px]">
-              Reading Text Size
-            </label>
-            <div className="grid grid-cols-3 gap-2">
-              {[
-                { id: 'sm', label: 'Compact (14px)' },
-                { id: 'md', label: 'Standard (16px)' },
-                { id: 'lg', label: 'Large (18px)' },
-              ].map((s) => (
-                <button
-                  key={s.id}
-                  onClick={() => onSelectFontSize(s.id as any)}
-                  className={`py-2 px-3 rounded-xl border text-center font-bold transition-all cursor-pointer ${
-                    fontSize === s.id
-                      ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 ring-1 ring-indigo-500'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  {s.label}
-                </button>
-              ))}
+          <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="type-heading">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">02 / Type scale</p>
+              <h3 id="type-heading" className="mt-1 flex items-center gap-2 text-base font-bold text-app-ink">
+                <Type className="h-4 w-4 text-app-muted" aria-hidden="true" /> Reading text size
+              </h3>
             </div>
-          </div>
-
-          {/* Font Family */}
-          <div className="space-y-2">
-            <label className="font-extrabold text-slate-900 dark:text-white block uppercase tracking-wider text-[11px]">
-              Typography Style
-            </label>
             <div className="grid grid-cols-3 gap-2">
-              {[
-                { id: 'sans', label: 'Modern Sans', style: 'font-sans' },
-                { id: 'serif', label: 'Editorial Serif', style: 'font-serif' },
-                { id: 'mono', label: 'Technical Mono', style: 'font-mono' },
-              ].map((f) => (
-                <button
-                  key={f.id}
-                  onClick={() => onSelectFontFamily(f.id as any)}
-                  className={`py-2 px-3 rounded-xl border text-center font-bold transition-all cursor-pointer ${f.style} ${
-                    fontFamily === f.id
-                      ? 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950/60 text-indigo-700 dark:text-indigo-300 ring-1 ring-indigo-500'
-                      : 'border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800'
-                  }`}
-                >
-                  {f.label}
-                </button>
-              ))}
+              {fontSizeOptions.map((option) => {
+                const isSelected = fontSize === option.id;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => onSelectFontSize(option.id)}
+                    aria-pressed={isSelected}
+                    className={`min-h-14 rounded-control border px-3 py-2 text-left transition-colors ${
+                      isSelected
+                        ? 'border-app-amber bg-app-active text-app-ink ring-2 ring-app-amber/25'
+                        : 'border-app-border bg-app-inset text-app-muted hover:border-app-amber/70 hover:text-app-ink'
+                    }`}
+                  >
+                    <span className="block text-xs font-bold">{option.label}</span>
+                    <span className="font-mono text-[11px] text-app-subtle">{option.detail}</span>
+                  </button>
+                );
+              })}
             </div>
-          </div>
+          </section>
 
-          {/* Push Notifications & Cookies */}
-          <div className="space-y-3 pt-4 border-t border-slate-200 dark:border-slate-800">
-            <label className="font-extrabold text-slate-900 dark:text-white block uppercase tracking-wider text-[11px]">
-              Push Notifications & Privacy Cookies
-            </label>
-            <div className="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 space-y-3">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white">Push Notifications for Updates</h4>
-                  <p className="text-[11px] text-slate-500 dark:text-slate-400">Receive alerts when new curriculum and coding challenges release.</p>
-                </div>
-                <button
-                  onClick={async () => {
-                    if ('Notification' in window) {
-                      const res = await Notification.requestPermission();
-                      if (res === 'granted') {
-                        localStorage.setItem('webzone_push_enabled', 'true');
-                        new Notification('WebZone Knowledge Base', {
-                          body: 'Push notifications are active!',
-                          icon: '/icon.png',
-                        });
-                      }
+          <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="font-heading">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">03 / Typeface</p>
+              <h3 id="font-heading" className="mt-1 flex items-center gap-2 text-base font-bold text-app-ink">
+                <BookOpen className="h-4 w-4 text-app-muted" aria-hidden="true" /> Choose a reading voice
+              </h3>
+            </div>
+            <div className="grid gap-2 sm:grid-cols-3">
+              {fontFamilyOptions.map((option) => {
+                const isSelected = fontFamily === option.id;
+                return (
+                  <button
+                    key={option.id}
+                    type="button"
+                    onClick={() => onSelectFontFamily(option.id)}
+                    aria-pressed={isSelected}
+                    className={`min-h-12 rounded-control border px-3 py-2 text-left text-sm transition-colors ${option.className} ${
+                      isSelected
+                        ? 'border-app-amber bg-app-active font-bold text-app-ink ring-2 ring-app-amber/25'
+                        : 'border-app-border bg-app-inset text-app-muted hover:border-app-amber/70 hover:text-app-ink'
+                    }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          </section>
+
+          <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="privacy-heading">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">04 / Notifications</p>
+              <h3 id="privacy-heading" className="mt-1 text-base font-bold text-app-ink">Keep up with new lessons</h3>
+            </div>
+            <div className="flex flex-col gap-3 rounded-control border border-app-border bg-app-inset p-4 sm:flex-row sm:items-center sm:justify-between">
+              <p className="max-w-xl text-sm leading-relaxed text-app-muted">Enable browser notifications for new curriculum and coding challenge releases.</p>
+              <button
+                type="button"
+                onClick={async () => {
+                  if ('Notification' in window) {
+                    const permission = await Notification.requestPermission();
+                    if (permission === 'granted') {
+                      localStorage.setItem('webzone_push_enabled', 'true');
+                      new Notification('WebZone Knowledge Base', {
+                        body: 'Push notifications are active!',
+                        icon: '/icon.png',
+                      });
                     }
-                  }}
-                  className="px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold transition-all shadow-xs cursor-pointer"
-                >
-                  Configure Push
-                </button>
-              </div>
+                  }
+                }}
+                className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-control bg-app-amber px-4 text-xs font-bold text-slate-950 transition-colors hover:bg-app-amber-hover"
+              >
+                <Upload className="h-4 w-4" aria-hidden="true" /> Configure push
+              </button>
             </div>
-          </div>
+          </section>
 
-          {/* Progress Backup & Reset */}
-          <div className="pt-4 border-t border-slate-200 dark:border-slate-800 space-y-3">
-            <label className="font-extrabold text-slate-900 dark:text-white block uppercase tracking-wider text-[11px]">
-              Data Management & Backup
-            </label>
+          <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="data-heading">
+            <div>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">05 / Your data</p>
+              <h3 id="data-heading" className="mt-1 text-base font-bold text-app-ink">Back up or reset progress</h3>
+            </div>
             <div className="flex flex-wrap gap-2">
               <button
+                type="button"
                 onClick={exportData}
-                className="px-3.5 py-2 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 flex items-center gap-1.5 font-bold cursor-pointer transition-colors"
+                className="inline-flex min-h-11 items-center gap-2 rounded-control border border-app-border bg-app-inset px-4 text-xs font-bold text-app-ink transition-colors hover:border-app-amber/70 hover:bg-app-active"
               >
-                <Download className="w-3.5 h-3.5" /> Export Progress (JSON)
+                <Download className="h-4 w-4 text-app-amber" aria-hidden="true" /> Export progress
               </button>
-
               <button
+                type="button"
                 onClick={() => {
                   if (window.confirm('Are you sure you want to reset all completed lessons and practice records?')) {
                     onResetProgress();
                     onClose();
                   }
                 }}
-                className="px-3.5 py-2 rounded-xl border border-red-200 dark:border-red-900/40 text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 flex items-center gap-1.5 font-bold ml-auto cursor-pointer transition-colors"
+                className="ml-auto inline-flex min-h-11 items-center gap-2 rounded-control border border-red-400/50 px-4 text-xs font-bold text-red-500 transition-colors hover:bg-red-500/10"
               >
-                <RotateCcw className="w-3.5 h-3.5" /> Reset Progress
+                <RotateCcw className="h-4 w-4" aria-hidden="true" /> Reset progress
               </button>
             </div>
-          </div>
+          </section>
         </div>
       </div>
     </div>

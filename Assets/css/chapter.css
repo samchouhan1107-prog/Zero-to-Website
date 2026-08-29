@@ -1,0 +1,49 @@
+/* ==================================================
+   WZ Storehouse - chapter.css
+   Author  : Sameer Chouhan
+   Version : 2.0 (Red Volcanic & Volcanic Porcelain)
+================================================== */
+
+.chapter-page {
+    background: var(--background);
+    color: var(--text);
+}
+
+.chapter-badge-lg {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--primary);
+    color: #ffffff;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 0 16px -2px var(--primary);
+}
+
+.chapter-timeline {
+    position: relative;
+    padding-left: 28px;
+    margin: 24px 0;
+    border-left: 2px solid var(--border);
+}
+
+.timeline-step {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.timeline-step::before {
+    content: '';
+    position: absolute;
+    left: -34px;
+    top: 4px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 8px var(--primary);
+}

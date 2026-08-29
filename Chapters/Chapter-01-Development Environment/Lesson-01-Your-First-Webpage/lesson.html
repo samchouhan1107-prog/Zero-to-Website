@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | Your First Webpage - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+
+<body class="lesson-page">
+
+    <!-- ==========================
+         HEADER
+    =========================== -->
+
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <!-- ==========================
+         SETTINGS PANEL
+    =========================== -->
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="languageBtn">🌐 Language</button>
+        <button id="readingModeBtn">📖 Reading Mode</button>
+        <button id="helpBtn">❓ Help</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <!-- ==========================
+         MAIN CONTENT
+    =========================== -->
+
+    <main class="container chapter-page">
+
+        <!-- 1. Lesson Header -->
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 01</span>
+            <h1>Your First Webpage</h1>
+            <p>Write, save, and preview your very first HTML document inside your browser.</p>
+        </section>
+
+        <!-- 2. Introduction -->
+        <section class="chapter-section">
+            <h2>1. Introduction</h2>
+            <p>Every website in the world begins with a single file: <code>index.html</code>. In this lesson, you will create a real HTML file, write basic tags, open it in your web browser, and see your code transform into a live webpage.</p>
+        </section>
+
+        <!-- 3. Learning Objectives -->
+        <section class="chapter-section">
+            <h2>2. Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Create and save an <code>index.html</code> file.</li>
+                <li>✔ Write the basic HTML5 document boilerplate structure.</li>
+                <li>✔ Understand the purpose of <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</li>
+                <li>✔ Open your file in Google Chrome, Edge, or Firefox.</li>
+            </ul>
+        </section>
+
+        <!-- 4. Theory & Explanation -->
+        <section class="chapter-section">
+            <h2>3. Theory & Explanation</h2>
+            <p>When you double-click an <code>.html</code> file on your computer, your default web browser reads the file from top to bottom. It does not display the angle brackets <code>&lt; &gt;</code> on screen; instead, it uses them as instructions to format headings, paragraphs, and images.</p>
+            <div class="callout-box">
+                <h4>Key Principle</h4>
+                <p>Content you want visitors to see (headings, buttons, text, pictures) must always live inside the <strong><code>&lt;body&gt;</code></strong> tag.</p>
+            </div>
+        </section>
+
+        <!-- 5. Real World Example -->
+        <section class="chapter-section">
+            <h2>4. Real-World Example</h2>
+            <p>Think of an HTML file like writing a letter:</p>
+            <ul class="chapter-list">
+                <li><strong>The Envelope (<code>&lt;head&gt;</code>):</strong> Contains the recipient name, postage stamp, and title (metadata).</li>
+                <li><strong>The Letter Paper (<code>&lt;body&gt;</code>):</strong> Contains the actual message, words, and drawings you want the reader to experience.</li>
+            </ul>
+        </section>
+
+        <!-- 6. Visual Explanation -->
+        <section class="chapter-section">
+            <h2>5. Visual Explanation</h2>
+            <div class="code-box">
+<pre><code>📁 My-First-Website
+└── 📄 index.html
+      ├── &lt;!DOCTYPE html&gt;  (Informs browser: HTML5 standard)
+      ├── &lt;html&gt;
+      │     ├── &lt;head&gt;      (Page title & charset)
+      │     └── &lt;body&gt;      (Visible website content)
+      │           ├── &lt;h1&gt;Hello World&lt;/h1&gt;
+      │           └── &lt;p&gt;Welcome to my site.&lt;/p&gt;
+      └── &lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <!-- 7. Code Example & Playground -->
+        <section class="chapter-section">
+            <h2>6. Code Example & Live Playground</h2>
+            <p>Edit the HTML below and click <strong>Run Code</strong> to see it render in real time:</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>HTML Editor</h3>
+                    <textarea id="htmlEditor">&lt;h1&gt;My First Webpage&lt;/h1&gt;
+&lt;p&gt;Hello World! I am learning web development at WZ Storehouse.&lt;/p&gt;
+&lt;button&gt;Click Me&lt;/button&gt;</textarea>
+                    <button type="button" id="runCodeBtn" onclick="runHTML()">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Preview Window</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. Code Breakdown -->
+        <section class="chapter-section">
+            <h2>7. Code Breakdown</h2>
+            <ul class="chapter-list">
+                <li><code>&lt;h1&gt;</code>: Defines the highest priority heading for the page title.</li>
+                <li><code>&lt;p&gt;</code>: Wraps regular paragraph text with comfortable reading line heights.</li>
+                <li><code>&lt;button&gt;</code>: Creates an interactive clickable button element.</li>
+            </ul>
+        </section>
+
+        <!-- 9. Related Topics -->
+        <section class="chapter-section">
+            <h2>8. Related Topics</h2>
+            <ul class="chapter-list">
+                <li>Used again in Chapter 02: Semantic HTML Architecture</li>
+                <li>Applied in Chapter 03: Styling with CSS Box Model</li>
+                <li>Required for Chapter 10: Final Deployment</li>
+            </ul>
+        </section>
+
+        <!-- 10. Practice Challenge -->
+        <section class="chapter-section">
+            <h2>9. Practice Challenge</h2>
+            <p>Ready to test your new skills? Open the practice workspace to build your first standalone card:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Practice Challenge →</h3>
+                <p>Guided coding exercise with instant feedback.</p>
+            </a>
+        </section>
+
+        <!-- 11. Summary -->
+        <section class="chapter-section">
+            <h2>10. Summary</h2>
+            <ul class="chapter-list">
+                <li>HTML provides the foundational structure of all web pages.</li>
+                <li>The <code>index.html</code> filename is the standard entrypoint for all web servers.</li>
+                <li>Visible elements belong inside the <code>&lt;body&gt;</code> container.</li>
+            </ul>
+        </section>
+
+        <!-- 12. Navigation -->
+        <section class="chapter-section chapter-nav-links">
+            <a href="../index.html">⬅ Chapter 01 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+
+    </main>
+
+    <!-- ==========================
+         FOOTER
+    =========================== -->
+
+    <footer>
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

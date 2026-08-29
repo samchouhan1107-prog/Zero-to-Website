@@ -29,7 +29,7 @@ import {
   Shield,
   Filter,
 } from 'lucide-react';
-import { Chapter, Lesson, UserProgress, DifficultyLevel } from '../types';
+import { Chapter, Lesson, UserProgress, DifficultyLevel } from '../utils/types';
 import { ACTIVITIES_DATA, getActivityDeckForLesson } from '../data/activitiesData';
 import { DifficultyBadge, getNormalizedDifficulty } from './DifficultyBadge';
 
