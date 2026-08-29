@@ -325,6 +325,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
             </div>
           </div>
         </div>
+        </div>
       </section>
 
       {/* Modern Sticky Section Tab Bar */}
