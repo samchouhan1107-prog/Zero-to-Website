@@ -42,40 +42,34 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
     setAiFeedback(null);
   }, [challenge.id]);
 
-  const runCode = () => {
-    if (!iframeRef.current) return;
-    const documentContent = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="UTF-8" />
-          <style>
-            body { margin: 16px; font-family: system-ui, -apple-system, sans-serif; }
-            ${css}
-          </style>
-        </head>
-        <body>
-          ${html}
-          <script>
-            // Intercept console logs
-            const originalLog = console.log;
-            console.log = function(...args) {
-              window.parent.postMessage({ type: 'CONSOLE_LOG', message: args.join(' ') }, '*');
-              originalLog.apply(console, args);
-            };
-            try {
-              ${js}
-            } catch (err) {
-              window.parent.postMessage({ type: 'CONSOLE_ERROR', message: err.toString() }, '*');
-            }
-          </script>
-        </body>
-      </html>
-    `;
-
-    const blob = new Blob([documentContent], { type: 'text/html' });
-    iframeRef.current.src = URL.createObjectURL(blob);
-  };
+  const getDocumentContent = () => `
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <meta charset="UTF-8" />
+        <style>
+          body { margin: 16px; font-family: system-ui, -apple-system, sans-serif; }
+          ${css}
+        </style>
+      </head>
+      <body>
+        ${html}
+        <script>
+          // Intercept console logs
+          const originalLog = console.log;
+          console.log = function(...args) {
+            window.parent.postMessage({ type: 'CONSOLE_LOG', message: args.join(' ') }, '*');
+            originalLog.apply(console, args);
+          };
+          try {
+            ${js}
+          } catch (err) {
+            window.parent.postMessage({ type: 'CONSOLE_ERROR', message: err.toString() }, '*');
+          }
+        </script>
+      </body>
+    </html>
+  `;
 
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
@@ -88,10 +82,6 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
     window.addEventListener('message', handleMessage);
     return () => window.removeEventListener('message', handleMessage);
   }, []);
-
-  useEffect(() => {
-    runCode();
-  }, [html, css, js]);
 
   const verifySolution = () => {
     // Run automated tests against DOM inside iframe
@@ -319,6 +309,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
             <iframe
               ref={iframeRef}
               title="Practice Sandbox Output"
+              srcDoc={getDocumentContent()}
               className="w-full h-[240px] bg-white rounded-lg border border-slate-200 dark:border-slate-800 shadow-sm"
               sandbox="allow-scripts allow-modals"
             />

@@ -287,7 +287,7 @@ export default function App() {
   return (
     <div
       id="wz-storehouse-app"
-      className={`grid h-[100dvh] min-w-0 grid-cols-1 overflow-hidden bg-app-canvas text-app-ink lg:grid-cols-[304px_minmax(0,1fr)] ${fontClass}`}
+      className={`grid h-[100dvh] min-w-0 grid-cols-1 overflow-hidden bg-app-canvas text-app-ink lg:grid-cols-[320px_minmax(0,1fr)] ${fontClass}`}
     >
       {/* Sidebar Navigation */}
       <Sidebar
@@ -297,6 +297,8 @@ export default function App() {
         progress={progress}
         isOpen={sidebarOpen}
         onCloseMobile={() => setSidebarOpen(false)}
+        activeView={activeView}
+        onNavigateHome={() => navigateToView('home')}
         onOpenPracticeHub={() => navigateToView('practice-hub')}
         onOpenVisualLab={() => navigateToView('visual-lab')}
         onOpenActivities={() => handleNavigateActivities()}
