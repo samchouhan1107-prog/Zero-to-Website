@@ -21,6 +21,8 @@ import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal
 import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
 import { NotificationCenterModal } from '../components/NotificationCenterModal';
 import { ToastNotification, ToastMessage } from '../components/ToastNotification';
+import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
+import { Footer } from '../components/Footer';
 import { NEWS_UPDATES } from '../data/newsData';
 
 const INITIAL_PROGRESS: UserProgress = {
@@ -49,7 +51,14 @@ export default function App() {
   const [celebratingMilestone, setCelebratingMilestone] = useState<XpMilestone | null>(null);
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [legalModalOpen, setLegalModalOpen] = useState(false);
+  const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+
+  const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
+    setLegalModalTab(tab);
+    setLegalModalOpen(true);
+  };
 
   const addToast = (title: string, message: string, type: 'info' | 'success' | 'update' = 'info') => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`;
@@ -430,10 +439,21 @@ initial={{ opacity: 0, y: 14 }}
               </motion.div>
             )}
           </AnimatePresence>
+
+          {/* Educational Platform Footer with AdSense & Legal Compliance Links */}
+          <Footer
+            onOpenLegal={handleOpenLegal}
+            onOpenTutor={() => handleOpenTutor()}
+          />
         </main>
       </div>
 
       {/* Global Modals & Drawers */}
+      <LegalComplianceModal
+        isOpen={legalModalOpen}
+        onClose={() => setLegalModalOpen(false)}
+        initialTab={legalModalTab}
+      />
       <SearchModal
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
@@ -461,6 +481,7 @@ initial={{ opacity: 0, y: 14 }}
         onSelectFontFamily={setFontFamily}
         onResetProgress={handleResetProgress}
         progress={progress}
+        onOpenLegal={handleOpenLegal}
       />
 
       <CertificateModal
@@ -521,6 +542,7 @@ initial={{ opacity: 0, y: 14 }}
           addToast('Preferences Updated', `Cookie settings saved with push ${prefs.pushNotifications ? 'enabled' : 'disabled'}.`, 'info');
         }}
         onOpenNews={() => setNotificationsOpen(true)}
+        onOpenPrivacy={() => handleOpenLegal('privacy')}
       />
     </div>
   );

@@ -26,6 +26,7 @@ interface CookieNotificationBannerProps {
   onPreferencesSaved?: (prefs: CookiePreferences) => void;
   onRequestPushPermission?: () => void;
   onOpenNews?: () => void;
+  onOpenPrivacy?: () => void;
 }
 
 export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> = ({
@@ -33,6 +34,7 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
   onPreferencesSaved,
   onRequestPushPermission,
   onOpenNews,
+  onOpenPrivacy,
 }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -173,7 +175,16 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
 
           {/* Description */}
           <p className="text-xs text-slate-300 leading-relaxed font-medium">
-            We use essential local cookies to store your learning milestones and themes. Enable <strong className="text-amber-300">Push Updates</strong> to receive instant alerts when new interactive chapters or coding challenges are published.
+            We use essential local cookies to store your learning milestones and themes. We partner with third-party networks such as Google AdSense to serve personalized ads under GDPR/CCPA standards.{' '}
+            {onOpenPrivacy && (
+              <button
+                type="button"
+                onClick={onOpenPrivacy}
+                className="text-amber-300 underline hover:text-amber-200 cursor-pointer font-bold inline"
+              >
+                Read our Privacy Policy &amp; Ad Disclosure
+              </button>
+            )}
           </p>
 
           {/* Expandable Preferences Section */}

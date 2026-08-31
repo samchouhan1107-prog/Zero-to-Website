@@ -1,33 +1,33 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
-  CheckCircle2,
+  ArrowRight,
+  Award,
+  BookOpen,
   Bookmark,
   BookmarkCheck,
+  Bug,
+  Check,
+  CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
-  HelpCircle,
-  Lightbulb,
-  Check,
-  Code2,
-  Tv,
-  Layers,
-  BookOpen,
-  ArrowRight,
-  FileEdit,
-  Save,
   Clock,
+  Code2,
   Compass,
   Copy,
-  Terminal,
-  Zap,
-  Award,
-  TrendingUp,
-  Printer,
+  FileEdit,
   GraduationCap,
-  Bug,
+  HelpCircle,
+  Layers,
+  Lightbulb,
+  Play,
+  Printer,
+  Save,
+  Sparkles,
+  Terminal,
+  Tv,
+  Zap,
 } from 'lucide-react';
-import { Lesson, Chapter } from '../utils/types';
+import { Chapter, Lesson } from '../utils/types';
 import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
 import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
 import { GridVisualizer } from './visualizers/GridVisualizer';
@@ -38,6 +38,7 @@ import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
 import { getActivityDeckForLesson } from '../data/activitiesData';
+import { AdSenseSlot } from './AdSenseSlot';
 
 interface LessonViewProps {
   lesson: Lesson;
@@ -78,7 +79,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const [copiedCode, setCopiedCode] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('section-theory');
 
-  // Find previous and next lessons
+  // Find previous and next lessons across all chapters
   const allLessons = allChapters.flatMap((c) => c.lessons);
   const currentIndex = allLessons.findIndex((l) => l.id === lesson.id);
   const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
@@ -103,7 +104,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
       const containerRect = scrollContainer.getBoundingClientRect();
       const elementRect = el.getBoundingClientRect();
       scrollContainer.scrollTo({
-        top: scrollContainer.scrollTop + elementRect.top - containerRect.top - 16,
+        top: scrollContainer.scrollTop + elementRect.top - containerRect.top - 24,
         behavior: 'smooth',
       });
     }
@@ -152,259 +153,233 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const sectionTabs = [
     { id: 'section-theory', label: 'Theory', icon: BookOpen },
     { id: 'section-analogy', label: 'Mental Model', icon: Lightbulb },
-    { id: 'section-visuals', label: 'Diagram', icon: Layers },
-    { id: 'section-code', label: 'Code', icon: Code2 },
-    { id: 'section-video', label: 'Video Studio', icon: Tv },
+    { id: 'section-visuals', label: 'Visual Lab', icon: Layers },
+    { id: 'section-code', label: 'Annotated Code', icon: Code2 },
     { id: 'section-practice', label: 'Sandbox', icon: Zap },
-    { id: 'section-quiz', label: 'Quiz', icon: HelpCircle },
+    ...(lesson.video ? [{ id: 'section-video', label: 'Video Lab', icon: Tv }] : []),
+    { id: 'section-quiz', label: 'Checkpoint', icon: HelpCircle },
     { id: 'section-activities', label: 'Activities', icon: GraduationCap },
     { id: 'section-notes', label: 'Notes', icon: FileEdit },
   ];
 
-  const handlePrintLesson = () => {
-    window.print();
-  };
-
   return (
-    <article id={`lesson-${lesson.id}`} className="mx-auto w-full max-w-[960px] min-w-0 space-y-12 px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-      {/* Printable Document Header (Visible only on Print / PDF) */}
-      <div className="hidden print-header-banner">
-        <span>WEBZONE FULL-STACK ACADEMY • OFFLINE STUDY GUIDE</span>
-        <span>CHAPTER {chapter.number}: {chapter.title.toUpperCase()}</span>
-      </div>
-
-      {/* 1. Spacious Hero Lesson Header Card */}
-      <section className="panel-surface relative overflow-hidden p-5 sm:p-8">
-        <div className="relative z-10">
-
-        <div className="space-y-6">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2.5">
-              <span className="text-xs px-3 py-1 rounded-full font-bold uppercase tracking-wider bg-indigo-500/20 text-indigo-300 dark:text-cyan-400 border border-indigo-500/30">
-                Chapter {chapter.number}
-              </span>
-              <span className="text-xs font-mono text-slate-400">/</span>
-              <span className="text-xs font-mono font-semibold text-slate-300">Lesson {lesson.number}</span>
-            </div>
-
-            <div className="flex items-center gap-2.5">
-              {/* Print / Save PDF Button */}
-              <button
-                onClick={handlePrintLesson}
-                className="p-2.5 sm:px-3.5 rounded-xl border border-slate-700 dark:border-[#1f2536] bg-slate-800/80 dark:bg-[#141722] text-slate-300 hover:text-white hover:bg-slate-700 text-xs font-bold flex items-center gap-1.5 transition-all cursor-pointer shadow-xs"
-                title="Print lesson or save as PDF for offline study"
-              >
-                <Printer className="w-4 h-4 text-cyan-400" />
-                <span className="hidden sm:inline">Print / PDF</span>
-              </button>
-
-              <button
-                onClick={() => onToggleBookmark(lesson.id)}
-                className={`p-2.5 sm:px-4 rounded-xl border text-xs font-bold flex items-center gap-2 transition-all cursor-pointer ${
-                  isBookmarked
-                    ? 'bg-amber-400/20 border-amber-400/50 text-amber-300 shadow-xs'
-                    : 'bg-slate-800/80 dark:bg-[#141722] border-slate-700 dark:border-[#1f2536] text-slate-300 hover:bg-slate-700 hover:text-white'
-                }`}
-              >
-                {isBookmarked ? <BookmarkCheck className="w-4 h-4 text-amber-400 fill-amber-400/20" /> : <Bookmark className="w-4 h-4" />}
-                <span className="hidden sm:inline">{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
-              </button>
-
-              <button
-                onClick={() => onCompleteLesson(lesson.id)}
-                className={`px-4 py-2.5 rounded-xl text-xs font-black flex items-center gap-2 transition-all shadow-lg cursor-pointer ${
-                  isCompleted
-                    ? 'bg-emerald-500 hover:bg-emerald-400 text-white shadow-emerald-500/30'
-                    : 'bg-gradient-to-r from-amber-500 to-yellow-400 hover:from-amber-400 hover:to-yellow-300 text-slate-950 shadow-amber-500/20'
-                }`}
-              >
-                <CheckCircle2 className="w-4 h-4" />
-                {isCompleted ? 'Completed ✓' : 'Mark as Complete'}
-              </button>
-            </div>
-          </div>
-
-          <div className="space-y-3">
-            <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white tracking-tight leading-[1.2]">
-              {lesson.title}
-            </h1>
-            <p className="text-base sm:text-lg text-slate-300 font-medium leading-relaxed max-w-3xl">
-              {lesson.tagline}
-            </p>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-3 pt-2 text-xs text-slate-300">
-            <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/70 dark:bg-[#141722] border border-slate-700/60 dark:border-[#1f2536] font-medium">
-              <Clock className="w-3.5 h-3.5 text-amber-400" /> {lesson.durationMinutes} min read
+    <article
+      id={`lesson-${lesson.id}`}
+      className="mx-auto w-full max-w-[1080px] min-w-0 space-y-12 px-4 py-8 sm:px-6 sm:py-12 lg:px-10"
+    >
+      {/* 1. Spacious Engineering Header Card */}
+      <section className="relative overflow-hidden rounded-2xl border border-app-border bg-app-surface p-6 sm:p-8 lg:p-10 shadow-sm space-y-8">
+        {/* Top Meta Bar */}
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-app-border pb-6">
+          <div className="flex flex-wrap items-center gap-2.5">
+            <span className="rounded-full border border-app-amber/60 bg-app-amber/10 px-3 py-1 font-mono text-xs font-bold uppercase tracking-wider text-app-amber">
+              Chapter {chapter.number}
             </span>
-            <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/70 dark:bg-[#141722] border border-slate-700/60 dark:border-[#1f2536] font-medium">
-              <Layers className="w-3.5 h-3.5 text-cyan-400" /> Interactive Visuals
-            </span>
-            <span className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-800/70 dark:bg-[#141722] border border-slate-700/60 dark:border-[#1f2536] font-medium">
-              <Code2 className="w-3.5 h-3.5 text-emerald-400" /> Live Sandbox
+            <span className="font-mono text-xs text-app-subtle">/</span>
+            <span className="font-mono text-xs font-semibold text-app-muted">
+              Lesson {lesson.number}
             </span>
           </div>
 
-          {/* Chapter Visual Progress Bar */}
-          <div id="chapter-progress-bar" className="p-4 sm:p-5 rounded-2xl bg-slate-800/60 dark:bg-[#07090e]/80 border border-slate-700/50 dark:border-[#1f2536] shadow-xs space-y-3 mt-4">
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              <div className="flex items-center gap-2">
-                <div className={`p-1.5 rounded-xl ${isChapterFullyCompleted ? 'bg-emerald-500/20 text-emerald-400' : 'bg-amber-500/20 text-amber-400'}`}>
-                  {isChapterFullyCompleted ? <Award className="w-4 h-4" /> : <TrendingUp className="w-4 h-4" />}
-                </div>
-                <div>
-                  <h2 className="text-xs font-black uppercase tracking-wider text-white flex items-center gap-1.5">
-                    <span>Chapter {chapter.number} Progress</span>
-                    <span className="text-slate-500 font-normal">•</span>
-                    <span className="text-slate-300 font-medium normal-case truncate max-w-[200px] sm:max-w-none">
-                      {chapter.title}
-                    </span>
-                  </h2>
-                </div>
-              </div>
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => onToggleBookmark(lesson.id)}
+              className={`flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all ${
+                isBookmarked
+                  ? 'border-app-amber bg-app-amber/15 text-app-amber shadow-xs'
+                  : 'border-app-border bg-app-inset text-app-muted hover:border-app-border hover:bg-app-active hover:text-app-ink'
+              }`}
+            >
+              {isBookmarked ? (
+                <BookmarkCheck className="h-4 w-4 fill-app-amber text-app-amber" />
+              ) : (
+                <Bookmark className="h-4 w-4" />
+              )}
+              <span className="hidden sm:inline">{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
+            </button>
 
-              <div className="flex items-center gap-2">
-                <span className={`text-xs font-mono font-bold px-3 py-1 rounded-full border ${
-                  isChapterFullyCompleted
-                    ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-300'
-                    : 'bg-amber-500/20 border-amber-500/40 text-amber-300'
-                }`}>
-                  {completedChapterLessons} of {totalChapterLessons} Lessons ({chapterProgressPercent}%)
-                </span>
-              </div>
-            </div>
-
-            {/* Visual Track */}
-            <div className="w-full h-3 bg-slate-900 rounded-full overflow-hidden p-0.5 border border-slate-700/60 shadow-inner">
-              <div
-                className={`h-full rounded-full transition-all duration-500 relative ${
-                  isChapterFullyCompleted
-                    ? 'bg-gradient-to-r from-emerald-500 to-teal-400 shadow-sm shadow-emerald-500/40'
-                    : 'bg-gradient-to-r from-amber-500 via-yellow-400 to-amber-300 shadow-sm shadow-amber-500/40'
-                }`}
-                style={{ width: `${chapterProgressPercent}%` }}
-              >
-                {chapterProgressPercent > 10 && (
-                  <div className="absolute inset-0 bg-white/20 animate-pulse rounded-full" />
-                )}
-              </div>
-            </div>
-
-            {/* Interactive Lesson Mini Step Nodes */}
-            <div className="pt-1 flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
-              {chapter.lessons.map((chLesson, idx) => {
-                const isChCompleted = !!completedLessons[chLesson.id] || (chLesson.id === lesson.id && isCompleted);
-                const isCurrent = chLesson.id === lesson.id;
-
-                return (
-                  <button
-                    key={chLesson.id}
-                    id={`progress-lesson-step-${chLesson.id}`}
-                    onClick={() => onNavigateLesson(chLesson.id)}
-                    title={`Lesson ${chLesson.number}: ${chLesson.title} (${isChCompleted ? 'Completed' : isCurrent ? 'Current' : 'Upcoming'})`}
-                    className={`px-3 py-1 rounded-xl text-[11px] font-mono font-bold flex items-center gap-1.5 transition-all cursor-pointer whitespace-nowrap shrink-0 ${
-                      isCurrent
-                        ? 'bg-gradient-to-r from-amber-500 to-yellow-400 text-slate-950 shadow-xs font-black'
-                        : isChCompleted
-                        ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 hover:bg-emerald-500/30'
-                        : 'bg-slate-800/80 text-slate-400 border border-slate-700/50 hover:bg-slate-700 hover:text-white'
-                    }`}
-                  >
-                    <span className="w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] font-black">
-                      {isChCompleted ? '✓' : idx + 1}
-                    </span>
-                    <span className="truncate max-w-[120px] sm:max-w-[180px]">{chLesson.title}</span>
-                    {isCurrent && (
-                      <span className="text-[9px] px-1 py-0.2 rounded-full bg-slate-950/20 text-slate-950 uppercase font-black">
-                        Active
-                      </span>
-                    )}
-                  </button>
-                );
-              })}
-            </div>
+            <button
+              type="button"
+              onClick={() => onCompleteLesson(lesson.id)}
+              className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all shadow-sm ${
+                isCompleted
+                  ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
+                  : 'bg-app-amber text-slate-950 hover:bg-app-amber-hover hover:shadow-app-amber/20'
+              }`}
+            >
+              <CheckCircle2 className="h-4 w-4" />
+              <span>{isCompleted ? 'Completed ✓' : 'Mark Complete (+50 XP)'}</span>
+            </button>
           </div>
         </div>
+
+        {/* Title and Tagline */}
+        <div className="space-y-4">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight text-app-ink leading-[1.15]">
+            {lesson.title}
+          </h1>
+          <p className="max-w-3xl text-base sm:text-lg leading-relaxed text-app-muted">
+            {lesson.tagline}
+          </p>
+        </div>
+
+        {/* Quick Lesson Metrics */}
+        <div className="flex flex-wrap items-center gap-2.5 pt-2 text-xs">
+          <span className="flex items-center gap-1.5 rounded-lg border border-app-border bg-app-inset px-3 py-1.5 font-mono text-app-muted">
+            <Clock className="h-3.5 w-3.5 text-app-amber" />
+            {lesson.durationMinutes} min read &amp; lab
+          </span>
+          <span className="flex items-center gap-1.5 rounded-lg border border-app-border bg-app-inset px-3 py-1.5 font-mono text-app-muted">
+            <Layers className="h-3.5 w-3.5 text-violet-400" />
+            Interactive 3D Lab
+          </span>
+          <span className="flex items-center gap-1.5 rounded-lg border border-app-border bg-app-inset px-3 py-1.5 font-mono text-app-muted">
+            <Zap className="h-3.5 w-3.5 text-emerald-400" />
+            Live Code Sandbox
+          </span>
+        </div>
+
+        {/* Interactive Chapter Stepper Progress Bar */}
+        <div className="rounded-xl border border-app-border bg-app-inset p-4 sm:p-5 space-y-3">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-app-ink">
+                Chapter {chapter.number} Track: {chapter.title}
+              </span>
+            </div>
+            <span className="font-mono text-xs font-bold text-app-amber">
+              {completedChapterLessons} / {totalChapterLessons} Lessons Finished ({chapterProgressPercent}%)
+            </span>
+          </div>
+
+          <div className="h-2 w-full overflow-hidden rounded-full bg-app-active">
+            <div
+              className="h-full rounded-full bg-app-amber transition-all duration-500"
+              style={{ width: `${chapterProgressPercent}%` }}
+            />
+          </div>
+
+          {/* Stepper nodes */}
+          <div className="flex items-center gap-1.5 overflow-x-auto pt-1 no-scrollbar">
+            {chapter.lessons.map((chLesson, idx) => {
+              const isChDone = !!completedLessons[chLesson.id] || (chLesson.id === lesson.id && isCompleted);
+              const isCurrent = chLesson.id === lesson.id;
+
+              return (
+                <button
+                  key={chLesson.id}
+                  type="button"
+                  onClick={() => onNavigateLesson(chLesson.id)}
+                  title={`Lesson ${chLesson.number}: ${chLesson.title}`}
+                  className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-mono transition-all ${
+                    isCurrent
+                      ? 'border-app-amber bg-app-amber text-slate-950 font-black shadow-xs'
+                      : isChDone
+                      ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold'
+                      : 'border-app-border bg-app-surface text-app-muted hover:border-app-border hover:text-app-ink'
+                  }`}
+                >
+                  <span>{isChDone ? '✓' : idx + 1}.</span>
+                  <span className="truncate max-w-[120px] sm:max-w-[180px]">{chLesson.title}</span>
+                </button>
+              );
+            })}
+          </div>
         </div>
       </section>
 
-      {/* Modern Sticky Section Tab Bar */}
-      <nav aria-label="Lesson Outline Tabs" className="sticky top-[104px] z-20 -mx-2 border-y border-app-border bg-app-canvas px-2 py-2 lg:top-16">
-        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5">
+      {/* 2. Sticky Section Quick-Nav Ribbon */}
+      <nav
+        aria-label="Lesson Section Navigation"
+        className="sticky top-16 z-20 -mx-2 rounded-xl border border-app-border bg-app-surface/90 backdrop-blur-md px-3 py-2 shadow-sm"
+      >
+        <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
           {sectionTabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeSection === tab.id;
             return (
               <button
                 key={tab.id}
+                type="button"
                 onClick={() => scrollToSection(tab.id)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-sm shadow-indigo-500/40 ring-1 ring-indigo-400'
-                    : 'bg-slate-100/80 dark:bg-slate-900/80 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 hover:text-slate-900 dark:hover:text-white'
+                    ? 'bg-app-active text-app-amber border border-app-amber/60 shadow-xs'
+                    : 'text-app-muted hover:bg-app-inset hover:text-app-ink border border-transparent'
                 }`}
               >
-                <Icon className="w-3.5 h-3.5" />
-                {tab.label}
+                <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-app-amber' : 'text-app-subtle'}`} />
+                <span>{tab.label}</span>
               </button>
             );
           })}
         </div>
       </nav>
 
-      {/* 2. Learning Objectives */}
-      <section id="section-objectives" className="p-5 rounded-2xl bg-gradient-to-r from-indigo-500/5 via-cyan-500/5 to-transparent border border-indigo-200/70 dark:border-indigo-900/40 space-y-3">
-        <h2 className="text-xs font-black uppercase tracking-wider text-indigo-700 dark:text-cyan-400 flex items-center gap-2">
-          <Compass className="w-4 h-4" />
-          Core Learning Objectives
+      {/* 3. Core Objectives */}
+      <section id="section-objectives" className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4">
+        <h2 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-app-amber">
+          <Compass className="h-4 w-4 text-app-amber" />
+          Engineering Objectives
         </h2>
-        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs text-slate-700 dark:text-slate-300">
+        <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs sm:text-sm text-app-ink">
           {lesson.learningObjectives.map((obj, i) => (
-            <li key={i} className="flex items-start gap-2 bg-white/60 dark:bg-slate-900/60 p-2.5 rounded-xl border border-slate-200/50 dark:border-slate-800/50">
-              <span className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center text-[10px] font-black shrink-0 mt-0.5">
+            <li
+              key={i}
+              className="flex items-start gap-2.5 rounded-lg border border-app-border bg-app-inset p-3"
+            >
+              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-emerald-500/20 text-emerald-400 font-mono text-xs font-black">
                 ✓
               </span>
-              <span className="font-medium">{obj}</span>
+              <span className="leading-relaxed font-medium">{obj}</span>
             </li>
           ))}
         </ul>
       </section>
 
-      {/* 3. Theory & Core Concepts */}
+      {/* 4. Theory & Core Concepts */}
       <section id="section-theory" className="space-y-6 pt-2">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-indigo-600 dark:text-cyan-400" />
-            Core Concepts & Theory
+        <div className="flex items-center justify-between border-b border-app-border pb-4">
+          <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+            <BookOpen className="h-5 w-5 text-app-amber" />
+            Core Concepts &amp; Mental Architecture
           </h2>
           <button
+            type="button"
             onClick={() => onOpenTutor(lesson.title)}
-            className="text-xs px-3 py-1.5 rounded-xl bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/60 dark:to-purple-950/60 border border-indigo-200 dark:border-indigo-800 text-indigo-700 dark:text-indigo-300 hover:brightness-105 flex items-center gap-1.5 font-bold cursor-pointer transition-all shadow-xs"
-            title="Ask 24/7 Tutor about this lesson"
+            className="flex items-center gap-1.5 rounded-lg border border-app-amber/60 bg-app-active px-3 py-1.5 text-xs font-bold text-app-amber hover:border-app-amber transition-all shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-600 dark:text-cyan-400" /> Ask Tutor
+            <Sparkles className="h-3.5 w-3.5 text-app-amber" />
+            <span>Ask Tutor</span>
           </button>
         </div>
 
-        <div className="space-y-6 text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+        <div className="space-y-8 text-sm sm:text-base text-app-ink leading-relaxed">
           {lesson.theorySections.map((sec, idx) => (
-            <div key={idx} className="space-y-3">
-              <h3 className="text-base font-bold text-slate-900 dark:text-white">
+            <div key={idx} className="space-y-4 rounded-xl border border-app-border bg-app-surface p-6">
+              <h3 className="text-lg font-bold text-app-ink">
                 {sec.heading}
               </h3>
-              <p>{sec.content}</p>
+              <p className="text-app-muted leading-relaxed">
+                {sec.content}
+              </p>
 
               {sec.bulletPoints && (
-                <ul className="list-disc list-inside space-y-1.5 pl-2 text-slate-600 dark:text-slate-300">
+                <ul className="space-y-2 pl-2 text-sm text-app-ink">
                   {sec.bulletPoints.map((bp, bIdx) => (
-                    <li key={bIdx}>{bp}</li>
+                    <li key={bIdx} className="flex items-start gap-2">
+                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-app-amber" />
+                      <span className="leading-relaxed">{bp}</span>
+                    </li>
                   ))}
                 </ul>
               )}
 
               {sec.callout && (
-                <div className="p-4 rounded-xl bg-indigo-50/80 dark:bg-indigo-950/40 border-l-4 border-indigo-500 text-xs text-indigo-950 dark:text-indigo-200 font-medium">
-                  <strong className="text-indigo-600 dark:text-cyan-400 font-bold">Key Takeaway:</strong> {sec.callout.text}
+                <div className="rounded-lg border-l-4 border-app-amber bg-app-inset p-4 text-xs sm:text-sm text-app-ink">
+                  <strong className="font-bold text-app-amber block mb-1">Key Takeaway:</strong>
+                  <span className="text-app-muted">{sec.callout.text}</span>
                 </div>
               )}
             </div>
@@ -412,72 +387,88 @@ export const LessonView: React.FC<LessonViewProps> = ({
         </div>
       </section>
 
-      {/* 4. Real-World Analogy */}
-      <section id="section-analogy" className="p-6 rounded-2xl bg-gradient-to-br from-amber-500/15 via-orange-500/5 to-transparent border border-amber-300/80 dark:border-amber-900/50 space-y-3 shadow-xs">
-        <div className="flex items-center gap-2 text-amber-800 dark:text-amber-300 font-black text-xs uppercase tracking-wider">
-          <Lightbulb className="w-5 h-5 text-amber-500 fill-amber-500/20" />
-          Real-World Mental Model • {lesson.realWorldAnalogy.title}
+      {/* 5. Real-World Mental Model / Analogy */}
+      <section
+        id="section-analogy"
+        className="rounded-2xl border border-amber-500/30 bg-app-surface p-6 sm:p-8 space-y-4 shadow-sm"
+      >
+        <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-app-amber">
+          <Lightbulb className="h-4 w-4 text-app-amber" />
+          Real-World Intuition · {lesson.realWorldAnalogy.title}
         </div>
-        <h3 className="text-base font-extrabold text-slate-900 dark:text-white">
+        <h3 className="text-xl font-bold text-app-ink">
           {lesson.realWorldAnalogy.concept}
         </h3>
-        <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed italic bg-white/50 dark:bg-slate-950/40 p-3.5 rounded-xl border border-amber-200/60 dark:border-amber-900/40">
+        <p className="rounded-xl border border-app-border bg-app-inset p-4 text-sm sm:text-base leading-relaxed italic text-app-muted">
           "{lesson.realWorldAnalogy.story}"
         </p>
-        <div className="pt-2 border-t border-amber-200/60 dark:border-amber-800/40 text-xs text-amber-900 dark:text-amber-200 font-bold flex items-center gap-1.5">
-          <Zap className="w-3.5 h-3.5 text-amber-500" /> Core Principle: {lesson.realWorldAnalogy.moral}
+        <div className="flex items-center gap-2 pt-2 border-t border-app-border font-mono text-xs font-bold text-app-amber">
+          <Zap className="h-4 w-4" />
+          <span>Core Principle: {lesson.realWorldAnalogy.moral}</span>
         </div>
       </section>
 
-      {/* 5. Interactive Visual Diagram */}
+      {/* 6. Interactive Visual Explainer */}
       <section id="section-visuals" className="space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <Layers className="w-5 h-5 text-cyan-600 dark:text-cyan-400" />
-            Interactive Visual Explainer
-          </h2>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-950/60 text-cyan-700 dark:text-cyan-300 font-mono font-bold uppercase">
-            Live Simulator
+        <div className="flex items-center justify-between border-b border-app-border pb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+              <Layers className="h-5 w-5 text-violet-400" />
+              Interactive Visual Explainer
+            </h2>
+            <p className="mt-1 text-xs text-app-muted">
+              Interact with the live simulator controls to build visual mental models.
+            </p>
+          </div>
+          <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-xs font-bold text-violet-400">
+            Live Instrument
           </span>
         </div>
         {renderVisualizer()}
       </section>
 
-      {/* 6. Upgraded Annotated Code Breakdown with IDE Tabs */}
+      {/* 7. Annotated Code Breakdown */}
       <section id="section-code" className="space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <Code2 className="w-5 h-5 text-indigo-600 dark:text-cyan-400" />
-            Annotated Code Breakdown
-          </h2>
+        <div className="flex items-center justify-between border-b border-app-border pb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+              <Code2 className="h-5 w-5 text-emerald-400" />
+              Annotated Code Breakdown
+            </h2>
+            <p className="mt-1 text-xs text-app-muted">
+              Inspect production-grade code structure with line-by-line architectural breakdown.
+            </p>
+          </div>
           <button
+            type="button"
             onClick={() => onOpenTutor(lesson.codeExample.title, lesson.codeExample.html + '\n' + lesson.codeExample.css)}
-            className="text-xs px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 font-mono flex items-center gap-1.5 cursor-pointer font-bold transition-all shadow-xs"
-            title="Ask 24/7 Tutor to explain this code snippet"
+            className="flex items-center gap-1.5 rounded-lg border border-app-border bg-app-inset px-3 py-1.5 text-xs font-bold text-app-ink hover:border-app-amber hover:text-app-amber transition-all shadow-xs"
           >
-            <Sparkles className="w-3.5 h-3.5 text-indigo-500 dark:text-cyan-400" /> Explain with Tutor
+            <Sparkles className="h-3.5 w-3.5 text-app-amber" />
+            <span>Explain with Tutor</span>
           </button>
         </div>
 
-        <div className="bg-slate-950 rounded-2xl overflow-hidden border border-slate-800 shadow-xl">
+        <div className="overflow-hidden rounded-2xl border border-app-border bg-slate-950 shadow-xl">
           {/* IDE Segmented Tabs */}
-          <div className="flex items-center justify-between px-3 bg-slate-900/90 border-b border-slate-800">
-            <div className="flex items-center gap-1.5 py-1.5">
+          <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-2">
+            <div className="flex items-center gap-1.5">
               {[
-                { id: 'html', label: 'index.html', badge: 'HTML5', color: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
-                { id: 'css', label: 'style.css', badge: 'CSS3', color: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' },
-                { id: 'js', label: 'script.js', badge: 'JS ES6', color: 'bg-amber-500/20 text-amber-400 border-amber-500/30' },
+                { id: 'html', label: 'index.html', badge: 'HTML5', tone: 'text-orange-400 bg-orange-500/10 border-orange-500/30' },
+                { id: 'css', label: 'style.css', badge: 'CSS3', tone: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
+                { id: 'js', label: 'script.js', badge: 'JS ES6', tone: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
               ].map((tab) => (
                 <button
                   key={tab.id}
+                  type="button"
                   onClick={() => setActiveCodeTab(tab.id as any)}
-                  className={`text-xs font-mono font-bold py-1.5 px-3 rounded-lg flex items-center gap-2 transition-all cursor-pointer ${
+                  className={`flex items-center gap-2 rounded-lg px-3 py-1.5 font-mono text-xs font-bold transition-all ${
                     activeCodeTab === tab.id
-                      ? 'bg-slate-800 text-white shadow-xs border border-slate-700 ring-1 ring-white/10'
-                      : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
+                      ? 'border border-slate-700 bg-slate-800 text-white shadow-xs'
+                      : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
                   }`}
                 >
-                  <span className={`text-[9px] px-1 rounded border font-mono font-extrabold ${tab.color}`}>
+                  <span className={`rounded border px-1 text-[9px] font-bold ${tab.tone}`}>
                     {tab.badge}
                   </span>
                   <span>{tab.label}</span>
@@ -486,39 +477,44 @@ export const LessonView: React.FC<LessonViewProps> = ({
             </div>
 
             <button
+              type="button"
               onClick={handleCopyCode}
-              className="text-xs font-mono text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer"
-              title="Copy code snippet"
+              className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-1.5 font-mono text-xs text-slate-300 transition-colors hover:bg-slate-700 hover:text-white"
             >
-              {copiedCode ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
-              <span>{copiedCode ? 'Copied!' : 'Copy'}</span>
+              {copiedCode ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
+              <span>{copiedCode ? 'Copied!' : 'Copy Code'}</span>
             </button>
           </div>
 
-          <div className="p-4 font-mono text-xs text-slate-100 overflow-x-auto bg-slate-950">
+          <div className="overflow-x-auto p-5 font-mono text-xs sm:text-sm text-slate-200 bg-slate-950">
             <pre>
               <code>
                 {activeCodeTab === 'html' && lesson.codeExample.html}
                 {activeCodeTab === 'css' && lesson.codeExample.css}
-                {activeCodeTab === 'js' && (lesson.codeExample.js || '// No JavaScript needed for this foundational concept')}
+                {activeCodeTab === 'js' && (lesson.codeExample.js || '// No JavaScript required for this architectural concept')}
               </code>
             </pre>
           </div>
 
-          {/* Breakdown Notes */}
-          <div className="p-4 bg-slate-900/80 border-t border-slate-800 space-y-2.5">
-            <h4 className="text-xs font-extrabold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-              <Terminal className="w-3.5 h-3.5 text-cyan-400" />
+          {/* Line-by-line annotations */}
+          <div className="space-y-3 border-t border-slate-800 bg-slate-900/60 p-5">
+            <h4 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-slate-400">
+              <Terminal className="h-4 w-4 text-emerald-400" />
               Line-by-Line Annotations
             </h4>
-            <div className="space-y-2">
+            <div className="grid gap-2 sm:grid-cols-2">
               {lesson.codeExample.breakdown.map((item, idx) => (
-                <div key={idx} className="text-xs bg-slate-950 p-3 rounded-xl border border-slate-800/80 hover:border-slate-700 transition-colors">
-                  <div className="flex items-center justify-between text-indigo-400 dark:text-cyan-300 font-mono font-bold">
+                <div
+                  key={idx}
+                  className="rounded-xl border border-slate-800 bg-slate-950 p-3.5 space-y-1 text-xs"
+                >
+                  <div className="flex items-center justify-between font-mono font-bold text-emerald-400">
                     <span>{item.title}</span>
-                    <span className="text-[11px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400">{item.lineRange}</span>
+                    <span className="rounded bg-slate-800 px-1.5 py-0.5 text-[10px] text-slate-400">
+                      {item.lineRange}
+                    </span>
                   </div>
-                  <p className="text-slate-300 mt-1 leading-relaxed">{item.explanation}</p>
+                  <p className="text-slate-300 leading-relaxed">{item.explanation}</p>
                 </div>
               ))}
             </div>
@@ -526,36 +522,22 @@ export const LessonView: React.FC<LessonViewProps> = ({
         </div>
       </section>
 
-      {/* 7. Video Masterclass */}
-      <section id="section-video" className="space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <Tv className="w-5 h-5 text-red-500" />
-            Video Masterclass & Synchronized Notes
-          </h2>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-red-100 dark:bg-red-950/60 text-red-700 dark:text-red-300 font-mono font-bold uppercase">
-            Audio Studio
-          </span>
-        </div>
-        <VideoPlayer
-          video={lesson.video}
-          currentLessonId={lesson.id}
-          relatedTopics={lesson.relatedTopics}
-          allChapters={allChapters}
-          onSelectLesson={onNavigateLesson}
-          onJumpToPractice={() => scrollToSection('section-practice')}
-          onJumpToVisualLab={() => scrollToSection('section-visuals')}
-        />
-      </section>
+      {/* Responsive In-Content Educational Ad Unit */}
+      <AdSenseSlot slotId={`lesson-mid-${lesson.id}`} format="horizontal" label="Educational Sponsor &amp; Tools" />
 
       {/* 8. Interactive Practice Sandbox */}
       <section id="section-practice" className="space-y-4">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200 dark:border-slate-800">
-          <h2 className="text-xl font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <Zap className="w-5 h-5 text-emerald-500 fill-emerald-500/20" />
-            Hands-On Practice Sandbox
-          </h2>
-          <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 font-mono font-bold uppercase">
+        <div className="flex items-center justify-between border-b border-app-border pb-4">
+          <div>
+            <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+              <Zap className="h-5 w-5 text-emerald-400" />
+              Hands-On Practice Sandbox
+            </h2>
+            <p className="mt-1 text-xs text-app-muted">
+              Solve the coding challenge with live preview and automated verification tests.
+            </p>
+          </div>
+          <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-bold text-emerald-400">
             Auto-Evaluated
           </span>
         </div>
@@ -566,255 +548,266 @@ export const LessonView: React.FC<LessonViewProps> = ({
         />
       </section>
 
-      {/* 9. Knowledge Checkpoint Quiz */}
-      <section id="section-quiz" className="p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-6 shadow-xs">
-        <div className="flex items-center justify-between pb-2 border-b border-slate-200/80 dark:border-slate-800/80">
+      {/* 9. Video Masterclass (if present) */}
+      {lesson.video && (
+        <section id="section-video" className="space-y-4">
+          <div className="flex items-center justify-between border-b border-app-border pb-4">
+            <div>
+              <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+                <Tv className="h-5 w-5 text-app-amber" />
+                Video Studio &amp; Timestamps
+              </h2>
+              <p className="mt-1 text-xs text-app-muted">
+                Visual walkthrough with synchronized notes and chapter markers.
+              </p>
+            </div>
+            <span className="rounded-full border border-app-amber/30 bg-app-amber/10 px-3 py-1 font-mono text-xs font-bold text-app-amber">
+              Video Masterclass
+            </span>
+          </div>
+          <VideoPlayer
+            video={lesson.video}
+            currentLessonId={lesson.id}
+            relatedTopics={lesson.relatedTopics}
+            allChapters={allChapters}
+            onSelectLesson={onNavigateLesson}
+            onJumpToPractice={() => scrollToSection('section-practice')}
+            onJumpToVisualLab={() => scrollToSection('section-visuals')}
+          />
+        </section>
+      )}
+
+      {/* 10. Checkpoint Quiz */}
+      <section
+        id="section-quiz"
+        className="rounded-2xl border border-app-border bg-app-surface p-6 sm:p-8 space-y-6 shadow-sm"
+      >
+        <div className="flex items-center justify-between border-b border-app-border pb-4">
           <div>
-            <h2 className="text-lg font-black text-slate-900 dark:text-white flex items-center gap-2">
-              <HelpCircle className="w-5 h-5 text-indigo-600 dark:text-cyan-400" />
-              Checkpoint Quiz
+            <h2 className="text-xl font-black text-app-ink flex items-center gap-2">
+              <HelpCircle className="h-5 w-5 text-app-amber" />
+              Checkpoint Sprint
             </h2>
-            <p className="text-xs text-slate-500 mt-0.5">Test your mastery of this lesson before advancing to the next topic.</p>
+            <p className="mt-1 text-xs text-app-muted">
+              Verify your architectural understanding before moving to the next concept.
+            </p>
           </div>
         </div>
 
         <div className="space-y-6">
           {lesson.quiz.map((q, qIdx) => (
             <div key={q.id} className="space-y-3">
-              <p className="text-sm font-bold text-slate-900 dark:text-white">
+              <p className="text-sm font-bold text-app-ink">
                 {qIdx + 1}. {q.question}
               </p>
               <div className="space-y-2">
                 {q.options.map((opt, optIdx) => {
                   const isSelected = selectedQuizAnswers[q.id] === optIdx;
                   const isCorrect = q.correctIndex === optIdx;
-                  let optionClass = 'border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-750';
+                  let optionClass = 'border-app-border bg-app-inset text-app-ink hover:bg-app-active';
 
                   if (quizSubmitted) {
                     if (isCorrect) {
-                      optionClass = 'border-emerald-500 bg-emerald-50 dark:bg-emerald-950/70 text-emerald-800 dark:text-emerald-200 font-bold ring-1 ring-emerald-500';
+                      optionClass = 'border-emerald-500 bg-emerald-500/15 text-emerald-400 font-bold ring-1 ring-emerald-500';
                     } else if (isSelected) {
-                      optionClass = 'border-red-500 bg-red-50 dark:bg-red-950/70 text-red-800 dark:text-red-200';
+                      optionClass = 'border-red-500 bg-red-500/15 text-red-400 font-medium';
                     }
                   } else if (isSelected) {
-                    optionClass = 'border-indigo-500 bg-indigo-50 dark:bg-indigo-950/70 text-indigo-800 dark:text-indigo-200 font-bold ring-2 ring-indigo-500/70';
+                    optionClass = 'border-app-amber bg-app-amber/15 text-app-amber font-bold ring-1 ring-app-amber';
                   }
 
                   return (
                     <button
                       key={optIdx}
+                      type="button"
                       onClick={() => handleQuizSelect(q.id, optIdx)}
-                      className={`w-full text-left p-3.5 rounded-xl border text-xs transition-all flex items-center justify-between cursor-pointer ${optionClass}`}
+                      className={`w-full text-left p-3.5 rounded-xl border text-xs transition-all flex items-center justify-between ${optionClass}`}
                     >
                       <span>{opt}</span>
-                      {quizSubmitted && isCorrect && <Check className="w-4 h-4 text-emerald-500 shrink-0 ml-2" />}
+                      {quizSubmitted && isCorrect && <Check className="h-4 w-4 text-emerald-400 shrink-0 ml-2" />}
                     </button>
                   );
                 })}
               </div>
 
               {quizSubmitted && (
-                <p className="text-xs text-indigo-950 dark:text-indigo-200 bg-indigo-50/80 dark:bg-indigo-950/40 p-3.5 rounded-xl border border-indigo-200 dark:border-indigo-900/40 font-medium">
-                  <strong>Explanation:</strong> {q.explanation}
-                </p>
+                <div className="rounded-xl border border-app-border bg-app-inset p-3.5 text-xs text-app-ink space-y-1">
+                  <strong className="text-app-amber font-bold block">Explanation:</strong>
+                  <span className="text-app-muted leading-relaxed">{q.explanation}</span>
+                </div>
               )}
             </div>
           ))}
         </div>
 
-        <div className="pt-2">
+        <div className="pt-2 border-t border-app-border">
           {!quizSubmitted ? (
             <button
+              type="button"
               onClick={() => setQuizSubmitted(true)}
               disabled={Object.keys(selectedQuizAnswers).length === 0}
-              className="w-full py-3 rounded-xl bg-indigo-600 hover:bg-indigo-500 disabled:opacity-50 text-white font-extrabold text-xs transition-colors shadow-md shadow-indigo-500/30 cursor-pointer"
+              className="w-full py-3 rounded-xl bg-app-amber hover:bg-app-amber-hover disabled:opacity-50 text-slate-950 font-black text-xs transition-colors shadow-sm"
             >
-              Submit Checkpoint Answers
+              Submit Checkpoint Answers (+30 XP)
             </button>
           ) : (
             <button
+              type="button"
               onClick={() => {
                 setSelectedQuizAnswers({});
                 setQuizSubmitted(false);
               }}
-              className="w-full py-3 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-bold cursor-pointer"
+              className="w-full py-3 rounded-xl border border-app-border bg-app-inset text-app-ink hover:bg-app-active text-xs font-bold"
             >
-              Retry Quiz
+              Retry Quiz Sprint
             </button>
           )}
         </div>
       </section>
 
-      {/* 9.5 Post-Class Activities & Practice Hub */}
+      {/* 11. Post-Class Activities & Drills */}
       {(() => {
         const lessonDeck = getActivityDeckForLesson(lesson.id);
         const overallDiff = lessonDeck.overallDifficulty || 'Beginner';
         return (
           <section
             id="section-activities"
-            className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-emerald-500/10 via-teal-500/5 to-indigo-500/10 border border-emerald-400/40 dark:border-emerald-700/40 space-y-5 shadow-lg"
+            className="rounded-2xl border border-cyan-500/30 bg-app-surface p-6 sm:p-8 space-y-5 shadow-sm"
           >
-            <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center justify-between gap-4">
               <div className="flex items-center gap-3">
-                <span className="p-2.5 rounded-2xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  <GraduationCap className="w-6 h-6 text-emerald-400" />
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-400">
+                  <GraduationCap className="h-5 w-5" />
                 </span>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono font-bold uppercase px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      Post-Class Mastery
+                    <span className="rounded-md bg-cyan-500/15 px-2 py-0.5 font-mono text-[10px] font-bold text-cyan-400">
+                      POST-CLASS DRILLS
                     </span>
                     <DifficultyBadge level={overallDiff} size="sm" />
-                    <span className="text-[10px] font-bold text-amber-400">+120 XP Available</span>
+                    <span className="font-mono text-[11px] font-bold text-app-amber">+120 XP</span>
                   </div>
-                  <h2 className="text-lg sm:text-xl font-black text-slate-900 dark:text-white mt-1">
-                    Post-Class Activities & Practice Lab
+                  <h2 className="text-xl font-bold text-app-ink mt-1">
+                    Reinforce Memory with Interactive Drills
                   </h2>
                 </div>
               </div>
 
               {onNavigateActivities && (
                 <button
+                  type="button"
                   onClick={() => onNavigateActivities(lesson.id)}
-                  className="px-4 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs flex items-center gap-2 shadow-lg shadow-emerald-600/30 transition-all cursor-pointer group"
+                  className="inline-flex items-center gap-2 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-black text-xs px-4 py-2.5 shadow-sm transition-all"
                 >
                   <span>Launch Full Activity Deck</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="h-4 w-4" />
                 </button>
               )}
             </div>
 
-            <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-medium">
-              Reinforce everything you just learned in <strong>Lesson {lesson.number}</strong> with active recall flashcards, bug hunting puzzles, and code sequencing exercises.
+            <p className="text-xs sm:text-sm text-app-muted leading-relaxed">
+              Lock in your memory for <strong>Lesson {lesson.number}</strong> with active recall flashcards, spot-the-bug puzzles, and rapid sprint checks.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
-              <div className="p-3.5 rounded-2xl bg-white/80 dark:bg-[#090d16] border border-emerald-200/80 dark:border-[#1c2438] space-y-1">
-                <div className="flex items-center justify-between gap-1 text-xs font-bold text-slate-900 dark:text-white">
-                  <div className="flex items-center gap-2">
-                    <Layers className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>🗂️ Active Recall Cards</span>
-                  </div>
+              <div className="rounded-xl border border-app-border bg-app-inset p-4 space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-bold text-app-ink">
+                  <span className="flex items-center gap-1.5">
+                    <Layers className="h-3.5 w-3.5 text-app-amber" />
+                    Recall Cards
+                  </span>
                   <DifficultyBadge level={lessonDeck.flashcards[0]?.difficulty || 'Beginner'} size="sm" showIcon={false} />
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Flip through 5 key concept and syntax flashcards to lock in memory.
+                <p className="text-[11px] text-app-muted">
+                  Flip 5 active recall flashcards to solidify key syntax and rules.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white/80 dark:bg-[#090d16] border border-emerald-200/80 dark:border-[#1c2438] space-y-1">
-                <div className="flex items-center justify-between gap-1 text-xs font-bold text-slate-900 dark:text-white">
-                  <div className="flex items-center gap-2">
-                    <Bug className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>🐛 Bug Hunter Puzzle</span>
-                  </div>
+              <div className="rounded-xl border border-app-border bg-app-inset p-4 space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-bold text-app-ink">
+                  <span className="flex items-center gap-1.5">
+                    <Bug className="h-3.5 w-3.5 text-emerald-400" />
+                    Bug Hunter
+                  </span>
                   <DifficultyBadge level={lessonDeck.bugHunt.difficulty === 'Hard' ? 'Advanced' : lessonDeck.bugHunt.difficulty === 'Medium' ? 'Intermediate' : 'Beginner'} size="sm" showIcon={false} />
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Spot and fix the deliberate syntax error in live code editor.
+                <p className="text-[11px] text-app-muted">
+                  Debug and fix broken code in live interactive IDE.
                 </p>
               </div>
 
-              <div className="p-3.5 rounded-2xl bg-white/80 dark:bg-[#090d16] border border-emerald-200/80 dark:border-[#1c2438] space-y-1">
-                <div className="flex items-center justify-between gap-1 text-xs font-bold text-slate-900 dark:text-white">
-                  <div className="flex items-center gap-2">
-                    <Zap className="w-3.5 h-3.5 text-amber-400" />
-                    <span>⚡ Speed Recall Sprint</span>
-                  </div>
+              <div className="rounded-xl border border-app-border bg-app-inset p-4 space-y-1.5">
+                <div className="flex items-center justify-between text-xs font-bold text-app-ink">
+                  <span className="flex items-center gap-1.5">
+                    <Zap className="h-3.5 w-3.5 text-cyan-400" />
+                    Speed Sprint
+                  </span>
                   <DifficultyBadge level={lessonDeck.speedQuiz[0]?.difficulty || 'Intermediate'} size="sm" showIcon={false} />
                 </div>
-                <p className="text-[11px] text-slate-500 dark:text-slate-400">
-                  Fast-paced rapid check to verify concept retention before moving on.
+                <p className="text-[11px] text-app-muted">
+                  Fast-paced rapid questions to evaluate concept retention.
                 </p>
               </div>
             </div>
-
-            {onNavigateActivities && (
-              <div className="pt-1 flex items-center justify-between border-t border-emerald-500/20 text-xs">
-                <span className="text-emerald-800 dark:text-emerald-300 font-bold">
-                  Ready to practice?
-                </span>
-                <button
-                  onClick={() => onNavigateActivities(lesson.id)}
-                  className="text-xs font-extrabold text-emerald-600 dark:text-emerald-400 hover:underline flex items-center gap-1 cursor-pointer"
-                >
-                  Start Lesson Activities ➔
-                </button>
-              </div>
-            )}
           </section>
         );
       })()}
 
-      {/* 10. Student Notes Drawer */}
-      <section id="section-notes" className="p-5 sm:p-6 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 space-y-3">
+      {/* 12. Student Notes Scratchpad */}
+      <section id="section-notes" className="rounded-xl border border-app-border bg-app-surface p-6 space-y-3">
         <div className="flex items-center justify-between">
-          <h3 className="text-sm font-black text-slate-900 dark:text-white flex items-center gap-2">
-            <FileEdit className="w-4 h-4 text-indigo-600 dark:text-cyan-400" />
-            My Lesson Notes
+          <h3 className="text-sm font-bold text-app-ink flex items-center gap-2">
+            <FileEdit className="h-4 w-4 text-app-amber" />
+            Engineering Scratchpad &amp; Notes
           </h3>
           <button
+            type="button"
             onClick={handleSaveNote}
-            className="text-xs px-3.5 py-1.5 rounded-xl bg-indigo-600 text-white hover:bg-indigo-500 flex items-center gap-1.5 font-bold transition-all shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 rounded-lg bg-app-amber px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-app-amber-hover transition-all shadow-xs"
           >
-            {noteSaved ? <Check className="w-3.5 h-3.5" /> : <Save className="w-3.5 h-3.5" />}
-            {noteSaved ? 'Saved!' : 'Save Note'}
+            {noteSaved ? <Check className="h-3.5 w-3.5" /> : <Save className="h-3.5 w-3.5" />}
+            <span>{noteSaved ? 'Saved!' : 'Save Note'}</span>
           </button>
         </div>
         <textarea
           value={noteText}
           onChange={(e) => setNoteText(e.target.value)}
-          placeholder="Write down personal notes, syntax cheat notes, or questions here..."
-          className="w-full h-24 p-3.5 text-xs rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 resize-none font-mono"
+          placeholder="Jot down architectural takeaways, syntax cheatsheets, or personal doubts..."
+          className="w-full h-24 p-3.5 text-xs rounded-xl border border-app-border bg-app-inset text-app-ink outline-none focus:border-app-amber focus:ring-1 focus:ring-app-amber resize-none font-mono"
         />
       </section>
 
-      {/* 11. Key Takeaways & Summary */}
-      <section id="section-summary" className="p-6 rounded-2xl bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-transparent border border-emerald-300/80 dark:border-emerald-900/40 space-y-3 shadow-xs">
-        <h2 className="text-base font-black text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
-          <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-          Lesson Summary & Key Takeaways
+      {/* 13. Summary & Key Takeaways */}
+      <section id="section-summary" className="rounded-xl border border-emerald-500/30 bg-app-surface p-6 space-y-3">
+        <h2 className="text-base font-bold text-emerald-400 flex items-center gap-2">
+          <CheckCircle2 className="h-5 w-5 text-emerald-400" />
+          Lesson Summary &amp; Key Takeaways
         </h2>
-        <ul className="list-disc list-inside space-y-1.5 text-xs text-emerald-950 dark:text-emerald-200 font-medium">
+        <ul className="space-y-2 text-xs sm:text-sm text-app-ink">
           {lesson.summary.map((sum, i) => (
-            <li key={i}>{sum}</li>
+            <li key={i} className="flex items-start gap-2">
+              <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-400" />
+              <span className="leading-relaxed">{sum}</span>
+            </li>
           ))}
         </ul>
       </section>
 
-      {/* 12. Related Topics Reference */}
-      {lesson.relatedTopics.length > 0 && (
-        <section id="section-related" className="space-y-3">
-          <h3 className="text-xs font-black text-slate-400 uppercase tracking-wider">
-            Related Curriculum References
-          </h3>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-            {lesson.relatedTopics.map((rel, idx) => (
-              <div key={idx} className="p-4 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-xs shadow-xs hover:border-indigo-400/50 transition-colors">
-                <div className="font-bold text-slate-900 dark:text-white flex items-center justify-between">
-                  <span>{rel.title}</span>
-                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-slate-100 dark:bg-slate-800 text-slate-500 font-bold">
-                    Ch {rel.chapterNumber}
-                  </span>
-                </div>
-                <p className="text-slate-500 dark:text-slate-400 mt-1 text-[11px] leading-snug">{rel.context}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 13. Navigation Buttons (Previous / Next) */}
-      <nav aria-label="Lesson Navigation" className="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between gap-4">
+      {/* 14. Chapter Navigation Footer */}
+      <nav
+        aria-label="Next and Previous Lessons"
+        className="flex flex-wrap items-center justify-between gap-4 border-t border-app-border pt-8"
+      >
         {prevLesson ? (
           <button
+            type="button"
             onClick={() => onNavigateLesson(prevLesson.id)}
-            className="text-xs px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 font-bold flex items-center gap-2 cursor-pointer transition-colors"
+            className="flex items-center gap-3 rounded-xl border border-app-border bg-app-surface px-4 py-3 text-left transition-all hover:border-app-amber hover:bg-app-active"
           >
-            <ChevronLeft className="w-4 h-4" />
-            <div className="text-left">
-              <div className="text-[10px] text-slate-400 font-normal">Previous Lesson</div>
-              <span>{prevLesson.title}</span>
+            <ChevronLeft className="h-5 w-5 text-app-subtle" />
+            <div>
+              <span className="font-mono text-[10px] text-app-subtle block">Previous Lesson</span>
+              <span className="text-xs font-bold text-app-ink">{prevLesson.title}</span>
             </div>
           </button>
         ) : (
@@ -823,31 +816,27 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
         {nextLesson ? (
           <button
+            type="button"
             onClick={() => onNavigateLesson(nextLesson.id)}
-            className="text-xs px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-extrabold flex items-center gap-2 shadow-md shadow-indigo-500/30 cursor-pointer transition-all"
+            className="flex items-center gap-3 rounded-xl bg-app-amber px-5 py-3 text-right text-slate-950 transition-all hover:bg-app-amber-hover shadow-sm"
           >
-            <div className="text-right">
-              <div className="text-[10px] opacity-80 font-normal">Next Lesson</div>
-              <span>{nextLesson.title}</span>
+            <div>
+              <span className="font-mono text-[10px] font-bold uppercase opacity-80 block">Next Lesson</span>
+              <span className="text-xs font-black">{nextLesson.title}</span>
             </div>
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="h-5 w-5" />
           </button>
         ) : (
           <button
+            type="button"
             onClick={() => onCompleteLesson(lesson.id)}
-            className="text-xs px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold flex items-center gap-2 shadow-md shadow-emerald-500/30 cursor-pointer transition-all"
+            className="flex items-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-slate-950 font-black text-xs shadow-sm transition-all"
           >
-            <span>Finish Chapter</span>
-            <CheckCircle2 className="w-4 h-4" />
+            <span>Finish Chapter Masterclass</span>
+            <CheckCircle2 className="h-4 w-4" />
           </button>
         )}
       </nav>
-
-      {/* Printable Document Footer (Visible only on Print / PDF) */}
-      <div className="hidden print-footer-banner">
-        <span>Lesson {lesson.number}: {lesson.title} • WebZone Curriculum</span>
-        <span>Generated for offline studying</span>
-      </div>
     </article>
   );
 };

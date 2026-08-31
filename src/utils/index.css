@@ -24,38 +24,38 @@
   :root,
   html.dark {
     color-scheme: dark;
-    --app-canvas: #070a12;
-    --app-surface: #101624;
-    --app-active: #182238;
-    --app-inset: #0c1320;
-    --app-border: #263148;
-    --app-ink: #f4f6fb;
-    --app-muted: #b7c0d2;
-    --app-subtle: #8490a5;
-    --app-amber: #f6b900;
-    --app-amber-hover: #ffd054;
-    --app-focus: #ffd054;
-    --app-lesson-strip: #dde5f1;
-    --app-lesson-strip-ink: #111827;
-    --app-panel-shadow: 0 18px 36px -28px rgb(0 0 0 / 0.9);
+    --app-canvas: #030305;
+    --app-surface: #0a0b10;
+    --app-active: #131622;
+    --app-inset: #050608;
+    --app-border: #1a1e2b;
+    --app-ink: #f8fafc;
+    --app-muted: #94a3b8;
+    --app-subtle: #64748b;
+    --app-amber: #f59e0b;
+    --app-amber-hover: #fbbf24;
+    --app-focus: #fbbf24;
+    --app-lesson-strip: #0a0b10;
+    --app-lesson-strip-ink: #f8fafc;
+    --app-panel-shadow: 0 18px 36px -28px rgb(0 0 0 / 0.98);
   }
 
   html.light {
     color-scheme: light;
-    --app-canvas: #e9eef6;
-    --app-surface: #f9fbff;
-    --app-active: #eef3fa;
-    --app-inset: #e1e8f2;
-    --app-border: #cbd5e3;
-    --app-ink: #111827;
-    --app-muted: #526078;
-    --app-subtle: #6b778d;
-    --app-amber: #b87900;
-    --app-amber-hover: #9a6500;
-    --app-focus: #182238;
-    --app-lesson-strip: #182238;
-    --app-lesson-strip-ink: #ffffff;
-    --app-panel-shadow: 0 18px 36px -30px rgb(48 63 88 / 0.28);
+    --app-canvas: #f6f3eb;
+    --app-surface: #fdfbf7;
+    --app-active: #eee8dc;
+    --app-inset: #f0ece2;
+    --app-border: #ded8cb;
+    --app-ink: #1f1d1a;
+    --app-muted: #5f5a50;
+    --app-subtle: #878072;
+    --app-amber: #b45309;
+    --app-amber-hover: #92400e;
+    --app-focus: #b45309;
+    --app-lesson-strip: #25221c;
+    --app-lesson-strip-ink: #faf8f5;
+    --app-panel-shadow: 0 16px 32px -24px rgb(58 45 28 / 0.12);
   }
 
   *,

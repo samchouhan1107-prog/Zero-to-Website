@@ -3,9 +3,12 @@ import {
   BookOpen,
   Check,
   Download,
+  Lock,
   Moon,
   RotateCcw,
+  Scale,
   Settings,
+  Shield,
   Sun,
   Type,
   Upload,
@@ -25,6 +28,7 @@ interface SettingsModalProps {
   onSelectFontFamily: (font: 'sans' | 'serif' | 'mono') => void;
   onResetProgress: () => void;
   progress: UserProgress;
+  onOpenLegal?: (tab: 'privacy' | 'terms' | 'cookies' | 'about' | 'contact') => void;
 }
 
 type ThemeOption = {
@@ -45,10 +49,10 @@ const themeOptions: ThemeOption[] = [
   },
   {
     id: 'light',
-    label: 'Light reading',
-    description: 'Crisp paper-like surfaces for bright environments.',
+    label: 'Warm cream reading',
+    description: 'Gentle warm cream and linen surfaces soothing on the eyes.',
     icon: Sun,
-    swatchClass: 'bg-slate-100 border-slate-300',
+    swatchClass: 'bg-[#f6f3eb] border-[#ded8cb]',
   },
 ];
 
@@ -75,6 +79,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   onSelectFontFamily,
   onResetProgress,
   progress,
+  onOpenLegal,
 }) => {
   useEffect(() => {
     if (!isOpen) return;
@@ -261,9 +266,55 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             </div>
           </section>
 
+          {onOpenLegal && (
+            <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="compliance-heading">
+              <div>
+                <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">05 / Trust &amp; Compliance</p>
+                <h3 id="compliance-heading" className="mt-1 flex items-center gap-2 text-base font-bold text-app-ink">
+                  <Shield className="h-4 w-4 text-app-amber" aria-hidden="true" /> Privacy &amp; Ad Policies
+                </h3>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenLegal('privacy');
+                  }}
+                  className="flex items-center gap-2 rounded-control border border-app-border bg-app-inset p-3 text-xs font-bold text-app-ink hover:border-app-amber hover:bg-app-active transition-colors"
+                >
+                  <Lock className="h-3.5 w-3.5 text-app-amber" />
+                  <span>Privacy Policy</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenLegal('terms');
+                  }}
+                  className="flex items-center gap-2 rounded-control border border-app-border bg-app-inset p-3 text-xs font-bold text-app-ink hover:border-app-amber hover:bg-app-active transition-colors"
+                >
+                  <Scale className="h-3.5 w-3.5 text-app-amber" />
+                  <span>Terms of Use</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    onClose();
+                    onOpenLegal('cookies');
+                  }}
+                  className="flex items-center gap-2 rounded-control border border-app-border bg-app-inset p-3 text-xs font-bold text-app-ink hover:border-app-amber hover:bg-app-active transition-colors"
+                >
+                  <Shield className="h-3.5 w-3.5 text-app-amber" />
+                  <span>Cookie Policy</span>
+                </button>
+              </div>
+            </section>
+          )}
+
           <section className="space-y-3 border-t border-app-border pt-6" aria-labelledby="data-heading">
             <div>
-              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">05 / Your data</p>
+              <p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">06 / Your data</p>
               <h3 id="data-heading" className="mt-1 text-base font-bold text-app-ink">Back up or reset progress</h3>
             </div>
             <div className="flex flex-wrap gap-2">

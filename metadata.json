@@ -1,6 +1,6 @@
 {
   "name": "WZ Storehouse",
-  "description": "Interactive digital web development textbook with visual diagrams, video lessons, and hands-on coding practice sandboxes.",
+  "description": "Interactive web engineering learning platform with real-time coding sandboxes, 3D visual lab instruments, AI code tutoring, and curriculum roadmap.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
