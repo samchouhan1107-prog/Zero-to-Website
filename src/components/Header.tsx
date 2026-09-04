@@ -164,12 +164,19 @@ export const Header: React.FC<HeaderProps> = ({
           <div className="flex items-center gap-3 shrink-0">
             <button
               type="button"
-              onClick={() => setMobileMenuOpen((prev) => !prev)}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#27272a] bg-[#18181c] text-[#a1a1aa] transition-colors hover:bg-[#222228] hover:text-white lg:hidden"
-              aria-label="Toggle navigation menu"
-              aria-expanded={mobileMenuOpen}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                if (onToggleSidebar) {
+                  onToggleSidebar();
+                } else {
+                  setMobileMenuOpen((prev) => !prev);
+                }
+              }}
+              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#27272a] bg-[#18181c] text-[#a1a1aa] transition-colors hover:border-blue-500/50 hover:bg-[#222228] hover:text-white"
+              aria-label="Toggle curriculum sidebar"
+              title="Toggle curriculum sidebar"
             >
-              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+              <Menu className="h-4 w-4" />
             </button>
 
             <button

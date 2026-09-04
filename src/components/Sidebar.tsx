@@ -129,7 +129,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         <button
           type="button"
           onClick={onCloseMobile}
-          className="fixed inset-0 z-40 bg-slate-950/75 backdrop-blur-xs transition-opacity lg:hidden"
+          className="fixed inset-0 z-40 bg-slate-950/75 backdrop-blur-xs transition-opacity"
           aria-label="Close course outline"
         />
       )}
@@ -138,7 +138,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
       <aside
         id="curriculum-sidebar"
         aria-label="Course outline and curriculum navigation"
-        className={`fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-[min(320px,calc(100vw-16px))] min-w-0 -translate-x-full flex-col border-r border-app-border bg-app-surface text-app-ink shadow-2xl transition-transform duration-200 lg:static lg:z-auto lg:h-[100dvh] lg:w-full lg:translate-x-0 lg:shadow-none ${
+        className={`fixed inset-y-0 left-0 z-50 flex h-[100dvh] w-[min(340px,calc(100vw-16px))] min-w-0 -translate-x-full flex-col border-r border-app-border bg-app-surface text-app-ink shadow-2xl transition-transform duration-200 ${
           isOpen ? 'translate-x-0' : ''
         }`}
       >
@@ -491,7 +491,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 </span>
                 <div className="min-w-0">
                   <span className="block truncate text-xs font-bold text-app-ink group-hover:text-app-amber transition-colors">
-                    24/7 AI Code Tutor
+                    Sameer Chouhan — Code Tutor
                   </span>
                   <span className="block truncate text-[10px] text-app-muted">
                     Ask doubts &amp; live guidance

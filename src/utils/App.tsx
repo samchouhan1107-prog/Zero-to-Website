@@ -349,7 +349,7 @@ export default function App() {
   return (
     <div
       id="wz-storehouse-app"
-      className={`grid h-[100dvh] min-w-0 grid-cols-1 overflow-hidden bg-app-canvas text-app-ink lg:grid-cols-[320px_minmax(0,1fr)] ${fontClass}`}
+      className={`flex h-[100dvh] min-w-0 flex-col overflow-hidden bg-app-canvas text-app-ink ${fontClass}`}
     >
       {/* Sidebar Navigation */}
       <Sidebar
