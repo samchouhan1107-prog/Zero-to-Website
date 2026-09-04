@@ -3,6 +3,7 @@ import path from "path";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
+import { CHAPTERS_DATA } from "./src/data/chaptersData";
 
 dotenv.config();
 
@@ -30,6 +31,85 @@ function getAi(): GoogleGenAI | null {
 // API Routes
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
+});
+
+// Dynamic Sitemap Generator listing all chapters, lessons, tools, and pages
+app.get("/sitemap.xml", (req, res) => {
+  const host = req.get("host") || "webzonebw.com";
+  const protocol =
+    req.protocol === "https" || req.get("x-forwarded-proto") === "https"
+      ? "https"
+      : "http";
+  const baseUrl = `${protocol}://${host}`;
+  const today = new Date().toISOString().split("T")[0];
+
+  let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+  xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"\n`;
+  xml += `        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n`;
+  xml += `        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9\n`;
+  xml += `        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">\n\n`;
+
+  const addEntry = (
+    url: string,
+    priority: string,
+    changefreq: string = "weekly"
+  ) => {
+    xml += `  <url>\n`;
+    xml += `    <loc>${url}</loc>\n`;
+    xml += `    <lastmod>${today}</lastmod>\n`;
+    xml += `    <changefreq>${changefreq}</changefreq>\n`;
+    xml += `    <priority>${priority}</priority>\n`;
+    xml += `  </url>\n`;
+  };
+
+  // Primary Landing Page
+  addEntry(`${baseUrl}/`, "1.0", "daily");
+
+  // Core Developer Tools & Visualizers
+  addEntry(`${baseUrl}/?view=practice-hub`, "0.95");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=box`, "0.90");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=flex`, "0.90");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=grid`, "0.90");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=dom`, "0.90");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=net`, "0.90");
+  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=git`, "0.90");
+  addEntry(`${baseUrl}/?view=activities`, "0.85");
+
+  // All Chapters
+  for (const chapter of CHAPTERS_DATA) {
+    addEntry(`${baseUrl}/?chapter=${chapter.id}`, "0.85", "weekly");
+
+    // All Lessons within Chapter
+    for (const lesson of chapter.lessons) {
+      addEntry(`${baseUrl}/?lesson=${lesson.id}`, "0.80", "monthly");
+    }
+  }
+
+  // Legal Compliance & Policy Pages
+  addEntry(`${baseUrl}/?legal=privacy`, "0.60", "monthly");
+  addEntry(`${baseUrl}/?legal=terms`, "0.60", "monthly");
+  addEntry(`${baseUrl}/?legal=cookies`, "0.60", "monthly");
+  addEntry(`${baseUrl}/?legal=about`, "0.60", "monthly");
+  addEntry(`${baseUrl}/?legal=contact`, "0.60", "monthly");
+
+  xml += `</urlset>`;
+
+  res.header("Content-Type", "application/xml; charset=utf-8");
+  res.send(xml);
+});
+
+// Search Engine Crawling Directives
+app.get("/robots.txt", (req, res) => {
+  const host = req.get("host") || "webzonebw.com";
+  const protocol =
+    req.protocol === "https" || req.get("x-forwarded-proto") === "https"
+      ? "https"
+      : "http";
+  const baseUrl = `${protocol}://${host}`;
+
+  const robots = `# WebZoneBW SC Search Engine Directives\nUser-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`;
+  res.header("Content-Type", "text/plain; charset=utf-8");
+  res.send(robots);
 });
 
 // Resilient Gemini generateContent helper with model fallback and retries
@@ -271,7 +351,12 @@ Return a helpful review response in JSON format with these exact keys:
 });
 
 async function startServer() {
-  if (process.env.NODE_ENV !== "production") {
+  const isProduction =
+    process.env.NODE_ENV === "production" ||
+    process.argv[1]?.includes("dist") ||
+    process.argv[1]?.endsWith(".cjs");
+
+  if (!isProduction) {
     const vite = await createViteServer({
       server: { middlewareMode: true },
       appType: "spa",

@@ -1,0 +1,6 @@
+# WebZoneBW SC Search Engine Directives
+User-agent: *
+Allow: /
+
+# Sitemap definition
+Sitemap: https://webzonebw.com/sitemap.xml

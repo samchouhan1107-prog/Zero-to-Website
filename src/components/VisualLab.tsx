@@ -7,7 +7,7 @@ import { DomTreeVisualizer } from './visualizers/DomTreeVisualizer';
 import { GitFlowVisualizer } from './visualizers/GitFlowVisualizer';
 import { NetworkFlowVisualizer } from './visualizers/NetworkFlowVisualizer';
 
-type VisualizerId = 'box' | 'flex' | 'grid' | 'dom' | 'git' | 'net';
+export type VisualizerId = 'box' | 'flex' | 'grid' | 'dom' | 'git' | 'net';
 
 type VisualizerTool = {
   id: VisualizerId;
@@ -27,8 +27,18 @@ const tools: VisualizerTool[] = [
   { id: 'net', name: 'HTTP & DNS flow', shortName: 'Network trace', icon: Globe, description: 'Client, DNS, server, and asset requests.', tone: 'text-emerald-400' },
 ];
 
-export const VisualLab: React.FC = () => {
-  const [activeVisualizer, setActiveVisualizer] = useState<VisualizerId>('box');
+interface VisualLabProps {
+  initialTool?: VisualizerId;
+}
+
+export const VisualLab: React.FC<VisualLabProps> = ({ initialTool = 'box' }) => {
+  const [activeVisualizer, setActiveVisualizer] = useState<VisualizerId>(initialTool);
+
+  React.useEffect(() => {
+    if (initialTool) {
+      setActiveVisualizer(initialTool);
+    }
+  }, [initialTool]);
   const activeTool = tools.find((tool) => tool.id === activeVisualizer) || tools[0];
 
   return (

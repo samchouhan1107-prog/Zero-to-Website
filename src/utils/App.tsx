@@ -10,7 +10,7 @@ import { Header } from '../components/Header';
 import { HomeHero } from '../components/HomeHero';
 import { LessonView } from '../components/LessonView';
 import { PracticeHub } from '../components/PracticeHub';
-import { VisualLab } from '../components/VisualLab';
+import { VisualLab, VisualizerId } from '../components/VisualLab';
 import { ActivitiesView } from '../components/ActivitiesView';
 import { SearchModal } from '../components/SearchModal';
 import { TutorModal } from '../components/TutorModal';
@@ -83,6 +83,16 @@ export default function App() {
   });
   const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
   const [fontFamily, setFontFamily] = useState<'sans' | 'serif' | 'mono'>('sans');
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+  const [selectedVisualizerTool, setSelectedVisualizerTool] = useState<VisualizerId>('box');
+  const [searchInitialQuery, setSearchInitialQuery] = useState<string>('');
+
+  const handleOpenVisualLab = (toolId?: string) => {
+    if (toolId) {
+      setSelectedVisualizerTool(toolId as VisualizerId);
+    }
+    navigateToView('visual-lab');
+  };
 
   // Load progress from localStorage with Daily Streak Verification
   const [progress, setProgress] = useState<UserProgress>(() => {
@@ -109,7 +119,50 @@ export default function App() {
       const { updatedProgress } = calculateDailyStreak(prev);
       return updatedProgress;
     });
-  }, []);
+
+    // Deep-link URL parameter resolution for sitemap indexing & direct navigation
+    try {
+      const params = new URLSearchParams(window.location.search);
+      const lessonParam = params.get('lesson');
+      const chapterParam = params.get('chapter');
+      const viewParam = params.get('view') as ViewMode | null;
+      const toolParam = params.get('tool') as VisualizerId | null;
+      const legalParam = params.get('legal') as PolicyTab | null;
+
+      if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
+        setLegalModalTab(legalParam);
+        setLegalModalOpen(true);
+      }
+
+      if (lessonParam) {
+        const lessonFound = chapters.some((c) => c.lessons.some((l) => l.id === lessonParam));
+        if (lessonFound) {
+          setCurrentLessonId(lessonParam);
+          setActiveView('lesson');
+          return;
+        }
+      }
+
+      if (chapterParam) {
+        const foundChapter = chapters.find((c) => c.id === chapterParam);
+        if (foundChapter && foundChapter.lessons.length > 0) {
+          setCurrentLessonId(foundChapter.lessons[0].id);
+          setActiveView('lesson');
+          return;
+        }
+      }
+
+      if (toolParam && ['box', 'flex', 'grid', 'dom', 'git', 'net'].includes(toolParam)) {
+        setSelectedVisualizerTool(toolParam);
+        setActiveView('visual-lab');
+        return;
+      }
+
+      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum'].includes(viewParam)) {
+        setActiveView(viewParam);
+      }
+    } catch {}
+  }, [chapters]);
 
   // Save progress to localStorage
   useEffect(() => {
@@ -329,8 +382,12 @@ export default function App() {
           unreadNewsCount={unreadNewsCount}
           onNavigateHome={() => navigateToView('home')}
           onNavigatePractice={() => navigateToView('practice-hub')}
-          onNavigateVisualLab={() => navigateToView('visual-lab')}
+          onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
           onNavigateActivities={() => handleNavigateActivities()}
+          onSelectCategory={(cat) => {
+            setSelectedCategory(cat);
+            navigateToView('home');
+          }}
           progress={progress}
           activeView={activeView}
           theme={theme}
@@ -343,7 +400,7 @@ export default function App() {
             {activeView === 'home' && (
               <motion.div
                 key="home-view"
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -354,10 +411,15 @@ initial={{ opacity: 0, y: 14 }}
                   progress={progress}
                   onSelectLesson={handleSelectLesson}
                   onOpenPracticeHub={() => navigateToView('practice-hub')}
-                  onOpenVisualLab={() => navigateToView('visual-lab')}
+                  onOpenVisualLab={(toolId) => handleOpenVisualLab(toolId)}
                   onOpenActivities={() => handleNavigateActivities()}
                   onOpenTutor={() => handleOpenTutor()}
                   onOpenMilestones={() => setRoadmapOpen(true)}
+                  onOpenSearch={(query) => {
+                    setSearchInitialQuery(query || '');
+                    setSearchOpen(true);
+                  }}
+                  selectedCategory={selectedCategory}
                 />
               </motion.div>
             )}
@@ -435,7 +497,7 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <VisualLab />
+                <VisualLab initialTool={selectedVisualizerTool} />
               </motion.div>
             )}
           </AnimatePresence>
@@ -444,6 +506,15 @@ initial={{ opacity: 0, y: 14 }}
           <Footer
             onOpenLegal={handleOpenLegal}
             onOpenTutor={() => handleOpenTutor()}
+            onSelectLesson={handleSelectLesson}
+            onNavigateHome={() => navigateToView('home')}
+            onNavigatePractice={() => navigateToView('practice-hub')}
+            onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+            onNavigateActivities={() => handleNavigateActivities()}
+            onOpenMilestones={() => setRoadmapOpen(true)}
+            onOpenCertificate={() => setCertificateOpen(true)}
+            onOpenSearch={() => setSearchOpen(true)}
+            chapters={chapters}
           />
         </main>
       </div>
@@ -459,6 +530,11 @@ initial={{ opacity: 0, y: 14 }}
         onClose={() => setSearchOpen(false)}
         chapters={chapters}
         onSelectLesson={handleSelectLesson}
+        onNavigatePractice={() => navigateToView('practice-hub')}
+        onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+        onNavigateActivities={() => handleNavigateActivities()}
+        onOpenTutor={() => handleOpenTutor()}
+        initialQuery={searchInitialQuery}
       />
 
       <TutorModal

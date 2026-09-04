@@ -1,6 +1,6 @@
 {
-  "name": "WZ Storehouse",
-  "description": "Interactive web engineering learning platform with real-time coding sandboxes, 3D visual lab instruments, AI code tutoring, and curriculum roadmap.",
+  "name": "WebZoneBW SC",
+  "description": "Powerful Web Tools, Built for the Modern Web. Explore practical web, image, developer, and performance tools to build, test, and improve modern websites.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
