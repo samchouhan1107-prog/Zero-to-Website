@@ -4,7 +4,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
-  base: '/',
+  // GitHub Pages serves this repo at /Zero-to-Website/ — keep asset URLs relative so they resolve correctly.
+  base: process.env.VITE_BASE || '/Zero-to-Website/',
 
   plugins: [
     react(),
