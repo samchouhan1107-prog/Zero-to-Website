@@ -35,7 +35,7 @@ app.get("/api/health", (_req, res) => {
 
 // Dynamic Sitemap Generator listing all chapters, lessons, tools, and pages
 app.get("/sitemap.xml", (req, res) => {
-  const host = req.get("host") || "webzonebw.com";
+  const host = req.get("host") || "webzonebw.shop";
   const protocol =
     req.protocol === "https" || req.get("x-forwarded-proto") === "https"
       ? "https"
@@ -100,7 +100,7 @@ app.get("/sitemap.xml", (req, res) => {
 
 // Search Engine Crawling Directives
 app.get("/robots.txt", (req, res) => {
-  const host = req.get("host") || "webzonebw.com";
+  const host = req.get("host") || "webzonebw.shop";
   const protocol =
     req.protocol === "https" || req.get("x-forwarded-proto") === "https"
       ? "https"

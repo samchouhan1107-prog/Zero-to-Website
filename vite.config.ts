@@ -4,8 +4,8 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
-  // GitHub Pages serves this repo at /Zero-to-Website/ — keep asset URLs relative so they resolve correctly.
-  base: process.env.VITE_BASE || '/Zero-to-Website/',
+  // Custom domain (webzonebw.shop) serves from root. Override with VITE_BASE for GitHub Pages subpath.
+  base: process.env.VITE_BASE || '/',
 
   plugins: [
     react(),

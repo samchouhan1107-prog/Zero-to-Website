@@ -3,4 +3,4 @@ User-agent: *
 Allow: /
 
 # Sitemap definition
-Sitemap: https://webzonebw.com/sitemap.xml
+Sitemap: https://webzonebw.shop/sitemap.xml
