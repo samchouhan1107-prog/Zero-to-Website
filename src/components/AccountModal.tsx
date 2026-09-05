@@ -198,7 +198,7 @@ export const AccountModal: React.FC<AccountModalProps> = ({
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="developer@webzonebw.com"
+                  placeholder="developer@webzonebw.shop"
                   required
                   className="w-full rounded-xl border border-[#27272a] bg-[#18181c] px-3.5 py-2.5 text-sm text-white placeholder-[#52525b] focus:border-blue-500 focus:outline-none"
                 />
