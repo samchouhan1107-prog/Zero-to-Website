@@ -271,4 +271,5 @@ export type ViewMode =
   | 'practice-hub'
   | 'visual-lab'
   | 'video-studio'
-  | 'curriculum';
+  | 'curriculum'
+  | 'blog';

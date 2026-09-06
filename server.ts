@@ -116,6 +116,20 @@ app.get("/sitemap.xml", (req, res) => {
   addEntry(`${baseUrl}/?legal=about`, "0.60", "monthly");
   addEntry(`${baseUrl}/?legal=contact`, "0.60", "monthly");
 
+  // Static Legal Pages (crawlable HTML)
+  addEntry(`${baseUrl}/privacy-policy.html`, "0.70", "monthly");
+  addEntry(`${baseUrl}/terms-of-service.html`, "0.70", "monthly");
+  addEntry(`${baseUrl}/cookie-policy.html`, "0.70", "monthly");
+  addEntry(`${baseUrl}/about.html`, "0.70", "monthly");
+
+  // Blog Posts — High-Value SEO Content
+  addEntry(`${baseUrl}/?view=blog`, "0.90", "weekly");
+  addEntry(`${baseUrl}/?blog=complete-guide-css-flexbox`, "0.85", "monthly");
+  addEntry(`${baseUrl}/?blog=understanding-css-grid`, "0.85", "monthly");
+  addEntry(`${baseUrl}/?blog=html5-semantic-elements-seo`, "0.85", "monthly");
+  addEntry(`${baseUrl}/?blog=javascript-dom-manipulation`, "0.85", "monthly");
+  addEntry(`${baseUrl}/?blog=responsive-web-design-best-practices`, "0.85", "monthly");
+
   xml += `</urlset>`;
 
   res.header("Content-Type", "application/xml; charset=utf-8");
@@ -131,7 +145,7 @@ app.get("/robots.txt", (req, res) => {
       : "http";
   const baseUrl = `${protocol}://${host}`;
 
-  const robots = `# WebZoneBW SC Search Engine Directives\nUser-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`;
+  const robots = `# WebZoneBW SC - Search Engine Directives\nUser-agent: *\nAllow: /\n\n# Allow AdSense bot full access\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: Googlebot-Image\nAllow: /\n\n# Disallow admin and private paths\nDisallow: /api/\nDisallow: /server/\n\n# Sitemap\nSitemap: ${baseUrl}/sitemap.xml\n`;
   res.header("Content-Type", "text/plain; charset=utf-8");
   res.send(robots);
 });
@@ -395,8 +409,31 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
-    app.get("*", (_req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
+
+    // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
+    const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
+    const fs = require("fs");
+    let cachedIndexHtml: string | null = null;
+
+    app.get("*", (req, res) => {
+      const userAgent = req.headers["user-agent"] || "";
+      const isBot = BOT_USER_AGENTS.test(userAgent);
+
+      if (isBot) {
+        // Serve index.html with the pre-rendered noscript content for crawlers
+        // The noscript block in index.html contains full readable content
+        try {
+          if (!cachedIndexHtml) {
+            cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
+          }
+          res.header("Content-Type", "text/html; charset=utf-8");
+          res.send(cachedIndexHtml);
+        } catch {
+          res.sendFile(path.join(distPath, "index.html"));
+        }
+      } else {
+        res.sendFile(path.join(distPath, "index.html"));
+      }
     });
   }
 

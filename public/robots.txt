@@ -1,6 +1,17 @@
-# WebZoneBW SC Search Engine Directives
+# WebZoneBW SC - Search Engine Directives
 User-agent: *
 Allow: /
 
-# Sitemap definition
+# Allow AdSense bot full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# Disallow admin and private paths
+Disallow: /api/
+Disallow: /server/
+
+# Sitemap
 Sitemap: https://webzonebw.shop/sitemap.xml

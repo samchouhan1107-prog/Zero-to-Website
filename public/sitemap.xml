@@ -229,4 +229,42 @@
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
   </url>
+
+  <!-- Blog Posts — High-Value SEO Content -->
+  <url>
+    <loc>https://webzonebw.shop/?view=blog</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.90</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?blog=complete-guide-css-flexbox</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?blog=understanding-css-grid</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?blog=html5-semantic-elements-seo</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?blog=javascript-dom-manipulation</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?blog=responsive-web-design-best-practices</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
 </urlset>

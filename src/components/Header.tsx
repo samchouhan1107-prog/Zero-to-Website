@@ -24,6 +24,7 @@ export interface HeaderProps {
   onNavigatePractice: () => void;
   onNavigateVisualLab: (toolId?: string) => void;
   onNavigateActivities?: () => void;
+  onNavigateBlog?: () => void;
   onOpenNotifications?: () => void;
   onSelectCategory?: (category: string) => void;
   unreadNewsCount?: number;
@@ -54,6 +55,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigatePractice,
   onNavigateVisualLab,
   onNavigateActivities,
+  onNavigateBlog,
   onOpenNotifications,
   onSelectCategory,
   unreadNewsCount = 0,
@@ -117,8 +119,8 @@ export const Header: React.FC<HeaderProps> = ({
         onNavigateHome();
         break;
       case 'Blog':
-        if (onOpenNotifications) {
-          onOpenNotifications();
+        if (onNavigateBlog) {
+          onNavigateBlog();
         } else {
           onNavigateHome();
         }

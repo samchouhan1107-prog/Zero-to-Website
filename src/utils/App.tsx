@@ -24,6 +24,8 @@ import { AccountModal } from '../components/AccountModal';
 import { ToastNotification, ToastMessage } from '../components/ToastNotification';
 import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
 import { Footer } from '../components/Footer';
+import { BlogView } from '../components/BlogView';
+import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
 import { NEWS_UPDATES } from '../data/newsData';
 import { useAuth } from './AuthContext';
 import * as authService from './authService';
@@ -101,6 +103,7 @@ export default function App() {
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
   const [selectedVisualizerTool, setSelectedVisualizerTool] = useState<VisualizerId>('box');
   const [searchInitialQuery, setSearchInitialQuery] = useState<string>('');
+  const [blogSlug, setBlogSlug] = useState<string | undefined>();
 
   const handleOpenVisualLab = (toolId?: string) => {
     if (toolId) {
@@ -171,10 +174,17 @@ export default function App() {
       const viewParam = params.get('view') as ViewMode | null;
       const toolParam = params.get('tool') as VisualizerId | null;
       const legalParam = params.get('legal') as PolicyTab | null;
+      const blogParam = params.get('blog') as string | null;
 
       if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
         setLegalModalTab(legalParam);
         setLegalModalOpen(true);
+      }
+
+      if (blogParam) {
+        setBlogSlug(blogParam);
+        setActiveView('blog');
+        return;
       }
 
       if (lessonParam) {
@@ -201,7 +211,7 @@ export default function App() {
         return;
       }
 
-      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum'].includes(viewParam)) {
+      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog'].includes(viewParam)) {
         setActiveView(viewParam);
       }
     } catch {}
@@ -402,6 +412,32 @@ export default function App() {
 
   const totalLessons = chapters.flatMap((c) => c.lessons).length;
 
+  // Dynamic SEO meta tags per view
+  const seoConfig = (() => {
+    switch (activeView) {
+      case 'practice-hub':
+        return SEO_PRESETS.practiceHub;
+      case 'visual-lab':
+        return SEO_PRESETS.visualLab(selectedVisualizerTool);
+      case 'lesson':
+        if (activeLesson) {
+          return SEO_PRESETS.lesson(
+            activeLesson.title,
+            activeLesson.tagline || activeLesson.learningObjectives?.[0] || `${activeLesson.title} — Free interactive lesson on WebZoneBW SC.`,
+            activeLesson.id
+          );
+        }
+        return SEO_PRESETS.home;
+      case 'activities':
+        return SEO_PRESETS.activities;
+      case 'blog':
+        return SEO_PRESETS.blog;
+      default:
+        return SEO_PRESETS.home;
+    }
+  })();
+  useSEOMeta(seoConfig);
+
   return (
     <div
       id="wz-storehouse-app"
@@ -441,6 +477,7 @@ export default function App() {
           onNavigatePractice={() => navigateToView('practice-hub')}
           onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
           onNavigateActivities={() => handleNavigateActivities()}
+          onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
           onSelectCategory={(cat) => {
             setSelectedCategory(cat);
             navigateToView('home');
@@ -557,6 +594,22 @@ initial={{ opacity: 0, y: 14 }}
                 <VisualLab initialTool={selectedVisualizerTool} />
               </motion.div>
             )}
+
+            {activeView === 'blog' && (
+              <motion.div
+                key="blog-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full"
+              >
+                <BlogView
+                  onNavigateHome={() => navigateToView('home')}
+                  initialSlug={blogSlug}
+                />
+              </motion.div>
+            )}
           </AnimatePresence>
 
           {/* Educational Platform Footer with AdSense & Legal Compliance Links */}
@@ -568,6 +621,7 @@ initial={{ opacity: 0, y: 14 }}
             onNavigatePractice={() => navigateToView('practice-hub')}
             onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
             onNavigateActivities={() => handleNavigateActivities()}
+            onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
             onOpenMilestones={() => setRoadmapOpen(true)}
             onOpenCertificate={() => setCertificateOpen(true)}
             onOpenSearch={() => setSearchOpen(true)}

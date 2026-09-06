@@ -33,6 +33,7 @@ interface FooterProps {
   onNavigatePractice?: () => void;
   onNavigateVisualLab?: (toolId: VisualizerId) => void;
   onNavigateActivities?: () => void;
+  onNavigateBlog?: () => void;
   onOpenMilestones?: () => void;
   onOpenCertificate?: () => void;
   onOpenSearch?: () => void;
@@ -47,6 +48,7 @@ export const Footer: React.FC<FooterProps> = ({
   onNavigatePractice,
   onNavigateVisualLab,
   onNavigateActivities,
+  onNavigateBlog,
   onOpenMilestones,
   onOpenCertificate,
   onOpenSearch,
@@ -329,6 +331,18 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>Global Search &amp; Index (⌘K)</span>
                 </button>
               </li>
+              {onNavigateBlog && (
+                <li>
+                  <button
+                    type="button"
+                    onClick={onNavigateBlog}
+                    className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  >
+                    <FileText className="h-3.5 w-3.5 text-app-subtle" />
+                    <span>Blog &amp; Tutorials</span>
+                  </button>
+                </li>
+              )}
               <li>
                 <button
                   type="button"
