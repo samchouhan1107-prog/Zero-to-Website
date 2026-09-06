@@ -31,25 +31,16 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  /**
-   * On mount: server is the authoritative source for auth.
-   * We attempt to resume session via API /auth/me.
-   * localStorage is ONLY used to persist the token for session resume — not as auth source.
-   */
+  // Restore session from localStorage (works offline)
   useEffect(() => {
     (async () => {
-      // Server is source of truth — validate session against API
-      const apiUser = await authService.getCurrentUser();
-      if (apiUser && apiUser.method !== 'guest') {
-        setUser(apiUser);
-      }
+      const saved = await authService.getCurrentUser();
+      if (saved) setUser(saved);
       setIsLoading(false);
     })();
   }, []);
 
-  const login = useCallback((u: AuthUser) => {
-    setUser(u);
-  }, []);
+  const login = useCallback((u: AuthUser) => setUser(u), []);
 
   const logout = useCallback(async () => {
     await authService.signOut();
@@ -57,10 +48,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   }, []);
 
   const refreshAuth = useCallback(async () => {
-    const apiUser = await authService.getCurrentUser();
-    if (apiUser && apiUser.method !== 'guest') {
-      setUser(apiUser);
-    }
+    const saved = await authService.getCurrentUser();
+    if (saved) setUser(saved);
   }, []);
 
   return (

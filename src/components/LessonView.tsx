@@ -38,7 +38,6 @@ import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
 import { getActivityDeckForLesson } from '../data/activitiesData';
-import { AdSenseSlot } from './AdSenseSlot';
 
 interface LessonViewProps {
   lesson: Lesson;
@@ -521,9 +520,6 @@ export const LessonView: React.FC<LessonViewProps> = ({
           </div>
         </div>
       </section>
-
-      {/* Responsive In-Content Educational Ad Unit */}
-      <AdSenseSlot slotId={`lesson-mid-${lesson.id}`} format="horizontal" label="Educational Sponsor &amp; Tools" />
 
       {/* 8. Interactive Practice Sandbox */}
       <section id="section-practice" className="space-y-4">

@@ -21,7 +21,6 @@ import {
 } from 'lucide-react';
 import { Chapter, UserProgress } from '../utils/types';
 import { WebZoneDeveloperGraphic } from './WebZoneDeveloperGraphic';
-import { AdvertisementContainer } from './AdvertisementContainer';
 import { NEWS_UPDATES } from '../data/newsData';
 
 export interface HomeHeroProps {
@@ -407,12 +406,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       </section>
 
       {/* ========================================================================= */}
-      {/* 2. MONETIZATION AREA: Clearly Labelled Responsive Advertisement Container */}
-      {/* ========================================================================= */}
-      <AdvertisementContainer />
-
-      {/* ========================================================================= */}
-      {/* 3. TOOL DISCOVERY SECTION                                                 */}
+      {/* 2. TOOL DISCOVERY SECTION                                                 */}
       {/* ========================================================================= */}
       <section id="tool-discovery" aria-labelledby="tools-heading" className="space-y-6">
         <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#27272a] pb-4">
