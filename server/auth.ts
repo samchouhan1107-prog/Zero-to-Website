@@ -135,13 +135,7 @@ router.post("/logout", (req, res) => {
 
 /* ── POST /api/auth/guest ──────────────────────────────── */
 router.post("/guest", (req, res) => {
-  // Guest sessions — no account needed, generates a temporary token
   const token = crypto.randomBytes(48).toString("hex");
-
-  // Store as a lightweight session without a user record
-  const { default: db } = require("./db");
-  // We'll treat guest as a special session
-
   res.json({
     success: true,
     user: { id: "guest", name: "Guest", email: "", method: "guest" },

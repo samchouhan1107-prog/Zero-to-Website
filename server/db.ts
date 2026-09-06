@@ -8,7 +8,8 @@ import fs from "fs";
 import path from "path";
 import crypto from "crypto";
 
-const DB_PATH = path.join(process.cwd(), "data", "webzonebw.json");
+const DB_DIR = path.join(process.cwd(), "data");
+const DB_PATH = path.join(DB_DIR, "webzonebw.json");
 
 /* ── Types ─────────────────────────────────────────────── */
 
@@ -53,23 +54,35 @@ interface Database {
 /* ── Helpers ───────────────────────────────────────────── */
 
 function ensureDir() {
-  const dir = path.dirname(DB_PATH);
-  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  try {
+    if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
+  } catch (err) {
+    console.warn("[DB] Could not create data directory:", err);
+  }
 }
 
 function load(): Database {
   ensureDir();
-  if (!fs.existsSync(DB_PATH)) {
-    const empty: Database = { users: [], sessions: [], progress: [] };
-    fs.writeFileSync(DB_PATH, JSON.stringify(empty, null, 2));
-    return empty;
+  try {
+    if (!fs.existsSync(DB_PATH)) {
+      const empty: Database = { users: [], sessions: [], progress: [] };
+      fs.writeFileSync(DB_PATH, JSON.stringify(empty, null, 2));
+      return empty;
+    }
+    return JSON.parse(fs.readFileSync(DB_PATH, "utf-8"));
+  } catch (err) {
+    console.warn("[DB] Load failed, using empty database:", err);
+    return { users: [], sessions: [], progress: [] };
   }
-  return JSON.parse(fs.readFileSync(DB_PATH, "utf-8"));
 }
 
 function save(db: Database) {
-  ensureDir();
-  fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  try {
+    ensureDir();
+    fs.writeFileSync(DB_PATH, JSON.stringify(db, null, 2));
+  } catch (err) {
+    console.warn("[DB] Save failed:", err);
+  }
 }
 
 export function hashPassword(password: string, salt?: string) {

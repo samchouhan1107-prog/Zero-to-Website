@@ -396,4 +396,7 @@ async function startServer() {
   });
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error("[FATAL] Server failed to start:", err);
+  process.exit(1);
+});
