@@ -63,6 +63,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleTheme,
 }) => {
   const { user, isAuthenticated } = useAuth();
+  const hasRealAccount = isAuthenticated && user?.method !== 'guest';
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en-US');
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -228,14 +229,14 @@ export const Header: React.FC<HeaderProps> = ({
               type="button"
               onClick={() => onOpenAccount()}
               className={`flex h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
-                isAuthenticated
+                hasRealAccount
                   ? 'border border-[#27272a] bg-[#18181c] text-white hover:border-[#3f3f46] hover:bg-[#222228]'
                   : 'border border-blue-500/30 bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
               }`}
-              aria-label={isAuthenticated ? 'View account' : 'Sign in'}
-              title={isAuthenticated ? 'Your Account' : 'Sign In / Sign Up'}
+              aria-label={hasRealAccount ? 'View account' : 'Sign in'}
+              title={hasRealAccount ? 'Your Account' : 'Sign In / Sign Up'}
             >
-              {isAuthenticated ? (
+              {hasRealAccount ? (
                 <>
                   <div className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-[9px] font-bold">
                     {user?.method === 'google' ? (
@@ -419,7 +420,7 @@ export const Header: React.FC<HeaderProps> = ({
                 className="w-full flex items-center justify-center gap-2 rounded-lg bg-blue-600 py-2 text-xs font-bold text-white hover:bg-blue-500"
               >
                 <User className="h-4 w-4" />
-                <span>{isAuthenticated ? `Hi, ${user?.name || 'Account'}` : 'Sign In / Create Account'}</span>
+                <span>{hasRealAccount ? `Hi, ${user?.name || 'Account'}` : isAuthenticated ? `Guest Mode` : 'Sign In / Create Account'}</span>
               </button>
             </div>
           </div>

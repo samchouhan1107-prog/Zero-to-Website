@@ -27,47 +27,29 @@ const AuthContext = createContext<AuthContextValue>({
   refreshAuth: async () => {},
 });
 
-const AUTH_STORAGE_KEY = 'wz_storehouse_auth';
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Restore session on mount
+  /**
+   * On mount: server is the authoritative source for auth.
+   * We attempt to resume session via API /auth/me.
+   * localStorage is ONLY used to persist the token for session resume — not as auth source.
+   */
   useEffect(() => {
     (async () => {
-      try {
-        // Try API session first
-        const apiUser = await authService.getCurrentUser();
-        if (apiUser) {
-          setUser(apiUser);
-          setIsLoading(false);
-          return;
-        }
-      } catch {}
-
-      // Fallback to localStorage
-      try {
-        const saved = localStorage.getItem(AUTH_STORAGE_KEY);
-        if (saved) setUser(JSON.parse(saved));
-      } catch {}
-
+      // Server is source of truth — validate session against API
+      const apiUser = await authService.getCurrentUser();
+      if (apiUser && apiUser.method !== 'guest') {
+        setUser(apiUser);
+      }
       setIsLoading(false);
     })();
   }, []);
 
-  // Persist to localStorage
-  useEffect(() => {
-    try {
-      if (user) {
-        localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(user));
-      } else {
-        localStorage.removeItem(AUTH_STORAGE_KEY);
-      }
-    } catch {}
-  }, [user]);
-
-  const login = useCallback((u: AuthUser) => setUser(u), []);
+  const login = useCallback((u: AuthUser) => {
+    setUser(u);
+  }, []);
 
   const logout = useCallback(async () => {
     await authService.signOut();
@@ -76,7 +58,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const refreshAuth = useCallback(async () => {
     const apiUser = await authService.getCurrentUser();
-    if (apiUser) setUser(apiUser);
+    if (apiUser && apiUser.method !== 'guest') {
+      setUser(apiUser);
+    }
   }, []);
 
   return (

@@ -26,6 +26,7 @@ import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceMo
 import { Footer } from '../components/Footer';
 import { NEWS_UPDATES } from '../data/newsData';
 import { useAuth } from './AuthContext';
+import * as authService from './authService';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
@@ -57,16 +58,17 @@ export default function App() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, user } = useAuth();
+  const hasRealAccount = isAuthenticated && user?.method !== 'guest';
 
   const requireAuth = useCallback((action: () => void) => {
-    if (isAuthenticated) {
+    if (hasRealAccount) {
       action();
     } else {
       addToast('Sign In Required', 'Create a free account to save your progress and access all features.', 'info');
       setAccountOpen(true);
     }
-  }, [isAuthenticated]);
+  }, [hasRealAccount]);
 
   const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
     setLegalModalTab(tab);
@@ -107,24 +109,52 @@ export default function App() {
     navigateToView('visual-lab');
   };
 
-  // Load progress from localStorage with Daily Streak Verification
-  const [progress, setProgress] = useState<UserProgress>(() => {
-    try {
-      const saved = localStorage.getItem('wz_storehouse_progress');
-      if (saved) {
-        const parsed = JSON.parse(saved);
-        const merged: UserProgress = {
-          ...INITIAL_PROGRESS,
-          ...parsed,
-          claimedMilestones: parsed.claimedMilestones || ['milestone-100'],
-        };
-        const { updatedProgress } = calculateDailyStreak(merged);
-        return updatedProgress;
+  // Load progress — server is source of truth when authenticated, localStorage for guests
+  const [progress, setProgress] = useState<UserProgress>(INITIAL_PROGRESS);
+  const [progressLoaded, setProgressLoaded] = useState(false);
+
+  // On mount: fetch from server if authenticated, otherwise use localStorage
+  useEffect(() => {
+    if (hasRealAccount) {
+      authService.fetchProgress().then((serverProgress) => {
+        if (serverProgress) {
+          const merged: UserProgress = {
+            ...INITIAL_PROGRESS,
+            ...serverProgress,
+            claimedMilestones: serverProgress.claimedMilestones || ['milestone-100'],
+          };
+          const { updatedProgress } = calculateDailyStreak(merged);
+          setProgress(updatedProgress);
+        } else {
+          const { updatedProgress } = calculateDailyStreak(INITIAL_PROGRESS);
+          setProgress(updatedProgress);
+        }
+        setProgressLoaded(true);
+      });
+    } else {
+      // Guest: use localStorage as offline cache
+      try {
+        const saved = localStorage.getItem('wz_storehouse_progress');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          const merged: UserProgress = {
+            ...INITIAL_PROGRESS,
+            ...parsed,
+            claimedMilestones: parsed.claimedMilestones || ['milestone-100'],
+          };
+          const { updatedProgress } = calculateDailyStreak(merged);
+          setProgress(updatedProgress);
+        } else {
+          const { updatedProgress } = calculateDailyStreak(INITIAL_PROGRESS);
+          setProgress(updatedProgress);
+        }
+      } catch {
+        const { updatedProgress } = calculateDailyStreak(INITIAL_PROGRESS);
+        setProgress(updatedProgress);
       }
-    } catch {}
-    const { updatedProgress } = calculateDailyStreak(INITIAL_PROGRESS);
-    return updatedProgress;
-  });
+      setProgressLoaded(true);
+    }
+  }, [hasRealAccount]);
 
   // Verify daily streak on mount / date change
   useEffect(() => {
@@ -177,12 +207,19 @@ export default function App() {
     } catch {}
   }, [chapters]);
 
-  // Save progress to localStorage
+  // Save progress — server is source of truth when authenticated, localStorage for guests
   useEffect(() => {
-    try {
-      localStorage.setItem('wz_storehouse_progress', JSON.stringify(progress));
-    } catch {}
-  }, [progress]);
+    if (!progressLoaded) return; // Don't save before initial load
+    if (hasRealAccount) {
+      // Sync to server (server overwrites localStorage)
+      authService.syncProgress(progress);
+    } else {
+      // Guest fallback: localStorage only
+      try {
+        localStorage.setItem('wz_storehouse_progress', JSON.stringify(progress));
+      } catch {}
+    }
+  }, [progress, hasRealAccount, progressLoaded]);
 
   // Save theme to localStorage (synchronizing both React SPA and standalone keys)
   useEffect(() => {

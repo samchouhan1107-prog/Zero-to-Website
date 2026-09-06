@@ -82,9 +82,24 @@ export const AccountModal: React.FC<AccountModalProps> = ({
   };
 
   const handleGoogleLogin = async () => {
-    // Simulated Google OAuth — in production, use Google Identity Services
-    const result = await authService.signInWithGoogle('Learner', 'you@gmail.com');
-    if (result.success && result.user) login(result.user);
+    // Production: Use Google Identity Services (GIS) — see https://developers.google.com/identity/gsi/web
+    // For now, open Google OAuth popup simulation
+    try {
+      // In production, replace with:
+      // const { credential } = await google.accounts.id.prompt();
+      // const decoded = jwt_decode(credential);
+      // const result = await authService.signInWithGoogle(decoded.name, decoded.email, decoded.picture);
+      
+      // Simulated Google account for demo
+      const result = await authService.signInWithGoogle('Google User', 'user@gmail.com');
+      if (result.success && result.user) {
+        login(result.user);
+      } else {
+        alert(result.error || 'Google sign-in failed');
+      }
+    } catch {
+      alert('Google sign-in is not available right now. Please use email.');
+    }
   };
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
@@ -119,7 +134,8 @@ export const AccountModal: React.FC<AccountModalProps> = ({
   };
 
   const handleContinueAsGuest = () => {
-    login({ name: 'Guest', email: '', method: 'guest' });
+    const guest = authService.createGuestSession();
+    login(guest);
   };
 
   return (
