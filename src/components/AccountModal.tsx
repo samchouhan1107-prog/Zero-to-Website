@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import * as authService from '../utils/authService';
 import {
   Award,
   BookOpen,
@@ -80,23 +81,35 @@ export const AccountModal: React.FC<AccountModalProps> = ({
     setShowConfirmPassword(false);
   };
 
-  const handleGoogleLogin = () => {
-    login({ name: 'Learner', email: 'you@gmail.com', method: 'google' });
+  const handleGoogleLogin = async () => {
+    // Simulated Google OAuth — in production, use Google Identity Services
+    const result = await authService.signInWithGoogle('Learner', 'you@gmail.com');
+    if (result.success && result.user) login(result.user);
   };
 
-  const handleEmailSignIn = (e: React.FormEvent) => {
+  const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     if (signInEmail) {
-      login({ name: signInEmail.split('@')[0], email: signInEmail, method: 'email' });
-      resetForms();
+      const result = await authService.signIn(signInEmail, signInPassword);
+      if (result.success && result.user) {
+        login(result.user);
+        resetForms();
+      } else {
+        alert(result.error || 'Sign in failed');
+      }
     }
   };
 
-  const handleEmailSignUp = (e: React.FormEvent) => {
+  const handleEmailSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     if (signUpName && signUpEmail && signUpPassword && agreedToTerms) {
-      login({ name: signUpName, email: signUpEmail, method: 'email' });
-      resetForms();
+      const result = await authService.signUp(signUpName, signUpEmail, signUpPassword);
+      if (result.success && result.user) {
+        login(result.user);
+        resetForms();
+      } else {
+        alert(result.error || 'Sign up failed');
+      }
     }
   };
 

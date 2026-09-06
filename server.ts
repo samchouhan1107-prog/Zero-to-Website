@@ -4,6 +4,9 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
+import authRoutes from "./server/auth";
+import userRoutes from "./server/api";
+import { cleanupExpiredSessions } from "./server/db";
 
 dotenv.config();
 
@@ -11,6 +14,13 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
+
+// Auth & User API routes
+app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
+
+// Cleanup expired sessions every hour
+setInterval(cleanupExpiredSessions, 60 * 60 * 1000);
 
 // Lazy-initialized Gemini client with telemetry header
 let aiClient: GoogleGenAI | null = null;
