@@ -580,6 +580,7 @@ initial={{ opacity: 0, y: 14 }}
       <AccountModal
         isOpen={accountOpen}
         onClose={() => setAccountOpen(false)}
+        onAuthSuccess={() => setAccountOpen(false)}
         progress={progress}
         onOpenCertificate={() => setCertificateOpen(true)}
         onOpenMilestones={() => setRoadmapOpen(true)}
