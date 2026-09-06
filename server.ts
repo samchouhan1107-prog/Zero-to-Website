@@ -1,12 +1,15 @@
 import express from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
 import authRoutes from "./server/auth";
 import userRoutes from "./server/api";
 import { cleanupExpiredSessions } from "./server/db";
+
+// Lazy-load vite only in dev (it's a devDependency, not available on Render)
+let createViteServer: any = null;
+try { createViteServer = require("vite").createServer; } catch { /* devDependency not installed */ }
 
 dotenv.config();
 
@@ -378,11 +381,17 @@ async function startServer() {
     process.argv[1]?.endsWith(".cjs");
 
   if (!isProduction) {
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
+    if (createViteServer) {
+      const vite = await createViteServer({
+        server: { middlewareMode: true },
+        appType: "spa",
+      });
+      app.use(vite.middlewares);
+    } else {
+      console.warn("[WARN] Vite not available, serving static dist");
+      const distPath = path.join(process.cwd(), "dist");
+      app.use(express.static(distPath));
+    }
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));
