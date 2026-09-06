@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CHAPTERS_DATA } from '../data/chaptersData';
 import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
@@ -25,6 +25,7 @@ import { ToastNotification, ToastMessage } from '../components/ToastNotification
 import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
 import { Footer } from '../components/Footer';
 import { NEWS_UPDATES } from '../data/newsData';
+import { useAuth } from './AuthContext';
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
@@ -56,6 +57,16 @@ export default function App() {
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+  const { isAuthenticated } = useAuth();
+
+  const requireAuth = useCallback((action: () => void) => {
+    if (isAuthenticated) {
+      action();
+    } else {
+      addToast('Sign In Required', 'Create a free account to save your progress and access all features.', 'info');
+      setAccountOpen(true);
+    }
+  }, [isAuthenticated]);
 
   const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
     setLegalModalTab(tab);
@@ -252,24 +263,26 @@ export default function App() {
   };
 
   const handleCompleteActivity = (activityId: string, xpReward: number) => {
-    setProgress((prev) => {
-      const isAlreadyDone = prev.completedActivities?.[activityId];
-      const withStreak = calculateDailyStreak(prev).updatedProgress;
-      return {
-        ...withStreak,
-        completedActivities: {
-          ...(withStreak.completedActivities || {}),
-          [activityId]: true,
-        },
-        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
-      };
-    });
+    requireAuth(() => {
+      setProgress((prev) => {
+        const isAlreadyDone = prev.completedActivities?.[activityId];
+        const withStreak = calculateDailyStreak(prev).updatedProgress;
+        return {
+          ...withStreak,
+          completedActivities: {
+            ...(withStreak.completedActivities || {}),
+            [activityId]: true,
+          },
+          xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
+        };
+      });
 
-    addToast(
-      'Activity Mastered! 🌟',
-      `You earned +${xpReward} XP for conquering this post-class exercise!`,
-      'success'
-    );
+      addToast(
+        'Activity Mastered! 🌟',
+        `You earned +${xpReward} XP for conquering this post-class exercise!`,
+        'success'
+      );
+    });
   };
 
   const handleCompleteLesson = (lessonId: string) => {
@@ -303,27 +316,31 @@ export default function App() {
   };
 
   const handleToggleBookmark = (lessonId: string) => {
-    setProgress((prev) => {
-      const isBookmarked = prev.bookmarks.includes(lessonId);
-      return {
-        ...prev,
-        bookmarks: isBookmarked
-          ? prev.bookmarks.filter((id) => id !== lessonId)
-          : [...prev.bookmarks, lessonId],
-      };
+    requireAuth(() => {
+      setProgress((prev) => {
+        const isBookmarked = prev.bookmarks.includes(lessonId);
+        return {
+          ...prev,
+          bookmarks: isBookmarked
+            ? prev.bookmarks.filter((id) => id !== lessonId)
+            : [...prev.bookmarks, lessonId],
+        };
+      });
     });
   };
 
   const handleSaveNote = (lessonId: string, note: string) => {
-    setProgress((prev) => {
-      const withStreak = calculateDailyStreak(prev).updatedProgress;
-      return {
-        ...withStreak,
-        notes: {
-          ...withStreak.notes,
-          [lessonId]: note,
-        },
-      };
+    requireAuth(() => {
+      setProgress((prev) => {
+        const withStreak = calculateDailyStreak(prev).updatedProgress;
+        return {
+          ...withStreak,
+          notes: {
+            ...withStreak.notes,
+            [lessonId]: note,
+          },
+        };
+      });
     });
   };
 
@@ -378,8 +395,8 @@ export default function App() {
           onOpenSearch={() => setSearchOpen(true)}
           onOpenTutor={() => handleOpenTutor()}
           onOpenMilestones={() => setRoadmapOpen(true)}
-          onOpenSettings={() => setSettingsOpen(true)}
-          onOpenCertificate={() => setCertificateOpen(true)}
+          onOpenSettings={() => requireAuth(() => setSettingsOpen(true))}
+          onOpenCertificate={() => requireAuth(() => setCertificateOpen(true))}
           onOpenNotifications={() => setNotificationsOpen(true)}
           onOpenAccount={() => setAccountOpen(true)}
           unreadNewsCount={unreadNewsCount}
