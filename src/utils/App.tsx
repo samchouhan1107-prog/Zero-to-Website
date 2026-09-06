@@ -20,6 +20,7 @@ import { XpMilestoneModal } from '../components/XpMilestoneModal';
 import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
 import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
 import { NotificationCenterModal } from '../components/NotificationCenterModal';
+import { AccountModal } from '../components/AccountModal';
 import { ToastNotification, ToastMessage } from '../components/ToastNotification';
 import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
 import { Footer } from '../components/Footer';
@@ -51,6 +52,7 @@ export default function App() {
   const [celebratingMilestone, setCelebratingMilestone] = useState<XpMilestone | null>(null);
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
+  const [accountOpen, setAccountOpen] = useState(false);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
   const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
@@ -379,6 +381,7 @@ export default function App() {
           onOpenSettings={() => setSettingsOpen(true)}
           onOpenCertificate={() => setCertificateOpen(true)}
           onOpenNotifications={() => setNotificationsOpen(true)}
+          onOpenAccount={() => setAccountOpen(true)}
           unreadNewsCount={unreadNewsCount}
           onNavigateHome={() => navigateToView('home')}
           onNavigatePractice={() => navigateToView('practice-hub')}
@@ -520,6 +523,14 @@ initial={{ opacity: 0, y: 14 }}
       </div>
 
       {/* Global Modals & Drawers */}
+      <AccountModal
+        isOpen={accountOpen}
+        onClose={() => setAccountOpen(false)}
+        progress={progress}
+        onOpenCertificate={() => setCertificateOpen(true)}
+        onOpenMilestones={() => setRoadmapOpen(true)}
+        onOpenSettings={() => setSettingsOpen(true)}
+      />
       <LegalComplianceModal
         isOpen={legalModalOpen}
         onClose={() => setLegalModalOpen(false)}

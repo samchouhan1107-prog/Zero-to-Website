@@ -1,28 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Award,
-  Bell,
-  BookOpen,
   ChevronDown,
-  Code2,
-  Compass,
-  Flame,
   Globe,
-  Layers,
   Menu,
   Moon,
   Search,
-  Settings,
-  Sparkles,
   Sun,
   User,
-  Wrench,
-  X,
-  Zap,
 } from 'lucide-react';
 import { UserProgress, AppTheme, ViewMode } from '../utils/types';
 import { WebZoneBrandLogo } from './WebZoneBrandLogo';
-import { AccountModal } from './AccountModal';
 
 export interface HeaderProps {
   onToggleSidebar?: () => void;
@@ -31,6 +18,7 @@ export interface HeaderProps {
   onOpenMilestones: () => void;
   onOpenSettings: () => void;
   onOpenCertificate: () => void;
+  onOpenAccount: () => void;
   onNavigateHome: () => void;
   onNavigatePractice: () => void;
   onNavigateVisualLab: (toolId?: string) => void;
@@ -60,6 +48,7 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenMilestones,
   onOpenSettings,
   onOpenCertificate,
+  onOpenAccount,
   onNavigateHome,
   onNavigatePractice,
   onNavigateVisualLab,
@@ -72,7 +61,6 @@ export const Header: React.FC<HeaderProps> = ({
   theme,
   onToggleTheme,
 }) => {
-  const [accountOpen, setAccountOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en-US');
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
@@ -236,7 +224,7 @@ export const Header: React.FC<HeaderProps> = ({
             {/* Sign In / Account Access */}
             <button
               type="button"
-              onClick={() => setAccountOpen(true)}
+              onClick={() => onOpenAccount()}
               className="flex h-9 items-center gap-2 rounded-lg border border-blue-500/30 bg-blue-600/10 px-3 text-xs font-semibold text-blue-400 transition-all hover:bg-blue-600/20 hover:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               aria-label="Sign in or view developer account"
               title="Sign In / Account"
@@ -412,17 +400,6 @@ export const Header: React.FC<HeaderProps> = ({
         )}
       </header>
 
-      {/* Developer Profile / Account Modal */}
-      {accountOpen && (
-        <AccountModal
-          isOpen={accountOpen}
-          onClose={() => setAccountOpen(false)}
-          progress={progress}
-          onOpenCertificate={onOpenCertificate}
-          onOpenMilestones={onOpenMilestones}
-          onOpenSettings={onOpenSettings}
-        />
-      )}
     </>
   );
 };

@@ -1,0 +1,454 @@
+diff --git a/src/utils/App.tsx b/src/utils/App.tsx
+index a7565e0..594e43e 100644
+--- a/src/utils/App.tsx
++++ b/src/utils/App.tsx
+@@ -20,150 +20,71 @@ import { XpMilestoneModal } from '../components/XpMilestoneModal';
+ import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
+ import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
+ import { NotificationCenterModal } from '../components/NotificationCenterModal';
+ import { ToastNotification, ToastMessage } from '../components/ToastNotification';
+ import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
+ import { Footer } from '../components/Footer';
+ import { NEWS_UPDATES } from '../data/newsData';
+ 
+ const INITIAL_PROGRESS: UserProgress = {
+   completedLessons: {},
+   completedChallenges: {},
+   quizScores: {},
+   claimedMilestones: ['milestone-100'],
+   notes: {},
+   bookmarks: [],
+   xpPoints: 120,
+   streakDays: 3,
+   lastActiveDate: getLocalDateString(),
+ };
+ 
+-const LEGAL_TABS: PolicyTab[] = ['privacy', 'terms', 'cookies', 'about', 'contact'];
+-const VIEW_MODES: ViewMode[] = ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum'];
+-const VISUALIZER_TOOLS: VisualizerId[] = ['box', 'flex', 'grid', 'dom', 'git', 'net'];
+-
+-interface DeepLinkHandlers {
+-  onSelectLesson: (lessonId: string) => void;
+-  onSelectVisualizerTool: (tool: VisualizerId) => void;
+-  onNavigateView: (view: ViewMode) => void;
+-  onOpenLegal: (tab: PolicyTab) => void;
+-}
+-
+-/** Parse URL params as strings and validate them against allowed lists before applying any typed state updates. */
+-function resolveDeepLink(params: URLSearchParams, chapters: Chapter[], handlers: DeepLinkHandlers) {
+-  const legalParam = params.get('legal');
+-  if (legalParam) {
+-    const legalTab = LEGAL_TABS.find((tab) => tab === legalParam);
+-    if (legalTab) {
+-      handlers.onOpenLegal(legalTab);
+-    }
+-  }
+-
+-  const lessonParam = params.get('lesson');
+-  if (lessonParam) {
+-    const lessonFound = chapters.some((c) => c.lessons.some((l) => l.id === lessonParam));
+-    if (lessonFound) {
+-      handlers.onSelectLesson(lessonParam);
+-      return;
+-    }
+-  }
+-
+-  const chapterParam = params.get('chapter');
+-  if (chapterParam) {
+-    const foundChapter = chapters.find((c) => c.id === chapterParam);
+-    if (foundChapter && foundChapter.lessons.length > 0) {
+-      handlers.onSelectLesson(foundChapter.lessons[0].id);
+-      return;
+-    }
+-  }
+-
+-  const toolParam = params.get('tool');
+-  if (toolParam) {
+-    const tool = VISUALIZER_TOOLS.find((t) => t === toolParam);
+-    if (tool) {
+-      handlers.onSelectVisualizerTool(tool);
+-      return;
+-    }
+-  }
+-
+-  const viewParam = params.get('view');
+-  if (viewParam) {
+-    const view = VIEW_MODES.find((v) => v === viewParam);
+-    if (view) {
+-      handlers.onNavigateView(view);
+-    }
+-  }
+-}
+-
+ export default function App() {
+   const [chapters] = useState<Chapter[]>(CHAPTERS_DATA);
+   const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
+   const [activeView, setActiveView] = useState<ViewMode>('home');
+   const [sidebarOpen, setSidebarOpen] = useState(false);
+   const [searchOpen, setSearchOpen] = useState(false);
+   const [tutorOpen, setTutorOpen] = useState(false);
+   const [aiTopic, setAiTopic] = useState<string | undefined>();
+   const [aiCode, setAiCode] = useState<string | undefined>();
+   const [settingsOpen, setSettingsOpen] = useState(false);
+   const [certificateOpen, setCertificateOpen] = useState(false);
+   const [celebratingMilestone, setCelebratingMilestone] = useState<XpMilestone | null>(null);
+   const [roadmapOpen, setRoadmapOpen] = useState(false);
+   const [notificationsOpen, setNotificationsOpen] = useState(false);
+   const [legalModalOpen, setLegalModalOpen] = useState(false);
+   const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
+   const [toasts, setToasts] = useState<ToastMessage[]>([]);
+ 
+-  // Track toast auto-dismiss timers so they can be cancelled on unmount/dismiss
+-  const toastTimersRef = useRef<Map<string, ReturnType<typeof setTimeout>>>(new Map());
+-
+-  useEffect(() => {
+-    const timers = toastTimersRef.current;
+-    return () => {
+-      timers.forEach((timer) => clearTimeout(timer));
+-      timers.clear();
+-    };
+-  }, []);
+-
+-  const dismissToast = (id: string) => {
+-    const timer = toastTimersRef.current.get(id);
+-    if (timer) {
+-      clearTimeout(timer);
+-      toastTimersRef.current.delete(id);
+-    }
+-    setToasts((prev) => prev.filter((t) => t.id !== id));
+-  };
+-
+   const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
+     setLegalModalTab(tab);
+     setLegalModalOpen(true);
+   };
+ 
+   const addToast = (title: string, message: string, type: 'info' | 'success' | 'update' = 'info') => {
+     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`;
+     const newToast: ToastMessage = { id, title, message, type };
+     setToasts((prev) => [...prev, newToast]);
+ 
+-    const timer = setTimeout(() => {
+-      toastTimersRef.current.delete(id);
++    setTimeout(() => {
+       setToasts((prev) => prev.filter((t) => t.id !== id));
+     }, 4500);
+-    toastTimersRef.current.set(id, timer);
+   };
+ 
+   const unreadNewsCount = NEWS_UPDATES.filter((n) => n.isUnread).length;
+   const mainContentRef = useRef<HTMLElement>(null);
+ 
+   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
+   const [theme, setTheme] = useState<AppTheme>(() => {
+     try {
+       return normalizeAppTheme(localStorage.getItem('wz_storehouse_theme'));
+     } catch {
+       return 'dark';
+     }
+   });
+   const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
+   const [fontFamily, setFontFamily] = useState<'sans' | 'serif' | 'mono'>('sans');
+   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+   const [selectedVisualizerTool, setSelectedVisualizerTool] = useState<VisualizerId>('box');
+   const [searchInitialQuery, setSearchInitialQuery] = useState<string>('');
+ 
+   const handleOpenVisualLab = (toolId?: string) => {
+@@ -181,61 +102,82 @@ export default function App() {
+         const parsed = JSON.parse(saved);
+         const merged: UserProgress = {
+           ...INITIAL_PROGRESS,
+           ...parsed,
+           claimedMilestones: parsed.claimedMilestones || ['milestone-100'],
+         };
+         const { updatedProgress } = calculateDailyStreak(merged);
+         return updatedProgress;
+       }
+     } catch {}
+     const { updatedProgress } = calculateDailyStreak(INITIAL_PROGRESS);
+     return updatedProgress;
+   });
+ 
+   // Verify daily streak on mount / date change
+   useEffect(() => {
+     setProgress((prev) => {
+       const { updatedProgress } = calculateDailyStreak(prev);
+       return updatedProgress;
+     });
+-  }, []);
+ 
+-  // Deep-link URL parameter resolution for sitemap indexing & direct navigation
+-  useEffect(() => {
++    // Deep-link URL parameter resolution for sitemap indexing & direct navigation
+     try {
+       const params = new URLSearchParams(window.location.search);
+-      resolveDeepLink(params, chapters, {
+-        onSelectLesson: (lessonId) => {
+-          setCurrentLessonId(lessonId);
++      const lessonParam = params.get('lesson');
++      const chapterParam = params.get('chapter');
++      const viewParam = params.get('view') as ViewMode | null;
++      const toolParam = params.get('tool') as VisualizerId | null;
++      const legalParam = params.get('legal') as PolicyTab | null;
++
++      if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
++        setLegalModalTab(legalParam);
++        setLegalModalOpen(true);
++      }
++
++      if (lessonParam) {
++        const lessonFound = chapters.some((c) => c.lessons.some((l) => l.id === lessonParam));
++        if (lessonFound) {
++          setCurrentLessonId(lessonParam);
+           setActiveView('lesson');
+-        },
+-        onSelectVisualizerTool: (tool) => {
+-          setSelectedVisualizerTool(tool);
+-          setActiveView('visual-lab');
+-        },
+-        onNavigateView: (view) => setActiveView(view),
+-        onOpenLegal: (tab) => {
+-          setLegalModalTab(tab);
+-          setLegalModalOpen(true);
+-        },
+-      });
++          return;
++        }
++      }
++
++      if (chapterParam) {
++        const foundChapter = chapters.find((c) => c.id === chapterParam);
++        if (foundChapter && foundChapter.lessons.length > 0) {
++          setCurrentLessonId(foundChapter.lessons[0].id);
++          setActiveView('lesson');
++          return;
++        }
++      }
++
++      if (toolParam && ['box', 'flex', 'grid', 'dom', 'git', 'net'].includes(toolParam)) {
++        setSelectedVisualizerTool(toolParam);
++        setActiveView('visual-lab');
++        return;
++      }
++
++      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum'].includes(viewParam)) {
++        setActiveView(viewParam);
++      }
+     } catch {}
+   }, [chapters]);
+ 
+   // Save progress to localStorage
+   useEffect(() => {
+     try {
+       localStorage.setItem('wz_storehouse_progress', JSON.stringify(progress));
+     } catch {}
+   }, [progress]);
+ 
+   // Save theme to localStorage (synchronizing both React SPA and standalone keys)
+   useEffect(() => {
+     try {
+       localStorage.setItem('wz_storehouse_theme', theme);
+       localStorage.setItem('wz-theme', theme);
+     } catch {}
+   }, [theme]);
+ 
+   // Check for newly reached XP milestones and trigger congratulatory modal
+   useEffect(() => {
+@@ -290,76 +232,89 @@ export default function App() {
+ 
+   const navigateToView = (view: ViewMode) => {
+     setActiveView(view);
+     scrollMainToTop();
+   };
+ 
+   const handleSelectLesson = (lessonId: string) => {
+     setCurrentLessonId(lessonId);
+     setActiveView('lesson');
+     scrollMainToTop();
+   };
+ 
+   const handleNavigateActivities = (lessonId?: string) => {
+     if (lessonId) {
+       setCurrentLessonId(lessonId);
+     }
+     setActiveView('activities');
+     scrollMainToTop();
+   };
+ 
+-  /** Shared progress updater: marks an item done in the given map, awards XP once, and keeps the daily streak fresh. */
+-  const awardProgress = (
+-    prev: UserProgress,
+-    mapKey: 'completedLessons' | 'completedChallenges' | 'completedActivities',
+-    itemId: string,
+-    xpReward: number
+-  ): UserProgress => {
+-    const currentMap = (prev[mapKey] || {}) as Record<string, boolean>;
+-    const isAlreadyDone = !!currentMap[itemId];
+-    const withStreak = calculateDailyStreak(prev).updatedProgress;
+-    return {
+-      ...withStreak,
+-      [mapKey]: {
+-        ...((withStreak[mapKey] || {}) as Record<string, boolean>),
+-        [itemId]: true,
+-      },
+-      xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
+-    };
+-  };
+-
+   const handleCompleteActivity = (activityId: string, xpReward: number) => {
+-    setProgress((prev) => awardProgress(prev, 'completedActivities', activityId, xpReward));
++    setProgress((prev) => {
++      const isAlreadyDone = prev.completedActivities?.[activityId];
++      const withStreak = calculateDailyStreak(prev).updatedProgress;
++      return {
++        ...withStreak,
++        completedActivities: {
++          ...(withStreak.completedActivities || {}),
++          [activityId]: true,
++        },
++        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
++      };
++    });
+ 
+     addToast(
+       'Activity Mastered! 🌟',
+       `You earned +${xpReward} XP for conquering this post-class exercise!`,
+       'success'
+     );
+   };
+ 
+   const handleCompleteLesson = (lessonId: string) => {
+-    setProgress((prev) => awardProgress(prev, 'completedLessons', lessonId, 50));
++    setProgress((prev) => {
++      const isAlreadyDone = prev.completedLessons[lessonId];
++      const withStreak = calculateDailyStreak(prev).updatedProgress;
++      return {
++        ...withStreak,
++        completedLessons: {
++          ...withStreak.completedLessons,
++          [lessonId]: true,
++        },
++        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
++      };
++    });
+   };
+ 
+   const handleCompleteChallenge = (challengeId: string) => {
+-    setProgress((prev) => awardProgress(prev, 'completedChallenges', challengeId, 50));
++    setProgress((prev) => {
++      const isAlreadyDone = prev.completedChallenges[challengeId];
++      const withStreak = calculateDailyStreak(prev).updatedProgress;
++      return {
++        ...withStreak,
++        completedChallenges: {
++          ...withStreak.completedChallenges,
++          [challengeId]: true,
++        },
++        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
++      };
++    });
+   };
+ 
+   const handleToggleBookmark = (lessonId: string) => {
+     setProgress((prev) => {
+       const isBookmarked = prev.bookmarks.includes(lessonId);
+       return {
+         ...prev,
+         bookmarks: isBookmarked
+           ? prev.bookmarks.filter((id) => id !== lessonId)
+           : [...prev.bookmarks, lessonId],
+       };
+     });
+   };
+ 
+   const handleSaveNote = (lessonId: string, note: string) => {
+     setProgress((prev) => {
+       const withStreak = calculateDailyStreak(prev).updatedProgress;
+       return {
+         ...withStreak,
+         notes: {
+@@ -396,42 +351,42 @@ export default function App() {
+       id="wz-storehouse-app"
+       className={`flex h-[100dvh] min-w-0 flex-col overflow-hidden bg-app-canvas text-app-ink ${fontClass}`}
+     >
+       {/* Sidebar Navigation */}
+       <Sidebar
+         chapters={chapters}
+         currentLessonId={currentLessonId}
+         onSelectLesson={handleSelectLesson}
+         progress={progress}
+         isOpen={sidebarOpen}
+         onCloseMobile={() => setSidebarOpen(false)}
+         activeView={activeView}
+         onNavigateHome={() => navigateToView('home')}
+         onOpenPracticeHub={() => navigateToView('practice-hub')}
+         onOpenVisualLab={() => navigateToView('visual-lab')}
+         onOpenActivities={() => handleNavigateActivities()}
+         onOpenMilestones={() => setRoadmapOpen(true)}
+         onOpenTutor={() => handleOpenTutor()}
+       />
+ 
+-      {/* Main Content Area (full width — curriculum lives in the header slide drawer) */}
+-      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
++      {/* Main Content Area */}
++      <div className="flex min-h-0 min-w-0 flex-col overflow-hidden">
+         {/* Sticky Header */}
+         <Header
+           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
+           onOpenSearch={() => setSearchOpen(true)}
+           onOpenTutor={() => handleOpenTutor()}
+           onOpenMilestones={() => setRoadmapOpen(true)}
+           onOpenSettings={() => setSettingsOpen(true)}
+           onOpenCertificate={() => setCertificateOpen(true)}
+           onOpenNotifications={() => setNotificationsOpen(true)}
+           unreadNewsCount={unreadNewsCount}
+           onNavigateHome={() => navigateToView('home')}
+           onNavigatePractice={() => navigateToView('practice-hub')}
+           onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+           onNavigateActivities={() => handleNavigateActivities()}
+           onSelectCategory={(cat) => {
+             setSelectedCategory(cat);
+             navigateToView('home');
+           }}
+           progress={progress}
+           activeView={activeView}
+@@ -634,38 +589,38 @@ initial={{ opacity: 0, y: 14 }}
+         }}
+       />
+ 
+       {/* Notifications & Release News Modal */}
+       <NotificationCenterModal
+         isOpen={notificationsOpen}
+         onClose={() => setNotificationsOpen(false)}
+         onNavigateView={(view, lessonId) => {
+           if (view === 'lesson' && lessonId) {
+             handleSelectLesson(lessonId);
+           } else {
+             navigateToView(view);
+           }
+         }}
+         onTriggerToast={addToast}
+       />
+ 
+       {/* Toast Notification Container */}
+       <ToastNotification
+         toasts={toasts}
+-        onDismiss={dismissToast}
++        onDismiss={(id) => setToasts((prev) => prev.filter((t) => t.id !== id))}
+       />
+ 
+       {/* Cookie & Push Notification Consent Banner */}
+       <CookieNotificationBanner
+         onAcceptAll={() => {
+           addToast('Preferences Saved', 'Cookies and push notification preferences enabled.', 'success');
+         }}
+         onPreferencesSaved={(prefs) => {
+           addToast('Preferences Updated', `Cookie settings saved with push ${prefs.pushNotifications ? 'enabled' : 'disabled'}.`, 'info');
+         }}
+         onOpenNews={() => setNotificationsOpen(true)}
+         onOpenPrivacy={() => handleOpenLegal('privacy')}
+       />
+     </div>
+   );
+ }
+ 
