@@ -408,20 +408,20 @@ async function startServer() {
     }
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
+    app.use(express.static(distPath, { index: 'index.html', extensions: ['html'] }));
 
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
     const fs = require("fs");
     let cachedIndexHtml: string | null = null;
 
+    // SPA catch-all — only routes that don't match static files
     app.get("*", (req, res) => {
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
 
       if (isBot) {
         // Serve index.html with the pre-rendered noscript content for crawlers
-        // The noscript block in index.html contains full readable content
         try {
           if (!cachedIndexHtml) {
             cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
