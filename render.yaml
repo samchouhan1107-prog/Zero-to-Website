@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: webzonebw-api
+    runtime: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: node dist/server.cjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: CORS_ORIGIN
+        value: https://webzonebw.shop
+      - key: GEMINI_API_KEY
+        sync: false

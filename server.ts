@@ -11,9 +11,20 @@ import { cleanupExpiredSessions } from "./server/db";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = parseInt(process.env.PORT || "3000", 10);
 
 app.use(express.json());
+
+// CORS — allow frontend (GitHub Pages) to call this API
+app.use((_req, res, next) => {
+  const origin = process.env.CORS_ORIGIN || _req.headers.origin || '*';
+  res.header('Access-Control-Allow-Origin', origin);
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.header('Access-Control-Allow-Credentials', 'true');
+  if (_req.method === 'OPTIONS') return res.sendStatus(204);
+  next();
+});
 
 // Auth & User API routes
 app.use("/api/auth", authRoutes);
