@@ -19,8 +19,27 @@ router.put("/progress", requireAuth, (req: AuthRequest, res) => {
   res.json({ success: true, progress: updated });
 });
 
+/* ── GET /api/user/notes ──────────────────────────────── */
+router.get("/notes", requireAuth, (req: AuthRequest, res) => {
+  const progress = getProgress(req.userId!);
+  res.json({ success: true, notes: progress?.notes || {} });
+});
+
 /* ── PUT /api/user/notes/:lessonId ─────────────────────── */
 router.put("/notes/:lessonId", requireAuth, (req: AuthRequest, res) => {
+  const { lessonId } = req.params;
+  const { content } = req.body;
+
+  const progress = getProgress(req.userId!);
+  const notes = progress?.notes || {};
+  notes[lessonId] = content || "";
+
+  const updated = updateProgress(req.userId!, { notes });
+  res.json({ success: true, notes: updated.notes });
+});
+
+/* ── POST /api/user/notes/:lessonId (alias) ────────────── */
+router.post("/notes/:lessonId", requireAuth, (req: AuthRequest, res) => {
   const { lessonId } = req.params;
   const { content } = req.body;
 
