@@ -34,6 +34,12 @@ import { GridVisualizer } from './visualizers/GridVisualizer';
 import { DomTreeVisualizer } from './visualizers/DomTreeVisualizer';
 import { GitFlowVisualizer } from './visualizers/GitFlowVisualizer';
 import { NetworkFlowVisualizer } from './visualizers/NetworkFlowVisualizer';
+import { DevToolsVisualizer } from './visualizers/DevToolsVisualizer';
+import { SemanticHtmlVisualizer } from './visualizers/SemanticHtmlVisualizer';
+import { JsDomEventVisualizer } from './visualizers/JsDomEventVisualizer';
+import { ResponsiveViewportVisualizer } from './visualizers/ResponsiveViewportVisualizer';
+import { BootstrapGridVisualizer } from './visualizers/BootstrapGridVisualizer';
+import { DeploymentPipelineVisualizer } from './visualizers/DeploymentPipelineVisualizer';
 import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
@@ -77,6 +83,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const [noteSaved, setNoteSaved] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
   const [activeSection, setActiveSection] = useState<string>('section-theory');
+  const [miniProjectCheckedSpecs, setMiniProjectCheckedSpecs] = useState<Record<number, boolean>>({});
+  const [miniProjectCodeTab, setMiniProjectCodeTab] = useState<'html' | 'css' | 'js'>('html');
+  const [copiedMiniCode, setCopiedMiniCode] = useState(false);
 
   // Find previous and next lessons across all chapters
   const allLessons = allChapters.flatMap((c) => c.lessons);
@@ -132,17 +141,29 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
   const renderVisualizer = () => {
     switch (lesson.visualType) {
+      case 'devtools-suite':
+        return <DevToolsVisualizer />;
+      case 'semantic-html':
+        return <SemanticHtmlVisualizer />;
       case 'box-model':
         return <BoxModelVisualizer />;
       case 'flexbox':
         return <FlexboxVisualizer />;
       case 'grid':
         return <GridVisualizer />;
+      case 'js-event':
+        return <JsDomEventVisualizer />;
+      case 'responsive-view':
+        return <ResponsiveViewportVisualizer />;
+      case 'bootstrap-grid':
+        return <BootstrapGridVisualizer />;
+      case 'git-flow':
+        return <GitFlowVisualizer />;
+      case 'deployment-pipeline':
+        return <DeploymentPipelineVisualizer />;
       case 'dom-tree':
       case 'html-skeleton':
         return <DomTreeVisualizer />;
-      case 'git-flow':
-        return <GitFlowVisualizer />;
       case 'network-flow':
       default:
         return <NetworkFlowVisualizer />;
@@ -155,6 +176,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
     { id: 'section-visuals', label: 'Visual Lab', icon: Layers },
     { id: 'section-code', label: 'Annotated Code', icon: Code2 },
     { id: 'section-practice', label: 'Sandbox', icon: Zap },
+    ...(lesson.miniProject ? [{ id: 'section-miniproject', label: 'Mini-Project', icon: Sparkles }] : []),
     ...(lesson.video ? [{ id: 'section-video', label: 'Video Lab', icon: Tv }] : []),
     { id: 'section-quiz', label: 'Checkpoint', icon: HelpCircle },
     { id: 'section-activities', label: 'Activities', icon: GraduationCap },
@@ -570,6 +592,154 @@ export const LessonView: React.FC<LessonViewProps> = ({
             onJumpToPractice={() => scrollToSection('section-practice')}
             onJumpToVisualLab={() => scrollToSection('section-visuals')}
           />
+        </section>
+      )}
+
+      {/* 9.5 Creative Mini-Project Challenge (Straight Book Method) */}
+      {lesson.miniProject && (
+        <section
+          id="section-miniproject"
+          className="rounded-2xl border border-indigo-500/30 bg-app-surface p-6 sm:p-8 space-y-6 shadow-sm"
+        >
+          <div className="flex flex-wrap items-center justify-between gap-4 border-b border-app-border pb-4">
+            <div className="space-y-1">
+              <div className="flex items-center gap-2">
+                <span className="rounded-md bg-indigo-500/15 px-2.5 py-0.5 font-mono text-[10px] font-bold text-indigo-400">
+                  STRAIGHT BOOK CHALLENGE
+                </span>
+                <span className="font-mono text-xs font-bold text-app-amber">
+                  +100 XP
+                </span>
+              </div>
+              <h2 className="text-xl sm:text-2xl font-black text-app-ink flex items-center gap-2.5">
+                <Sparkles className="h-5 w-5 text-indigo-400" />
+                <span>{lesson.miniProject.title}</span>
+              </h2>
+              <p className="text-xs sm:text-sm text-app-muted">
+                {lesson.miniProject.subtitle}
+              </p>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => scrollToSection('section-practice')}
+              className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 shadow-sm transition-all cursor-pointer"
+            >
+              <Zap className="h-4 w-4 text-amber-300" />
+              <span>Practice in Sandbox</span>
+            </button>
+          </div>
+
+          <p className="text-xs sm:text-sm text-app-ink leading-relaxed">
+            {lesson.miniProject.description}
+          </p>
+
+          {/* Specifications Checklist */}
+          <div className="rounded-xl border border-app-border bg-app-inset p-4 space-y-3">
+            <div className="flex items-center justify-between">
+              <h4 className="text-xs font-mono font-bold uppercase tracking-wider text-app-ink flex items-center gap-1.5">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                Project Specifications &amp; Checklist
+              </h4>
+              <span className="font-mono text-[11px] text-app-subtle">
+                {Object.values(miniProjectCheckedSpecs).filter(Boolean).length} of{' '}
+                {lesson.miniProject.specifications.length} completed
+              </span>
+            </div>
+
+            <div className="space-y-2">
+              {lesson.miniProject.specifications.map((spec, sIdx) => {
+                const isChecked = !!miniProjectCheckedSpecs[sIdx];
+                return (
+                  <label
+                    key={sIdx}
+                    className={`flex items-start gap-3 p-2.5 rounded-lg border text-xs cursor-pointer transition-all ${
+                      isChecked
+                        ? 'border-emerald-500/40 bg-emerald-500/10 text-app-ink'
+                        : 'border-app-border bg-app-surface text-app-muted hover:text-app-ink'
+                    }`}
+                  >
+                    <input
+                      type="checkbox"
+                      checked={isChecked}
+                      onChange={() =>
+                        setMiniProjectCheckedSpecs((prev) => ({
+                          ...prev,
+                          [sIdx]: !prev[sIdx],
+                        }))
+                      }
+                      className="mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
+                    />
+                    <span className={isChecked ? 'line-through opacity-80' : 'font-medium'}>
+                      {spec}
+                    </span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Starter Blueprint Tabs & Code */}
+          <div className="rounded-xl border border-slate-800 bg-[#121216] overflow-hidden space-y-0">
+            <div className="flex items-center justify-between px-3 py-2 bg-[#0a0a0d] border-b border-slate-800">
+              <div className="flex items-center gap-1.5 font-mono text-xs">
+                {(['html', 'css', 'js'] as const).map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setMiniProjectCodeTab(tab)}
+                    className={`px-3 py-1 rounded-md text-xs font-bold uppercase transition-colors cursor-pointer ${
+                      miniProjectCodeTab === tab
+                        ? 'bg-slate-800 text-white border border-slate-700'
+                        : 'text-slate-400 hover:text-white'
+                    }`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  const code =
+                    miniProjectCodeTab === 'html'
+                      ? lesson.miniProject?.starterCode.html || ''
+                      : miniProjectCodeTab === 'css'
+                      ? lesson.miniProject?.starterCode.css || ''
+                      : lesson.miniProject?.starterCode.js || '';
+                  navigator.clipboard.writeText(code);
+                  setCopiedMiniCode(true);
+                  setTimeout(() => setCopiedMiniCode(false), 2000);
+                }}
+                className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-mono transition-colors cursor-pointer"
+              >
+                {copiedMiniCode ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
+                <span>{copiedMiniCode ? 'Copied!' : 'Copy Code'}</span>
+              </button>
+            </div>
+
+            <pre className="p-4 font-mono text-xs text-slate-200 overflow-x-auto max-h-[220px] leading-relaxed">
+              <code>
+                {miniProjectCodeTab === 'html' && lesson.miniProject.starterCode.html}
+                {miniProjectCodeTab === 'css' && lesson.miniProject.starterCode.css}
+                {miniProjectCodeTab === 'js' && (lesson.miniProject.starterCode.js || '// No JavaScript required for this stage')}
+              </code>
+            </pre>
+          </div>
+
+          {/* Straight Book Advice: Think at your brain level & use your own ideas */}
+          <div className="p-3.5 rounded-xl border border-indigo-500/20 bg-indigo-500/5 text-xs text-app-ink flex items-start gap-3">
+            <Lightbulb className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
+            <div className="space-y-1">
+              <strong className="text-app-ink font-bold block">
+                Think at Your Brain Level &amp; Use Your Own Ideas:
+              </strong>
+              <p className="text-app-muted leading-relaxed">
+                The textbook specifies the structure, but your personal creativity brings the site to life. Experiment with your own custom color scheme, invent a unique brand name, or add your own interactive elements!
+              </p>
+            </div>
+          </div>
         </section>
       )}
 

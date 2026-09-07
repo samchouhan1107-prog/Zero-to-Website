@@ -1,12 +1,17 @@
 export type VisualType =
   | 'network-flow'
+  | 'devtools-suite'
+  | 'html-skeleton'
+  | 'semantic-html'
   | 'box-model'
   | 'flexbox'
   | 'grid'
   | 'dom-tree'
-  | 'git-flow'
+  | 'js-event'
   | 'responsive-view'
-  | 'html-skeleton'
+  | 'bootstrap-grid'
+  | 'git-flow'
+  | 'deployment-pipeline'
   | 'color-palette';
 
 export interface Objective {
@@ -87,6 +92,14 @@ export interface PracticeChallenge {
   solutionJs: string;
   hints: string[];
   testCases: TestCase[];
+  conceptQuestion?: {
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  };
+  bookRule?: string;
+  creativeIdeas?: string[];
 }
 
 export interface QuizQuestion {
