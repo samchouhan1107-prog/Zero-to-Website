@@ -20,12 +20,9 @@ export const AdSenseSlot: React.FC<AdSenseSlotProps> = ({
       aria-label="Advertisement Container"
     >
       <div className="flex items-center justify-between border-b border-app-border/40 pb-2 text-[10px] font-mono text-app-subtle">
-        <span className="flex items-center gap-1 uppercase tracking-wider">
+        <span className="flex items-center gap-1 uppercase tracking-wider font-semibold">
           <Info className="h-3 w-3" />
-          {label}
-        </span>
-        <span className="rounded bg-app-active px-1.5 py-0.5 text-[9px] text-app-muted">
-          AdSense Ready · Responsive
+          ADVERTISEMENT
         </span>
       </div>
 
@@ -34,14 +31,10 @@ export const AdSenseSlot: React.FC<AdSenseSlotProps> = ({
           format === 'horizontal' ? 'min-h-[90px]' : format === 'rectangle' ? 'min-h-[250px]' : 'min-h-[120px]'
         }`}
       >
-        <div className="space-y-1.5 max-w-sm">
-          <div className="flex items-center justify-center gap-1.5 font-bold text-app-ink text-xs">
-            <Sparkles className="h-3.5 w-3.5 text-app-amber" />
-            <span>Google AdSense Slot Container</span>
+        <div className="space-y-2 max-w-sm">
+          <div className="text-[11px] font-medium text-app-muted leading-relaxed">
+            Please support our free educational content by disabling ad-blockers or allowing ads.
           </div>
-          <p className="text-[11px] text-app-subtle leading-relaxed">
-            Standard non-intrusive ad unit configured with GDPR/CCPA consent compliance, optimal contrast, and zero layout shift.
-          </p>
         </div>
       </div>
     </div>

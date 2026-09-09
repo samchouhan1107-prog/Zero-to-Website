@@ -23,9 +23,6 @@ export const AdvertisementContainer: React.FC<AdvertisementContainerProps> = ({
           <Info className="h-3 w-3 text-[#71717a]" aria-hidden="true" />
           ADVERTISEMENT
         </span>
-        <span className="rounded bg-[#1c1c22] px-2 py-0.5 text-[9px] text-[#a1a1aa] border border-[#27272a]">
-          Sponsor / Google AdSense Slot
-        </span>
       </div>
 
       {/* Reserved responsive space container (no CLS / cumulative layout shift) */}
@@ -35,11 +32,8 @@ export const AdvertisementContainer: React.FC<AdvertisementContainerProps> = ({
         }`}
       >
         <div className="space-y-1.5 max-w-md">
-          <div className="font-mono text-xs font-semibold text-[#a1a1aa] tracking-tight">
-            Reserved Sponsor Space (970×90 / 728×90 / 320×100)
-          </div>
           <p className="text-[11px] leading-relaxed text-[#71717a]">
-            Non-intrusive developer-targeted ad placement adhering to privacy guidelines and contrast standards.
+            Support free development education by allowing ads.
           </p>
         </div>
       </div>

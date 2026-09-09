@@ -315,7 +315,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           </div>
 
           {/* Quick status filter pills */}
-          <div className="flex items-center gap-1 overflow-x-auto pb-0.5 no-scrollbar">
+          <div className="flex items-center gap-1 overflow-x-auto pb-1 no-scrollbar pt-1">
             {(
               [
                 { id: 'all', label: 'All' },
@@ -412,11 +412,11 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                   </button>
 
-                  {/* Lessons Accordion Body */}
+/* Lesson Accordion Body */
                   {isExpanded && (
                     <div
                       id={`chapter-lessons-${chapter.id}`}
-                      className="divide-y divide-app-border/40 border-t border-app-border/60 bg-app-inset/40"
+                      className="divide-y divide-app-border/40 border-t border-app-border/60 bg-app-inset/40 p-1"
                     >
                       {chapter.lessons.map((lesson) => {
                         const isSelected = currentLessonId === lesson.id && activeView === 'lesson';
@@ -430,10 +430,10 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             type="button"
                             key={lesson.id}
                             onClick={() => closeAfter(() => onSelectLesson(lesson.id))}
-                            className={`group flex min-h-9 w-full items-center justify-between gap-2 border-l-2 px-3 py-1.5 text-left text-xs transition-all ${
+                            className={`group flex min-h-9 w-full items-center justify-between gap-2 px-2 py-1.5 text-left text-xs transition-all rounded-md ${
                               isSelected
-                                ? 'border-app-amber bg-app-amber/15 font-bold text-app-ink'
-                                : 'border-transparent text-app-muted hover:bg-app-active/70 hover:text-app-ink'
+                                ? 'bg-app-amber/15 font-bold text-app-ink'
+                                : 'text-app-muted hover:bg-app-active/70 hover:text-app-ink'
                             }`}
                             aria-current={isSelected ? 'page' : undefined}
                           >
@@ -451,15 +451,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
                             </div>
 
                             {/* Badges / Indicators */}
-                            <div className="flex shrink-0 items-center gap-1">
-                              {isBookmarked && (
-                                <Bookmark className="h-3 w-3 fill-current text-app-amber shrink-0" aria-label="Bookmarked" />
+                            <div className="flex shrink-0 items-center gap-1.5 pr-1">
+                              {hasPractice && (
+                                <Code2 className="h-3 w-3 text-emerald-500/80 group-hover:text-emerald-400 shrink-0" aria-label="Includes code challenge" />
                               )}
                               {hasVideo && (
                                 <Video className="h-3 w-3 text-app-subtle group-hover:text-app-muted shrink-0" aria-label="Includes video" />
                               )}
-                              {hasPractice && (
-                                <Code2 className="h-3 w-3 text-emerald-500/80 group-hover:text-emerald-400 shrink-0" aria-label="Includes code challenge" />
+                              {isBookmarked && (
+                                <Bookmark className="h-3 w-3 fill-current text-app-amber shrink-0" aria-label="Bookmarked" />
                               )}
                             </div>
                           </button>
