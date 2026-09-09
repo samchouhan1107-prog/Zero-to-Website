@@ -246,7 +246,7 @@ export const CHAPTERS_DATA: Chapter[] = [
           story: 'Just like a mechanic uses diagnostic scanners or a doctor uses an X-ray to see inside without surgery, DevTools gives developers an X-ray view of running websites, letting you test changes in real-time safely.',
           moral: 'Never guess what code is doing—inspect it live with DevTools.'
         },
-        visualType: 'dom-tree',
+        visualType: 'devtools-suite',
         codeExample: {
           title: 'Console Debugging & Element Selectors',
           description: 'Try opening your browser console and testing DOM manipulation.',
@@ -379,7 +379,7 @@ export const CHAPTERS_DATA: Chapter[] = [
           story: 'When you read a newspaper, you instantly recognize the Masthead (header), Headline (h1), Sections (sports, finance), and Byline (footer). If every text block used identical font and size with no hierarchy, finding news would be impossible.',
           moral: 'Semantic tags provide visual and structural orientation to both humans and machines.'
         },
-        visualType: 'html-skeleton',
+        visualType: 'semantic-html',
         codeExample: {
           title: 'Accessible Registration Form',
           description: 'A clean semantic form with validation, labels, and structured fieldsets.',
@@ -930,7 +930,7 @@ export const CHAPTERS_DATA: Chapter[] = [
           story: 'When you walk into a dark room and flip the switch on the wall, a physical signal travels along the wire to the light bulb on the ceiling, switching it on. In JS, the switch is an Event Listener (click), the wire is the Callback Function, and the illuminated bulb is the DOM update.',
           moral: 'Actions trigger events; event callbacks update the DOM.'
         },
-        visualType: 'dom-tree',
+        visualType: 'js-event',
         codeExample: {
           title: 'Interactive Counter with State & Limits',
           description: 'A clean interactive counter that updates the DOM and disables buttons at bounds.',
@@ -1195,7 +1195,7 @@ export const CHAPTERS_DATA: Chapter[] = [
           story: 'Instead of hand-carving every single brick from clay, a builder uses standard prefabricated modules (doors, windows, roof trusses) that snap together securely. Frameworks provide battle-tested, accessible building blocks.',
           moral: 'Use frameworks to avoid reinventing solved problems like basic buttons and modals.'
         },
-        visualType: 'grid',
+        visualType: 'bootstrap-grid',
         codeExample: {
           title: 'Component Library Card System',
           description: 'A modular card component using standardized utility classes.',
@@ -1454,7 +1454,7 @@ export const CHAPTERS_DATA: Chapter[] = [
           story: 'You bought land (domain name), built the walls and foundation (HTML), painted the facade and decorated the windows (CSS), installed cash registers and automated doors (JavaScript), and now you cut the red ribbon for the world to visit (Deployment).',
           moral: 'Shipping your work to real users is where software truly comes alive.'
         },
-        visualType: 'responsive-view',
+        visualType: 'deployment-pipeline',
         codeExample: {
           title: 'Complete Production Portfolio Showcase',
           description: 'A polished developer portfolio section with responsive grid and live contact drawer.',

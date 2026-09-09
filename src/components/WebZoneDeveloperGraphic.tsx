@@ -28,10 +28,16 @@ export const WebZoneDeveloperGraphic: React.FC = () => {
             <span className="h-2.5 w-2.5 rounded-full bg-[#22c55e]/80" />
           </div>
 
-          <div className="flex items-center gap-2 rounded-md border border-[#27272a] bg-[#18181c] px-2 py-0.5 font-mono text-[10px] text-[#9ca3af]">
+          <a
+            href="https://webzonebw.in/er/index.html"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open WebZone Workspace"
+            className="flex items-center gap-2 rounded-md border border-[#27272a] bg-[#18181c] px-2.5 py-0.5 font-mono text-[10px] text-[#9ca3af] transition-colors hover:border-blue-500/50 hover:text-blue-300"
+          >
             <Globe className="h-3 w-3 text-blue-400" />
-            <span>webzonebw.sc/workspace</span>
-          </div>
+            <span className="truncate max-w-[190px]">https://webzonebw.in/er/index.html</span>
+          </a>
 
           <div className="flex items-center gap-1 font-mono text-[10px] font-bold text-blue-400">
             <span>SC</span>

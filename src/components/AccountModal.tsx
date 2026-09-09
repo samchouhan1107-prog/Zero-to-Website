@@ -188,7 +188,11 @@ export const AccountModal: React.FC<AccountModalProps> = ({
         login(result.user);
         // Auto-close after brief success animation
         setTimeout(() => {
-          onAuthSuccess?.() || onClose();
+          if (onAuthSuccess) {
+            onAuthSuccess();
+          } else {
+            onClose();
+          }
         }, 1200);
       } else {
         setError(result.error || 'Sign in failed. Please check your credentials.');
@@ -230,7 +234,11 @@ export const AccountModal: React.FC<AccountModalProps> = ({
         login(result.user);
         // Auto-close after brief success animation
         setTimeout(() => {
-          onAuthSuccess?.() || onClose();
+          if (onAuthSuccess) {
+            onAuthSuccess();
+          } else {
+            onClose();
+          }
         }, 1200);
       } else {
         setError(result.error || 'Sign up failed. Please try again.');
@@ -253,7 +261,11 @@ export const AccountModal: React.FC<AccountModalProps> = ({
   const handleContinueAsGuest = () => {
     const guest = authService.createGuestSession();
     login(guest);
-    onAuthSuccess?.() || onClose();
+    if (onAuthSuccess) {
+      onAuthSuccess();
+    } else {
+      onClose();
+    }
   };
 
   /* ── Field error helper ───────────────────────────────── */

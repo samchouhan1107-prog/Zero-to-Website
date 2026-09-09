@@ -1,15 +1,13 @@
+import fs from "fs";
 import express from "express";
 import path from "path";
+import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
 import authRoutes from "./server/auth";
 import userRoutes from "./server/api";
 import { cleanupExpiredSessions } from "./server/db";
-
-// Lazy-load vite only in dev (it's a devDependency, not available on Render)
-let createViteServer: any = null;
-try { createViteServer = require("vite").createServer; } catch { /* devDependency not installed */ }
 
 dotenv.config();
 
@@ -412,7 +410,6 @@ async function startServer() {
 
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
-    const fs = require("fs");
     let cachedIndexHtml: string | null = null;
 
     // SPA catch-all — only routes that don't match static files
