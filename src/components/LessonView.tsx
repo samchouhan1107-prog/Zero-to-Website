@@ -240,15 +240,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
         </div>
 
         {/* Interactive Chapter Stepper Progress Bar */}
-        <div className="rounded-xl border border-app-border bg-app-inset p-4 sm:p-5 space-y-3">
-          <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="rounded-xl border border-app-border bg-app-inset p-5 sm:p-6 mb-8 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
             <div className="flex items-center gap-2">
               <span className="font-mono text-xs font-bold uppercase tracking-wider text-app-ink">
-                Chapter {chapter.number} Track: {chapter.title}
+                Chapter {chapter.number} Course Progression
               </span>
             </div>
             <span className="font-mono text-xs font-bold text-app-amber">
-              {completedChapterLessons} / {totalChapterLessons} Lessons Finished ({chapterProgressPercent}%)
+              {completedChapterLessons} / {totalChapterLessons} Lessons ({chapterProgressPercent}%)
             </span>
           </div>
 
@@ -259,8 +259,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
             />
           </div>
 
-          {/* Stepper nodes */}
-          <div className="flex items-center gap-1.5 overflow-x-auto pt-1 no-scrollbar">
+          {/* Stepper nodes - More spaced and clearly defined */}
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 pt-2">
             {chapter.lessons.map((chLesson, idx) => {
               const isChDone = !!completedLessons[chLesson.id] || (chLesson.id === lesson.id && isCompleted);
               const isCurrent = chLesson.id === lesson.id;
@@ -271,16 +271,16 @@ export const LessonView: React.FC<LessonViewProps> = ({
                   type="button"
                   onClick={() => onNavigateLesson(chLesson.id)}
                   title={`Lesson ${chLesson.number}: ${chLesson.title}`}
-                  className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-mono transition-all ${
+                  className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-xs font-mono transition-all ${
                     isCurrent
-                      ? 'border-app-amber bg-app-amber text-slate-950 font-black shadow-xs'
+                      ? 'border-app-amber bg-app-amber text-slate-950 font-black shadow-md'
                       : isChDone
                       ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold'
                       : 'border-app-border bg-app-surface text-app-muted hover:border-app-border hover:text-app-ink'
                   }`}
                 >
-                  <span>{isChDone ? '✓' : idx + 1}.</span>
-                  <span className="truncate max-w-[120px] sm:max-w-[180px]">{chLesson.title}</span>
+                  <span className="shrink-0">{isChDone ? '✓' : idx + 1}.</span>
+                  <span className="truncate">{chLesson.title}</span>
                 </button>
               );
             })}

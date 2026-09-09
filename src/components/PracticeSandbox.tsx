@@ -225,13 +225,13 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
         </div>
       )}
 
-      {/* Main Split Grid */}
-      <div className="grid min-w-0 grid-cols-1 divide-y divide-app-border lg:grid-cols-2 lg:divide-x lg:divide-y-0 min-h-[380px]">
+      {/* Main Split Grid - Adjusted layout for better spacing */}
+      <div className="grid min-w-0 grid-cols-1 divide-y divide-app-border lg:grid-cols-2 lg:divide-x lg:divide-y-0 min-h-[420px]">
         {/* Editor Half */}
-        <div className="flex min-w-0 flex-col bg-slate-900">
-          {/* Editor Tabs */}
-          <div className="flex items-center justify-between px-3 py-1.5 bg-slate-950/90 border-b border-slate-800">
-            <div className="flex items-center gap-1.5">
+        <div className="flex min-w-0 flex-col bg-slate-900 lg:border-r border-slate-800">
+          {/* Editor Tabs - Increased padding and interaction size */}
+          <div className="flex items-center justify-between px-4 py-2 bg-slate-950/90 border-b border-slate-800">
+            <div className="flex items-center gap-2">
               {[
                 { id: 'html', label: 'index.html', badge: 'HTML', color: 'bg-orange-500/20 text-orange-400 border-orange-500/30' },
                 { id: 'css', label: 'style.css', badge: 'CSS', color: 'bg-cyan-500/20 text-cyan-400 border-cyan-500/30' },
@@ -240,37 +240,29 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                 <button
                   key={tab.id}
                   onClick={() => setActiveTab(tab.id as any)}
-                  className={`text-xs font-mono font-bold py-1.5 px-3 rounded-lg flex items-center gap-2 transition-all cursor-pointer ${
+                  className={`text-xs font-mono font-bold py-2 px-4 rounded-lg flex items-center gap-2 transition-all cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-slate-800 text-white shadow-xs border border-slate-700 ring-1 ring-emerald-400/30'
+                      ? 'bg-slate-800 text-white shadow-sm border border-slate-700 ring-1 ring-emerald-400/30'
                       : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
                   }`}
                 >
-                  <span className={`text-[9px] px-1 rounded border font-mono font-extrabold ${tab.color}`}>
+                  <span className={`text-[9px] px-1.5 py-0.5 rounded border font-mono font-extrabold ${tab.color}`}>
                     {tab.badge}
                   </span>
                   <span>{tab.label}</span>
                 </button>
               ))}
             </div>
-            <button
-              onClick={handleReset}
-              className="text-xs font-mono text-slate-400 hover:text-white px-2.5 py-1 rounded-lg bg-slate-800/50 hover:bg-slate-800 border border-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer"
-              title="Reset starter code"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset</span>
-            </button>
           </div>
 
-          {/* Active Code Input */}
-          <div className="flex-1 p-3 font-mono text-xs text-slate-100 overflow-auto">
+          {/* Active Code Input - Increased vertical padding */}
+          <div className="flex-1 p-5 font-mono text-sm text-slate-100 overflow-auto">
             {activeTab === 'html' && (
               <textarea
                 value={showSolution ? challenge.solutionHtml : html}
                 onChange={(e) => !showSolution && setHtml(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[260px] bg-transparent outline-none resize-none font-mono text-slate-100 leading-relaxed"
+                className="w-full h-full min-h-[300px] bg-transparent outline-none resize-none font-mono text-slate-100 leading-relaxed"
                 spellCheck={false}
               />
             )}
@@ -279,7 +271,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                 value={showSolution ? challenge.solutionCss : css}
                 onChange={(e) => !showSolution && setCss(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[260px] bg-transparent outline-none resize-none font-mono text-emerald-300 leading-relaxed"
+                className="w-full h-full min-h-[300px] bg-transparent outline-none resize-none font-mono text-emerald-300 leading-relaxed"
                 spellCheck={false}
               />
             )}
@@ -288,7 +280,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                 value={showSolution ? challenge.solutionJs : js}
                 onChange={(e) => !showSolution && setJs(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[260px] bg-transparent outline-none resize-none font-mono text-amber-300 leading-relaxed"
+                className="w-full h-full min-h-[300px] bg-transparent outline-none resize-none font-mono text-amber-300 leading-relaxed"
                 spellCheck={false}
               />
             )}

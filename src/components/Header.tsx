@@ -151,10 +151,10 @@ export const Header: React.FC<HeaderProps> = ({
         id="app-header"
         className="sticky top-0 z-30 border-b border-[#27272a] bg-[#121215] text-white shadow-md transition-colors"
       >
-        {/* ROW 1: Main Header Navigation Bar */}
-        <div className="mx-auto flex min-h-14 max-w-[1600px] items-center justify-between gap-3 px-4 sm:px-6">
+        {/* ROW 1: Main Header Navigation Bar - Added padding for better layout */}
+        <div className="mx-auto flex min-h-16 max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-8">
           {/* Left: Brand Logo & Mobile Menu Toggle */}
-          <div className="flex items-center gap-3 shrink-0">
+          <div className="flex items-center gap-4 shrink-0">
             <button
               type="button"
               onClick={() => {
@@ -165,17 +165,17 @@ export const Header: React.FC<HeaderProps> = ({
                   setMobileMenuOpen((prev) => !prev);
                 }
               }}
-              className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#27272a] bg-[#18181c] text-[#a1a1aa] transition-colors hover:border-blue-500/50 hover:bg-[#222228] hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#27272a] bg-[#18181c] text-[#a1a1aa] transition-colors hover:border-blue-500/50 hover:bg-[#222228] hover:text-white"
               aria-label="Toggle curriculum sidebar"
               title="Toggle curriculum sidebar"
             >
-              <Menu className="h-4 w-4" />
+              <Menu className="h-5 w-5" />
             </button>
 
             <button
               type="button"
               onClick={onNavigateHome}
-              className="flex items-center text-left focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-lg p-0.5"
+              className="flex items-center text-left focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-xl p-1"
               aria-label="WebZoneBW SC Home"
             >
               <WebZoneBrandLogo size="md" showSubtitle={true} />
@@ -185,7 +185,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Center: Main Navigation (Desktop & Tablet) */}
           <nav
             aria-label="Main Navigation"
-            className="hidden items-center gap-1 overflow-x-auto no-scrollbar lg:flex"
+            className="hidden items-center gap-2 overflow-x-auto no-scrollbar lg:flex"
           >
             {navItems.map((item) => {
               const isActive = activeNav === item.section;
@@ -194,7 +194,7 @@ export const Header: React.FC<HeaderProps> = ({
                   key={item.section}
                   type="button"
                   onClick={() => handleNavClick(item.section)}
-                  className={`relative whitespace-nowrap px-3 py-1.5 text-xs font-semibold rounded-lg transition-all ${
+                  className={`relative whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-xl transition-all ${
                     isActive
                       ? 'text-white bg-[#222228] border border-[#3f3f46]'
                       : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181c]'
@@ -202,7 +202,7 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   {item.label}
                   {item.section === 'Blog' && unreadNewsCount > 0 && (
-                    <span className="ml-1.5 inline-block h-1.5 w-1.5 rounded-full bg-blue-400" />
+                    <span className="ml-2 inline-block h-2 w-2 rounded-full bg-blue-400" />
                   )}
                 </button>
               );
@@ -210,18 +210,18 @@ export const Header: React.FC<HeaderProps> = ({
           </nav>
 
           {/* Right: Search Control & Sign In / Account Access */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-3 shrink-0">
             {/* Global Search Button */}
             <button
               type="button"
               onClick={onOpenSearch}
-              className="flex h-9 items-center gap-2 rounded-lg border border-[#27272a] bg-[#18181c] px-3 text-xs text-[#a1a1aa] transition-all hover:border-blue-500/50 hover:bg-[#222228] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+              className="flex h-10 items-center gap-3 rounded-xl border border-[#27272a] bg-[#18181c] px-4 text-sm text-[#a1a1aa] transition-all hover:border-blue-500/50 hover:bg-[#222228] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/40"
               aria-label="Open global search"
               title="Search tools, documentation, and resources (⌘K)"
             >
-              <Search className="h-4 w-4 shrink-0 text-blue-400" />
-              <span className="hidden sm:inline font-sans">Search tools...</span>
-              <kbd className="hidden rounded border border-[#3f3f46] bg-[#27272a] px-1.5 py-0.5 font-mono text-[9px] text-[#9ca3af] sm:inline">
+              <Search className="h-5 w-5 shrink-0 text-blue-400" />
+              <span className="hidden sm:inline font-sans">Search...</span>
+              <kbd className="hidden rounded-lg border border-[#3f3f46] bg-[#27272a] px-2 py-0.5 font-mono text-[10px] text-[#9ca3af] sm:inline">
                 ⌘K
               </kbd>
             </button>
@@ -230,7 +230,7 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={() => onOpenAccount()}
-              className={`flex h-9 items-center gap-2 rounded-lg px-3 text-xs font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
+              className={`flex h-10 items-center gap-3 rounded-xl px-4 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
                 hasRealAccount
                   ? 'border border-[#27272a] bg-[#18181c] text-white hover:border-[#3f3f46] hover:bg-[#222228]'
                   : 'border border-blue-500/30 bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
@@ -240,9 +240,9 @@ export const Header: React.FC<HeaderProps> = ({
             >
               {hasRealAccount ? (
                 <>
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-[9px] font-bold">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-blue-500 to-blue-600 text-white text-[10px] font-bold">
                     {user?.method === 'google' ? (
-                      <svg className="h-3 w-3" viewBox="0 0 24 24" fill="none">
+                      <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none">
                         <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
                         <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
                         <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
@@ -256,8 +256,8 @@ export const Header: React.FC<HeaderProps> = ({
                 </>
               ) : (
                 <>
-                  <div className="flex h-5 w-5 items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
-                    <User className="h-3.5 w-3.5" />
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
+                    <User className="h-4 w-4" />
                   </div>
                   <span className="hidden sm:inline font-sans">Sign In</span>
                 </>
