@@ -450,4 +450,39 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    id: 'blog-006',
+    slug: 'getting-started-with-webzonebw',
+    title: 'Getting Started: Your Path to Web Development Mastery',
+    excerpt: 'Welcome to WebZoneBW SC! Learn how to navigate our interactive platform, use our built-in code sandboxes, and follow our comprehensive web development curriculum to start your coding journey.',
+    author: 'WebZoneBW Editorial Team',
+    date: '2025-06-01',
+    readTime: '8 min read',
+    category: 'General',
+    tags: ['WebZoneBW', 'Tutorial', 'Getting Started', 'Web Development'],
+    content: [
+      {
+        heading: 'Welcome to WebZoneBW SC',
+        text: 'WebZoneBW SC is designed to be your all-in-one companion for learning modern web development. Whether you are a complete beginner or an experienced developer looking to sharpen your skills, our platform provides the tools, curriculum, and sandbox environments you need to succeed.',
+      },
+      {
+        heading: 'How to Navigate the Platform',
+        text: 'Our platform is structured into clear chapters, starting from development environment setup to advanced deployment. Use the sidebar to track your progress through our curriculum, and explore the "VisualLab" section to experiment with CSS properties in real-time.',
+        list: [
+          'Curriculum: A structured, step-by-step path from HTML basics to advanced deployment.',
+          'Sandbox: An interactive environment to practice coding without local setup.',
+          'Visualizers: Interactive tools for Flexbox, Grid, and the Box Model.',
+          'AI Tutor: Get instant, context-aware help with your code.',
+        ],
+      },
+      {
+        heading: 'Using the Interactive Sandbox',
+        text: 'The Web REPL Sandbox is the heart of our learning experience. You can write HTML, CSS, and JavaScript, and see your changes reflected instantly. Use it to work through our lessons or to experiment with your own creative ideas.',
+      },
+      {
+        heading: 'Start Your Journey Today',
+        text: 'Your journey starts in the Introduction section. Once you are ready, move on to the Development Environment chapter to set up your workflow, or dive straight into HTML if you are eager to start building. We are excited to support you as you master web development!',
+      },
+    ],
+  },
 ];
