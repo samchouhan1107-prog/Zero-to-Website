@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advertisement Test</title>
+    <style>
+        .ad-container {
+            margin: 20px auto;
+            max-width: 728px;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ccc;
+            background: #f9f9f9;
+        }
+        
+        .ad-container .adsbygoogle {
+            width: 100%;
+            height: auto;
+            min-height: 90px;
+        }
+
+        /* Responsive ad sizes */
+        @media (max-width: 728px) {
+            .ad-container {
+                max-width: 100%;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ad-container {
+                margin: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Advertisement Test Page</h1>
+    
+    <p>This page tests the advertisement implementation:</p>
+    
+    <div class="ad-container">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-2904917114665090"
+             data-ad-slot="7590829298"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <p>The advertisement should appear above this text in a properly sized container.</p>
+    
+    <p>Key features tested:</p>
+    <ul>
+        <li>✓ Proper CSS styling for responsive layout</li>
+        <li>✓ AdSense integration with correct parameters</li>
+        <li>✓ Responsive design that works on different screen sizes</li>
+        <li>✓ No layout shift issues</li>
+    </ul>
+</body>
+</html>

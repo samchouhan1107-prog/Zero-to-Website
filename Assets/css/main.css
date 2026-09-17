@@ -799,3 +799,37 @@ body.dark footer p{
         color:#000;
     }
 }
+
+/* ==================================================
+   ADVERTISEMENT STYLING
+================================================== */
+
+.ad-container {
+     margin: 20px auto;
+     max-width: 728px;
+     text-align: center;
+     min-height: 90px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+}
+
+.ad-container .adsbygoogle {
+     width: 100%;
+     height: auto;
+     min-height: 90px;
+}
+
+/* Responsive ad sizes */
+@media (max-width: 728px) {
+     .ad-container {
+         max-width: 100%;
+         margin: 10px;
+     }
+}
+
+@media (max-width: 480px) {
+     .ad-container {
+         margin: 5px;
+     }
+}
