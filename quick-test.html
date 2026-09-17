@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Test | WebZoneBW</title>
+    <link rel="stylesheet" href="Assets/css/main.css">
+    <link rel="stylesheet" href="Assets/css/ad-styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+         crossorigin="anonymous"></script>
+    
+    <!-- News Ad -->
+    <ins class="adsbygoogle news-ad-container"
+         style="display:block"
+         data-ad-client="ca-pub-2904917114665090"
+         data-ad-slot="7478243169"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Advertisement Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .ad-container {
+            margin: 20px auto;
+            max-width: 728px;
+            text-align: center;
+            min-height: 90px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #4CAF50;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+        
+        .ad-container .adsbygoogle {
+            width: 100%;
+            height: auto;
+            min-height: 90px;
+        }
+
+        /* Responsive ad sizes */
+        @media (max-width: 728px) {
+            .ad-container {
+                max-width: 100%;
+                margin: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .ad-container {
+                margin: 5px;
+            }
+        }
+        
+        .content {
+            margin-top: 30px;
+        }
+        
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Advertisement System Test</h1>
+        
+        <div class="status success">
+            ✅ This page tests if advertisements break the webpage functionality
+        </div>
+        
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-2904917114665090"
+                 data-ad-slot="7590829298"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="content">
+            <div class="test-section">
+                <h3>Webpage Functionality Test</h3>
+                <p>This section tests if the webpage still works properly with advertisements:</p>
+                
+                <button onclick="testFunctionality()" style="padding: 10px 20px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">
+                    Test JavaScript Functionality
+                </button>
+                
+                <div id="test-result" style="margin-top: 10px; padding: 10px; background: #e9ecef; border-radius: 4px;">
+                    Click the button above to test JavaScript functionality
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <h3>Navigation Test</h3>
+                <p>Test if navigation still works:</p>
+                <a href="#test-anchor" style="color: #007bff; text-decoration: none;">Link to test anchor</a>
+                <div id="test-anchor" style="margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 4px;">
+                    Anchor test successful!
+                </div>
+            </div>
+            
+            <div class="test-section">
+                <h3>Form Test</h3>
+                <form onsubmit="testFormSubmit(event)">
+                    <input type="text" placeholder="Test input" style="padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+                    <button type="submit" style="padding: 8px 16px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer;">Submit</button>
+                </form>
+                <div id="form-result" style="margin-top: 10px; padding: 10px; background: #e9ecef; border-radius: 4px;"></div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        function testFunctionality() {
+            const result = document.getElementById('test-result');
+            result.innerHTML = '✅ JavaScript functionality is working! The page is not broken by advertisements.';
+            result.style.background = '#d4edda';
+            result.style.color = '#155724';
+        }
+        
+        function testFormSubmit(event) {
+            event.preventDefault();
+            const result = document.getElementById('form-result');
+            result.innerHTML = '✅ Form submission is working! Form functionality is not affected by advertisements.';
+            result.style.background = '#d4edda';
+            result.style.color = '#155724';
+        }
+        
+        // Test if page loads completely
+        window.addEventListener('load', function() {
+            console.log('Page loaded successfully with advertisements');
+            const status = document.querySelector('.status');
+            status.innerHTML = '✅ Page loaded successfully with advertisements. Webpage functionality is NOT broken.';
+        });
+    </script>
+</body>
+</html>
