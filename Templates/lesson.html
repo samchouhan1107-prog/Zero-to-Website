@@ -8,6 +8,9 @@
     <script src="../Assets/js/main.js" defer></script>
 </head>
 <body>
+    <!-- Skip to main content link for screen readers -->
+    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+    
     <header>
         <div class="logo">
             <a href="../index.html" class="logo-link">
@@ -22,7 +25,7 @@
         </nav>
     </header>
     <div id="settingsPanel" class="settings-panel"></div>
-    <main class="container chapter-page">
+    <main id="main-content" role="main" class="container chapter-page">
         <section class="chapter-header">
             <span class="chapter-badge">Chapter 04</span>
             <h1>Lesson Title</h1>
@@ -100,7 +103,7 @@
             <a href="#" class="btn primary">Next Lesson ➜</a>
         </section>
     </main>
-    <footer>
+    <footer role="contentinfo">
         <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
     </footer>
 </body>

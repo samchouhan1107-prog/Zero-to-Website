@@ -88,36 +88,36 @@ const renderCommandCenter = (panel) => {
 
         <section class="command-section">
             <p class="command-section-heading">Appearance</p>
-            <button id="darkModeBtn" type="button" class="command-btn">🌙 Dark Mode</button>
-            <button id="fontSizeBtn" type="button" class="command-btn">🔤 Font Size</button>
-            <button id="languageBtn" type="button" class="command-btn">🌐 Language</button>
+            <button id="darkModeBtn" type="button" class="command-btn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+            <button id="fontSizeBtn" type="button" class="command-btn" aria-label="Adjust font size">🔤 Font Size</button>
+            <button id="languageBtn" type="button" class="command-btn" aria-label="Change language settings">🌐 Language</button>
         </section>
 
         <div class="command-divider"></div>
 
         <section class="command-section">
             <p class="command-section-heading">Learning</p>
-            <button id="readingModeBtn" type="button" class="command-btn">📖 Reading Mode</button>
-            <button id="notesBtn" type="button" class="command-btn">📝 Notes</button>
-            <button id="bookmarksBtn" type="button" class="command-btn">🔖 Bookmarks</button>
-            <button id="progressBtn" type="button" class="command-btn">📈 Progress</button>
+            <button id="readingModeBtn" type="button" class="command-btn" aria-label="Toggle reading mode">📖 Reading Mode</button>
+            <button id="notesBtn" type="button" class="command-btn" aria-label="Open notes panel">📝 Notes</button>
+            <button id="bookmarksBtn" type="button" class="command-btn" aria-label="Open bookmarks panel">🔖 Bookmarks</button>
+            <button id="progressBtn" type="button" class="command-btn" aria-label="View learning progress">📈 Progress</button>
         </section>
 
         <div class="command-divider"></div>
 
         <section class="command-section">
             <p class="command-section-heading">Utilities</p>
-            <button id="calculatorBtn" type="button" class="command-btn">🧮 Calculator</button>
-            <button id="cheatSheetsBtn" type="button" class="command-btn">📑 Cheat Sheets</button>
-            <button id="shortcutsBtn" type="button" class="command-btn">⌨ Shortcuts</button>
+            <button id="calculatorBtn" type="button" class="command-btn" aria-label="Open calculator">🧮 Calculator</button>
+            <button id="cheatSheetsBtn" type="button" class="command-btn" aria-label="View cheat sheets">📑 Cheat Sheets</button>
+            <button id="shortcutsBtn" type="button" class="command-btn" aria-label="View keyboard shortcuts">⌨ Shortcuts</button>
         </section>
 
         <div class="command-divider"></div>
 
         <section class="command-section">
             <p class="command-section-heading">Support</p>
-            <button id="helpBtn" type="button" class="command-btn">❓ Help</button>
-            <button id="aboutBtn" type="button" class="command-btn">ℹ About</button>
+            <button id="helpBtn" type="button" class="command-btn" aria-label="Get help and support">❓ Help</button>
+            <button id="aboutBtn" type="button" class="command-btn" aria-label="About WebZoneBW SC">ℹ About</button>
         </section>
     `;
 };
