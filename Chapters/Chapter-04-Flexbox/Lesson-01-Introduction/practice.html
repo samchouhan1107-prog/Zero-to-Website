@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 01 | Flexbox Introduction - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 4.1</span>
+            <h1>Initialize Flexbox Navigation Bar</h1>
+            <p>Activate <code>display: flex</code> to align a brand logo and navigational links horizontally with clean vertical centering.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Apply <code>display: flex; align-items: center; justify-content: space-between;</code> to the header.</li>
+                <li>2. Give the navigation items a gap of <code>16px</code>.</li>
+                <li>3. Add an action button that aligns nicely on the right.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .flex-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 16px 24px;
+    font-family: system-ui, sans-serif;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+  }
+  .flex-brand {
+    font-weight: 800;
+    color: #ef233c;
+    font-size: 18px;
+    letter-spacing: -0.5px;
+  }
+  .flex-links {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .flex-links a {
+    text-decoration: none;
+    color: #475569;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .flex-links a:hover {
+    color: #0f172a;
+  }
+</style>
+
+<nav class="flex-navbar">
+  <div class="flex-brand">FlexMatrix</div>
+  <ul class="flex-links">
+    <li><a href="#">Showcase</a></li>
+    <li><a href="#">Components</a></li>
+    <li><a href="#">Guides</a></li>
+  </ul>
+  <button style="background: #0f172a; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+    Get Started 🚀
+  </button>
+</nav></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 01</a>
+            <a href="../Lesson-02-Flex-Container/lesson.html">Next: Lesson 02 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

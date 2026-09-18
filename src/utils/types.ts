@@ -6,8 +6,10 @@ export type VisualType =
   | 'box-model'
   | 'flexbox'
   | 'grid'
+  | 'css-grid'
   | 'dom-tree'
   | 'js-event'
+  | 'syntax-breakdown'
   | 'responsive-view'
   | 'bootstrap-grid'
   | 'git-flow'
@@ -64,7 +66,7 @@ export interface LessonVideo {
   keyPoints: string[];
   timestamps: VideoTimestamp[];
   transcript: VideoTranscriptItem[];
-  demoAnimationType: 'packet-route' | 'dom-build' | 'css-cascade' | 'flex-align' | 'grid-track' | 'js-event' | 'git-branch' | 'deploy-cloud';
+  demoAnimationType: 'packet-route' | 'dom-build' | 'css-cascade' | 'flex-align' | 'grid-track' | 'grid-tracks' | 'js-event' | 'js-exec' | 'git-branch' | 'deploy-cloud';
 }
 
 export interface TestCase {
@@ -251,10 +253,39 @@ export interface LessonActivityDeck {
   }[];
 }
 
+export interface AchievementItem {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  xpReward: number;
+  unlocked: boolean;
+  unlockedAt?: string | null;
+}
+
+export interface SmartResumeInfo {
+  lastCompletedLesson: string | null;
+  lastCompletedTitle?: string | null;
+  nextLessonId: string;
+  nextChapterId: string;
+  nextLessonTitle: string;
+  nextChapterNumber: string;
+  completedCount: number;
+  totalCount: number;
+  percentComplete: number;
+  isCourseCompleted: boolean;
+}
+
 export interface UserProgress {
   completedLessons: Record<string, boolean>;
   completedChallenges: Record<string, boolean>;
   completedActivities?: Record<string, boolean>;
+  practiceCompletions?: Record<string, { completedAt: string; verified: boolean; codeLength?: number }>;
+  lessonCompletions?: Record<string, { completedAt: string; verified: boolean }>;
+  lastVerifiedLesson?: string;
+  lastVerifiedChapter?: string;
+  currentLearningPath?: string;
+  completionTimestamps?: Record<string, string>;
   quizScores: Record<string, number>;
   claimedMilestones: string[];
   bookmarks: string[];
@@ -263,6 +294,12 @@ export interface UserProgress {
   streakDays: number;
   lastActiveDate: string;
   xpPoints: number;
+  achievements?: Array<{ id: string; title: string; unlockedAt: string; icon: string; description: string }>;
+  finalProjectSubmitted?: boolean;
+  finalProjectVerified?: boolean;
+  finalProjectDetails?: { title: string; techStack?: string[]; description?: string; submittedAt: string };
+  courseCompleted?: boolean;
+  courseCompletedAt?: string;
 }
 
 export type AppTheme = 'dark' | 'light';

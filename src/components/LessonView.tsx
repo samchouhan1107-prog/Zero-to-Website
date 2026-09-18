@@ -44,6 +44,9 @@ import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
 import { getActivityDeckForLesson } from '../data/activitiesData';
+import { AdvertisementBanner } from './AdvertisementBanner';
+import { FinalProjectSubmission } from './FinalProjectSubmission';
+import { UserProgress } from '../utils/types';
 
 interface LessonViewProps {
   lesson: Lesson;
@@ -59,6 +62,9 @@ interface LessonViewProps {
   onOpenTutor: (topic: string, code?: string) => void;
   allChapters: Chapter[];
   completedLessons?: Record<string, boolean>;
+  progress?: UserProgress;
+  onUpdateProgress?: (updated: UserProgress) => void;
+  onOpenCertificate?: () => void;
 }
 
 export const LessonView: React.FC<LessonViewProps> = ({
@@ -75,6 +81,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
   onOpenTutor,
   allChapters,
   completedLessons = {},
+  progress,
+  onUpdateProgress,
+  onOpenCertificate,
 }) => {
   const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<Record<string, number>>({});
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
@@ -150,8 +159,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
       case 'flexbox':
         return <FlexboxVisualizer />;
       case 'grid':
+      case 'css-grid':
         return <GridVisualizer />;
       case 'js-event':
+      case 'syntax-breakdown':
         return <JsDomEventVisualizer />;
       case 'responsive-view':
         return <ResponsiveViewportVisualizer />;
@@ -743,6 +754,18 @@ export const LessonView: React.FC<LessonViewProps> = ({
         </section>
       )}
 
+      {/* Capstone Final Project Submission (Chapter 10 specific) */}
+      {(lesson.id === 'ch-10-l-01' || lesson.chapterId === 'ch-10') && progress && onUpdateProgress && (
+        <FinalProjectSubmission
+          progress={progress}
+          onProjectSubmitted={(updated) => {
+            onUpdateProgress(updated);
+            onCompleteLesson(lesson.id);
+          }}
+          onOpenCertificate={onOpenCertificate}
+        />
+      )}
+
       {/* 10. Checkpoint Quiz */}
       <section
         id="section-quiz"
@@ -958,6 +981,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
           ))}
         </ul>
       </section>
+
+      {/* Non-intrusive Sponsor Banner */}
+      <AdvertisementBanner className="my-8" />
 
       {/* 14. Chapter Navigation Footer */}
       <nav

@@ -17,9 +17,10 @@ export const AdvertisementBanner: React.FC<AdvertisementBannerProps> = ({
 
   useEffect(() => {
     // Only initialize AdSense if the element exists and window.adsbygoogle is available
-    if (adRef.current && window.adsbygoogle) {
+    const win = typeof window !== 'undefined' ? (window as unknown as { adsbygoogle?: unknown[] }) : undefined;
+    if (adRef.current && win?.adsbygoogle) {
       try {
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        (win.adsbygoogle = win.adsbygoogle || []).push({});
       } catch (error) {
         console.warn('AdSense initialization failed:', error);
       }

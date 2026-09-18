@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 03 | Colors & Typography - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.3</span>
+            <h1>Design with CSS Variables &amp; Typographic Hierarchy</h1>
+            <p>Declare CSS custom properties for brand color, surface background, and text tone, then build a readable editorial card.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Define CSS variables: <code>--brand: #ef233c; --surface: #ffffff; --text: #1e293b;</code>.</li>
+                <li>2. Set heading to 24px with tight line height (1.2), and body text to 16px with relaxed line height (1.6).</li>
+                <li>3. Constrain paragraph width to <code>max-width: 55ch;</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  :root {
+    --brand-crimson: #ef233c;
+    --card-surface: #ffffff;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+  }
+  .editorial-card {
+    background: var(--card-surface);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+    max-width: 440px;
+    margin: 20px auto;
+    font-family: system-ui, sans-serif;
+  }
+  .editorial-card h2 {
+    color: var(--text-primary);
+    font-size: 22px;
+    line-height: 1.25;
+    margin: 0 0 10px;
+  }
+  .editorial-card p {
+    color: var(--text-secondary);
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 45ch;
+  }
+</style>
+
+<div class="editorial-card">
+  <h2>Design Token Typography</h2>
+  <p>
+    Notice how clean and legible this text is because the font size is at least 16px and the line height provides ample vertical breathing room.
+  </p>
+  <button style="background: var(--brand-crimson); color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; cursor: pointer;">
+    Explore Colors
+  </button>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 03</a>
+            <a href="../Lesson-04-Display-Positioning/lesson.html">Next: Lesson 04 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

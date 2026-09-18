@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 03 | Rows & Columns - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 5.3</span>
+            <h1>Build an App Shell with Sidebar and Main Feed</h1>
+            <p>Construct a 2-column dashboard layout where the sidebar occupies a fixed <code>240px</code> and the main feed expands using <code>1fr</code>.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Set <code>grid-template-columns: 240px 1fr;</code> on the dashboard shell.</li>
+                <li>2. Give both the sidebar and main feed clean background surfaces and padding.</li>
+                <li>3. Add <code>gap: 20px;</code> for clean spacing.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .app-shell {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    max-width: 600px;
+    margin: 20px auto;
+    font-family: system-ui, sans-serif;
+    min-height: 240px;
+  }
+  .sidebar {
+    background: #0f172a;
+    color: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .sidebar li a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  .sidebar li a.active {
+    color: #ef233c;
+    font-weight: bold;
+  }
+  .main-feed {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 24px;
+  }
+</style>
+
+<div class="app-shell">
+  <aside class="sidebar">
+    <div style="font-weight: 800; font-size: 16px; color: white;">CloudApp</div>
+    <ul>
+      <li><a href="#" class="active">📊 Overview</a></li>
+      <li><a href="#">📁 Projects</a></li>
+      <li><a href="#">👥 Team</a></li>
+      <li><a href="#">⚙ Settings</a></li>
+    </ul>
+  </aside>
+
+  <main class="main-feed">
+    <h3 style="margin: 0 0 12px; color: #0f172a;">Active Analytics</h3>
+    <p style="color: #64748b; font-size: 14px; line-height: 1.6;">
+      This main panel takes up all remaining width (1fr) while the sidebar locks to its designated track width.
+    </p>
+  </main>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 03</a>
+            <a href="../Lesson-04-Grid-Areas/lesson.html">Next: Lesson 04 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

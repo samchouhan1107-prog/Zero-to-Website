@@ -217,15 +217,29 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
 }
 
 /**
- * Guest mode — no account needed.
+ * Guest mode — with persistent server session
  */
-export function createGuestSession(): AuthUser {
-  const guest: AuthUser = { id: "guest-" + generateId(), name: "Guest", email: "", method: "guest" };
+export async function createGuestSession(): Promise<AuthUser> {
+  try {
+    const res = await fetch(`${API_BASE}/auth/guest`, { method: "POST" });
+    if (res.ok) {
+      const data = await res.json();
+      if (data.token) {
+        localStorage.setItem(SESSION_KEY, data.token);
+      }
+      if (data.user) {
+        setCurrentUser(data.user);
+        return data.user;
+      }
+    }
+  } catch {}
+
+  const guest: AuthUser = { id: "guest-" + generateId(), name: "Guest Learner", email: "", method: "guest" };
   setCurrentUser(guest);
   return guest;
 }
 
-/* ── Progress (localStorage — always works offline) ────── */
+/* ── Progress (Server Source of Truth with Local Cache) ────── */
 
 const PROGRESS_KEY = "wz_storehouse_progress";
 
@@ -241,39 +255,211 @@ export function saveLocalProgress(progress: any): void {
 }
 
 export async function fetchProgress(): Promise<any | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/progress`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) {
+          saveLocalProgress(data.progress);
+          return data.progress;
+        }
+      }
+    } catch {}
+  }
   return fetchLocalProgress();
 }
 
 export async function syncProgress(progress: any): Promise<any | null> {
   saveLocalProgress(progress);
 
-  // Optionally sync to server
-  if (await isApiAvailable()) {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
     try {
-      const token = localStorage.getItem(SESSION_KEY);
-      await fetch(`${API_BASE}/user/progress`, {
+      const res = await fetch(`${API_BASE}/user/progress`, {
         method: "PUT",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify(progress),
       });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) {
+          saveLocalProgress(data.progress);
+          return data.progress;
+        }
+      }
     } catch {}
   }
 
   return progress;
 }
 
-export async function toggleBookmark(lessonId: string): Promise<boolean | null> {
-  return null; // Handled locally by App.tsx
+export async function fetchSmartResume(): Promise<any | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/resume`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.resume;
+      }
+    } catch {}
+  }
+  return null;
 }
 
-export async function saveNote(lessonId: string, content: string): Promise<boolean> {
-  return true; // Handled locally by App.tsx
+export async function fetchAchievements(): Promise<any[] | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/achievements`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.achievements;
+      }
+    } catch {}
+  }
+  return null;
 }
 
-export async function completeLesson(lessonId: string): Promise<{ xpAwarded: number } | null> {
-  return { xpAwarded: 50 };
+export async function completeLesson(lessonId: string): Promise<{ success: boolean; progress?: any; xpAwarded: number; newlyUnlockedAchievements?: any[] } | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/complete-lesson`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ lessonId }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) saveLocalProgress(data.progress);
+        return data;
+      }
+    } catch {}
+  }
+  return { success: true, xpAwarded: 50 };
+}
+
+export async function completePractice(lessonId: string, challengeId: string, codeSnippet?: string): Promise<{ success: boolean; progress?: any; xpAwarded: number; newlyUnlockedAchievements?: any[] } | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/complete-practice`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ lessonId, challengeId, codeSnippet }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) saveLocalProgress(data.progress);
+        return data;
+      }
+    } catch {}
+  }
+  return { success: true, xpAwarded: 50 };
+}
+
+export async function completeChallenge(challengeId: string): Promise<{ success: boolean; progress?: any; xpAwarded: number; newlyUnlockedAchievements?: any[] } | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/complete-challenge`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ challengeId }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) saveLocalProgress(data.progress);
+        return data;
+      }
+    } catch {}
+  }
+  return { success: true, xpAwarded: 50 };
+}
+
+export async function submitFinalProject(payload: {
+  title: string;
+  description?: string;
+  techStack?: string[];
+  htmlCode?: string;
+  cssCode?: string;
+  jsCode?: string;
+}): Promise<{ success: boolean; progress?: any; xpAwarded: number; newlyUnlockedAchievements?: any[]; courseCompleted?: boolean } | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/submit-final-project`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) saveLocalProgress(data.progress);
+        return data;
+      }
+    } catch {}
+  }
+  return null;
 }
 
 export async function completeActivity(activityId: string, xpReward: number): Promise<{ xpAwarded: number } | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/complete-activity`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ activityId, xpReward }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.progress) saveLocalProgress(data.progress);
+        return data;
+      }
+    } catch {}
+  }
   return { xpAwarded: xpReward };
+}
+
+export async function toggleBookmark(lessonId: string): Promise<boolean | null> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/bookmarks/toggle`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ lessonId }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        return data.bookmarked;
+      }
+    } catch {}
+  }
+  return null;
+}
+
+export async function saveNote(lessonId: string, content: string): Promise<boolean> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token) {
+    try {
+      const res = await fetch(`${API_BASE}/user/notes/${lessonId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ content }),
+      });
+      return res.ok;
+    } catch {}
+  }
+  return true;
 }

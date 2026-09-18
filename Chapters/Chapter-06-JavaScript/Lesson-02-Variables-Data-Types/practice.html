@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 02 | Variables & Data Types - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 6.2</span>
+            <h1>Build an Interactive Score &amp; Greeting Tracker</h1>
+            <p>Write JavaScript using <code>const</code> for user attributes and <code>let</code> for score counting, updating the display on button click.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Declare a <code>const username = "Dev Explorer";</code>.</li>
+                <li>2. Declare a <code>let score = 10;</code> that increments when the user clicks the action button.</li>
+                <li>3. Update the DOM output using template strings <code>`Score: ${score}`</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor"><div style="background: #ffffff; border: 2px solid #3b82f6; border-radius: 12px; padding: 24px; max-width: 400px; margin: 20px auto; font-family: system-ui, sans-serif; text-align: center;">
+  <h3 id="userTitle" style="color: #1e3a8a; margin: 0 0 8px;">Player Profile</h3>
+  <div style="font-size: 36px; font-weight: 800; color: #3b82f6; margin: 12px 0;" id="scoreDisplay">0</div>
+  <p style="color: #64748b; font-size: 14px; margin-bottom: 20px;" id="statusText">Click below to gain experience points!</p>
+
+  <button id="boostBtn" style="background: #3b82f6; color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px;">
+    Level Up +10 ⚡
+  </button>
+</div>
+
+<script>
+  const playerName = "Sameer";
+  let expPoints = 0;
+
+  const titleEl = document.getElementById("userTitle");
+  const displayEl = document.getElementById("scoreDisplay");
+  const statusEl = document.getElementById("statusText");
+  const btnEl = document.getElementById("boostBtn");
+
+  titleEl.innerText = `Player: ${playerName}`;
+
+  btnEl.addEventListener("click", () => {
+    expPoints += 10;
+    displayEl.innerText = expPoints;
+    statusEl.innerText = `Great job! Total XP is now ${expPoints}.`;
+  });
+</script></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 02</a>
+            <a href="../Lesson-03-Functions-Events/lesson.html">Next: Lesson 03 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

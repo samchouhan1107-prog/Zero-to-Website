@@ -50,6 +50,77 @@ function getAi(): GoogleGenAI | null {
   return aiClient;
 }
 
+// Resilient static routing & URL decoding for /Chapters and /Assets (handles spaces, %20, and '20' without percent)
+const chaptersRoot = path.join(process.cwd(), "Chapters");
+const assetsRoot = path.join(process.cwd(), "Assets");
+
+app.use("/Assets", express.static(assetsRoot));
+
+app.use("/Chapters", (req, res, next) => {
+  let subPath = req.url.split("?")[0];
+  try {
+    subPath = decodeURIComponent(subPath);
+  } catch {}
+
+  // Normalization for missing percent in '%20' (e.g. Chapter-01-Development20Environment)
+  const normalizedCandidate = subPath.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, "$1 $2");
+
+  // 1. Direct match on decoded path
+  let targetPath = path.join(chaptersRoot, subPath);
+  if (fs.existsSync(targetPath)) {
+    if (fs.statSync(targetPath).isDirectory()) {
+      const indexFile = path.join(targetPath, "index.html");
+      if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
+    } else {
+      return res.sendFile(targetPath);
+    }
+  }
+
+  // 2. Normalized space match
+  targetPath = path.join(chaptersRoot, normalizedCandidate);
+  if (fs.existsSync(targetPath)) {
+    if (fs.statSync(targetPath).isDirectory()) {
+      const indexFile = path.join(targetPath, "index.html");
+      if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
+    } else {
+      return res.sendFile(targetPath);
+    }
+  }
+
+  // 3. Fuzzy directory matching for chapter folders
+  try {
+    const allChapterDirs = fs.existsSync(chaptersRoot) ? fs.readdirSync(chaptersRoot) : [];
+    const segments = subPath.split("/").filter(Boolean);
+    if (segments.length > 0) {
+      const firstSegment = segments[0];
+      const normFirst = firstSegment
+        .replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, "$1 $2")
+        .replace(/[-_]+/g, " ")
+        .toLowerCase();
+
+      const matchedDir = allChapterDirs.find((dir) => {
+        const normDir = dir.replace(/[-_]+/g, " ").toLowerCase();
+        return normDir === normFirst || normDir.includes(normFirst) || normFirst.includes(normDir);
+      });
+
+      if (matchedDir) {
+        const remaining = segments.slice(1).join("/");
+        const resolved = remaining ? path.join(chaptersRoot, matchedDir, remaining) : path.join(chaptersRoot, matchedDir);
+        if (fs.existsSync(resolved)) {
+          if (fs.statSync(resolved).isDirectory()) {
+            const indexFile = path.join(resolved, "index.html");
+            if (fs.existsSync(indexFile)) return res.sendFile(indexFile);
+          } else {
+            return res.sendFile(resolved);
+          }
+        }
+      }
+    }
+  } catch {}
+
+  next();
+});
+
 // API Routes
 app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });

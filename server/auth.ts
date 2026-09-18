@@ -8,6 +8,7 @@ import {
   deleteSession,
   findSession,
   hashPassword,
+  getProgress,
 } from "./db";
 
 const router = Router();
@@ -135,11 +136,21 @@ router.post("/logout", (req, res) => {
 
 /* ── POST /api/auth/guest ──────────────────────────────── */
 router.post("/guest", (req, res) => {
-  const token = crypto.randomBytes(48).toString("hex");
+  const guestId = "guest_" + crypto.randomUUID();
+  const guestUser = createUser(
+    "Guest Learner",
+    `${guestId}@guest.webzonebw.shop`,
+    crypto.randomBytes(16).toString("hex"),
+    "guest"
+  );
+  const session = createSession(guestUser.id);
+  getProgress(guestUser.id);
+
   res.json({
     success: true,
-    user: { id: "guest", name: "Guest", email: "", method: "guest" },
-    token,
+    user: { id: guestUser.id, name: guestUser.name, email: guestUser.email, method: "guest" },
+    token: session.token,
+    expiresAt: session.expiresAt,
   });
 });
 

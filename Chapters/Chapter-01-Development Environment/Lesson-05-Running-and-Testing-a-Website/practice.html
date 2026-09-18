@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 05 | Running and Testing a Website - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 1.5</span>
+            <h1>Build a Website Quality Assurance Audit Card</h1>
+            <p>Assemble an interactive deployment checklist card displaying passing status badges for HTML validation, mobile responsiveness, and clean console logs.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Create a checklist box showing 3 QA items (HTML Validation, Mobile Viewport, 0 Console Errors).</li>
+                <li>2. Give each item a green checkmark or pill badge (e.g. <code>PASS</code>).</li>
+                <li>3. Add a primary button: <strong>"Ready to Deploy 🚀"</strong>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML)</h3>
+                    <textarea id="htmlEditor"><div style="background: #ffffff; border: 2px solid #10b981; border-radius: 12px; padding: 24px; font-family: system-ui, sans-serif; max-width: 460px; margin: 0 auto; box-shadow: 0 8px 20px rgba(16, 185, 129, 0.1);">
+  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+    <h2 style="margin: 0; font-size: 18px; color: #065f46;">🚀 QA Launch Readiness</h2>
+    <span style="background: #d1fae5; color: #047857; padding: 4px 10px; border-radius: 9999px; font-size: 12px; font-weight: bold;">100% READY</span>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; font-size: 14px; color: #1e293b;">
+    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
+      <span>✔ W3C HTML5 Validated</span>
+      <strong style="color: #059669;">PASSED</strong>
+    </div>
+    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid #f1f5f9; padding-bottom: 8px;">
+      <span>📱 Mobile Viewport Responsive</span>
+      <strong style="color: #059669;">PASSED</strong>
+    </div>
+    <div style="display: flex; justify-content: space-between;">
+      <span>⚡ 0 DevTools Console Errors</span>
+      <strong style="color: #059669;">PASSED</strong>
+    </div>
+  </div>
+
+  <button style="width: 100%; margin-top: 20px; background: #059669; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px;">
+    Deploy Website to Production 🚀
+  </button>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 05</a>
+            <a href="../../Chapter-02-HTML/index.html">Next: Chapter 02 HTML ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

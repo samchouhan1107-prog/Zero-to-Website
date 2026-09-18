@@ -258,8 +258,8 @@ export const AccountModal: React.FC<AccountModalProps> = ({
   };
 
   /* ── Guest ────────────────────────────────────────────── */
-  const handleContinueAsGuest = () => {
-    const guest = authService.createGuestSession();
+  const handleContinueAsGuest = async () => {
+    const guest = await authService.createGuestSession();
     login(guest);
     if (onAuthSuccess) {
       onAuthSuccess();

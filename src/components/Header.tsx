@@ -11,7 +11,6 @@ import {
 import { UserProgress, AppTheme, ViewMode } from '../utils/types';
 import { WebZoneBrandLogo } from './WebZoneBrandLogo';
 import { useAuth } from '../utils/AuthContext';
-import { AdvertisementBanner } from './AdvertisementBanner';
 
 export interface HeaderProps {
   onToggleSidebar?: () => void;
@@ -148,9 +147,6 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <>
-      {/* Advertisement Banner */}
-      <AdvertisementBanner className="border-b" format="horizontal" />
-
       <header
         id="app-header"
         className="sticky top-0 z-30 border-b border-[#27272a] bg-[#121215] text-white shadow-md transition-colors"

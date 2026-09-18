@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 05 | Spacing, Borders & Visual Styling - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 03</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 03 • Lesson 05</span>
+            <h1>Spacing, Borders &amp; Visual Styling</h1>
+            <p>Master mathematical padding, margin collapse rules, border-radius geometry, CSS box-shadows, and modern CSS gradients.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Padding Rule</h3>
+                    <p>Horizontal = 2x Vertical</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Radius Rule</h3>
+                    <p>Inner = Outer - Padding</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Shadows</h3>
+                    <p>Layered soft elevations</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>25 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Padding and Margin Rhythm</h2>
+            <p>Visual polish comes from consistent spacing rhythm. Always follow mathematical proportions:</p>
+            <ul class="chapter-list">
+                <li><strong>Buttons:</strong> Horizontal padding should be exactly 2x the vertical padding (e.g. <code>padding: 10px 20px;</code> or <code>padding: 12px 24px;</code>).</li>
+                <li><strong>Nested Corners:</strong> When a child box sits inside a padded parent, <code>Inner Radius = Outer Radius - Distance/Padding</code> so curves fit flush without ugly pinched gaps.</li>
+                <li><strong>Margin Collapse:</strong> Vertical margins between two adjacent block elements collapse into the single largest margin value rather than adding together.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Modern Elevation with Box Shadow</h2>
+            <div class="code-box">
+                <pre><code>/* Multi-layered soft drop shadow */
+.card-elevated {
+    box-shadow: 
+        0 1px 3px rgba(0, 0, 0, 0.05),
+        0 8px 24px rgba(0, 0, 0, 0.08);
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Practice Challenge</h2>
+            <p>Construct a mathematically styled button and container card in the practice sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 05 Practice Challenge →</h3>
+                <p>Test spacing math, corner radii, and shadow elevations.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-04-Display-Positioning/lesson.html">⬅ Lesson 04: Display & Positioning</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

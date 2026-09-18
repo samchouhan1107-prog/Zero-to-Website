@@ -16,8 +16,11 @@ import {
   Server,
   Sparkles,
   Terminal,
+  Trophy,
   Wrench,
   Zap,
+  Flame,
+  Award,
 } from 'lucide-react';
 import { Chapter, UserProgress } from '../utils/types';
 import { WebZoneDeveloperGraphic } from './WebZoneDeveloperGraphic';
@@ -75,8 +78,11 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
   const [activeToolCategory, setActiveToolCategory] = useState<ToolCategory>('All');
 
   const allLessons = chapters.flatMap((chapter) => chapter.lessons);
-  const completedCount = Object.values(progress.completedLessons).filter(Boolean).length;
-  const nextIncompleteLesson = allLessons.find((lesson) => !progress.completedLessons[lesson.id]) || allLessons[0];
+  const completedCount = Object.values(progress.completedLessons || {}).filter(Boolean).length;
+  const totalLessons = allLessons.length;
+  const percentComplete = totalLessons > 0 ? Math.round((completedCount / totalLessons) * 100) : 0;
+  const nextIncompleteLesson = allLessons.find((lesson) => !progress.completedLessons?.[lesson.id]) || allLessons[0];
+  const nextChapter = chapters.find((c) => c.lessons.some((l) => l.id === nextIncompleteLesson?.id)) || chapters[0];
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -363,6 +369,60 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               </div>
             </form>
 
+            {/* Guided Learning Track / Smart Resume */}
+            <div className="rounded-xl border border-blue-500/20 bg-[#16161c] p-4 shadow-md space-y-3">
+              <div className="flex flex-wrap items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                    <BookOpen className="h-3.5 w-3.5" />
+                  </span>
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#d4d4d8]">
+                    {completedCount === 0 ? 'Start Learning Track' : progress.courseCompleted ? 'Curriculum Completed' : 'Continue Learning Track'}
+                  </span>
+                </div>
+
+                <div className="flex items-center gap-3 text-xs">
+                  {progress.streakDays > 0 && (
+                    <span className="flex items-center gap-1 font-mono font-bold text-amber-400">
+                      <Flame className="h-3.5 w-3.5 fill-amber-400" />
+                      {progress.streakDays} Day{progress.streakDays > 1 ? 's' : ''} Streak
+                    </span>
+                  )}
+                  <span className="font-mono text-emerald-400 font-bold">
+                    {completedCount}/{totalLessons} Lessons ({percentComplete}%)
+                  </span>
+                </div>
+              </div>
+
+              {/* Progress Bar */}
+              <div className="h-1.5 w-full rounded-full bg-[#27272a] overflow-hidden">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-blue-500 to-emerald-400 transition-all duration-500"
+                  style={{ width: `${Math.max(4, percentComplete)}%` }}
+                />
+              </div>
+
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
+                <div className="min-w-0 flex-1">
+                  <p className="text-[11px] font-mono text-[#71717a]">
+                    {progress.courseCompleted ? 'All 11 Chapters Mastered' : `Chapter ${nextChapter?.number || '00'} · ${nextChapter?.title || 'Web Foundations'}`}
+                  </p>
+                  <p className="text-xs sm:text-sm font-bold text-white truncate">
+                    {progress.courseCompleted ? '🎉 Capstone Project & Verifiable Credential' : nextIncompleteLesson?.title || 'The Universal Web & Internet Architecture'}
+                  </p>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => onSelectLesson(nextIncompleteLesson?.id || 'ch-00-l-01')}
+                  className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 text-xs font-bold text-slate-950 transition-colors shrink-0 shadow-sm"
+                >
+                  <span>{completedCount === 0 ? 'Start Course' : progress.courseCompleted ? 'Review Capstone' : 'Resume Lesson'}</span>
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </button>
+              </div>
+            </div>
+
             {/* Primary and Secondary CTAs */}
             <div className="flex flex-wrap items-center gap-3 pt-2">
               {/* Dominant CTA: Explore Tools */}
@@ -519,35 +579,52 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
               <div className="flex items-center gap-2 font-bold text-white text-base">
                 <Compass className="h-4 w-4 text-blue-400" />
-                <span>Featured Curriculum Tracks</span>
+                <span>Curriculum Roadmap</span>
               </div>
-              <span className="font-mono text-xs text-[#71717a]">5 Chapters · 20 Lessons</span>
+              <span className="font-mono text-xs text-[#71717a]">{chapters.length} Chapters · {allLessons.length} Comprehensive Lessons</span>
             </div>
 
-            <div className="divide-y divide-[#27272a]/70">
-              {chapters.slice(0, 4).map((ch) => (
-                <div key={ch.id} className="py-3 flex items-start justify-between gap-3 group">
-                  <div className="space-y-1">
-                    <div className="flex items-center gap-2">
-                      <span className="font-mono text-[10px] font-bold px-1.5 py-0.5 rounded bg-[#27272a] text-blue-400">
-                        Ch {ch.number}
-                      </span>
-                      <h4 className="text-sm font-bold text-white group-hover:text-blue-400 transition-colors">
-                        {ch.title}
-                      </h4>
+            <div className="divide-y divide-[#27272a]/70 max-h-[360px] overflow-y-auto pr-1">
+              {chapters.map((ch) => {
+                const chDoneCount = ch.lessons.filter((l) => progress.completedLessons?.[l.id]).length;
+                const chTotal = ch.lessons.length;
+                const isChapterDone = chTotal > 0 && chDoneCount === chTotal;
+
+                return (
+                  <div key={ch.id} className="py-2.5 flex items-center justify-between gap-3 group">
+                    <div className="space-y-0.5 min-w-0">
+                      <div className="flex items-center gap-2">
+                        <span className={`font-mono text-[10px] font-bold px-1.5 py-0.5 rounded ${
+                          isChapterDone
+                            ? 'bg-emerald-500/20 text-emerald-400'
+                            : chDoneCount > 0
+                            ? 'bg-blue-500/20 text-blue-400'
+                            : 'bg-[#27272a] text-[#a1a1aa]'
+                        }`}>
+                          Ch {ch.number}
+                        </span>
+                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-400 transition-colors truncate">
+                          {ch.title}
+                        </h4>
+                        {isChapterDone && (
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                        )}
+                      </div>
+                      <p className="text-[11px] text-[#71717a] font-mono">
+                        {chDoneCount}/{chTotal} lessons completed
+                      </p>
                     </div>
-                    <p className="text-xs text-[#a1a1aa] line-clamp-1">{ch.description}</p>
+                    <button
+                      type="button"
+                      onClick={() => onSelectLesson(ch.lessons[0]?.id || 'ch-00-l-01')}
+                      className="shrink-0 inline-flex items-center gap-1 rounded-md border border-[#27272a] bg-[#1c1c22] px-2.5 py-1 text-xs font-semibold text-[#d4d4d8] hover:border-blue-500/50 hover:text-white transition-colors"
+                    >
+                      <span>{isChapterDone ? 'Review' : 'Open'}</span>
+                      <ArrowRight className="h-3 w-3" />
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => onSelectLesson(ch.lessons[0]?.id || 'ch-00-l-01')}
-                    className="shrink-0 inline-flex items-center gap-1 rounded-md border border-[#27272a] bg-[#1c1c22] px-2.5 py-1 text-xs font-semibold text-[#d4d4d8] hover:border-blue-500/50 hover:text-white transition-colors"
-                  >
-                    <span>Read</span>
-                    <ArrowRight className="h-3 w-3" />
-                  </button>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 

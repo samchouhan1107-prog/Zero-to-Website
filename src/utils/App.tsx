@@ -166,15 +166,41 @@ export default function App() {
       return updatedProgress;
     });
 
-    // Deep-link URL parameter resolution for sitemap indexing & direct navigation
+    // Deep-link URL parameter & pathname resolution with resilient URL decoding
     try {
+      const normalizeRouteToken = (token: string): string => {
+        if (!token) return '';
+        let decoded = token;
+        try {
+          decoded = decodeURIComponent(token);
+        } catch {}
+        // Fix missing percent in '%20' where URL became e.g. Chapter-01-Development20Environment
+        decoded = decoded.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, '$1 $2');
+        return decoded.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+      };
+
       const params = new URLSearchParams(window.location.search);
-      const lessonParam = params.get('lesson');
-      const chapterParam = params.get('chapter');
+      const rawLessonParam = params.get('lesson');
+      const rawChapterParam = params.get('chapter');
       const viewParam = params.get('view') as ViewMode | null;
       const toolParam = params.get('tool') as VisualizerId | null;
       const legalParam = params.get('legal') as PolicyTab | null;
       const blogParam = params.get('blog') as string | null;
+
+      // Also check pathname (e.g. /Chapters/Chapter-01-Development20Environment/Lesson-02-...)
+      const pathname = window.location.pathname || '';
+      let pathChapterMatch: string | null = null;
+      let pathLessonMatch: string | null = null;
+      if (pathname.includes('/Chapters/') || pathname.includes('/chapter/')) {
+        const parts = pathname.split('/').filter(Boolean);
+        for (const part of parts) {
+          if (/chapter/i.test(part)) pathChapterMatch = part;
+          if (/lesson/i.test(part)) pathLessonMatch = part;
+        }
+      }
+
+      const chapterCandidate = rawChapterParam || pathChapterMatch;
+      const lessonCandidate = rawLessonParam || pathLessonMatch;
 
       if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
         setLegalModalTab(legalParam);
@@ -187,17 +213,45 @@ export default function App() {
         return;
       }
 
-      if (lessonParam) {
-        const lessonFound = chapters.some((c) => c.lessons.some((l) => l.id === lessonParam));
-        if (lessonFound) {
-          setCurrentLessonId(lessonParam);
+      // 1. Resolve lesson if specified
+      if (lessonCandidate) {
+        const normLesson = normalizeRouteToken(lessonCandidate);
+        // Direct ID match
+        let foundLesson = chapters
+          .flatMap((c) => c.lessons)
+          .find((l) => l.id.toLowerCase() === normLesson || l.id.toLowerCase() === lessonCandidate.toLowerCase());
+
+        // Slug / title match
+        if (!foundLesson) {
+          foundLesson = chapters
+            .flatMap((c) => c.lessons)
+            .find((l) => {
+              const normTitle = normalizeRouteToken(l.title);
+              return normLesson.includes(normTitle) || normTitle.includes(normLesson);
+            });
+        }
+
+        if (foundLesson) {
+          setCurrentLessonId(foundLesson.id);
           setActiveView('lesson');
           return;
         }
       }
 
-      if (chapterParam) {
-        const foundChapter = chapters.find((c) => c.id === chapterParam);
+      // 2. Resolve chapter if specified
+      if (chapterCandidate) {
+        const normChapter = normalizeRouteToken(chapterCandidate);
+        // Extract number like "01" or "1"
+        const numMatch = chapterCandidate.match(/\b(0\d|10|\d)\b/);
+        const candidateNum = numMatch ? numMatch[1].padStart(2, '0') : null;
+
+        const foundChapter = chapters.find((c) => {
+          if (c.id.toLowerCase() === normChapter || c.id.toLowerCase() === chapterCandidate.toLowerCase()) return true;
+          if (candidateNum && c.number === candidateNum) return true;
+          const normTitle = normalizeRouteToken(c.title);
+          return normChapter.includes(normTitle) || normTitle.includes(normChapter);
+        });
+
         if (foundChapter && foundChapter.lessons.length > 0) {
           setCurrentLessonId(foundChapter.lessons[0].id);
           setActiveView('lesson');
@@ -332,7 +386,8 @@ export default function App() {
     });
   };
 
-  const handleCompleteLesson = (lessonId: string) => {
+  const handleCompleteLesson = async (lessonId: string) => {
+    // 1. Optimistic client update
     setProgress((prev) => {
       const isAlreadyDone = prev.completedLessons[lessonId];
       const withStreak = calculateDailyStreak(prev).updatedProgress;
@@ -345,9 +400,31 @@ export default function App() {
         xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
       };
     });
+
+    // 2. Server-verified progress & achievement evaluation
+    try {
+      const res = await authService.completeLesson(lessonId);
+      if (res && res.progress) {
+        setProgress((prev) => ({
+          ...prev,
+          ...res.progress,
+        }));
+
+        if (res.xpAwarded > 0) {
+          addToast('Lesson Completed! 🎯', `Verified on server: +${res.xpAwarded} XP!`, 'success');
+        }
+
+        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+          res.newlyUnlockedAchievements.forEach((ach) => {
+            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+          });
+        }
+      }
+    } catch {}
   };
 
-  const handleCompleteChallenge = (challengeId: string) => {
+  const handleCompleteChallenge = async (challengeId: string) => {
+    // 1. Optimistic client update
     setProgress((prev) => {
       const isAlreadyDone = prev.completedChallenges[challengeId];
       const withStreak = calculateDailyStreak(prev).updatedProgress;
@@ -360,6 +437,27 @@ export default function App() {
         xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
       };
     });
+
+    // 2. Server-verified practice evaluation
+    try {
+      const res = await authService.completePractice(challengeId, challengeId);
+      if (res && res.progress) {
+        setProgress((prev) => ({
+          ...prev,
+          ...res.progress,
+        }));
+
+        if (res.xpAwarded > 0) {
+          addToast('Challenge Mastered! ⚡', `Verified: +${res.xpAwarded} XP!`, 'success');
+        }
+
+        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+          res.newlyUnlockedAchievements.forEach((ach) => {
+            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+          });
+        }
+      }
+    } catch {}
   };
 
   const handleToggleBookmark = (lessonId: string) => {
@@ -541,6 +639,9 @@ initial={{ opacity: 0, y: 14 }}
                   onOpenTutor={handleOpenTutor}
                   allChapters={chapters}
                   completedLessons={progress.completedLessons}
+                  progress={progress}
+                  onUpdateProgress={(updated) => setProgress(updated)}
+                  onOpenCertificate={() => setCertificateOpen(true)}
                 />
               </motion.div>
             )}

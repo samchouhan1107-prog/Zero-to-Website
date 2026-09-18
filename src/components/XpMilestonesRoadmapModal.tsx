@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   X,
   Trophy,
@@ -10,8 +10,23 @@ import {
   Award,
   Zap,
 } from 'lucide-react';
-import { UserProgress, XpMilestone } from '../types';
+import { UserProgress, XpMilestone } from '../utils/types';
 import { XP_MILESTONES, getMilestoneProgressPercent } from '../data/milestonesData';
+
+const COURSE_ACHIEVEMENTS = [
+  { id: 'first_lesson', title: 'First Step Taken', icon: '🌱', description: 'Complete your first guided lesson', xpReward: 100 },
+  { id: 'git_pioneer', title: 'Git Pioneer', icon: '🐙', description: 'Master Chapter 01 Dev Environment and Version Control', xpReward: 150 },
+  { id: 'html_architect', title: 'HTML Architect', icon: '🧱', description: 'Complete all HTML structure and semantic markup lessons', xpReward: 200 },
+  { id: 'css_architect', title: 'CSS Stylist', icon: '🎨', description: 'Master Chapter 03 Box Model, Typography, and Selectors', xpReward: 200 },
+  { id: 'flexbox_master', title: 'Flexbox Maestro', icon: '📐', description: 'Conquer 1D Flexbox alignment and axis distribution', xpReward: 250 },
+  { id: 'grid_master', title: 'Grid Strategist', icon: '🪟', description: 'Design fluid 2D CSS Grid templates and auto-fit layouts', xpReward: 250 },
+  { id: 'responsive_ninja', title: 'Responsive Ninja', icon: '📱', description: 'Master mobile-first media queries and responsive images', xpReward: 300 },
+  { id: 'js_engineer', title: 'DOM Commander', icon: '⚡', description: 'Harness JavaScript DOM manipulation and browser events', xpReward: 300 },
+  { id: 'capstone_builder', title: 'Full-Stack Creator', icon: '🚀', description: 'Submit and verify your Chapter 10 Capstone Portfolio project', xpReward: 500 },
+  { id: 'full_graduate', title: 'Curriculum Graduate', icon: '🎓', description: 'Complete all 11 chapters from Web Foundations to Cloud Deployment', xpReward: 1000 },
+  { id: 'streak_warrior_3', title: 'Consistency Spark', icon: '🔥', description: 'Maintain an active 3-day daily learning streak', xpReward: 150 },
+  { id: 'streak_master_7', title: 'Habit Master', icon: '⚡', description: 'Maintain an active 7-day daily learning streak', xpReward: 300 },
+];
 
 interface XpMilestonesRoadmapModalProps {
   isOpen: boolean;
@@ -26,10 +41,14 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
   progress,
   onTriggerCelebration,
 }) => {
+  const [activeTab, setActiveTab] = useState<'roadmap' | 'achievements'>('roadmap');
   if (!isOpen) return null;
 
   const { percent, current, next } = getMilestoneProgressPercent(progress.xpPoints);
   const claimedMilestones = progress.claimedMilestones || [];
+  const achievementsList = Array.isArray(progress.achievements) ? progress.achievements : [];
+  const unlockedAchievementMap = new Map(achievementsList.map((a) => [a.id, a]));
+  const unlockedCount = achievementsList.length;
 
   const handleClaimMilestone = (milestone: XpMilestone) => {
     if (!claimedMilestones.includes(milestone.id) && progress.xpPoints >= milestone.xpRequired) {
@@ -65,6 +84,35 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
               aria-label="Close milestones modal"
             >
               <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Navigation Tabs */}
+          <div className="mt-4 flex items-center gap-2 border-b border-slate-200 dark:border-slate-800 pb-2">
+            <button
+              type="button"
+              onClick={() => setActiveTab('roadmap')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeTab === 'roadmap'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Trophy className="w-4 h-4" />
+              <span>XP Level Roadmap</span>
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setActiveTab('achievements')}
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all ${
+                activeTab === 'achievements'
+                  ? 'bg-indigo-600 text-white shadow-sm'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+              }`}
+            >
+              <Award className="w-4 h-4" />
+              <span>Badges &amp; Achievements ({unlockedCount}/{COURSE_ACHIEVEMENTS.length})</span>
             </button>
           </div>
 
@@ -121,119 +169,165 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
           </div>
         </div>
 
-        {/* Milestones List */}
+        {/* Content Area */}
         <div className="overflow-y-auto p-6 pt-4 space-y-3" style={{ maxHeight: 'calc(90vh - 280px)' }}>
-          {XP_MILESTONES.map((milestone, index) => {
-            const isUnlocked = progress.xpPoints >= milestone.xpRequired;
-            const isClaimed = claimedMilestones.includes(milestone.id);
-            const isNext = next?.id === milestone.id;
+          {activeTab === 'roadmap' ? (
+            XP_MILESTONES.map((milestone, index) => {
+              const isUnlocked = progress.xpPoints >= milestone.xpRequired;
+              const isClaimed = claimedMilestones.includes(milestone.id);
+              const isNext = next?.id === milestone.id;
 
-            return (
-              <div
-                key={milestone.id}
-                className={`relative p-4 rounded-2xl border-2 transition-all ${
-                  isClaimed
-                    ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700'
-                    : isNext
-                    ? 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-400/50'
-                    : isUnlocked
-                    ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700'
-                    : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-60'
-                }`}
-              >
-                <div className="flex items-start gap-4">
-                  {/* Badge Icon */}
+              return (
+                <div
+                  key={milestone.id}
+                  className={`relative p-4 rounded-2xl border-2 transition-all ${
+                    isClaimed
+                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700'
+                      : isNext
+                      ? 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-400/50'
+                      : isUnlocked
+                      ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700'
+                      : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-60'
+                  }`}
+                >
+                  <div className="flex items-start gap-4">
+                    {/* Badge Icon */}
+                    <div
+                      className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${
+                        isClaimed
+                          ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+                          : isUnlocked
+                          ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
+                          : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+                      }`}
+                    >
+                      {isClaimed ? (
+                        <CheckCircle2 className="w-7 h-7" />
+                      ) : isUnlocked ? (
+                        <span>{milestone.badge}</span>
+                      ) : (
+                        <Lock className="w-6 h-6" />
+                      )}
+                    </div>
+
+                    {/* Content */}
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <h3 className="text-sm font-black text-slate-900 dark:text-white truncate">
+                          {milestone.title}
+                        </h3>
+                        {isNext && (
+                          <span className="shrink-0 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-500 text-white">
+                            Next Goal
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-2 mb-2">
+                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                          isClaimed
+                            ? 'bg-emerald-200 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
+                            : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                        }`}>
+                          {milestone.rank}
+                        </span>
+                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+                          {milestone.xpRequired} XP required
+                        </span>
+                      </div>
+
+                      {/* Unlocked Perks */}
+                      <div className="space-y-1">
+                        {milestone.unlockedPerks.slice(0, 2).map((perk, idx) => (
+                          <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400">
+                            <Zap className="w-3 h-3 text-amber-500 shrink-0" />
+                            <span>{perk}</span>
+                          </div>
+                        ))}
+                        {milestone.unlockedPerks.length > 2 && (
+                          <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">
+                            +{milestone.unlockedPerks.length - 2} more perks
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Action Button */}
+                    <div className="shrink-0">
+                      {isClaimed ? (
+                        <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+                          <CheckCircle2 className="w-4 h-4" />
+                          <span>Claimed</span>
+                        </div>
+                      ) : isUnlocked ? (
+                        <button
+                          onClick={() => handleClaimMilestone(milestone)}
+                          className="flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-colors shadow-lg shadow-amber-500/30"
+                        >
+                          <Award className="w-3.5 h-3.5" />
+                          Claim
+                        </button>
+                      ) : (
+                        <div className="flex items-center gap-1 text-slate-400 text-xs font-bold">
+                          <Lock className="w-3.5 h-3.5" />
+                          <span>Locked</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Connector Line */}
+                  {index < XP_MILESTONES.length - 1 && (
+                    <div className="absolute -bottom-3 left-7 w-0.5 h-3 bg-slate-200 dark:bg-slate-700" />
+                  )}
+                </div>
+              );
+            })
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {COURSE_ACHIEVEMENTS.map((achievement) => {
+                const unlocked = unlockedAchievementMap.get(achievement.id);
+                const isUnlocked = Boolean(unlocked);
+
+                return (
                   <div
-                    className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${
-                      isClaimed
-                        ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                        : isUnlocked
-                        ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
-                        : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+                    key={achievement.id}
+                    className={`p-4 rounded-2xl border-2 transition-all ${
+                      isUnlocked
+                        ? 'bg-amber-500/10 border-amber-500/40 shadow-sm'
+                        : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 opacity-60'
                     }`}
                   >
-                    {isClaimed ? (
-                      <CheckCircle2 className="w-7 h-7" />
-                    ) : isUnlocked ? (
-                      <span>{milestone.badge}</span>
-                    ) : (
-                      <Lock className="w-6 h-6" />
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-2 mb-1">
-                      <h3 className="text-sm font-black text-slate-900 dark:text-white truncate">
-                        {milestone.title}
-                      </h3>
-                      {isNext && (
-                        <span className="shrink-0 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-500 text-white">
-                          Next Goal
-                        </span>
-                      )}
-                    </div>
-
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                        isClaimed
-                          ? 'bg-emerald-200 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
-                          : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+                    <div className="flex items-start gap-3">
+                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 text-2xl ${
+                        isUnlocked ? 'bg-amber-500/20' : 'bg-slate-200 dark:bg-slate-700'
                       }`}>
-                        {milestone.rank}
-                      </span>
-                      <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                        {milestone.xpRequired} XP required
-                      </span>
-                    </div>
-
-                    {/* Unlocked Perks */}
-                    <div className="space-y-1">
-                      {milestone.unlockedPerks.slice(0, 2).map((perk, idx) => (
-                        <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400">
-                          <Zap className="w-3 h-3 text-amber-500 shrink-0" />
-                          <span>{perk}</span>
+                        {isUnlocked ? achievement.icon : '🔒'}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center justify-between gap-1">
+                          <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                            {achievement.title}
+                          </h4>
+                          <span className="font-mono text-[10px] font-bold text-amber-500 shrink-0">
+                            +{achievement.xpReward} XP
+                          </span>
                         </div>
-                      ))}
-                      {milestone.unlockedPerks.length > 2 && (
-                        <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">
-                          +{milestone.unlockedPerks.length - 2} more perks
+                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+                          {achievement.description}
                         </p>
-                      )}
+                        {isUnlocked && unlocked?.unlockedAt && (
+                          <span className="inline-block text-[10px] font-mono text-emerald-600 dark:text-emerald-400 mt-2">
+                            ✓ Unlocked {new Date(unlocked.unlockedAt).toLocaleDateString()}
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </div>
-
-                  {/* Action Button */}
-                  <div className="shrink-0">
-                    {isClaimed ? (
-                      <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
-                        <CheckCircle2 className="w-4 h-4" />
-                        <span>Claimed</span>
-                      </div>
-                    ) : isUnlocked ? (
-                      <button
-                        onClick={() => handleClaimMilestone(milestone)}
-                        className="flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-colors shadow-lg shadow-amber-500/30"
-                      >
-                        <Award className="w-3.5 h-3.5" />
-                        Claim
-                      </button>
-                    ) : (
-                      <div className="flex items-center gap-1 text-slate-400 text-xs font-bold">
-                        <Lock className="w-3.5 h-3.5" />
-                        <span>Locked</span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Connector Line */}
-                {index < XP_MILESTONES.length - 1 && (
-                  <div className="absolute -bottom-3 left-7 w-0.5 h-3 bg-slate-200 dark:bg-slate-700" />
-                )}
-              </div>
-            );
-          })}
+                );
+              })}
+            </div>
+          )}
         </div>
 
         {/* Footer */}

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 05 | Auto-Fit & Minmax - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 5.5</span>
+            <h1>Build an Intrinsic Responsive Product Grid</h1>
+            <p>Implement <code>grid-template-columns: repeat(auto-fit, minmax(180px, 1fr))</code> so the cards automatically adapt to any screen size.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Apply <code>repeat(auto-fit, minmax(180px, 1fr))</code> to the container.</li>
+                <li>2. Set <code>gap: 16px;</code>.</li>
+                <li>3. Add 4 product cards and observe how they wrap into 2 or 1 column when space shrinks.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .auto-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    font-family: system-ui, sans-serif;
+  }
+  .card-item {
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    padding: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+  }
+  .card-item h4 { margin: 0 0 6px; color: #0f172a; font-size: 15px; }
+  .card-item p { margin: 0; color: #64748b; font-size: 13px; line-height: 1.4; }
+</style>
+
+<div class="auto-grid">
+  <div class="card-item">
+    <h4>⚡ Fast Server</h4>
+    <p>Sub-millisecond static routing response times.</p>
+  </div>
+  <div class="card-item">
+    <h4>🛡 Secure Core</h4>
+    <p>Zero secret exposures with backend proxying.</p>
+  </div>
+  <div class="card-item">
+    <h4>📱 Responsive</h4>
+    <p>Auto-fit reflows without media query breakpoints.</p>
+  </div>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 05</a>
+            <a href="../Lesson-06-Grid-Alignment/lesson.html">Next: Lesson 06 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

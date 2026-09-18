@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 04 | Display & Positioning - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.4</span>
+            <h1>Build an Absolute Notification Badge on a Card</h1>
+            <p>Use <code>position: relative</code> on the parent card and <code>position: absolute</code> with <code>top</code> and <code>right</code> offsets to pin a notification pill badge to the top corner.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Ensure the parent card has <code>position: relative;</code> so the badge positions relative to it.</li>
+                <li>2. Give the badge <code>position: absolute; top: 12px; right: 12px;</code>.</li>
+                <li>3. Add <code>display: inline-block;</code> and padding to the card action button.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><div style="position: relative; background: #ffffff; border: 2px solid #e2e8f0; border-radius: 16px; padding: 28px 24px; font-family: system-ui, sans-serif; max-width: 420px; margin: 20px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.06);">
+  <!-- Absolute Notification Badge -->
+  <span style="position: absolute; top: -10px; right: 18px; background: #ef233c; color: #ffffff; font-size: 11px; font-weight: 800; padding: 4px 10px; border-radius: 9999px; letter-spacing: 0.5px; box-shadow: 0 2px 8px rgba(239,35,60,0.4);">
+    NEW FEATURE
+  </span>
+
+  <h3 style="margin: 0 0 8px; color: #0f172a; font-size: 18px;">CSS Positioning Masterclass</h3>
+  <p style="color: #64748b; font-size: 14px; line-height: 1.6; margin: 0 0 16px;">
+    Notice how this red pill floats over the top-right border of the card because of relative + absolute coordinate anchoring.
+  </p>
+
+  <button style="display: inline-block; background: #0f172a; color: white; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 600; cursor: pointer;">
+    Explore Placement ➜
+  </button>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 04</a>
+            <a href="../Lesson-05-Spacing-Visual-Styling/lesson.html">Next: Lesson 05 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

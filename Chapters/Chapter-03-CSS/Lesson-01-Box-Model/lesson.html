@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | The CSS Box Model - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 03</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 03 • Lesson 01</span>
+            <h1>The CSS Box Model</h1>
+            <p>Every element rendered in the browser is a rectangular box made of four distinct layers: Content, Padding, Border, and Margin.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Golden Rule</h3>
+                    <p>box-sizing: border-box</p>
+                </div>
+                <div class="summary-card">
+                    <h3>4 Layers</h3>
+                    <p>Content/Pad/Border/Margin</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Units</h3>
+                    <p>px, rem, %, ch</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. The Four Layers</h2>
+            <ul class="chapter-list">
+                <li><strong>Content Box:</strong> The inner core where text, images, or child elements reside.</li>
+                <li><strong>Padding Box:</strong> Transparent breathable cushion surrounding the content, adopting the element's background color.</li>
+                <li><strong>Border Box:</strong> The visible frame or boundary enclosing the padding and content.</li>
+                <li><strong>Margin Box:</strong> Outer clear buffer separating this element from adjacent neighboring elements.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Why <code>border-box</code> Is Essential</h2>
+            <div class="code-box">
+                <pre><code>/* Standard modern CSS reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+}</code></pre>
+            </div>
+            <p>With default <code>content-box</code>, adding padding or border expands the total element width past its declared width, causing accidental layout overflows. With <code>border-box</code>, padding and border are absorbed inside the declared width.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Practice Challenge</h2>
+            <p>Inspect and manipulate box model layers directly in the interactive sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 01 Practice Challenge →</h3>
+                <p>Experiment with content, padding, border, and margin in real time.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../index.html">⬅ Chapter 03 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
