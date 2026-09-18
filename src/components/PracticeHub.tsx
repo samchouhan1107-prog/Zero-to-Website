@@ -39,9 +39,16 @@ export const PracticeHub: React.FC<PracticeHubProps> = ({ chapters, progress, on
       <section className="panel-surface p-6 sm:p-8">
         <div className="flex flex-wrap items-start justify-between gap-6">
           <div className="min-w-0 max-w-3xl">
-            <p className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-400"><Code2 className="h-4 w-4" aria-hidden="true" /> Practice arena / sandbox</p>
-            <h1 className="mt-3 text-3xl font-black leading-tight tracking-[-0.03em] text-app-ink sm:text-4xl">Build until the concept sticks.</h1>
-            <p className="mt-3 text-base leading-relaxed text-app-muted">Work through isolated HTML, CSS, and JavaScript challenges with live previews, verification, hints, and optional code review.</p>
+            <div className="flex flex-wrap items-center gap-2 mb-2">
+              <p className="flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-emerald-400">
+                <Code2 className="h-4 w-4" aria-hidden="true" /> Practice arena / sandbox
+              </p>
+              <span className="rounded-full border border-emerald-400/40 bg-emerald-950/40 px-2.5 py-0.5 font-mono text-[10px] font-bold text-emerald-300">
+                Age 15+ Developer Assessment Matrix
+              </span>
+            </div>
+            <h1 className="mt-2 text-3xl font-black leading-tight tracking-[-0.03em] text-app-ink sm:text-4xl">Build until the concept sticks.</h1>
+            <p className="mt-3 text-base leading-relaxed text-app-muted">Work through isolated HTML, CSS, JavaScript, and Framework challenges designed for independent learners and students aged 15+. Includes live compilation, automated unit diagnostics, and original project prompts.</p>
           </div>
           <div className="border-l border-app-border pl-4"><p className="font-mono text-[11px] uppercase tracking-[0.12em] text-app-subtle">Progress</p><p className="mt-2 font-mono text-2xl font-black tabular-nums text-app-amber">{completedCount}<span className="text-sm text-app-muted"> / {allChallenges.length}</span></p><p className="mt-1 text-xs text-app-muted">challenges mastered</p></div>
         </div>

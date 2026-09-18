@@ -18,12 +18,38 @@ export const AdvertisementBanner: React.FC<AdvertisementBannerProps> = ({
   useEffect(() => {
     // Only initialize AdSense if the element exists and window.adsbygoogle is available
     const win = typeof window !== 'undefined' ? (window as unknown as { adsbygoogle?: unknown[] }) : undefined;
-    if (adRef.current && win?.adsbygoogle) {
-      try {
-        (win.adsbygoogle = win.adsbygoogle || []).push({});
-      } catch (error) {
-        console.warn('AdSense initialization failed:', error);
+    const el = adRef.current;
+    if (!el || !win?.adsbygoogle) return;
+
+    let hasPushed = false;
+    const tryPush = () => {
+      if (hasPushed) return;
+      if (el.offsetWidth > 0) {
+        hasPushed = true;
+        try {
+          (win.adsbygoogle = win.adsbygoogle || []).push({});
+        } catch (error) {
+          console.warn('AdSense initialization failed:', error);
+        }
       }
+    };
+
+    if (el.offsetWidth > 0) {
+      tryPush();
+    } else if (typeof ResizeObserver !== 'undefined') {
+      const resizeObserver = new ResizeObserver((entries) => {
+        for (const entry of entries) {
+          if (entry.contentRect.width > 0) {
+            tryPush();
+            resizeObserver.disconnect();
+            break;
+          }
+        }
+      });
+      resizeObserver.observe(el);
+      return () => {
+        resizeObserver.disconnect();
+      };
     }
   }, []);
 

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 07 | Chapter 04 Capstone: Multi-Component Flexbox Dashboard - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 04.07</span>
+            <h1>Chapter 04 Capstone: Multi-Component Flexbox Dashboard</h1>
+            <p>Synthesize navigation, cards, sidebar, and multi-line chips into a complete interactive dashboard view.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Create a sticky top navigation bar with justify-content: space-between</li>
+<li>2. Construct a main content area with sidebar (flex: 1) and main view (flex: 3)</li>
+<li>3. Include a wrapped tag cloud and interactive action buttons</li>
+<li>4. Verify that no element overflows horizontally</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .dashboard {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-family: system-ui, sans-serif;
+    max-width: 540px;
+    margin: auto;
+  }
+  .dash-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #1e293b;
+    color: white;
+    border-radius: 8px;
+  }
+  .dash-body {
+    display: flex;
+    gap: 12px;
+  }
+  .dash-sidebar {
+    flex: 1;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 13px;
+  }
+  .dash-content {
+    flex: 2;
+    padding: 12px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+  }
+&lt;/style&gt;
+&lt;div class=&quot;dashboard&quot;&gt;
+  &lt;div class=&quot;dash-nav&quot;&gt;
+    &lt;strong&gt;⚡ FlexEngine&lt;/strong&gt;
+    &lt;span style=&quot;font-size: 12px; background: #3b82f6; padding: 2px 8px; border-radius: 10px;&quot;&gt;Level 2&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;dash-body&quot;&gt;
+    &lt;div class=&quot;dash-sidebar&quot;&gt;
+      &lt;strong&gt;Menu&lt;/strong&gt;
+      &lt;p style=&quot;color: #64748b; margin: 6px 0 0;&quot;&gt;Analytics&lt;br&gt;Modules&lt;br&gt;Settings&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;dash-content&quot;&gt;
+      &lt;h4 style=&quot;margin: 0 0 6px;&quot;&gt;Active Workspace&lt;/h4&gt;
+      &lt;p style=&quot;color: #64748b; font-size: 13px; margin: 0;&quot;&gt;All flexbox items scaled proportionally across all screen widths.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="../index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

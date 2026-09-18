@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | JavaScript Introduction & Runtime - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 01</span>
+            <h1>JavaScript Introduction & Runtime</h1>
+            <p>Discover how the Google V8 engine interprets code, executes through the call stack, and drives web interactivity.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Execution</h3>
+                    <p>Single-threaded Call Stack</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Engine</h3>
+                    <p>Google V8 JIT Compilation</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Script Loading</h3>
+                    <p>defer vs async</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Console</h3>
+                    <p>console.log & DevTools</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Understand the role of JavaScript in web architecture alongside HTML & CSS</li>
+<li>✔ Learn how modern browser engines execute JavaScript through the call stack</li>
+<li>✔ Use developer console methods (log, warn, table) for real-time inspection</li>
+<li>✔ Prevent render-blocking by applying the defer attribute on script tags</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. What is the Modern JavaScript Engine?</h2>
+            <p>JavaScript is an ECMAScript-standardized programming language that gives dynamic behavior to web documents. Under the hood, modern browsers like Google Chrome and Microsoft Edge use Google's V8 engine to compile JavaScript directly into native machine code using Just-In-Time (JIT) compilation.</p>
+            <ul class='chapter-list'><li>Single-Threaded: One call stack executes instructions sequentially without race conditions</li>
+<li>Event Loop: Background Web APIs handle network requests, timers, and user clicks smoothly</li>
+<li>EcmaScript (ES6+): Modern standards provide arrow functions, destructuring, modules, and classes</li>
+</ul>
+        </section>
+        <section class="chapter-section">
+            <h2>2. Script Placement and Non-Blocking Loading</h2>
+            <p>Placing a plain <script> in the <head> pauses HTML parsing. By adding the defer attribute, the browser downloads the script in parallel and executes it cleanly right after the DOM tree is assembled.</p>
+            <ul class='chapter-list'><li><script defer src='app.js'>: Recommended for predictable DOM readiness and high Lighthouse performance</li>
+<li><script async src='analytics.js'>: Ideal for independent tracking scripts where order doesn't matter</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;padding: 20px; text-align: center;&quot;&gt;
+  &lt;h3 id=&quot;headline&quot; style=&quot;color: #4f46e5; margin: 0 0 10px;&quot;&gt;JavaScript is Running!&lt;/h3&gt;
+  &lt;p id=&quot;timestamp&quot; style=&quot;color: #64748b;&quot;&gt;Ready for interaction.&lt;/p&gt;
+  &lt;button id=&quot;actionBtn&quot; style=&quot;padding: 10px 18px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;&quot;&gt;Click to Inspect Timestamp&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const btn = document.getElementById(&#x27;actionBtn&#x27;);
+  const timeEl = document.getElementById(&#x27;timestamp&#x27;);
+  btn.addEventListener(&#x27;click&#x27;, () =&gt; {
+    const now = new Date().toLocaleTimeString();
+    timeEl.textContent = &#x27;Last clicked at: &#x27; + now;
+    console.log(&#x27;User clicked at&#x27;, now);
+  });
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

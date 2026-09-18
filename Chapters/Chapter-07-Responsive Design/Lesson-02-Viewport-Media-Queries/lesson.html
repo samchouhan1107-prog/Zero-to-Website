@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | Viewport Meta Tag & Media Query Breakpoints - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 02</span>
+            <h1>Viewport Meta Tag & Media Query Breakpoints</h1>
+            <p>Configure device pixel scaling, standard screen breakpoints, and modern range query syntax.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Viewport Tag</h3>
+                    <p>width=device-width, initial-scale=1.0</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Breakpoints</h3>
+                    <p>640px, 768px, 1024px, 1280px</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Syntax</h3>
+                    <p>@media (min-width: ...) & Range queries</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Orientation</h3>
+                    <p>(orientation: landscape)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Recognize the catastrophic consequence of omitting the viewport meta tag</li>
+<li>✔ Establish standard responsive breakpoints (sm: 640px, md: 768px, lg: 1024px, xl: 1280px)</li>
+<li>✔ Use modern CSS Media Queries Level 4 syntax like @media (width >= 768px)</li>
+<li>✔ Test device simulations using browser developer tools</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. The Viewport Meta Tag</h2>
+            <p>Without <meta name='viewport' content='width=device-width, initial-scale=1.0'>, mobile browsers assume a desktop 980px canvas and zoom out until text is unreadably microscopic. The viewport tag binds the layout viewport directly to the actual device screen width.</p>
+            <ul class='chapter-list'><li>width=device-width: Sets page width to follow screen-width in device-independent pixels</li>
+<li>initial-scale=1.0: Sets initial zoom level when first loaded by the browser</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .breakpoint-box {
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: bold;
+    background: #fef08a;
+    color: #854d0e;
+  }
+  @media (min-width: 500px) {
+    .breakpoint-box {
+      background: #bbf7d0;
+      color: #166534;
+    }
+  }
+&lt;/style&gt;
+&lt;div class=&quot;breakpoint-box&quot;&gt;
+  Resize browser or preview window to see color transition!
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
