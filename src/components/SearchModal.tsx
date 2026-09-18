@@ -219,16 +219,16 @@ export const SearchModal: React.FC<SearchModalProps> = ({
       role="dialog"
       aria-modal="true"
       aria-label="Search WebZoneBW tools, articles, and resources"
-      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-start justify-center pt-16 sm:pt-24 px-4 bg-black/60 backdrop-blur-sm"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-2xl bg-[#141417] text-white rounded-2xl border border-[#27272a] shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
+        className="w-full max-w-2xl bg-app-surface text-app-ink rounded-2xl border border-app-border shadow-2xl overflow-hidden flex flex-col max-h-[85vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Search Bar Input */}
-        <div className="p-4 border-b border-[#27272a] flex items-center gap-3 bg-[#18181c]">
-          <Search className="w-5 h-5 text-blue-400 shrink-0" aria-hidden="true" />
+        <div className="p-4 border-b border-app-border flex items-center gap-3 bg-app-inset">
+          <Search className="w-5 h-5 text-blue-500 shrink-0" aria-hidden="true" />
           <input
             ref={inputRef}
             type="text"
@@ -238,7 +238,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
               setQuery(e.target.value);
               setSelectedIndex(0);
             }}
-            className="w-full text-sm sm:text-base bg-transparent text-white outline-none placeholder:text-[#71717a]"
+            className="w-full text-sm sm:text-base bg-transparent text-app-ink outline-none placeholder:text-app-subtle"
             aria-label="Search input"
           />
           {query && (
@@ -248,7 +248,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 setQuery('');
                 inputRef.current?.focus();
               }}
-              className="p-1 rounded text-[#71717a] hover:text-white"
+              className="p-1 rounded text-app-subtle hover:text-app-ink cursor-pointer"
               aria-label="Clear query"
             >
               <X className="w-4 h-4" />
@@ -257,7 +257,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-lg border border-[#27272a] hover:bg-[#27272a] text-[#a1a1aa] transition-colors text-xs"
+            className="p-1.5 rounded-lg border border-app-border hover:bg-app-active text-app-muted transition-colors text-xs cursor-pointer font-mono"
             aria-label="Close search dialog"
           >
             ESC
@@ -265,7 +265,7 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Category Filter Pills */}
-        <div className="flex items-center gap-1.5 px-4 py-2 border-b border-[#27272a] bg-[#121215] overflow-x-auto no-scrollbar text-xs">
+        <div className="flex items-center gap-1.5 px-4 py-2 border-b border-app-border bg-app-surface overflow-x-auto no-scrollbar text-xs">
           {categories.map((cat) => (
             <button
               key={cat}
@@ -274,10 +274,10 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                 setActiveFilter(cat);
                 setSelectedIndex(0);
               }}
-              className={`whitespace-nowrap px-2.5 py-1 rounded-md text-[11px] font-bold transition-colors ${
+              className={`whitespace-nowrap px-2.5 py-1 rounded-md text-[11px] font-bold transition-colors cursor-pointer ${
                 activeFilter === cat
                   ? 'bg-blue-600 text-white'
-                  : 'bg-[#1e1e24] text-[#a1a1aa] hover:text-white hover:bg-[#27272a]'
+                  : 'bg-app-inset text-app-muted hover:text-app-ink hover:bg-app-active'
               }`}
             >
               {cat}
@@ -286,12 +286,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Results List */}
-        <div className="overflow-y-auto p-2 divide-y divide-[#27272a]/40 max-h-[420px]">
+        <div className="overflow-y-auto p-2 divide-y divide-app-border/50 max-h-[420px]">
           {displayResults.length === 0 ? (
             <div className="p-10 text-center space-y-2">
-              <Search className="w-8 h-8 text-[#52525b] mx-auto mb-2" />
-              <p className="text-sm font-bold text-[#e4e4e7]">No tools or resources found</p>
-              <p className="text-xs text-[#71717a] max-w-sm mx-auto">
+              <Search className="w-8 h-8 text-app-subtle mx-auto mb-2" />
+              <p className="text-sm font-bold text-app-ink">No tools or resources found</p>
+              <p className="text-xs text-app-muted max-w-sm mx-auto">
                 We couldn't find any results matching "{query}". Try checking for typos or search for "Flexbox", "Sandbox", "HTTP", or "Box model".
               </p>
             </div>
@@ -304,20 +304,20 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                   type="button"
                   onClick={() => handleItemClick(item)}
                   onMouseEnter={() => setSelectedIndex(index)}
-                  className={`w-full text-left p-3 rounded-xl transition-all flex items-center justify-between group ${
+                  className={`w-full text-left p-3 rounded-xl transition-all flex items-center justify-between group cursor-pointer ${
                     isSelected
-                      ? 'bg-blue-600/15 border border-blue-500/40 text-white'
-                      : 'border border-transparent text-[#d4d4d8] hover:bg-[#1c1c22]'
+                      ? 'bg-blue-600/10 border border-blue-500/40 text-app-ink shadow-xs'
+                      : 'border border-transparent text-app-ink hover:bg-app-active/60'
                   }`}
                 >
                   <div className="flex items-start gap-3 truncate pr-2">
                     <div
                       className={`p-2 rounded-lg shrink-0 mt-0.5 ${
                         item.type === 'tool'
-                          ? 'bg-blue-500/20 text-blue-400'
+                          ? 'bg-blue-500/15 text-blue-600 dark:text-blue-400'
                           : item.type === 'resource'
-                          ? 'bg-purple-500/20 text-purple-400'
-                          : 'bg-[#27272a] text-[#a1a1aa]'
+                          ? 'bg-purple-500/15 text-purple-600 dark:text-purple-400'
+                          : 'bg-app-active text-app-muted'
                       }`}
                     >
                       {item.type === 'tool' ? (
@@ -330,21 +330,21 @@ export const SearchModal: React.FC<SearchModalProps> = ({
                     </div>
                     <div className="truncate">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-[#27272a] text-[#a1a1aa]">
+                        <span className="text-[10px] font-mono font-bold px-1.5 py-0.5 rounded bg-app-active text-app-muted">
                           {item.category}
                         </span>
-                        <span className="text-sm font-bold text-white truncate">
+                        <span className="text-sm font-bold text-app-ink truncate">
                           {item.title}
                         </span>
                       </div>
-                      <p className="text-xs text-[#a1a1aa] truncate mt-1">
+                      <p className="text-xs text-app-muted truncate mt-1">
                         {item.subtitle}
                       </p>
                     </div>
                   </div>
                   <ArrowRight
                     className={`w-4 h-4 shrink-0 transition-transform ${
-                      isSelected ? 'text-blue-400 translate-x-1' : 'text-[#71717a]'
+                      isSelected ? 'text-blue-500 translate-x-1' : 'text-app-subtle'
                     }`}
                   />
                 </button>
@@ -354,12 +354,12 @@ export const SearchModal: React.FC<SearchModalProps> = ({
         </div>
 
         {/* Keyboard Footer */}
-        <div className="p-3 bg-[#101012] border-t border-[#27272a] text-[11px] font-mono text-[#71717a] flex flex-wrap items-center justify-between gap-2">
+        <div className="p-3 bg-app-inset border-t border-app-border text-[11px] font-mono text-app-subtle flex flex-wrap items-center justify-between gap-2">
           <div className="flex items-center gap-3">
-            <span><kbd className="px-1.5 py-0.5 rounded bg-[#1c1c22] border border-[#27272a] text-[#a1a1aa]">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-[#1c1c22] border border-[#27272a] text-[#a1a1aa]">↓</kbd> navigate</span>
-            <span><kbd className="px-1.5 py-0.5 rounded bg-[#1c1c22] border border-[#27272a] text-[#a1a1aa]">Enter</kbd> open</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-app-surface border border-app-border text-app-muted">↑</kbd> <kbd className="px-1.5 py-0.5 rounded bg-app-surface border border-app-border text-app-muted">↓</kbd> navigate</span>
+            <span><kbd className="px-1.5 py-0.5 rounded bg-app-surface border border-app-border text-app-muted">Enter</kbd> open</span>
           </div>
-          <span><kbd className="px-1.5 py-0.5 rounded bg-[#1c1c22] border border-[#27272a] text-[#a1a1aa]">ESC</kbd> close</span>
+          <span><kbd className="px-1.5 py-0.5 rounded bg-app-surface border border-app-border text-app-muted">ESC</kbd> close</span>
         </div>
       </div>
     </div>

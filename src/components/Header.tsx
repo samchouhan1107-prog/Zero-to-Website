@@ -149,7 +149,7 @@ export const Header: React.FC<HeaderProps> = ({
     <>
       <header
         id="app-header"
-        className="sticky top-0 z-30 border-b border-[#27272a] bg-[#121215] text-white shadow-md transition-colors"
+        className="sticky top-0 z-30 border-b border-app-border bg-app-surface/95 text-app-ink backdrop-blur-md shadow-xs transition-colors"
       >
         {/* ROW 1: Main Header Navigation Bar - Added padding for better layout */}
         <div className="mx-auto flex min-h-16 max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-8">
@@ -165,7 +165,7 @@ export const Header: React.FC<HeaderProps> = ({
                   setMobileMenuOpen((prev) => !prev);
                 }
               }}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#27272a] bg-[#18181c] text-[#a1a1aa] transition-colors hover:border-blue-500/50 hover:bg-[#222228] hover:text-white"
+              className="flex h-10 w-10 items-center justify-center rounded-xl border border-app-border bg-app-inset text-app-muted transition-colors hover:border-blue-500/50 hover:bg-app-active hover:text-app-ink"
               aria-label="Toggle curriculum sidebar"
               title="Toggle curriculum sidebar"
             >
@@ -196,8 +196,8 @@ export const Header: React.FC<HeaderProps> = ({
                   onClick={() => handleNavClick(item.section)}
                   className={`relative whitespace-nowrap px-4 py-2 text-sm font-semibold rounded-xl transition-all ${
                     isActive
-                      ? 'text-white bg-[#222228] border border-[#3f3f46]'
-                      : 'text-[#a1a1aa] hover:text-white hover:bg-[#18181c]'
+                      ? 'text-app-ink bg-app-active border border-app-border font-bold'
+                      : 'text-app-muted hover:text-app-ink hover:bg-app-inset'
                   }`}
                 >
                   {item.label}
@@ -215,13 +215,13 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={onOpenSearch}
-              className="flex h-10 items-center gap-3 rounded-xl border border-[#27272a] bg-[#18181c] px-4 text-sm text-[#a1a1aa] transition-all hover:border-blue-500/50 hover:bg-[#222228] hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+              className="flex h-10 items-center gap-3 rounded-xl border border-app-border bg-app-inset px-4 text-sm text-app-muted transition-all hover:border-blue-500/50 hover:bg-app-active hover:text-app-ink focus:outline-none focus:ring-2 focus:ring-blue-500/40"
               aria-label="Open global search"
               title="Search tools, documentation, and resources (⌘K)"
             >
-              <Search className="h-5 w-5 shrink-0 text-blue-400" />
+              <Search className="h-5 w-5 shrink-0 text-blue-500" />
               <span className="hidden sm:inline font-sans">Search...</span>
-              <kbd className="hidden rounded-lg border border-[#3f3f46] bg-[#27272a] px-2 py-0.5 font-mono text-[10px] text-[#9ca3af] sm:inline">
+              <kbd className="hidden rounded-lg border border-app-border bg-app-active px-2 py-0.5 font-mono text-[10px] text-app-subtle sm:inline">
                 ⌘K
               </kbd>
             </button>
@@ -232,8 +232,8 @@ export const Header: React.FC<HeaderProps> = ({
               onClick={() => onOpenAccount()}
               className={`flex h-10 items-center gap-3 rounded-xl px-4 text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-blue-500/50 ${
                 hasRealAccount
-                  ? 'border border-[#27272a] bg-[#18181c] text-white hover:border-[#3f3f46] hover:bg-[#222228]'
-                  : 'border border-blue-500/30 bg-blue-600/10 text-blue-400 hover:bg-blue-600/20 hover:border-blue-500/60'
+                  ? 'border border-app-border bg-app-inset text-app-ink hover:bg-app-active'
+                  : 'border border-blue-500/30 bg-blue-600/10 text-blue-500 hover:bg-blue-600/20 hover:border-blue-500/60'
               }`}
               aria-label={hasRealAccount ? 'View account' : 'Sign in'}
               title={hasRealAccount ? 'Your Account' : 'Sign In / Sign Up'}
@@ -256,7 +256,7 @@ export const Header: React.FC<HeaderProps> = ({
                 </>
               ) : (
                 <>
-                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-blue-400">
+                  <div className="flex h-6 w-6 items-center justify-center rounded-full bg-blue-500/20 text-blue-500">
                     <User className="h-4 w-4" />
                   </div>
                   <span className="hidden sm:inline font-sans">Sign In</span>
@@ -267,20 +267,20 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* ROW 2: Compact Secondary Navigation & Status Row */}
-        <div className="border-t border-[#27272a]/70 bg-[#0e0e11] px-4 sm:px-6">
+        <div className="border-t border-app-border/70 bg-app-inset/60 px-4 sm:px-6">
           <div className="mx-auto flex min-h-9 max-w-[1600px] flex-wrap items-center justify-between gap-2 py-1 text-xs">
             {/* Left: WebZoneBW Status, Tools & Resources Quick Links */}
             <div className="flex items-center gap-3">
               <button
                 type="button"
                 onClick={onNavigateHome}
-                className="flex items-center gap-1.5 font-mono text-[11px] font-bold text-blue-400 hover:text-blue-300 transition-colors"
+                className="flex items-center gap-1.5 font-mono text-[11px] font-bold text-blue-500 hover:text-blue-600 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
               >
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                 <span>WebZoneBW</span>
               </button>
 
-              <span className="text-[#3f3f46]">/</span>
+              <span className="text-app-subtle">/</span>
 
               <button
                 type="button"
@@ -288,12 +288,12 @@ export const Header: React.FC<HeaderProps> = ({
                   onNavigatePractice();
                   setActiveNav('Web Tools');
                 }}
-                className="font-medium text-[#a1a1aa] hover:text-white transition-colors text-[11px]"
+                className="font-medium text-app-muted hover:text-app-ink transition-colors text-[11px]"
               >
                 Tools
               </button>
 
-              <span className="text-[#3f3f46]">·</span>
+              <span className="text-app-subtle">·</span>
 
               <button
                 type="button"
@@ -301,7 +301,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onNavigateVisualLab('box');
                   setActiveNav('Developer Tools');
                 }}
-                className="font-medium text-[#a1a1aa] hover:text-white transition-colors text-[11px]"
+                className="font-medium text-app-muted hover:text-app-ink transition-colors text-[11px]"
               >
                 Resources
               </button>
@@ -313,7 +313,7 @@ export const Header: React.FC<HeaderProps> = ({
               <button
                 type="button"
                 onClick={onToggleTheme}
-                className="flex h-7 items-center gap-1.5 rounded-md border border-[#27272a] bg-[#18181c] px-2 text-[11px] font-medium text-[#d4d4d8] transition-colors hover:border-[#3f3f46] hover:text-white"
+                className="flex h-7 items-center gap-1.5 rounded-md border border-app-border bg-app-surface px-2 text-[11px] font-medium text-app-ink transition-colors hover:bg-app-active"
                 aria-label={`Current theme: ${theme}. Click to switch theme`}
                 title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               >
@@ -324,7 +324,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </>
                 ) : (
                   <>
-                    <Moon className="h-3 w-3 text-blue-400" />
+                    <Moon className="h-3 w-3 text-blue-500" />
                     <span className="hidden xs:inline">Theme: Light</span>
                   </>
                 )}
@@ -335,19 +335,19 @@ export const Header: React.FC<HeaderProps> = ({
                 <button
                   type="button"
                   onClick={() => setLangDropdownOpen((prev) => !prev)}
-                  className="flex h-7 items-center gap-1.5 rounded-md border border-[#27272a] bg-[#18181c] px-2 text-[11px] font-medium text-[#d4d4d8] transition-colors hover:border-[#3f3f46] hover:text-white"
+                  className="flex h-7 items-center gap-1.5 rounded-md border border-app-border bg-app-surface px-2 text-[11px] font-medium text-app-ink transition-colors hover:bg-app-active"
                   aria-label={`Selected language: ${currentLangObj.label}`}
                   aria-expanded={langDropdownOpen}
                 >
-                  <Globe className="h-3 w-3 text-blue-400" />
+                  <Globe className="h-3 w-3 text-blue-500 dark:text-blue-400" />
                   <span className="hidden sm:inline">{currentLangObj.label}</span>
                   <span className="sm:hidden">{currentLangObj.code.split('-')[0].toUpperCase()}</span>
-                  <ChevronDown className="h-3 w-3 text-[#71717a]" />
+                  <ChevronDown className="h-3 w-3 text-app-subtle" />
                 </button>
 
                 {langDropdownOpen && (
-                  <div className="absolute right-0 top-[calc(100%+4px)] z-50 w-44 rounded-xl border border-[#27272a] bg-[#18181c] p-1.5 shadow-2xl">
-                    <div className="px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-[#71717a]">
+                  <div className="absolute right-0 top-[calc(100%+4px)] z-50 w-44 rounded-xl border border-app-border bg-app-surface p-1.5 shadow-2xl text-app-ink">
+                    <div className="px-2 py-1 font-mono text-[9px] font-bold uppercase tracking-wider text-app-subtle">
                       Language / Locale
                     </div>
                     {LANGUAGES.map((lang) => (
@@ -360,8 +360,8 @@ export const Header: React.FC<HeaderProps> = ({
                         }}
                         className={`w-full flex items-center justify-between rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors ${
                           selectedLanguage === lang.code
-                            ? 'bg-blue-600/20 text-blue-400 font-bold'
-                            : 'text-[#d4d4d8] hover:bg-[#222228] hover:text-white'
+                            ? 'bg-blue-600/15 text-blue-500 font-bold'
+                            : 'text-app-ink hover:bg-app-active'
                         }`}
                       >
                         <span>{lang.label}</span>
@@ -377,7 +377,7 @@ export const Header: React.FC<HeaderProps> = ({
 
         {/* Mobile Navigation Drawer Dropdown */}
         {mobileMenuOpen && (
-          <div className="border-t border-[#27272a] bg-[#141417] px-4 py-4 lg:hidden animate-fade-in shadow-2xl">
+          <div className="border-t border-app-border bg-app-surface px-4 py-4 lg:hidden animate-fade-in shadow-2xl">
             <div className="space-y-1">
               {navItems.map((item) => (
                 <button
@@ -386,8 +386,8 @@ export const Header: React.FC<HeaderProps> = ({
                   onClick={() => handleNavClick(item.section)}
                   className={`w-full flex items-center justify-between px-3 py-2 rounded-lg text-sm font-semibold transition-colors ${
                     activeNav === item.section
-                      ? 'bg-blue-600/20 text-blue-400 border border-blue-500/30'
-                      : 'text-[#d4d4d8] hover:bg-[#1f1f25] hover:text-white'
+                      ? 'bg-blue-600/15 text-blue-500 border border-blue-500/30'
+                      : 'text-app-ink hover:bg-app-active'
                   }`}
                 >
                   <span>{item.label}</span>
@@ -400,16 +400,16 @@ export const Header: React.FC<HeaderProps> = ({
               ))}
             </div>
 
-            <div className="mt-4 pt-3 border-t border-[#27272a] flex flex-col gap-2">
+            <div className="mt-4 pt-3 border-t border-app-border flex flex-col gap-2">
               <button
                 type="button"
                 onClick={() => {
                   setMobileMenuOpen(false);
                   onOpenSearch();
                 }}
-                className="w-full flex items-center justify-center gap-2 rounded-lg border border-[#27272a] bg-[#1c1c22] py-2 text-xs font-semibold text-white hover:bg-[#27272e]"
+                className="w-full flex items-center justify-center gap-2 rounded-lg border border-app-border bg-app-inset py-2 text-xs font-semibold text-app-ink hover:bg-app-active"
               >
-                <Search className="h-4 w-4 text-blue-400" />
+                <Search className="h-4 w-4 text-blue-500" />
                 <span>Search All Tools &amp; Guides</span>
               </button>
 

@@ -709,17 +709,17 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
   return (
     <div id="practice-sandbox" className="panel-surface min-w-0 overflow-hidden space-y-0 rounded-2xl border border-app-border shadow-md">
       {/* ── Header: Studio Bar ────────────────────────────── */}
-      <div className="p-4 sm:p-5 bg-slate-900 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4 text-white">
+      <div className="p-4 sm:p-5 bg-app-surface border-b border-app-border flex flex-wrap items-center justify-between gap-4 text-app-ink">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono font-bold uppercase tracking-wider bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
-              <Cpu className="w-3 h-3 text-emerald-400" />
+            <span className="text-[10px] px-2.5 py-0.5 rounded-full font-mono font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 flex items-center gap-1.5">
+              <Cpu className="w-3 h-3 text-emerald-500" />
               VS Studio Challenge Sandbox
             </span>
-            <span className="text-[11px] text-slate-400 font-mono">Est: {challenge.estimatedTime}</span>
-            <span className="text-[11px] text-cyan-400 font-mono font-bold">{challenge.difficulty}</span>
+            <span className="text-[11px] text-app-subtle font-mono">Est: {challenge.estimatedTime}</span>
+            <span className="text-[11px] text-cyan-600 dark:text-cyan-400 font-mono font-bold">{challenge.difficulty}</span>
           </div>
-          <h3 className="text-lg font-black text-white mt-1.5 tracking-tight flex items-center gap-2">
+          <h3 className="text-lg font-black text-app-ink mt-1.5 tracking-tight flex items-center gap-2">
             <span>{challenge.title}</span>
           </h3>
         </div>
@@ -729,16 +729,16 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
           <button
             type="button"
             onClick={() => setShowHint(!showHint)}
-            className="text-xs px-3 py-2 rounded-lg border border-slate-700 bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700 flex items-center gap-1.5 font-medium transition-colors cursor-pointer"
+            className="text-xs px-3 py-2 rounded-lg border border-app-border bg-app-inset text-app-muted hover:text-app-ink hover:bg-app-active flex items-center gap-1.5 font-medium transition-colors cursor-pointer"
           >
-            <HelpCircle className="w-3.5 h-3.5 text-amber-400" />
+            <HelpCircle className="w-3.5 h-3.5 text-amber-500" />
             <span>{showHint ? 'Hide Book Hint' : 'Book Hint'}</span>
           </button>
 
           <button
             type="button"
             onClick={() => setShowSolution(!showSolution)}
-            className="text-xs px-3 py-2 rounded-lg border border-slate-700 bg-slate-800/80 text-slate-300 hover:text-white hover:bg-slate-700 flex items-center gap-1.5 font-medium transition-colors cursor-pointer"
+            className="text-xs px-3 py-2 rounded-lg border border-app-border bg-app-inset text-app-muted hover:text-app-ink hover:bg-app-active flex items-center gap-1.5 font-medium transition-colors cursor-pointer"
           >
             {showSolution ? <EyeOff className="w-3.5 h-3.5" /> : <Eye className="w-3.5 h-3.5" />}
             <span>{showSolution ? 'Hide Solution' : 'Peek Solution'}</span>
@@ -756,7 +756,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
       </div>
 
       {/* ── Brain-Level Concept & Straight Book Method Card ── */}
-      <div className="p-4 sm:p-5 bg-slate-950/60 border-b border-app-border space-y-4">
+      <div className="p-4 sm:p-5 bg-app-inset/40 border-b border-app-border space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">
@@ -919,9 +919,9 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
       {/* ── VS Studio Code Editor & Live Preview Grid ────────── */}
       <div className="grid min-w-0 grid-cols-1 divide-y divide-app-border lg:grid-cols-2 lg:divide-x lg:divide-y-0 min-h-[400px]">
         {/* Editor Half (VS Code Dark Theme) */}
-        <div className="flex min-w-0 flex-col bg-[#141417]">
+        <div className="flex min-w-0 flex-col bg-slate-950">
           {/* File Tabs Bar */}
-          <div className="flex items-center justify-between px-3 py-2 bg-[#0d0d10] border-b border-[#27272a]">
+          <div className="flex items-center justify-between px-3 py-2 bg-slate-900 border-b border-app-border">
             <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar">
               {[
                 { id: 'html', label: 'index.html', badge: 'HTML', color: 'text-orange-400 border-orange-500/30 bg-orange-500/10' },
@@ -934,8 +934,8 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                   onClick={() => setActiveTab(tab.id as any)}
                   className={`text-xs font-mono font-bold py-1.5 px-3 rounded-md flex items-center gap-2 transition-all cursor-pointer ${
                     activeTab === tab.id
-                      ? 'bg-[#1e1e24] text-white border border-[#3b3b45] shadow-xs'
-                      : 'text-[#9ca3af] hover:text-white hover:bg-[#18181c]'
+                      ? 'bg-slate-800 text-white border border-slate-700 shadow-xs'
+                      : 'text-slate-400 hover:text-white hover:bg-slate-850'
                   }`}
                 >
                   <span className={`text-[9px] px-1 py-0.2 rounded border font-mono font-extrabold ${tab.color}`}>
@@ -950,7 +950,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
               <button
                 type="button"
                 onClick={handleReset}
-                className="text-xs font-mono text-[#9ca3af] hover:text-white px-2.5 py-1 rounded bg-[#1e1e24] border border-[#2e2e38] flex items-center gap-1.5 transition-colors cursor-pointer"
+                className="text-xs font-mono text-slate-400 hover:text-white px-2.5 py-1 rounded bg-slate-800 border border-slate-700 flex items-center gap-1.5 transition-colors cursor-pointer"
                 title="Reset starter code"
               >
                 <RotateCcw className="w-3 h-3" />
@@ -960,13 +960,13 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
           </div>
 
           {/* Active Code Input Area */}
-          <div className="flex-1 p-3.5 font-mono text-xs text-slate-100 overflow-auto bg-[#141417]">
+          <div className="flex-1 p-3.5 font-mono text-xs text-slate-100 overflow-auto bg-slate-950">
             {activeTab === 'html' && (
               <textarea
                 value={showSolution ? challenge.solutionHtml : html}
                 onChange={(e) => !showSolution && setHtml(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-[#f3f4f6] leading-relaxed selection:bg-blue-600/40"
+                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-slate-100 leading-relaxed selection:bg-blue-600/40"
                 spellCheck={false}
                 placeholder="Write your HTML here..."
               />
@@ -976,7 +976,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                 value={showSolution ? challenge.solutionCss : css}
                 onChange={(e) => !showSolution && setCss(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-[#67e8f9] leading-relaxed selection:bg-cyan-600/40"
+                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-cyan-300 leading-relaxed selection:bg-cyan-600/40"
                 spellCheck={false}
                 placeholder="Write your CSS styles here..."
               />
@@ -986,7 +986,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
                 value={showSolution ? challenge.solutionJs : js}
                 onChange={(e) => !showSolution && setJs(e.target.value)}
                 readOnly={showSolution}
-                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-[#fde047] leading-relaxed selection:bg-amber-600/40"
+                className="w-full h-full min-h-[280px] bg-transparent outline-none resize-none font-mono text-amber-300 leading-relaxed selection:bg-amber-600/40"
                 spellCheck={false}
                 placeholder="Write your JavaScript logic here..."
               />
@@ -1031,17 +1031,17 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
       </div>
 
       {/* ── VS Studio Bottom Diagnostic Dock ─────────────────── */}
-      <div className="border-t border-app-border bg-[#0d0d10] text-[#e4e4e7]">
+      <div className="border-t border-app-border bg-slate-950 text-slate-200">
         {/* Dock Tabs Header */}
-        <div className="flex items-center justify-between px-3 py-1.5 border-b border-[#27272a] bg-[#141417]">
+        <div className="flex items-center justify-between px-3 py-1.5 border-b border-app-border bg-slate-900">
           <div className="flex items-center gap-2">
             <button
               type="button"
               onClick={() => setBottomDockTab('compiler')}
               className={`px-2.5 py-1 rounded text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
                 bottomDockTab === 'compiler'
-                  ? 'bg-[#27272a] text-white font-bold'
-                  : 'text-[#9ca3af] hover:text-white'
+                  ? 'bg-slate-800 text-white font-bold'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               <Cpu className="w-3.5 h-3.5 text-blue-400" />
@@ -1066,8 +1066,8 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
               onClick={() => setBottomDockTab('console')}
               className={`px-2.5 py-1 rounded text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
                 bottomDockTab === 'console'
-                  ? 'bg-[#27272a] text-white font-bold'
-                  : 'text-[#9ca3af] hover:text-white'
+                  ? 'bg-slate-800 text-white font-bold'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               <Terminal className="w-3.5 h-3.5 text-emerald-400" />
@@ -1080,8 +1080,8 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
               onClick={() => setBottomDockTab('tests')}
               className={`px-2.5 py-1 rounded text-xs font-mono flex items-center gap-1.5 transition-colors cursor-pointer ${
                 bottomDockTab === 'tests'
-                  ? 'bg-[#27272a] text-white font-bold'
-                  : 'text-[#9ca3af] hover:text-white'
+                  ? 'bg-slate-800 text-white font-bold'
+                  : 'text-slate-400 hover:text-white'
               }`}
             >
               <CheckCircle2 className="w-3.5 h-3.5 text-cyan-400" />
@@ -1092,7 +1092,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
             </button>
           </div>
 
-          <span className="text-[10px] font-mono text-[#71717a] hidden sm:inline">
+          <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
             100% Local Engine • No 3rd Party Host / DNS Dependencies
           </span>
         </div>
@@ -1184,7 +1184,7 @@ export const PracticeSandbox: React.FC<PracticeSandboxProps> = ({
         </div>
 
         {/* VS Studio Status Bar Footer */}
-        <div className="px-3 py-1 bg-[#09090c] border-t border-[#1f1f23] flex flex-wrap items-center justify-between text-[10px] font-mono text-[#9ca3af]">
+        <div className="px-3 py-1 bg-slate-950 border-t border-app-border flex flex-wrap items-center justify-between text-[10px] font-mono text-slate-400">
           <div className="flex items-center gap-3">
             <span className="flex items-center gap-1 text-emerald-400 font-bold">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />

@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme inline {
   --color-app-canvas: var(--app-canvas);
   --color-app-surface: var(--app-surface);
@@ -45,20 +47,20 @@
 
   html.light {
     color-scheme: light;
-    --app-canvas: #f6f3eb;
-    --app-surface: #fdfbf7;
-    --app-active: #eee8dc;
-    --app-inset: #f0ece2;
-    --app-border: #ded8cb;
-    --app-ink: #1f1d1a;
-    --app-muted: #5f5a50;
-    --app-subtle: #878072;
-    --app-amber: #b45309;
-    --app-amber-hover: #92400e;
-    --app-focus: #b45309;
-    --app-lesson-strip: #25221c;
-    --app-lesson-strip-ink: #faf8f5;
-    --app-panel-shadow: 0 16px 32px -24px rgb(58 45 28 / 0.12);
+    --app-canvas: #f8fafc;
+    --app-surface: #ffffff;
+    --app-active: #f1f5f9;
+    --app-inset: #f8fafc;
+    --app-border: #e2e8f0;
+    --app-ink: #0f172a;
+    --app-muted: #475569;
+    --app-subtle: #64748b;
+    --app-amber: #2563eb;
+    --app-amber-hover: #1d4ed8;
+    --app-focus: #2563eb;
+    --app-lesson-strip: #0f172a;
+    --app-lesson-strip-ink: #ffffff;
+    --app-panel-shadow: 0 4px 16px -2px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.04);
   }
 
   *,
@@ -205,31 +207,73 @@
   }
 
   html.light .bg-white {
-    background-color: var(--app-surface) !important;
+    background-color: #ffffff !important;
   }
 
-  html.light .bg-slate-50,
+  html.light .bg-slate-50 {
+    background-color: #f8fafc !important;
+  }
+
   html.light .bg-slate-100 {
-    background-color: var(--app-active) !important;
+    background-color: #f1f5f9 !important;
   }
 
   html.light .border-slate-100,
-  html.light .border-slate-200,
-  html.light .border-slate-300,
+  html.light .border-slate-200 {
+    border-color: #e2e8f0 !important;
+  }
+
+  html.light .border-slate-300 {
+    border-color: #cbd5e1 !important;
+  }
+
   html.light .border-slate-700,
   html.light .border-slate-800 {
     border-color: var(--app-border) !important;
   }
 
   html.light .text-slate-900,
-  html.light .text-slate-800,
-  html.light .text-slate-700 {
+  html.light .text-slate-800 {
+    color: #0f172a !important;
+  }
+
+  html.light .text-slate-700,
+  html.light .text-slate-600 {
+    color: #334155 !important;
+  }
+
+  html.light .text-slate-500,
+  html.light .text-slate-400 {
+    color: #64748b !important;
+  }
+
+  /* Safe fallback for legacy hardcoded dark panels in light mode */
+  html.light .bg-\[\#121215\],
+  html.light .bg-\[\#141417\],
+  html.light .bg-\[\#16161a\],
+  html.light .bg-\[\#16161c\],
+  html.light .bg-\[\#18181c\],
+  html.light .bg-\[\#111114\],
+  html.light .bg-\[\#0e0e11\],
+  html.light .bg-\[\#101012\],
+  html.light .bg-\[\#222228\] {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.light .border-\[\#27272a\],
+  html.light .border-\[\#3f3f46\],
+  html.light .border-\[\#3b3b45\] {
+    border-color: var(--app-border) !important;
+  }
+
+  html.light .text-\[\#d4d4d8\],
+  html.light .text-\[\#e4e4e7\] {
     color: var(--app-ink) !important;
   }
 
-  html.light .text-slate-600,
-  html.light .text-slate-500,
-  html.light .text-slate-400 {
+  html.light .text-\[\#a1a1aa\],
+  html.light .text-\[\#9ca3af\],
+  html.light .text-\[\#71717a\] {
     color: var(--app-muted) !important;
   }
 }

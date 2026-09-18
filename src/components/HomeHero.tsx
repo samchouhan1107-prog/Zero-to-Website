@@ -295,7 +295,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       {/* ========================================================================= */}
       <section
         aria-label="WebZoneBW Hero Section"
-        className="relative overflow-hidden rounded-2xl border border-[#27272a] bg-[#121215] p-6 sm:p-10 lg:p-12 shadow-2xl"
+        className="relative overflow-hidden rounded-2xl border border-app-border bg-app-surface p-6 sm:p-10 lg:p-12 shadow-md"
       >
         {/* Soft background ambient radial glows */}
         <div className="pointer-events-none absolute -left-20 -top-20 h-96 w-96 rounded-full bg-blue-600/10 blur-3xl" />
@@ -305,28 +305,28 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
           {/* Left Column: Headline, Supporting Text, Search Experience, and Action CTAs */}
           <div className="space-y-6">
             <div className="space-y-3.5">
-              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 font-mono text-xs font-semibold text-blue-400">
-                <span className="h-2 w-2 rounded-full bg-blue-400 animate-pulse" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-blue-500/30 bg-blue-500/10 px-3 py-1 font-mono text-xs font-semibold text-blue-500 dark:text-blue-400">
+                <span className="h-2 w-2 rounded-full bg-blue-500 animate-pulse" />
                 <span>WebZoneBW SC · Developer Studio</span>
               </div>
 
               {/* Exact Requested Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-[1.08]">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-app-ink leading-[1.08]">
                 Powerful Web Tools, <br />
-                <span className="text-white">Built for the Modern Web</span>
+                <span className="text-app-ink">Built for the Modern Web</span>
               </h1>
 
               {/* Exact Requested Supporting Text */}
-              <p className="text-base sm:text-lg font-normal text-[#a1a1aa] leading-relaxed max-w-xl">
+              <p className="text-base sm:text-lg font-normal text-app-muted leading-relaxed max-w-xl">
                 Explore practical web, image, developer and performance tools designed to help you build, test and improve your websites.
               </p>
             </div>
 
             {/* Prominent Search Control */}
             <form onSubmit={handleSearchSubmit} className="space-y-3">
-              <div className="relative flex w-full max-w-xl items-center rounded-xl border border-[#27272a] bg-[#18181c] p-1.5 shadow-lg transition-all focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/30">
-                <div className="flex items-center pl-3 text-[#71717a]">
-                  <Search className="h-5 w-5 text-blue-400" aria-hidden="true" />
+              <div className="relative flex w-full max-w-xl items-center rounded-xl border border-app-border bg-app-inset p-1.5 shadow-sm transition-all focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/30">
+                <div className="flex items-center pl-3 text-app-subtle">
+                  <Search className="h-5 w-5 text-blue-500" aria-hidden="true" />
                 </div>
 
                 <input
@@ -334,18 +334,18 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search web tools, CSS visualizers, sandbox, DOM..."
-                  className="w-full bg-transparent px-3 py-2 text-sm sm:text-base text-white placeholder-[#71717a] focus:outline-none"
+                  className="w-full bg-transparent px-3 py-2 text-sm sm:text-base text-app-ink placeholder:text-app-subtle focus:outline-none"
                   aria-label="Search WebZoneBW tools and resources"
                 />
 
-                <span className="hidden sm:inline-flex items-center rounded border border-[#27272a] bg-[#222228] px-2 py-0.5 font-mono text-[10px] text-[#9ca3af] mr-2">
+                <span className="hidden sm:inline-flex items-center rounded border border-app-border bg-app-active px-2 py-0.5 font-mono text-[10px] text-app-subtle mr-2">
                   ⌘K
                 </span>
 
                 {/* Dominant Search Button */}
                 <button
                   type="submit"
-                  className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-500 active:scale-[0.98] shadow-md shrink-0"
+                  className="inline-flex min-h-11 items-center justify-center rounded-lg bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-500 active:scale-[0.98] shadow-md shrink-0 cursor-pointer"
                 >
                   Search
                 </button>
@@ -353,7 +353,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
               {/* Popular quick-discovery chips */}
               <div className="flex flex-wrap items-center gap-1.5 pt-1 text-xs">
-                <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-[#71717a]">
+                <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-app-subtle">
                   Quick Explore:
                 </span>
                 {POPULAR_SEARCH_TAGS.map((tag) => (
@@ -361,7 +361,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                     key={tag.query}
                     type="button"
                     onClick={() => handleQuickTagClick(tag.query)}
-                    className="rounded-md border border-[#27272a] bg-[#18181c] px-2.5 py-1 text-xs font-medium text-blue-400 transition-colors hover:border-blue-500/50 hover:bg-[#222228]"
+                    className="rounded-md border border-app-border bg-app-surface px-2.5 py-1 text-xs font-medium text-blue-600 dark:text-blue-400 transition-colors hover:border-blue-500/50 hover:bg-app-active cursor-pointer"
                   >
                     {tag.label}
                   </button>
@@ -370,32 +370,32 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             </form>
 
             {/* Guided Learning Track / Smart Resume */}
-            <div className="rounded-xl border border-blue-500/20 bg-[#16161c] p-4 shadow-md space-y-3">
+            <div className="rounded-xl border border-blue-500/20 bg-app-inset p-4 shadow-sm space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500/10 text-blue-400">
+                  <span className="flex h-6 w-6 items-center justify-center rounded-lg bg-blue-500/10 text-blue-500">
                     <BookOpen className="h-3.5 w-3.5" />
                   </span>
-                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#d4d4d8]">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-app-ink">
                     {completedCount === 0 ? 'Start Learning Track' : progress.courseCompleted ? 'Curriculum Completed' : 'Continue Learning Track'}
                   </span>
                 </div>
 
                 <div className="flex items-center gap-3 text-xs">
                   {progress.streakDays > 0 && (
-                    <span className="flex items-center gap-1 font-mono font-bold text-amber-400">
-                      <Flame className="h-3.5 w-3.5 fill-amber-400" />
+                    <span className="flex items-center gap-1 font-mono font-bold text-amber-500 dark:text-amber-400">
+                      <Flame className="h-3.5 w-3.5 fill-amber-500 dark:fill-amber-400" />
                       {progress.streakDays} Day{progress.streakDays > 1 ? 's' : ''} Streak
                     </span>
                   )}
-                  <span className="font-mono text-emerald-400 font-bold">
+                  <span className="font-mono text-emerald-600 dark:text-emerald-400 font-bold">
                     {completedCount}/{totalLessons} Lessons ({percentComplete}%)
                   </span>
                 </div>
               </div>
 
               {/* Progress Bar */}
-              <div className="h-1.5 w-full rounded-full bg-[#27272a] overflow-hidden">
+              <div className="h-1.5 w-full rounded-full bg-app-active overflow-hidden">
                 <div
                   className="h-full rounded-full bg-gradient-to-r from-blue-500 to-emerald-400 transition-all duration-500"
                   style={{ width: `${Math.max(4, percentComplete)}%` }}
@@ -404,10 +404,10 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
               <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
                 <div className="min-w-0 flex-1">
-                  <p className="text-[11px] font-mono text-[#71717a]">
+                  <p className="text-[11px] font-mono text-app-subtle">
                     {progress.courseCompleted ? 'All 11 Chapters Mastered' : `Chapter ${nextChapter?.number || '00'} · ${nextChapter?.title || 'Web Foundations'}`}
                   </p>
-                  <p className="text-xs sm:text-sm font-bold text-white truncate">
+                  <p className="text-xs sm:text-sm font-bold text-app-ink truncate">
                     {progress.courseCompleted ? '🎉 Capstone Project & Verifiable Credential' : nextIncompleteLesson?.title || 'The Universal Web & Internet Architecture'}
                   </p>
                 </div>
@@ -415,7 +415,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                 <button
                   type="button"
                   onClick={() => onSelectLesson(nextIncompleteLesson?.id || 'ch-00-l-01')}
-                  className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-emerald-500 hover:bg-emerald-400 px-4 text-xs font-bold text-slate-950 transition-colors shrink-0 shadow-sm"
+                  className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-400 px-4 text-xs font-bold text-white transition-colors shrink-0 shadow-sm cursor-pointer"
                 >
                   <span>{completedCount === 0 ? 'Start Course' : progress.courseCompleted ? 'Review Capstone' : 'Resume Lesson'}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
@@ -429,7 +429,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               <button
                 type="button"
                 onClick={() => scrollToSection('tool-discovery')}
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-500 active:scale-[0.98] shadow-lg shadow-blue-600/20"
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl bg-blue-600 px-6 text-sm font-bold text-white transition-all hover:bg-blue-500 active:scale-[0.98] shadow-md shadow-blue-600/20 cursor-pointer"
               >
                 <Wrench className="h-4 w-4" />
                 <span>Explore Tools</span>
@@ -440,9 +440,9 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               <button
                 type="button"
                 onClick={() => scrollToSection('explore-webzonebw')}
-                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#27272a] bg-[#18181c] px-5 text-sm font-bold text-[#d4d4d8] transition-all hover:border-[#3f3f46] hover:bg-[#222228] hover:text-white"
+                className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-app-border bg-app-surface px-5 text-sm font-bold text-app-ink transition-all hover:bg-app-active cursor-pointer"
               >
-                <BookOpen className="h-4 w-4 text-purple-400" />
+                <BookOpen className="h-4 w-4 text-purple-500" />
                 <span>Explore WebZoneBW</span>
               </button>
 
@@ -450,7 +450,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               <button
                 type="button"
                 onClick={onOpenPracticeHub}
-                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 text-xs font-bold text-emerald-400 transition-colors hover:bg-emerald-500/20"
+                className="inline-flex min-h-11 items-center gap-1.5 rounded-xl border border-emerald-500/30 bg-emerald-500/10 px-4 text-xs font-bold text-emerald-600 dark:text-emerald-400 transition-colors hover:bg-emerald-500/20 cursor-pointer"
               >
                 <Code2 className="h-3.5 w-3.5" />
                 <span>Live REPL Sandbox</span>
@@ -469,17 +469,17 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       {/* 2. TOOL DISCOVERY SECTION                                                 */}
       {/* ========================================================================= */}
       <section id="tool-discovery" aria-labelledby="tools-heading" className="space-y-6">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#27272a] pb-4">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-app-border pb-4">
           <div>
-            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-blue-400">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-blue-500 dark:text-blue-400">
               <Wrench className="h-3.5 w-3.5" />
               <span>Tool Discovery</span>
             </div>
-            <h2 id="tools-heading" className="mt-1 text-2xl sm:text-3xl font-black text-white">
+            <h2 id="tools-heading" className="mt-1 text-2xl sm:text-3xl font-black text-app-ink">
               Practical Web Engineering Utilities
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-lg leading-relaxed">
+          <p className="text-xs sm:text-sm text-app-muted max-w-lg leading-relaxed">
             Select an instrument category to explore hands-on visualizers, interactive layout workbenches, and sandbox environments.
           </p>
         </div>
@@ -491,10 +491,10 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               key={category}
               type="button"
               onClick={() => setActiveToolCategory(category)}
-              className={`whitespace-nowrap rounded-lg px-3.5 py-2 text-xs font-bold transition-all ${
+              className={`whitespace-nowrap rounded-lg px-3.5 py-2 text-xs font-bold transition-all cursor-pointer ${
                 activeToolCategory === category
-                  ? 'bg-blue-600 text-white shadow-md'
-                  : 'border border-[#27272a] bg-[#18181c] text-[#a1a1aa] hover:border-[#3f3f46] hover:text-white'
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'border border-app-border bg-app-surface text-app-muted hover:border-app-border/80 hover:text-app-ink hover:bg-app-active'
               }`}
             >
               {category}
@@ -509,7 +509,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             return (
               <div
                 key={tool.id}
-                className="group relative flex flex-col justify-between rounded-xl border border-[#27272a] bg-[#16161a] p-5 sm:p-6 transition-all hover:border-blue-500/50 hover:bg-[#1a1a20] shadow-sm hover:shadow-xl"
+                className="group relative flex flex-col justify-between rounded-xl border border-app-border bg-app-surface p-5 sm:p-6 transition-all hover:border-blue-500/50 hover:bg-app-active/40 shadow-xs hover:shadow-md"
               >
                 <div className="space-y-3">
                   <div className="flex items-start justify-between gap-2">
@@ -517,31 +517,31 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                       <Icon className="h-5 w-5" aria-hidden="true" />
                     </div>
                     {tool.badge && (
-                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider rounded border border-[#27272a] bg-[#121215] px-2 py-0.5 text-[#a1a1aa]">
+                      <span className="font-mono text-[10px] font-bold uppercase tracking-wider rounded border border-app-border bg-app-inset px-2 py-0.5 text-app-subtle">
                         {tool.badge}
                       </span>
                     )}
                   </div>
 
                   <div>
-                    <span className="font-mono text-[10px] font-bold uppercase text-blue-400 tracking-wider">
+                    <span className="font-mono text-[10px] font-bold uppercase text-blue-500 dark:text-blue-400 tracking-wider">
                       {tool.category}
                     </span>
-                    <h3 className="mt-1 text-base sm:text-lg font-bold text-white group-hover:text-blue-400 transition-colors">
+                    <h3 className="mt-1 text-base sm:text-lg font-bold text-app-ink group-hover:text-blue-500 dark:group-hover:text-blue-400 transition-colors">
                       {tool.name}
                     </h3>
                   </div>
 
-                  <p className="text-xs sm:text-sm text-[#a1a1aa] leading-relaxed">
+                  <p className="text-xs sm:text-sm text-app-muted leading-relaxed">
                     {tool.description}
                   </p>
                 </div>
 
-                <div className="mt-6 pt-3 border-t border-[#27272a]/60">
+                <div className="mt-6 pt-3 border-t border-app-border/60">
                   <button
                     type="button"
                     onClick={tool.action}
-                    className="w-full inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-[#27272a] bg-[#1c1c22] px-4 text-xs font-bold text-white transition-all group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white active:scale-[0.98]"
+                    className="w-full inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border border-app-border bg-app-inset px-4 text-xs font-bold text-app-ink transition-all group-hover:border-blue-500 group-hover:bg-blue-600 group-hover:text-white active:scale-[0.98] cursor-pointer"
                   >
                     <span>{tool.ctaText}</span>
                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
@@ -557,17 +557,17 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       {/* 4. CONTENT / RESOURCE AREA: "Explore WebZoneBW"                          */}
       {/* ========================================================================= */}
       <section id="explore-webzonebw" aria-labelledby="resources-heading" className="space-y-6 pt-4">
-        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-[#27272a] pb-4">
+        <div className="flex flex-wrap items-end justify-between gap-4 border-b border-app-border pb-4">
           <div>
-            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-purple-400">
+            <div className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-purple-600 dark:text-purple-400">
               <BookOpen className="h-3.5 w-3.5" />
               <span>Knowledge Base &amp; Guides</span>
             </div>
-            <h2 id="resources-heading" className="mt-1 text-2xl sm:text-3xl font-black text-white">
+            <h2 id="resources-heading" className="mt-1 text-2xl sm:text-3xl font-black text-app-ink">
               Explore WebZoneBW
             </h2>
           </div>
-          <p className="text-xs sm:text-sm text-[#a1a1aa] max-w-lg leading-relaxed">
+          <p className="text-xs sm:text-sm text-app-muted max-w-lg leading-relaxed">
             Curated developer references, core standards documentation, and genuine platform release updates.
           </p>
         </div>
@@ -575,16 +575,16 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
         {/* 4 Cards Bento: Featured Tools, Latest Resources, Helpful Guides, Developer Articles */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Bento Card 1: Featured Learning Tracks */}
-          <div className="rounded-xl border border-[#27272a] bg-[#16161a] p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-              <div className="flex items-center gap-2 font-bold text-white text-base">
-                <Compass className="h-4 w-4 text-blue-400" />
+          <div className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-app-border pb-3">
+              <div className="flex items-center gap-2 font-bold text-app-ink text-base">
+                <Compass className="h-4 w-4 text-blue-500" />
                 <span>Curriculum Roadmap</span>
               </div>
-              <span className="font-mono text-xs text-[#71717a]">{chapters.length} Chapters · {allLessons.length} Comprehensive Lessons</span>
+              <span className="font-mono text-xs text-app-subtle">{chapters.length} Chapters · {allLessons.length} Comprehensive Lessons</span>
             </div>
 
-            <div className="divide-y divide-[#27272a]/70 max-h-[360px] overflow-y-auto pr-1">
+            <div className="divide-y divide-app-border/70 max-h-[360px] overflow-y-auto pr-1">
               {chapters.map((ch) => {
                 const chDoneCount = ch.lessons.filter((l) => progress.completedLessons?.[l.id]).length;
                 const chTotal = ch.lessons.length;
@@ -596,28 +596,28 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                       <div className="flex items-center gap-2">
                         <span className={`font-mono text-[10px] font-bold px-1.5 py-0.5 rounded ${
                           isChapterDone
-                            ? 'bg-emerald-500/20 text-emerald-400'
+                            ? 'bg-emerald-500/20 text-emerald-600 dark:text-emerald-400'
                             : chDoneCount > 0
-                            ? 'bg-blue-500/20 text-blue-400'
-                            : 'bg-[#27272a] text-[#a1a1aa]'
+                            ? 'bg-blue-500/20 text-blue-600 dark:text-blue-400'
+                            : 'bg-app-active text-app-muted'
                         }`}>
                           Ch {ch.number}
                         </span>
-                        <h4 className="text-xs sm:text-sm font-bold text-white group-hover:text-blue-400 transition-colors truncate">
+                        <h4 className="text-xs sm:text-sm font-bold text-app-ink group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors truncate">
                           {ch.title}
                         </h4>
                         {isChapterDone && (
-                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
+                          <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 shrink-0" />
                         )}
                       </div>
-                      <p className="text-[11px] text-[#71717a] font-mono">
+                      <p className="text-[11px] text-app-subtle font-mono">
                         {chDoneCount}/{chTotal} lessons completed
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={() => onSelectLesson(ch.lessons[0]?.id || 'ch-00-l-01')}
-                      className="shrink-0 inline-flex items-center gap-1 rounded-md border border-[#27272a] bg-[#1c1c22] px-2.5 py-1 text-xs font-semibold text-[#d4d4d8] hover:border-blue-500/50 hover:text-white transition-colors"
+                      className="shrink-0 inline-flex items-center gap-1 rounded-md border border-app-border bg-app-inset px-2.5 py-1 text-xs font-semibold text-app-ink hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-white transition-colors cursor-pointer"
                     >
                       <span>{isChapterDone ? 'Review' : 'Open'}</span>
                       <ArrowRight className="h-3 w-3" />
@@ -629,62 +629,62 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
           </div>
 
           {/* Bento Card 2: Helpful Guides & Specifications */}
-          <div className="rounded-xl border border-[#27272a] bg-[#16161a] p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-              <div className="flex items-center gap-2 font-bold text-white text-base">
-                <FileCode className="h-4 w-4 text-purple-400" />
+          <div className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-app-border pb-3">
+              <div className="flex items-center gap-2 font-bold text-app-ink text-base">
+                <FileCode className="h-4 w-4 text-purple-500" />
                 <span>Helpful Developer Guides</span>
               </div>
-              <span className="font-mono text-xs text-[#71717a]">Verified References</span>
+              <span className="font-mono text-xs text-app-subtle">Verified References</span>
             </div>
 
             <div className="space-y-3">
-              <div className="rounded-lg border border-[#27272a] bg-[#121215] p-3.5 space-y-1">
+              <div className="rounded-lg border border-app-border bg-app-inset p-3.5 space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white">HTTP Lifecycle &amp; Networking Protocol</span>
-                  <span className="font-mono text-[10px] text-blue-400">RFC Standards</span>
+                  <span className="text-xs font-bold text-app-ink">HTTP Lifecycle &amp; Networking Protocol</span>
+                  <span className="font-mono text-[10px] text-blue-600 dark:text-blue-400">RFC Standards</span>
                 </div>
-                <p className="text-xs text-[#a1a1aa]">
+                <p className="text-xs text-app-muted">
                   In-depth walkthrough of DNS lookup stages, TCP handshakes, TLS negotiation, and status response codes.
                 </p>
                 <button
                   type="button"
                   onClick={() => onSelectLesson('ch-00-l-01')}
-                  className="pt-1 text-xs font-bold text-blue-400 hover:underline flex items-center gap-1"
+                  className="pt-1 text-xs font-bold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <span>Open Guide</span> <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
 
-              <div className="rounded-lg border border-[#27272a] bg-[#121215] p-3.5 space-y-1">
+              <div className="rounded-lg border border-app-border bg-app-inset p-3.5 space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white">CSS Box Model &amp; Spatial Geometry</span>
-                  <span className="font-mono text-[10px] text-amber-400">W3C Recommendation</span>
+                  <span className="text-xs font-bold text-app-ink">CSS Box Model &amp; Spatial Geometry</span>
+                  <span className="font-mono text-[10px] text-amber-600 dark:text-amber-400">W3C Recommendation</span>
                 </div>
-                <p className="text-xs text-[#a1a1aa]">
+                <p className="text-xs text-app-muted">
                   Complete analysis of margin collapsing, padding depth, border dimensions, and standard box-sizing rules.
                 </p>
                 <button
                   type="button"
                   onClick={() => onSelectLesson('ch-02-l-01')}
-                  className="pt-1 text-xs font-bold text-amber-400 hover:underline flex items-center gap-1"
+                  className="pt-1 text-xs font-bold text-amber-600 dark:text-amber-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <span>Open Guide</span> <ArrowRight className="h-3 w-3" />
                 </button>
               </div>
 
-              <div className="rounded-lg border border-[#27272a] bg-[#121215] p-3.5 space-y-1">
+              <div className="rounded-lg border border-app-border bg-app-inset p-3.5 space-y-1">
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-white">Modern Flexbox &amp; CSS Grid Matrix</span>
-                  <span className="font-mono text-[10px] text-teal-400">Layout Specification</span>
+                  <span className="text-xs font-bold text-app-ink">Modern Flexbox &amp; CSS Grid Matrix</span>
+                  <span className="font-mono text-[10px] text-teal-600 dark:text-teal-400">Layout Specification</span>
                 </div>
-                <p className="text-xs text-[#a1a1aa]">
+                <p className="text-xs text-app-muted">
                   Two-dimensional track definitions, auto-fit repeat matrices, and 1D flex item alignment mechanics.
                 </p>
                 <button
                   type="button"
                   onClick={() => onSelectLesson('ch-03-l-01')}
-                  className="pt-1 text-xs font-bold text-teal-400 hover:underline flex items-center gap-1"
+                  className="pt-1 text-xs font-bold text-teal-600 dark:text-teal-400 hover:underline flex items-center gap-1 cursor-pointer"
                 >
                   <span>Open Guide</span> <ArrowRight className="h-3 w-3" />
                 </button>
@@ -693,39 +693,39 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
           </div>
 
           {/* Bento Card 3: Developer Articles & Genuine Releases */}
-          <div className="rounded-xl border border-[#27272a] bg-[#16161a] p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-              <div className="flex items-center gap-2 font-bold text-white text-base">
-                <Sparkles className="h-4 w-4 text-emerald-400" />
+          <div className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-app-border pb-3">
+              <div className="flex items-center gap-2 font-bold text-app-ink text-base">
+                <Sparkles className="h-4 w-4 text-emerald-500" />
                 <span>Developer Articles &amp; Updates</span>
               </div>
-              <span className="font-mono text-xs text-[#71717a]">Live Platform Notes</span>
+              <span className="font-mono text-xs text-app-subtle">Live Platform Notes</span>
             </div>
 
-            <div className="divide-y divide-[#27272a]/70">
+            <div className="divide-y divide-app-border/70">
               {NEWS_UPDATES.slice(0, 3).map((news) => (
                 <div key={news.id} className="py-3 space-y-1">
                   <div className="flex items-center justify-between gap-2">
-                    <span className="text-xs font-bold text-white">{news.title}</span>
-                    <span className="font-mono text-[10px] text-[#71717a]">{news.date}</span>
+                    <span className="text-xs font-bold text-app-ink">{news.title}</span>
+                    <span className="font-mono text-[10px] text-app-subtle">{news.date}</span>
                   </div>
-                  <p className="text-xs text-[#a1a1aa] leading-relaxed">{news.summary}</p>
+                  <p className="text-xs text-app-muted leading-relaxed">{news.summary}</p>
                 </div>
               ))}
             </div>
           </div>
 
           {/* Bento Card 4: Interactive Exercises & AI Review */}
-          <div className="rounded-xl border border-[#27272a] bg-[#16161a] p-6 space-y-4">
-            <div className="flex items-center justify-between border-b border-[#27272a] pb-3">
-              <div className="flex items-center gap-2 font-bold text-white text-base">
-                <Terminal className="h-4 w-4 text-cyan-400" />
+          <div className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4 shadow-xs">
+            <div className="flex items-center justify-between border-b border-app-border pb-3">
+              <div className="flex items-center gap-2 font-bold text-app-ink text-base">
+                <Terminal className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                 <span>Interactive Practice &amp; AI Assistance</span>
               </div>
-              <span className="font-mono text-xs text-emerald-400">Ready to Code</span>
+              <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400">Ready to Code</span>
             </div>
 
-            <div className="space-y-3 text-xs leading-relaxed text-[#a1a1aa]">
+            <div className="space-y-3 text-xs leading-relaxed text-app-muted">
               <p>
                 WebZoneBW features verified interactive code challenges with instant DOM isolation, live preview rendering, automated test assertion passes, and on-demand AI code tutoring.
               </p>
@@ -734,19 +734,19 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                 <button
                   type="button"
                   onClick={onOpenPracticeHub}
-                  className="rounded-lg border border-[#27272a] bg-[#121215] p-3 text-left hover:border-emerald-500/50 transition-colors group"
+                  className="rounded-lg border border-app-border bg-app-inset p-3 text-left hover:border-emerald-500/50 transition-colors group cursor-pointer"
                 >
-                  <div className="font-bold text-white group-hover:text-emerald-400 transition-colors">Practice Arena</div>
-                  <div className="text-[11px] text-[#71717a] mt-0.5">Solve code challenges</div>
+                  <div className="font-bold text-app-ink group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Practice Arena</div>
+                  <div className="text-[11px] text-app-subtle mt-0.5">Solve code challenges</div>
                 </button>
 
                 <button
                   type="button"
                   onClick={onOpenTutor}
-                  className="rounded-lg border border-[#27272a] bg-[#121215] p-3 text-left hover:border-blue-500/50 transition-colors group"
+                  className="rounded-lg border border-app-border bg-app-inset p-3 text-left hover:border-blue-500/50 transition-colors group cursor-pointer"
                 >
-                  <div className="font-bold text-white group-hover:text-blue-400 transition-colors">AI Code Tutor</div>
-                  <div className="text-[11px] text-[#71717a] mt-0.5">Ask questions anytime</div>
+                  <div className="font-bold text-app-ink group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">AI Code Tutor</div>
+                  <div className="text-[11px] text-app-subtle mt-0.5">Ask questions anytime</div>
                 </button>
               </div>
 
@@ -755,7 +755,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                   <button
                     type="button"
                     onClick={() => onSelectLesson(nextIncompleteLesson.id)}
-                    className="w-full inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-xs font-bold text-white hover:bg-blue-500 transition-colors"
+                    className="w-full inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-xs font-bold text-white hover:bg-blue-500 transition-colors cursor-pointer"
                   >
                     <Play className="h-3.5 w-3.5 fill-current" />
                     <span>{completedCount > 0 ? `Resume: ${nextIncompleteLesson.title}` : 'Start Curriculum'}</span>
