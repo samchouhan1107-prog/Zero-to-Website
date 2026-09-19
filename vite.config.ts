@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
   // Custom domain (webzonebw.shop) serves from root. Override with VITE_BASE for GitHub Pages subpath.
-  base: process.env.VITE_BASE || '/',
+  base: process.env.VITE_BASE || './',
 
   plugins: [
     react(),
