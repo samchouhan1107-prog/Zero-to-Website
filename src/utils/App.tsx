@@ -1,4 +1,21 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
+/* Code-splitting: heavy views & modals are lazy-loaded so the initial
+const LessonView = lazy(() => import('../components/LessonView').then((m) => ({ default: m.LessonView })));
+const PracticeHub = lazy(() => import('../components/PracticeHub').then((m) => ({ default: m.PracticeHub })));
+const VisualLab = lazy(() => import('../components/VisualLab').then((m) => ({ default: m.VisualLab }))) as unknown as React.FC<{ initialTool?: VisualizerId }> & { VisualizerId: VisualizerId };
+const ActivitiesView = lazy(() => import('../components/ActivitiesView').then((m) => ({ default: m.ActivitiesView })));
+const BlogView = lazy(() => import('../components/BlogView').then((m) => ({ default: m.BlogView })));
+const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })));
+const SearchModal = lazy(() => import('../components/SearchModal').then((m) => ({ default: m.SearchModal })));
+const TutorModal = lazy(() => import('../components/TutorModal').then((m) => ({ default: m.TutorModal })));
+const SettingsModal = lazy(() => import('../components/SettingsModal').then((m) => ({ default: m.SettingsModal })));
+const CertificateModal = lazy(() => import('../components/CertificateModal').then((m) => ({ default: m.CertificateModal })));
+const XpMilestoneModal = lazy(() => import('../components/XpMilestoneModal').then((m) => ({ default: m.XpMilestoneModal })));
+const XpMilestonesRoadmapModal = lazy(() => import('../components/XpMilestonesRoadmapModal').then((m) => ({ default: m.XpMilestonesRoadmapModal })));
+const CookieNotificationBanner = lazy(() => import('../components/CookieNotificationBanner').then((m) => ({ default: m.CookieNotificationBanner })));
+const NotificationCenterModal = lazy(() => import('../components/NotificationCenterModal').then((m) => ({ default: m.NotificationCenterModal })));
+const AccountModal = lazy(() => import('../components/AccountModal').then((m) => ({ default: m.AccountModal })));
+const LegalComplianceModal = lazy(() => import('../components/LegalComplianceModal').then((m) => ({ default: m.LegalComplianceModal })));
 import { motion, AnimatePresence } from 'motion/react';
 import { CHAPTERS_DATA } from '../data/chaptersData';
 import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
@@ -8,23 +25,9 @@ import { calculateDailyStreak, getLocalDateString } from './streakUtils';
 import { Sidebar } from '../components/Sidebar';
 import { Header } from '../components/Header';
 import { HomeHero } from '../components/HomeHero';
-import { LessonView } from '../components/LessonView';
-import { PracticeHub } from '../components/PracticeHub';
-import { VisualLab, VisualizerId } from '../components/VisualLab';
-import { ActivitiesView } from '../components/ActivitiesView';
-import { SearchModal } from '../components/SearchModal';
-import { TutorModal } from '../components/TutorModal';
-import { SettingsModal } from '../components/SettingsModal';
-import { CertificateModal } from '../components/CertificateModal';
-import { XpMilestoneModal } from '../components/XpMilestoneModal';
-import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
-import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
-import { NotificationCenterModal } from '../components/NotificationCenterModal';
-import { AccountModal } from '../components/AccountModal';
+import { VisualizerId } from '../components/VisualLab';
 import { ToastNotification, ToastMessage } from '../components/ToastNotification';
-import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
-import { Footer } from '../components/Footer';
-import { BlogView } from '../components/BlogView';
+import { PolicyTab } from '../components/LegalComplianceModal';
 import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
 import { NEWS_UPDATES } from '../data/newsData';
 import { useAuth } from './AuthContext';
@@ -619,12 +622,17 @@ export default function App() {
             {activeView === 'lesson' && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
+                    <span className="animate-pulse">Loading lesson…</span>
+                  </div>
+                }>
                 <LessonView
                   lesson={activeLesson}
                   chapter={activeChapter}
@@ -643,6 +651,7 @@ initial={{ opacity: 0, y: 14 }}
                   onUpdateProgress={(updated) => setProgress(updated)}
                   onOpenCertificate={() => setCertificateOpen(true)}
                 />
+                </Suspense>
               </motion.div>
             )}
 
@@ -655,6 +664,11 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
+                    <span className="animate-pulse">Loading activities…</span>
+                  </div>
+                }>
                 <ActivitiesView
                   chapters={chapters}
                   currentLessonId={currentLessonId}
@@ -663,6 +677,7 @@ initial={{ opacity: 0, y: 14 }}
                   progress={progress}
                   onCompleteActivity={handleCompleteActivity}
                 />
+                </Suspense>
               </motion.div>
             )}
 
@@ -675,11 +690,17 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
+                    <span className="animate-pulse">Loading practice hub…</span>
+                  </div>
+                }>
                 <PracticeHub
                   chapters={chapters}
                   progress={progress}
                   onCompleteChallenge={handleCompleteChallenge}
                 />
+                </Suspense>
               </motion.div>
             )}
 
@@ -692,7 +713,13 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
+                    <span className="animate-pulse">Loading visual lab…</span>
+                  </div>
+                }>
                 <VisualLab initialTool={selectedVisualizerTool} />
+                </Suspense>
               </motion.div>
             )}
 
@@ -705,10 +732,16 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
+                <Suspense fallback={
+                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
+                    <span className="animate-pulse">Loading blog…</span>
+                  </div>
+                }>
                 <BlogView
                   onNavigateHome={() => navigateToView('home')}
                   initialSlug={blogSlug}
                 />
+                </Suspense>
               </motion.div>
             )}
           </AnimatePresence>
@@ -732,7 +765,7 @@ initial={{ opacity: 0, y: 14 }}
       </div>
 
       {/* Global Modals & Drawers */}
-      <AccountModal
+      <Suspense fallback={null}><AccountModal
         isOpen={accountOpen}
         onClose={() => setAccountOpen(false)}
         onAuthSuccess={() => setAccountOpen(false)}
@@ -740,13 +773,13 @@ initial={{ opacity: 0, y: 14 }}
         onOpenCertificate={() => setCertificateOpen(true)}
         onOpenMilestones={() => setRoadmapOpen(true)}
         onOpenSettings={() => setSettingsOpen(true)}
-      />
-      <LegalComplianceModal
+      /></Suspense>
+      <Suspense fallback={null}><LegalComplianceModal
         isOpen={legalModalOpen}
         onClose={() => setLegalModalOpen(false)}
         initialTab={legalModalTab}
-      />
-      <SearchModal
+      /></Suspense>
+      <Suspense fallback={null}><SearchModal
         isOpen={searchOpen}
         onClose={() => setSearchOpen(false)}
         chapters={chapters}
@@ -756,18 +789,18 @@ initial={{ opacity: 0, y: 14 }}
         onNavigateActivities={() => handleNavigateActivities()}
         onOpenTutor={() => handleOpenTutor()}
         initialQuery={searchInitialQuery}
-      />
+      /></Suspense>
 
-      <TutorModal
+      <Suspense fallback={null}><TutorModal
         isOpen={tutorOpen}
         onClose={() => setTutorOpen(false)}
         initialTopic={aiTopic}
         initialCode={aiCode}
         allChapters={chapters}
         onNavigateLesson={handleSelectLesson}
-      />
+      /></Suspense>
 
-      <SettingsModal
+      <Suspense fallback={null}><SettingsModal
         isOpen={settingsOpen}
         onClose={() => setSettingsOpen(false)}
         theme={theme}
@@ -779,28 +812,28 @@ initial={{ opacity: 0, y: 14 }}
         onResetProgress={handleResetProgress}
         progress={progress}
         onOpenLegal={handleOpenLegal}
-      />
+      /></Suspense>
 
-      <CertificateModal
+      <Suspense fallback={null}><CertificateModal
         isOpen={certificateOpen}
         onClose={() => setCertificateOpen(false)}
         progress={progress}
         totalLessons={totalLessons}
-      />
+      /></Suspense>
 
       {/* Congratulatory XP Milestone Celebration Modal */}
       {celebratingMilestone && (
-        <XpMilestoneModal
+        <Suspense fallback={null}><XpMilestoneModal
           milestone={celebratingMilestone}
           isOpen={!!celebratingMilestone}
           onClose={() => setCelebratingMilestone(null)}
           onOpenRoadmap={() => setRoadmapOpen(true)}
           currentXp={progress.xpPoints}
-        />
+        /></Suspense>
       )}
 
       {/* XP Milestones & Level Roadmap Modal */}
-      <XpMilestonesRoadmapModal
+      <Suspense fallback={null}><XpMilestonesRoadmapModal
         isOpen={roadmapOpen}
         onClose={() => setRoadmapOpen(false)}
         progress={progress}
@@ -808,10 +841,10 @@ initial={{ opacity: 0, y: 14 }}
           setRoadmapOpen(false);
           setCelebratingMilestone(m);
         }}
-      />
+      /></Suspense>
 
       {/* Notifications & Release News Modal */}
-      <NotificationCenterModal
+      <Suspense fallback={null}><NotificationCenterModal
         isOpen={notificationsOpen}
         onClose={() => setNotificationsOpen(false)}
         onNavigateView={(view, lessonId) => {
@@ -822,7 +855,7 @@ initial={{ opacity: 0, y: 14 }}
           }
         }}
         onTriggerToast={addToast}
-      />
+      /></Suspense>
 
       {/* Toast Notification Container */}
       <ToastNotification
@@ -831,7 +864,7 @@ initial={{ opacity: 0, y: 14 }}
       />
 
       {/* Cookie & Push Notification Consent Banner */}
-      <CookieNotificationBanner
+      <Suspense fallback={null}><CookieNotificationBanner
         onAcceptAll={() => {
           addToast('Preferences Saved', 'Cookies and push notification preferences enabled.', 'success');
         }}
@@ -840,7 +873,7 @@ initial={{ opacity: 0, y: 14 }}
         }}
         onOpenNews={() => setNotificationsOpen(true)}
         onOpenPrivacy={() => handleOpenLegal('privacy')}
-      />
+      /></Suspense>
     </div>
   );
 }
