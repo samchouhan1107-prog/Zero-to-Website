@@ -11,20 +11,29 @@ export const WebZoneBrandLogo: React.FC<WebZoneBrandLogoProps> = ({
   size = 'md',
   showSubtitle = true,
 }) => {
-  // Aspect ratio matches the official SC >> WEBZONE logo image (220 x 147)
-  const height = size === 'sm' ? 24 : size === 'lg' ? 42 : 32;
-  const width = (height * 220) / 147;
+  // Enhanced sizing for better visual hierarchy
+  const height = size === 'sm' ? 28 : size === 'lg' ? 48 : 36;
+  const fontSize = size === 'sm' ? 'text-lg' : size === 'lg' ? 'text-3xl' : 'text-xl';
+  const gap = size === 'sm' ? 'gap-1' : size === 'lg' ? 'gap-3' : 'gap-2';
 
   return (
-    <div className={`inline-flex items-center select-none ${className}`} title="SC WebZone Knowledge Base">
-      <img
-        src="/logo.png"
-        alt="SC >> WEBZONE Knowledge Base logo"
-        height={height}
-        width={width}
-        className="block h-auto w-auto"
-        style={{ height, width: 'auto' }}
-      />
+    <div className={`inline-flex items-center select-none ${gap} ${className}`} title="WebZoneBW SC">
+      {/* Primary Brand Identity: 💠 Diamond emoji */}
+      <span className={`${fontSize} font-bold text-blue-600`}>
+        💠
+      </span>
+      
+      {/* Brand Text */}
+      <div className="flex flex-col">
+        <span className="font-bold text-gray-900 dark:text-white text-lg md:text-xl">
+          WebZoneBW
+        </span>
+        {showSubtitle && (
+          <span className="text-xs text-gray-600 dark:text-gray-400 font-medium">
+            SC
+          </span>
+        )}
+      </div>
     </div>
   );
 };

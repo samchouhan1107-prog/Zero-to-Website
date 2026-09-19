@@ -168,7 +168,7 @@ export const Header: React.FC<HeaderProps> = ({
         className="sticky top-0 z-30 border-b border-app-border bg-app-surface/95 text-app-ink backdrop-blur-md shadow-xs transition-colors"
       >
         {/* ROW 1: Main Header Navigation Bar - Added padding for better layout */}
-        <div className="mx-auto flex min-h-16 max-w-[1600px] items-center justify-between gap-4 px-4 sm:px-8">
+        <div className="mx-auto flex min-h-16 max-w-[1600px] items-center justify-between gap-3 sm:gap-4 px-4 sm:px-8">
           {/* Left: Brand Logo & Mobile Menu Toggle */}
           <div className="flex items-center gap-4 shrink-0">
             <button
@@ -191,10 +191,10 @@ export const Header: React.FC<HeaderProps> = ({
             <button
               type="button"
               onClick={onNavigateHome}
-              className="flex items-center text-left focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-xl p-1"
+              className="flex items-center text-left focus:outline-none focus:ring-2 focus:ring-blue-500/50 rounded-xl p-1 sm:p-2"
               aria-label="WebZoneBW SC Home"
             >
-              <WebZoneBrandLogo size="md" showSubtitle={true} />
+              <WebZoneBrandLogo size="lg" showSubtitle={true} />
             </button>
           </div>
 

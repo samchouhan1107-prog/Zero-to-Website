@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback, memo } from 'react';
 import {
   X,
   Trophy,
@@ -35,6 +35,216 @@ interface XpMilestonesRoadmapModalProps {
   onTriggerCelebration: (milestone: XpMilestone) => void;
 }
 
+// Error boundary for robust error handling
+class ErrorBoundary extends React.Component<{}, { hasError: boolean; error?: Error }> {
+  constructor(props: {}) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error: Error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('XP Modal Error:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-md">
+          <div className="w-full max-w-md p-6 bg-white dark:bg-slate-900 rounded-lg border border-red-500 text-center">
+            <h3 className="text-lg font-bold text-red-600 mb-2">Something went wrong</h3>
+            <p className="text-sm text-slate-600 dark:text-slate-400">Please try refreshing the page.</p>
+          </div>
+        </div>
+      );
+    }
+    return this.props.children;
+  }
+}
+
+const MilestoneCard = memo(({ 
+  milestone, 
+  isUnlocked, 
+  isClaimed, 
+  isNext, 
+  onClaim,
+  claimedMilestones,
+  progressXP
+}: {
+  milestone: XpMilestone;
+  isUnlocked: boolean;
+  isClaimed: boolean;
+  isNext: boolean;
+  onClaim: (milestone: XpMilestone) => void;
+  claimedMilestones: string[];
+  progressXP: number;
+}) => {
+  const handleClaim = useCallback(() => {
+    if (!isClaimed && isUnlocked && progressXP >= milestone.xpRequired) {
+      onClaim(milestone);
+    }
+  }, [isClaimed, isUnlocked, progressXP, milestone, onClaim]);
+
+  return (
+    <div
+      key={milestone.id}
+      className={`relative p-4 rounded-2xl border-2 transition-all ${
+        isClaimed
+          ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700'
+          : isNext
+          ? 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-400/50'
+          : isUnlocked
+          ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700'
+          : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-60'
+      }`}
+      role="listitem"
+      aria-label={`${milestone.title} - ${isClaimed ? 'Claimed' : isUnlocked ? 'Unlocked' : 'Locked'} milestone`}
+    >
+      <div className="flex items-start gap-4">
+        <div
+          className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${
+            isClaimed
+              ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
+              : isUnlocked
+              ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
+              : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
+          }`}
+        >
+          {isClaimed ? (
+            <CheckCircle2 className="w-7 h-7" />
+          ) : isUnlocked ? (
+            <span>{milestone.badge}</span>
+          ) : (
+            <Lock className="w-6 h-6" />
+          )}
+        </div>
+
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-2 mb-1">
+            <h3 className="text-sm font-black text-slate-900 dark:text-white truncate">
+              {milestone.title}
+            </h3>
+            {isNext && (
+              <span className="shrink-0 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-500 text-white">
+                Next Goal
+              </span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2 mb-2">
+            <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+              isClaimed
+                ? 'bg-emerald-200 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
+                : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
+            }`}>
+              {milestone.rank}
+            </span>
+            <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
+              {milestone.xpRequired} XP required
+            </span>
+          </div>
+
+          <div className="space-y-1">
+            {milestone.unlockedPerks.slice(0, 2).map((perk, idx) => (
+              <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400">
+                <Zap className="w-3 h-3 text-amber-500 shrink-0" />
+                <span>{perk}</span>
+              </div>
+            ))}
+            {milestone.unlockedPerks.length > 2 && (
+              <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">
+                +{milestone.unlockedPerks.length - 2} more perks
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="shrink-0">
+          {isClaimed ? (
+            <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
+              <CheckCircle2 className="w-4 h-4" />
+              <span>Claimed</span>
+            </div>
+          ) : isUnlocked ? (
+            <button
+              onClick={handleClaim}
+              className="flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-colors shadow-lg shadow-amber-500/30"
+              aria-label={`Claim ${milestone.title} milestone`}
+              disabled={isClaimed || !isUnlocked}
+            >
+              <Award className="w-3.5 h-3.5" />
+              Claim
+            </button>
+          ) : (
+            <div className="flex items-center gap-1 text-slate-400 text-xs font-bold">
+              <Lock className="w-3.5 h-3.5" />
+              <span>Locked</span>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className="absolute -bottom-3 left-7 w-0.5 h-3 bg-slate-200 dark:bg-slate-700" />
+    </div>
+  );
+});
+
+MilestoneCard.displayName = 'MilestoneCard';
+
+const AchievementCard = memo(({ 
+  achievement, 
+  isUnlocked, 
+  unlockedData
+}: {
+  achievement: typeof COURSE_ACHIEVEMENTS[0];
+  isUnlocked: boolean;
+  unlockedData?: any;
+}) => {
+  return (
+    <div
+      key={achievement.id}
+      className={`p-4 rounded-2xl border-2 transition-all ${
+        isUnlocked
+          ? 'bg-amber-500/10 border-amber-500/40 shadow-sm'
+          : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 opacity-60'
+      }`}
+      role="listitem"
+      aria-label={`${achievement.title} achievement`}
+    >
+      <div className="flex items-start gap-3">
+        <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 text-2xl ${
+          isUnlocked ? 'bg-amber-500/20' : 'bg-slate-200 dark:bg-slate-700'
+        }`}>
+          {isUnlocked ? achievement.icon : '🔒'}
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center justify-between gap-1">
+            <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
+              {achievement.title}
+            </h4>
+            <span className="font-mono text-[10px] font-bold text-amber-500 shrink-0">
+              +{achievement.xpReward} XP
+            </span>
+          </div>
+          <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
+            {achievement.description}
+          </p>
+          {isUnlocked && unlockedData?.unlockedAt && (
+            <span className="inline-block text-[10px] font-mono text-emerald-600 dark:text-emerald-400 mt-2">
+              ✓ Unlocked {new Date(unlockedData.unlockedAt).toLocaleDateString()}
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+AchievementCard.displayName = 'AchievementCard';
+
 export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> = ({
   isOpen,
   onClose,
@@ -42,19 +252,27 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
   onTriggerCelebration,
 }) => {
   const [activeTab, setActiveTab] = useState<'roadmap' | 'achievements'>('roadmap');
+  
   if (!isOpen) return null;
 
-  const { percent, current, next } = getMilestoneProgressPercent(progress.xpPoints);
-  const claimedMilestones = progress.claimedMilestones || [];
-  const achievementsList = Array.isArray(progress.achievements) ? progress.achievements : [];
-  const unlockedAchievementMap = new Map(achievementsList.map((a) => [a.id, a]));
-  const unlockedCount = achievementsList.length;
+  // Memoize expensive calculations for better performance
+  const progressData = useMemo(() => {
+    const { percent, current, next } = getMilestoneProgressPercent(progress.xpPoints);
+    return { percent, current, next };
+  }, [progress.xpPoints]);
 
-  const handleClaimMilestone = (milestone: XpMilestone) => {
+  const claimedMilestones = useMemo(() => progress.claimedMilestones || [], [progress.claimedMilestones]);
+  const achievementsList = useMemo(() => Array.isArray(progress.achievements) ? progress.achievements : [], [progress.achievements]);
+  const unlockedAchievementMap = useMemo(() => new Map(achievementsList.map((a) => [a.id, a])), [achievementsList]);
+  const unlockedCount = achievementsList.length;
+  
+  const { percent, current, next } = progressData;
+
+  const handleClaimMilestone = useCallback((milestone: XpMilestone) => {
     if (!claimedMilestones.includes(milestone.id) && progress.xpPoints >= milestone.xpRequired) {
       onTriggerCelebration(milestone);
     }
-  };
+  }, [claimedMilestones, progress.xpPoints, onTriggerCelebration]);
 
   return (
     <div
@@ -170,160 +388,51 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
         </div>
 
         {/* Content Area */}
-        <div className="overflow-y-auto p-6 pt-4 space-y-3" style={{ maxHeight: 'calc(90vh - 280px)' }}>
+        <div 
+          className="overflow-y-auto p-6 pt-4 space-y-3" 
+          style={{ maxHeight: 'calc(90vh - 280px)' }}
+          role="region"
+          aria-label="Milestones and achievements content"
+          tabIndex={0}
+        >
           {activeTab === 'roadmap' ? (
-            XP_MILESTONES.map((milestone, index) => {
-              const isUnlocked = progress.xpPoints >= milestone.xpRequired;
-              const isClaimed = claimedMilestones.includes(milestone.id);
-              const isNext = next?.id === milestone.id;
+            <div role="list" aria-label="XP Level Roadmap">
+              {XP_MILESTONES.map((milestone, index) => {
+                const isUnlocked = progress.xpPoints >= milestone.xpRequired;
+                const isClaimed = claimedMilestones.includes(milestone.id);
+                const isNext = next?.id === milestone.id;
 
-              return (
-                <div
-                  key={milestone.id}
-                  className={`relative p-4 rounded-2xl border-2 transition-all ${
-                    isClaimed
-                      ? 'bg-emerald-50 dark:bg-emerald-950/30 border-emerald-300 dark:border-emerald-700'
-                      : isNext
-                      ? 'bg-indigo-50 dark:bg-indigo-950/30 border-indigo-300 dark:border-indigo-700 ring-2 ring-indigo-400/50'
-                      : isUnlocked
-                      ? 'bg-amber-50 dark:bg-amber-950/30 border-amber-300 dark:border-amber-700'
-                      : 'bg-slate-50 dark:bg-slate-800/50 border-slate-200 dark:border-slate-700 opacity-60'
-                  }`}
-                >
-                  <div className="flex items-start gap-4">
-                    {/* Badge Icon */}
-                    <div
-                      className={`shrink-0 w-14 h-14 rounded-2xl flex items-center justify-center text-2xl ${
-                        isClaimed
-                          ? 'bg-emerald-500 text-white shadow-lg shadow-emerald-500/30'
-                          : isUnlocked
-                          ? 'bg-amber-500 text-white shadow-lg shadow-amber-500/30'
-                          : 'bg-slate-200 dark:bg-slate-700 text-slate-400'
-                      }`}
-                    >
-                      {isClaimed ? (
-                        <CheckCircle2 className="w-7 h-7" />
-                      ) : isUnlocked ? (
-                        <span>{milestone.badge}</span>
-                      ) : (
-                        <Lock className="w-6 h-6" />
-                      )}
-                    </div>
-
-                    {/* Content */}
-                    <div className="flex-1 min-w-0">
-                      <div className="flex items-center gap-2 mb-1">
-                        <h3 className="text-sm font-black text-slate-900 dark:text-white truncate">
-                          {milestone.title}
-                        </h3>
-                        {isNext && (
-                          <span className="shrink-0 text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-indigo-500 text-white">
-                            Next Goal
-                          </span>
-                        )}
-                      </div>
-
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
-                          isClaimed
-                            ? 'bg-emerald-200 dark:bg-emerald-900 text-emerald-700 dark:text-emerald-300'
-                            : 'bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300'
-                        }`}>
-                          {milestone.rank}
-                        </span>
-                        <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
-                          {milestone.xpRequired} XP required
-                        </span>
-                      </div>
-
-                      {/* Unlocked Perks */}
-                      <div className="space-y-1">
-                        {milestone.unlockedPerks.slice(0, 2).map((perk, idx) => (
-                          <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-600 dark:text-slate-400">
-                            <Zap className="w-3 h-3 text-amber-500 shrink-0" />
-                            <span>{perk}</span>
-                          </div>
-                        ))}
-                        {milestone.unlockedPerks.length > 2 && (
-                          <p className="text-[11px] text-indigo-600 dark:text-indigo-400 font-medium">
-                            +{milestone.unlockedPerks.length - 2} more perks
-                          </p>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Action Button */}
-                    <div className="shrink-0">
-                      {isClaimed ? (
-                        <div className="flex items-center gap-1 text-emerald-600 dark:text-emerald-400 text-xs font-bold">
-                          <CheckCircle2 className="w-4 h-4" />
-                          <span>Claimed</span>
-                        </div>
-                      ) : isUnlocked ? (
-                        <button
-                          onClick={() => handleClaimMilestone(milestone)}
-                          className="flex items-center gap-1 px-3 py-2 rounded-xl bg-amber-500 hover:bg-amber-600 text-white text-xs font-bold transition-colors shadow-lg shadow-amber-500/30"
-                        >
-                          <Award className="w-3.5 h-3.5" />
-                          Claim
-                        </button>
-                      ) : (
-                        <div className="flex items-center gap-1 text-slate-400 text-xs font-bold">
-                          <Lock className="w-3.5 h-3.5" />
-                          <span>Locked</span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Connector Line */}
-                  {index < XP_MILESTONES.length - 1 && (
-                    <div className="absolute -bottom-3 left-7 w-0.5 h-3 bg-slate-200 dark:bg-slate-700" />
-                  )}
-                </div>
-              );
-            })
+                return (
+                  <MilestoneCard
+                    key={milestone.id}
+                    milestone={milestone}
+                    isUnlocked={isUnlocked}
+                    isClaimed={isClaimed}
+                    isNext={isNext}
+                    onClaim={handleClaimMilestone}
+                    claimedMilestones={claimedMilestones}
+                    progressXP={progress.xpPoints}
+                  />
+                );
+              })}
+            </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div 
+              className="grid grid-cols-1 sm:grid-cols-2 gap-3" 
+              role="list" 
+              aria-label="Course achievements and badges"
+            >
               {COURSE_ACHIEVEMENTS.map((achievement) => {
                 const unlocked = unlockedAchievementMap.get(achievement.id);
                 const isUnlocked = Boolean(unlocked);
 
                 return (
-                  <div
+                  <AchievementCard
                     key={achievement.id}
-                    className={`p-4 rounded-2xl border-2 transition-all ${
-                      isUnlocked
-                        ? 'bg-amber-500/10 border-amber-500/40 shadow-sm'
-                        : 'bg-slate-50 dark:bg-slate-800/40 border-slate-200 dark:border-slate-800 opacity-60'
-                    }`}
-                  >
-                    <div className="flex items-start gap-3">
-                      <div className={`w-11 h-11 rounded-xl flex items-center justify-center shrink-0 text-2xl ${
-                        isUnlocked ? 'bg-amber-500/20' : 'bg-slate-200 dark:bg-slate-700'
-                      }`}>
-                        {isUnlocked ? achievement.icon : '🔒'}
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <div className="flex items-center justify-between gap-1">
-                          <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
-                            {achievement.title}
-                          </h4>
-                          <span className="font-mono text-[10px] font-bold text-amber-500 shrink-0">
-                            +{achievement.xpReward} XP
-                          </span>
-                        </div>
-                        <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-1 leading-snug">
-                          {achievement.description}
-                        </p>
-                        {isUnlocked && unlocked?.unlockedAt && (
-                          <span className="inline-block text-[10px] font-mono text-emerald-600 dark:text-emerald-400 mt-2">
-                            ✓ Unlocked {new Date(unlocked.unlockedAt).toLocaleDateString()}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  </div>
+                    achievement={achievement}
+                    isUnlocked={isUnlocked}
+                    unlockedData={unlocked}
+                  />
                 );
               })}
             </div>
@@ -349,3 +458,10 @@ export const XpMilestonesRoadmapModal: React.FC<XpMilestonesRoadmapModalProps> =
     </div>
   );
 };
+
+// Export wrapped with error boundary for production safety
+export const SafeXpMilestonesRoadmapModal = (props: XpMilestonesRoadmapModalProps) => (
+  <ErrorBoundary>
+    <XpMilestonesRoadmapModal {...props} />
+  </ErrorBoundary>
+);
