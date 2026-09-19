@@ -744,60 +744,71 @@ initial={{ opacity: 0, y: 14 }}
             onOpenSearch={() => setSearchOpen(true)}
             chapters={chapters}
           />
-        </main>
-      </div>
 
-      {/* Global Modals & Drawers */}
-      <Suspense fallback={null}><AccountModal
-        isOpen={accountOpen}
-        onClose={() => setAccountOpen(false)}
-        onAuthSuccess={() => setAccountOpen(false)}
-        progress={progress}
-        onOpenCertificate={() => setCertificateOpen(true)}
-        onOpenMilestones={() => setRoadmapOpen(true)}
-        onOpenSettings={() => setSettingsOpen(true)}
-      /></Suspense>
-      <Suspense fallback={null}><LegalComplianceModal
-        isOpen={legalModalOpen}
-        onClose={() => setLegalModalOpen(false)}
-        initialTab={legalModalTab}
-      /></Suspense>
-      <Suspense fallback={null}><SearchModal
-        isOpen={searchOpen}
-        onClose={() => setSearchOpen(false)}
-        chapters={chapters}
-        onSelectLesson={handleSelectLesson}
-        onNavigatePractice={() => navigateToView('practice-hub')}
-        onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-        onNavigateActivities={() => handleNavigateActivities()}
-        onOpenTutor={() => handleOpenTutor()}
-        initialQuery={searchInitialQuery}
-      /></Suspense>
+          {/* Global Modals & Drawers */}
+          <Suspense fallback={null}>
+            <AccountModal
+              isOpen={accountOpen}
+              onClose={() => setAccountOpen(false)}
+              onAuthSuccess={() => setAccountOpen(false)}
+              progress={progress}
+              onOpenCertificate={() => setCertificateOpen(true)}
+              onOpenMilestones={() => setRoadmapOpen(true)}
+              onOpenSettings={() => setSettingsOpen(true)}
+            />
+          </Suspense>
+          
+          <Suspense fallback={null}>
+            <LegalComplianceModal
+              isOpen={legalModalOpen}
+              onClose={() => setLegalModalOpen(false)}
+              initialTab={legalModalTab}
+            />
+          </Suspense>
+          
+          <Suspense fallback={null}>
+            <SearchModal
+              isOpen={searchOpen}
+              onClose={() => setSearchOpen(false)}
+              chapters={chapters}
+              onSelectLesson={handleSelectLesson}
+              onNavigatePractice={() => navigateToView('practice-hub')}
+              onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+              onNavigateActivities={() => handleNavigateActivities()}
+              onOpenTutor={() => handleOpenTutor()}
+              initialQuery={searchInitialQuery}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><TutorModal
-        isOpen={tutorOpen}
-        onClose={() => setTutorOpen(false)}
-        initialTopic={aiTopic}
-        initialCode={aiCode}
-        allChapters={chapters}
-        onNavigateLesson={handleSelectLesson}
-      /></Suspense>
+          <Suspense fallback={null}>
+            <TutorModal
+              isOpen={tutorOpen}
+              onClose={() => setTutorOpen(false)}
+              initialTopic={aiTopic}
+              initialCode={aiCode}
+              allChapters={chapters}
+              onNavigateLesson={handleSelectLesson}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><SettingsModal
-        isOpen={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
-        theme={theme}
-        onSelectTheme={setTheme}
-        fontSize={fontSize}
-        onSelectFontSize={setFontSize}
-        fontFamily={fontFamily}
-        onSelectFontFamily={setFontFamily}
-        onResetProgress={handleResetProgress}
-        progress={progress}
-        onOpenLegal={handleOpenLegal}
-      /></Suspense>
+          <Suspense fallback={null}>
+            <SettingsModal
+              isOpen={settingsOpen}
+              onClose={() => setSettingsOpen(false)}
+              theme={theme}
+              onSelectTheme={setTheme}
+              fontSize={fontSize}
+              onSelectFontSize={setFontSize}
+              fontFamily={fontFamily}
+              onSelectFontFamily={setFontFamily}
+              onResetProgress={handleResetProgress}
+              progress={progress}
+              onOpenLegal={handleOpenLegal}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><CertificateModal
+          <Suspense fallback={null}>
+            <CertificateModal
         isOpen={certificateOpen}
         onClose={() => setCertificateOpen(false)}
         progress={progress}
