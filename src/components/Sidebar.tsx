@@ -262,9 +262,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
                 {completedCount}/{totalLessons} lessons
               </span>
               <div className="flex items-center gap-2">
-                <span className="flex items-center gap-1 text-orange-400 font-bold">
-                  <Flame className="h-3 w-3" aria-hidden="true" />
-                  {progress.streakDays}d
+                <span className="flex items-center gap-1 text-cyan-500 dark:text-cyan-400 font-bold" title="Concepts Mastered">
+                  <GraduationCap className="h-3 w-3" aria-hidden="true" />
+                  {completedCount} concepts
                 </span>
                 <span className="text-app-subtle">·</span>
                 <span className="text-app-amber font-bold">{progress.xpPoints} XP</span>
@@ -412,7 +412,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
                     </div>
                   </button>
 
-/* Lesson Accordion Body */
+                  {/* Lesson Accordion Body */}
                   {isExpanded && (
                     <div
                       id={`chapter-lessons-${chapter.id}`}

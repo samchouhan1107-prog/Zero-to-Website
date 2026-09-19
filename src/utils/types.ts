@@ -291,7 +291,9 @@ export interface UserProgress {
   bookmarks: string[];
   notes: Record<string, string>;
   lastVisitedLessonId?: string;
-  streakDays: number;
+  streakDays?: number;
+  conceptsMastered?: number;
+  studyMinutes?: number;
   lastActiveDate: string;
   xpPoints: number;
   achievements?: Array<{ id: string; title: string; unlockedAt: string; icon: string; description: string }>;
@@ -300,6 +302,9 @@ export interface UserProgress {
   finalProjectDetails?: { title: string; techStack?: string[]; description?: string; submittedAt: string };
   courseCompleted?: boolean;
   courseCompletedAt?: string;
+  chapterImpressions?: Record<string, number>;
+  readingEngagement?: Record<string, { readSeconds: number; scrollDepth: number; verifiedReading: boolean; lastImpressionDate?: string }>;
+  dailyCheckInClaimedDate?: string;
 }
 
 export type AppTheme = 'dark' | 'light';
@@ -322,4 +327,5 @@ export type ViewMode =
   | 'visual-lab'
   | 'video-studio'
   | 'curriculum'
-  | 'blog';
+  | 'blog'
+  | 'workspace';

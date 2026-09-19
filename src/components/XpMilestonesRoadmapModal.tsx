@@ -24,8 +24,8 @@ const COURSE_ACHIEVEMENTS = [
   { id: 'js_engineer', title: 'DOM Commander', icon: '⚡', description: 'Harness JavaScript DOM manipulation and browser events', xpReward: 300 },
   { id: 'capstone_builder', title: 'Full-Stack Creator', icon: '🚀', description: 'Submit and verify your Chapter 10 Capstone Portfolio project', xpReward: 500 },
   { id: 'full_graduate', title: 'Curriculum Graduate', icon: '🎓', description: 'Complete all 11 chapters from Web Foundations to Cloud Deployment', xpReward: 1000 },
-  { id: 'streak_warrior_3', title: 'Consistency Spark', icon: '🔥', description: 'Maintain an active 3-day daily learning streak', xpReward: 150 },
-  { id: 'streak_master_7', title: 'Habit Master', icon: '⚡', description: 'Maintain an active 7-day daily learning streak', xpReward: 300 },
+  { id: 'concept_explorer_5', title: 'Conceptual Explorer', icon: '🧠', description: 'Master 5 core web engineering concepts and verify understanding', xpReward: 150 },
+  { id: 'concept_scholar_15', title: 'Curriculum Scholar', icon: '📚', description: 'Master 15 comprehensive web specifications and architecture concepts', xpReward: 300 },
 ];
 
 interface XpMilestonesRoadmapModalProps {

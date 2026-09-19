@@ -48,7 +48,7 @@ export const FinalProjectSubmission: React.FC<FinalProjectSubmissionProps> = ({
   const [htmlCode, setHtmlCode] = useState(`<section class="portfolio-hero">
   <div class="badge">🚀 Available for Hire</div>
   <h1>Student Web Developer</h1>
-  <p class="subtitle">Frontend Engineer &amp; Graduate of WZ Storehouse Academy</p>
+  <p class="subtitle">Frontend Engineer &amp; Graduate of WebZone Storehouse Academy</p>
   <div class="skills-row">
     <span class="chip">HTML5</span>
     <span class="chip">CSS3 Grid / Flexbox</span>
@@ -285,7 +285,7 @@ h1 {
               </div>
               <p className="text-xs text-slate-400 leading-relaxed max-w-xl">
                 {progress.finalProjectDetails?.description ||
-                  'Your final capstone project has been reviewed, evaluated, and permanently verified on the WZ Storehouse server.'}
+                  'Your final capstone project has been reviewed, evaluated, and permanently verified on the WebZone Storehouse repository.'}
               </p>
               {progress.finalProjectDetails?.submittedAt && (
                 <p className="text-[11px] font-mono text-emerald-400/80">
@@ -333,8 +333,8 @@ h1 {
           )}
         </div>
       ) : (
-        /* Submission Form */
         <form onSubmit={handleSubmit} className="space-y-6">
+          {/* Submission Form */}
           {error && (
             <div className="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-400 text-xs">
               {error}

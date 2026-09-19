@@ -32,7 +32,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="flex items-center gap-2">
             <Award className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-              WZ Storehouse Certificate of Web Development Mastery
+              WebZone Storehouse Certificate of Web Development Mastery
             </h3>
           </div>
           <button
@@ -57,8 +57,11 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 Official Certification of Achievement
               </span>
               <h2 className="text-2xl sm:text-3xl font-serif font-black text-slate-900 dark:text-white">
-                WZ Storehouse Digital Academy
+                WebZone Storehouse Digital Academy
               </h2>
+              <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                WebZone Storehouse Global Accreditation Authority
+              </p>
             </div>
 
             <p className="text-xs text-slate-500 uppercase tracking-wider">
@@ -79,13 +82,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
 
             <p className="text-xs text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed">
-              has demonstrated technical proficiency across <strong>10 Comprehensive Chapters</strong> in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox & Grid Systems, JavaScript (DOM & Async), Responsive Engineering, React Components, and Git Version Control.
+              has demonstrated technical proficiency across <strong>11 Comprehensive Chapters (00–10)</strong> in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox &amp; Grid Systems, JavaScript (DOM &amp; Async), Responsive Engineering, React Components, and Cloud Deployment.
             </p>
 
             <div className="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-500 font-mono gap-4">
               <div>
                 <span className="block text-[10px] text-slate-400 uppercase">Verification ID</span>
-                <strong>WZ-{Math.random().toString(36).substring(2, 9).toUpperCase()}</strong>
+                <strong className="text-indigo-600 dark:text-indigo-400">WZ-STOREHOUSE-{Math.random().toString(36).substring(2, 9).toUpperCase()}</strong>
               </div>
 
               <div>

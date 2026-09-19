@@ -141,6 +141,15 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
                 <p className="text-app-muted">
                   WZ Storehouse does not knowingly collect any Personal Identifiable Information from children under the age of 13.
                 </p>
+
+                <h4 className="font-bold text-app-ink text-sm">5. Official Reach Out &amp; Privacy Enquiry</h4>
+                <p className="text-app-muted">
+                  For official privacy inquiries, data deletion requests, or institutional partnership inquiries, reach out through our verified portal at{' '}
+                  <a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer" className="text-app-amber underline font-medium">
+                    webzonebw.in
+                  </a>{' '}
+                  or contact our inquiry desk at <strong className="text-app-ink">enquiry@webzonebw.in</strong> / <strong className="text-app-ink">privacy@webzonebw.in</strong>.
+                </p>
               </div>
             </div>
           )}
@@ -230,14 +239,28 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
 
           {activeTab === 'contact' && (
             <div className="space-y-4">
-              <div className="rounded-xl border border-app-border bg-app-inset p-4">
-                <h3 className="text-sm font-black text-app-ink flex items-center gap-2">
+              <div className="rounded-xl border border-app-border bg-app-inset p-4 space-y-3">
+                <div className="flex items-center gap-2">
                   <Mail className="h-4 w-4 text-app-amber" />
-                  Contact the Editorial &amp; Support Team
-                </h3>
-                <p className="text-xs text-app-muted mt-1">
-                  Have feedback, copyright inquiries, or questions about a lesson? We reply promptly.
+                  <h3 className="text-sm font-black text-app-ink">
+                    Official Reach Out &amp; Editorial Enquiry
+                  </h3>
+                </div>
+                <p className="text-xs text-app-muted">
+                  Have feedback, copyright inquiries, or questions about our developer tools? You can submit your inquiry below or connect with our parent portal at{' '}
+                  <a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer" className="text-app-amber underline font-medium">
+                    webzonebw.in
+                  </a>{' '}
+                  (Email: <a href="mailto:enquiry@webzonebw.in" className="text-app-amber hover:underline">enquiry@webzonebw.in</a>).
                 </p>
+                <div className="flex flex-wrap gap-2 pt-1 font-mono text-[11px]">
+                  <span className="rounded bg-app-surface px-2.5 py-1 border border-app-border text-app-muted">
+                    Portal: webzonebw.in
+                  </span>
+                  <span className="rounded bg-app-surface px-2.5 py-1 border border-app-border text-app-muted">
+                    Direct: enquiry@webzonebw.in
+                  </span>
+                </div>
               </div>
 
               {contactSubmitted ? (

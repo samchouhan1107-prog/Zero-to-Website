@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   ArrowRight,
   Award,
@@ -21,13 +21,18 @@ import {
   Lightbulb,
   Play,
   Printer,
+  RotateCcw,
   Save,
   Sparkles,
   Terminal,
   Tv,
   Zap,
+  Eye,
+  Brain,
 } from 'lucide-react';
 import { Chapter, Lesson } from '../utils/types';
+import { evaluateReadingRecognition, getCalculatedImpressions } from '../utils/readingRecognitionAlgorithm';
+import { BRAIN_CONCEPT_STONES } from '../data/brainLanguageStones';
 import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
 import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
 import { GridVisualizer } from './visualizers/GridVisualizer';
@@ -96,6 +101,59 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const [miniProjectCodeTab, setMiniProjectCodeTab] = useState<'html' | 'css' | 'js'>('html');
   const [copiedMiniCode, setCopiedMiniCode] = useState(false);
 
+  // Reading Impression & Recognition Algorithm State
+  const [scrollDepth, setScrollDepth] = useState<number>(0);
+  const [readSeconds, setReadSeconds] = useState<number>(0);
+  const [showRecognitionDetails, setShowRecognitionDetails] = useState(false);
+  const [activeStoneIndex, setActiveStoneIndex] = useState(0);
+
+  // Reading duration timer
+  useEffect(() => {
+    setReadSeconds(0);
+    setScrollDepth(0);
+    const interval = setInterval(() => {
+      setReadSeconds((s) => s + 1);
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [lesson.id]);
+
+  // Scroll depth tracking
+  useEffect(() => {
+    const mainContainer = document.getElementById('main-content');
+    const updateScrollDepth = () => {
+      const el = mainContainer || document.documentElement;
+      const totalScroll = el.scrollHeight - el.clientHeight;
+      if (totalScroll > 0) {
+        const depth = Math.min(100, Math.round((el.scrollTop / totalScroll) * 100));
+        setScrollDepth((prev) => Math.max(prev, depth));
+      }
+    };
+
+    if (mainContainer) {
+      mainContainer.addEventListener('scroll', updateScrollDepth);
+    }
+    window.addEventListener('scroll', updateScrollDepth);
+
+    return () => {
+      if (mainContainer) mainContainer.removeEventListener('scroll', updateScrollDepth);
+      window.removeEventListener('scroll', updateScrollDepth);
+    };
+  }, [lesson.id]);
+
+  // Evaluate reading algorithm recognition
+  const recognitionState = evaluateReadingRecognition(
+    scrollDepth,
+    readSeconds,
+    copiedCode || copiedMiniCode,
+    Object.keys(selectedQuizAnswers).length > 0,
+    lesson.id,
+    chapter.id
+  );
+
+  const calculatedImpressions = progress
+    ? getCalculatedImpressions(progress, chapter.id, lesson.id)
+    : 2450;
+
   // Find previous and next lessons across all chapters
   const allLessons = allChapters.flatMap((c) => c.lessons);
   const currentIndex = allLessons.findIndex((l) => l.id === lesson.id);
@@ -112,6 +170,31 @@ export const LessonView: React.FC<LessonViewProps> = ({
       ? Math.round((completedChapterLessons / totalChapterLessons) * 100)
       : 0;
   const isChapterFullyCompleted = chapterProgressPercent === 100;
+
+  // Top-to-bottom scroll rollover whenever lesson changes
+  useEffect(() => {
+    setSelectedQuizAnswers({});
+    setQuizSubmitted(false);
+    setNoteText(userNote || '');
+    setMiniProjectCheckedSpecs({});
+    setActiveSection('section-theory');
+
+    // Smooth rollover read from top to bottom
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const mainContainer = document.getElementById('main-content');
+    if (mainContainer) {
+      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [lesson.id, userNote]);
+
+  const navigateWithTopScroll = (targetLessonId: string) => {
+    onNavigateLesson(targetLessonId);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    const mainContainer = document.getElementById('main-content');
+    if (mainContainer) {
+      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
@@ -993,10 +1076,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
         {prevLesson ? (
           <button
             type="button"
-            onClick={() => onNavigateLesson(prevLesson.id)}
-            className="flex items-center gap-3 rounded-xl border border-app-border bg-app-surface px-4 py-3 text-left transition-all hover:border-app-amber hover:bg-app-active"
+            onClick={() => navigateWithTopScroll(prevLesson.id)}
+            className="group flex items-center gap-3 rounded-xl border border-app-border bg-app-surface px-4 py-3 text-left transition-all hover:border-app-amber hover:bg-app-active cursor-pointer"
           >
-            <ChevronLeft className="h-5 w-5 text-app-subtle" />
+            <ChevronLeft className="h-5 w-5 text-app-subtle transition-transform duration-200 group-hover:-translate-x-1" />
             <div>
               <span className="font-mono text-[10px] text-app-subtle block">Previous Lesson</span>
               <span className="text-xs font-bold text-app-ink">{prevLesson.title}</span>
@@ -1009,24 +1092,38 @@ export const LessonView: React.FC<LessonViewProps> = ({
         {nextLesson ? (
           <button
             type="button"
-            onClick={() => onNavigateLesson(nextLesson.id)}
-            className="flex items-center gap-3 rounded-xl bg-app-amber px-5 py-3 text-right text-slate-950 transition-all hover:bg-app-amber-hover shadow-sm"
+            onClick={() => navigateWithTopScroll(nextLesson.id)}
+            className="group flex items-center gap-3 rounded-xl bg-app-amber px-5 py-3 text-right text-slate-950 transition-all hover:bg-app-amber-hover shadow-sm cursor-pointer"
+            title="Read next chapter / lesson from top to bottom"
           >
             <div>
-              <span className="font-mono text-[10px] font-bold uppercase opacity-80 block">Next Lesson</span>
+              <span className="font-mono text-[10px] font-bold uppercase opacity-80 block">Next Chapter / Lesson</span>
               <span className="text-xs font-black">{nextLesson.title}</span>
             </div>
-            <ChevronRight className="h-5 w-5" />
+            <ChevronRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />
           </button>
         ) : (
-          <button
-            type="button"
-            onClick={() => onCompleteLesson(lesson.id)}
-            className="flex items-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-slate-950 font-black text-xs shadow-sm transition-all"
-          >
-            <span>Finish Chapter Masterclass</span>
-            <CheckCircle2 className="h-4 w-4" />
-          </button>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              onClick={() => onCompleteLesson(lesson.id)}
+              className="flex items-center gap-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 px-5 py-3 text-slate-950 font-black text-xs shadow-sm transition-all cursor-pointer"
+            >
+              <span>Finish Chapter Masterclass</span>
+              <CheckCircle2 className="h-4 w-4" />
+            </button>
+            {allLessons.length > 0 && (
+              <button
+                type="button"
+                onClick={() => navigateWithTopScroll(allLessons[0].id)}
+                className="group flex items-center gap-2 rounded-xl border border-blue-500/40 bg-blue-500/10 hover:bg-blue-500/20 px-4 py-3 text-xs font-bold text-blue-600 dark:text-blue-400 transition-all cursor-pointer"
+                title="Roll over to Chapter 00 to read from top to bottom"
+              >
+                <RotateCcw className="h-4 w-4 transition-transform duration-300 group-hover:-rotate-90" />
+                <span>Roll Over to Chapter 00 (Read Top-to-Bottom)</span>
+              </button>
+            )}
+          </div>
         )}
       </nav>
     </article>

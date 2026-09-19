@@ -8,7 +8,7 @@ export const NetworkFlowVisualizer: React.FC = () => {
   const steps = [
     {
       title: '1. User Types URL',
-      desc: 'Browser requests address for "https://webzonebw.in/er/index.html"',
+      desc: 'Browser requests address for "https://webzonebw.in/"',
       activeNode: 'browser',
     },
     {

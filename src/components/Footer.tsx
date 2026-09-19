@@ -6,6 +6,7 @@ import {
   Code2,
   Compass,
   Cpu,
+  ExternalLink,
   FileText,
   GitBranch,
   Grid,
@@ -416,6 +417,17 @@ export const Footer: React.FC<FooterProps> = ({
                   <span>Contact Editorial Desk</span>
                 </button>
               </li>
+              <li>
+                <a
+                  href="https://webzonebw.in/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left text-app-amber/90"
+                >
+                  <ExternalLink className="h-3.5 w-3.5 text-app-amber" />
+                  <span>Enquiry Portal (webzonebw.in)</span>
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -483,6 +495,15 @@ export const Footer: React.FC<FooterProps> = ({
             >
               About
             </button>
+            <span>·</span>
+            <a
+              href="https://webzonebw.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-app-amber text-app-amber font-semibold transition-colors"
+            >
+              Enquiry Portal
+            </a>
             <span>·</span>
             <button
               type="button"

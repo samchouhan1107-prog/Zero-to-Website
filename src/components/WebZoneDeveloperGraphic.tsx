@@ -29,14 +29,14 @@ export const WebZoneDeveloperGraphic: React.FC = () => {
           </div>
 
           <a
-            href="https://webzonebw.in/er/index.html"
+            href="https://webzonebw.in/"
             target="_blank"
             rel="noopener noreferrer"
             title="Open WebZone Workspace"
             className="flex items-center gap-2 rounded-md border border-app-border bg-app-inset px-2.5 py-0.5 font-mono text-[10px] text-app-muted transition-colors hover:border-blue-500/50 hover:text-blue-600 dark:hover:text-blue-300"
           >
             <Globe className="h-3 w-3 text-blue-500" />
-            <span className="truncate max-w-[190px]">https://webzonebw.in/er/index.html</span>
+            <span className="truncate max-w-[190px]">https://webzonebw.in/</span>
           </a>
 
           <div className="flex items-center gap-1 font-mono text-[10px] font-bold text-blue-500 dark:text-blue-400">

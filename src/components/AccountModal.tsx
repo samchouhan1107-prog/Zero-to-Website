@@ -10,7 +10,7 @@ import {
   Eye,
   EyeOff,
   FileCheck,
-  Flame,
+  GraduationCap,
   LogOut,
   Mail,
   Settings,
@@ -364,11 +364,11 @@ export const AccountModal: React.FC<AccountModalProps> = ({
               {/* Stats Grid */}
               <div className="grid grid-cols-3 gap-2.5">
                 <div className="rounded-xl border border-zinc-800 bg-zinc-800/30 p-3 text-center hover:border-zinc-700 transition-colors">
-                  <div className="flex items-center justify-center gap-1 text-amber-400 font-bold text-sm">
-                    <Flame className="h-3.5 w-3.5" />
-                    <span>{progress.streakDays}</span>
+                  <div className="flex items-center justify-center gap-1 text-cyan-400 font-bold text-sm">
+                    <GraduationCap className="h-3.5 w-3.5" />
+                    <span>{progress.conceptsMastered || Object.values(progress.completedLessons || {}).filter(Boolean).length}</span>
                   </div>
-                  <span className="text-[10px] text-zinc-500 mt-1 block">Day Streak</span>
+                  <span className="text-[10px] text-zinc-500 mt-1 block">Concepts Mastered</span>
                 </div>
                 <div className="rounded-xl border border-zinc-800 bg-zinc-800/30 p-3 text-center hover:border-zinc-700 transition-colors">
                   <div className="flex items-center justify-center gap-1 text-blue-400 font-bold text-sm">

@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   ChevronDown,
   Globe,
+  Laptop,
   Menu,
   Moon,
   Search,
+  ShieldCheck,
   Sun,
   User,
 } from 'lucide-react';
 import { UserProgress, AppTheme, ViewMode } from '../utils/types';
 import { WebZoneBrandLogo } from './WebZoneBrandLogo';
+import { PlatformTrustModal } from './PlatformTrustModal';
 import { useAuth } from '../utils/AuthContext';
 
 export interface HeaderProps {
@@ -25,6 +28,7 @@ export interface HeaderProps {
   onNavigateVisualLab: (toolId?: string) => void;
   onNavigateActivities?: () => void;
   onNavigateBlog?: () => void;
+  onNavigateWorkspace?: () => void;
   onOpenNotifications?: () => void;
   onSelectCategory?: (category: string) => void;
   unreadNewsCount?: number;
@@ -56,6 +60,7 @@ export const Header: React.FC<HeaderProps> = ({
   onNavigateVisualLab,
   onNavigateActivities,
   onNavigateBlog,
+  onNavigateWorkspace,
   onOpenNotifications,
   onSelectCategory,
   unreadNewsCount = 0,
@@ -70,6 +75,7 @@ export const Header: React.FC<HeaderProps> = ({
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en-US');
   const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [activeNav, setActiveNav] = useState<string>('Home');
+  const [isTrustModalOpen, setIsTrustModalOpen] = useState(false);
 
   const langRef = useRef<HTMLDivElement>(null);
 
@@ -88,10 +94,12 @@ export const Header: React.FC<HeaderProps> = ({
   // Synchronize active nav tab with activeView
   useEffect(() => {
     if (activeView === 'home') setActiveNav('Home');
+    else if (activeView === 'workspace') setActiveNav('Workspace');
     else if (activeView === 'practice-hub') setActiveNav('Web Tools');
     else if (activeView === 'visual-lab') setActiveNav('Developer Tools');
     else if (activeView === 'lesson' || activeView === 'chapter' || activeView === 'curriculum') setActiveNav('Learn');
     else if (activeView === 'activities') setActiveNav('Developer Tools');
+    else if (activeView === 'blog') setActiveNav('Blog');
   }, [activeView]);
 
   const handleNavClick = (section: string) => {
@@ -105,6 +113,13 @@ export const Header: React.FC<HeaderProps> = ({
     switch (section) {
       case 'Home':
         onNavigateHome();
+        break;
+      case 'Workspace':
+        if (onNavigateWorkspace) {
+          onNavigateWorkspace();
+        } else {
+          onNavigatePractice();
+        }
         break;
       case 'Web Tools':
         onNavigatePractice();
@@ -135,6 +150,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   const navItems = [
     { label: 'Home', section: 'Home' },
+    { label: 'Workspace', section: 'Workspace', isHighlight: true },
     { label: 'Web Tools', section: 'Web Tools' },
     { label: 'Image Tools', section: 'Image Tools' },
     { label: 'Developer Tools', section: 'Developer Tools' },
@@ -305,6 +321,18 @@ export const Header: React.FC<HeaderProps> = ({
               >
                 Resources
               </button>
+
+              <span className="text-app-subtle">·</span>
+
+              <button
+                type="button"
+                onClick={() => setIsTrustModalOpen(true)}
+                className="hidden sm:inline-flex items-center gap-1 font-semibold text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 transition-colors text-[11px] cursor-pointer"
+                title="View Platform Independence & Data Sovereignty Guarantee"
+              >
+                <ShieldCheck className="h-3 w-3" />
+                <span>100% Independent &amp; Private</span>
+              </button>
             </div>
 
             {/* Right: Working Theme Control & Localization-Ready Language Selector */}
@@ -429,6 +457,10 @@ export const Header: React.FC<HeaderProps> = ({
         )}
       </header>
 
+      <PlatformTrustModal
+        isOpen={isTrustModalOpen}
+        onClose={() => setIsTrustModalOpen(false)}
+      />
     </>
   );
 };

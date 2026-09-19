@@ -57,9 +57,9 @@ export const DeploymentPipelineVisualizer: React.FC = () => {
       id: 4,
       title: '5. Live Production',
       badge: 'Global HTTPS',
-      desc: 'Website is live globally at https://webzonebw.in/er/index.html with zero downtime.',
+      desc: 'Website is live globally at https://webzonebw.in/ with zero downtime.',
       status: '200 OK Live',
-      terminal: 'HTTP/2 200 OK\nDomain: https://webzonebw.in/er/index.html\nReady for global visitors!',
+      terminal: 'HTTP/2 200 OK\nDomain: https://webzonebw.in/\nReady for global visitors!',
     },
   ];
 
@@ -70,7 +70,7 @@ export const DeploymentPipelineVisualizer: React.FC = () => {
       name: 'Internet & DNS Architecture',
       role: 'Global Routing',
       appliedIn: 'Domain name resolution & HTTP GET packet delivery for the live portfolio.',
-      code: 'https://webzonebw.in/er/index.html -> 200 OK HTML payload',
+      code: 'https://webzonebw.in/ -> 200 OK HTML payload',
     },
     {
       ch: 'Ch 02',
@@ -231,7 +231,7 @@ export const DeploymentPipelineVisualizer: React.FC = () => {
         <div className="rounded-lg border border-slate-800 bg-[#0a0c12] p-3 font-mono text-xs text-slate-300 space-y-1">
           <div className="text-[10px] text-slate-500 flex items-center justify-between">
             <span>Terminal Output: {stages[pipelineStep].title}</span>
-            <span>https://webzonebw.in/er/index.html</span>
+            <span>https://webzonebw.in/</span>
           </div>
           <pre className="text-emerald-400 text-xs overflow-x-auto whitespace-pre-wrap leading-relaxed">
             {stages[pipelineStep].terminal}
@@ -313,12 +313,12 @@ export const DeploymentPipelineVisualizer: React.FC = () => {
             </span>
           </div>
           <div className="font-mono text-sm font-bold text-emerald-400">
-            https://webzonebw.in/er/index.html
+            https://webzonebw.in/
           </div>
         </div>
 
         <a
-          href="https://webzonebw.in/er/index.html"
+          href="https://webzonebw.in/"
           target="_blank"
           rel="noreferrer"
           className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-sm transition-all"
