@@ -38,11 +38,18 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
+        with:
+          # Enable serving from the root directory
+          static_site: true
+          # Disable redirects that might cause issues
+          upload_branch: main
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: "./dist"
+          # Ensure proper artifact naming
+          name: github-pages-artifact
 
   deploy:
     environment:
