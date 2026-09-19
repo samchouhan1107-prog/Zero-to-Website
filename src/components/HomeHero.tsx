@@ -254,7 +254,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       icon: Zap,
       description: 'Understand browser engine parsing, DOM + CSSOM construction, render tree calculation, layout reflow, and pixel paint.',
       ctaText: 'Inspect Pipeline',
-      action: () => onSelectLesson('ch-00-l-04'),
+      action: () => onOpenVisualLab('criticalpath'),
       badge: 'Core Vitals',
       accentColor: 'text-yellow-400 border-yellow-500/30 bg-yellow-500/10',
     },

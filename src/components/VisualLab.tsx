@@ -24,6 +24,7 @@ import { JsDomEventVisualizer } from './visualizers/JsDomEventVisualizer';
 import { ResponsiveViewportVisualizer } from './visualizers/ResponsiveViewportVisualizer';
 import { BootstrapGridVisualizer } from './visualizers/BootstrapGridVisualizer';
 import { DeploymentPipelineVisualizer } from './visualizers/DeploymentPipelineVisualizer';
+import { CriticalPathInspector } from './visualizers/CriticalPathInspector';
 
 export type VisualizerId =
   | 'box'
@@ -37,7 +38,8 @@ export type VisualizerId =
   | 'jsevent'
   | 'viewport'
   | 'bootstrap'
-  | 'deploy';
+  | 'deploy'
+  | 'criticalpath';
 
 type VisualizerTool = {
   id: VisualizerId;
@@ -49,6 +51,7 @@ type VisualizerTool = {
 };
 
 const tools: VisualizerTool[] = [
+  { id: 'criticalpath', name: 'Critical Rendering Path', shortName: 'CRP Inspector', icon: Zap, description: 'DOM + CSSOM → Render Tree → Layout → Paint visualization.', tone: 'text-yellow-400' },
   { id: 'net', name: 'HTTP & DNS flow', shortName: 'Ch 00 Network', icon: Globe, description: 'Client, DNS, server, and asset requests.', tone: 'text-emerald-400' },
   { id: 'devtools', name: 'DevTools Suite', shortName: 'Ch 01 DevTools', icon: Cpu, description: 'Live DOM inspector and console diagnostic loop.', tone: 'text-cyan-400' },
   { id: 'semantic', name: 'Semantic HTML5', shortName: 'Ch 02 Semantics', icon: FileCode2, description: 'Document outline vs div-soup comparison.', tone: 'text-amber-400' },
@@ -105,6 +108,7 @@ export const VisualLab: React.FC<VisualLabProps> = ({ initialTool = 'box' }) => 
         <section id="visualizer-stage" aria-label={`${activeTool.name} teaching stage`} className="min-w-0">
           <div className="mb-3 flex items-center justify-between gap-3"><div className="min-w-0"><p className="font-mono text-[11px] font-bold uppercase tracking-[0.14em] text-app-amber">Teaching stage</p><h2 className="mt-1 truncate text-lg font-bold text-app-ink">{activeTool.name}</h2></div><span className="shrink-0 rounded-control border border-app-border bg-app-inset px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.1em] text-app-subtle">Standardized Model</span></div>
           <div className="min-w-0 overflow-hidden rounded-panel border border-app-border bg-app-surface">
+            {activeVisualizer === 'criticalpath' && <CriticalPathInspector />}
             {activeVisualizer === 'net' && <NetworkFlowVisualizer />}
             {activeVisualizer === 'devtools' && <DevToolsVisualizer />}
             {activeVisualizer === 'semantic' && <SemanticHtmlVisualizer />}
