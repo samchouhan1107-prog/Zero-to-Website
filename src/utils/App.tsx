@@ -745,6 +745,7 @@ initial={{ opacity: 0, y: 14 }}
             chapters={chapters}
           />
 
+          </main>
           {/* Global Modals & Drawers */}
           <Suspense fallback={null}>
             <AccountModal
