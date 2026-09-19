@@ -312,14 +312,26 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 
               {/* Exact Requested Headline */}
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-app-ink leading-[1.08]">
-                Powerful Web Tools, <br />
-                <span className="text-app-ink">Built for the Modern Web</span>
+                Learn to Build Real Websites, <br />
+                <span className="text-app-ink">From Zero to Professional</span>
               </h1>
 
-              {/* Exact Requested Supporting Text */}
+              {/* What You'll Learn Statement */}
               <p className="text-base sm:text-lg font-normal text-app-muted leading-relaxed max-w-xl">
-                Explore practical web, image, developer and performance tools designed to help you build, test and improve your websites.
+                Master HTML, CSS, JavaScript & modern web development through hands-on projects. Build portfolio-worthy websites while learning industry best practices.
               </p>
+              
+              {/* Learning Path Visualization */}
+              <div className="mt-6 p-4 bg-blue-500/10 border border-blue-500/30 rounded-lg">
+                <p className="text-sm font-semibold text-blue-600 dark:text-blue-400 mb-2">Your Learning Journey:</p>
+                <div className="flex flex-wrap gap-2 text-xs">
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full">HTML Foundations</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full">CSS & Layout</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full">JavaScript</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full">Projects</span>
+                  <span className="px-3 py-1 bg-blue-500/20 text-blue-600 dark:text-blue-400 rounded-full">Portfolio</span>
+                </div>
+              </div>
             </div>
 
             {/* Prominent Search Control */}
@@ -369,7 +381,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
               </div>
             </form>
 
-            {/* Guided Learning Track / Smart Resume */}
+            {/* Skills Dashboard & Learning Progress */}
             <div className="rounded-xl border border-blue-500/20 bg-app-inset p-4 shadow-sm space-y-3">
               <div className="flex flex-wrap items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
@@ -377,7 +389,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                     <BookOpen className="h-3.5 w-3.5" />
                   </span>
                   <span className="font-mono text-xs font-bold uppercase tracking-wider text-app-ink">
-                    {completedCount === 0 ? 'Start Learning Track' : progress.courseCompleted ? 'Curriculum Completed' : 'Continue Learning Track'}
+                    {completedCount === 0 ? 'Start Your Journey' : progress.courseCompleted ? 'Portfolio Ready!' : 'Building Skills'}
                   </span>
                 </div>
 
@@ -402,13 +414,33 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                 />
               </div>
 
+              {/* Skills Progress */}
+              <div className="grid grid-cols-2 gap-2 pt-2">
+                <div className="text-center">
+                  <div className="text-xs font-bold text-app-ink">HTML</div>
+                  <div className="text-xs text-emerald-400">✓ Mastered</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-bold text-app-ink">CSS</div>
+                  <div className="text-xs text-amber-400">Learning</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-bold text-app-ink">JavaScript</div>
+                  <div className="text-xs text-gray-400">Next</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-xs font-bold text-app-ink">Projects</div>
+                  <div className="text-xs text-blue-400">Building</div>
+                </div>
+              </div>
+
               <div className="flex flex-wrap items-center justify-between gap-3 pt-0.5">
                 <div className="min-w-0 flex-1">
                   <p className="text-[11px] font-mono text-app-subtle">
-                    {progress.courseCompleted ? 'All 11 Chapters Mastered' : `Chapter ${nextChapter?.number || '00'} · ${nextChapter?.title || 'Web Foundations'}`}
+                    {progress.courseCompleted ? 'Portfolio Deployed & Skills Certified' : `Chapter ${nextChapter?.number || '00'} · ${nextChapter?.title || 'Web Foundations'}`}
                   </p>
                   <p className="text-xs sm:text-sm font-bold text-app-ink truncate">
-                    {progress.courseCompleted ? '🎉 Capstone Project & Verifiable Credential' : nextIncompleteLesson?.title || 'The Universal Web & Internet Architecture'}
+                    {progress.courseCompleted ? '🎉 Professional Portfolio Live!' : nextIncompleteLesson?.title || 'Start Building Your First Website'}
                   </p>
                 </div>
 
@@ -417,7 +449,7 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
                   onClick={() => onSelectLesson(nextIncompleteLesson?.id || 'ch-00-l-01')}
                   className="inline-flex min-h-9 items-center gap-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 dark:bg-emerald-500 dark:hover:bg-emerald-400 px-4 text-xs font-bold text-white transition-colors shrink-0 shadow-sm cursor-pointer"
                 >
-                  <span>{completedCount === 0 ? 'Start Course' : progress.courseCompleted ? 'Review Capstone' : 'Resume Lesson'}</span>
+                  <span>{completedCount === 0 ? 'Start Building' : progress.courseCompleted ? 'View Portfolio' : 'Continue Learning'}</span>
                   <ArrowRight className="h-3.5 w-3.5" />
                 </button>
               </div>
@@ -715,53 +747,59 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
             </div>
           </div>
 
-          {/* Bento Card 4: Interactive Exercises & AI Review */}
+          {/* Bento Card 4: Build Your Portfolio Project */}
           <div className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-app-border pb-3">
               <div className="flex items-center gap-2 font-bold text-app-ink text-base">
-                <Terminal className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
-                <span>Interactive Practice &amp; AI Assistance</span>
+                <Trophy className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+                <span>Build Your Portfolio Project</span>
               </div>
-              <span className="font-mono text-xs text-emerald-600 dark:text-emerald-400">Ready to Code</span>
+              <span className="font-mono text-xs text-amber-600 dark:text-amber-400">Real-World Skills</span>
             </div>
 
             <div className="space-y-3 text-xs leading-relaxed text-app-muted">
               <p>
-                WebZoneBW features verified interactive code challenges with instant DOM isolation, live preview rendering, automated test assertion passes, and on-demand AI code tutoring.
+                Learn by building actual portfolio projects. Each lesson contributes to creating professional websites you can showcase to employers.
               </p>
+
+              {/* Current Project Progress */}
+              <div className="bg-amber-500/10 border border-amber-500/30 rounded-lg p-3">
+                <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">🎯 Current Project: Personal Portfolio</p>
+                <div className="space-y-1">
+                  <div className="flex justify-between text-xs">
+                    <span>HTML Structure</span>
+                    <span className="text-emerald-400">✓ Complete</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span>CSS Layout</span>
+                    <span className="text-amber-400">In Progress</span>
+                  </div>
+                  <div className="flex justify-between text-xs">
+                    <span>JavaScript Features</span>
+                    <span className="text-gray-400">Next</span>
+                  </div>
+                </div>
+              </div>
 
               <div className="grid grid-cols-2 gap-3 pt-2">
                 <button
                   type="button"
                   onClick={onOpenPracticeHub}
-                  className="rounded-lg border border-app-border bg-app-inset p-3 text-left hover:border-emerald-500/50 transition-colors group cursor-pointer"
+                  className="rounded-lg border border-app-border bg-app-inset p-3 text-left hover:border-amber-500/50 transition-colors group cursor-pointer"
                 >
-                  <div className="font-bold text-app-ink group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">Practice Arena</div>
-                  <div className="text-[11px] text-app-subtle mt-0.5">Solve code challenges</div>
+                  <div className="font-bold text-app-ink group-hover:text-amber-600 dark:group-hover:text-amber-400 transition-colors">Continue Project</div>
+                  <div className="text-[11px] text-app-subtle mt-0.5">Add portfolio sections</div>
                 </button>
 
                 <button
                   type="button"
-                  onClick={onOpenTutor}
+                  onClick={() => onSelectLesson('ch-02-l-01')}
                   className="rounded-lg border border-app-border bg-app-inset p-3 text-left hover:border-blue-500/50 transition-colors group cursor-pointer"
                 >
-                  <div className="font-bold text-app-ink group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">AI Code Tutor</div>
-                  <div className="text-[11px] text-app-subtle mt-0.5">Ask questions anytime</div>
+                  <div className="font-bold text-app-ink group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">Next Skill</div>
+                  <div className="text-[11px] text-app-subtle mt-0.5">CSS Styling</div>
                 </button>
               </div>
-
-              {nextIncompleteLesson && (
-                <div className="pt-2">
-                  <button
-                    type="button"
-                    onClick={() => onSelectLesson(nextIncompleteLesson.id)}
-                    className="w-full inline-flex min-h-11 items-center justify-center gap-2 rounded-xl bg-blue-600 px-4 text-xs font-bold text-white hover:bg-blue-500 transition-colors cursor-pointer"
-                  >
-                    <Play className="h-3.5 w-3.5 fill-current" />
-                    <span>{completedCount > 0 ? `Resume: ${nextIncompleteLesson.title}` : 'Start Curriculum'}</span>
-                  </button>
-                </div>
-              )}
             </div>
           </div>
         </div>
