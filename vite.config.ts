@@ -18,6 +18,15 @@ export default defineConfig(() => ({
     },
   },
 
+  build: {
+    outDir: 'dist',
+    rollupOptions: {
+      input: {
+        main: path.resolve(__dirname, 'public/index.html'),
+      },
+    },
+  },
+
   server: {
     host: '0.0.0.0',
     port: 3000,
