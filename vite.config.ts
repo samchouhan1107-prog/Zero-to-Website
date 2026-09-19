@@ -4,7 +4,7 @@ import path from 'path';
 import { defineConfig } from 'vite';
 
 export default defineConfig(() => ({
-  // Custom domain (webzonebw.shop) serves from root. Override with VITE_BASE for GitHub Pages subpath.
+  // Custom domain serves from root. GitHub Pages can override this with VITE_BASE.
   base: process.env.VITE_BASE || '/',
 
   plugins: [
@@ -20,20 +20,12 @@ export default defineConfig(() => ({
 
   build: {
     outDir: 'dist',
-    rollupOptions: {
-      input: {
-        main: path.resolve(__dirname, 'public/index.html'),
-      },
-    },
   },
 
   server: {
     host: '0.0.0.0',
     port: 3000,
-    // HMR is disabled in AI Studio via DISABLE_HMR.
     hmr: process.env.DISABLE_HMR !== 'true',
-
-    // Disable file watching when HMR is disabled.
     watch: process.env.DISABLE_HMR === 'true' ? null : {},
   },
 }));
