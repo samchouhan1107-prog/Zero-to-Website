@@ -264,28 +264,28 @@ export const TutorModal: React.FC<TutorModalProps> = ({
       id="tutor-modal-overlay"
       className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-950/80 backdrop-blur-xs animate-fade-in"
     >
-      <div className="w-full max-w-3xl h-[88vh] max-h-[780px] bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden">
+      <div className="w-full max-w-4xl h-[85vh] max-h-[800px] min-h-[600px] bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-2xl flex flex-col overflow-hidden">
         {/* 24/7 Top Header Bar */}
         <div className="p-4 bg-slate-900 text-white flex items-center justify-between border-b border-slate-800 shrink-0">
           <div className="flex items-center gap-3">
             <div className="relative">
-              <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
-                <GraduationCap className="w-5 h-5" />
+              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-2xl bg-gradient-to-tr from-indigo-500 via-purple-600 to-pink-500 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
+                <GraduationCap className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
-              <span className="absolute -bottom-1 -right-1 w-3.5 h-3.5 rounded-full bg-emerald-500 ring-2 ring-slate-900 animate-pulse" />
+              <span className="absolute -bottom-1 -right-1 w-3 h-3 sm:w-3.5 sm:h-3.5 rounded-full bg-emerald-500 ring-2 ring-slate-900 animate-pulse" />
             </div>
 
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-extrabold text-sm sm:text-base text-white">
+                <h3 className="font-extrabold text-xs sm:text-sm sm:text-base text-white">
                   Tutor
                 </h3>
-                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/60 font-bold flex items-center gap-1">
-                  <Radio className="w-2.5 h-2.5 animate-ping text-emerald-400" /> 24/7 Always Active
+                <span className="text-[9px] sm:text-[10px] font-mono px-2 py-0.5 rounded-full bg-emerald-950/80 text-emerald-400 border border-emerald-700/60 font-bold flex items-center gap-1">
+                  <Radio className="w-2 h-2.5 sm:w-2.5 animate-ping text-emerald-400" /> 24/7 Active
                 </span>
               </div>
-              <p className="text-xs text-slate-400">
-                Continuous doubt resolution & complete textbook knowledge base
+              <p className="text-[10px] sm:text-xs text-slate-400">
+                Continuous doubt resolution & textbook knowledge base
               </p>
             </div>
           </div>
@@ -311,10 +311,10 @@ export const TutorModal: React.FC<TutorModalProps> = ({
         </div>
 
         {/* Navigation Tabs (Chat / Referenced Sources / Doubt Solving Tips) */}
-        <div className="flex border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 px-4 shrink-0 text-xs font-semibold">
+        <div className="flex border-b border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/50 px-3 sm:px-4 shrink-0 text-xs font-semibold overflow-x-auto">
           <button
             onClick={() => setActiveTab('chat')}
-            className={`py-2.5 px-3 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-2 sm:py-2.5 px-3 sm:px-4 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'chat'
                 ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -325,7 +325,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
           <button
             onClick={() => setActiveTab('sources')}
-            className={`py-2.5 px-3 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-2 sm:py-2.5 px-3 sm:px-4 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'sources'
                 ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -336,7 +336,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
           <button
             onClick={() => setActiveTab('tips')}
-            className={`py-2.5 px-3 border-b-2 flex items-center gap-1.5 transition-colors ${
+            className={`py-2 sm:py-2.5 px-3 sm:px-4 border-b-2 flex items-center gap-1.5 transition-colors whitespace-nowrap ${
               activeTab === 'tips'
                 ? 'border-indigo-600 text-indigo-600 dark:text-indigo-400'
                 : 'border-transparent text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
@@ -350,26 +350,26 @@ export const TutorModal: React.FC<TutorModalProps> = ({
         {activeTab === 'chat' && (
           <div className="flex-1 flex flex-col min-h-0 bg-slate-50/50 dark:bg-slate-950/30">
             {/* Messages Scroll Area */}
-            <div className="flex-1 overflow-y-auto p-4 sm:p-5 space-y-4">
+            <div className="flex-1 overflow-y-auto p-3 sm:p-4 space-y-3 sm:space-y-4">
               {messages.map((m) => (
                 <div
                   key={m.id}
-                  className={`flex items-start gap-3 ${m.sender === 'student' ? 'flex-row-reverse' : ''}`}
+                  className={`flex items-start gap-2 sm:gap-3 ${m.sender === 'student' ? 'flex-row-reverse' : ''}`}
                 >
                   {/* Avatar */}
                   <div
-                    className={`w-8 h-8 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center shrink-0 shadow-sm ${
                       m.sender === 'student'
                         ? 'bg-indigo-600 text-white'
                         : 'bg-gradient-to-tr from-purple-600 to-indigo-600 text-white'
                     }`}
                   >
-                    {m.sender === 'student' ? <User className="w-4 h-4" /> : <Bot className="w-4 h-4" />}
+                    {m.sender === 'student' ? <User className="w-3.5 h-3.5 sm:w-4 sm:h-4" /> : <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4" />}
                   </div>
 
                   {/* Message Bubble */}
                   <div
-                    className={`max-w-[88%] sm:max-w-[80%] rounded-2xl p-4 text-xs leading-relaxed space-y-2.5 ${
+                    className={`max-w-[85%] sm:max-w-[80%] rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed space-y-2 ${
                       m.sender === 'student'
                         ? 'bg-indigo-600 text-white rounded-tr-none shadow-md shadow-indigo-600/10'
                         : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none shadow-xs'
@@ -421,7 +421,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                     )}
 
                     {/* Main Markdown Formatted Text */}
-                    <div className="whitespace-pre-wrap font-sans text-xs sm:text-[13px] leading-relaxed">
+                    <div className="whitespace-pre-wrap font-sans text-xs sm:text-sm leading-relaxed break-words">
                       {m.text}
                     </div>
 
@@ -456,13 +456,13 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
               {/* Loading Spinner */}
               {isLoading && (
-                <div className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
-                    <Bot className="w-4 h-4" />
+                <div className="flex items-start gap-2 sm:gap-3">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center shrink-0 shadow-sm">
+                    <Bot className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   </div>
-                  <div className="p-3.5 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 flex items-center gap-2 shadow-xs">
+                  <div className="p-3 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-xs text-slate-500 flex items-center gap-2 shadow-xs">
                     <RefreshCw className="w-3.5 h-3.5 animate-spin text-indigo-600" />
-                    <span>Tutor is consulting textbook sources and formulating doubt solution...</span>
+                    <span className="text-xs sm:text-sm">Tutor is consulting textbook sources...</span>
                   </div>
                 </div>
               )}
@@ -470,15 +470,16 @@ export const TutorModal: React.FC<TutorModalProps> = ({
             </div>
 
             {/* Quick Doubt Buttons Scroll Area */}
-            <div className="px-4 py-2 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800/80 flex items-center gap-1.5 overflow-x-auto text-[11px] shrink-0">
-              <span className="text-slate-400 text-[10px] font-bold uppercase shrink-0">Popular Doubts:</span>
+            <div className="px-3 sm:px-4 py-2 sm:py-3 bg-white dark:bg-slate-900 border-t border-slate-100 dark:border-slate-800/80 flex flex-wrap items-center gap-1.5 sm:gap-2 text-[10px] sm:text-[11px] shrink-0 min-h-[44px]">
+              <span className="text-slate-400 text-[9px] sm:text-[10px] font-bold uppercase shrink-0 mr-2 sm:mr-0">Popular Doubts:</span>
               {QUICK_DOUBTS.map((chip, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleSendMessage(chip.prompt)}
-                  className="px-2.5 py-1 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 shrink-0 transition-all text-xs font-medium"
+                  className="px-2 py-1 sm:px-2.5 sm:py-1 rounded-lg border border-slate-200 dark:border-slate-800 hover:border-indigo-500 hover:text-indigo-600 dark:hover:text-indigo-400 bg-slate-50 dark:bg-slate-950 text-slate-600 dark:text-slate-300 transition-all text-xs font-medium whitespace-nowrap"
                 >
-                  {chip.label}
+                  <span className="hidden sm:inline">{chip.label}</span>
+                  <span className="sm:hidden">{chip.label.split(' ')[0]}</span>
                 </button>
               ))}
             </div>
@@ -501,7 +502,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                   value={codeAttachment}
                   onChange={(e) => setCodeAttachment(e.target.value)}
                   placeholder="Paste your HTML, CSS, or JS snippet here..."
-                  className="w-full h-24 bg-slate-900 text-slate-100 font-mono text-xs p-2.5 rounded-lg border border-slate-800 outline-none focus:border-indigo-500 resize-none"
+                  className="w-full h-20 sm:h-24 bg-slate-900 text-slate-100 font-mono text-xs p-2.5 rounded-lg border border-slate-800 outline-none focus:border-indigo-500 resize-none"
                   spellCheck={false}
                 />
               </div>
@@ -513,36 +514,39 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                 e.preventDefault();
                 handleSendMessage();
               }}
-              className="p-3 sm:p-4 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2 shrink-0"
+              className="p-2 sm:p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center gap-2 sm:gap-3 shrink-0 min-h-[60px]"
             >
-              <button
-                type="button"
-                onClick={() => setShowCodeInput(!showCodeInput)}
-                className={`p-2.5 rounded-xl border transition-colors ${
-                  showCodeInput || codeAttachment
-                    ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-500 text-indigo-600 dark:text-indigo-400'
-                    : 'border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
-                }`}
-                title="Attach code snippet for debugging"
-              >
-                <Code2 className="w-4 h-4" />
-              </button>
+              <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                <button
+                  type="button"
+                  onClick={() => setShowCodeInput(!showCodeInput)}
+                  className={`p-2 sm:p-2.5 rounded-xl border transition-colors flex-shrink-0 ${
+                    showCodeInput || codeAttachment
+                      ? 'bg-indigo-50 dark:bg-indigo-950/60 border-indigo-500 text-indigo-600 dark:text-indigo-400'
+                      : 'border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
+                  }`}
+                  title="Attach code snippet for debugging"
+                >
+                  <Code2 className="w-4 h-4" />
+                </button>
 
-              <input
-                type="text"
-                placeholder="Ask any doubt about HTML, CSS, JS, Flexbox, Git, or errors..."
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                className="flex-1 text-xs sm:text-sm px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white outline-none focus:border-indigo-500"
-              />
+                <input
+                  type="text"
+                  placeholder="Ask any doubt about HTML, CSS, JS, Flexbox, Git, or errors..."
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  className="flex-1 text-xs sm:text-sm px-3 py-2 sm:px-3.5 sm:py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-white outline-none focus:border-indigo-500 min-h-[40px]"
+                />
+              </div>
 
               <button
                 type="submit"
                 disabled={(!input.trim() && !codeAttachment.trim()) || isLoading}
-                className="p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 disabled:opacity-50 text-white font-bold text-xs flex items-center gap-1.5 transition-all shadow-md shadow-indigo-500/20"
+                className="p-2 sm:p-2.5 sm:px-4 sm:py-2.5 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:brightness-110 disabled:opacity-50 text-white font-bold text-xs sm:text-sm flex items-center gap-1.5 transition-all shadow-md shadow-indigo-500/20 flex-shrink-0 w-full sm:w-auto"
               >
                 <Send className="w-4 h-4" />
                 <span className="hidden sm:inline">Ask Tutor</span>
+                <span className="sm:hidden">Send</span>
               </button>
             </form>
           </div>
@@ -550,7 +554,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
         {/* Tab 2: Full Curriculum Sources Library */}
         {activeTab === 'sources' && (
-          <div className="flex-1 overflow-y-auto p-6 space-y-4 bg-slate-50 dark:bg-slate-950/40 text-xs">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 bg-slate-50 dark:bg-slate-950/40 text-xs">
             <div className="space-y-1">
               <h4 className="font-bold text-slate-900 dark:text-white text-sm">
                 Complete Textbook Knowledge Base
@@ -560,11 +564,11 @@ export const TutorModal: React.FC<TutorModalProps> = ({
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {allChapters.map((ch) => (
                 <div
                   key={ch.id}
-                  className="p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs"
+                  className="p-3 sm:p-4 rounded-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-2 shadow-xs"
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-mono text-[10px] font-bold px-2 py-0.5 rounded bg-indigo-50 dark:bg-indigo-950 text-indigo-600 dark:text-indigo-400">
@@ -572,7 +576,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                     </span>
                     <span className="text-[10px] text-slate-400">{ch.totalLessons} Lessons</span>
                   </div>
-                  <h5 className="font-bold text-slate-900 dark:text-white text-xs">{ch.title}</h5>
+                  <h5 className="font-bold text-slate-900 dark:text-white text-xs sm:text-sm line-clamp-1">{ch.title}</h5>
                   <p className="text-[11px] text-slate-500 line-clamp-2">{ch.description}</p>
 
                   <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex flex-wrap gap-1">
@@ -585,7 +589,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                             onClose();
                           }
                         }}
-                        className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 text-slate-700 dark:text-slate-300 transition-colors"
+                        className="text-[10px] px-2 py-0.5 rounded bg-slate-100 dark:bg-slate-800 hover:bg-indigo-50 text-slate-700 dark:text-slate-300 transition-colors whitespace-nowrap overflow-hidden text-ellipsis"
                       >
                         {lesson.title}
                       </button>
@@ -599,12 +603,12 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
         {/* Tab 3: 24/7 Guide & Tips */}
         {activeTab === 'tips' && (
-          <div className="flex-1 overflow-y-auto p-6 space-y-5 bg-slate-50 dark:bg-slate-950/40 text-xs">
-            <div className="p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 space-y-2">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-4 sm:space-y-5 bg-slate-50 dark:bg-slate-950/40 text-xs">
+            <div className="p-3 sm:p-4 rounded-2xl bg-indigo-50/80 dark:bg-indigo-950/40 border border-indigo-200 dark:border-indigo-900/60 space-y-2">
               <h4 className="font-bold text-indigo-900 dark:text-indigo-200 text-sm flex items-center gap-2">
                 <ShieldCheck className="w-4 h-4 text-emerald-500" /> 24/7 Continuous Student Support Guarantee
               </h4>
-              <p className="text-indigo-950 dark:text-indigo-300 leading-relaxed">
+              <p className="text-indigo-950 dark:text-indigo-300 leading-relaxed text-xs sm:text-sm">
                 Whether you are studying at 2 AM or during weekend cram sessions, your Tutor is continuously available with built-in instant resolution rules for syntax debugging, real-world analogies, and chapter references.
               </p>
             </div>
@@ -614,8 +618,8 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                 How to formulate high-impact doubts:
               </h5>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
                   <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <Bug className="w-3.5 h-3.5 text-red-500" /> 1. Paste Broken Code
                   </div>
@@ -624,7 +628,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
                   <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <Lightbulb className="w-3.5 h-3.5 text-amber-500" /> 2. Ask for Analogies
                   </div>
@@ -633,7 +637,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                   </p>
                 </div>
 
-                <div className="p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
+                <div className="p-3 sm:p-3.5 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 space-y-1.5">
                   <div className="font-bold text-slate-900 dark:text-white flex items-center gap-1.5">
                     <BookOpen className="w-3.5 h-3.5 text-indigo-500" /> 3. Jump to Lessons
                   </div>

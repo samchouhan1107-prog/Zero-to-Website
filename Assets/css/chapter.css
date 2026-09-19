@@ -1,12 +1,13 @@
 /* ==================================================
    WZ Storehouse - chapter.css
    Author  : Sameer Chouhan
-   Version : 2.0 (Red Volcanic & Volcanic Porcelain)
-================================================== */
+   Version : 2.1 (Enhanced Responsive Design)
+   ================================================== */
 
 .chapter-page {
     background: var(--background);
     color: var(--text);
+    min-height: 100vh;
 }
 
 .chapter-badge-lg {
@@ -22,6 +23,12 @@
     letter-spacing: 0.05em;
     text-transform: uppercase;
     box-shadow: 0 0 16px -2px var(--primary);
+    transition: all 0.2s ease;
+}
+
+.chapter-badge-lg:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px -2px var(--primary);
 }
 
 .chapter-timeline {
@@ -34,6 +41,7 @@
 .timeline-step {
     position: relative;
     margin-bottom: 20px;
+    padding-left: 16px;
 }
 
 .timeline-step::before {
@@ -46,4 +54,476 @@
     border-radius: 50%;
     background: var(--primary);
     box-shadow: 0 0 8px var(--primary);
+    transition: all 0.2s ease;
+}
+
+.timeline-step:hover::before {
+    transform: scale(1.2);
+    box-shadow: 0 0 12px var(--primary);
+}
+
+/* Chapter navigation */
+.chapter-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin: 32px 0;
+    padding: 20px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+}
+
+.chapter-nav a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-weight: 500;
+    color: var(--text);
+}
+
+.chapter-nav a:hover {
+    background: var(--background);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* Chapter progress */
+.chapter-progress {
+    margin: 24px 0;
+    padding: 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.chapter-progress h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+    color: var(--text);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 12px 0;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.875rem;
+    color: var(--muted);
+    text-align: center;
+}
+
+/* Chapter lessons grid */
+.chapter-lessons {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.lesson-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    color: var(--text);
+}
+
+.lesson-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    border-color: var(--primary);
+}
+
+.lesson-item h4 {
+    color: var(--primary);
+    margin-bottom: 8px;
+    font-size: 1rem;
+}
+
+.lesson-item p {
+    color: var(--muted);
+    font-size: 0.875rem;
+    margin-bottom: 12px;
+}
+
+.lesson-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    color: var(--muted);
+}
+
+.lesson-status {
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.lesson-status.completed {
+    background: rgba(34, 197, 94, 0.1);
+    color: #22c55e;
+}
+
+.lesson-status.in-progress {
+    background: rgba(251, 146, 60, 0.1);
+    color: #fb923c;
+}
+
+.lesson-status.not-started {
+    background: rgba(156, 163, 175, 0.1);
+    color: #9ca3af;
+}
+
+/* Chapter overview */
+.chapter-overview {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 24px 0;
+}
+
+.chapter-overview h3 {
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-size: 1.25rem;
+}
+
+.chapter-overview ul {
+    list-style: none;
+    padding: 0;
+}
+
+.chapter-overview li {
+    padding: 8px 0 8px 24px;
+    position: relative;
+    color: var(--text);
+}
+
+.chapter-overview li::before {
+    content: "▸";
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: bold;
+}
+
+/* Responsive design for chapter pages */
+@media (max-width: 768px) {
+    .chapter-badge-lg {
+        font-size: 0.75rem;
+        padding: 4px 12px;
+    }
+    
+    .chapter-timeline {
+        padding-left: 24px;
+        margin: 20px 0;
+    }
+    
+    .timeline-step {
+        margin-bottom: 16px;
+        padding-left: 12px;
+    }
+    
+    .timeline-step::before {
+        left: -30px;
+        width: 8px;
+        height: 8px;
+    }
+    
+    .chapter-nav {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .chapter-nav a {
+        justify-content: center;
+    }
+    
+    .chapter-progress {
+        padding: 12px;
+    }
+    
+    .chapter-progress h3 {
+        font-size: 0.875rem;
+    }
+    
+    .progress-bar {
+        height: 6px;
+    }
+    
+    .progress-text {
+        font-size: 0.75rem;
+    }
+    
+    .chapter-lessons {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .lesson-item {
+        padding: 12px;
+    }
+    
+    .lesson-item h4 {
+        font-size: 0.875rem;
+    }
+    
+    .lesson-item p {
+        font-size: 0.75rem;
+    }
+    
+    .lesson-meta {
+        font-size: 0.625rem;
+    }
+    
+    .lesson-status {
+        padding: 1px 6px;
+        font-size: 0.625rem;
+    }
+    
+    .chapter-overview {
+        padding: 16px;
+    }
+    
+    .chapter-overview h3 {
+        font-size: 1rem;
+    }
+    
+    .chapter-overview li {
+        padding: 6px 0 6px 20px;
+        font-size: 0.875rem;
+    }
+    
+    .chapter-overview li::before {
+        font-size: 0.875rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .chapter-badge-lg {
+        font-size: 0.625rem;
+        padding: 3px 10px;
+    }
+    
+    .chapter-timeline {
+        padding-left: 20px;
+        margin: 16px 0;
+    }
+    
+    .timeline-step {
+        margin-bottom: 12px;
+        padding-left: 10px;
+    }
+    
+    .timeline-step::before {
+        left: -26px;
+        width: 6px;
+        height: 6px;
+    }
+    
+    .chapter-nav {
+        padding: 12px;
+        gap: 12px;
+    }
+    
+    .chapter-nav a {
+        padding: 8px 12px;
+        font-size: 0.8125rem;
+    }
+    
+    .chapter-progress {
+        padding: 10px;
+    }
+    
+    .chapter-lessons {
+        gap: 8px;
+    }
+    
+    .lesson-item {
+        padding: 10px;
+    }
+    
+    .lesson-item h4 {
+        font-size: 0.75rem;
+    }
+    
+    .lesson-item p {
+        font-size: 0.6875rem;
+    }
+    
+    .lesson-meta {
+        font-size: 0.5625rem;
+    }
+    
+    .lesson-status {
+        padding: 1px 4px;
+        font-size: 0.5625rem;
+    }
+    
+    .chapter-overview {
+        padding: 12px;
+    }
+    
+    .chapter-overview h3 {
+        font-size: 0.875rem;
+    }
+    
+    .chapter-overview li {
+        padding: 4px 0 4px 16px;
+        font-size: 0.75rem;
+    }
+    
+    .chapter-overview li::before {
+        font-size: 0.75rem;
+    }
+}
+
+/* Dark mode adjustments for chapter pages */
+body.dark .chapter-badge-lg {
+    box-shadow: 0 0 16px -2px rgba(96, 165, 250, 0.5);
+}
+
+body.dark .timeline-step::before {
+    box-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
+}
+
+body.dark .chapter-nav {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .chapter-nav a {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+    color: #d4d4d8;
+}
+
+body.dark .chapter-nav a:hover {
+    background: rgba(18, 18, 21, 0.8);
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+body.dark .chapter-progress {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .chapter-progress h3 {
+    color: #d4d4d8;
+}
+
+body.dark .progress-fill {
+    background: linear-gradient(90deg, #60a5fa, #3b82f6);
+}
+
+body.dark .progress-text {
+    color: #71717a;
+}
+
+body.dark .lesson-item {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .lesson-item:hover {
+    background: rgba(18, 18, 21, 0.8);
+    border-color: #60a5fa;
+}
+
+body.dark .lesson-item h4 {
+    color: #60a5fa;
+}
+
+body.dark .lesson-item p {
+    color: #a1a1aa;
+}
+
+body.dark .lesson-meta {
+    color: #71717a;
+}
+
+body.dark .lesson-status.completed {
+    background: rgba(34, 197, 94, 0.2);
+    color: #4ade80;
+}
+
+body.dark .lesson-status.in-progress {
+    background: rgba(251, 146, 60, 0.2);
+    color: #fb923c;
+}
+
+body.dark .lesson-status.not-started {
+    background: rgba(75, 85, 99, 0.2);
+    color: #94a3b8;
+}
+
+body.dark .chapter-overview {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .chapter-overview h3 {
+    color: #60a5fa;
+}
+
+body.dark .chapter-overview li {
+    color: #d4d4d8;
+}
+
+body.dark .chapter-overview li::before {
+    color: #60a5fa;
+}
+
+/* Print styles for chapter pages */
+@media print {
+    .chapter-timeline,
+    .chapter-nav,
+    .chapter-progress,
+    .chapter-lessons,
+    .chapter-overview {
+        page-break-inside: avoid;
+    }
+    
+    .chapter-nav {
+        display: none;
+    }
+    
+    .timeline-step::before {
+        display: none;
+    }
+    
+    .chapter-timeline {
+        border-left: 1px solid #ccc;
+    }
+    
+    body.dark .chapter-timeline {
+        border-left-color: #ccc;
+    }
 }
