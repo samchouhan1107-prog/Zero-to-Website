@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useState } from 'react';
 import {
   Activity,
   ArrowRight,
@@ -75,28 +75,6 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [activeToolCategory, setActiveToolCategory] = useState<ToolCategory>('All');
-
-  // Smart mouse-follow spotlight — desktop (fine pointer) only.
-  // Skipped on touch devices and for users preferring reduced motion,
-  // and rendered with pointer-events-none so it never blocks interaction.
-  const heroRef = useRef<HTMLElement>(null);
-  const [spotlight, setSpotlight] = useState<{ x: number; y: number } | null>(null);
-  const [pointerFine, setPointerFine] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia('(pointer: fine) and (prefers-reduced-motion: no-preference)');
-    const update = () => setPointerFine(mq.matches);
-    update();
-    mq.addEventListener('change', update);
-    return () => mq.removeEventListener('change', update);
-  }, []);
-
-  const handleHeroMouseMove = (e: React.MouseEvent<HTMLElement>) => {
-    if (!pointerFine) return;
-    const rect = heroRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    setSpotlight({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-  };
 
   const allLessons = chapters.flatMap((chapter) => chapter.lessons);
   const completedCount = Object.values(progress.completedLessons || {}).filter(Boolean).length;
@@ -315,26 +293,12 @@ export const HomeHero: React.FC<HomeHeroProps> = ({
       {/* 1. HERO SECTION                                                          */}
       {/* ========================================================================= */}
       <section
-        ref={heroRef}
         aria-label="WebZoneBW Hero Section"
-        onMouseMove={handleHeroMouseMove}
-        onMouseLeave={() => setSpotlight(null)}
         className="relative overflow-hidden rounded-2xl border border-app-border bg-app-surface p-8 sm:p-12 lg:p-16 shadow-lg"
       >
         {/* Soft background ambient radial glows */}
         <div className="pointer-events-none absolute -left-16 -top-16 h-80 w-80 rounded-full bg-blue-600/10 blur-2xl" />
         <div className="pointer-events-none absolute -right-16 bottom-0 h-80 w-80 rounded-full bg-indigo-600/10 blur-2xl" />
-
-        {/* Smart mouse-follow spotlight (desktop only, never blocks clicks) */}
-        {pointerFine && spotlight && (
-          <div
-            className="pointer-events-none absolute inset-0 z-0 transition-opacity duration-300"
-            style={{
-              background: `radial-gradient(420px circle at ${spotlight.x}px ${spotlight.y}px, rgba(59,130,246,0.12), transparent 70%)`,
-            }}
-            aria-hidden="true"
-          />
-        )}
 
         <div className="relative z-10 grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-center">
           {/* Left Column: Headline, Supporting Text, Search Experience, and Action CTAs */}

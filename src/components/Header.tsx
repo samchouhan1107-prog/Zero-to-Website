@@ -211,17 +211,6 @@ export const Header: React.FC<HeaderProps> = ({
 
           {/* Right: Search Control & Sign In / Account Access */}
           <div className="flex items-center gap-3 shrink-0">
-            {/* Mobile-only theme toggle (Row 2 is hidden below lg) */}
-            <button
-              type="button"
-              onClick={onToggleTheme}
-              className="flex h-10 w-10 items-center justify-center rounded-xl border border-app-border bg-app-inset text-app-muted transition-colors hover:border-blue-500/50 hover:bg-app-active hover:text-app-ink lg:hidden"
-              aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-              title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
-            >
-              {theme === 'dark' ? <Sun className="h-5 w-5 text-amber-400" /> : <Moon className="h-5 w-5 text-blue-500" />}
-            </button>
-
             {/* Global Search Button */}
             <button
               type="button"
@@ -277,11 +266,8 @@ export const Header: React.FC<HeaderProps> = ({
           </div>
         </div>
 
-        {/* ROW 2: Compact Secondary Navigation & Status Row (desktop only —
-            on smaller screens this strip wasted vertical space and pushed the
-            hero content below the fold, so it is hidden and the theme toggle
-            moved into ROW 1 for mobile users) */}
-        <div className="hidden border-t border-app-border/70 bg-app-inset/60 px-4 sm:px-6 lg:block">
+        {/* ROW 2: Compact Secondary Navigation & Status Row */}
+        <div className="border-t border-app-border/70 bg-app-inset/60 px-4 sm:px-6">
           <div className="mx-auto flex min-h-9 max-w-[1600px] flex-wrap items-center justify-between gap-2 py-1 text-xs">
             {/* Left: WebZoneBW Status, Tools & Resources Quick Links */}
             <div className="flex items-center gap-3">
