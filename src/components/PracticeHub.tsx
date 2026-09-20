@@ -47,20 +47,8 @@ export const PracticeHub: React.FC<PracticeHubProps> = ({ chapters, progress, on
                 Age 15+ Developer Assessment Matrix
               </span>
             </div>
-            <h1 className="mt-2 text-3xl font-black leading-tight tracking-[-0.03em] text-app-ink sm:text-4xl">Build Your Portfolio Project</h1>
-            <p className="mt-3 text-base leading-relaxed text-app-muted">Practice skills that directly contribute to building your professional portfolio. Each challenge teaches you concepts you'll use in real websites and helps you create portfolio-ready projects.</p>
-            
-            {/* Project Progress */}
-            <div className="mt-4 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
-                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400 mb-2">🎯 Current Project: Personal Portfolio Website</p>
-                <p className="text-xs text-app-muted">Complete these challenges to build your professional portfolio:</p>
-                <div className="mt-2 space-y-1">
-                    <div className="text-xs"><span className="text-emerald-400">✓</span> HTML Structure & Semantic Elements</div>
-                    <div className="text-xs"><span className="text-emerald-400">✓</span> CSS Layout & Responsive Design</div>
-                    <div className="text-xs"><span className="text-amber-400">→</span> JavaScript Interactivity</div>
-                    <div className="text-xs"><span className="text-gray-400">○</span> Final Project Integration</div>
-                </div>
-            </div>
+            <h1 className="mt-2 text-3xl font-black leading-tight tracking-[-0.03em] text-app-ink sm:text-4xl">Build until the concept sticks.</h1>
+            <p className="mt-3 text-base leading-relaxed text-app-muted">Work through isolated HTML, CSS, JavaScript, and Framework challenges designed for independent learners and students aged 15+. Includes live compilation, automated unit diagnostics, and original project prompts.</p>
           </div>
           <div className="border-l border-app-border pl-4"><p className="font-mono text-[11px] uppercase tracking-[0.12em] text-app-subtle">Progress</p><p className="mt-2 font-mono text-2xl font-black tabular-nums text-app-amber">{completedCount}<span className="text-sm text-app-muted"> / {allChallenges.length}</span></p><p className="mt-1 text-xs text-app-muted">challenges mastered</p></div>
         </div>

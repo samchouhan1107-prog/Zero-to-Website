@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 07 | Responsive Design & Fluid Layouts - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/ad-styles.css">
+    <script src="../../Assets/js/main.js" defer></script>
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+         crossorigin="anonymous"></script>
+</head>
+<body class="chapter-responsive">
+<header>
+    <div class="logo">
+        <a href="../../index.html" class="logo-link">
+            <h1>WZ STOREHOUSE</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
+    </div>
+    <nav>
+        <a href="../../index.html">🏠 Home</a>
+        <a href="../Chapter-06-JavaScript/index.html">⬅ Previous</a>
+        <a href="../Chapter-08-Bootstrap/index.html">Next ➜</a>
+        <button id="settingsBtn">⚙ Settings</button>
+    </nav>
+</header>
+<div id="settingsPanel" class="settings-panel">
+    <h3>⚙ Settings</h3>
+    <button id="darkModeBtn">🌙 Dark Mode</button>
+    <button id="fontSizeBtn">🔤 Font Size</button>
+    <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+</div>
+<main class="container chapter-page">
+    <section class="chapter-hero">
+        <span class="chapter-badge">Chapter 07</span>
+        <h1>Responsive Web Design &amp; Media Queries</h1>
+        <p>Build websites that look pristine on any screen size: smartphones, tablets, laptops, and ultra-wide desktop monitors.</p>
+
+        <div class="info-grid">
+            <div class="summary-card">
+                <h3>Difficulty</h3>
+                <p>Intermediate</p>
+            </div>
+            <div class="summary-card">
+                <h3>Duration</h3>
+                <p>3.0 Hours</p>
+            </div>
+            <div class="summary-card">
+                <h3>Key Technique</h3>
+                <p>Mobile-First CSS</p>
+            </div>
+            <div class="summary-card">
+                <h3>Outcome</h3>
+                <p>Adaptive Multi-Device Layouts</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section">
+        <h2>🎯 Learning Objectives</h2>
+        <ul class="chapter-list">
+            <li>✔ Configure the responsive viewport meta tag: <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code>.</li>
+            <li>✔ Write mobile-first media queries using <code>min-width</code> breakpoints (640px, 768px, 1024px, 1280px).</li>
+            <li>✔ Implement fluid typography with <code>clamp(1rem, 2.5vw, 2rem)</code>.</li>
+            <li>✔ Create collapsible mobile navigation menus with touch support.</li>
+        </ul>
+    </section>
+
+    <section class="chapter-section">
+        <h2>📚 Chapter 07 Lessons &amp; Interactive Practices</h2>
+        <div class="lesson-grid">
+            <div class="lesson-card">
+                <h3>Lesson 01</h3>
+                <p><strong>Mobile-First Approach</strong>: Progressive enhancement, lean default payloads, and touch-target minimums.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-01-Mobile-First-Approach/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-01-Mobile-First-Approach/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 02</h3>
+                <p><strong>Viewport &amp; Media Queries</strong>: Viewport meta tag, standard breakpoints (640, 768, 1024), and range syntax.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-02-Viewport-Media-Queries/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-02-Viewport-Media-Queries/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 03</h3>
+                <p><strong>Fluid Units &amp; Clamp</strong>: Zero-breakpoint fluid scaling using clamp(), min(), max(), and dynamic viewport units.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-03-Fluid-Units-Clamp/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-03-Fluid-Units-Clamp/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 04</h3>
+                <p><strong>Responsive Images &amp; Media</strong>: Fluid images, srcset density descriptors, and art direction with picture.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-04-Responsive-Images-Media/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-04-Responsive-Images-Media/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 05</h3>
+                <p><strong>Responsive Typography</strong>: Optimal measure (65-75ch), rem scaling, inverse line heights, and text-wrap balance.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-05-Responsive-Typography/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-05-Responsive-Typography/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 06</h3>
+                <p><strong>Responsive Navigation</strong>: Collapsible hamburger drawers, desktop horizontal bars, and touch accessibility.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-06-Responsive-Navigation/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-06-Responsive-Navigation/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+
+            <div class="lesson-card">
+                <h3>Lesson 07</h3>
+                <p><strong>Responsive Portfolio Build</strong>: Capstone combining fluid hero, auto-fit card grid, and 100% mobile score.</p>
+                <div style="display: flex; gap: 8px; margin-top: 10px;">
+                    <a class="btn primary" href="Lesson-07-Responsive-Portfolio-Build/lesson.html">Read Lesson ➜</a>
+                    <a class="btn secondary" href="Lesson-07-Responsive-Portfolio-Build/practice.html">Practice ⚡</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="chapter-section chapter-nav-links">
+        <a href="../../index.html">🏠 Home</a>
+        <a href="../Chapter-06-JavaScript/index.html">⬅ Chapter 06: JavaScript</a>
+        <a href="../Chapter-08-Bootstrap/index.html">Chapter 08: Bootstrap &amp; Frameworks ➜</a>
+    </section>
+</main>
+<footer>
+    <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+</footer>
+</body>
+</html>

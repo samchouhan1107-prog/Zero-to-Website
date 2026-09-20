@@ -1,591 +1,270 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
- <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Core Landing & Home Dashboard -->
+  <url>
     <loc>https://webzonebw.shop/</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
- </url>
- <url>
+  </url>
+
+  <!-- Interactive Web Tools & Sandboxes -->
+  <url>
     <loc>https://webzonebw.shop/?view=practice-hub</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=box</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=flex</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=grid</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=dom</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=net</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=visual-lab&amp;tool=git</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?view=activities</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+
+  <!-- Complete Web Engineering Chapters -->
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-00</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-00-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-00-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-01</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-01-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-01-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-01-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-01-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-01-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-02</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-02-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-02-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-02-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-02-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-02-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-03</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-03-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-04</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-04-l-07</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-05</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-05-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-06</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-06-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-07</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-07-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-08</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-08-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-09</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-09-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?chapter=ch-10</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+
+  <!-- Complete In-Depth Lessons -->
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-00-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-01-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-02-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-03-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-04-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-05-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-06-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-07-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-08-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
+    <loc>https://webzonebw.shop/?lesson=ch-09-l-01</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?lesson=ch-10-l-01</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-10-l-02</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-10-l-03</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-10-l-04</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-10-l-05</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?lesson=ch-10-l-06</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.80</priority>
- </url>
- <url>
+  </url>
+
+  <!-- Legal, Trust & Compliance Standards -->
+  <url>
     <loc>https://webzonebw.shop/?legal=privacy</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?legal=terms</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?legal=cookies</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?legal=about</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?legal=contact</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.60</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/privacy-policy.html</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/terms-of-service.html</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/cookie-policy.html</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/about.html</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/contact.html</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.70</priority>
- </url>
- <url>
+  </url>
+
+  <!-- Blog Posts — High-Value SEO Content -->
+  <url>
     <loc>https://webzonebw.shop/?view=blog</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.90</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?blog=complete-guide-css-flexbox</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?blog=understanding-css-grid</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?blog=html5-semantic-elements-seo</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?blog=javascript-dom-manipulation</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
+  </url>
+  <url>
     <loc>https://webzonebw.shop/?blog=responsive-web-design-best-practices</loc>
-    <lastmod>2026-09-19</lastmod>
+    <lastmod>2026-09-04</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
- </url>
- <url>
-    <loc>https://webzonebw.shop/?blog=getting-started-with-webzonebw</loc>
-    <lastmod>2026-09-19</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
- </url>
+  </url>
 </urlset>

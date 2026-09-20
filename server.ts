@@ -122,85 +122,8 @@ app.use("/Chapters", (req, res, next) => {
 });
 
 // API Routes
-/* ── Routine Maintenance / Health Check Endpoint ──────────
- * GET /api/health       → lightweight liveness probe (uptime monitors)
- * GET /api/health?full=1 → deep audit: chapter integrity, memory, versions
- */
-app.get("/api/health", (req, res) => {
-  const base = {
-    status: "ok",
-    timestamp: new Date().toISOString(),
-    uptimeSeconds: Math.round(process.uptime()),
-  };
-
-  // Deep maintenance audit only when explicitly requested
-  if (req.query.full !== "1" && req.query.full !== "true") {
-    res.json(base);
-    return;
-  }
-
-  try {
-    const memory = process.memoryUsage();
-    const chapterAudit = CHAPTERS_DATA.map((c) => ({
-      id: c.id,
-      number: c.number,
-      title: c.title,
-      lessons: c.lessons.length,
-      empty: c.lessons.length === 0,
-    }));
-    const emptyChapters = chapterAudit.filter((c) => c.empty);
-
-    res.json({
-      ...base,
-      nodeVersion: process.version,
-      environment: process.env.NODE_ENV || "development",
-      memory: {
-        rssMb: Math.round(memory.rss / 1024 / 1024),
-        heapUsedMb: Math.round(memory.heapUsed / 1024 / 1024),
-      },
-      curriculum: {
-        chapters: CHAPTERS_DATA.length,
-        lessons: CHAPTERS_DATA.reduce((n, c) => n + c.lessons.length, 0),
-        emptyChapters: emptyChapters.map((c) => c.id),
-        integrity: emptyChapters.length === 0 ? "pass" : "fail",
-      },
-      aiTutor: getAi() ? "configured" : "fallback-mode",
-    });
-  } catch (err: any) {
-    res.status(500).json({ ...base, status: "degraded", error: err?.message });
-  }
-});
-
-/* ── Learning Path / Curriculum Map (graph for UI roadmap & audits) ──
- * GET /api/curriculum → chapter nodes + lesson edges + progress gate info
- */
-app.get("/api/curriculum", (_req, res) => {
-  try {
-    const nodes = CHAPTERS_DATA.map((c) => ({
-      id: c.id,
-      number: c.number,
-      title: c.title,
-      lessonCount: c.lessons.length,
-      lessons: c.lessons.map((l) => ({
-        id: l.id,
-        number: l.number,
-        title: l.title,
-        slug: l.slug,
-        durationMinutes: l.durationMinutes,
-        url: `/?lesson=${l.id}`,
-      })),
-    }));
-
-    res.json({
-      success: true,
-      generatedAt: new Date().toISOString(),
-      totalChapters: nodes.length,
-      totalLessons: CHAPTERS_DATA.reduce((n, c) => n + c.lessons.length, 0),
-      learningPath: nodes,
-    });
-  } catch (err: any) {
-    res.status(500).json({ success: false, error: err?.message });
-  }
+app.get("/api/health", (_req, res) => {
+  res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
 // Dynamic Sitemap Generator listing all chapters, lessons, tools, and pages

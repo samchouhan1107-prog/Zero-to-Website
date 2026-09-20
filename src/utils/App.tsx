@@ -1,23 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
-/* Code-splitting: heavy views & modals are lazy-loaded so the initial
- * bundle stays small and the first paint is fast.
- */
-const LessonView = lazy(() => import('../components/LessonView').then((m) => ({ default: m.LessonView })));
-const PracticeHub = lazy(() => import('../components/PracticeHub').then((m) => ({ default: m.PracticeHub })));
-const VisualLab = lazy(() => import('../components/VisualLab').then((m) => ({ default: m.VisualLab }))) as unknown as React.FC<{ initialTool?: VisualizerId }> & { VisualizerId: VisualizerId };
-const ActivitiesView = lazy(() => import('../components/ActivitiesView').then((m) => ({ default: m.ActivitiesView })));
-const BlogView = lazy(() => import('../components/BlogView').then((m) => ({ default: m.BlogView })));
-const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })));
-const SearchModal = lazy(() => import('../components/SearchModal').then((m) => ({ default: m.SearchModal })));
-const TutorModal = lazy(() => import('../components/TutorModal').then((m) => ({ default: m.TutorModal })));
-const SettingsModal = lazy(() => import('../components/SettingsModal').then((m) => ({ default: m.SettingsModal })));
-const CertificateModal = lazy(() => import('../components/CertificateModal').then((m) => ({ default: m.CertificateModal })));
-const XpMilestoneModal = lazy(() => import('../components/XpMilestoneModal').then((m) => ({ default: m.XpMilestoneModal })));
-const XpMilestonesRoadmapModal = lazy(() => import('../components/XpMilestonesRoadmapModal').then((m) => ({ default: m.XpMilestonesRoadmapModal })));
-const CookieNotificationBanner = lazy(() => import('../components/CookieNotificationBanner').then((m) => ({ default: m.CookieNotificationBanner })));
-const NotificationCenterModal = lazy(() => import('../components/NotificationCenterModal').then((m) => ({ default: m.NotificationCenterModal })));
-const AccountModal = lazy(() => import('../components/AccountModal').then((m) => ({ default: m.AccountModal })));
-const LegalComplianceModal = lazy(() => import('../components/LegalComplianceModal').then((m) => ({ default: m.LegalComplianceModal })));
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CHAPTERS_DATA } from '../data/chaptersData';
 import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
@@ -27,9 +8,25 @@ import { calculateDailyStreak, getLocalDateString } from './streakUtils';
 import { Sidebar } from '../components/Sidebar';
 import { Header } from '../components/Header';
 import { HomeHero } from '../components/HomeHero';
-import { VisualizerId } from '../components/VisualLab';
+import { LessonView } from '../components/LessonView';
+import { PracticeHub } from '../components/PracticeHub';
+import { VisualLab, VisualizerId } from '../components/VisualLab';
+import { ActivitiesView } from '../components/ActivitiesView';
+import { SearchModal } from '../components/SearchModal';
+import { TutorModal } from '../components/TutorModal';
+import { SettingsModal } from '../components/SettingsModal';
+import { CertificateModal } from '../components/CertificateModal';
+import { XpMilestoneModal } from '../components/XpMilestoneModal';
+import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
+import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
+import { NotificationCenterModal } from '../components/NotificationCenterModal';
+import { AccountModal } from '../components/AccountModal';
 import { ToastNotification, ToastMessage } from '../components/ToastNotification';
-import { PolicyTab } from '../components/LegalComplianceModal';
+import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
+import { Footer } from '../components/Footer';
+import { BlogView } from '../components/BlogView';
+import { WorkspaceView } from '../components/WorkspaceView';
+import { AnimatedBackground } from '../components/AnimatedBackground';
 import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
 import { NEWS_UPDATES } from '../data/newsData';
 import { useAuth } from './AuthContext';
@@ -43,7 +40,8 @@ const INITIAL_PROGRESS: UserProgress = {
   notes: {},
   bookmarks: [],
   xpPoints: 120,
-  streakDays: 3,
+  conceptsMastered: 1,
+  studyMinutes: 15,
   lastActiveDate: getLocalDateString(),
 };
 
@@ -544,10 +542,29 @@ export default function App() {
   return (
     <div
       id="wz-storehouse-app"
-      className="flex h-screen min-w-0 flex-col overflow-hidden bg-gray-900 text-white"
+      className={`flex h-[100dvh] min-w-0 flex-col overflow-hidden bg-app-canvas text-app-ink ${fontClass}`}
     >
-      {/* Sticky Header */}
-      <Header
+      {/* Sidebar Navigation */}
+      <Sidebar
+        chapters={chapters}
+        currentLessonId={currentLessonId}
+        onSelectLesson={handleSelectLesson}
+        progress={progress}
+        isOpen={sidebarOpen}
+        onCloseMobile={() => setSidebarOpen(false)}
+        activeView={activeView}
+        onNavigateHome={() => navigateToView('home')}
+        onOpenPracticeHub={() => navigateToView('practice-hub')}
+        onOpenVisualLab={() => navigateToView('visual-lab')}
+        onOpenActivities={() => handleNavigateActivities()}
+        onOpenMilestones={() => setRoadmapOpen(true)}
+        onOpenTutor={() => handleOpenTutor()}
+      />
+
+      {/* Main Content Area */}
+      <div className="flex min-h-0 min-w-0 flex-col overflow-hidden">
+        {/* Sticky Header */}
+        <Header
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           onOpenSearch={() => setSearchOpen(true)}
           onOpenTutor={() => handleOpenTutor()}
@@ -562,6 +579,7 @@ export default function App() {
           onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
           onNavigateActivities={() => handleNavigateActivities()}
           onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
+          onNavigateWorkspace={() => navigateToView('workspace')}
           onSelectCategory={(cat) => {
             setSelectedCategory(cat);
             navigateToView('home');
@@ -574,6 +592,9 @@ export default function App() {
 
         {/* View Router with one independent scroll region */}
         <main ref={mainContentRef} id="main-content" className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
+          {/* Animated Background with ambient nodes and cursor tracking */}
+          <AnimatedBackground theme={theme} />
+
           <AnimatePresence mode="wait" initial={false}>
             {activeView === 'home' && (
               <motion.div
@@ -582,7 +603,7 @@ export default function App() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
+                className="w-full relative z-10"
               >
                 <HomeHero
                   chapters={chapters}
@@ -593,6 +614,7 @@ export default function App() {
                   onOpenActivities={() => handleNavigateActivities()}
                   onOpenTutor={() => handleOpenTutor()}
                   onOpenMilestones={() => setRoadmapOpen(true)}
+                  onOpenWorkspace={() => navigateToView('workspace')}
                   onOpenSearch={(query) => {
                     setSearchInitialQuery(query || '');
                     setSearchOpen(true);
@@ -605,17 +627,12 @@ export default function App() {
             {activeView === 'lesson' && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
-                initial={{ opacity: 0, y: 14 }}
+initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading lesson…</span>
-                  </div>
-                }>
                 <LessonView
                   lesson={activeLesson}
                   chapter={activeChapter}
@@ -634,7 +651,6 @@ export default function App() {
                   onUpdateProgress={(updated) => setProgress(updated)}
                   onOpenCertificate={() => setCertificateOpen(true)}
                 />
-                </Suspense>
               </motion.div>
             )}
 
@@ -647,11 +663,6 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading activities…</span>
-                  </div>
-                }>
                 <ActivitiesView
                   chapters={chapters}
                   currentLessonId={currentLessonId}
@@ -660,7 +671,6 @@ initial={{ opacity: 0, y: 14 }}
                   progress={progress}
                   onCompleteActivity={handleCompleteActivity}
                 />
-                </Suspense>
               </motion.div>
             )}
 
@@ -673,17 +683,11 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading practice hub…</span>
-                  </div>
-                }>
                 <PracticeHub
                   chapters={chapters}
                   progress={progress}
                   onCompleteChallenge={handleCompleteChallenge}
                 />
-                </Suspense>
               </motion.div>
             )}
 
@@ -696,13 +700,7 @@ initial={{ opacity: 0, y: 14 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading visual lab…</span>
-                  </div>
-                }>
                 <VisualLab initialTool={selectedVisualizerTool} />
-                </Suspense>
               </motion.div>
             )}
 
@@ -713,18 +711,29 @@ initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
+                className="w-full relative z-10"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading blog…</span>
-                  </div>
-                }>
                 <BlogView
                   onNavigateHome={() => navigateToView('home')}
                   initialSlug={blogSlug}
                 />
-                </Suspense>
+              </motion.div>
+            )}
+
+            {activeView === 'workspace' && (
+              <motion.div
+                key="workspace-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <WorkspaceView
+                  progress={progress}
+                  onOpenTutor={() => handleOpenTutor()}
+                  onNavigateHome={() => navigateToView('home')}
+                />
               </motion.div>
             )}
           </AnimatePresence>
@@ -744,91 +753,79 @@ initial={{ opacity: 0, y: 14 }}
             onOpenSearch={() => setSearchOpen(true)}
             chapters={chapters}
           />
+        </main>
+      </div>
 
-          </main>
-          {/* Global Modals & Drawers */}
-          <Suspense fallback={null}>
-            <AccountModal
-              isOpen={accountOpen}
-              onClose={() => setAccountOpen(false)}
-              onAuthSuccess={() => setAccountOpen(false)}
-              progress={progress}
-              onOpenCertificate={() => setCertificateOpen(true)}
-              onOpenMilestones={() => setRoadmapOpen(true)}
-              onOpenSettings={() => setSettingsOpen(true)}
-            />
-          </Suspense>
-          
-          <Suspense fallback={null}>
-            <LegalComplianceModal
-              isOpen={legalModalOpen}
-              onClose={() => setLegalModalOpen(false)}
-              initialTab={legalModalTab}
-            />
-          </Suspense>
-          
-          <Suspense fallback={null}>
-            <SearchModal
-              isOpen={searchOpen}
-              onClose={() => setSearchOpen(false)}
-              chapters={chapters}
-              onSelectLesson={handleSelectLesson}
-              onNavigatePractice={() => navigateToView('practice-hub')}
-              onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-              onNavigateActivities={() => handleNavigateActivities()}
-              onOpenTutor={() => handleOpenTutor()}
-              initialQuery={searchInitialQuery}
-            />
-          </Suspense>
+      {/* Global Modals & Drawers */}
+      <AccountModal
+        isOpen={accountOpen}
+        onClose={() => setAccountOpen(false)}
+        onAuthSuccess={() => setAccountOpen(false)}
+        progress={progress}
+        onOpenCertificate={() => setCertificateOpen(true)}
+        onOpenMilestones={() => setRoadmapOpen(true)}
+        onOpenSettings={() => setSettingsOpen(true)}
+      />
+      <LegalComplianceModal
+        isOpen={legalModalOpen}
+        onClose={() => setLegalModalOpen(false)}
+        initialTab={legalModalTab}
+      />
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        chapters={chapters}
+        onSelectLesson={handleSelectLesson}
+        onNavigatePractice={() => navigateToView('practice-hub')}
+        onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+        onNavigateActivities={() => handleNavigateActivities()}
+        onOpenTutor={() => handleOpenTutor()}
+        initialQuery={searchInitialQuery}
+      />
 
-          <Suspense fallback={null}>
-            <TutorModal
-              isOpen={tutorOpen}
-              onClose={() => setTutorOpen(false)}
-              initialTopic={aiTopic}
-              initialCode={aiCode}
-              allChapters={chapters}
-              onNavigateLesson={handleSelectLesson}
-            />
-          </Suspense>
+      <TutorModal
+        isOpen={tutorOpen}
+        onClose={() => setTutorOpen(false)}
+        initialTopic={aiTopic}
+        initialCode={aiCode}
+        allChapters={chapters}
+        onNavigateLesson={handleSelectLesson}
+      />
 
-          <Suspense fallback={null}>
-            <SettingsModal
-              isOpen={settingsOpen}
-              onClose={() => setSettingsOpen(false)}
-              theme={theme}
-              onSelectTheme={setTheme}
-              fontSize={fontSize}
-              onSelectFontSize={setFontSize}
-              fontFamily={fontFamily}
-              onSelectFontFamily={setFontFamily}
-              onResetProgress={handleResetProgress}
-              progress={progress}
-              onOpenLegal={handleOpenLegal}
-            />
-          </Suspense>
+      <SettingsModal
+        isOpen={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        theme={theme}
+        onSelectTheme={setTheme}
+        fontSize={fontSize}
+        onSelectFontSize={setFontSize}
+        fontFamily={fontFamily}
+        onSelectFontFamily={setFontFamily}
+        onResetProgress={handleResetProgress}
+        progress={progress}
+        onOpenLegal={handleOpenLegal}
+      />
 
-          <Suspense fallback={null}>
-            <CertificateModal
+      <CertificateModal
         isOpen={certificateOpen}
         onClose={() => setCertificateOpen(false)}
         progress={progress}
         totalLessons={totalLessons}
-      /></Suspense>
+      />
 
       {/* Congratulatory XP Milestone Celebration Modal */}
       {celebratingMilestone && (
-        <Suspense fallback={null}><XpMilestoneModal
+        <XpMilestoneModal
           milestone={celebratingMilestone}
           isOpen={!!celebratingMilestone}
           onClose={() => setCelebratingMilestone(null)}
           onOpenRoadmap={() => setRoadmapOpen(true)}
           currentXp={progress.xpPoints}
-        /></Suspense>
+        />
       )}
 
       {/* XP Milestones & Level Roadmap Modal */}
-      <Suspense fallback={null}><XpMilestonesRoadmapModal
+      <XpMilestonesRoadmapModal
         isOpen={roadmapOpen}
         onClose={() => setRoadmapOpen(false)}
         progress={progress}
@@ -836,10 +833,10 @@ initial={{ opacity: 0, y: 14 }}
           setRoadmapOpen(false);
           setCelebratingMilestone(m);
         }}
-      /></Suspense>
+      />
 
       {/* Notifications & Release News Modal */}
-      <Suspense fallback={null}><NotificationCenterModal
+      <NotificationCenterModal
         isOpen={notificationsOpen}
         onClose={() => setNotificationsOpen(false)}
         onNavigateView={(view, lessonId) => {
@@ -850,7 +847,7 @@ initial={{ opacity: 0, y: 14 }}
           }
         }}
         onTriggerToast={addToast}
-      /></Suspense>
+      />
 
       {/* Toast Notification Container */}
       <ToastNotification
@@ -859,7 +856,7 @@ initial={{ opacity: 0, y: 14 }}
       />
 
       {/* Cookie & Push Notification Consent Banner */}
-      <Suspense fallback={null}><CookieNotificationBanner
+      <CookieNotificationBanner
         onAcceptAll={() => {
           addToast('Preferences Saved', 'Cookies and push notification preferences enabled.', 'success');
         }}
@@ -868,7 +865,7 @@ initial={{ opacity: 0, y: 14 }}
         }}
         onOpenNews={() => setNotificationsOpen(true)}
         onOpenPrivacy={() => handleOpenLegal('privacy')}
-      /></Suspense>
+      />
     </div>
   );
 }

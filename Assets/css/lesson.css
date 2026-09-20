@@ -95,20 +95,16 @@
     flex: 1;
     border: 1px solid var(--border);
     border-radius: 8px;
-    background: var(--white);
+    background: #ffffff;
 }
 
 /* Callout boxes */
 .callout-box {
     border-left: 4px solid var(--primary);
-    background: rgba(217, 4, 41, 0.06);
+    background: rgba(255, 45, 85, 0.06);
     padding: 16px 20px;
     border-radius: 0 12px 12px 0;
     margin: 20px 0;
-}
-
-body.dark .callout-box {
-    background: rgba(217, 4, 41, 0.08);
 }
 
 .callout-box h4 {

@@ -108,16 +108,6 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'Take Your Skills to the Next Level',
         text: 'Theoretical knowledge is only half the battle. To truly master Flexbox, you must build, break, and refine layouts. WebZoneBW SC offers an interactive Flexbox Studio where you can visually tweak and test these properties in real-time. Combine this visual practice with our structured lessons to build professional-grade UIs that are ready for production.',
       },
-      {
-        heading: 'Learning Resources & References',
-        text: 'For comprehensive documentation and additional examples, W3Schools provides an excellent reference for Flexbox properties and browser compatibility. Use it to explore edge cases and advanced features beyond our interactive studio.',
-        list: [
-          'W3Schools Flexbox Reference: Complete property documentation with live examples',
-          'Browser compatibility guides for flexbox implementation details',
-          'Advanced flexbox techniques and real-world use cases',
-          'Cross-browser considerations and fallback strategies',
-        ],
-      },
     ],
   },
   {
