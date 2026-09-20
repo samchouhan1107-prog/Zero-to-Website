@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
 /* Code-splitting: heavy views & modals are lazy-loaded so the initial
+ * bundle stays small and the first paint is fast.
+ */
 const LessonView = lazy(() => import('../components/LessonView').then((m) => ({ default: m.LessonView })));
 const PracticeHub = lazy(() => import('../components/PracticeHub').then((m) => ({ default: m.PracticeHub })));
 const VisualLab = lazy(() => import('../components/VisualLab').then((m) => ({ default: m.VisualLab }))) as unknown as React.FC<{ initialTool?: VisualizerId }> & { VisualizerId: VisualizerId };
@@ -539,9 +541,13 @@ export default function App() {
   })();
   useSEOMeta(seoConfig);
 
-  return <div>Test</div>;
-        {/* Sticky Header */}
-        <Header
+  return (
+    <div
+      id="wz-storehouse-app"
+      className="flex h-screen min-w-0 flex-col overflow-hidden bg-gray-900 text-white"
+    >
+      {/* Sticky Header */}
+      <Header
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           onOpenSearch={() => setSearchOpen(true)}
           onOpenTutor={() => handleOpenTutor()}
@@ -738,60 +744,72 @@ initial={{ opacity: 0, y: 14 }}
             onOpenSearch={() => setSearchOpen(true)}
             chapters={chapters}
           />
-        </main>
-      </div>
 
-      {/* Global Modals & Drawers */}
-      <Suspense fallback={null}><AccountModal
-        isOpen={accountOpen}
-        onClose={() => setAccountOpen(false)}
-        onAuthSuccess={() => setAccountOpen(false)}
-        progress={progress}
-        onOpenCertificate={() => setCertificateOpen(true)}
-        onOpenMilestones={() => setRoadmapOpen(true)}
-        onOpenSettings={() => setSettingsOpen(true)}
-      /></Suspense>
-      <Suspense fallback={null}><LegalComplianceModal
-        isOpen={legalModalOpen}
-        onClose={() => setLegalModalOpen(false)}
-        initialTab={legalModalTab}
-      /></Suspense>
-      <Suspense fallback={null}><SearchModal
-        isOpen={searchOpen}
-        onClose={() => setSearchOpen(false)}
-        chapters={chapters}
-        onSelectLesson={handleSelectLesson}
-        onNavigatePractice={() => navigateToView('practice-hub')}
-        onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-        onNavigateActivities={() => handleNavigateActivities()}
-        onOpenTutor={() => handleOpenTutor()}
-        initialQuery={searchInitialQuery}
-      /></Suspense>
+          </main>
+          {/* Global Modals & Drawers */}
+          <Suspense fallback={null}>
+            <AccountModal
+              isOpen={accountOpen}
+              onClose={() => setAccountOpen(false)}
+              onAuthSuccess={() => setAccountOpen(false)}
+              progress={progress}
+              onOpenCertificate={() => setCertificateOpen(true)}
+              onOpenMilestones={() => setRoadmapOpen(true)}
+              onOpenSettings={() => setSettingsOpen(true)}
+            />
+          </Suspense>
+          
+          <Suspense fallback={null}>
+            <LegalComplianceModal
+              isOpen={legalModalOpen}
+              onClose={() => setLegalModalOpen(false)}
+              initialTab={legalModalTab}
+            />
+          </Suspense>
+          
+          <Suspense fallback={null}>
+            <SearchModal
+              isOpen={searchOpen}
+              onClose={() => setSearchOpen(false)}
+              chapters={chapters}
+              onSelectLesson={handleSelectLesson}
+              onNavigatePractice={() => navigateToView('practice-hub')}
+              onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+              onNavigateActivities={() => handleNavigateActivities()}
+              onOpenTutor={() => handleOpenTutor()}
+              initialQuery={searchInitialQuery}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><TutorModal
-        isOpen={tutorOpen}
-        onClose={() => setTutorOpen(false)}
-        initialTopic={aiTopic}
-        initialCode={aiCode}
-        allChapters={chapters}
-        onNavigateLesson={handleSelectLesson}
-      /></Suspense>
+          <Suspense fallback={null}>
+            <TutorModal
+              isOpen={tutorOpen}
+              onClose={() => setTutorOpen(false)}
+              initialTopic={aiTopic}
+              initialCode={aiCode}
+              allChapters={chapters}
+              onNavigateLesson={handleSelectLesson}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><SettingsModal
-        isOpen={settingsOpen}
-        onClose={() => setSettingsOpen(false)}
-        theme={theme}
-        onSelectTheme={setTheme}
-        fontSize={fontSize}
-        onSelectFontSize={setFontSize}
-        fontFamily={fontFamily}
-        onSelectFontFamily={setFontFamily}
-        onResetProgress={handleResetProgress}
-        progress={progress}
-        onOpenLegal={handleOpenLegal}
-      /></Suspense>
+          <Suspense fallback={null}>
+            <SettingsModal
+              isOpen={settingsOpen}
+              onClose={() => setSettingsOpen(false)}
+              theme={theme}
+              onSelectTheme={setTheme}
+              fontSize={fontSize}
+              onSelectFontSize={setFontSize}
+              fontFamily={fontFamily}
+              onSelectFontFamily={setFontFamily}
+              onResetProgress={handleResetProgress}
+              progress={progress}
+              onOpenLegal={handleOpenLegal}
+            />
+          </Suspense>
 
-      <Suspense fallback={null}><CertificateModal
+          <Suspense fallback={null}>
+            <CertificateModal
         isOpen={certificateOpen}
         onClose={() => setCertificateOpen(false)}
         progress={progress}

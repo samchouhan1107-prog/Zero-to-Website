@@ -9,8 +9,7 @@ if (typeof window !== 'undefined') {
   window.addEventListener('error', (event) => {
     if (
       event?.message &&
-      (event.message.includes('adsbygoogle') ||
-        event.message.includes('availableWidth=0') ||
+      (event.message.includes('availableWidth=0') ||
         event.message.includes('No slot size'))
     ) {
       // Prevent uncaught error reporting for third-party ad script timing

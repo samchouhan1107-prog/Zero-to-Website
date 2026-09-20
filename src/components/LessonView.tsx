@@ -49,7 +49,7 @@ import { PracticeSandbox } from './PracticeSandbox';
 import { VideoPlayer } from './VideoPlayer';
 import { DifficultyBadge } from './DifficultyBadge';
 import { getActivityDeckForLesson } from '../data/activitiesData';
-import { AdvertisementBanner } from './AdvertisementBanner';
+
 import { FinalProjectSubmission } from './FinalProjectSubmission';
 import { UserProgress } from '../utils/types';
 
@@ -1066,7 +1066,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </section>
 
       {/* Non-intrusive Sponsor Banner */}
-      <AdvertisementBanner className="my-8" />
+      
 
       {/* 14. Chapter Navigation Footer */}
       <nav

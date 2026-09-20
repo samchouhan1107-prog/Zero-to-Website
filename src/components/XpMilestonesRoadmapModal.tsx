@@ -36,8 +36,12 @@ interface XpMilestonesRoadmapModalProps {
 }
 
 // Error boundary for robust error handling
-class ErrorBoundary extends React.Component<{}, { hasError: boolean; error?: Error }> {
-  constructor(props: {}) {
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, { hasError: boolean; error?: Error }> {
+  constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
   }

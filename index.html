@@ -30,7 +30,7 @@
     <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
 
     <!-- AdSense -->
-    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
+    
     
     <!-- CRITICAL CSS - INLINE FOR ABOVE-THE-FOLD CONTENT -->
     <style>
@@ -277,15 +277,11 @@
         
         // Load non-critical scripts
         const scripts = [
-          'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090'
+          // AdSense removed - no longer serving advertisements
         ];
         
         scripts.forEach(src => {
           const script = document.createElement('script');
-          if (src.includes('adsbygoogle')) {
-            script.async = true;
-            script.crossOrigin = 'anonymous';
-          }
           script.src = src;
           document.head.appendChild(script);
         });

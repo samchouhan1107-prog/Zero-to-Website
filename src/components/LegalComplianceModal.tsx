@@ -123,13 +123,13 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
                   WZ Storehouse does not require mandatory account registration to access course lessons. When you use the interactive coding sandboxes, lesson checklists, notes, or AI tutor, data (such as code progress and XP points) is stored locally in your browser (LocalStorage).
                 </p>
 
-                <h4 className="font-bold text-app-ink text-sm">2. Google AdSense &amp; Third-Party Advertising</h4>
+                <h4 className="font-bold text-app-ink text-sm">2. Third-Party Services</h4>
                 <p className="text-app-muted">
-                  We partner with third-party vendors, including <strong>Google AdSense</strong>, to serve advertisements when you visit our website. Google uses cookies (including the DoubleClick DART cookie) to serve ads based on prior visits to our website or other websites on the Internet.
+                  We may integrate with third-party services to enhance functionality and user experience. These services may collect usage data to improve their offerings.
                 </p>
                 <ul className="list-disc pl-5 space-y-1 text-app-muted">
-                  <li>Users may opt out of personalized advertising by visiting <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener noreferrer" className="text-app-amber underline">Google Ads Settings</a>.</li>
-                  <li>Alternatively, users can opt out of a third-party vendor's use of cookies for personalized advertising by visiting <a href="https://www.aboutads.info" target="_blank" rel="noopener noreferrer" className="text-app-amber underline">www.aboutads.info</a>.</li>
+                  <li>Users can review and manage privacy settings for third-party services through their respective privacy dashboards.</li>
+                  <li>We ensure all third-party integrations comply with applicable privacy standards and regulations.</li>
                 </ul>
 
                 <h4 className="font-bold text-app-ink text-sm">3. Log Files &amp; Analytics</h4>
@@ -203,9 +203,9 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
                   We use browser LocalStorage to remember your active lesson, dark/light theme preference, bookmark state, completed quiz scores, and student XP points without requiring a login cookie.
                 </p>
 
-                <h4 className="font-bold text-app-ink text-sm">2. Advertising &amp; Tracking Cookies</h4>
+                <h4 className="font-bold text-app-ink text-sm">2. Analytics &amp; Performance Cookies</h4>
                 <p className="text-app-muted">
-                  Third-party ad networks (such as Google AdSense) may set cookies on your device to serve targeted advertisements based on your interests and geographic region. You can manage or disable cookies at any time through your browser settings.
+                  We may use analytics cookies to understand how users interact with our platform and to improve our services. You can manage cookie preferences through your browser settings.
                 </p>
               </div>
             </div>

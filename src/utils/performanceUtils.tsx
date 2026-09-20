@@ -1,3 +1,5 @@
+import React, { useMemo } from 'react';
+
 /**
  * Performance optimization utilities for XP Milestones Modal
  */
@@ -122,7 +124,7 @@ export function useOptimizedMemo<T>(
 ): T {
   const startTime = PerformanceTracker.startRender(componentName);
   
-  const memoizedValue = React.useMemo(factory, deps);
+  const memoizedValue = useMemo(factory, deps);
   
   PerformanceTracker.endRender(componentName, startTime);
   
@@ -254,17 +256,3 @@ export class OptimizedErrorBoundary extends React.Component<
   }
 }
 
-// Export all utilities
-export {
-  PerformanceTracker,
-  MemoCache,
-  debounce,
-  throttle,
-  useOptimizedMemo,
-  calculateVisibleItems,
-  createIntersectionObserver,
-  withPerformanceMonitoring,
-  getMemoryUsage,
-  forceGarbageCollection,
-  OptimizedErrorBoundary,
-};

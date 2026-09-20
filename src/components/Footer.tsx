@@ -25,7 +25,7 @@ import { WebZoneBrandLogo } from './WebZoneBrandLogo';
 import { PolicyTab } from './LegalComplianceModal';
 import { Chapter } from '../types';
 import { VisualizerId } from './VisualLab';
-import { AdvertisementBanner } from './AdvertisementBanner';
+
 
 interface FooterProps {
   onOpenLegal: (tab: PolicyTab) => void;
@@ -432,8 +432,7 @@ export const Footer: React.FC<FooterProps> = ({
           </div>
         </div>
 
-        {/* Advertisement Banner */}
-        <AdvertisementBanner className="my-8" />
+        
 
         {/* Standards Badges Row */}
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-y border-app-border/70 py-4 font-mono text-[11px] text-app-subtle">
