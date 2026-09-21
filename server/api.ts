@@ -1,5 +1,6 @@
-import { Router } from "express";
+import { Router, Response } from "express";
 import { requireAuth, AuthRequest } from "./authMiddleware";
+import type { DbProgress } from "./db";
 import {
   getProgress,
   updateProgress,
@@ -12,6 +13,51 @@ import {
 
 const router = Router();
 
+/* ── Shared helpers ────────────────────────────────────── */
+
+// Server-side XP rewards — the client can never dictate XP amounts.
+const ACTIVITY_XP_REWARDS: Record<string, number> = {
+  flashcards: 25,
+  quiz: 50,
+  fillInTheBlank: 40,
+  codeFix: 60,
+  matching: 35,
+};
+const DEFAULT_ACTIVITY_XP = 50;
+
+function resolveActivityXp(activityId: string): number {
+  const activityType = activityId.split("-")[0];
+  return ACTIVITY_XP_REWARDS[activityType] ?? DEFAULT_ACTIVITY_XP;
+}
+
+async function completeAndAward(
+  userId: string,
+  targetId: string,
+  patch: (progress: DbProgress, now: string) => Partial<DbProgress>
+) {
+  const progress = getProgress(userId);
+  const now = new Date().toISOString();
+
+  const streakRes = updateStreakServer(progress);
+  const draft: DbProgress = {
+    ...progress,
+    ...patch(progress, now),
+    streakDays: streakRes.progress.streakDays,
+    lastActiveDate: streakRes.progress.lastActiveDate,
+  };
+
+  const { progress: evaluatedProgress, newlyUnlocked } = evaluateAchievements(draft);
+  const updated = await updateProgress(userId, evaluatedProgress);
+  return { updated, newlyUnlocked, streakIncreased: streakRes.streakIncreased };
+}
+
+async function saveNote(userId: string, lessonId: string, content: unknown) {
+  const progress = getProgress(userId);
+  const notes = { ...progress.notes, [lessonId]: typeof content === "string" ? content : "" };
+  const updated = await updateProgress(userId, { notes });
+  return updated.notes;
+}
+
 /* ── GET /api/user/progress ────────────────────────────── */
 router.get("/progress", requireAuth, (req: AuthRequest, res) => {
   const progress = getProgress(req.userId!);
@@ -19,16 +65,31 @@ router.get("/progress", requireAuth, (req: AuthRequest, res) => {
 });
 
 /* ── PUT /api/user/progress ────────────────────────────── */
-router.put("/progress", requireAuth, (req: AuthRequest, res) => {
-  // Merge updates safely, protecting verified server states
-  const current = getProgress(req.userId!);
-  const updates = { ...req.body };
+router.put("/progress", requireAuth, async (req: AuthRequest, res) => {
+  // Merge updates safely, protecting verified server states.
+  // Whitelist only client-owned fields so users cannot grant themselves
+  // XP, achievements, streaks, or verified course states.
+  const CLIENT_EDITABLE_FIELDS = [
+    "notes",
+    "bookmarks",
+    "currentLearningPath",
+    "claimedMilestones",
+    "quizScores",
+  ] as const;
 
-  // Retain server-verified properties
+  const current = getProgress(req.userId!);
+  const updates: Partial<DbProgress> = {};
+  for (const field of CLIENT_EDITABLE_FIELDS) {
+    if (field in req.body) {
+      (updates as Record<string, unknown>)[field] = req.body[field];
+    }
+  }
+
+  // Retain server-verified properties (never revocable by the client)
   if (current.finalProjectVerified) updates.finalProjectVerified = true;
   if (current.courseCompleted) updates.courseCompleted = true;
 
-  const updated = updateProgress(req.userId!, updates);
+  const updated = await updateProgress(req.userId!, updates);
   res.json({ success: true, progress: updated });
 });
 
@@ -58,103 +119,67 @@ router.get("/achievements", requireAuth, (req: AuthRequest, res) => {
 });
 
 /* ── POST /api/user/complete-lesson ────────────────────── */
-router.post("/complete-lesson", requireAuth, (req: AuthRequest, res) => {
+router.post("/complete-lesson", requireAuth, async (req: AuthRequest, res) => {
   const { lessonId } = req.body;
   if (!lessonId) return res.status(400).json({ error: "lessonId required" });
 
   const progress = getProgress(req.userId!);
-  const completedLessons = { ...(progress.completedLessons || {}) };
-  const lessonCompletions = { ...(progress.lessonCompletions || {}) };
-  const completionTimestamps = { ...(progress.completionTimestamps || {}) };
-
-  const isAlreadyDone = !!completedLessons[lessonId];
-  const now = new Date().toISOString();
-
-  completedLessons[lessonId] = true;
-  lessonCompletions[lessonId] = { completedAt: now, verified: true };
-  completionTimestamps[lessonId] = now;
-
-  // Track verified lesson & chapter
-  const lastVerifiedLesson = lessonId;
-  const lastVerifiedChapter = lessonId.startsWith("ch-") ? lessonId.slice(0, 5) : progress.lastVerifiedChapter || "ch-00";
-
-  // Check and update streak
-  const streakRes = updateStreakServer(progress);
-  const streakDays = streakRes.progress.streakDays;
-  const lastActiveDate = streakRes.progress.lastActiveDate;
-
-  // Award XP
+  const isAlreadyDone = !!progress.completedLessons?.[lessonId];
   const xpReward = isAlreadyDone ? 0 : 50;
-  let xpPoints = (progress.xpPoints || 0) + xpReward;
 
-  // Apply updates to draft
-  const draft = {
-    ...progress,
-    completedLessons,
-    lessonCompletions,
-    completionTimestamps,
-    lastVerifiedLesson,
-    lastVerifiedChapter,
-    streakDays,
-    lastActiveDate,
-    xpPoints,
-  };
-
-  // Evaluate achievements on backend
-  const { progress: evaluatedProgress, newlyUnlocked } = evaluateAchievements(draft);
-
-  // Save to database
-  const updated = updateProgress(req.userId!, evaluatedProgress);
+  const { updated, newlyUnlocked, streakIncreased } = await completeAndAward(
+    req.userId!,
+    lessonId,
+    (progress, now) => ({
+      completedLessons: { ...progress.completedLessons, [lessonId]: true },
+      lessonCompletions: {
+        ...progress.lessonCompletions,
+        [lessonId]: { completedAt: now, verified: true },
+      },
+      completionTimestamps: { ...progress.completionTimestamps, [lessonId]: now },
+      lastVerifiedLesson: lessonId,
+      lastVerifiedChapter: lessonId.startsWith("ch-")
+        ? lessonId.slice(0, 5)
+        : progress.lastVerifiedChapter || "ch-00",
+      xpPoints: (progress.xpPoints || 0) + xpReward,
+    })
+  );
 
   res.json({
     success: true,
     progress: updated,
     xpAwarded: xpReward,
     newlyUnlockedAchievements: newlyUnlocked,
-    streakUpdated: streakRes.streakIncreased,
+    streakUpdated: streakIncreased,
   });
 });
 
 /* ── POST /api/user/complete-practice ──────────────────── */
-router.post("/complete-practice", requireAuth, (req: AuthRequest, res) => {
+router.post("/complete-practice", requireAuth, async (req: AuthRequest, res) => {
   const { lessonId, challengeId, codeSnippet } = req.body;
   const targetId = challengeId || lessonId;
   if (!targetId) return res.status(400).json({ error: "challengeId or lessonId required" });
 
   const progress = getProgress(req.userId!);
-  const completedChallenges = { ...(progress.completedChallenges || {}) };
-  const practiceCompletions = { ...(progress.practiceCompletions || {}) };
-
-  const isAlreadyDone = !!completedChallenges[targetId];
-  const now = new Date().toISOString();
-
-  completedChallenges[targetId] = true;
-  practiceCompletions[targetId] = {
-    completedAt: now,
-    verified: true,
-    codeLength: typeof codeSnippet === "string" ? codeSnippet.length : 0,
-  };
-
-  // Update streak
-  const streakRes = updateStreakServer(progress);
-  const streakDays = streakRes.progress.streakDays;
-  const lastActiveDate = streakRes.progress.lastActiveDate;
-
-  // Award XP
+  const isAlreadyDone = !!progress.completedChallenges?.[targetId];
   const xpReward = isAlreadyDone ? 0 : 50;
-  let xpPoints = (progress.xpPoints || 0) + xpReward;
 
-  const draft = {
-    ...progress,
-    completedChallenges,
-    practiceCompletions,
-    streakDays,
-    lastActiveDate,
-    xpPoints,
-  };
-
-  const { progress: evaluatedProgress, newlyUnlocked } = evaluateAchievements(draft);
-  const updated = updateProgress(req.userId!, evaluatedProgress);
+  const { updated, newlyUnlocked } = await completeAndAward(
+    req.userId!,
+    targetId,
+    (progress, now) => ({
+      completedChallenges: { ...progress.completedChallenges, [targetId]: true },
+      practiceCompletions: {
+        ...progress.practiceCompletions,
+        [targetId]: {
+          completedAt: now,
+          verified: true,
+          codeLength: typeof codeSnippet === "string" ? codeSnippet.length : 0,
+        },
+      },
+      xpPoints: (progress.xpPoints || 0) + xpReward,
+    })
+  );
 
   res.json({
     success: true,
@@ -164,8 +189,8 @@ router.post("/complete-practice", requireAuth, (req: AuthRequest, res) => {
   });
 });
 
-/* ── POST /api/user/submit-final-project ────────────────── */
-router.post("/submit-final-project", requireAuth, (req: AuthRequest, res) => {
+/* ── POST /api/user/submit-final-project ─────────────── */
+router.post("/submit-final-project", requireAuth, async (req: AuthRequest, res) => {
   const { title, description, techStack, htmlCode, cssCode, jsCode } = req.body;
 
   if (!title || !title.trim()) {
@@ -186,13 +211,14 @@ router.post("/submit-final-project", requireAuth, (req: AuthRequest, res) => {
   };
 
   // Mark Chapter 10 lesson completed
-  const completedLessons = { ...(progress.completedLessons || {}), "ch-10-l-01": true };
+  const completedLessons: Record<string, boolean> = { ...(progress.completedLessons || {}), "ch-10-l-01": true };
   const lessonCompletions = {
     ...(progress.lessonCompletions || {}),
     "ch-10-l-01": { completedAt: now, verified: true },
   };
 
-  // Check if all chapters 00-10 are completed
+  // Check if all chapters 00-10 are completed — computed on the merged
+  // completedLessons so the just-marked capstone lesson is included.
   const allRequired = COURSE_LESSON_CHAIN.map((c) => c.id);
   const allChaptersDone = allRequired.every((id) => !!completedLessons[id]);
 
@@ -217,7 +243,7 @@ router.post("/submit-final-project", requireAuth, (req: AuthRequest, res) => {
   };
 
   const { progress: evaluatedProgress, newlyUnlocked } = evaluateAchievements(draft);
-  const updated = updateProgress(req.userId!, evaluatedProgress);
+  const updated = await updateProgress(req.userId!, evaluatedProgress);
 
   res.json({
     success: true,
@@ -234,34 +260,22 @@ router.get("/notes", requireAuth, (req: AuthRequest, res) => {
   res.json({ success: true, notes: progress.notes || {} });
 });
 
-/* ── PUT /api/user/notes/:lessonId ─────────────────────── */
-router.put("/notes/:lessonId", requireAuth, (req: AuthRequest, res) => {
-  const { lessonId } = req.params;
-  const { content } = req.body;
+/* ── PUT/POST /api/user/notes/:lessonId ───────────────── */
+const handleSaveNote = async (req: AuthRequest, res: Response) => {
+  try {
+    const notes = await saveNote(req.userId!, req.params.lessonId, req.body?.content);
+    res.json({ success: true, notes });
+  } catch (err) {
+    console.error("[API] Failed to save note:", err);
+    res.status(500).json({ error: "Failed to save note" });
+  }
+};
 
-  const progress = getProgress(req.userId!);
-  const notes = progress.notes || {};
-  notes[lessonId] = content || "";
-
-  const updated = updateProgress(req.userId!, { notes });
-  res.json({ success: true, notes: updated.notes });
-});
-
-/* ── POST /api/user/notes/:lessonId (alias) ────────────── */
-router.post("/notes/:lessonId", requireAuth, (req: AuthRequest, res) => {
-  const { lessonId } = req.params;
-  const { content } = req.body;
-
-  const progress = getProgress(req.userId!);
-  const notes = progress.notes || {};
-  notes[lessonId] = content || "";
-
-  const updated = updateProgress(req.userId!, { notes });
-  res.json({ success: true, notes: updated.notes });
-});
+router.put("/notes/:lessonId", requireAuth, handleSaveNote as any);
+router.post("/notes/:lessonId", requireAuth, handleSaveNote as any);
 
 /* ── POST /api/user/bookmarks/toggle ───────────────────── */
-router.post("/bookmarks/toggle", requireAuth, (req: AuthRequest, res) => {
+router.post("/bookmarks/toggle", requireAuth, async (req: AuthRequest, res) => {
   const { lessonId } = req.body;
   if (!lessonId) return res.status(400).json({ error: "lessonId required" });
 
@@ -275,27 +289,30 @@ router.post("/bookmarks/toggle", requireAuth, (req: AuthRequest, res) => {
     bookmarks.push(lessonId);
   }
 
-  const updated = updateProgress(req.userId!, { bookmarks });
+  const updated = await updateProgress(req.userId!, { bookmarks });
   res.json({ success: true, bookmarks: updated.bookmarks, bookmarked: idx === -1 });
 });
 
 /* ── POST /api/user/complete-activity ──────────────────── */
-router.post("/complete-activity", requireAuth, (req: AuthRequest, res) => {
-  const { activityId, xpReward } = req.body;
+router.post("/complete-activity", requireAuth, async (req: AuthRequest, res) => {
+  const { activityId } = req.body;
   if (!activityId) return res.status(400).json({ error: "activityId required" });
+
+  // XP comes from the server-side catalog — never from the client.
+  const xpAmount = resolveActivityXp(activityId);
 
   const progress = getProgress(req.userId!);
   const completedActivities = { ...(progress.completedActivities || {}) };
   const isAlreadyDone = completedActivities[activityId];
   completedActivities[activityId] = true;
 
-  const xpPoints = (progress.xpPoints || 0) + (isAlreadyDone ? 0 : (xpReward || 50));
-  const updated = updateProgress(req.userId!, { completedActivities, xpPoints });
-  res.json({ success: true, progress: updated, xpAwarded: isAlreadyDone ? 0 : (xpReward || 50) });
+  const xpPoints = (progress.xpPoints || 0) + (isAlreadyDone ? 0 : xpAmount);
+  const updated = await updateProgress(req.userId!, { completedActivities, xpPoints });
+  res.json({ success: true, progress: updated, xpAwarded: isAlreadyDone ? 0 : xpAmount });
 });
 
 /* ── POST /api/user/complete-challenge ─────────────────── */
-router.post("/complete-challenge", requireAuth, (req: AuthRequest, res) => {
+router.post("/complete-challenge", requireAuth, async (req: AuthRequest, res) => {
   const { challengeId } = req.body;
   if (!challengeId) return res.status(400).json({ error: "challengeId required" });
 
@@ -305,7 +322,7 @@ router.post("/complete-challenge", requireAuth, (req: AuthRequest, res) => {
   completedChallenges[challengeId] = true;
 
   const xpPoints = (progress.xpPoints || 0) + (isAlreadyDone ? 0 : 50);
-  const updated = updateProgress(req.userId!, { completedChallenges, xpPoints });
+  const updated = await updateProgress(req.userId!, { completedChallenges, xpPoints });
   res.json({ success: true, progress: updated, xpAwarded: isAlreadyDone ? 0 : 50 });
 });
 

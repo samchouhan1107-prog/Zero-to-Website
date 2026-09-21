@@ -268,7 +268,7 @@ export default function App() {
         return;
       }
 
-      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog'].includes(viewParam)) {
+      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog', 'workspace'].includes(viewParam)) {
         setActiveView(viewParam);
       }
     } catch {}
@@ -434,7 +434,7 @@ export default function App() {
       return {
         ...withStreak,
         completedChallenges: {
-          ...withStreak.completedChallenges,
+          ...(withStreak.completedChallenges || {}),
           [challengeId]: true,
         },
         xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
@@ -627,7 +627,7 @@ export default function App() {
             {activeView === 'lesson' && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -657,7 +657,7 @@ initial={{ opacity: 0, y: 14 }}
             {activeView === 'activities' && (
               <motion.div
                 key="activities-view"
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -677,7 +677,7 @@ initial={{ opacity: 0, y: 14 }}
             {activeView === 'practice-hub' && (
               <motion.div
                 key="practice-hub-view"
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -694,7 +694,7 @@ initial={{ opacity: 0, y: 14 }}
             {activeView === 'visual-lab' && (
               <motion.div
                 key="visual-lab-view"
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
@@ -869,4 +869,3 @@ initial={{ opacity: 0, y: 14 }}
     </div>
   );
 }
-

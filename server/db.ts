@@ -273,6 +273,20 @@ function load(): Database {
   }
 }
 
+/* ── Write serialization ───────────────────────────────── */
+
+// Every mutation follows a load -> modify -> save cycle on a single JSON file.
+// Chaining all mutations through this promise queue guarantees they execute
+// one at a time, so concurrent requests cannot interleave and drop writes.
+let writeQueue: Promise<unknown> = Promise.resolve();
+
+function serializeWrite<T>(operation: () => T): Promise<T> {
+  const run = writeQueue.then(operation);
+  // Keep the chain alive even if an operation throws
+  writeQueue = run.catch(() => undefined);
+  return run;
+}
+
 function save(db: Database) {
   try {
     ensureDir();
@@ -286,6 +300,15 @@ export function hashPassword(password: string, salt?: string) {
   const s = salt || crypto.randomBytes(16).toString("hex");
   const hash = crypto.scryptSync(password, s, 64).toString("hex");
   return { hash, salt: s };
+}
+
+/** Constant-time password hash comparison to prevent timing attacks. */
+export function verifyPassword(password: string, user: { salt: string; passwordHash: string }): boolean {
+  const { hash } = hashPassword(password, user.salt);
+  const a = Buffer.from(hash, "hex");
+  const b = Buffer.from(user.passwordHash, "hex");
+  if (a.length !== b.length) return false;
+  return crypto.timingSafeEqual(a, b);
 }
 
 export function generateToken(): string {
@@ -308,57 +331,49 @@ export function createUser(
   password: string,
   method: "google" | "email" | "guest" = "email",
   avatar?: string
-): DbUser {
-  const db = load();
-  const { hash, salt } = hashPassword(password);
-  const user: DbUser = {
-    id: crypto.randomUUID(),
-    name,
-    email,
-    passwordHash: hash,
-    salt,
-    avatar: avatar || null,
-    method,
-    createdAt: new Date().toISOString(),
-  };
-  db.users.push(user);
+): Promise<DbUser> {
+  return serializeWrite(() => {
+    const db = load();
+    const { hash, salt } = hashPassword(password);
+    const user: DbUser = {
+      id: crypto.randomUUID(),
+      name,
+      email,
+      passwordHash: hash,
+      salt,
+      avatar: avatar || null,
+      method,
+      createdAt: new Date().toISOString(),
+    };
+    db.users.push(user);
 
-  // Create default progress
-  db.progress.push({
-    userId: user.id,
-    completedLessons: {},
-    completedChallenges: {},
-    completedActivities: {},
-    quizScores: {},
-    notes: {},
-    bookmarks: [],
-    xpPoints: 0,
-    streakDays: 0,
-    lastActiveDate: "",
-    claimedMilestones: ["milestone-100"],
+    // Create default progress
+    db.progress.push(createDefaultProgress(user.id));
+
+    save(db);
+    return user;
   });
-
-  save(db);
-  return user;
 }
 
 /* ── Session CRUD ──────────────────────────────────────── */
 
-export function createSession(userId: string): DbSession {
-  const db = load();
-  const token = generateToken();
-  const now = new Date();
-  const session: DbSession = {
-    token,
-    userId,
-    createdAt: now.toISOString(),
-    expiresAt: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
-  };
-  // Remove old sessions for this user
-  db.sessions = db.sessions.filter((s) => s.userId !== userId);
-  db.sessions.push(session);
-  save(db);
-  return session;
+export function createSession(userId: string): Promise<DbSession> {
+  return serializeWrite(() => {
+    const db = load();
+    const token = generateToken();
+    const now = new Date();
+    const session: DbSession = {
+      token,
+      userId,
+      createdAt: now.toISOString(),
+      expiresAt: new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000).toISOString(), // 30 days
+    };
+    // Remove old sessions for this user
+    db.sessions = db.sessions.filter((s) => s.userId !== userId);
+    db.sessions.push(session);
+    save(db);
+    return session;
+  });
 }
 
 export function findSession(token: string): DbSession | undefined {
@@ -368,37 +383,43 @@ export function findSession(token: string): DbSession | undefined {
   return undefined;
 }
 
-export function deleteSession(token: string) {
-  const db = load();
-  db.sessions = db.sessions.filter((s) => s.token !== token);
-  save(db);
+export function deleteSession(token: string): Promise<void> {
+  return serializeWrite(() => {
+    const db = load();
+    db.sessions = db.sessions.filter((s) => s.token !== token);
+    save(db);
+  });
 }
 
 /* ── Progress CRUD ─────────────────────────────────────── */
+
+export function createDefaultProgress(userId: string): DbProgress {
+  return {
+    userId,
+    completedLessons: {},
+    completedChallenges: {},
+    completedActivities: {},
+    practiceCompletions: {},
+    lessonCompletions: {},
+    quizScores: {},
+    notes: {},
+    bookmarks: [],
+    xpPoints: 0,
+    streakDays: 0,
+    lastActiveDate: "",
+    claimedMilestones: ["milestone-100"],
+    achievements: {},
+    finalProjectSubmitted: false,
+    finalProjectVerified: false,
+    courseCompleted: false,
+  };
+}
 
 export function getProgress(userId: string): DbProgress {
   const db = load();
   let prog = db.progress.find((p) => p.userId === userId);
   if (!prog) {
-    prog = {
-      userId,
-      completedLessons: {},
-      completedChallenges: {},
-      completedActivities: {},
-      practiceCompletions: {},
-      lessonCompletions: {},
-      quizScores: {},
-      notes: {},
-      bookmarks: [],
-      xpPoints: 0,
-      streakDays: 0,
-      lastActiveDate: "",
-      claimedMilestones: ["milestone-100"],
-      achievements: {},
-      finalProjectSubmitted: false,
-      finalProjectVerified: false,
-      courseCompleted: false,
-    };
+    prog = createDefaultProgress(userId);
     db.progress.push(prog);
     save(db);
     return prog;
@@ -418,44 +439,29 @@ export function getProgress(userId: string): DbProgress {
   return prog;
 }
 
-export function updateProgress(userId: string, updates: Partial<DbProgress>): DbProgress {
-  const db = load();
-  const idx = db.progress.findIndex((p) => p.userId === userId);
-  if (idx === -1) {
-    const fresh: DbProgress = {
-      userId,
-      completedLessons: {},
-      completedChallenges: {},
-      completedActivities: {},
-      practiceCompletions: {},
-      lessonCompletions: {},
-      quizScores: {},
-      notes: {},
-      bookmarks: [],
-      xpPoints: 0,
-      streakDays: 0,
-      lastActiveDate: "",
-      claimedMilestones: ["milestone-100"],
-      achievements: {},
-      finalProjectSubmitted: false,
-      finalProjectVerified: false,
-      courseCompleted: false,
-      ...updates,
-    };
-    db.progress.push(fresh);
+export function updateProgress(userId: string, updates: Partial<DbProgress>): Promise<DbProgress> {
+  return serializeWrite(() => {
+    const db = load();
+    const idx = db.progress.findIndex((p) => p.userId === userId);
+    if (idx === -1) {
+      const fresh: DbProgress = { ...createDefaultProgress(userId), ...updates };
+      db.progress.push(fresh);
+      save(db);
+      return fresh;
+    }
+    db.progress[idx] = { ...db.progress[idx], ...updates };
     save(db);
-    return fresh;
-  }
-  db.progress[idx] = { ...db.progress[idx], ...updates };
-  save(db);
-  return db.progress[idx];
+    return db.progress[idx];
+  });
 }
 
 /* ── Cleanup ───────────────────────────────────────────── */
 
-export function cleanupExpiredSessions() {
-  const db = load();
-  const now = new Date();
-  db.sessions = db.sessions.filter((s) => new Date(s.expiresAt) > now);
-  save(db);
+export function cleanupExpiredSessions(): Promise<void> {
+  return serializeWrite(() => {
+    const db = load();
+    const now = new Date();
+    db.sessions = db.sessions.filter((s) => new Date(s.expiresAt) > now);
+    save(db);
+  });
 }

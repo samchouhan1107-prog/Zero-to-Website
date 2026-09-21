@@ -7,14 +7,14 @@ import {
   createSession,
   deleteSession,
   findSession,
-  hashPassword,
+  verifyPassword,
   getProgress,
 } from "./db";
 
 const router = Router();
 
 /* ── POST /api/auth/signup ─────────────────────────────── */
-router.post("/signup", (req, res) => {
+router.post("/signup", async (req, res) => {
   const { name, email, password } = req.body;
 
   if (!name || !email || !password) {
@@ -30,8 +30,8 @@ router.post("/signup", (req, res) => {
     return res.status(409).json({ error: "An account with this email already exists" });
   }
 
-  const user = createUser(name.trim(), email.toLowerCase().trim(), password, "email");
-  const session = createSession(user.id);
+  const user = await createUser(name.trim(), email.toLowerCase().trim(), password, "email");
+  const session = await createSession(user.id);
 
   res.json({
     success: true,
@@ -42,7 +42,7 @@ router.post("/signup", (req, res) => {
 });
 
 /* ── POST /api/auth/signin ─────────────────────────────── */
-router.post("/signin", (req, res) => {
+router.post("/signin", async (req, res) => {
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -54,12 +54,11 @@ router.post("/signin", (req, res) => {
     return res.status(401).json({ error: "Invalid email or password" });
   }
 
-  const { hash } = hashPassword(password, user.salt);
-  if (hash !== user.passwordHash) {
+  if (!verifyPassword(password, user)) {
     return res.status(401).json({ error: "Invalid email or password" });
   }
 
-  const session = createSession(user.id);
+  const session = await createSession(user.id);
 
   res.json({
     success: true,
@@ -69,27 +68,71 @@ router.post("/signin", (req, res) => {
   });
 });
 
-/* ── POST /api/auth/google ─────────────────────────────── */
-router.post("/google", (req, res) => {
-  // Simulated Google OAuth — in production, verify the Google ID token
-  const { name, email, avatar } = req.body;
+/* ── Google ID token verification ─────────────────────── */
+interface GoogleTokenInfo {
+  email?: string;
+  email_verified?: boolean | string;
+  aud?: string;
+  exp?: string;
+  name?: string;
+  picture?: string;
+}
 
-  if (!email) {
-    return res.status(400).json({ error: "Google email is required" });
+async function verifyGoogleIdToken(idToken: string): Promise<GoogleTokenInfo | null> {
+  try {
+    // Verify the token signature and claims via Google's tokeninfo endpoint.
+    const resp = await fetch(
+      `https://oauth2.googleapis.com/tokeninfo?id_token=${encodeURIComponent(idToken)}`
+    );
+    if (!resp.ok) return null;
+    const info = (await resp.json()) as GoogleTokenInfo;
+
+    // Reject expired tokens
+    if (info.exp && Number(info.exp) * 1000 < Date.now()) return null;
+    // Require a verified email
+    if (!info.email || info.email_verified !== true && info.email_verified !== "true") return null;
+    // If a client ID is configured, require the audience to match
+    const expectedAud = process.env.GOOGLE_CLIENT_ID;
+    if (expectedAud && info.aud !== expectedAud) return null;
+
+    return info;
+  } catch (err) {
+    console.warn("[AUTH] Google ID token verification failed:", err);
+    return null;
+  }
+}
+
+/* ── POST /api/auth/google ─────────────────────────────── */
+router.post("/google", async (req, res) => {
+  // The client must present a Google ID token (from Google Identity Services);
+  // it is verified server-side before any session is issued.
+  const { idToken, clientId } = req.body;
+
+  if (!idToken || typeof idToken !== "string") {
+    return res.status(400).json({ error: "Google ID token is required" });
   }
 
-  let user = findUserByEmail(email.toLowerCase().trim());
+  const info = await verifyGoogleIdToken(idToken);
+  if (!info) {
+    return res.status(401).json({ error: "Invalid or expired Google ID token" });
+  }
+  if (clientId && process.env.GOOGLE_CLIENT_ID && clientId !== process.env.GOOGLE_CLIENT_ID) {
+    return res.status(401).json({ error: "Google client ID mismatch" });
+  }
+
+  const email = info.email!.toLowerCase().trim();
+  let user = findUserByEmail(email);
   if (!user) {
-    user = createUser(
-      name || "Google User",
-      email.toLowerCase().trim(),
+    user = await createUser(
+      info.name || "Google User",
+      email,
       crypto.randomBytes(32).toString("hex"), // Random password for Google users
       "google",
-      avatar
+      info.picture || undefined
     );
   }
 
-  const session = createSession(user.id);
+  const session = await createSession(user.id);
 
   res.json({
     success: true,
@@ -125,25 +168,25 @@ router.get("/me", (req, res) => {
 });
 
 /* ── POST /api/auth/logout ─────────────────────────────── */
-router.post("/logout", (req, res) => {
+router.post("/logout", async (req, res) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.startsWith("Bearer ") ? authHeader.slice(7) : null;
 
-  if (token) deleteSession(token);
+  if (token) await deleteSession(token);
 
   res.json({ success: true });
 });
 
 /* ── POST /api/auth/guest ──────────────────────────────── */
-router.post("/guest", (req, res) => {
+router.post("/guest", async (req, res) => {
   const guestId = "guest_" + crypto.randomUUID();
-  const guestUser = createUser(
+  const guestUser = await createUser(
     "Guest Learner",
     `${guestId}@guest.webzonebw.shop`,
     crypto.randomBytes(16).toString("hex"),
     "guest"
   );
-  const session = createSession(guestUser.id);
+  const session = await createSession(guestUser.id);
   getProgress(guestUser.id);
 
   res.json({

@@ -22,7 +22,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 'blog-001',
     slug: 'complete-guide-css-flexbox',
-    title: 'A Complete Guide to CSS Flexbox in 2025',
+    title: 'A Complete Guide to CSS Flexbox',
     excerpt: 'Master CSS Flexbox with this comprehensive guide. Learn about flex containers, flex items, alignment properties, and real-world layout patterns that every modern developer needs.',
     author: 'WebZoneBW Editorial Team',
     date: '2025-01-15',
