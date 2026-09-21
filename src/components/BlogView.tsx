@@ -9,6 +9,7 @@ import {
   User,
 } from 'lucide-react';
 import { BlogPost, BLOG_POSTS } from '../data/blogData';
+import { useSEOMeta, SEO_PRESETS } from '../utils/useSEOMeta';
 
 interface BlogViewProps {
   onNavigateHome: () => void;
@@ -24,6 +25,13 @@ export const BlogView: React.FC<BlogViewProps> = ({
     initialSlug ? BLOG_POSTS.find((p) => p.slug === initialSlug) || null : null
   );
   const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  // SEO: blog index or individual post with clean canonical URL
+  useSEOMeta(
+    selectedPost
+      ? SEO_PRESETS.blogPost(selectedPost.title, selectedPost.excerpt, selectedPost.slug, selectedPost.author, selectedPost.date, selectedPost.tags)
+      : SEO_PRESETS.blog
+  );
 
   const categories = ['All', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category)))];
 

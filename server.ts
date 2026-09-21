@@ -126,6 +126,222 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
+// ─── Legacy query-URL migration (301/308 permanent redirects) ───
+// Rebuilds the query string without non-canonical lesson/blog params and
+// redirects to the clean path. Remaining params (e.g. tracking) are preserved.
+function legacyQueryRedirect(req: express.Request, res: express.Response, next: express.NextFunction) {
+  const lessonId = req.query.lesson;
+  const blogSlug = req.query.blog;
+
+  if (typeof blogSlug === "string" && blogSlug) {
+    const qs = buildForwardQuery(req, "blog");
+    return res.redirect(301, `/blog/${encodeURIComponent(blogSlug)}${qs}`);
+  }
+  if (typeof lessonId === "string" && lessonId) {
+    const qs = buildForwardQuery(req, "lesson");
+    return res.redirect(301, `/lessons/${encodeURIComponent(lessonId)}${qs}`);
+  }
+  next();
+}
+
+// Build a query string excluding the migrated parameter
+function buildForwardQuery(req: express.Request, exclude: string): string {
+  const rest = { ...req.query } as Record<string, any>;
+  delete rest[exclude];
+  const parts = Object.entries(rest)
+    .filter(([, v]) => v != null && v !== "")
+    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`);
+  return parts.length ? `?${parts.join("&")}` : "";
+}
+
+app.get("/", legacyQueryRedirect);
+
+// ─── SSR helpers: resolve lesson / blog data and inject SEO head tags ───
+import { BLOG_POSTS } from "./src/data/blogData";
+
+interface PageSEO {
+  title: string;
+  description: string;
+  canonical: string;
+  ogType?: string;
+  breadcrumb?: { name: string; url: string }[];
+  learningResource?: { name: string; description: string; url: string; inLanguage?: string };
+  blogPosting?: { headline: string; description: string; url: string; author: string; datePublished: string; keywords?: string[] };
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+}
+
+function injectSEO(html: string, seo: PageSEO): string {
+  const canonicalTag = `<link rel="canonical" href="${escapeHtml(seo.canonical)}" />`;
+  const titleTag = `<title>${escapeHtml(seo.title)}</title>`;
+  const descTag = `<meta name="description" content="${escapeHtml(seo.description)}" />`;
+  const ogTypeTag = seo.ogType ? `<meta property="og:type" content="${escapeHtml(seo.ogType)}" />` : "";
+  const ogUrlTag = `<meta property="og:url" content="${escapeHtml(seo.canonical)}" />`;
+
+  const jsonLdBlocks: object[] = [];
+  if (seo.breadcrumb && seo.breadcrumb.length > 1) {
+    jsonLdBlocks.push({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: seo.breadcrumb.map((item, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        name: item.name,
+        item: item.url,
+      })),
+    });
+  }
+  if (seo.learningResource) {
+    const lr = seo.learningResource;
+    jsonLdBlocks.push({
+      "@context": "https://schema.org",
+      "@type": "LearningResource",
+      name: lr.name,
+      description: lr.description,
+      provider: { "@type": "EducationalOrganization", name: "WebZoneBW SC", url: "https://webzonebw.shop" },
+      url: lr.url,
+      inLanguage: lr.inLanguage || "en",
+      educationalLevel: "Beginner to Advanced",
+    });
+  }
+  if (seo.blogPosting) {
+    const bp = seo.blogPosting;
+    jsonLdBlocks.push({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: bp.headline,
+      description: bp.description,
+      url: bp.url,
+      author: { "@type": "Person", name: bp.author },
+      datePublished: bp.datePublished,
+      publisher: { "@type": "Organization", name: "WebZoneBW SC", url: "https://webzonebw.shop" },
+      ...(bp.keywords ? { keywords: bp.keywords.join(", ") } : {}),
+    });
+  }
+  const jsonLdTag = jsonLdBlocks.length
+    ? jsonLdBlocks.map((b) => `<script type="application/ld+json">${JSON.stringify(b)}</script>`).join("\n    ")
+    : "";
+
+  let out = html;
+  // Replace title
+  out = out.replace(/<title>[^<]*<\/title>/, titleTag);
+  // Replace existing canonical + description if present
+  if (/<link rel="canonical"[^>]*>/.test(out)) {
+    out = out.replace(/<link rel="canonical"[^>]*>/, canonicalTag);
+  } else {
+    out = out.replace(/<title>[^<]*<\/title>/, `${titleTag}\n    ${canonicalTag}`);
+  }
+  if (/<meta name="description"[^>]*>/.test(out)) {
+    out = out.replace(/<meta name="description"[^>]*>/, descTag);
+  } else {
+    out = out.replace(/<title>[^<]*<\/title>/, `${titleTag}\n    ${descTag}`);
+  }
+  if (ogTypeTag && /<meta property="og:type"[^>]*>/.test(out)) {
+    out = out.replace(/<meta property="og:type"[^>]*>/, ogTypeTag);
+  }
+  if (/<meta property="og:url"[^>]*>/.test(out)) {
+    out = out.replace(/<meta property="og:url"[^>]*>/, ogUrlTag);
+  }
+  // Inject JSON-LD right after the canonical tag
+  if (jsonLdTag) {
+    out = out.replace(/<link rel="canonical"[^>]*>/, (m) => `${m}\n    ${jsonLdTag}`);
+  }
+  return out;
+}
+
+function baseUrlOf(req: express.Request): string {
+  const host = req.get("host") || "webzonebw.shop";
+  const protocol =
+    req.protocol === "https" || req.get("x-forwarded-proto") === "https" ? "https" : "http";
+  return `${protocol}://${host}`;
+}
+
+function resolveLessonSEO(lessonId: string): (PageSEO & { chapterTitle: string }) | null {
+  for (const chapter of CHAPTERS_DATA) {
+    const lesson = chapter.lessons.find((l) => l.id === lessonId);
+    if (lesson) {
+      return {
+        title: `${lesson.title} — ${chapter.title} | WebZoneBW SC`,
+        description: lesson.tagline || `Interactive lesson on ${lesson.title} in ${chapter.title} at WebZoneBW SC.`,
+        canonical: `https://webzonebw.shop/lessons/${lesson.id}`,
+        ogType: "article",
+        breadcrumb: [
+          { name: "Home", url: "https://webzonebw.shop/" },
+          { name: chapter.title, url: `https://webzonebw.shop/?chapter=${chapter.id}` },
+          { name: lesson.title, url: `https://webzonebw.shop/lessons/${lesson.id}` },
+        ],
+        learningResource: {
+          name: lesson.title,
+          description: lesson.tagline || `Interactive lesson on ${lesson.title}`,
+          url: `https://webzonebw.shop/lessons/${lesson.id}`,
+          inLanguage: "en",
+        },
+        chapterTitle: chapter.title,
+      };
+    }
+  }
+  return null;
+}
+
+function resolveBlogSEO(slug: string): PageSEO | null {
+  const post = BLOG_POSTS.find((p) => p.slug === slug);
+  if (!post) return null;
+  return {
+    title: `${post.title} | WebZoneBW SC Blog`,
+    description: post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
+    canonical: `https://webzonebw.shop/blog/${post.slug}`,
+    ogType: "article",
+    breadcrumb: [
+      { name: "Home", url: "https://webzonebw.shop/" },
+      { name: "Blog", url: "https://webzonebw.shop/?view=blog" },
+      { name: post.title, url: `https://webzonebw.shop/blog/${post.slug}` },
+    ],
+    blogPosting: {
+      headline: post.title,
+      description: post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
+      url: `https://webzonebw.shop/blog/${post.slug}`,
+      author: post.author,
+      datePublished: post.date,
+      keywords: post.tags,
+    },
+  };
+}
+
+// Cached dist index.html shared by SPA fallback and SEO injection
+let cachedIndexHtml: string | null = null;
+function getIndexHtml(): string | null {
+  if (cachedIndexHtml) return cachedIndexHtml;
+  try {
+    cachedIndexHtml = fs.readFileSync(path.join(process.cwd(), "dist", "index.html"), "utf-8");
+  } catch {
+    return null;
+  }
+  return cachedIndexHtml;
+}
+
+function sendSEOPage(req: express.Request, res: express.Response, seo: PageSEO, fallbackRedirect: string) {
+  const html = getIndexHtml();
+  if (!html) return res.redirect(301, fallbackRedirect);
+  res.header("Content-Type", "text/html; charset=utf-8");
+  return res.send(injectSEO(html, seo));
+}
+
+// ─── Clean lesson routes: /lessons/:lessonId ───
+app.get("/lessons/:lessonId", (req, res) => {
+  const seo = resolveLessonSEO(req.params.lessonId);
+  if (!seo) return res.redirect(301, "/");
+  sendSEOPage(req, res, seo, "/");
+});
+
+// ─── Clean blog routes: /blog/:slug ───
+app.get("/blog/:slug", (req, res) => {
+  const seo = resolveBlogSEO(req.params.slug);
+  if (!seo) return res.redirect(301, "/?view=blog");
+  sendSEOPage(req, res, seo, "/?view=blog");
+});
+
 // Dynamic Sitemap Generator listing all chapters, lessons, tools, and pages
 app.get("/sitemap.xml", (req, res) => {
   const host = req.get("host") || "webzonebw.shop";
@@ -158,32 +374,12 @@ app.get("/sitemap.xml", (req, res) => {
   // Primary Landing Page
   addEntry(`${baseUrl}/`, "1.0", "daily");
 
-  // Core Developer Tools & Visualizers
-  addEntry(`${baseUrl}/?view=practice-hub`, "0.95");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=box`, "0.90");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=flex`, "0.90");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=grid`, "0.90");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=dom`, "0.90");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=net`, "0.90");
-  addEntry(`${baseUrl}/?view=visual-lab&amp;tool=git`, "0.90");
-  addEntry(`${baseUrl}/?view=activities`, "0.85");
-
-  // All Chapters
+  // All Chapters → Clean lesson URLs (canonical)
   for (const chapter of CHAPTERS_DATA) {
-    addEntry(`${baseUrl}/?chapter=${chapter.id}`, "0.85", "weekly");
-
-    // All Lessons within Chapter
     for (const lesson of chapter.lessons) {
-      addEntry(`${baseUrl}/?lesson=${lesson.id}`, "0.80", "monthly");
+      addEntry(`${baseUrl}/lessons/${lesson.id}`, "0.80", "monthly");
     }
   }
-
-  // Legal Compliance & Policy Pages
-  addEntry(`${baseUrl}/?legal=privacy`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=terms`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=cookies`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=about`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=contact`, "0.60", "monthly");
 
   // Static Legal Pages (crawlable HTML)
   addEntry(`${baseUrl}/privacy-policy.html`, "0.70", "monthly");
@@ -191,13 +387,10 @@ app.get("/sitemap.xml", (req, res) => {
   addEntry(`${baseUrl}/cookie-policy.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/about.html`, "0.70", "monthly");
 
-  // Blog Posts — High-Value SEO Content
-  addEntry(`${baseUrl}/?view=blog`, "0.90", "weekly");
-  addEntry(`${baseUrl}/?blog=complete-guide-css-flexbox`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=understanding-css-grid`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=html5-semantic-elements-seo`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=javascript-dom-manipulation`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=responsive-web-design-best-practices`, "0.85", "monthly");
+  // Blog Posts — Clean canonical URLs
+  for (const post of BLOG_POSTS) {
+    addEntry(`${baseUrl}/blog/${post.slug}`, "0.85", "monthly");
+  }
 
   xml += `</urlset>`;
 
@@ -481,7 +674,6 @@ async function startServer() {
 
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
-    let cachedIndexHtml: string | null = null;
 
     // SPA catch-all — only routes that don't match static files
     app.get("*", (req, res) => {
@@ -490,13 +682,11 @@ async function startServer() {
 
       if (isBot) {
         // Serve index.html with the pre-rendered noscript content for crawlers
-        try {
-          if (!cachedIndexHtml) {
-            cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
-          }
+        const html = getIndexHtml();
+        if (html) {
           res.header("Content-Type", "text/html; charset=utf-8");
-          res.send(cachedIndexHtml);
-        } catch {
+          res.send(html);
+        } else {
           res.sendFile(path.join(distPath, "index.html"));
         }
       } else {

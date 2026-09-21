@@ -152,7 +152,7 @@ export const SEO_PRESETS = {
     description,
     ogTitle: `${title} — WebZoneBW SC`,
     ogDescription: description,
-    canonical: `https://webzonebw.shop/?lesson=${lessonId}`,
+    canonical: `https://webzonebw.shop/lessons/${lessonId}`,
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -164,7 +164,7 @@ export const SEO_PRESETS = {
         name: 'WebZoneBW SC',
         url: 'https://webzonebw.shop',
       },
-      url: `https://webzonebw.shop/?lesson=${lessonId}`,
+      url: `https://webzonebw.shop/lessons/${lessonId}`,
       educationalLevel: 'Beginner to Advanced',
     },
   }),
@@ -185,4 +185,24 @@ export const SEO_PRESETS = {
     canonical: 'https://webzonebw.shop/?view=blog',
     ogType: 'website',
   },
+
+  blogPost: (title: string, excerpt: string, slug: string, author: string, date: string, tags: string[]) => ({
+    title: `${title} | WebZoneBW SC Blog`,
+    description: excerpt,
+    ogTitle: title,
+    ogDescription: excerpt,
+    canonical: `https://webzonebw.shop/blog/${slug}`,
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description: excerpt,
+      url: `https://webzonebw.shop/blog/${slug}`,
+      author: { '@type': 'Person', name: author },
+      datePublished: date,
+      publisher: { '@type': 'Organization', name: 'WebZoneBW SC', url: 'https://webzonebw.shop' },
+      ...(tags.length ? { keywords: tags.join(', ') } : {}),
+    },
+  }),
 };

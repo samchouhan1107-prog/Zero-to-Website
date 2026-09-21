@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CHAPTERS_DATA } from '../data/chaptersData';
+import { BLOG_POSTS } from '../data/blogData';
 import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
 import { applyAppTheme, normalizeAppTheme } from './theme';
 import { XP_MILESTONES } from '../data/milestonesData';
@@ -200,6 +201,21 @@ export default function App() {
           if (/chapter/i.test(part)) pathChapterMatch = part;
           if (/lesson/i.test(part)) pathLessonMatch = part;
         }
+      }
+
+      // Clean SEO routes: /lessons/:lessonId and /blog/:slug
+      const cleanLessonMatch = pathname.match(/^\/lessons\/([\w.-]+)\/??$/);
+      const cleanBlogMatch = pathname.match(/^\/blog\/([\w.-]+)\/??$/);
+      if (cleanBlogMatch) {
+        const slug = decodeURIComponent(cleanBlogMatch[1]);
+        if (BLOG_POSTS.some((p) => p.slug === slug)) {
+          setBlogSlug(slug);
+          setActiveView('blog');
+          return;
+        }
+      }
+      if (cleanLessonMatch) {
+        pathLessonMatch = decodeURIComponent(cleanLessonMatch[1]);
       }
 
       const chapterCandidate = rawChapterParam || pathChapterMatch;
