@@ -4,10 +4,210 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lesson 01 | Mobile-First Philosophy & Core Architecture - WZ Storehouse</title>
-    <link rel="stylesheet" href="../../../Assets/css/main.css">
-    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
-    <script src="../../../Assets/js/main.js" defer></script>
-    <script src="../../../Assets/js/lesson.js" defer></script>
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical mobile styles */
+        body {
+            font-family: Inter, system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fcf7f7;
+            color: #1c0b0f;
+        }
+        
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e6ccd0;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .logo h1 {
+            font-size: 1.375rem;
+            color: #d90429;
+            margin: 0;
+            font-weight: 900;
+        }
+        
+        .logo p {
+            font-size: 0.75rem;
+            color: #5e3a40;
+            margin: 0;
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1c0b0f;
+            padding: 4px;
+        }
+        
+        .mobile-nav-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e6ccd0;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-nav-menu.active {
+            display: block;
+        }
+        
+        .mobile-nav-menu a {
+            display: block;
+            padding: 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #1c0b0f;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .mobile-nav-menu a:hover {
+            background: #fcf7f7;
+        }
+        
+        nav {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #1c0b0f;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: color 0.2s ease;
+        }
+        
+        nav a:hover {
+            color: #d90429;
+        }
+        
+        .btn {
+            padding: 10px 16px;
+            background: #d90429;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .btn:hover {
+            background: #ef233c;
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        @media (max-width: 767px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                position: relative;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .mobile-nav-menu {
+                display: none;
+            }
+            
+            .mobile-nav-menu.active {
+                display: block;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="../../../Assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../../../Assets/css/main.css"></noscript>
+    <link rel="preload" href="../../../Assets/css/lesson.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../../../Assets/css/lesson.css"></noscript>
+    
+    <!-- Critical JS -->
+    <script>
+        // Mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.getElementById('mobileNavToggle');
+            const nav = document.querySelector('nav');
+            const mobileMenu = document.querySelector('.mobile-nav-menu');
+            
+            if (mobileToggle && nav) {
+                mobileToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    nav.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    
+                    // Update aria-expanded for accessibility
+                    const isExpanded = nav.classList.contains('active');
+                    mobileToggle.setAttribute('aria-expanded', isExpanded);
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!nav.contains(e.target) && !mobileToggle.contains(e.target)) {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.focus();
+                }
+            });
+        });
+    </script>
+    
+    <!-- Non-critical JS loaded with async -->
+    <script src="../../../Assets/js/main.js" async fetchpriority="low"></script>
+    <script src="../../../Assets/js/lesson.js" async fetchpriority="low"></script>
 </head>
 <body class="lesson-page">
     <header>
@@ -17,18 +217,46 @@
                 <p>Learn • Practice • Build • Share</p>
             </a>
         </div>
+        
+        <!-- Mobile Navigation Toggle -->
+        <button id="mobileNavToggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            ☰
+        </button>
+        
         <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 07: Responsive Design</a>
-            <button id="settingsBtn">⚙ Settings</button>
+            <a href="../../../index.html" aria-label="Go to home page">🏠 Home</a>
+            <a href="../index.html" aria-label="Go to chapter overview">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn" class="btn" aria-label="Open settings panel">⚙ Settings</button>
         </nav>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu">
+            <a href="../../../index.html" aria-label="Go to home page">🏠 Home</a>
+            <a href="../index.html" aria-label="Go to chapter overview">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtnMobile" class="btn" aria-label="Open settings panel" style="width: 100%;">⚙ Settings</button>
+        </div>
     </header>
 
     <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+        <div class="settings-panel-header">
+            <h3>⚙ Settings</h3>
+            <button id="closeSettingsBtn" class="close-btn" aria-label="Close settings panel">✖</button>
+        </div>
+        
+        <div class="settings-panel-content">
+            <button id="darkModeBtn" class="settings-btn" aria-label="Toggle dark mode">
+                <span class="btn-icon">🌙</span>
+                <span class="btn-text">Dark Mode</span>
+            </button>
+            <button id="fontSizeBtn" class="settings-btn" aria-label="Adjust font size">
+                <span class="btn-icon">🔤</span>
+                <span class="btn-text">Font Size</span>
+            </button>
+            <button id="mobileNavClose" class="settings-btn" aria-label="Close settings and navigation">
+                <span class="btn-icon">📱</span>
+                <span class="btn-text">Mobile Navigation</span>
+            </button>
+        </div>
     </div>
 
     <main class="container chapter-page">

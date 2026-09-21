@@ -24,6 +24,7 @@ import { JsDomEventVisualizer } from './visualizers/JsDomEventVisualizer';
 import { ResponsiveViewportVisualizer } from './visualizers/ResponsiveViewportVisualizer';
 import { BootstrapGridVisualizer } from './visualizers/BootstrapGridVisualizer';
 import { DeploymentPipelineVisualizer } from './visualizers/DeploymentPipelineVisualizer';
+import { CriticalRenderingPathInspector } from './CriticalRenderingPathInspector';
 
 export type VisualizerId =
   | 'box'
@@ -37,7 +38,8 @@ export type VisualizerId =
   | 'jsevent'
   | 'viewport'
   | 'bootstrap'
-  | 'deploy';
+  | 'deploy'
+  | 'rendering-path';
 
 type VisualizerTool = {
   id: VisualizerId;
@@ -61,6 +63,7 @@ const tools: VisualizerTool[] = [
   { id: 'git', name: 'Git commit DAG', shortName: 'Ch 09 Git Version', icon: GitBranch, description: 'Branches, commits, and merge flow.', tone: 'text-pink-400' },
   { id: 'deploy', name: 'Cloud Deploy Pipeline', shortName: 'Ch 10 Production', icon: Cloud, description: 'CI/CD pipeline & curriculum traceability matrix.', tone: 'text-emerald-400' },
   { id: 'dom', name: 'DOM tree inspector', shortName: 'DOM Explorer', icon: Terminal, description: 'HTML hierarchy and selected nodes.', tone: 'text-cyan-400' },
+  { id: 'rendering-path', name: 'Critical Rendering Path', shortName: 'Ch 11 Rendering', icon: BarChart3, description: 'Browser engine parsing, DOM + CSSOM construction, render tree calculation, layout reflow, and pixel paint.', tone: 'text-orange-400' },
 ];
 
 interface VisualLabProps {
@@ -117,6 +120,7 @@ export const VisualLab: React.FC<VisualLabProps> = ({ initialTool = 'box' }) => 
             {activeVisualizer === 'git' && <GitFlowVisualizer />}
             {activeVisualizer === 'deploy' && <DeploymentPipelineVisualizer />}
             {activeVisualizer === 'dom' && <DomTreeVisualizer />}
+            {activeVisualizer === 'rendering-path' && <CriticalRenderingPathInspector />}
           </div>
         </section>
       </div>

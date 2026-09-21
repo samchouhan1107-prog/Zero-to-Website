@@ -674,6 +674,30 @@ async function startServer() {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath, { index: 'index.html', extensions: ['html'] }));
 
+    // Static HTML page routes
+    const staticPages = [
+      'index.html',
+      'Workspace.html', 
+      'webtools.html',
+      'imagetools.html',
+      'developertools.html',
+      'learn.html',
+      'blog.html',
+      'about.html'
+    ];
+
+    // Serve static HTML pages directly
+    staticPages.forEach(page => {
+      app.get(`/${page}`, (req, res) => {
+        const pagePath = path.join(distPath, page);
+        if (fs.existsSync(pagePath)) {
+          res.sendFile(pagePath);
+        } else {
+          res.redirect(301, '/index.html');
+        }
+      });
+    });
+
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
 

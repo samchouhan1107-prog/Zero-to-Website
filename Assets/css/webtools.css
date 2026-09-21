@@ -1,0 +1,72 @@
+/* Web Tools Page Styles */
+.webtools-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.webtools-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.webtools-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #60a5fa;
+}
+
+.webtools-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.webtools-category {
+  background: #1a1a1f;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 1.5rem;
+}
+
+.webtools-category h3 {
+  color: #60a5fa;
+  margin-bottom: 1rem;
+}
+
+.webtools-list {
+  list-style: none;
+  padding: 0;
+}
+
+.webtools-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #27272a;
+}
+
+.webtools-list li:last-child {
+  border-bottom: none;
+}
+
+.webtools-utilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.webtool-card {
+  background: #1a1a1f;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.webtool-card:hover {
+  background: #27272a;
+  border-color: #60a5fa;
+}

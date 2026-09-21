@@ -112,39 +112,31 @@ export const Header: React.FC<HeaderProps> = ({
 
     switch (section) {
       case 'Home':
-        onNavigateHome();
+        window.location.href = '/index.html';
         break;
       case 'Workspace':
-        if (onNavigateWorkspace) {
-          onNavigateWorkspace();
-        } else {
-          onNavigatePractice();
-        }
+        window.location.href = '/Workspace.html';
         break;
       case 'Web Tools':
-        onNavigatePractice();
+        window.location.href = '/webtools.html';
         break;
       case 'Image Tools':
-        onNavigateVisualLab('box');
+        window.location.href = '/imagetools.html';
         break;
       case 'Developer Tools':
-        onNavigateVisualLab('grid');
+        window.location.href = '/developertools.html';
         break;
       case 'Learn':
-        onNavigateHome();
+        window.location.href = '/learn.html';
         break;
       case 'Blog':
-        if (onNavigateBlog) {
-          onNavigateBlog();
-        } else {
-          onNavigateHome();
-        }
+        window.location.href = '/blog.html';
         break;
       case 'About':
-        onOpenSettings();
+        window.location.href = '/about.html';
         break;
       default:
-        onNavigateHome();
+        window.location.href = '/index.html';
     }
   };
 
@@ -298,29 +290,21 @@ export const Header: React.FC<HeaderProps> = ({
 
               <span className="text-app-subtle">/</span>
 
-              <button
-                type="button"
-                onClick={() => {
-                  onNavigatePractice();
-                  setActiveNav('Web Tools');
-                }}
+              <a
+                href="/webtools.html"
                 className="font-medium text-app-muted hover:text-app-ink transition-colors text-[11px]"
               >
                 Tools
-              </button>
+              </a>
 
               <span className="text-app-subtle">·</span>
 
-              <button
-                type="button"
-                onClick={() => {
-                  onNavigateVisualLab('box');
-                  setActiveNav('Developer Tools');
-                }}
+              <a
+                href="/imagetools.html"
                 className="font-medium text-app-muted hover:text-app-ink transition-colors text-[11px]"
               >
                 Resources
-              </button>
+              </a>
 
               <span className="text-app-subtle">·</span>
 

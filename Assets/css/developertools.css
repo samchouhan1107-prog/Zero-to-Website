@@ -1,0 +1,81 @@
+/* Developer Tools Page Styles */
+.developertools-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.developertools-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.developertools-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #60a5fa;
+}
+
+.developertools-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.developertools-category {
+  background: #1a1a1f;
+  border: 1px solid #27272a;
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.developertools-category h2 {
+  color: #60a5fa;
+  margin-bottom: 1.5rem;
+  font-size: 1.5rem;
+}
+
+.developertools-list {
+  list-style: none;
+  padding: 0;
+}
+
+.developertools-list li {
+  padding: 1rem 0;
+  border-bottom: 1px solid #27272a;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.developertools-list li:last-child {
+  border-bottom: none;
+}
+
+.developertools-icon {
+  width: 24px;
+  height: 24px;
+  color: #60a5fa;
+}
+
+.developertools-tools {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.developertool-card {
+  background: #1a1a1f;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.developertool-card:hover {
+  background: #27272a;
+  border-color: #60a5fa;
+  transform: translateY(-2px);
+}

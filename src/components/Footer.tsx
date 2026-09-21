@@ -157,9 +157,8 @@ export const Footer: React.FC<FooterProps> = ({
             </div>
             <ul className="space-y-2.5 text-xs text-app-muted">
               <li>
-                <button
-                  type="button"
-                  onClick={onNavigatePractice}
+                <a
+                  href="/webtools.html"
                   className="group flex w-full items-center justify-between hover:text-app-amber transition-colors text-left"
                 >
                   <span className="flex items-center gap-2">
@@ -169,67 +168,61 @@ export const Footer: React.FC<FooterProps> = ({
                   <span className="rounded bg-emerald-500/10 px-1.5 py-0.2 font-mono text-[9px] font-bold text-emerald-400">
                     LIVE
                   </span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('box')}
+                <a
+                  href="/imagetools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <Box className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>CSS Box Model Studio</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('flex')}
+                <a
+                  href="/imagetools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <Layers className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>Flexbox Layout Studio</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('grid')}
+                <a
+                  href="/developertools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <Grid className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>CSS Grid Matrix</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('dom')}
+                <a
+                  href="/developertools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <Cpu className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>DOM Tree Inspector</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('net')}
+                <a
+                  href="/developertools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <Network className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>HTTP &amp; DNS Flow Trace</span>
-                </button>
+                </a>
               </li>
               <li>
-                <button
-                  type="button"
-                  onClick={() => handleToolClick('git')}
+                <a
+                  href="/developertools.html"
                   className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                 >
                   <GitBranch className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>Git Commit DAG Explorer</span>
-                </button>
+                </a>
               </li>
             </ul>
           </div>
@@ -247,28 +240,26 @@ export const Footer: React.FC<FooterProps> = ({
                 const firstLessonId = ch.lessons?.[0]?.id || `${ch.id}-l-01`;
                 return (
                   <li key={ch.id}>
-                    <button
-                      type="button"
-                      onClick={() => onSelectLesson && onSelectLesson(firstLessonId)}
+                    <a
+                      href={`/learn.html`}
                       className="group flex items-center gap-1.5 hover:text-app-amber transition-colors text-left"
                     >
                       <span className="font-mono text-[10px] font-bold text-app-subtle group-hover:text-app-amber">
                         Ch {ch.number}:
                       </span>
                       <span className="truncate max-w-[200px]">{ch.title}</span>
-                    </button>
+                    </a>
                   </li>
                 );
               })}
               {defaultChapters.length > 7 && (
                 <li>
-                  <button
-                    type="button"
-                    onClick={onNavigateHome}
+                  <a
+                    href="/learn.html"
                     className="font-mono text-[11px] font-semibold text-app-amber hover:underline pt-1 inline-flex items-center gap-1"
                   >
                     <span>View all {defaultChapters.length} chapters →</span>
-                  </button>
+                  </a>
                 </li>
               )}
             </ul>
@@ -335,14 +326,13 @@ export const Footer: React.FC<FooterProps> = ({
               </li>
               {onNavigateBlog && (
                 <li>
-                  <button
-                    type="button"
-                    onClick={onNavigateBlog}
+                  <a
+                    href="/blog.html"
                     className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
                   >
                     <FileText className="h-3.5 w-3.5 text-app-subtle" />
                     <span>Blog &amp; Tutorials</span>
-                  </button>
+                  </a>
                 </li>
               )}
               <li>

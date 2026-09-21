@@ -56,9 +56,10 @@ import {
   Wifi,
   WifiOff
 } from 'lucide-react';
+import { CriticalRenderingPathInspector } from './CriticalRenderingPathInspector';
 
 interface DevToolTab {
-  id: 'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security';
+  id: 'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security' | 'rendering-path';
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   description: string;
@@ -153,6 +154,12 @@ const DEV_TOOLS_TABS: DevToolTab[] = [
     label: 'Security',
     icon: Shield,
     description: 'Analyze security issues'
+  },
+  {
+    id: 'rendering-path',
+    label: 'Rendering Path',
+    icon: BarChart3,
+    description: 'Analyze critical rendering path and browser optimization'
   }
 ];
 
@@ -282,7 +289,7 @@ const SAMPLE_SECURITY_ISSUES: SecurityIssue[] = [
 ];
 
 export const EnhancedDeveloperTools: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security'>('elements');
+  const [activeTab, setActiveTab] = useState<'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security' | 'rendering-path'>('elements');
   const [consoleInput, setConsoleInput] = useState('');
   const [consoleLogs, setConsoleLogs] = useState<ConsoleMessage[]>(SAMPLE_CONSOLE_MESSAGES);
   const [networkRequests, setNetworkRequests] = useState<NetworkRequest[]>(SAMPLE_NETWORK_REQUESTS);
@@ -378,6 +385,9 @@ export const EnhancedDeveloperTools: React.FC = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
+      case 'rendering-path':
+        return <CriticalRenderingPathInspector />;
+
       case 'elements':
         return (
           <div className="space-y-4">
