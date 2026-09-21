@@ -347,68 +347,114 @@ export const WorkspaceNavigation: React.FC<WorkspaceNavigationProps> = ({
         })}
       </nav>
 
-      {/* Mobile Navigation - Collapsible drawer */}
+      {/* Mobile Navigation Trigger Bar (Touch-Friendly) */}
+      <div className="lg:hidden sticky top-16 z-20 bg-app-surface/95 border-b border-app-border backdrop-blur-md px-4 py-2.5 flex items-center justify-between shadow-xs">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-bold font-mono uppercase tracking-wider text-app-subtle">Workspace</span>
+          <span className="text-app-subtle">/</span>
+          <span className="text-xs font-semibold text-app-ink capitalize">{activeView.replace('-', ' ')}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          {onOpenTutor && (
+            <button
+              type="button"
+              onClick={onOpenTutor}
+              className="min-h-[44px] px-3 inline-flex items-center gap-1.5 rounded-xl bg-blue-600/10 text-blue-500 hover:bg-blue-600/20 text-xs font-semibold transition-all touch-manipulation"
+              aria-label="Ask AI Tutor"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Tutor</span>
+            </button>
+          )}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(true)}
+            className="min-h-[44px] px-3.5 py-2 inline-flex items-center gap-2 rounded-xl border border-app-border bg-app-inset text-xs font-semibold text-app-ink hover:bg-app-active active:scale-95 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+            aria-label="Open workspace navigation menu"
+            aria-expanded={mobileMenuOpen}
+          >
+            <Layers className="h-4 w-4 text-blue-500" />
+            <span>Sections</span>
+            <ChevronDown className="h-3.5 w-3.5 text-app-subtle" />
+          </button>
+        </div>
+      </div>
+
+      {/* Mobile Navigation - Collapsible drawer (Touch-Friendly & Accessible) */}
       {mobileMenuOpen && (
-        <div className="lg:hidden fixed inset-0 z-50 bg-app-canvas/95 backdrop-blur-sm">
-          <div className="flex flex-col h-full">
+        <div 
+          role="dialog" 
+          aria-modal="true" 
+          aria-label="Workspace Navigation"
+          className="lg:hidden fixed inset-0 z-50 bg-app-canvas/95 backdrop-blur-sm animate-fade-in"
+        >
+          <div className="flex flex-col h-full max-w-md ml-auto bg-app-surface shadow-2xl border-l border-app-border">
             {/* Header */}
             <div className="flex items-center justify-between p-4 border-b border-app-border bg-app-surface">
-              <h3 className="text-lg font-bold text-app-ink">Workspace Navigation</h3>
+              <div className="flex items-center gap-2">
+                <Layers className="h-5 w-5 text-blue-500" />
+                <h3 className="text-base font-bold text-app-ink">Workspace Navigation</h3>
+              </div>
               <button
+                type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="p-2 rounded-lg hover:bg-app-inset transition-colors"
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center rounded-xl hover:bg-app-inset transition-colors touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+                aria-label="Close workspace navigation"
               >
-                <ChevronDown className="h-5 w-5" />
+                <ChevronDown className="h-5 w-5 text-app-muted" />
               </button>
             </div>
 
             {/* Navigation Content */}
-            <div className="flex-1 overflow-y-auto">
+            <div className="flex-1 overflow-y-auto p-2">
               {WORKSPACE_SECTIONS.map((section) => (
-                <div key={section.id} className="border-b border-app-border">
+                <div key={section.id} className="mb-2 rounded-xl border border-app-border overflow-hidden bg-app-surface">
                   <button
+                    type="button"
                     onClick={() => toggleSection(section.id)}
-                    className="w-full flex items-center justify-between p-4 hover:bg-app-inset transition-colors"
+                    className="w-full flex items-center justify-between min-h-[48px] p-4 hover:bg-app-inset transition-colors touch-manipulation"
+                    aria-expanded={expandedSections[section.id]}
                   >
-                    <div className="flex items-center gap-2">
-                      <section.icon className="h-5 w-5 text-app-ink" />
-                      <span className="font-medium text-app-ink">{section.title}</span>
+                    <div className="flex items-center gap-2.5">
+                      <section.icon className="h-5 w-5 text-blue-500" />
+                      <span className="font-semibold text-sm text-app-ink">{section.title}</span>
                     </div>
                     {expandedSections[section.id] ? (
-                      <ChevronDown className="h-4 w-4" />
+                      <ChevronDown className="h-4 w-4 text-app-subtle" />
                     ) : (
-                      <ChevronRight className="h-4 w-4" />
+                      <ChevronRight className="h-4 w-4 text-app-subtle" />
                     )}
                   </button>
 
                   {expandedSections[section.id] && (
-                    <div className="px-4 pb-3 space-y-2">
+                    <div className="px-3 pb-3 space-y-2 border-t border-app-border/50 pt-2 bg-app-inset/40">
                       {section.items.map((item) => (
                         <button
                           key={item.id}
+                          type="button"
                           onClick={() => {
                             handleItemAction(section.id, item);
                             setMobileMenuOpen(false);
                           }}
-                          className={`w-full p-3 rounded-lg border transition-all text-left ${
+                          className={`w-full min-h-[48px] p-3.5 rounded-xl border transition-all text-left touch-manipulation ${
                             isActive(section.id, item.id)
-                              ? 'border-blue-500/50 bg-blue-500/10'
-                              : 'border-app-border hover:border-app-muted'
+                              ? 'border-blue-500/60 bg-blue-500/15 shadow-xs'
+                              : 'border-app-border bg-app-surface hover:border-app-muted hover:bg-app-active'
                           }`}
                         >
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-2.5">
                             {item.icon && (
                               <item.icon className="h-4 w-4 text-app-muted" />
                             )}
-                            <span className="font-medium text-app-ink">{item.label}</span>
+                            <span className="font-semibold text-sm text-app-ink">{item.label}</span>
                             {item.badge && (
-                              <span className="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-blue-500/10 text-blue-500">
+                              <span className="ml-auto inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase bg-blue-500/10 text-blue-500">
                                 {item.badge}
                               </span>
                             )}
                           </div>
                           {item.description && (
-                            <p className="text-xs text-app-muted mt-1">{item.description}</p>
+                            <p className="text-xs text-app-muted mt-1 leading-relaxed pl-6">{item.description}</p>
                           )}
                         </button>
                       ))}
@@ -421,11 +467,12 @@ export const WorkspaceNavigation: React.FC<WorkspaceNavigationProps> = ({
             {/* Footer */}
             <div className="p-4 border-t border-app-border bg-app-surface">
               <button
+                type="button"
                 onClick={() => {
                   onOpenTutor?.();
                   setMobileMenuOpen(false);
                 }}
-                className="w-full flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-medium transition-all hover:from-blue-500 hover:to-indigo-500"
+                className="w-full min-h-[48px] flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-sm font-bold shadow-md hover:from-blue-500 hover:to-indigo-500 transition-all touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
               >
                 <Sparkles className="h-4 w-4" />
                 <span>Ask AI Tutor</span>

@@ -33,14 +33,19 @@
     }
   }
   </script>
+  <meta name="theme-color" content="#0f172a">
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
     body{font-family:system-ui,-apple-system,sans-serif;background:#121215;color:#d4d4d8;line-height:1.7}
     a{color:#60a5fa;text-decoration:none}a:hover{text-decoration:underline}
+    :focus-visible{outline:2px solid #38bdf8;outline-offset:2px}
+    .skip-link{position:absolute;top:-60px;left:12px;background:#1e293b;color:#fff;padding:12px 20px;min-height:44px;display:inline-flex;align-items:center;font-weight:700;text-decoration:none;border-radius:0 0 8px 8px;z-index:1000;transition:top 0.2s}
+    .skip-link:focus{top:12px;outline:3px solid #38bdf8}
     .container{max-width:800px;margin:0 auto;padding:40px 24px}
     header{border-bottom:1px solid #27272a;padding:20px 0;margin-bottom:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
     header h1{font-size:1.1rem;color:#fff}
-    nav{display:flex;gap:16px;font-size:0.85rem}
+    nav{display:flex;gap:12px;font-size:0.9rem;align-items:center;flex-wrap:wrap}
+    nav a{min-height:44px;min-width:44px;padding:10px 14px;border-radius:8px;display:inline-flex;align-items:center;justify-content:center;touch-action:manipulation}
     h2{color:#fff;font-size:1.4rem;margin:32px 0 12px;border-left:3px solid #f59e0b;padding-left:12px}
     h3{color:#e5e7eb;font-size:1.1rem;margin:20px 0 8px}
     p{margin-bottom:16px;font-size:0.95rem;color:#a1a1aa}
@@ -53,7 +58,8 @@
   </style>
 </head>
 <body>
-  <div class="container">
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div class="container" id="main-content" tabindex="-1">
     <header>
       <h1><a href="/" style="color:#fff">WebZoneBW SC</a></h1>
       <nav>

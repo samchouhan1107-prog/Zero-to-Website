@@ -88,12 +88,18 @@
         }
         
         .nav-test a {
-            padding: 8px 16px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            min-width: 44px;
+            padding: 10px 16px;
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 6px;
             text-decoration: none;
             color: var(--text);
+            touch-action: manipulation;
         }
         
         .nav-test a:hover {
@@ -176,6 +182,11 @@
         }
         
         .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 44px;
+            min-width: 44px;
             padding: 10px 20px;
             background: var(--primary);
             color: white;
@@ -183,6 +194,7 @@
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
+            touch-action: manipulation;
         }
         
         .btn:hover {

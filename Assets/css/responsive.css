@@ -56,17 +56,25 @@
         font-size: 0.75rem;
     }
     
-    /* Navigation responsive */
+    /* Navigation responsive: Touch-friendly layout */
     nav {
         flex-direction: column;
-        gap: 8px;
-        align-items: flex-start;
+        gap: 10px;
+        align-items: stretch;
         width: 100%;
     }
     
-    nav a {
-        font-size: 0.875rem;
-        padding: 4px 8px;
+    nav a,
+    header button {
+        font-size: 0.9375rem;
+        padding: 12px 16px;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        touch-action: manipulation;
     }
     
     /* Hero sections */
@@ -682,23 +690,30 @@
     }
 }
 
-/* Touch device optimizations */
-@media (hover: none) and (pointer: coarse) {
+/* Touch device & mobile viewport optimizations */
+@media (max-width: 768px), (pointer: coarse) {
     button,
     .command-btn,
     .command-center {
         min-height: 44px;
         min-width: 44px;
+        touch-action: manipulation;
     }
     
-    nav a {
+    nav a,
+    .nav-test a,
+    .chapter-nav-links a {
         min-height: 44px;
+        min-width: 44px;
         padding: 12px 16px;
+        display: inline-flex;
+        align-items: center;
+        touch-action: manipulation;
     }
     
     .skip-link {
         min-height: 44px;
-        padding: 12px 16px;
+        padding: 12px 20px;
     }
 }
 
@@ -718,12 +733,16 @@
     }
     
     nav {
-        gap: 8px;
+        gap: 10px;
     }
     
     nav a {
-        font-size: 0.75rem;
-        padding: 4px 8px;
+        font-size: 0.8125rem;
+        padding: 10px 14px;
+        min-height: 44px;
+        min-width: 44px;
+        display: inline-flex;
+        align-items: center;
     }
     
     .chapter-hero {
@@ -733,4 +752,51 @@
     .chapter-hero h1 {
         font-size: 1.5rem;
     }
+}
+
+/* ==================================================
+    PERFORMANCE & ACCESSIBILITY OPTIMIZATIONS
+    ================================================== */
+
+/* Performance: Reduce layout shifts */
+img, picture, video {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Performance: Enable GPU acceleration for transforms */
+.transform-gpu {
+    transform: translateZ(0);
+}
+
+/* Performance: Optimize animations */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Accessibility: Focus management */
+*:focus {
+    outline: 2px solid #60a5fa;
+    outline-offset: 2px;
+}
+
+/* Touch-friendly minimum sizes */
+button, a, .btn, .settings-btn {
+    min-height: 44px;
+    min-width: 44px;
+}
+
+/* Performance: Optimize scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Performance: Reduce paint on scroll */
+body {
+    contain: layout style paint;
 }

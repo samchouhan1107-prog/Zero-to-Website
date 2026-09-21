@@ -134,6 +134,106 @@
             outline-offset: 2px;
         }
         
+        /* Touch-friendly settings panel */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: #ffffff;
+            border-left: 1px solid #e6ccd0;
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .settings-panel.active {
+            right: 0;
+        }
+        
+        .settings-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e6ccd0;
+        }
+        
+        .settings-panel-header h3 {
+            margin: 0;
+            color: #1c0b0f;
+            font-size: 1.25rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: #5e3a40;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            background: #fcf7f7;
+            color: #1c0b0f;
+        }
+        
+        .settings-panel-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .settings-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #e6ccd0;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            min-height: 56px;
+            touch-action: manipulation;
+        }
+        
+        .settings-btn:hover {
+            background: #fcf7f7;
+            border-color: #d90429;
+            transform: translateY(-1px);
+        }
+        
+        .settings-btn:active {
+            transform: translateY(0);
+        }
+        
+        .settings-btn:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        .btn-icon {
+            font-size: 1.25rem;
+            min-width: 24px;
+        }
+        
+        .btn-text {
+            font-weight: 500;
+            color: #1c0b0f;
+        }
+        
+        /* Mobile responsive adjustments */
         @media (max-width: 767px) {
             .mobile-nav-toggle {
                 display: block;
@@ -155,6 +255,61 @@
             .mobile-nav-menu.active {
                 display: block;
             }
+            
+            .settings-panel {
+                width: 100%;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                max-height: 100vh;
+                overflow-y: auto;
+                z-index: 1001;
+            }
+            
+            .settings-panel.active,
+            .settings-panel.show {
+                right: 0;
+            }
+            
+            .settings-panel-header {
+                padding-bottom: 12px;
+            }
+            
+            .settings-btn {
+                padding: 14px;
+                font-size: 0.8125rem;
+                min-height: 48px;
+            }
+            
+            .btn-icon {
+                font-size: 1.125rem;
+            }
+        }
+        
+        /* Focus indicators for accessibility */
+        *:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .btn {
+                border: 2px solid currentColor;
+            }
+            
+            .settings-btn {
+                border: 2px solid currentColor;
+            }
         }
     </style>
     
@@ -163,6 +318,8 @@
     <noscript><link rel="stylesheet" href="../../../Assets/css/main.css"></noscript>
     <link rel="preload" href="../../../Assets/css/lesson.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="../../../Assets/css/lesson.css"></noscript>
+    <link rel="preload" href="../../../Assets/css/mobile-optimized.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="../../../Assets/css/mobile-optimized.css"></noscript>
     
     <!-- Critical JS -->
     <script>
@@ -171,7 +328,12 @@
             const mobileToggle = document.getElementById('mobileNavToggle');
             const nav = document.querySelector('nav');
             const mobileMenu = document.querySelector('.mobile-nav-menu');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const settingsBtnMobile = document.getElementById('settingsBtnMobile');
             
+            // Mobile navigation functionality
             if (mobileToggle && nav) {
                 mobileToggle.addEventListener('click', function(e) {
                     e.preventDefault();
@@ -181,33 +343,121 @@
                     // Update aria-expanded for accessibility
                     const isExpanded = nav.classList.contains('active');
                     mobileToggle.setAttribute('aria-expanded', isExpanded);
+                    mobileToggle.setAttribute('aria-label', isExpanded ? 'Close navigation menu' : 'Open navigation menu');
                 });
             }
             
             // Close mobile menu when clicking outside
             document.addEventListener('click', function(e) {
-                if (!nav.contains(e.target) && !mobileToggle.contains(e.target)) {
+                if (!nav.contains(e.target) && !mobileToggle.contains(e.target) && nav.classList.contains('active')) {
                     nav.classList.remove('active');
                     mobileMenu.classList.remove('active');
                     mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
                 }
             });
             
             // Keyboard navigation
             document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && nav.classList.contains('active')) {
+                if (e.key === 'Escape') {
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                        mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                        mobileToggle.focus();
+                    }
+                    if (settingsPanel && settingsPanel.classList.contains('active')) {
+                        settingsPanel.classList.remove('active');
+                        settingsBtnMobile.focus();
+                    }
+                }
+            });
+            
+            // Settings panel functionality
+            if (closeSettingsBtn && settingsPanel) {
+                closeSettingsBtn.addEventListener('click', function() {
+                    settingsPanel.classList.remove('active');
+                    settingsBtnMobile.focus();
+                });
+            }
+            
+            // Mobile navigation close from settings
+            if (mobileNavClose && nav && mobileMenu) {
+                mobileNavClose.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    settingsPanel.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                    mobileToggle.focus();
+                });
+            }
+            
+            // Settings button in mobile menu
+            if (settingsBtnMobile && settingsPanel) {
+                settingsBtnMobile.addEventListener('click', function() {
+                    settingsPanel.classList.add('active');
                     nav.classList.remove('active');
                     mobileMenu.classList.remove('active');
                     mobileToggle.setAttribute('aria-expanded', 'false');
-                    mobileToggle.focus();
-                }
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                });
+            }
+            
+            // Touch gesture support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
             });
+            
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                // Swipe left to open navigation
+                if (diff > swipeThreshold && !nav.classList.contains('active')) {
+                    nav.classList.add('active');
+                    mobileMenu.classList.add('active');
+                    mobileToggle.setAttribute('aria-expanded', 'true');
+                    mobileToggle.setAttribute('aria-label', 'Close navigation menu');
+                }
+                
+                // Swipe right to close navigation
+                if (diff < -swipeThreshold && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                }
+            }
+            
+            // Performance optimization: throttle touch events
+            let touchThrottle = false;
+            document.addEventListener('touchmove', function(e) {
+                if (!touchThrottle) {
+                    touchThrottle = true;
+                    setTimeout(() => {
+                        touchThrottle = false;
+                    }, 100);
+                }
+            }, { passive: true });
         });
     </script>
     
+    <!-- Performance monitoring -->
+    <script src="../../../Assets/js/performance-monitor.js" async fetchpriority="low"></script>
+    
     <!-- Non-critical JS loaded with async -->
     <script src="../../../Assets/js/main.js" async fetchpriority="low"></script>
-    <script src="../../../Assets/js/lesson.js" async fetchpriority="low"></script>
+    <script src="../../../Assets/js/lesson-optimized.js" async fetchpriority="low"></script>
 </head>
 <body class="lesson-page">
     <header>

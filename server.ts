@@ -665,6 +665,7 @@ async function startServer() {
         appType: "spa",
       });
       app.use(vite.middlewares);
+      app.use('/Assets', express.static(path.join(process.cwd(), 'Assets')));
     } else {
       console.warn("[WARN] Vite not available, serving static dist");
       const distPath = path.join(process.cwd(), "dist");
@@ -672,7 +673,35 @@ async function startServer() {
     }
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath, { index: 'index.html', extensions: ['html'] }));
+
+    // Static assets caching: hashed files in /assets get 1-year immutable cache
+    app.use('/assets', express.static(path.join(distPath, 'assets'), {
+      maxAge: '1y',
+      immutable: true,
+    }));
+
+    // Repository static assets (/Assets) get 1-day cache with stale-while-revalidate
+    app.use('/Assets', express.static(path.join(process.cwd(), 'Assets'), {
+      maxAge: '1d',
+      setHeaders: (res, filePath) => {
+        if (/\.(css|js)$/.test(filePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        }
+      }
+    }));
+
+    // Other static files in dist
+    app.use(express.static(distPath, { 
+      index: 'index.html', 
+      extensions: ['html'],
+      setHeaders: (res, filePath) => {
+        if (filePath.endsWith('.html')) {
+          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+        } else if (/\.(woff2?|ttf|eot|svg|png|jpg|jpeg|webp|ico)$/.test(filePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
+        }
+      }
+    }));
 
     // Static HTML page routes
     const staticPages = [
@@ -691,6 +720,7 @@ async function startServer() {
       app.get(`/${page}`, (req, res) => {
         const pagePath = path.join(distPath, page);
         if (fs.existsSync(pagePath)) {
+          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
           res.sendFile(pagePath);
         } else {
           res.redirect(301, '/index.html');

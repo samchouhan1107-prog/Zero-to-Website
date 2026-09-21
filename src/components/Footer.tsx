@@ -87,7 +87,7 @@ export const Footer: React.FC<FooterProps> = ({
   ];
 
   return (
-    <footer id="main-platform-footer" className="mt-20 border-t border-app-border bg-app-surface/95 text-app-ink">
+    <footer id="main-platform-footer" role="contentinfo" className="mt-20 border-t border-app-border bg-app-surface/95 text-app-ink">
       {/* Top Banner: Brand Mission, Realtime Status & Quick Actions */}
       <div className="border-b border-app-border/70 bg-app-inset/40 py-8 px-4 sm:px-6 lg:px-10">
         <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -97,7 +97,7 @@ export const Footer: React.FC<FooterProps> = ({
               <button
                 type="button"
                 onClick={onNavigateHome}
-                className="inline-flex items-center transition-opacity hover:opacity-90 text-left"
+                className="inline-flex items-center transition-opacity hover:opacity-90 text-left touch-manipulation min-h-[44px]"
                 aria-label="WebZoneBW SC Home"
               >
                 <WebZoneBrandLogo size="md" />
@@ -125,7 +125,7 @@ export const Footer: React.FC<FooterProps> = ({
               <button
                 type="button"
                 onClick={onNavigatePractice}
-                className="inline-flex items-center gap-1.5 rounded-lg border border-app-border bg-app-surface px-3 py-1.5 text-xs font-medium text-app-ink hover:border-app-amber/50 hover:text-app-amber transition-colors"
+                className="inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-app-border bg-app-surface px-3 py-2 text-xs font-medium text-app-ink hover:border-app-amber/50 hover:text-app-amber transition-colors touch-manipulation"
               >
                 <Terminal className="h-3.5 w-3.5 text-app-amber" />
                 <span>Launch REPL</span>
@@ -135,7 +135,7 @@ export const Footer: React.FC<FooterProps> = ({
             <button
               type="button"
               onClick={onOpenTutor}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-app-amber/40 bg-app-amber/15 px-3 py-1.5 text-xs font-semibold text-app-amber hover:bg-app-amber/25 transition-colors"
+              className="inline-flex min-h-[40px] items-center gap-1.5 rounded-lg border border-app-amber/40 bg-app-amber/15 px-3 py-2 text-xs font-semibold text-app-amber hover:bg-app-amber/25 transition-colors touch-manipulation"
             >
               <Sparkles className="h-3.5 w-3.5" />
               <span>Ask AI Tutor</span>
@@ -155,11 +155,11 @@ export const Footer: React.FC<FooterProps> = ({
                 Web &amp; Dev Tools
               </h3>
             </div>
-            <ul className="space-y-2.5 text-xs text-app-muted">
+            <ul className="space-y-1 text-xs text-app-muted">
               <li>
                 <a
                   href="/webtools.html"
-                  className="group flex w-full items-center justify-between hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] w-full items-center justify-between py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <span className="flex items-center gap-2">
                     <Terminal className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
@@ -173,7 +173,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/imagetools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Box className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>CSS Box Model Studio</span>
@@ -182,7 +182,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/imagetools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Layers className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>Flexbox Layout Studio</span>
@@ -191,7 +191,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/developertools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Grid className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>CSS Grid Matrix</span>
@@ -200,7 +200,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/developertools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Cpu className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>DOM Tree Inspector</span>
@@ -209,7 +209,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/developertools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Network className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>HTTP &amp; DNS Flow Trace</span>
@@ -218,7 +218,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <a
                   href="/developertools.html"
-                  className="group flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="group flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <GitBranch className="h-3.5 w-3.5 text-app-subtle group-hover:text-app-amber" />
                   <span>Git Commit DAG Explorer</span>
@@ -242,7 +242,7 @@ export const Footer: React.FC<FooterProps> = ({
                   <li key={ch.id}>
                     <a
                       href={`/learn.html`}
-                      className="group flex items-center gap-1.5 hover:text-app-amber transition-colors text-left"
+                      className="group flex min-h-[36px] items-center gap-1.5 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                     >
                       <span className="font-mono text-[10px] font-bold text-app-subtle group-hover:text-app-amber">
                         Ch {ch.number}:
@@ -256,7 +256,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li>
                   <a
                     href="/learn.html"
-                    className="font-mono text-[11px] font-semibold text-app-amber hover:underline pt-1 inline-flex items-center gap-1"
+                    className="font-mono text-[11px] font-semibold text-app-amber hover:underline pt-1 min-h-[36px] inline-flex items-center gap-1 touch-manipulation"
                   >
                     <span>View all {defaultChapters.length} chapters →</span>
                   </a>
@@ -273,12 +273,12 @@ export const Footer: React.FC<FooterProps> = ({
                 Developer Resources
               </h3>
             </div>
-            <ul className="space-y-2.5 text-xs text-app-muted">
+            <ul className="space-y-1 text-xs text-app-muted">
               <li>
                 <button
                   type="button"
                   onClick={onOpenTutor}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Sparkles className="h-3.5 w-3.5 text-app-amber" />
                   <span>24/7 AI Code Tutor</span>
@@ -288,7 +288,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={onNavigateActivities}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Cpu className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Recall Drills &amp; Bug Hunt</span>
@@ -298,7 +298,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={onOpenMilestones}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Award className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Developer Milestones &amp; XP</span>
@@ -308,7 +308,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={onOpenCertificate}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <FileText className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Certificate of Completion</span>
@@ -318,7 +318,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={onOpenSearch}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Search className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Global Search &amp; Index (⌘K)</span>
@@ -328,7 +328,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <li>
                   <a
                     href="/blog.html"
-                    className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                    className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                   >
                     <FileText className="h-3.5 w-3.5 text-app-subtle" />
                     <span>Blog &amp; Tutorials</span>
@@ -339,7 +339,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={onNavigatePractice}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Code2 className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Interactive Sandboxes &amp; REPL</span>
@@ -356,12 +356,12 @@ export const Footer: React.FC<FooterProps> = ({
                 Trust &amp; Compliance
               </h3>
             </div>
-            <ul className="space-y-2.5 text-xs text-app-muted">
+            <ul className="space-y-1 text-xs text-app-muted">
               <li>
                 <button
                   type="button"
                   onClick={() => onOpenLegal('privacy')}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Lock className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Privacy Policy (GDPR / CCPA)</span>
@@ -371,7 +371,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenLegal('terms')}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Scale className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Terms of Service &amp; Fair Use</span>
@@ -381,7 +381,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenLegal('cookies')}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <FileText className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Cookie &amp; Ad Policies (TCF v2.2)</span>
@@ -391,7 +391,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenLegal('about')}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Shield className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Editorial Standards (E-E-A-T)</span>
@@ -401,7 +401,7 @@ export const Footer: React.FC<FooterProps> = ({
                 <button
                   type="button"
                   onClick={() => onOpenLegal('contact')}
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Mail className="h-3.5 w-3.5 text-app-subtle" />
                   <span>Contact Editorial Desk</span>
@@ -412,7 +412,7 @@ export const Footer: React.FC<FooterProps> = ({
                   href="https://webzonebw.in/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 hover:text-app-amber transition-colors text-left text-app-amber/90"
+                  className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left text-app-amber/90 touch-manipulation"
                 >
                   <ExternalLink className="h-3.5 w-3.5 text-app-amber" />
                   <span>Enquiry Portal (webzonebw.in)</span>

@@ -11,6 +11,7 @@ import {
   Zap,
   Smartphone,
   Cloud,
+  BarChart3,
 } from 'lucide-react';
 import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
 import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
