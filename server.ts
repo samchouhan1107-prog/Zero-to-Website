@@ -126,35 +126,37 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// ─── Legacy query-URL migration (301/308 permanent redirects) ───
-// Rebuilds the query string without non-canonical lesson/blog params and
-// redirects to the clean path. Remaining params (e.g. tracking) are preserved.
-function legacyQueryRedirect(req: express.Request, res: express.Response, next: express.NextFunction) {
-  const lessonId = req.query.lesson;
-  const blogSlug = req.query.blog;
+// ─── Legacy query-URL migration (301 permanent redirects) ───
+// Applied to ALL GET paths so any URL carrying ?lesson=/?blog= (including
+// /index.html, deep paths, or array-typed params) is permanently migrated
+// to the clean canonical route instead of ever rendering a duplicate page.
+const TRACKING_PARAM_RE = /^(utm_|fbclid|gclid|msclkid|ref|source|igshid|mc_[a-z])/i;
+const CACHE_BUSTING_RE = /^(v|cache|nocache|ts|t|_)$/i;
 
-  if (typeof blogSlug === "string" && blogSlug) {
-    const qs = buildForwardQuery(req, "blog");
-    return res.redirect(301, `/blog/${encodeURIComponent(blogSlug)}${qs}`);
-  }
-  if (typeof lessonId === "string" && lessonId) {
-    const qs = buildForwardQuery(req, "lesson");
-    return res.redirect(301, `/lessons/${encodeURIComponent(lessonId)}${qs}`);
-  }
+function legacyQueryRedirect(req: express.Request, res: express.Response, next: express.NextFunction) {
+  // Normalize array-typed params (?lesson=a&lesson=b) to first value
+  const first = (v: unknown): string | null =>
+    typeof v === "string" && v ? v : Array.isArray(v) && typeof v[0] === "string" && v[0] ? v[0] : null;
+
+  const blogSlug = first(req.query.blog);
+  const lessonId = first(req.query.lesson);
+
+  const forward = (exclude: string): string => {
+    const rest = { ...req.query } as Record<string, unknown>;
+    delete rest[exclude];
+    // Drop tracking & cache-busting params so clean URLs stay clean
+    const parts = Object.entries(rest)
+      .filter(([k, v]) => !TRACKING_PARAM_RE.test(k) && !CACHE_BUSTING_RE.test(k) && typeof v === "string" && v !== "")
+      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v as string)}`);
+    return parts.length ? `?${parts.join("&")}` : "";
+  };
+
+  if (blogSlug) return res.redirect(301, `/blog/${encodeURIComponent(blogSlug)}${forward("blog")}`);
+  if (lessonId) return res.redirect(301, `/lessons/${encodeURIComponent(lessonId)}${forward("lesson")}`);
   next();
 }
 
-// Build a query string excluding the migrated parameter
-function buildForwardQuery(req: express.Request, exclude: string): string {
-  const rest = { ...req.query } as Record<string, any>;
-  delete rest[exclude];
-  const parts = Object.entries(rest)
-    .filter(([, v]) => v != null && v !== "")
-    .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(String(v))}`);
-  return parts.length ? `?${parts.join("&")}` : "";
-}
-
-app.get("/", legacyQueryRedirect);
+app.use(legacyQueryRedirect);
 
 // ─── SSR helpers: resolve lesson / blog data and inject SEO head tags ───
 import { BLOG_POSTS } from "./src/data/blogData";
