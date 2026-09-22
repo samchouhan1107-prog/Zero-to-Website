@@ -28,6 +28,7 @@ import { Footer } from '../components/Footer';
 import { BlogView } from '../components/BlogView';
 import { WorkspaceView } from '../components/WorkspaceView';
 import { AnimatedBackground } from '../components/AnimatedBackground';
+import { EnhancedDeveloperTools } from '../components/EnhancedDeveloperTools';
 import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
 import { NEWS_UPDATES } from '../data/newsData';
 import { useAuth } from './AuthContext';
@@ -284,7 +285,7 @@ export default function App() {
         return;
       }
 
-      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog', 'workspace'].includes(viewParam)) {
+      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog', 'workspace', 'developertools', 'imagetools', 'webtools'].includes(viewParam)) {
         setActiveView(viewParam);
       }
     } catch {}
@@ -750,6 +751,77 @@ export default function App() {
                   onOpenTutor={() => handleOpenTutor()}
                   onNavigateHome={() => navigateToView('home')}
                 />
+              </motion.div>
+            )}
+
+            {activeView === 'developertools' && (
+              <motion.div
+                key="developertools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <EnhancedDeveloperTools />
+              </motion.div>
+            )}
+
+            {activeView === 'imagetools' && (
+              <motion.div
+                key="imagetools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <div className="imagetools-container">
+                  <h1 className="text-3xl font-bold mb-6">Image Tools</h1>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">Image Optimizer</h3>
+                      <p>Compress and optimize your images for better web performance.</p>
+                    </div>
+                    <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">Image Resizer</h3>
+                      <p>Resize and crop images to fit your exact requirements.</p>
+                    </div>
+                    <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">Format Converter</h3>
+                      <p>Convert between different image formats (PNG, JPEG, WebP, etc.).</p>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeView === 'webtools' && (
+              <motion.div
+                key="webtools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <div className="webtools-container">
+                  <h1 className="text-3xl font-bold mb-6">Web Tools</h1>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="text-xl font-semibold mb-3">HTML Validator</h3>
+                      <p>Validate your HTML code for compliance and best practices.</p>
+                    </div>
+                    <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="text-xl font-semibold mb-3">CSS Optimizer</h3>
+                      <p>Optimize and minify your CSS for better performance.</p>
+                    </div>
+                    <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
+                      <h3 className="text-xl font-semibold mb-3">JSON Formatter</h3>
+                      <p>Format and validate JSON data with syntax highlighting.</p>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

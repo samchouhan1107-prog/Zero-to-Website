@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from '../App.tsx';
+import App from './App.tsx';
 
 // Developer Tools specific initialization
 const initializeDeveloperTools = () => {
@@ -21,14 +21,6 @@ const initializeDeveloperTools = () => {
     }
   });
 };
-
-// Initialize the React app with developer tools context
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
 // Initialize developer tools-specific functionality
 initializeDeveloperTools();

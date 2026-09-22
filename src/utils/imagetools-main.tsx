@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from '../App.tsx';
+import App from './App.tsx';
 
 // Image Tools specific initialization
 const initializeImageTools = () => {
@@ -21,14 +21,6 @@ const initializeImageTools = () => {
     }
   });
 };
-
-// Initialize the React app with image tools context
-const root = ReactDOM.createRoot(document.getElementById('root')!);
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
 // Initialize image tools-specific functionality
 initializeImageTools();
