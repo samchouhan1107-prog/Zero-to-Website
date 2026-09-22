@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>404 - Page Not Found | WebZoneBW SC</title>
+    <meta name="description" content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools, tutorials, and web engineering curriculum." />
+    <meta name="keywords" content="404 error, page not found, web developer tools, CSS flexbox, CSS grid, HTML tutorials, JavaScript lessons, web development" />
+    <meta name="author" content="WebZoneBW" />
+    <meta name="robots" content="noindex, follow" />
+    <link rel="canonical" href="https://webzonebw.shop/404.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webzonebw.shop/404.html" />
+    <meta property="og:title" content="404 - Page Not Found | WebZoneBW SC" />
+    <meta property="og:description" content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools and tutorials." />
+    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:site_name" content="WebZoneBW SC" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://webzonebw.shop/404.html" />
+    <meta property="twitter:title" content="404 - Page Not Found | WebZoneBW SC" />
+    <meta property="twitter:description" content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools and tutorials." />
+    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+
+    <!-- AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+         crossorigin="anonymous"></script>
+
+    <!-- Legal Disclosures & Reach Out Connection -->
+    <link rel="privacy-policy" href="https://webzonebw.shop/privacy-policy.html" />
+    <link rel="terms-of-service" href="https://webzonebw.shop/terms-of-service.html" />
+    <link rel="copyright" href="https://webzonebw.shop/about.html" />
+    <link rel="help" href="https://webzonebw.in/" title="Official WebZoneBW Reach Out &amp; Enquiry Reference" />
+
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+
+    <!-- Preconnect & Asset Loading Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+    </noscript>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-L1KR6MWWP3');
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #e2e8f0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+      
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        flex: 1;
+      }
+      
+      .error-container {
+        text-align: center;
+        padding: 4rem 0;
+      }
+      
+      .error-code {
+        font-size: 8rem;
+        font-weight: 900;
+        color: #3b82f6;
+        line-height: 1;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+      }
+      
+      .error-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: #f1f5f9;
+      }
+      
+      .error-message {
+        font-size: 1.25rem;
+        color: #94a3b8;
+        margin-bottom: 3rem;
+        line-height: 1.6;
+      }
+      
+      .search-container {
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 2rem;
+        margin-bottom: 3rem;
+        backdrop-filter: blur(10px);
+      }
+      
+      .search-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #f1f5f9;
+      }
+      
+      .search-box {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+      
+      .search-input {
+        flex: 1;
+        padding: 1rem;
+        border: 2px solid #334155;
+        border-radius: 8px;
+        background: #1e293b;
+        color: #e2e8f0;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+      
+      .search-input:focus {
+        outline: none;
+        border-color: #3b82f6;
+      }
+      
+      .search-btn {
+        padding: 1rem 2rem;
+        background: #3b82f6;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .search-btn:hover {
+        background: #2563eb;
+      }
+      
+      .quick-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+      
+      .quick-link-card {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 1.5rem;
+        text-decoration: none;
+        color: #e2e8f0;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
+      
+      .quick-link-card:hover {
+        background: rgba(59, 130, 246, 0.1);
+        border-color: #3b82f6;
+        transform: translateY(-2px);
+      }
+      
+      .quick-link-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+      }
+      
+      .quick-link-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      
+      .quick-link-desc {
+        font-size: 0.9rem;
+        color: #94a3b8;
+        line-height: 1.5;
+      }
+      
+      .contact-info {
+        background: rgba(30, 41, 59, 0.8);
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 2rem;
+        text-align: center;
+        backdrop-filter: blur(10px);
+      }
+      
+      .contact-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: #f1f5f9;
+      }
+      
+      .contact-links {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+      }
+      
+      .contact-link {
+        color: #3b82f6;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+      }
+      
+      .contact-link:hover {
+        color: #2563eb;
+      }
+      
+      footer {
+        background: rgba(15, 23, 42, 0.9);
+        border-top: 1px solid #334155;
+        padding: 2rem 0;
+        text-align: center;
+        color: #94a3b8;
+      }
+      
+      .footer-content {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+      
+      .footer-links {
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        margin-bottom: 1rem;
+        flex-wrap: wrap;
+      }
+      
+      .footer-link {
+        color: #94a3b8;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .footer-link:hover {
+        color: #3b82f6;
+      }
+      
+      @media (max-width: 768px) {
+        .error-code {
+          font-size: 6rem;
+        }
+        
+        .error-title {
+          font-size: 2rem;
+        }
+        
+        .search-box {
+          flex-direction: column;
+        }
+        
+        .quick-links {
+          grid-template-columns: 1fr;
+        }
+        
+        .footer-links {
+          flex-direction: column;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="error-container">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+          Oops! The page you're looking for doesn't exist or has been moved. 
+          Don't worry, let's help you find what you need.
+        </p>
+      </div>
+
+      <div class="search-container">
+        <h2 class="search-title">🔍 Search WebZoneBW.shop</h2>
+        <div class="search-box">
+          <input 
+            type="text" 
+            class="search-input" 
+            placeholder="Search for tools, tutorials, or topics..."
+            id="searchInput"
+          >
+          <button class="search-btn" onclick="performSearch()">Search</button>
+        </div>
+        <p style="color: #94a3b8; font-size: 0.9rem;">
+          Try searching for: CSS Grid, JavaScript, HTML, Flexbox, Bootstrap, etc.
+        </p>
+      </div>
+
+      <div class="quick-links">
+        <a href="/" class="quick-link-card">
+          <div class="quick-link-icon">🏠</div>
+          <div class="quick-link-title">Home</div>
+          <div class="quick-link-desc">Start exploring our developer tools and tutorials</div>
+        </a>
+        
+        <a href="/learn.html" class="quick-link-card">
+          <div class="quick-link-icon">📚</div>
+          <div class="quick-link-title">Learn Web Development</div>
+          <div class="quick-link-desc">Complete curriculum from HTML to advanced JavaScript</div>
+        </a>
+        
+        <a href="/webtools.html" class="quick-link-card">
+          <div class="quick-link-icon">🛠️</div>
+          <div class="quick-link-title">Developer Tools</div>
+          <div class="quick-link-desc">Interactive CSS Grid, Flexbox, and HTML sandboxes</div>
+        </a>
+        
+        <a href="/Workspace.html" class="quick-link-card">
+          <div class="quick-link-icon">💻</div>
+          <div class="quick-link-title">Workspace</div>
+          <div class="quick-link-desc">Practice coding with live environments</div>
+        </a>
+      </div>
+
+      <div class="contact-info">
+        <h3 class="contact-title">Still can't find what you're looking for?</h3>
+        <div class="contact-links">
+          <a href="/contact.html" class="contact-link">Contact Us</a>
+          <a href="https://webzonebw.in/" class="contact-link" target="_blank">Visit webzonebw.in for support</a>
+          <a href="mailto:enquiry@webzonebw.in" class="contact-link">enquiry@webzonebw.in</a>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="/privacy-policy.html" class="footer-link">Privacy Policy</a>
+          <a href="/cookie-policy.html" class="footer-link">Cookie Policy</a>
+          <a href="/terms-of-service.html" class="footer-link">Terms of Service</a>
+          <a href="/about.html" class="footer-link">About</a>
+          <a href="/contact.html" class="footer-link">Contact</a>
+          <a href="https://webzonebw.in/" class="footer-link" target="_blank">Reach Out & Enquiry</a>
+        </div>
+        <p>&copy; 2026 WebZoneBW SC. Connected with <a href="https://webzonebw.in/" style="color:#3b82f6;text-decoration:underline;">webzonebw.in</a> for inquiries and data transparency.</p>
+      </div>
+    </footer>
+
+    <script>
+      function performSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const query = searchInput.value.trim();
+        
+        if (query) {
+          // Create Google search URL with site restriction
+          const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}+site:webzonebw.shop`;
+          window.open(searchUrl, '_blank');
+        }
+      }
+      
+      // Allow Enter key to trigger search
+      document.getElementById('searchInput').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          performSearch();
+        }
+      });
+      
+      // Track 404 page views
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          'page_title': '404 - Page Not Found',
+          'page_location': window.location.href
+        });
+      }
+    </script>
+  </body>
+</html>
