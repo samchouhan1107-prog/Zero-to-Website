@@ -32,7 +32,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           <div className="flex items-center gap-2">
             <Award className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white">
-              WebZone Storehouse Certificate of Web Development Mastery
+              WebZoneBW Certificate of Web Development Mastery
             </h3>
           </div>
           <button

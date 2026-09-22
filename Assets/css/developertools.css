@@ -1,4 +1,4 @@
-/* Developer Tools Page Styles */
+/* Developer Tools Page Styles - Standardized with Main Design System */
 .developertools-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,12 +8,16 @@
 .developertools-hero {
   text-align: center;
   margin-bottom: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
 }
 
 .developertools-hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #60a5fa;
+  color: var(--primary);
 }
 
 .developertools-grid {
@@ -24,14 +28,20 @@
 }
 
 .developertools-category {
-  background: #1a1a1f;
-  border: 1px solid #27272a;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem;
+  transition: all 0.2s ease;
+}
+
+.developertools-category:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .developertools-category h2 {
-  color: #60a5fa;
+  color: var(--primary);
   margin-bottom: 1.5rem;
   font-size: 1.5rem;
 }
@@ -43,10 +53,11 @@
 
 .developertools-list li {
   padding: 1rem 0;
-  border-bottom: 1px solid #27272a;
+  border-bottom: 1px solid var(--border);
   display: flex;
   align-items: center;
   gap: 1rem;
+  color: var(--text);
 }
 
 .developertools-list li:last-child {
@@ -56,7 +67,7 @@
 .developertools-icon {
   width: 24px;
   height: 24px;
-  color: #60a5fa;
+  color: var(--primary);
 }
 
 .developertools-tools {
@@ -67,15 +78,16 @@
 }
 
 .developertool-card {
-  background: #1a1a1f;
-  border: 1px solid #27272a;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 1.5rem;
   transition: all 0.2s ease;
 }
 
 .developertool-card:hover {
-  background: #27272a;
-  border-color: #60a5fa;
+  background: var(--background);
+  border-color: var(--primary);
   transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }

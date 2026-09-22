@@ -136,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const settingsBtn = document.getElementById("settingsBtn");
     const settingsPanel = document.getElementById("settingsPanel");
+    const closeSettingsBtn = document.getElementById("closeSettingsBtn");
+    const backdrop = attachCommandBackdrop();
     const roadmapButtons = document.querySelectorAll(".roadmap-btn");
     const currentUrl = new URL(window.location.href);
     const siteRootHref = currentUrl.href.replace(/\/Chapters\/.*$/, "/");
@@ -153,7 +155,6 @@ document.addEventListener("DOMContentLoaded", () => {
         settingsBtn.setAttribute("aria-label", "Open settings panel");
     }
 
-    const closeSettingsBtn = document.getElementById("closeSettingsBtn");
     if (closeSettingsBtn && settingsPanel && backdrop) {
         const hidePanel = () => {
             settingsPanel.classList.remove("show");

@@ -1,4 +1,4 @@
-/* Learn Page Styles */
+/* Learn Page Styles - Standardized with Main Design System */
 .learn-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -8,17 +8,21 @@
 .learn-hero {
   text-align: center;
   margin-bottom: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
 }
 
 .learn-hero h1 {
   font-size: 2.5rem;
   margin-bottom: 1rem;
-  color: #60a5fa;
+  color: var(--primary);
 }
 
 .learn-description {
   font-size: 1.1rem;
-  color: #a1a1aa;
+  color: var(--muted);
   margin-bottom: 2rem;
   max-width: 800px;
   margin-left: auto;
@@ -33,29 +37,29 @@
 }
 
 .learn-chapter {
-  background: #1a1a1f;
-  border: 1px solid #27272a;
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 12px;
   padding: 2rem;
   transition: all 0.2s ease;
 }
 
 .learn-chapter:hover {
-  background: #27272a;
-  border-color: #60a5fa;
+  border-color: var(--primary);
   transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .learn-chapter h3 {
-  color: #60a5fa;
+  color: var(--primary);
   margin-bottom: 1rem;
   font-size: 1.3rem;
 }
 
 .learn-chapter-number {
   display: inline-block;
-  background: #3b82f6;
-  color: white;
+  background: var(--primary);
+  color: var(--white);
   padding: 0.25rem 0.75rem;
   border-radius: 6px;
   font-size: 0.9rem;
@@ -71,15 +75,21 @@
 }
 
 .learn-path {
-  background: #1a1a1f;
-  border: 1px solid #27272a;
-  border-radius: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
   padding: 1.5rem;
   text-align: center;
+  transition: all 0.2s ease;
+}
+
+.learn-path:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
 }
 
 .learn-path h4 {
-  color: #60a5fa;
+  color: var(--primary);
   margin-bottom: 1rem;
 }
 
@@ -91,11 +101,11 @@
 
 .learn-features li {
   padding: 0.5rem 0;
-  color: #a1a1aa;
+  color: var(--muted);
 }
 
 .learn-features li:before {
   content: "✓ ";
-  color: #10b981;
+  color: var(--primary);
   font-weight: bold;
 }
