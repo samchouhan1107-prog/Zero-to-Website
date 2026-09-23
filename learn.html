@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <!-- Primary SEO Meta Tags -->
+  <title>Learn | WebZoneBW SC — Complete Web Engineering Curriculum</title>
+  <meta name="description" content="WebZoneBW Learn — Complete web engineering curriculum with interactive lessons, hands-on projects, and structured learning paths from HTML basics to advanced JavaScript and responsive design.">
+  <meta name="keywords" content="web development course, learn HTML CSS JavaScript, web engineering curriculum, interactive learning, coding tutorials, responsive design, Bootstrap">
+  <meta name="author" content="WebZoneBW">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="https://webzonebw.shop/learn.html">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://webzonebw.shop/learn.html">
+  <meta property="og:title" content="Learn | WebZoneBW SC — Complete Web Engineering Curriculum">
+  <meta property="og:description" content="Complete web engineering curriculum with interactive lessons, hands-on projects, and structured learning paths from HTML basics to advanced JavaScript and responsive design.">
+  <meta property="og:image" content="https://webzonebw.shop/og-image.svg">
+  <meta property="og:site_name" content="WebZoneBW SC">
+  <meta property="og:locale" content="en_US">
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://webzonebw.shop/learn.html">
+  <meta property="twitter:title" content="Learn | WebZoneBW SC — Complete Web Engineering Curriculum">
+  <meta property="twitter:description" content="Complete web engineering curriculum with interactive lessons, hands-on projects, and structured learning paths from HTML basics to advanced JavaScript and responsive design.">
+  <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg">
+  
+  <!-- AdSense -->
+  <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
+  
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+       crossorigin="anonymous"></script>
+  
+  <!-- Legal Disclosures & Reach Out Connection -->
+  <link rel="privacy-policy" href="https://webzonebw.shop/privacy-policy.html" />
+  <link rel="terms-of-service" href="https://webzonebw.shop/terms-of-service.html" />
+  <link rel="copyright" href="https://webzonebw.shop/about.html" />
+  <link rel="help" href="https://webzonebw.in/" title="Official WebZoneBW Reach Out & Enquiry Reference" />
+
+  <meta name="theme-color" content="#0f172a" />
+
+  <!-- Favicons -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>" />
+  
+  <!-- Preconnect & Asset Loading Optimization -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
+  </noscript>
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="/Assets/css/main.css">
+  <link rel="stylesheet" href="/Assets/css/learn.css">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      min-height: 100vh;
+    }
+    
+    .learn-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .learn-hero {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    
+    .learn-hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .learn-hero p {
+      font-size: 1.2rem;
+      color: #94a3b8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    
+    .learning-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+    
+    .stat-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .stat-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    
+    .stat-number {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #3b82f6;
+      margin-bottom: 0.5rem;
+    }
+    
+    .stat-label {
+      color: #94a3b8;
+      font-size: 0.875rem;
+    }
+    
+    .curriculum-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .chapter-card {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .chapter-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(59, 130, 246, 0.4);
+      box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.2);
+    }
+    
+    .chapter-number {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.125rem;
+    }
+    
+    .chapter-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      margin-bottom: 1rem;
+    }
+    
+    .chapter-title {
+      color: #3b82f6;
+      margin-bottom: 0.5rem;
+      font-size: 1.375rem;
+    }
+    
+    .chapter-description {
+      color: #94a3b8;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+    
+    .chapter-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+      font-size: 0.875rem;
+      color: #64748b;
+    }
+    
+    .lessons-count {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    
+    .difficulty {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    
+    .difficulty-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #64748b;
+    }
+    
+    .difficulty-dot.active {
+      background: #3b82f6;
+    }
+    
+    .chapter-progress {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 1rem;
+    }
+    
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    
+    .chapter-btn {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      color: white;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      width: 100%;
+      justify-content: center;
+    }
+    
+    .chapter-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 16px -4px rgba(59, 130, 246, 0.3);
+    }
+    
+    .chapter-btn.completed {
+      background: linear-gradient(135deg, #22c55e, #16a34a);
+    }
+    
+    .learning-path {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .path-title {
+      text-align: center;
+      color: #3b82f6;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+    
+    .path-stages {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .path-stage {
+      text-align: center;
+      flex: 1;
+      min-width: 120px;
+      position: relative;
+    }
+    
+    .path-stage:not(:last-child)::after {
+      content: '→';
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #64748b;
+      font-size: 1.25rem;
+    }
+    
+    .stage-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(59, 130, 246, 0.2);
+      border: 2px solid rgba(59, 130, 246, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin: 0 auto 0.5rem;
+      transition: all 0.3s ease;
+    }
+    
+    .path-stage.active .stage-icon {
+      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+      border-color: transparent;
+      color: white;
+    }
+    
+    .stage-title {
+      color: #f8fafc;
+      font-size: 0.875rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    
+    .stage-description {
+      color: #64748b;
+      font-size: 0.75rem;
+    }
+    
+    .features-section {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-bottom: 3rem;
+    }
+    
+    .features-title {
+      text-align: center;
+      color: #3b82f6;
+      margin-bottom: 2rem;
+      font-size: 1.5rem;
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+    
+    .feature-item {
+      text-align: center;
+      padding: 1.5rem;
+      background: rgba(15, 23, 42, 0.8);
+      border-radius: 12px;
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-item:hover {
+      transform: translateY(-2px);
+      border-color: rgba(59, 130, 246, 0.4);
+    }
+    
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    .feature-title {
+      color: #3b82f6;
+      margin-bottom: 0.5rem;
+      font-size: 1.125rem;
+    }
+    
+    .feature-description {
+      color: #94a3b8;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    
+    @media (max-width: 768px) {
+      .learn-container {
+        padding: 1rem;
+      }
+      
+      .learn-hero h1 {
+        font-size: 2rem;
+      }
+      
+      .curriculum-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .path-stages {
+        flex-direction: column;
+      }
+      
+      .path-stage:not(:last-child)::after {
+        content: '';
+        position: static;
+        transform: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to main content link for screen readers -->
+  <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+  
+  <div class="learn-container">
+    
+    <!-- Hero Section -->
+    <section class="learn-hero" id="main-content">
+      <div class="badge">Web Engineering Curriculum</div>
+      <h1>Complete Web Development Course</h1>
+      <p>Master modern web development with our structured curriculum. From HTML basics to advanced JavaScript and responsive design.</p>
+    </section>
+
+    <!-- Learning Statistics -->
+    <section class="learning-stats">
+      <div class="stat-card">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Chapters</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Lessons</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Practice Exercises</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">20+</div>
+        <div class="stat-label">Projects</div>
+      </div>
+    </section>
+
+    <!-- Learning Path -->
+    <section class="learning-path">
+      <h2 class="path-title">🎯 Learning Path</h2>
+      <div class="path-stages">
+        <div class="path-stage active">
+          <div class="stage-icon">📖</div>
+          <div class="stage-title">Learn</div>
+          <div class="stage-description">Theory & Concepts</div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-icon">🔧</div>
+          <div class="stage-title">Practice</div>
+          <div class="stage-description">Hands-on Coding</div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-icon">🎨</div>
+          <div class="stage-title">Build</div>
+          <div class="stage-description">Projects & Apps</div>
+        </div>
+        <div class="path-stage">
+          <div class="stage-icon">🏆</div>
+          <div class="stage-title">Master</div>
+          <div class="stage-description">Advanced Skills</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Curriculum Grid -->
+    <section class="curriculum-grid">
+      <div class="chapter-card">
+        <div class="chapter-number">00</div>
+        <div class="chapter-icon">🚀</div>
+        <h3 class="chapter-title">Introduction</h3>
+        <p class="chapter-description">Get started with web development fundamentals and understand what you'll learn throughout the course.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>2 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 100%"></div>
+        </div>
+        <button class="chapter-btn completed" onclick="window.location.href='/Chapters/Chapter-00-Introduction/index.html'">
+          ✓ Completed
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">01</div>
+        <div class="chapter-icon">💻</div>
+        <h3 class="chapter-title">Development Environment</h3>
+        <p class="chapter-description">Set up your development workspace, choose the right tools, and learn professional workflows.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>5 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 80%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-01-Development%20Environment/index.html'">
+          Continue Learning →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">02</div>
+        <div class="chapter-icon">📄</div>
+        <h3 class="chapter-title">HTML</h3>
+        <p class="chapter-description">Master semantic HTML5, accessibility, and modern markup practices for professional websites.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>8 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 60%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-02-HTML/index.html'">
+          Start HTML →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">03</div>
+        <div class="chapter-icon">🎨</div>
+        <h3 class="chapter-title">CSS</h3>
+        <p class="chapter-description">Learn modern CSS techniques, styling, animations, and responsive design principles.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>7 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 40%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-03-CSS/index.html'">
+          Start CSS →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">04</div>
+        <div class="chapter-icon">📐</div>
+        <h3 class="chapter-title">Flexbox</h3>
+        <p class="chapter-description">Master CSS Flexbox for creating flexible, responsive layouts with ease and precision.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>7 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 20%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-04-Flexbox/index.html'">
+          Start Flexbox →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">05</div>
+        <div class="chapter-icon">🔲</div>
+        <h3 class="chapter-title">CSS Grid</h3>
+        <p class="chapter-description">Create complex 2D layouts with CSS Grid, master grid areas, and advanced layout techniques.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>6 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-05-CSS%20Grid/index.html'">
+          Start Grid →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">06</div>
+        <div class="chapter-icon">⚡</div>
+        <h3 class="chapter-title">JavaScript</h3>
+        <p class="chapter-description">Learn programming fundamentals, DOM manipulation, events, and modern JavaScript features.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>10 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-06-JavaScript/index.html'">
+          Start JavaScript →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">07</div>
+        <div class="chapter-icon">📱</div>
+        <h3 class="chapter-title">Responsive Design</h3>
+        <p class="chapter-description">Create websites that work perfectly on all devices with modern responsive techniques.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>7 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-07-Responsive%20Design/index.html'">
+          Start Responsive →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">08</div>
+        <div class="chapter-icon">🎩</div>
+        <h3 class="chapter-title">Bootstrap</h3>
+        <p class="chapter-description">Learn the Bootstrap framework and create professional, responsive websites quickly.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>5 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-08-Bootstrap/index.html'">
+          Start Bootstrap →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">09</div>
+        <div class="chapter-icon">🌿</div>
+        <h3 class="chapter-title">Git & GitHub</h3>
+        <p class="chapter-description">Version control mastery, collaboration workflows, and professional development practices.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>4 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-09-Git%20%26%20GitHub/index.html'">
+          Start Git →
+        </button>
+      </div>
+      
+      <div class="chapter-card">
+        <div class="chapter-number">10</div>
+        <div class="chapter-icon">🚀</div>
+        <h3 class="chapter-title">Final Project</h3>
+        <p class="chapter-description">Build a complete portfolio website and deploy it to production with all learned skills.</p>
+        <div class="chapter-meta">
+          <div class="lessons-count">
+            <span>3 lessons</span>
+          </div>
+          <div class="difficulty">
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+            <span class="difficulty-dot active"></span>
+          </div>
+        </div>
+        <div class="chapter-progress">
+          <div class="progress-fill" style="width: 0%"></div>
+        </div>
+        <button class="chapter-btn" onclick="window.location.href='/Chapters/Chapter-10-Final%20Project%20%26%20Deployment/index.html'">
+          Start Project →
+        </button>
+      </div>
+    </section>
+
+    <!-- Learning Features -->
+    <section class="features-section">
+      <h2 class="features-title">🌟 Learning Features</h2>
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎯</div>
+          <h4 class="feature-title">Structured Learning</h4>
+          <p class="feature-description">Clear progression from beginner to advanced with comprehensive coverage of each topic</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔧</div>
+          <h4 class="feature-title">Hands-on Practice</h4>
+          <p class="feature-description">Interactive coding exercises and real-world projects to reinforce learning</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎨</div>
+          <h4 class="feature-title">Visual Learning</h4>
+          <p class="feature-description">Interactive tools and visualizations to understand complex concepts easily</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📱</div>
+          <h4 class="feature-title">Mobile Friendly</h4>
+          <p class="feature-description">Learn anywhere with responsive design that works on all devices</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🏆</div>
+          <h4 class="feature-title">Progress Tracking</h4>
+          <p class="feature-description">Monitor your learning progress and celebrate achievements along the way</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🤖</div>
+          <h4 class="feature-title">AI Assistance</h4>
+          <p class="feature-description">Get instant help from our AI tutor when you get stuck on challenging concepts</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Settings Panel -->
+  <div class="settings-panel" id="settingsPanel">
+    <button class="close-btn" aria-label="Close settings">✖</button>
+    <h3>Settings</h3>
+  </div>
+  
+  <footer>
+    <p>
+      <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> ·
+      <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> ·
+      <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> ·
+      <a href="/about.html" rel="nofollow">About</a> ·
+      <a href="/contact.html" rel="nofollow">Contact</a> ·
+      <a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer">Reach Out &amp; Enquiry (webzonebw.in)</a>
+    </p>
+    <p>&copy; 2026 WebZoneBW SC. Connected with <a href="https://webzonebw.in/" style="color:#a1a1aa;text-decoration:underline;">webzonebw.in</a> for inquiries and data transparency.</p>
+  </footer>
+
+  <script src="/Assets/js/main.js"></script>
+</body>
+</html>
