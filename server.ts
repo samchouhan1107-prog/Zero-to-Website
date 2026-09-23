@@ -12,7 +12,7 @@ import { cleanupExpiredSessions } from "./server/db";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(express.json());
 
@@ -121,8 +121,15 @@ app.use("/Chapters", (req, res, next) => {
   next();
 });
 
+// Test route
+app.get("/test", (_req, res) => {
+  console.log("[TEST ROUTE] Test endpoint called");
+  res.send("Server is working!");
+});
+
 // API Routes
 app.get("/api/health", (_req, res) => {
+  console.log("[HEALTH CHECK] Health endpoint called");
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
@@ -659,15 +666,16 @@ async function startServer() {
     process.argv[1]?.endsWith(".cjs");
 
   if (!isProduction) {
-    if (createViteServer) {
-      const vite = await createViteServer({
+    try {
+      const { createServer } = await import("vite");
+      const vite = await createServer({
         server: { middlewareMode: true },
         appType: "spa",
       });
       app.use(vite.middlewares);
       app.use('/Assets', express.static(path.join(process.cwd(), 'Assets')));
-    } else {
-      console.warn("[WARN] Vite not available, serving static dist");
+    } catch (error) {
+      console.warn("[WARN] Vite not available, serving static dist:", error.message);
       const distPath = path.join(process.cwd(), "dist");
       app.use(express.static(distPath));
     }
@@ -751,9 +759,30 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, "0.0.0.0", () => {
-    console.log(`WZ Storehouse Server running on http://0.0.0.0:${PORT}`);
-  });
+  try {
+    const server = app.listen(PORT, () => {
+      console.log(`WZ Storehouse Server running on http://0.0.0.0:${PORT}`);
+      console.log(`Server address: ${server.address()}`);
+    });
+
+    server.on('error', (err) => {
+      console.error('[ERROR] Failed to start server:', err);
+    });
+
+    server.on('listening', () => {
+      console.log(`[SUCCESS] Server is listening on port ${PORT}`);
+      console.log(`[SUCCESS] Access at: http://localhost:${PORT}`);
+    });
+
+    // Log the actual server address after a short delay
+    setTimeout(() => {
+      console.log(`[DEBUG] Server actual address: ${server.address()}`);
+      console.log(`[DEBUG] Server listening state: ${server.listening}`);
+    }, 1000);
+
+  } catch (err) {
+    console.error('[FATAL] Error creating server:', err);
+  }
 }
 
 startServer().catch((err) => {
