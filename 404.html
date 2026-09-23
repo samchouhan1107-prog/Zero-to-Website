@@ -365,16 +365,19 @@
       </div>
 
       <div class="search-container">
-        <h2 class="search-title">ðŸ” Search WebZoneBW.shop</h2>
-        <div class="search-box">
+        <h2 class="search-title">🔍 Search WebZoneBW.shop</h2>
+        <form class="search-box" id="searchForm">
           <input
-            type="text"
+            type="search"
             class="search-input"
             placeholder="Search for tools, tutorials, or topics..."
             id="searchInput"
+            name="q"
+            autocomplete="off"
+            aria-label="Search WebZoneBW.shop"
           />
-          <button class="search-btn" onclick="performSearch()">Search</button>
-        </div>
+          <button class="search-btn" type="submit" id="searchButton">Search</button>
+        </form>
         <p style="color: #94a3b8; font-size: 0.9rem">
           Try searching for: CSS Grid, JavaScript, HTML, Flexbox, Bootstrap,
           etc.
@@ -456,25 +459,24 @@
     </footer>
 
     <script>
-      function performSearch() {
-        const searchInput = document.getElementById("searchInput");
+      const searchForm = document.getElementById("searchForm");
+      const searchInput = document.getElementById("searchInput");
+
+      searchForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
         const query = searchInput.value.trim();
-
-        if (query) {
-          // Create Google search URL with site restriction
-          const searchUrl = `https://www.google.com/search?q=${encodeURIComponent(query)}+site:webzonebw.shop`;
-          window.open(searchUrl, "_blank");
+        if (!query) {
+          searchInput.focus();
+          return;
         }
-      }
 
-      // Allow Enter key to trigger search
-      document
-        .getElementById("searchInput")
-        .addEventListener("keypress", function (e) {
-          if (e.key === "Enter") {
-            performSearch();
-          }
-        });
+        const searchUrl =
+          "https://www.google.com/search?q=" +
+          encodeURIComponent(query + " site:webzonebw.shop");
+
+        window.open(searchUrl, "_blank", "noopener,noreferrer");
+      });
 
       // Track 404 page views
       if (typeof gtag !== "undefined") {
