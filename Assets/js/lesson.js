@@ -1,5 +1,5 @@
 /* ==================================================
-   WZ Storehouse - lesson.js
+   WebZoneBW SC - lesson.js
    Author  : Sameer Chouhan
    Version : 2.0
 ================================================== */

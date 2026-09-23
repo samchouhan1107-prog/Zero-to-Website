@@ -1,174 +1,580 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE html>
 
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 03 | CSS Mastery & Box Model - WZ Storehouse</title>
-    <link rel="stylesheet" href="/Assets/css/main.css">
-    <link rel="stylesheet" href="/Assets/css/ad-styles.css">
-    <script src="/Assets/js/main.js" defer></script>
-    
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-         crossorigin="anonymous"></script>
+<title>Chapter 03 | CSS Mastery &amp; Box Model — WebZoneBW</title>
+
+<meta
+    name="description"
+    content="Chapter 03 of WebZoneBW: learn CSS selectors, specificity, the cascade, box model, colors, typography, positioning, spacing, visual styling, and advanced selectors."
+>
+
+<meta name="theme-color" content="#111111">
+
+<link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon/favicon.ico"
+>
+
+<link
+    rel="stylesheet"
+    href="/assets/css/style.css"
+>
+
+<script
+    src="/assets/js/main.js"
+    defer
+></script>
+
+<!-- AdSense -->
+<script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+    crossorigin="anonymous"
+></script>
+
 </head>
 
-<body class="chapter-page">
-    <!-- ==========================
-         HEADER
-    =========================== -->
+<body class="chapter-page chapter-css">
+<!-- =========================
+     SITE HEADER
+========================== -->
+<header class="site-header">
 
-    <header>
-        <div class="logo">
-            <a href="/index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
-        </div>
-
-        <nav>
-            <a href="/index.html">🏠 Home</a>
-            <a href="../Chapter-02-HTML/index.html">⬅ Previous</a>
-            <a href="../Chapter-04-Flexbox/index.html">Next ➜</a>
-            <button id="settingsBtn">⚙ Settings</button>
-        </nav>
-    </header>
-
-    <!-- ==========================
-         SETTINGS PANEL
-    =========================== -->
-
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    <div class="logo">
+        <a
+            href="/index.html"
+            class="logo-link"
+            aria-label="WebZoneBW home"
+        >
+            <h1>WebZoneBW</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
     </div>
 
-    <!-- ==========================
-         MAIN LAYOUT
-    =========================== -->
+    <nav aria-label="Primary navigation">
 
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 03</span>
-            <h1>CSS Mastery &amp; The Box Model</h1>
-            <p>Master the visual styling engine of the web: colors, typography, margins, padding, borders, and CSS variables.</p>
+        <a href="/index.html">
+            🏠 Home
+        </a>
 
-            <div class="info-grid">
-                <div class="summary-card">
-                    <h3>Difficulty</h3>
-                    <p>Beginner to Intermediate</p>
+        <a href="../Chapter-02-HTML/index.html">
+            ← Previous
+        </a>
+
+        <a href="../Chapter-04-Flexbox/index.html">
+            Next →
+        </a>
+
+        <button
+            type="button"
+            id="settingsBtn"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+        >
+            ⚙ Settings
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================== -->
+<aside
+    id="settingsPanel"
+    class="settings-panel"
+    aria-label="Site settings"
+    hidden
+>
+
+    <h2>⚙ Settings</h2>
+
+    <button
+        type="button"
+        id="darkModeBtn"
+    >
+        🌙 Dark Mode
+    </button>
+
+    <button
+        type="button"
+        id="fontSizeBtn"
+    >
+        🔤 Font Size
+    </button>
+
+    <button
+        type="button"
+        id="closeSettingsBtn"
+        class="close-btn"
+    >
+        ✕ Close
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+<main class="container chapter-page">
+
+    <!-- =========================
+         CHAPTER HERO
+    ========================== -->
+    <section
+        class="chapter-hero"
+        aria-labelledby="chapter-title"
+    >
+
+        <span class="chapter-badge">
+            Chapter 03
+        </span>
+
+        <h1 id="chapter-title">
+            CSS Mastery &amp; The Box Model
+        </h1>
+
+        <p>
+            Learn the visual styling engine of the web. Build a
+            strong CSS foundation through the box model, selectors,
+            specificity, colors, typography, positioning, spacing,
+            and advanced selector patterns.
+        </p>
+
+
+        <div class="info-grid">
+
+            <article class="summary-card">
+                <h2>Difficulty</h2>
+                <p>Beginner to Intermediate</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Lessons</h2>
+                <p>7 Interactive Lessons</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Key Concept</h2>
+                <p>CSS Layout &amp; Styling</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Outcome</h2>
+                <p>Styled Responsive Interfaces</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING OBJECTIVES
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="objectives-title"
+    >
+
+        <h2 id="objectives-title">
+            🎯 Learning Objectives
+        </h2>
+
+        <ul class="chapter-list">
+
+            <li>
+                ✔ Understand the four layers of the CSS Box Model:
+                content, padding, border, and margin.
+            </li>
+
+            <li>
+                ✔ Use <code>box-sizing: border-box</code> to make
+                layout sizing predictable.
+            </li>
+
+            <li>
+                ✔ Understand selectors, specificity, inheritance,
+                and the CSS cascade.
+            </li>
+
+            <li>
+                ✔ Apply modern color systems, typography,
+                CSS variables, and readable visual scales.
+            </li>
+
+            <li>
+                ✔ Understand display modes and CSS positioning.
+            </li>
+
+            <li>
+                ✔ Build consistent spacing and visual styling
+                systems.
+            </li>
+
+            <li>
+                ✔ Use advanced selectors and combinators to target
+                elements precisely.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- =========================
+         LESSONS
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="lessons-title"
+    >
+
+        <h2 id="lessons-title">
+            📚 Chapter 03 Lessons &amp; Practice
+        </h2>
+
+        <div class="lesson-grid">
+
+
+            <!-- LESSON 01 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 01</h3>
+
+                <p>
+                    <strong>The CSS Box Model</strong>
+                    — Understand content, padding, border, margin,
+                    and the <code>border-box</code> sizing model.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-01-Box-Model/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-01-Box-Model/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
-                <div class="summary-card">
-                    <h3>Duration</h3>
-                    <p>3.5 Hours</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Key Topic</h3>
-                    <p>The CSS Box Model</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Outcome</h3>
-                    <p>Style Responsive Cards &amp; Layouts</p>
-                </div>
-            </div>
-        </section>
 
-        <section class="chapter-section">
-            <h2>🎯 Learning Objectives</h2>
-            <ul class="chapter-list">
-                <li>✔ Master the 4 layers of the CSS Box Model (Content, Padding, Border, Margin).</li>
-                <li>✔ Learn why <code>* { box-sizing: border-box; }</code> is essential for layout math.</li>
-                <li>✔ Apply modern colors (HEX, RGB, HSL) and design tokens using CSS variables.</li>
-                <li>✔ Understand CSS Specificity and the Cascade.</li>
-            </ul>
-        </section>
+            </article>
 
-        <section class="chapter-section">
-            <h2>📚 Chapter 03 Lessons &amp; Practices</h2>
-            <div class="lesson-grid">
-                <div class="lesson-card">
-                    <h3>Lesson 01</h3>
-                    <p><strong>The CSS Box Model</strong>: Content, padding, border, margin, and border-box reset.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-01-Box-Model/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-01-Box-Model/practice.html">Practice ⚡</a>
-                    </div>
+
+            <!-- LESSON 02 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 02</h3>
+
+                <p>
+                    <strong>Selectors, Specificity &amp; Cascade</strong>
+                    — Learn how CSS rules are selected, inherited,
+                    compared, and ultimately applied by the browser.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-02-Selectors-Specificity/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-02-Selectors-Specificity/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 02</h3>
-                    <p><strong>Selectors, Specificity &amp; Cascade</strong>: Specificity weights, IDs, classes, and inheritance.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-02-Selectors-Specificity/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-02-Selectors-Specificity/practice.html">Practice ⚡</a>
-                    </div>
+            </article>
+
+
+            <!-- LESSON 03 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 03</h3>
+
+                <p>
+                    <strong>Colors &amp; Typography</strong>
+                    — Work with modern color values, CSS variables,
+                    font scales, line-height, and readable text.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-03-Colors-Typography/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-03-Colors-Typography/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 03</h3>
-                    <p><strong>Colors &amp; Typography</strong>: CSS variables, font scales, line-heights, and contrast.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-03-Colors-Typography/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-03-Colors-Typography/practice.html">Practice ⚡</a>
-                    </div>
+            </article>
+
+
+            <!-- LESSON 04 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 04</h3>
+
+                <p>
+                    <strong>Display &amp; Positioning</strong>
+                    — Understand block and inline formatting,
+                    relative and absolute positioning, fixed
+                    elements, and sticky behavior.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-04-Display-Positioning/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-04-Display-Positioning/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 04</h3>
-                    <p><strong>Display &amp; Positioning</strong>: Block, inline-block, relative, absolute, fixed, and sticky.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-04-Display-Positioning/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-04-Display-Positioning/practice.html">Practice ⚡</a>
-                    </div>
+            </article>
+
+
+            <!-- LESSON 05 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 05</h3>
+
+                <p>
+                    <strong>Spacing &amp; Visual Styling</strong>
+                    — Build consistent spacing systems with margin
+                    and padding while working with borders, radii,
+                    and shadows.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-05-Spacing-Visual-Styling/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-05-Spacing-Visual-Styling/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 05</h3>
-                    <p><strong>Spacing &amp; Visual Styling</strong>: Margin collapse, padding ratios, concentric radii, and soft shadows.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-05-Spacing-Visual-Styling/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-05-Spacing-Visual-Styling/practice.html">Practice ⚡</a>
-                    </div>
+            </article>
+
+
+            <!-- LESSON 06 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 06</h3>
+
+                <p>
+                    <strong>Practical CSS Page Build</strong>
+                    — Bring the chapter concepts together by building
+                    and styling a complete product showcase page.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-06-Practical-CSS-Page-Build/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-06-Practical-CSS-Page-Build/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 06</h3>
-                    <p><strong>Practical CSS Page Build</strong>: Complete product showcase assembly integrating all CSS skills.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-06-Practical-CSS-Page-Build/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-06-Practical-CSS-Page-Build/practice.html">Practice ⚡</a>
-                    </div>
+            </article>
+
+
+            <!-- LESSON 07 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 07</h3>
+
+                <p>
+                    <strong>Advanced Selectors &amp; Combinators</strong>
+                    — Explore child and sibling relationships,
+                    <code>:nth-child()</code>, <code>:is()</code>,
+                    <code>:where()</code>, and <code>:has()</code>.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-07-Advanced-Selectors/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-07-Advanced-Selectors/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
                 </div>
 
-                <div class="lesson-card">
-                    <h3>Lesson 07</h3>
-                    <p><strong>Advanced Selectors &amp; Combinators</strong>: Child combinators, nth-child, :is, :where, and :has.</p>
-                    <div style="display: flex; gap: 8px; margin-top: 10px;">
-                        <a class="btn primary" href="Lesson-07-Advanced-Selectors/lesson.html">Read Lesson ➜</a>
-                        <a class="btn secondary" href="Lesson-07-Advanced-Selectors/practice.html">Practice ⚡</a>
-                    </div>
-                </div>
-            </div>
-        </section>
+            </article>
 
-        <section class="chapter-section chapter-nav-links">
-            <a href="/index.html">🏠 Home</a>
-            <a href="../Chapter-02-HTML/index.html">⬅ Chapter 02: HTML</a>
-            <a href="../Chapter-04-Flexbox/index.html">Chapter 04: Flexbox ➜</a>
-        </section>
-    </main>
+        </div>
 
-    <!-- ==========================
-         FOOTER
-    =========================== -->
+    </section>
 
-    <footer>
-        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
-    </footer>
+
+    <!-- =========================
+         CHAPTER CONNECTION
+    ========================== -->
+    <section
+        class="chapter-section chapter-connection"
+        aria-labelledby="connection-title"
+    >
+
+        <h2 id="connection-title">
+            🔗 Chapter Connection
+        </h2>
+
+        <p>
+            Chapter 03 establishes the visual language of the page:
+            sizing, spacing, typography, selectors, and positioning.
+            Chapter 04 builds on this foundation with Flexbox,
+            introducing a structured way to arrange elements along
+            an axis.
+        </p>
+
+        <div class="chapter-nav-links">
+
+            <a
+                href="../Chapter-02-HTML/index.html"
+            >
+                ← Chapter 02: HTML
+            </a>
+
+            <a
+                href="../Chapter-04-Flexbox/index.html"
+            >
+                Chapter 04: Flexbox →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BRAIN NOTE
+    ========================== -->
+    <section
+        class="chapter-section brain-note"
+        aria-label="WebZoneBW Brain Note"
+    >
+
+        <p>
+            🌋 <strong>Brain Note:</strong>
+            CSS becomes easier when you stop seeing properties as
+            isolated commands. Think:
+            <strong>Selector → Box → Style → Position → Relationship</strong>.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         CHAPTER ACTIONS
+    ========================== -->
+    <section class="chapter-actions">
+
+        <a
+            href="../Chapter-02-HTML/index.html"
+            class="btn secondary"
+        >
+            ← Previous Chapter
+        </a>
+
+        <a
+            href="Lesson-01-Box-Model/lesson.html"
+            class="btn primary"
+        >
+            Start Lesson 01 →
+        </a>
+
+        <a
+            href="../Chapter-04-Flexbox/index.html"
+            class="btn primary"
+        >
+            Next Chapter →
+        </a>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+<footer>
+
+    <p>
+        WebZoneBW |
+        Learn • Practice • Build • Share |
+        &copy; 2026 All Rights Reserved.
+    </p>
+
+</footer>
 
 </body>
-
 </html>

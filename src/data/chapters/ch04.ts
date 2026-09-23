@@ -1,4 +1,4 @@
-import { Chapter } from '../../utils/types';
+﻿import { Chapter } from '../../utils/types';
 
 export const chapter04: Chapter = {
   id: 'ch-04',
@@ -32,7 +32,7 @@ export const chapter04: Chapter = {
           heading: '1. Why Flexbox Changed CSS Forever',
           content: 'Before Flexbox, centering an element vertically or creating a simple equal-height column layout required brittle hacks using float, clearfix, display: table, or negative margins. CSS Flexible Box Layout (Flexbox) introduced a predictable, one-dimensional layout engine.',
           bulletPoints: [
-            'One-Dimensional Layout: Flexbox arranges elements along a single dimension at a time — either as a row or as a column',
+            'One-Dimensional Layout: Flexbox arranges elements along a single dimension at a time â€” either as a row or as a column',
             'Dynamic Distribution: Children automatically grow to fill empty space or shrink to prevent overflow',
             'Effortless Centering: Vertical and horizontal centering becomes a simple 2-property combination'
           ]
@@ -964,7 +964,7 @@ export const chapter04: Chapter = {
           { time: '08:30', seconds: 510, title: 'Universal Centering', description: 'Solving vertical center' }
         ],
         transcript: [
-          { speaker: 'Instructor', time: '00:00', seconds: 0, text: 'No more negative margin tricks — centering in Flexbox is effortless.' }
+          { speaker: 'Instructor', time: '00:00', seconds: 0, text: 'No more negative margin tricks â€” centering in Flexbox is effortless.' }
         ],
         demoAnimationType: 'flex-align'
       },
@@ -1346,7 +1346,7 @@ export const chapter04: Chapter = {
         description: 'Complete navigation header, responsive card grid, and equal-height cards.',
         html: `<div class="app-shell">
   <header class="navbar">
-    <div class="brand">WZ Studio</div>
+    <div class="brand">WebZoneBW Studio</div>
     <nav class="nav-links">
       <a href="#">Dashboard</a>
       <a href="#">Projects</a>

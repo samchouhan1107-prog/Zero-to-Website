@@ -1,0 +1,19 @@
+# WebZoneBW SC - Search Engine Directives (RFC 9309 Compliant)
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /server/
+
+# Full access for Google AdSense Crawler
+User-agent: Mediapartners-Google
+Allow: /
+
+# Full access for Google Search & Image Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+# XML Sitemap
+Sitemap: https://webzonebw.shop/sitemap.xml

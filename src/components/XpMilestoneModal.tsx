@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import {
   Sparkles,
   Award,
@@ -75,7 +75,7 @@ export const XpMilestoneModal: React.FC<XpMilestoneModalProps> = ({
   if (!isOpen) return null;
 
   const handleShare = () => {
-    const text = `🎉 I just hit ${milestone.xpRequired} XP in WZ Storehouse and reached the rank of "${milestone.rank}: ${milestone.title}"! Master web development interactively at WZ Storehouse.`;
+    const text = `ðŸŽ‰ I just hit ${milestone.xpRequired} XP in WebZoneBW Storehouse and reached the rank of "${milestone.rank}: ${milestone.title}"! Master web development interactively at WebZoneBW Storehouse.`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
       setCopied(true);
@@ -117,7 +117,7 @@ export const XpMilestoneModal: React.FC<XpMilestoneModalProps> = ({
 
             <div>
               <span className="text-xs font-mono font-extrabold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
-                ✨ Milestone Achieved! ✨
+                âœ¨ Milestone Achieved! âœ¨
               </span>
               <h2 className="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white mt-1">
                 {milestone.title}

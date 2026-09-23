@@ -1,0 +1,85 @@
+/* Web Tools Page Styles - Standardized with Main Design System */
+.webtools-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.webtools-hero {
+  text-align: center;
+  margin-bottom: 3rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+}
+
+.webtools-hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--primary);
+}
+
+.webtools-categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.webtools-category {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.webtools-category:hover {
+  border-color: var(--primary);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.webtools-category h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.webtools-list {
+  list-style: none;
+  padding: 0;
+}
+
+.webtools-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+
+.webtools-list li:last-child {
+  border-bottom: none;
+}
+
+.webtools-utilities {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.webtool-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.webtool-card:hover {
+  background: var(--background);
+  border-color: var(--primary);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}

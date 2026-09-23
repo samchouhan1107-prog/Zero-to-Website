@@ -1,4 +1,4 @@
-import { XpMilestone } from '../types';
+﻿import { XpMilestone } from '../types';
 
 export const XP_MILESTONES: XpMilestone[] = [
   {
@@ -6,7 +6,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 100,
     title: 'Explorer Debut',
     rank: 'Web Novice',
-    badge: '🧭',
+    badge: 'ðŸ§­',
     rewardDescription: 'Unlocked Interactive Visual Lab & Practice Sandbox',
     unlockedPerks: [
       'Interactive 3D Visualizer Lab Access',
@@ -21,7 +21,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 250,
     title: 'HTML & Semantic Craftsman',
     rank: 'Markup Apprentice',
-    badge: '🧱',
+    badge: 'ðŸ§±',
     rewardDescription: 'Unlocked DOM Tree Inspector & Semantic Hierarchy Analyzer',
     unlockedPerks: [
       'Interactive DOM Tree Generator',
@@ -36,7 +36,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 500,
     title: 'CSS Styling Architect',
     rank: 'Cascade Virtuoso',
-    badge: '🎨',
+    badge: 'ðŸŽ¨',
     rewardDescription: 'Unlocked 3D Box Model Matrix & Flexbox Alignment Playground',
     unlockedPerks: [
       'Interactive Flexbox & CSS Grid Matrix Playground',
@@ -51,7 +51,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 750,
     title: 'JavaScript Logic Dynamo',
     rank: 'Script Engineer',
-    badge: '⚡',
+    badge: 'âš¡',
     rewardDescription: 'Unlocked Async Event Loop Studio & JavaScript Live Sandbox',
     unlockedPerks: [
       'Interactive DOM Event Dispatcher',
@@ -66,7 +66,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 1000,
     title: 'Responsive Layout Pioneer',
     rank: 'Full-Stack Scholar',
-    badge: '📱',
+    badge: 'ðŸ“±',
     rewardDescription: 'Unlocked Multi-Device Responsive Viewport Emulator',
     unlockedPerks: [
       'Mobile/Tablet/Desktop Live Viewport Simulator',
@@ -81,7 +81,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 1500,
     title: 'React & Component Ace',
     rank: 'Component Maestro',
-    badge: '⚛️',
+    badge: 'âš›ï¸',
     rewardDescription: 'Unlocked Component Lifecycle Engine & State Tree Inspector',
     unlockedPerks: [
       'Custom React Hook & State Visualizer',
@@ -96,11 +96,11 @@ export const XP_MILESTONES: XpMilestone[] = [
     xpRequired: 2000,
     title: 'Git Flow & Web Grandmaster',
     rank: 'Lead System Architect',
-    badge: '👑',
+    badge: 'ðŸ‘‘',
     rewardDescription: 'Unlocked Git DAG Branch Graph Simulator & Cloud Deployment Hub',
     unlockedPerks: [
       'Interactive Git Commit & Rebase Simulator',
-      'Official WZ Storehouse Grandmaster Seal',
+      'Official WebZoneBW Storehouse Grandmaster Seal',
       'Lifetime Academic Honor Roll Recognition'
     ],
     motivationQuote: 'You have conquered the full spectrum of modern web development craftsmanship!',
@@ -109,9 +109,9 @@ export const XP_MILESTONES: XpMilestone[] = [
   {
     id: 'milestone-3000',
     xpRequired: 3000,
-    title: 'WZ Storehouse Fellow',
+    title: 'WebZoneBW Storehouse Fellow',
     rank: 'Legendary Pioneer',
-    badge: '🌟',
+    badge: 'ðŸŒŸ',
     rewardDescription: 'Unlocked All Masterclass Secrets & Infinite Prestige Rank',
     unlockedPerks: [
       'Honorary Digital Fellow Badge',

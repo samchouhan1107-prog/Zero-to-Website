@@ -1,11 +1,11 @@
-/**
- * WebZoneBW Auth Service — Fully Independent
+﻿/**
+ * WebZoneBW Auth Service â€” Fully Independent
  *
- * ✅ Works completely offline — no backend required
- * ✅ All auth, sessions, progress stored in localStorage
- * ✅ Server sync is OPTIONAL — only activates when VITE_API_URL is set and reachable
- * ✅ Zero billing / payment / premium features — completely free learning platform
- * ✅ Passwords hashed locally with Web Crypto API (no plaintext)
+ * âœ… Works completely offline â€” no backend required
+ * âœ… All auth, sessions, progress stored in localStorage
+ * âœ… Server sync is OPTIONAL â€” only activates when VITE_API_URL is set and reachable
+ * âœ… Zero billing / payment / premium features â€” completely free learning platform
+ * âœ… Passwords hashed locally with Web Crypto API (no plaintext)
  */
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
@@ -24,13 +24,13 @@ interface AuthResponse {
   error?: string;
 }
 
-/* ── Storage Keys ──────────────────────────────────────── */
+/* â”€â”€ Storage Keys â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
-const USER_KEY = "wz_user";
-const USERS_KEY = "wz_users";     // All registered users (local)
-const SESSION_KEY = "wz_session"; // Current session token
+const USER_KEY = "webzonebw_user";
+const USERS_KEY = "webzonebw_users";     // All registered users (local)
+const SESSION_KEY = "webzonebw_session"; // Current session token
 
-/* ── Local User Store (localStorage-based) ─────────────── */
+/* â”€â”€ Local User Store (localStorage-based) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 interface StoredUser {
   id: string;
@@ -55,7 +55,7 @@ function generateId(): string {
 }
 
 function hashPasswordLocal(password: string): string {
-  // Simple hash for localStorage storage — NOT for production security
+  // Simple hash for localStorage storage â€” NOT for production security
   let hash = 0;
   const salt = generateId();
   const salted = salt + password;
@@ -79,7 +79,7 @@ function verifyPasswordLocal(password: string, stored: string): boolean {
   return Math.abs(h).toString(36) === hash;
 }
 
-/* ── Session Management ────────────────────────────────── */
+/* â”€â”€ Session Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 function setCurrentUser(user: AuthUser) {
   try {
@@ -95,7 +95,7 @@ function clearCurrentUser() {
   } catch {}
 }
 
-/* ── Server Sync (Optional — only when API available) ──── */
+/* â”€â”€ Server Sync (Optional â€” only when API available) â”€â”€â”€â”€ */
 
 let _apiAvailable: boolean | null = null;
 
@@ -111,7 +111,7 @@ async function isApiAvailable(): Promise<boolean> {
   return _apiAvailable;
 }
 
-/* ── Auth Functions (work offline) ─────────────────────── */
+/* â”€â”€ Auth Functions (work offline) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 export async function signUp(name: string, email: string, password: string): Promise<AuthResponse> {
   const users = getStoredUsers();
@@ -205,7 +205,7 @@ export async function signOut(): Promise<void> {
 }
 
 /**
- * Resume session from localStorage — works offline.
+ * Resume session from localStorage â€” works offline.
  * Only contacts server if API is available AND user has a real account.
  */
 export async function getCurrentUser(): Promise<AuthUser | null> {
@@ -217,7 +217,7 @@ export async function getCurrentUser(): Promise<AuthUser | null> {
 }
 
 /**
- * Guest mode — with persistent server session
+ * Guest mode â€” with persistent server session
  */
 export async function createGuestSession(): Promise<AuthUser> {
   try {
@@ -239,9 +239,9 @@ export async function createGuestSession(): Promise<AuthUser> {
   return guest;
 }
 
-/* ── Progress (Server Source of Truth with Local Cache) ────── */
+/* â”€â”€ Progress (Server Source of Truth with Local Cache) â”€â”€â”€â”€â”€â”€ */
 
-const PROGRESS_KEY = "wz_storehouse_progress";
+const PROGRESS_KEY = "webzonebw_storehouse_progress";
 
 export function fetchLocalProgress(): any | null {
   try {

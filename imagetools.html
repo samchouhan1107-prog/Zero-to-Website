@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- Primary SEO Meta Tags -->
-  <title>Image Tools | WebZoneBW SC — CSS Visualizers & Web Development Tools</title>
-  <meta name="description" content="WebZoneBW Image Tools — Interactive CSS visualizers including Flexbox Studio, CSS Grid Matrix, Box Model Inspector, and DOM Tree Explorer for hands-on web development learning.">
+  <title>Image Tools | WebZoneBW SC â€” CSS Visualizers & Web Development Tools</title>
+  <meta name="description" content="WebZoneBW Image Tools â€” Interactive CSS visualizers including Flexbox Studio, CSS Grid Matrix, Box Model Inspector, and DOM Tree Explorer for hands-on web development learning.">
   <meta name="keywords" content="CSS flexbox visualizer, CSS grid tool, box model inspector, DOM tree explorer, CSS visualizers, web development tools, interactive learning">
   <meta name="author" content="WebZoneBW">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -16,7 +16,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://webzonebw.shop/imagetools.html">
-  <meta property="og:title" content="Image Tools | WebZoneBW SC — CSS Visualizers & Web Development Tools">
+  <meta property="og:title" content="Image Tools | WebZoneBW SC â€” CSS Visualizers & Web Development Tools">
   <meta property="og:description" content="Interactive CSS visualizers including Flexbox Studio, CSS Grid Matrix, Box Model Inspector, and DOM Tree Explorer for hands-on web development learning.">
   <meta property="og:image" content="https://webzonebw.shop/og-image.svg">
   <meta property="og:site_name" content="WebZoneBW SC">
@@ -25,7 +25,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://webzonebw.shop/imagetools.html">
-  <meta property="twitter:title" content="Image Tools | WebZoneBW SC — CSS Visualizers & Web Development Tools">
+  <meta property="twitter:title" content="Image Tools | WebZoneBW SC â€” CSS Visualizers & Web Development Tools">
   <meta property="twitter:description" content="Interactive CSS visualizers including Flexbox Studio, CSS Grid Matrix, Box Model Inspector, and DOM Tree Explorer for hands-on web development learning.">
   <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg">
   
@@ -44,7 +44,7 @@
   <meta name="theme-color" content="#0f172a" />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸŽ¨</text></svg>" />
   
   <!-- Preconnect & Asset Loading Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,7 +57,8 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/Assets/css/main.css">
   <link rel="stylesheet" href="/Assets/css/imagetools.css">
-  
+    <link rel="stylesheet" href="/Assets/css/site-nav.css">
+
   <style>
     body {
       margin: 0;
@@ -67,18 +68,18 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
     }
-    
+
     .imagetools-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
     }
-    
+
     .imagetools-hero {
       text-align: center;
       margin-bottom: 3rem;
     }
-    
+
     .imagetools-hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
@@ -87,21 +88,21 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .imagetools-hero p {
       font-size: 1.2rem;
       color: #94a3b8;
       max-width: 600px;
       margin: 0 auto;
     }
-    
+
     .visualizers-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 2rem;
       margin-bottom: 3rem;
     }
-    
+
     .visualizer-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -112,20 +113,20 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .visualizer-card:hover {
       transform: translateY(-4px);
       border-color: rgba(245, 158, 11, 0.4);
       box-shadow: 0 20px 40px -10px rgba(245, 158, 11, 0.2);
     }
-    
+
     .visualizer-header {
       display: flex;
       align-items: center;
       gap: 1rem;
       margin-bottom: 1.5rem;
     }
-    
+
     .visualizer-icon {
       width: 56px;
       height: 56px;
@@ -137,31 +138,31 @@
       font-size: 1.75rem;
       flex-shrink: 0;
     }
-    
+
     .visualizer-title h3 {
       color: #f59e0b;
       margin-bottom: 0.25rem;
       font-size: 1.375rem;
     }
-    
+
     .visualizer-title p {
       color: #64748b;
       font-size: 0.875rem;
       margin: 0;
     }
-    
+
     .visualizer-description {
       color: #94a3b8;
       line-height: 1.6;
       margin-bottom: 1.5rem;
     }
-    
+
     .visualizer-features {
       list-style: none;
       padding: 0;
       margin: 0 0 1.5rem 0;
     }
-    
+
     .visualizer-features li {
       color: #64748b;
       font-size: 0.875rem;
@@ -170,14 +171,14 @@
       align-items: flex-start;
       gap: 0.5rem;
     }
-    
+
     .visualizer-features li::before {
-      content: '▶';
+      content: 'â–¶';
       color: #f59e0b;
       font-size: 0.75rem;
       margin-top: 0.25rem;
     }
-    
+
     .visualizer-btn {
       background: linear-gradient(135deg, #f59e0b, #ef4444);
       color: white;
@@ -195,12 +196,12 @@
       width: 100%;
       justify-content: center;
     }
-    
+
     .visualizer-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 16px -4px rgba(245, 158, 11, 0.3);
     }
-    
+
     .interactive-demo {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -209,19 +210,19 @@
       padding: 2rem;
       margin-bottom: 3rem;
     }
-    
+
     .demo-title {
       text-align: center;
       color: #f59e0b;
       margin-bottom: 1.5rem;
     }
-    
+
     .demo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
     }
-    
+
     .demo-item {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(245, 158, 11, 0.2);
@@ -230,55 +231,55 @@
       text-align: center;
       transition: all 0.2s ease;
     }
-    
+
     .demo-item:hover {
       border-color: rgba(245, 158, 11, 0.4);
       transform: translateY(-2px);
     }
-    
+
     .demo-icon {
       font-size: 2.5rem;
       margin-bottom: 1rem;
     }
-    
+
     .demo-item h4 {
       color: #f59e0b;
       margin-bottom: 0.5rem;
     }
-    
+
     .demo-item p {
       color: #94a3b8;
       font-size: 0.875rem;
       line-height: 1.5;
     }
-    
+
     @media (max-width: 768px) {
       .imagetools-container {
         padding: 1rem;
       }
-      
+
       .imagetools-hero h1 {
         font-size: 2rem;
       }
-      
+
       .visualizers-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      
+
       .demo-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
+<body data-breadcrumb="Home::/index.html | Image Tools">
 
-  <!-- Skip to main content link for screen readers -->
-  <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
-  
+  <!-- Shared Navigation (rendered by site-nav.js) -->
+  <div id="webzonebw-site-nav"></div>
+
   <div class="imagetools-container">
-    
+
     <!-- Hero Section -->
     <section class="imagetools-hero" id="main-content">
       <div class="badge">CSS Visualizers</div>
@@ -288,25 +289,25 @@
 
     <!-- Interactive Demo Section -->
     <section class="interactive-demo">
-      <h2 class="demo-title">🎯 Quick Start</h2>
+      <h2 class="demo-title">ðŸŽ¯ Quick Start</h2>
       <div class="demo-grid">
         <div class="demo-item">
-          <div class="demo-icon">🎨</div>
+          <div class="demo-icon">ðŸŽ¨</div>
           <h4>CSS Flexbox</h4>
           <p>Design 1D layouts with flexible containers and responsive items</p>
         </div>
         <div class="demo-item">
-          <div class="demo-icon">📐</div>
+          <div class="demo-icon">ðŸ“</div>
           <h4>CSS Grid</h4>
           <p>Create complex 2D layouts with precise control over rows and columns</p>
         </div>
         <div class="demo-item">
-          <div class="demo-icon">📦</div>
+          <div class="demo-icon">ðŸ“¦</div>
           <h4>Box Model</h4>
           <p>Understand content, padding, border, and margin relationships</p>
         </div>
         <div class="demo-item">
-          <div class="demo-icon">🌳</div>
+          <div class="demo-icon">ðŸŒ³</div>
           <h4>DOM Tree</h4>
           <p>Explore HTML structure and relationships between elements</p>
         </div>
@@ -317,7 +318,7 @@
     <section class="visualizers-grid">
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">🎨</div>
+          <div class="visualizer-icon">ðŸŽ¨</div>
           <div class="visualizer-title">
             <h3>CSS Flexbox Studio</h3>
             <p>1D Layout System</p>
@@ -334,13 +335,13 @@
           <li>Pre-built templates for common layouts</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Launch Flexbox Studio →
+          Launch Flexbox Studio â†’
         </button>
       </div>
-      
+
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">📐</div>
+          <div class="visualizer-icon">ðŸ“</div>
           <div class="visualizer-title">
             <h3>CSS Grid Matrix</h3>
             <p>2D Layout System</p>
@@ -357,13 +358,13 @@
           <li>CSS code export functionality</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Launch Grid Matrix →
+          Launch Grid Matrix â†’
         </button>
       </div>
-      
+
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">📦</div>
+          <div class="visualizer-icon">ðŸ“¦</div>
           <div class="visualizer-title">
             <h3>Box Model Inspector</h3>
             <p>Layout Fundamentals</p>
@@ -380,13 +381,13 @@
           <li>Best practice recommendations</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Inspect Box Model →
+          Inspect Box Model â†’
         </button>
       </div>
-      
+
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">🌳</div>
+          <div class="visualizer-icon">ðŸŒ³</div>
           <div class="visualizer-title">
             <h3>DOM Tree Explorer</h3>
             <p>Structure Visualization</p>
@@ -403,13 +404,13 @@
           <li>HTML generation from tree</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Explore DOM Tree →
+          Explore DOM Tree â†’
         </button>
       </div>
-      
+
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">🎯</div>
+          <div class="visualizer-icon">ðŸŽ¯</div>
           <div class="visualizer-title">
             <h3>Selector Studio</h3>
             <p>CSS Selection</p>
@@ -426,13 +427,13 @@
           <li>Performance optimization tips</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Test Selectors →
+          Test Selectors â†’
         </button>
       </div>
-      
+
       <div class="visualizer-card">
         <div class="visualizer-header">
-          <div class="visualizer-icon">🎨</div>
+          <div class="visualizer-icon">ðŸŽ¨</div>
           <div class="visualizer-title">
             <h3>Color & Typography</h3>
             <p>Visual Design Tools</p>
@@ -449,14 +450,14 @@
           <li>Design system creation</li>
         </ul>
         <button class="visualizer-btn" onclick="window.location.href='/webtools.html'">
-          Design Studio →
+          Design Studio â†’
         </button>
       </div>
     </section>
 
     <!-- Learning Path -->
     <section style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 16px; padding: 2rem; margin-bottom: 3rem;">
-      <h2 style="color: #f59e0b; text-align: center; margin-bottom: 1.5rem;">🎓 Learning Path</h2>
+      <h2 style="color: #f59e0b; text-align: center; margin-bottom: 1.5rem;">ðŸŽ“ Learning Path</h2>
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
         <div style="text-align: center; padding: 1rem; background: rgba(15, 23, 42, 0.8); border-radius: 12px; border: 1px solid rgba(245, 158, 11, 0.2);">
           <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">1</div>
@@ -485,22 +486,23 @@
 
   <!-- Settings Panel -->
   <div class="settings-panel" id="settingsPanel">
-    <button class="close-btn" aria-label="Close settings">✖</button>
+    <button class="close-btn" aria-label="Close settings">âœ–</button>
     <h3>Settings</h3>
   </div>
-  
+
   <footer>
     <p>
-      <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> ·
-      <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> ·
-      <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> ·
-      <a href="/about.html" rel="nofollow">About</a> ·
-      <a href="/contact.html" rel="nofollow">Contact</a> ·
+      <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> Â·
+      <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> Â·
+      <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> Â·
+      <a href="/about.html" rel="nofollow">About</a> Â·
+      <a href="/contact.html" rel="nofollow">Contact</a> Â·
       <a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer">Reach Out &amp; Enquiry (webzonebw.in)</a>
     </p>
     <p>&copy; 2026 WebZoneBW SC. Connected with <a href="https://webzonebw.in/" style="color:#a1a1aa;text-decoration:underline;">webzonebw.in</a> for inquiries and data transparency.</p>
   </footer>
 
-  <script src="/Assets/js/main.js"></script>
+  <script src="/Assets/js/site-nav.js" defer></script>
+  <script src="/Assets/js/main.js" defer></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-# WZ Storehouse Tab System Implementation Guide
+# WebZoneBW Storehouse Tab System Implementation Guide
 
 ## Overview
 

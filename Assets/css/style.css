@@ -1,0 +1,335 @@
+﻿/* ==================================================
+   WebZoneBW SC â€” style.css
+   Shared foundation: design tokens + reusable components
+   Layered system:
+     style.css        â†’ tokens, resets, shared components (THIS FILE)
+     main.css         â†’ chapter/lesson framework (retained)
+     site-nav.css     â†’ shared header/nav/breadcrumbs (retained)
+     <page>.css       â†’ page-specific layout only
+   Theming: body.dark (default slate night) / body.light (porcelain)
+   Tokens are compatible with --primary/--surface/--border/--text/--muted
+   used by workspace/blog/learn/webtools/imagetools/developertools.css.
+================================================== */
+
+/* ---------- 1. Design tokens ---------- */
+:root,
+body.dark {
+  /* Brand */
+  --primary: #3b82f6;
+  --secondary: #8b5cf6;
+  --accent: #22c55e;
+  --webzonebw-accent: #3b82f6;
+  --webzonebw-accent-2: #8b5cf6;
+  --webzonebw-accent-soft: rgba(59, 130, 246, 0.14);
+
+  /* Surfaces */
+  --background: #0f172a;
+  --bg: #0f172a;
+  --surface: rgba(30, 41, 59, 0.75);
+  --surface-solid: #1e293b;
+  --white: #ffffff;
+
+  /* Text */
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --text-muted: #94a3b8;
+  --text-subtle: #64748b;
+
+  /* Lines */
+  --border: rgba(148, 163, 184, 0.18);
+
+  /* Status */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --error: #ef4444;
+
+  /* Spacing scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2rem;
+  --space-6: 3rem;
+
+  /* Radius */
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  /* Elevation */
+  --shadow-sm: 0 2px 8px rgba(2, 6, 23, 0.35);
+  --shadow: 0 8px 24px rgba(2, 6, 23, 0.45);
+
+  /* Type */
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "JetBrains Mono", Consolas, "Courier New", monospace;
+}
+
+body.light {
+  --primary: #2563eb;
+  --secondary: #7c3aed;
+  --accent: #16a34a;
+  --webzonebw-accent: #2563eb;
+  --webzonebw-accent-2: #7c3aed;
+  --webzonebw-accent-soft: rgba(37, 99, 235, 0.1);
+
+  --background: #fcf7f7;
+  --bg: #fcf7f7;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-solid: #ffffff;
+  --white: #ffffff;
+
+  --text: #1c0b0f;
+  --muted: #5e3a40;
+  --text-muted: #5e3a40;
+  --text-subtle: #8a6a70;
+
+  --border: rgba(28, 11, 15, 0.12);
+
+  --shadow-sm: 0 2px 8px rgba(28, 11, 15, 0.08);
+  --shadow: 0 8px 24px rgba(28, 11, 15, 0.1);
+}
+
+/* ---------- 2. Base reset & typography ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text);
+  background: var(--background);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  margin: 0 0 var(--space-3);
+  color: var(--text);
+}
+
+h1 { font-size: clamp(1.8rem, 4vw, 2.5rem); font-weight: 800; }
+h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); font-weight: 700; }
+h3 { font-size: 1.25rem; font-weight: 700; }
+h4 { font-size: 1.05rem; font-weight: 600; }
+
+p { margin: 0 0 var(--space-3); }
+a { color: var(--primary); }
+img, svg, video { max-width: 100%; height: auto; }
+
+code, kbd, pre, samp { font-family: var(--font-mono); font-size: 0.92em; }
+
+/* ---------- 3. Accessibility ---------- */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- 4. Layout containers ---------- */
+.webzonebw-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--space-5) var(--space-4);
+}
+
+.webzonebw-section { margin-bottom: var(--space-6); }
+
+/* ---------- 5. Cards ---------- */
+.webzonebw-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--space-4);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.webzonebw-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary);
+  box-shadow: var(--shadow);
+}
+
+/* ---------- 6. Buttons ---------- */
+.webzonebw-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.webzonebw-btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+}
+
+.webzonebw-btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(59, 130, 246, 0.35);
+}
+
+.webzonebw-btn-secondary {
+  background: var(--surface-solid);
+  color: var(--text);
+  border-color: var(--border);
+}
+
+.webzonebw-btn-secondary:hover { border-color: var(--primary); }
+
+/* ---------- 7. Forms ---------- */
+.webzonebw-input,
+.webzonebw-select,
+.webzonebw-textarea {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  background: var(--surface-solid);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease;
+}
+
+.webzonebw-input:focus,
+.webzonebw-select:focus,
+.webzonebw-textarea:focus { border-color: var(--primary); outline: none; }
+
+.webzonebw-label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: var(--space-1);
+  color: var(--text);
+}
+
+/* ---------- 8. Tables ---------- */
+.webzonebw-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.webzonebw-table th,
+.webzonebw-table td {
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.webzonebw-table th { color: var(--muted); font-weight: 600; font-size: 0.85rem; }
+
+/* ---------- 9. Code blocks ---------- */
+.webzonebw-code {
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.webzonebw-code code { color: var(--text); }
+
+/* ---------- 10. Notices / notes ---------- */
+.webzonebw-note {
+  border-left: 3px solid var(--primary);
+  background: var(--webzonebw-accent-soft);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: var(--space-3);
+  font-size: 0.92rem;
+}
+
+.webzonebw-note--success { border-left-color: var(--success); }
+.webzonebw-note--warning { border-left-color: var(--warning); }
+
+/* ---------- 11. Progress indicator ---------- */
+.webzonebw-progress {
+  height: 8px;
+  background: var(--surface-solid);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.webzonebw-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* ---------- 12. Badges ---------- */
+.webzonebw-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.2rem 0.7rem;
+  border-radius: 999px;
+  background: var(--webzonebw-accent-soft);
+  color: var(--primary);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* ---------- 13. Responsive grid helpers ---------- */
+.webzonebw-grid { display: grid; gap: var(--space-4); }
+.webzonebw-grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.webzonebw-grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+
+/* ---------- 14. Footer ---------- */
+.webzonebw-footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.webzonebw-footer a { color: var(--muted); }
+.webzonebw-footer a:hover { color: var(--text); }
+
+/* ---------- 15. Light-mode compat for retained page styles ---------- */
+/* Pages styled against main.css's volcanic-porcelain palette keep working
+   because the token names match; only values differ per theme. */
+
+@media (max-width: 640px) {
+  .webzonebw-container { padding: var(--space-4) var(--space-3); }
+}

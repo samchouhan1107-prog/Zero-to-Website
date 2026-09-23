@@ -1,5 +1,5 @@
 /* ==================================================
-   WZ Storehouse
+   WebZoneBW SC
    main.js
 ================================================== */
 
@@ -147,8 +147,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderCommandCenter(settingsPanel);
     loadDarkModeScript();
     initTabs();
-
-    const backdrop = attachCommandBackdrop();
 
     if (settingsBtn) {
         settingsBtn.textContent = "⚙ Settings";

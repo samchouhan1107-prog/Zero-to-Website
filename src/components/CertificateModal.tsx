@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Award, X, Download, Printer, CheckCircle, Sparkles } from 'lucide-react';
 import { UserProgress } from '../utils/types';
 
@@ -82,18 +82,18 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
             </div>
 
             <p className="text-xs text-slate-600 dark:text-slate-300 max-w-xl mx-auto leading-relaxed">
-              has demonstrated technical proficiency across <strong>11 Comprehensive Chapters (00–10)</strong> in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox &amp; Grid Systems, JavaScript (DOM &amp; Async), Responsive Engineering, React Components, and Cloud Deployment.
+              has demonstrated technical proficiency across <strong>11 Comprehensive Chapters (00â€“10)</strong> in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox &amp; Grid Systems, JavaScript (DOM &amp; Async), Responsive Engineering, React Components, and Cloud Deployment.
             </p>
 
             <div className="pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-wrap items-center justify-between text-xs text-slate-500 font-mono gap-4">
               <div>
                 <span className="block text-[10px] text-slate-400 uppercase">Verification ID</span>
-                <strong className="text-indigo-600 dark:text-indigo-400">WZ-STOREHOUSE-{Math.random().toString(36).substring(2, 9).toUpperCase()}</strong>
+                <strong className="text-indigo-600 dark:text-indigo-400">webzonebw-STOREHOUSE-{Math.random().toString(36).substring(2, 9).toUpperCase()}</strong>
               </div>
 
               <div>
                 <span className="block text-[10px] text-slate-400 uppercase">Mastery Score</span>
-                <strong className="text-emerald-600 dark:text-emerald-400">{progress.xpPoints} XP Points • {completedCount}/{totalLessons} Lessons</strong>
+                <strong className="text-emerald-600 dark:text-emerald-400">{progress.xpPoints} XP Points â€¢ {completedCount}/{totalLessons} Lessons</strong>
               </div>
 
               <div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Code2,
   Play,
@@ -48,7 +48,7 @@ const TEMPLATES = [
   </div>
   <button id="action-btn" class="btn">
     <span>Trigger Event</span>
-    <span class="arrow">→</span>
+    <span class="arrow">â†’</span>
   </button>
 </div>`,
     css: `body {
@@ -169,7 +169,7 @@ btn.addEventListener('click', () => {
     desc: 'Fluid responsive layout using CSS auto-fit Grid with flexbox sub-elements.',
     html: `<div class="container">
   <header class="header">
-    <div class="logo">⚡ LayoutMatrix</div>
+    <div class="logo">âš¡ LayoutMatrix</div>
     <nav class="nav">
       <a href="#flex">Flexbox</a>
       <a href="#grid">Grid</a>
@@ -362,7 +362,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [scratchpadNote, setScratchpadNote] = useState<string>(() => {
     try {
-      return localStorage.getItem('wz_workspace_scratchpad') || '### Architectural Notes & Experiment Log\n- Test CSS Grid with auto-fit and minmax\n- Compare microtasks vs macrotasks in the event loop\n- Everything here saves locally on your device with 100% privacy';
+      return localStorage.getItem('webzonebw_workspace_scratchpad') || '### Architectural Notes & Experiment Log\n- Test CSS Grid with auto-fit and minmax\n- Compare microtasks vs macrotasks in the event loop\n- Everything here saves locally on your device with 100% privacy';
     } catch {
       return '';
     }
@@ -374,7 +374,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   const handleSaveScratchpad = (val: string) => {
     setScratchpadNote(val);
     try {
-      localStorage.setItem('wz_workspace_scratchpad', val);
+      localStorage.setItem('webzonebw_workspace_scratchpad', val);
       setScratchpadSaved(true);
       setTimeout(() => setScratchpadSaved(false), 2000);
     } catch {}
@@ -491,7 +491,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               </span>
               <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-0.5 font-mono text-[11px] font-semibold text-emerald-600 dark:text-emerald-400">
                 <ShieldCheck className="h-3 w-3" />
-                <span>100% Client-Side Private · Zero Tracking Lock-In</span>
+                <span>100% Client-Side Private Â· Zero Tracking Lock-In</span>
               </span>
             </div>
 
@@ -549,7 +549,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               >
                 <span>{tmpl.title}</span>
                 <span className="text-[10px] opacity-60 transition-transform duration-200 group-hover:translate-x-0.5">
-                  →
+                  â†’
                 </span>
               </button>
             );
@@ -652,7 +652,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                 <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
                 <span>Live Browser Sandbox Ready</span>
               </span>
-              <span>UTF-8 · Client-Side Memory</span>
+              <span>UTF-8 Â· Client-Side Memory</span>
             </div>
           </div>
         </div>

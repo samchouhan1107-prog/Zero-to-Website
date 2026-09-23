@@ -1,593 +1,263 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 02 | HTML Fundamentals — WebZoneBW</title>
 
-<title>Chapter 02 | HTML Fundamentals</title>
+    <meta
+        name="description"
+        content="Learn HTML fundamentals, document structure, tags, elements, and the foundations of building webpages with WebZoneBW."
+    >
 
+    <link rel="icon" href="/assets/favicon/favicon.ico">
 
-<link rel="stylesheet" href="/Assets/css/main.css">
-<link rel="stylesheet" href="/Assets/css/ad-styles.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js" defer></script>
 
-<script src="/Assets/js/main.js" defer></script>
-
-<!-- AdSense -->
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-     crossorigin="anonymous"></script>
-
+    <!-- AdSense -->
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+        crossorigin="anonymous">
+    </script>
 </head>
-
 
 <body class="chapter-page">
 
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-<header>
+    <header>
 
+        <div class="logo">
+            <a href="/index.html" class="logo-link">
+                <h1>WebZoneBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
 
-<div class="logo">
+        <nav aria-label="Primary navigation">
 
-<a href="/index.html" class="logo-link">
+            <a href="/index.html">
+                🏠 Home
+            </a>
 
-<h1>
-WZ STOREHOUSE
-</h1>
+            <a href="../Chapter-01-Development Environment/index.html">
+                ← Previous
+            </a>
 
-<p>
-Learn • Practice • Build • Share
-</p>
+            <a href="../Chapter-03-CSS/index.html">
+                Next →
+            </a>
 
-</a>
+            <button
+                id="settingsBtn"
+                type="button"
+                aria-controls="settingsPanel"
+                aria-expanded="false">
+                ⚙ Settings
+            </button>
 
-</div>
+        </nav>
 
+    </header>
 
 
-<nav>
+    <!-- =========================
+         SETTINGS PANEL
+    ========================== -->
 
-<a href="/index.html">
-🏠 Home
-</a>
+    <div
+        id="settingsPanel"
+        class="settings-panel"
+        hidden>
 
+        <h3>⚙ Settings</h3>
 
-<a href="../Chapter-01-Development Environment/index.html">
-⬅ Previous
-</a>
+        <button id="darkModeBtn" type="button">
+            🌙 Dark Mode
+        </button>
 
+        <button id="searchBtn" type="button">
+            🔍 Search Lessons
+        </button>
 
-<a href="../Chapter-03-CSS/index.html">
-Next ➜
-</a>
+        <button id="fontSizeBtn" type="button">
+            🔤 Font Size
+        </button>
 
+        <button id="languageBtn" type="button">
+            🌐 Language
+        </button>
 
-<button id="settingsBtn">
-⚙ Settings
-</button>
+        <button id="readingModeBtn" type="button">
+            📖 Reading Mode
+        </button>
 
+        <button id="helpBtn" type="button">
+            ❓ Help
+        </button>
 
-</nav>
+        <button id="aboutBtn" type="button">
+            ℹ About
+        </button>
 
+        <button
+            id="closeSettingsBtn"
+            class="close-btn"
+            type="button">
+            ✕ Close
+        </button>
 
-</header>
+    </div>
 
 
+    <!-- =========================
+         MAIN
+    ========================== -->
 
+    <main class="chapter-page">
 
+        <!-- =========================
+             BREADCRUMB
+        ========================== -->
 
+        <section class="container">
 
-<!-- SETTINGS PANEL -->
+            <div class="chapter-breadcrumb">
+                <a href="/index.html">WebZoneBW</a>
+                <span>→</span>
+                <span>Learn</span>
+                <span>→</span>
+                <strong>Chapter 02</strong>
+            </div>
 
-<div id="settingsPanel" class="settings-panel">
+        </section>
 
 
-<h3>
-⚙ Settings
-</h3>
+        <!-- =========================
+             CHAPTER HERO
+        ========================== -->
 
+        <section class="container">
 
-<button id="darkModeBtn">
-🌙 Dark Mode
-</button>
+            <div class="chapter-hero">
 
+                <span class="chapter-badge">
+                    Chapter 02
+                </span>
 
-<button id="searchBtn">
-🔍 Search Lessons
-</button>
+                <h1>
+                    HTML Fundamentals
+                </h1>
 
+                <p>
+                    Every website begins with HTML.
+                    Learn how webpages are structured, how browsers
+                    interpret HTML, and how to build the foundation
+                    of a real webpage.
+                </p>
 
-<button id="fontSizeBtn">
-🔤 Font Size
-</button>
 
+                <div class="info-grid">
 
-<button id="languageBtn">
-🌐 Language
-</button>
+                    <div class="summary-card">
+                        <h3>Difficulty</h3>
+                        <p>Beginner</p>
+                    </div>
 
+                    <div class="summary-card">
+                        <h3>Duration</h3>
+                        <p>3 Hours</p>
+                    </div>
 
-<button id="readingModeBtn">
-📖 Reading Mode
-</button>
+                    <div class="summary-card">
+                        <h3>Lessons</h3>
+                        <p>10 Lessons</p>
+                    </div>
 
+                    <div class="summary-card">
+                        <h3>Outcome</h3>
+                        <p>Build HTML Pages</p>
+                    </div>
 
-<button id="helpBtn">
-❓ Help
-</button>
+                </div>
 
+            </div>
 
-<button id="aboutBtn">
-ℹ About
-</button>
+        </section>
 
 
-<button id="closeSettingsBtn" class="close-btn">
-✖ Close
-</button>
+        <!-- =========================
+             CHAPTER CONNECTION
+        ========================== -->
 
+        <section class="container">
 
-</div>
+            <div class="chapter-section">
 
+                <h2>
+                    From Idea to Structure
+                </h2>
 
+                <p>
+                    A webpage starts as an idea. HTML gives that idea
+                    a recognizable structure that the browser can read.
+                    CSS will later control how that structure looks,
+                    while JavaScript will make it interactive.
+                </p>
 
+                <div class="chapter-connection">
 
+                    <span>Idea</span>
+                    <span>→</span>
+                    <strong>HTML Structure</strong>
+                    <span>→</span>
+                    <span>CSS Styling</span>
+                    <span>→</span>
+                    <span>JavaScript Interaction</span>
 
+                </div>
 
-<main class="chapter-page">
+            </div>
 
+        </section>
 
 
+        <!-- =========================
+             WHY HTML EXISTS
+        ========================== -->
 
+        <section class="container">
 
-<!-- =========================
-CHAPTER INTRODUCTION
-========================= -->
+            <div class="chapter-section">
 
+                <h2>
+                    Why HTML Exists
+                </h2>
 
-<section class="container">
+                <p>
+                    The web needs a way to describe the structure and
+                    meaning of information. HTML provides that structure
+                    through elements that browsers can understand.
+                </p>
 
+                <ul class="chapter-list">
 
-<div class="chapter-hero">
+                    <li>
+                        Headings organize information into sections.
+                    </li>
 
+                    <li>
+                        Paragraphs contain readable content.
+                    </li>
 
-<span class="chapter-badge">
+                    <li>
+                        Images provide visual information.
+                    </li>
 
-Chapter 02
-
-</span>
-
-
-
-<h1>
-HTML Fundamentals
-</h1>
-
-
-
-<p>
-
-Every website begins with HTML.
-
-In this chapter you will understand how webpages are structured,
-how browsers read HTML, and how to create your first webpage.
-
-</p>
-
-
-
-
-<div class="info-grid">
-
-
-<div class="summary-card">
-
-<h3>
-Difficulty
-</h3>
-
-<p>
-Beginner
-</p>
-
-</div>
-
-
-
-
-<div class="summary-card">
-
-<h3>
-Duration
-</h3>
-
-<p>
-3 Hours
-</p>
-
-</div>
-
-
-
-
-
-<div class="summary-card">
-
-<h3>
-Lessons
-</h3>
-
-<p>
-10 Lessons
-</p>
-
-</div>
-
-
-
-
-
-<div class="summary-card">
-
-<h3>
-Outcome
-</h3>
-
-<p>
-Build HTML Pages
-</p>
-
-</div>
-
-
-
-</div>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-WHY HTML EXISTS
-========================= -->
-
-
-<section class="container">
-
-
-<div class="chapter-section">
-
-
-<h2>
-Why HTML Exists
-</h2>
-
-
-
-<p>
-
-The internet needs a way to organize information.
-
-HTML was created to give webpages structure.
-
-</p>
-
-
-
-<ul class="chapter-list">
-
-
-<li>
-Headings organize information.
-</li>
-
-
-<li>
-Paragraphs display content.
-</li>
-
-
-<li>
-Images show visual information.
-</li>
-
-
-<li>
-Links connect webpages together.
-</li>
-
-
-<li>
-Forms collect user information.
-</li>
-
-
-</ul>
-
-
-
-<p>
-
-Without HTML, browsers would not know how to display a webpage.
-
-</p>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-LEARNING OBJECTIVES
-========================= -->
-
-
-<section class="container">
-
-
-<div class="chapter-section">
-
-
-<h2>
-Learning Objectives
-</h2>
-
-
-
-<ul class="chapter-list">
-
-
-<li>
-Understand what HTML is.
-</li>
-
-
-<li>
-Learn how HTML documents are created.
-</li>
-
-
-<li>
-Understand tags and elements.
-</li>
-
-
-<li>
-Learn how browsers interpret HTML.
-</li>
-
-
-<li>
-Create your first webpage structure.
-</li>
-
-
-</ul>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-ROADMAP
-========================= -->
-
-
-<section class="container">
-
-
-<div class="chapter-section">
-
-
-<h2>
-Chapter Roadmap
-</h2>
-
-
-
-
-<div class="lesson-card">
-<h3>Lesson 01</h3>
-<p>What is HTML?</p>
-<a href="lessons/lesson-01-what-is-html.html">Start Lesson →</a>
-</div>
-
-
-
-
-
-
-<div class="lesson-card locked">
-
-
-<h3>
-Lesson 02
-</h3>
-
-
-<p>
-HTML Document Structure
-</p>
-
-
-<span>
-Coming Soon
-</span>
-
-
-</div>
-
-
-
-
-
-
-
-<div class="lesson-card locked">
-
-
-<h3>
-Lesson 03
-</h3>
-
-
-<p>
-HTML Tags and Elements
-</p>
-
-
-<span>
-Coming Soon
-</span>
-
-
-</div>
-
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<!-- =========================
-START LESSON
-========================= -->
-
-
-<section class="container">
-
-
-<div class="chapter-section start-box">
-
-
-<h2>
-Ready To Start?
-</h2>
-
-
-
-<p>
-
-Begin your first HTML lesson and learn how websites are created.
-
-</p>
-
-
-
-
-<a href="lessons/lesson-01-what-is-html.html" class="primary-btn">Start Learning HTML →</a>
-
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-
-
-
-<section class="container">
-
-
-<div class="chapter-nav-links">
-
-
-<a href="/index.html">
-🏠 Dashboard
-</a>
-
-
-<a href="../Chapter-01-Development Environment/index.html">
-← Previous Chapter
-</a>
-
-
-<a href="../Chapter-03-CSS/index.html">
-Next Chapter →
-</a>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-</main>
-
-
-
-
-
-
-
-<footer>
-
-
-<p>
-
-WZ Storehouse  ||
-© 2026 All Rights Reserved.
-
-</p>
-
-
-</footer>
-
-
-
-</body>
-
-</html>
+                    <li>

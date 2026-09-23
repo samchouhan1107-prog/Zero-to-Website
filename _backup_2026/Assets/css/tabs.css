@@ -1,0 +1,325 @@
+/* ==================================================
+   WebZoneBW Developer Platform - tabs.css
+   Author  : WebZoneBW Team
+   Version : 2.0 (Production Ready)
+   ================================================== */
+
+/* Tab Navigation */
+.tab-navigation {
+    margin: 32px 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.tab-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.tab-btn {
+    flex: 1;
+    min-width: 120px;
+    padding: 12px 16px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text);
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.tab-btn:hover {
+    background: var(--background);
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+    box-shadow: 0 2px 8px rgba(217, 4, 41, 0.2);
+}
+
+.tab-btn.active:hover {
+    background: var(--primary);
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+/* Tab Content Container */
+.tab-content-container {
+    position: relative;
+    min-height: 400px;
+}
+
+.tab-content {
+    display: none;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Enhanced tab content styling */
+.tab-content .chapter-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+}
+
+.tab-content .chapter-section h2 {
+    color: var(--primary);
+    margin-bottom: 16px;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.tab-content .chapter-section p {
+    line-height: 1.6;
+    color: var(--text);
+    margin-bottom: 16px;
+}
+
+/* Tab indicator */
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    left: 4px;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+/* Responsive design for tabs */
+@media (max-width: 768px) {
+    .tab-container {
+        flex-direction: column;
+        gap: 8px;
+        padding: 8px;
+    }
+    
+    .tab-btn {
+        min-width: 100%;
+        padding: 16px;
+        font-size: 0.875rem;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+    
+    .tab-btn:hover {
+        transform: translateX(4px);
+    }
+    
+    .tab-content-container {
+        min-height: 350px;
+    }
+    
+    .tab-content .chapter-section {
+        padding: 20px;
+        margin: 12px 0;
+    }
+    
+    .tab-content .chapter-section h2 {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .tab-container {
+        gap: 6px;
+        padding: 6px;
+    }
+    
+    .tab-btn {
+        padding: 14px;
+        font-size: 0.8125rem;
+    }
+    
+    .tab-content-container {
+        min-height: 300px;
+    }
+    
+    .tab-content .chapter-section {
+        padding: 16px;
+        margin: 8px 0;
+    }
+    
+    .tab-content .chapter-section h2 {
+        font-size: 1.125rem;
+    }
+}
+
+/* Dark mode adjustments for tabs */
+body.dark .tab-navigation {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .tab-container {
+    background: rgba(18, 18, 21, 0.3);
+}
+
+body.dark .tab-btn {
+    background: rgba(26, 26, 31, 0.8);
+    border-color: #27272a;
+    color: #d4d4d8;
+}
+
+body.dark .tab-btn:hover {
+    background: rgba(18, 18, 21, 0.9);
+    border-color: #60a5fa;
+    color: #60a5fa;
+}
+
+body.dark .tab-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+}
+
+body.dark .tab-content .chapter-section {
+    background: rgba(26, 26, 31, 0.5);
+    border-color: #27272a;
+}
+
+body.dark .tab-content .chapter-section h2 {
+    color: #60a5fa;
+}
+
+body.dark .tab-content .chapter-section p {
+    color: #d4d4d8;
+}
+
+/* Print styles for tabs */
+@media print {
+    .tab-navigation,
+    .tab-container,
+    .tab-btn {
+        display: none;
+    }
+    
+    .tab-content {
+        display: block !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+    
+    .tab-content .chapter-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* Loading animation for tabs */
+.tab-loading {
+    display: none;
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+}
+
+.tab-loading::after {
+    content: '';
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--primary);
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+    margin-left: 8px;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Focus styles for accessibility */
+.tab-btn:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.tab-btn:focus:not(:focus-visible) {
+    outline: none;
+}
+
+.tab-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Progress indicator for tabs */
+.tab-progress {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), #ff7b00);
+    transition: width 0.3s ease;
+    z-index: 2;
+}
+
+/* Tab content animations */
+.tab-content-enter {
+    animation: tabSlideIn 0.3s ease-out;
+}
+
+@keyframes tabSlideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.tab-content-exit {
+    animation: tabSlideOut 0.3s ease-out;
+}
+
+@keyframes tabSlideOut {
+    from {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(20px);
+    }
+}

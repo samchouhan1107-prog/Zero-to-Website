@@ -1,4 +1,4 @@
-import fs from "fs";
+﻿import fs from "fs";
 import express from "express";
 import path from "path";
 import { createServer as createViteServer } from "vite";
@@ -16,7 +16,7 @@ const PORT = 3001;
 
 app.use(express.json());
 
-// CORS — allow frontend (GitHub Pages) to call this API
+// CORS â€” allow frontend (GitHub Pages) to call this API
 app.use((_req, res, next) => {
   const origin = process.env.CORS_ORIGIN || _req.headers.origin || '*';
   res.header('Access-Control-Allow-Origin', origin);
@@ -133,7 +133,7 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// ─── Legacy query-URL migration (301 permanent redirects) ───
+// â”€â”€â”€ Legacy query-URL migration (301 permanent redirects) â”€â”€â”€
 // Applied to ALL GET paths so any URL carrying ?lesson=/?blog= (including
 // /index.html, deep paths, or array-typed params) is permanently migrated
 // to the clean canonical route instead of ever rendering a duplicate page.
@@ -165,7 +165,7 @@ function legacyQueryRedirect(req: express.Request, res: express.Response, next: 
 
 app.use(legacyQueryRedirect);
 
-// ─── SSR helpers: resolve lesson / blog data and inject SEO head tags ───
+// â”€â”€â”€ SSR helpers: resolve lesson / blog data and inject SEO head tags â”€â”€â”€
 import { BLOG_POSTS } from "./src/data/blogData";
 
 interface PageSEO {
@@ -272,7 +272,7 @@ function resolveLessonSEO(lessonId: string): (PageSEO & { chapterTitle: string }
     const lesson = chapter.lessons.find((l) => l.id === lessonId);
     if (lesson) {
       return {
-        title: `${lesson.title} — ${chapter.title} | WebZoneBW SC`,
+        title: `${lesson.title} â€” ${chapter.title} | WebZoneBW SC`,
         description: lesson.tagline || `Interactive lesson on ${lesson.title} in ${chapter.title} at WebZoneBW SC.`,
         canonical: `https://webzonebw.shop/lessons/${lesson.id}`,
         ogType: "article",
@@ -337,14 +337,14 @@ function sendSEOPage(req: express.Request, res: express.Response, seo: PageSEO, 
   return res.send(injectSEO(html, seo));
 }
 
-// ─── Clean lesson routes: /lessons/:lessonId ───
+// â”€â”€â”€ Clean lesson routes: /lessons/:lessonId â”€â”€â”€
 app.get("/lessons/:lessonId", (req, res) => {
   const seo = resolveLessonSEO(req.params.lessonId);
   if (!seo) return res.redirect(301, "/");
   sendSEOPage(req, res, seo, "/");
 });
 
-// ─── Clean blog routes: /blog/:slug ───
+// â”€â”€â”€ Clean blog routes: /blog/:slug â”€â”€â”€
 app.get("/blog/:slug", (req, res) => {
   const seo = resolveBlogSEO(req.params.slug);
   if (!seo) return res.redirect(301, "/?view=blog");
@@ -383,7 +383,7 @@ app.get("/sitemap.xml", (req, res) => {
   // Primary Landing Page
   addEntry(`${baseUrl}/`, "1.0", "daily");
 
-  // All Chapters → Clean lesson URLs (canonical)
+  // All Chapters â†’ Clean lesson URLs (canonical)
   for (const chapter of CHAPTERS_DATA) {
     for (const lesson of chapter.lessons) {
       addEntry(`${baseUrl}/lessons/${lesson.id}`, "0.80", "monthly");
@@ -396,7 +396,7 @@ app.get("/sitemap.xml", (req, res) => {
   addEntry(`${baseUrl}/cookie-policy.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/about.html`, "0.70", "monthly");
 
-  // Blog Posts — Clean canonical URLs
+  // Blog Posts â€” Clean canonical URLs
   for (const post of BLOG_POSTS) {
     addEntry(`${baseUrl}/blog/${post.slug}`, "0.85", "monthly");
   }
@@ -490,11 +490,11 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
 
   let coreAnswer = "";
   if (query.includes("box model") || query.includes("padding") || query.includes("margin")) {
-    coreAnswer = `### 📦 CSS Box Model Resolution\n\n` +
-      `**Core Principle**: Every element on a web page is computed as 4 nested rectangular layers: **Content** ➔ **Padding** (inner space) ➔ **Border** (stroke) ➔ **Margin** (outer space).\n\n` +
+    coreAnswer = `### ðŸ“¦ CSS Box Model Resolution\n\n` +
+      `**Core Principle**: Every element on a web page is computed as 4 nested rectangular layers: **Content** âž” **Padding** (inner space) âž” **Border** (stroke) âž” **Margin** (outer space).\n\n` +
       `**Key Insight**: Always apply \`box-sizing: border-box;\` so specified widths include padding and borders rather than growing unpredictably.`;
   } else if (query.includes("flexbox") || query.includes("center") || query.includes("align")) {
-    coreAnswer = `### 📐 Flexbox & Centering Doubt Resolution\n\n` +
+    coreAnswer = `### ðŸ“ Flexbox & Centering Doubt Resolution\n\n` +
       `**Fastest Centering Pattern**:\n` +
       `\`\`\`css\n` +
       `.container {\n` +
@@ -506,7 +506,7 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `\`\`\`\n` +
       `*Or with CSS Grid:* \`display: grid; place-items: center;\``;
   } else if (query.includes("async") || query.includes("promise") || query.includes("await")) {
-    coreAnswer = `### ⚡ JavaScript Async/Await & Promises\n\n` +
+    coreAnswer = `### âš¡ JavaScript Async/Await & Promises\n\n` +
       `**Mental Model**: Think of a Promise like ordering coffee. You get a buzzer (Promise) and continue talking with friends. When the buzzer goes off (\`await\`), you receive your drink without blocking the line!\n\n` +
       `\`\`\`javascript\n` +
       `async function loadData() {\n` +
@@ -520,7 +520,7 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `}\n` +
       `\`\`\``;
   } else if (code) {
-    coreAnswer = `### 🐞 Code Debugger & Inspection\n\n` +
+    coreAnswer = `### ðŸž Code Debugger & Inspection\n\n` +
       `**Submitted Code Review**:\n` +
       `\`\`\`\n${code}\n\`\`\`\n\n` +
       `**Debugging Steps**:\n` +
@@ -528,13 +528,13 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `2. Verify that HTML tag pairs match and CSS class names correspond directly to markup.\n` +
       `3. In JavaScript, ensure event listeners attach after the DOM is fully loaded.`;
   } else {
-    coreAnswer = `### 💡 Web Development Concept Resolution\n\n` +
+    coreAnswer = `### ðŸ’¡ Web Development Concept Resolution\n\n` +
       `**Core Concept**: In modern web applications, the foundation rests on three pillars: **HTML** for semantic structure, **CSS** for visual hierarchy and responsive layout, and **JavaScript** for reactive logic.\n\n` +
       `**Best Practice**: Test interactively in the built-in Sandbox to inspect real-time DOM changes.`;
   }
 
   return `${coreAnswer}\n\n` +
-    `*⚡ Note: Generated via WZ Storehouse Continuous Learning Engine.*`;
+    `*âš¡ Note: Generated via WebZoneBW Storehouse Continuous Learning Engine.*`;
 }
 
 // 24/7 Web Dev Tutor / Explainer & Doubt Resolver endpoint
@@ -550,11 +550,11 @@ app.post("/api/ai/explain", async (req, res) => {
     });
   }
 
-  const prompt = `You are the dedicated 24/7 Web Development Tutor for students studying the interactive textbook "WZ Storehouse".
+  const prompt = `You are the dedicated 24/7 Web Development Tutor for students studying the interactive textbook "WebZoneBW Storehouse".
 Your mission is to clarify any doubt, debug broken code, provide crystal-clear intuitive explanations, and guide students with actionable advice.
 
 Context:
-- Curriculum: WZ Storehouse Interactive Web Development Textbook
+- Curriculum: WebZoneBW Storehouse Interactive Web Development Textbook
 - Active Chapter/Context: ${chapterTitle || "Complete Web Curriculum (HTML, CSS, JS, DOM, React, Git)"}
 - Topic: ${topic || "Web Development Concept"}
 ${code ? `Student's Code Snippet:\n\`\`\`\n${code}\n\`\`\`\n` : ""}
@@ -666,6 +666,12 @@ async function startServer() {
     process.argv[1]?.endsWith(".cjs");
 
   if (!isProduction) {
+    // Serve repository static assets & public HTML pages BEFORE the Vite SPA
+    // middleware so clean page URLs (/learn.html, /contact.html) and shared
+    // /Assets never fall through to the SPA catch-all as 404s.
+    const publicRoot = path.join(process.cwd(), "public");
+    app.use("/Assets", express.static(path.join(process.cwd(), "Assets")));
+    app.use(express.static(publicRoot, { index: false, extensions: ["html"] }));
     try {
       const { createServer } = await import("vite");
       const vite = await createServer({
@@ -673,7 +679,6 @@ async function startServer() {
         appType: "spa",
       });
       app.use(vite.middlewares);
-      app.use('/Assets', express.static(path.join(process.cwd(), 'Assets')));
     } catch (error) {
       console.warn("[WARN] Vite not available, serving static dist:", error.message);
       const distPath = path.join(process.cwd(), "dist");
@@ -698,9 +703,15 @@ async function startServer() {
       }
     }));
 
+    // Repository /public static pages (legal/contact) â€” served when absent from dist
+    app.use(express.static(path.join(process.cwd(), 'public'), {
+      index: false,
+      extensions: ['html'],
+    }));
+
     // Other static files in dist
-    app.use(express.static(distPath, { 
-      index: 'index.html', 
+    app.use(express.static(distPath, {
+      index: 'index.html',
       extensions: ['html'],
       setHeaders: (res, filePath) => {
         if (filePath.endsWith('.html')) {
@@ -714,32 +725,44 @@ async function startServer() {
     // Static HTML page routes
     const staticPages = [
       'index.html',
-      'Workspace.html', 
+      'Workspace.html',
       'webtools.html',
       'imagetools.html',
       'developertools.html',
       'learn.html',
       'blog.html',
-      'about.html'
+      'about.html',
+      'contact.html',
+      'privacy-policy.html',
+      'terms-of-service.html',
+      'cookie-policy.html',
+      '404.html'
     ];
 
     // Serve static HTML pages directly
     staticPages.forEach(page => {
       app.get(`/${page}`, (req, res) => {
+        // The repository root copy is the single source of truth for static
+        // pages. Prefer it so stale build artifacts in dist/ can never shadow
+        // an updated page (e.g. an old about.html missing the site-nav system).
+        const repoPath = path.join(process.cwd(), page);
+        if (fs.existsSync(repoPath)) {
+          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+          return res.sendFile(repoPath);
+        }
         const pagePath = path.join(distPath, page);
         if (fs.existsSync(pagePath)) {
           res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-          res.sendFile(pagePath);
-        } else {
-          res.redirect(301, '/index.html');
+          return res.sendFile(pagePath);
         }
+        res.redirect(301, '/index.html');
       });
     });
 
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
 
-    // SPA catch-all — only routes that don't match static files
+    // SPA catch-all â€” only routes that don't match static files
     app.get("*", (req, res) => {
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
@@ -761,7 +784,7 @@ async function startServer() {
 
   try {
     const server = app.listen(PORT, () => {
-      console.log(`WZ Storehouse Server running on http://0.0.0.0:${PORT}`);
+      console.log(`WebZoneBW Storehouse Server running on http://0.0.0.0:${PORT}`);
       console.log(`Server address: ${server.address()}`);
     });
 

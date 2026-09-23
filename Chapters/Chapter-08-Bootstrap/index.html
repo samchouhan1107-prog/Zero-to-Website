@@ -1,146 +1,597 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 08 | Bootstrap 5 Framework - WZ Storehouse</title>
-    <link rel="stylesheet" href="/Assets/css/main.css">
-    <link rel="stylesheet" href="/Assets/css/ad-styles.css">
-    <script src="/Assets/js/main.js" defer></script>
-    
-    <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-         crossorigin="anonymous"></script>
+<title>Chapter 08 | Bootstrap 5 — WebZoneBW</title>
+
+<meta
+    name="description"
+    content="Chapter 08 of WebZoneBW: learn Bootstrap 5 through seven practical lessons covering responsive grids, utilities, components, navigation, forms, interactive UI, and a capstone project."
+>
+
+<meta name="theme-color" content="#111111">
+
+<link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon/favicon.ico"
+>
+
+<link
+    rel="stylesheet"
+    href="/assets/css/style.css"
+>
+
+<script
+    src="/assets/js/main.js"
+    defer
+></script>
+
+<!-- AdSense -->
+<script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+    crossorigin="anonymous"
+></script>
+
 </head>
+
 <body class="chapter-page">
-<header>
+<!-- =========================
+     SITE HEADER
+========================== -->
+<header class="site-header">
+
     <div class="logo">
-        <a href="/index.html" class="logo-link">
-            <h1>WZ STOREHOUSE</h1>
+        <a
+            href="/index.html"
+            class="logo-link"
+            aria-label="WebZoneBW home"
+        >
+            <h1>WebZoneBW</h1>
             <p>Learn • Practice • Build • Share</p>
         </a>
     </div>
-    <nav>
-        <a href="/index.html">🏠 Home</a>
-        <a href="../Chapter-07-Responsive Design/index.html">⬅ Previous</a>
-        <a href='../Chapter-09-Git & GitHub/index.html'>Next ➜</a>
-        <button id="settingsBtn">⚙ Settings</button>
+
+    <nav aria-label="Primary navigation">
+
+        <a href="/index.html">
+            🏠 Home
+        </a>
+
+        <a href="../Chapter-07-Responsive Design/index.html">
+            ← Previous
+        </a>
+
+        <a href="../Chapter-09-Git & GitHub/index.html">
+            Next →
+        </a>
+
+        <button
+            type="button"
+            id="settingsBtn"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+        >
+            ⚙ Settings
+        </button>
+
     </nav>
+
 </header>
-<div id="settingsPanel" class="settings-panel">
-    <h3>⚙ Settings</h3>
-    <button id="darkModeBtn">🌙 Dark Mode</button>
-    <button id="fontSizeBtn">🔤 Font Size</button>
-    <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-</div>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================== -->
+<aside
+    id="settingsPanel"
+    class="settings-panel"
+    aria-label="Site settings"
+    hidden
+>
+
+    <h2>⚙ Settings</h2>
+
+    <button
+        type="button"
+        id="darkModeBtn"
+    >
+        🌙 Dark Mode
+    </button>
+
+    <button
+        type="button"
+        id="fontSizeBtn"
+    >
+        🔤 Font Size
+    </button>
+
+    <button
+        type="button"
+        id="closeSettingsBtn"
+        class="close-btn"
+    >
+        ✕ Close
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
 <main class="container chapter-page">
-    <section class="chapter-hero">
-        <span class="chapter-badge">Chapter 08</span>
-        <h1>Bootstrap 5 UI Framework</h1>
-        <p>Accelerate frontend delivery: the 12-column grid system, responsive utilities, cards, navbars, and interactive modals.</p>
+
+
+    <!-- =========================
+         CHAPTER HERO
+    ========================== -->
+    <section
+        class="chapter-hero"
+        aria-labelledby="chapter-title"
+    >
+
+        <span class="chapter-badge">
+            Chapter 08
+        </span>
+
+        <h1 id="chapter-title">
+            Bootstrap 5
+        </h1>
+
+        <p>
+            Build responsive interfaces faster with Bootstrap 5.
+            Learn its grid system, utilities, reusable components,
+            responsive navigation, interactive UI patterns, and
+            practical project workflows.
+        </p>
+
 
         <div class="info-grid">
-            <div class="summary-card">
-                <h3>Track Level</h3>
+
+            <article class="summary-card">
+                <h2>Track Level</h2>
                 <p>Age 15+ to Professional</p>
-            </div>
-            <div class="summary-card">
-                <h3>Total Lessons</h3>
+            </article>
+
+            <article class="summary-card">
+                <h2>Total Lessons</h2>
                 <p>7 Interactive Lessons</p>
-            </div>
-            <div class="summary-card">
-                <h3>Practice</h3>
-                <p>Sandboxes Included</p>
-            </div>
-            <div class="summary-card">
-                <h3>Status</h3>
-                <p>100% Complete</p>
-            </div>
+            </article>
+
+            <article class="summary-card">
+                <h2>Practice</h2>
+                <p>7 Practice Classes</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Journey</h2>
+                <p>Learn → Practice → Build</p>
+            </article>
+
         </div>
+
     </section>
 
-    <section class="chapter-section">
-        <h2>🎯 Learning Objectives</h2>
+
+    <!-- =========================
+         CHAPTER PURPOSE
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="purpose-title"
+    >
+
+        <h2 id="purpose-title">
+            What You'll Build
+        </h2>
+
+        <p>
+            Chapter 07 introduced responsive design concepts.
+            Chapter 08 takes those ideas into a component-based
+            framework so you can build common interface patterns
+            faster while still understanding the HTML and CSS
+            underneath them.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING OBJECTIVES
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="objectives-title"
+    >
+
+        <h2 id="objectives-title">
+            🎯 Learning Objectives
+        </h2>
+
         <ul class="chapter-list">
-            <li>✔ Link Bootstrap 5 via CDN without legacy jQuery dependencies.</li>
-<li>✔ Master the 12-column flexbox grid system (.container, .row, .col-md-6).</li>
-<li>✔ Utilize contextual badges, elevated cards, and floating label inputs.</li>
-<li>✔ Assemble production landing pages with mobile collapsible navigation.</li>
+
+            <li>
+                ✔ Understand how to include Bootstrap 5 in a project
+                without legacy jQuery dependencies.
+            </li>
+
+            <li>
+                ✔ Build responsive layouts using Bootstrap's
+                12-column grid system.
+            </li>
+
+            <li>
+                ✔ Use utility classes for spacing, typography,
+                colors, borders, and layout.
+            </li>
+
+            <li>
+                ✔ Build reusable interface elements including
+                buttons, cards, badges, forms, and alerts.
+            </li>
+
+            <li>
+                ✔ Create responsive navigation and interactive
+                Bootstrap components.
+            </li>
+
+            <li>
+                ✔ Combine multiple Bootstrap concepts into a
+                complete responsive project.
+            </li>
 
         </ul>
+
     </section>
 
-    <section class="chapter-section">
-        <h2>📚 Chapter Lessons &amp; Interactive Practices</h2>
+
+    <!-- =========================
+         LESSONS
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="lessons-title"
+    >
+
+        <h2 id="lessons-title">
+            📚 Chapter Lessons &amp; Practice
+        </h2>
+
         <div class="lesson-grid">
-            
-            <div class="lesson-card">
-                <h3>Lesson 01</h3>
-                <p><strong>Bootstrap 5 Fundamentals</strong>: Reboot resets, container roots, and bundle JS integration without jQuery.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-01-Bootstrap-Introduction/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-01-Bootstrap-Introduction/practice.html">Practice ⚡</a>
+
+
+            <!-- LESSON 01 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 01
+                </h3>
+
+                <p>
+                    <strong>
+                        Bootstrap 5 Fundamentals
+                    </strong>
+                    — Learn Bootstrap's foundation, reboot styles,
+                    containers, CDN setup, and bundled JavaScript.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-01-Bootstrap-Introduction/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-01-Bootstrap-Introduction/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 02</h3>
-                <p><strong>The 12-Column Grid</strong>: Subdivisions, responsive tiers (col-md-6), auto-layout, and gutters (g-3).</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-02-Bootstrap-Grid-System/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-02-Bootstrap-Grid-System/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 02 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 02
+                </h3>
+
+                <p>
+                    <strong>
+                        The 12-Column Grid
+                    </strong>
+                    — Understand containers, rows, columns,
+                    responsive breakpoints, auto-layout, and gutters.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-02-Bootstrap-Grid-System/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-02-Bootstrap-Grid-System/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 03</h3>
-                <p><strong>Typography & Spacing Utilities</strong>: Directional spacing (m-*, p-*), contextual color themes, and subtle borders.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-03-Typography-Colors-Spacing/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-03-Typography-Colors-Spacing/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 03 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 03
+                </h3>
+
+                <p>
+                    <strong>
+                        Typography &amp; Spacing Utilities
+                    </strong>
+                    — Use Bootstrap utilities for typography,
+                    spacing, colors, borders, and layout control.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-03-Typography-Colors-Spacing/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-03-Typography-Colors-Spacing/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 04</h3>
-                <p><strong>Buttons, Cards & Badges</strong>: Structured cards, soft elevations (shadow-sm), pills, and button states.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-04-Buttons-Cards-Badges/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-04-Buttons-Cards-Badges/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 04 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 04
+                </h3>
+
+                <p>
+                    <strong>
+                        Buttons, Cards &amp; Badges
+                    </strong>
+                    — Build reusable interface patterns with
+                    buttons, cards, badges, pills, and visual states.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-04-Buttons-Cards-Badges/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-04-Buttons-Cards-Badges/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 05</h3>
-                <p><strong>Responsive Navbars</strong>: Desktop horizontal navbars, mobile hamburger collapse, and dark mode themes.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-05-Navbars-Headers/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-05-Navbars-Headers/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 05 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 05
+                </h3>
+
+                <p>
+                    <strong>
+                        Responsive Navbars
+                    </strong>
+                    — Create navigation that adapts between desktop
+                    and mobile layouts using Bootstrap's responsive
+                    system.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-05-Navbars-Headers/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-05-Navbars-Headers/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 06</h3>
-                <p><strong>Modals, Forms & Alerts</strong>: Floating labels, accessible modal dialogs, accordions, and dismissible alerts.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-06-Modals-Forms-Alerts/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-06-Modals-Forms-Alerts/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 06 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 06
+                </h3>
+
+                <p>
+                    <strong>
+                        Modals, Forms &amp; Alerts
+                    </strong>
+                    — Add interactive dialogs, forms, accordions,
+                    floating labels, and dismissible alerts.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-06-Modals-Forms-Alerts/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-06-Modals-Forms-Alerts/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
-            <div class="lesson-card">
-                <h3>Lesson 07</h3>
-                <p><strong>Bootstrap Capstone Page</strong>: Assembling a responsive enterprise landing page in under 15 minutes.</p>
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <a class="btn primary" href="Lesson-07-Bootstrap-Landing-Page/lesson.html">Read Lesson ➜</a>
-                    <a class="btn secondary" href="Lesson-07-Bootstrap-Landing-Page/practice.html">Practice ⚡</a>
+
+            </article>
+
+
+            <!-- LESSON 07 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 07
+                </h3>
+
+                <p>
+                    <strong>
+                        Bootstrap Capstone
+                    </strong>
+                    — Combine the chapter's Bootstrap concepts
+                    into a complete responsive landing-page project.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-07-Bootstrap-Landing-Page/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-07-Bootstrap-Landing-Page/practice.html"
+                    >
+                        Practice ⚡
+                    </a>
+
                 </div>
-            </div>
+
+            </article>
+
         </div>
+
     </section>
 
-    <section class="chapter-section chapter-nav-links">
-        <a href="/index.html">🏠 Home</a>
-        <a href="../Chapter-07-Responsive Design/index.html">⬅ Chapter 07: Responsive Design</a>
-        <a href='../Chapter-09-Git & GitHub/index.html'>Chapter 09: Git & GitHub ➜</a>
+
+    <!-- =========================
+         CHAPTER CONNECTION
+    ========================== -->
+    <section
+        class="chapter-section chapter-connection"
+        aria-labelledby="connection-title"
+    >
+
+        <h2 id="connection-title">
+            🔗 Continue the Journey
+        </h2>
+
+        <p>
+            You have learned responsive design and now know how
+            Bootstrap can accelerate common interface work.
+            Next, you'll learn how to track changes, create
+            branches, collaborate, and manage your project with
+            Git and GitHub.
+        </p>
+
+        <div class="chapter-nav-links">
+
+            <a
+                href="../Chapter-07-Responsive Design/index.html"
+            >
+                ← Chapter 07: Responsive Design
+            </a>
+
+            <a
+                href="../Chapter-09-Git & GitHub/index.html"
+            >
+                Chapter 09: Git &amp; GitHub →
+            </a>
+
+        </div>
+
     </section>
+
+
+    <!-- =========================
+         BRAIN NOTE
+    ========================== -->
+    <section
+        class="chapter-section brain-note"
+        aria-label="WebZoneBW Brain Note"
+    >
+
+        <p>
+            🌋 <strong>Brain Note:</strong>
+            Bootstrap is a tool, not a replacement for understanding
+            HTML, CSS, and responsive design. Know what the framework
+            is doing before relying on it.
+        </p>
+
+    </section>
+
 </main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
 <footer>
-    <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+
+    <p>
+        WebZoneBW |
+        Learn • Practice • Build • Share |
+        &copy; 2026 All Rights Reserved.
+    </p>
+
 </footer>
+
 </body>
 </html>

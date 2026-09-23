@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Sparkles,
   X,
@@ -57,9 +57,9 @@ export interface TutorMessage {
 const DEFAULT_WELCOME_MESSAGE: TutorMessage = {
   id: 'welcome-1',
   sender: 'tutor',
-  text: `👋 Hello student! I am your **24/7 Web Development Tutor**, available around the clock to resolve any doubts, clarify concepts, debug broken code, and guide you through the **WZ Storehouse** textbook.
+  text: `ðŸ‘‹ Hello student! I am your **24/7 Web Development Tutor**, available around the clock to resolve any doubts, clarify concepts, debug broken code, and guide you through the **WebZoneBW Storehouse** textbook.
 
-### 🌟 What I can help you with:
+### ðŸŒŸ What I can help you with:
 - **Instant Doubt Resolution**: Clear up confusion on HTML, CSS Box Model, Flexbox, Grid, DOM events, Async JavaScript, and Git.
 - **Code Debugger**: Paste your HTML, CSS, or JS snippets, and I will pinpoint the bug line, explain why it broke, and provide the clean fix.
 - **Real-World Analogies**: Turn abstract mental models into intuitive visual analogies.
@@ -90,12 +90,12 @@ Ask any question below or choose a quick doubt topic to get started!`,
 };
 
 const QUICK_DOUBTS = [
-  { label: '📦 Box Model vs Flexbox', prompt: 'What is the exact difference between the CSS Box Model (margin, border, padding) and Flexbox alignment? When should I use which?' },
-  { label: '🐞 Debug Div Centering', prompt: 'Why is my <div> not centering horizontally and vertically? What are the top 3 modern techniques to center any element in CSS?' },
-  { label: '⚡ async/await vs Promises', prompt: 'Can you explain JavaScript async/await vs .then() Promises with a clear real-world analogy and minimal code example?' },
-  { label: '🌲 What is the DOM Tree?', prompt: 'How does a web browser parse raw HTML into the Document Object Model (DOM) tree, and how does JavaScript manipulate it?' },
-  { label: '🔀 Git Rebase vs Merge', prompt: 'In Git, what is the difference between git merge and git rebase? When is rebase dangerous?' },
-  { label: '🎯 CSS Specificity Rules', prompt: 'How do CSS specificity weights (Inline > IDs > Classes > Tags) work? How do I resolve styling conflicts cleanly?' },
+  { label: 'ðŸ“¦ Box Model vs Flexbox', prompt: 'What is the exact difference between the CSS Box Model (margin, border, padding) and Flexbox alignment? When should I use which?' },
+  { label: 'ðŸž Debug Div Centering', prompt: 'Why is my <div> not centering horizontally and vertically? What are the top 3 modern techniques to center any element in CSS?' },
+  { label: 'âš¡ async/await vs Promises', prompt: 'Can you explain JavaScript async/await vs .then() Promises with a clear real-world analogy and minimal code example?' },
+  { label: 'ðŸŒ² What is the DOM Tree?', prompt: 'How does a web browser parse raw HTML into the Document Object Model (DOM) tree, and how does JavaScript manipulate it?' },
+  { label: 'ðŸ”€ Git Rebase vs Merge', prompt: 'In Git, what is the difference between git merge and git rebase? When is rebase dangerous?' },
+  { label: 'ðŸŽ¯ CSS Specificity Rules', prompt: 'How do CSS specificity weights (Inline > IDs > Classes > Tags) work? How do I resolve styling conflicts cleanly?' },
 ];
 
 export const TutorModal: React.FC<TutorModalProps> = ({
@@ -108,7 +108,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 }) => {
   const [messages, setMessages] = useState<TutorMessage[]>(() => {
     try {
-      const saved = localStorage.getItem('wz_storehouse_tutor_history');
+      const saved = localStorage.getItem('webzonebw_storehouse_tutor_history');
       if (saved) {
         const parsed = JSON.parse(saved);
         if (Array.isArray(parsed) && parsed.length > 0) return parsed;
@@ -131,7 +131,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
   // Sync to localStorage for continuous student usage across 24/7 sessions
   useEffect(() => {
     try {
-      localStorage.setItem('wz_storehouse_tutor_history', JSON.stringify(messages));
+      localStorage.setItem('webzonebw_storehouse_tutor_history', JSON.stringify(messages));
     } catch {}
   }, [messages]);
 
@@ -188,7 +188,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
           topic: textToSend,
           code: codeToSend,
           question: textToSend,
-          chapterTitle: 'WZ Storehouse Complete Curriculum',
+          chapterTitle: 'WebZoneBW Storehouse Complete Curriculum',
         }),
       });
 
@@ -379,7 +379,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                     {m.sender === 'tutor' && (
                       <div className="flex items-center justify-between text-[10px] text-slate-400 pb-1 border-b border-slate-100 dark:border-slate-800">
                         <span className="font-mono font-bold text-indigo-600 dark:text-indigo-400">
-                          Tutor Answer • {m.timestamp}
+                          Tutor Answer â€¢ {m.timestamp}
                         </span>
                         <div className="flex items-center gap-1">
                           <button
@@ -560,7 +560,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                 Complete Textbook Knowledge Base
               </h4>
               <p className="text-slate-500 text-xs">
-                The 24/7 Tutor is trained on the entire WZ Storehouse curriculum across all chapters:
+                The 24/7 Tutor is trained on the entire WebZoneBW Storehouse curriculum across all chapters:
               </p>
             </div>
 
@@ -711,7 +711,7 @@ function generateOfflineDoubtAnswer(query: string, code: string, allChapters: Ch
   let text = '';
 
   if (q.includes('box model') || q.includes('padding') || q.includes('margin')) {
-    text = `### 📦 CSS Box Model Doubt Resolution
+    text = `### ðŸ“¦ CSS Box Model Doubt Resolution
 
 **Core Concept**: Every HTML element is rendered as a rectangular box comprising 4 concentric layers:
 1. **Content**: The text, image, or child element.
@@ -719,10 +719,10 @@ function generateOfflineDoubtAnswer(query: string, code: string, allChapters: Ch
 3. **Border**: The visible stroke wrapping the padding.
 4. **Margin**: Outer spacing pushing other sibling elements away.
 
-**🔑 Crucial Best Practice**:
+**ðŸ”‘ Crucial Best Practice**:
 Always add \`box-sizing: border-box;\` in modern CSS so that padding and border do NOT expand the specified width/height!`;
   } else if (q.includes('flexbox') || q.includes('align') || q.includes('center')) {
-    text = `### 📐 Flexbox & Centering Doubt Resolution
+    text = `### ðŸ“ Flexbox & Centering Doubt Resolution
 
 **Top 3 Techniques to Center Any Element**:
 
@@ -752,7 +752,7 @@ Always add \`box-sizing: border-box;\` in modern CSS so that padding and border 
 }
 \`\`\``;
   } else if (q.includes('async') || q.includes('promise') || q.includes('fetch')) {
-    text = `### ⚡ JavaScript Async/Await & Promises
+    text = `### âš¡ JavaScript Async/Await & Promises
 
 **Real-World Analogy**:
 - **Synchronous**: Standing in line at a coffee shop counter and freezing everyone behind you until your latte is brewed.
@@ -771,14 +771,14 @@ async function loadUserData() {
 }
 \`\`\``;
   } else if (q.includes('dom') || q.includes('event')) {
-    text = `### 🌲 DOM Tree & Event Listeners
+    text = `### ðŸŒ² DOM Tree & Event Listeners
 
 **Key Insight**: The DOM (Document Object Model) is a live JavaScript object representation of your HTML.
 - **Select**: \`document.querySelector('#myBtn')\`
 - **Listen**: \`element.addEventListener('click', (event) => { ... })\`
 - **Modify**: \`element.textContent = 'Updated!';\` or \`element.classList.toggle('active');\``;
   } else if (code) {
-    text = `### 🐞 Code Debug & Structure Analysis
+    text = `### ðŸž Code Debug & Structure Analysis
 
 I reviewed the code snippet you provided:
 \`\`\`
@@ -790,7 +790,7 @@ ${code}
 2. Verify CSS class names match the HTML \`class="..."\` attributes exactly.
 3. In JavaScript, verify that you select elements **after** the DOM is loaded or place \`<script>\` at the bottom of \`<body>\`.`;
   } else {
-    text = `### 💡 24/7 Tutor Answer for: "${query}"
+    text = `### ðŸ’¡ 24/7 Tutor Answer for: "${query}"
 
 **Key Explanation & Insights**:
 - **Semantic Structure**: Modern web applications prioritize clear separation of concerns: HTML for structure, CSS for aesthetics, and JavaScript for reactivity.

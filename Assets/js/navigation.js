@@ -1,5 +1,5 @@
 /* ==================================================
-   WZ Storehouse - navigation.js
+   WebZoneBW SC - navigation.js
    Author  : Sameer Chouhan
    Version : 2.0 (Resilient URL & Path Matching)
 ================================================== */

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- Primary SEO Meta Tags -->
-  <title>Blog | WebZoneBW SC — Web Development Tutorials & Resources</title>
-  <meta name="description" content="WebZoneBW Blog — Comprehensive web development tutorials, best practices, tips, and resources for developers of all skill levels. Learn modern web technologies and best practices.">
+  <title>Blog | WebZoneBW SC â€” Web Development Tutorials & Resources</title>
+  <meta name="description" content="WebZoneBW Blog â€” Comprehensive web development tutorials, best practices, tips, and resources for developers of all skill levels. Learn modern web technologies and best practices.">
   <meta name="keywords" content="web development blog, coding tutorials, CSS tips, JavaScript guides, web development resources, programming tutorials, frontend development">
   <meta name="author" content="WebZoneBW">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -16,7 +16,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://webzonebw.shop/blog.html">
-  <meta property="og:title" content="Blog | WebZoneBW SC — Web Development Tutorials & Resources">
+  <meta property="og:title" content="Blog | WebZoneBW SC â€” Web Development Tutorials & Resources">
   <meta property="og:description" content="Comprehensive web development tutorials, best practices, tips, and resources for developers of all skill levels. Learn modern web technologies and best practices.">
   <meta property="og:image" content="https://webzonebw.shop/og-image.svg">
   <meta property="og:site_name" content="WebZoneBW SC">
@@ -25,7 +25,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta property="twitter:url" content="https://webzonebw.shop/blog.html">
-  <meta property="twitter:title" content="Blog | WebZoneBW SC — Web Development Tutorials & Resources">
+  <meta property="twitter:title" content="Blog | WebZoneBW SC â€” Web Development Tutorials & Resources">
   <meta property="twitter:description" content="Comprehensive web development tutorials, best practices, tips, and resources for developers of all skill levels.">
   <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg">
   
@@ -44,7 +44,7 @@
   <meta name="theme-color" content="#0f172a" />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ“</text></svg>" />
   
   <!-- Preconnect & Asset Loading Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -57,7 +57,8 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/Assets/css/main.css">
   <link rel="stylesheet" href="/Assets/css/blog.css">
-  
+    <link rel="stylesheet" href="/Assets/css/site-nav.css">
+
   <style>
     body {
       margin: 0;
@@ -67,18 +68,18 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
     }
-    
+
     .blog-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
     }
-    
+
     .blog-hero {
       text-align: center;
       margin-bottom: 3rem;
     }
-    
+
     .blog-hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
@@ -87,21 +88,21 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .blog-hero p {
       font-size: 1.2rem;
       color: #94a3b8;
       max-width: 600px;
       margin: 0 auto;
     }
-    
+
     .blog-stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
-    
+
     .stat-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -111,24 +112,24 @@
       text-align: center;
       transition: all 0.3s ease;
     }
-    
+
     .stat-card:hover {
       transform: translateY(-2px);
       border-color: rgba(16, 185, 129, 0.4);
     }
-    
+
     .stat-number {
       font-size: 2rem;
       font-weight: bold;
       color: #10b981;
       margin-bottom: 0.5rem;
     }
-    
+
     .stat-label {
       color: #94a3b8;
       font-size: 0.875rem;
     }
-    
+
     .blog-categories {
       display: flex;
       justify-content: center;
@@ -136,7 +137,7 @@
       margin-bottom: 2rem;
       flex-wrap: wrap;
     }
-    
+
     .category-btn {
       background: rgba(30, 41, 59, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.1);
@@ -147,21 +148,21 @@
       transition: all 0.2s ease;
       font-size: 0.875rem;
     }
-    
+
     .category-btn:hover,
     .category-btn.active {
       background: rgba(16, 185, 129, 0.2);
       border-color: rgba(16, 185, 129, 0.4);
       color: #10b981;
     }
-    
+
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
       margin-bottom: 3rem;
     }
-    
+
     .blog-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -171,13 +172,13 @@
       transition: all 0.3s ease;
       position: relative;
     }
-    
+
     .blog-card:hover {
       transform: translateY(-4px);
       border-color: rgba(16, 185, 129, 0.4);
       box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.2);
     }
-    
+
     .blog-image {
       width: 100%;
       height: 200px;
@@ -188,11 +189,11 @@
       font-size: 3rem;
       color: rgba(255, 255, 255, 0.8);
     }
-    
+
     .blog-content {
       padding: 1.5rem;
     }
-    
+
     .blog-meta {
       display: flex;
       justify-content: space-between;
@@ -201,13 +202,13 @@
       font-size: 0.875rem;
       color: #64748b;
     }
-    
+
     .blog-date {
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .blog-category {
       background: rgba(16, 185, 129, 0.2);
       color: #10b981;
@@ -216,28 +217,28 @@
       font-size: 0.75rem;
       font-weight: 600;
     }
-    
+
     .blog-title {
       color: #f8fafc;
       margin-bottom: 0.75rem;
       font-size: 1.25rem;
       line-height: 1.4;
     }
-    
+
     .blog-excerpt {
       color: #94a3b8;
       line-height: 1.6;
       margin-bottom: 1rem;
       font-size: 0.95rem;
     }
-    
+
     .blog-tags {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
       margin-bottom: 1rem;
     }
-    
+
     .blog-tag {
       background: rgba(255, 255, 255, 0.1);
       color: #94a3b8;
@@ -245,7 +246,7 @@
       border-radius: 12px;
       font-size: 0.75rem;
     }
-    
+
     .blog-read-more {
       background: linear-gradient(135deg, #10b981, #3b82f6);
       color: white;
@@ -261,12 +262,12 @@
       gap: 0.5rem;
       font-size: 0.875rem;
     }
-    
+
     .blog-read-more:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.3);
     }
-    
+
     .featured-post {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -279,19 +280,19 @@
       gap: 2rem;
       align-items: center;
     }
-    
+
     .featured-content h3 {
       color: #10b981;
       margin-bottom: 1rem;
       font-size: 1.5rem;
     }
-    
+
     .featured-content p {
       color: #94a3b8;
       line-height: 1.6;
       margin-bottom: 1.5rem;
     }
-    
+
     .featured-image {
       background: linear-gradient(135deg, #10b981, #3b82f6);
       border-radius: 12px;
@@ -302,7 +303,7 @@
       font-size: 4rem;
       color: rgba(255, 255, 255, 0.8);
     }
-    
+
     .newsletter-section {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -312,12 +313,12 @@
       text-align: center;
       margin-bottom: 3rem;
     }
-    
+
     .newsletter-section h3 {
       color: #10b981;
       margin-bottom: 1rem;
     }
-    
+
     .newsletter-section p {
       color: #94a3b8;
       margin-bottom: 1.5rem;
@@ -325,14 +326,14 @@
       margin-left: auto;
       margin-right: auto;
     }
-    
+
     .newsletter-form {
       display: flex;
       gap: 1rem;
       max-width: 400px;
       margin: 0 auto;
     }
-    
+
     .newsletter-input {
       flex: 1;
       background: rgba(15, 23, 42, 0.8);
@@ -342,7 +343,7 @@
       border-radius: 8px;
       font-size: 0.875rem;
     }
-    
+
     .newsletter-btn {
       background: linear-gradient(135deg, #10b981, #3b82f6);
       color: white;
@@ -354,43 +355,43 @@
       transition: all 0.2s ease;
       font-size: 0.875rem;
     }
-    
+
     .newsletter-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.3);
     }
-    
+
     @media (max-width: 768px) {
       .blog-container {
         padding: 1rem;
       }
-      
+
       .blog-hero h1 {
         font-size: 2rem;
       }
-      
+
       .blog-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
       }
-      
+
       .featured-post {
         grid-template-columns: 1fr;
       }
-      
+
       .newsletter-form {
         flex-direction: column;
       }
     }
   </style>
 </head>
-<body>
+<body data-breadcrumb="Home::/index.html | Blog">
 
-  <!-- Skip to main content link for screen readers -->
-  <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
-  
+  <!-- Shared Navigation (rendered by site-nav.js) -->
+  <div id="webzonebw-site-nav"></div>
+
   <div class="blog-container">
-    
+
     <!-- Hero Section -->
     <section class="blog-hero" id="main-content">
       <div class="badge">Web Development Blog</div>
@@ -413,7 +414,7 @@
         <div class="stat-label">Categories</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">4.8⭐</div>
+        <div class="stat-number">4.8â­</div>
         <div class="stat-label">Average Rating</div>
       </div>
     </section>
@@ -421,16 +422,16 @@
     <!-- Featured Post -->
     <section class="featured-post">
       <div class="featured-content">
-        <h3>🌟 Featured Article</h3>
+        <h3>ðŸŒŸ Featured Article</h3>
         <h2>Complete Guide to Modern CSS Grid Layouts</h2>
         <p>Master CSS Grid from basics to advanced techniques. Learn how to create complex, responsive layouts with ease and precision. This comprehensive guide covers everything you need to know about modern grid layouts.</p>
         <div class="blog-meta">
-          <div class="blog-date">📅 March 15, 2026</div>
+          <div class="blog-date">ðŸ“… March 15, 2026</div>
           <div class="blog-category">CSS</div>
         </div>
-        <a href="#" class="blog-read-more">Read Article →</a>
+        <a href="#" class="blog-read-more">Read Article â†’</a>
       </div>
-      <div class="featured-image">🔲</div>
+      <div class="featured-image">ðŸ”²</div>
     </section>
 
     <!-- Blog Categories -->
@@ -447,10 +448,10 @@
     <!-- Blog Posts Grid -->
     <section class="blog-grid">
       <article class="blog-card">
-        <div class="blog-image">🎨</div>
+        <div class="blog-image">ðŸŽ¨</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 March 10, 2026</div>
+            <div class="blog-date">ðŸ“… March 10, 2026</div>
             <div class="blog-category">CSS</div>
           </div>
           <h3 class="blog-title">CSS Flexbox: Complete Guide to 1D Layouts</h3>
@@ -460,15 +461,15 @@
             <span class="blog-tag">Layout</span>
             <span class="blog-tag">Responsive</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
-      
+
       <article class="blog-card">
-        <div class="blog-image">⚡</div>
+        <div class="blog-image">âš¡</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 March 8, 2026</div>
+            <div class="blog-date">ðŸ“… March 8, 2026</div>
             <div class="blog-category">JavaScript</div>
           </div>
           <h3 class="blog-title">Advanced JavaScript: Closures and Scope</h3>
@@ -478,15 +479,15 @@
             <span class="blog-tag">Advanced</span>
             <span class="blog-tag">Concepts</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
-      
+
       <article class="blog-card">
-        <div class="blog-image">📱</div>
+        <div class="blog-image">ðŸ“±</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 March 5, 2026</div>
+            <div class="blog-date">ðŸ“… March 5, 2026</div>
             <div class="blog-category">Responsive</div>
           </div>
           <h3 class="blog-title">Mobile-First Design: Best Practices</h3>
@@ -496,15 +497,15 @@
             <span class="blog-tag">Mobile</span>
             <span class="blog-tag">UX</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
-      
+
       <article class="blog-card">
-        <div class="blog-image">🔧</div>
+        <div class="blog-image">ðŸ”§</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 March 3, 2026</div>
+            <div class="blog-date">ðŸ“… March 3, 2026</div>
             <div class="blog-category">Tools</div>
           </div>
           <h3 class="blog-title">Essential Developer Tools in 2026</h3>
@@ -514,15 +515,15 @@
             <span class="blog-tag">Productivity</span>
             <span class="blog-tag">Development</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
-      
+
       <article class="blog-card">
-        <div class="blog-image">🚀</div>
+        <div class="blog-image">ðŸš€</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 February 28, 2026</div>
+            <div class="blog-date">ðŸ“… February 28, 2026</div>
             <div class="blog-category">Performance</div>
           </div>
           <h3 class="blog-title">Web Performance Optimization Guide</h3>
@@ -532,15 +533,15 @@
             <span class="blog-tag">Optimization</span>
             <span class="blog-tag">Speed</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
-      
+
       <article class="blog-card">
-        <div class="blog-image">🎯</div>
+        <div class="blog-image">ðŸŽ¯</div>
         <div class="blog-content">
           <div class="blog-meta">
-            <div class="blog-date">📅 February 25, 2026</div>
+            <div class="blog-date">ðŸ“… February 25, 2026</div>
             <div class="blog-category">HTML</div>
           </div>
           <h3 class="blog-title">Semantic HTML5 for Better SEO</h3>
@@ -550,14 +551,14 @@
             <span class="blog-tag">SEO</span>
             <span class="blog-tag">Accessibility</span>
           </div>
-          <a href="#" class="blog-read-more">Read More →</a>
+          <a href="#" class="blog-read-more">Read More â†’</a>
         </div>
       </article>
     </section>
 
     <!-- Newsletter Section -->
     <section class="newsletter-section">
-      <h3>📧 Stay Updated</h3>
+      <h3>ðŸ“§ Stay Updated</h3>
       <p>Get the latest web development tutorials, tips, and insights delivered to your inbox. Join thousands of developers who improve their skills weekly.</p>
       <form class="newsletter-form">
         <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
@@ -569,17 +570,17 @@
 
   <!-- Settings Panel -->
   <div class="settings-panel" id="settingsPanel">
-    <button class="close-btn" aria-label="Close settings">✖</button>
+    <button class="close-btn" aria-label="Close settings">âœ–</button>
     <h3>Settings</h3>
   </div>
-  
+
   <footer>
     <p>
-      <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> ·
-      <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> ·
-      <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> ·
-      <a href="/about.html" rel="nofollow">About</a> ·
-      <a href="/contact.html" rel="nofollow">Contact</a> ·
+      <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> Â·
+      <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> Â·
+      <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> Â·
+      <a href="/about.html" rel="nofollow">About</a> Â·
+      <a href="/contact.html" rel="nofollow">Contact</a> Â·
       <a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer">Reach Out &amp; Enquiry (webzonebw.in)</a>
     </p>
     <p>&copy; 2026 WebZoneBW SC. Connected with <a href="https://webzonebw.in/" style="color:#a1a1aa;text-decoration:underline;">webzonebw.in</a> for inquiries and data transparency.</p>
@@ -595,7 +596,7 @@
         this.querySelector('.newsletter-input').value = '';
       }
     });
-    
+
     // Category filter functionality
     document.querySelectorAll('.category-btn').forEach(btn => {
       btn.addEventListener('click', function() {
@@ -607,6 +608,7 @@
     });
   </script>
 
-  <script src="/Assets/js/main.js"></script>
+  <script src="/Assets/js/site-nav.js" defer></script>
+  <script src="/Assets/js/main.js" defer></script>
 </body>
 </html>

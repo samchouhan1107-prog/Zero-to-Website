@@ -1,103 +1,478 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 10 | Final Capstone Project & Deployment - WZ Storehouse</title>
-    <link rel="stylesheet" href="/Assets/css/main.css">
-    <link rel="stylesheet" href="/Assets/css/ad-styles.css">
-    <script src="/Assets/js/main.js" defer></script>
-    
+
+    <title>Chapter 10 | Final Capstone &amp; Deployment — WebZoneBW</title>
+
+    <meta
+        name="description"
+        content="Complete the WebZoneBW final capstone by building, testing, optimizing, and deploying a responsive website to the web."
+    >
+
+    <link rel="icon" href="/assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js" defer></script>
+
     <!-- AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-         crossorigin="anonymous"></script>
-    
-    <!-- News Ad -->
-    <ins class="adsbygoogle news-ad-container"
-         style="display:block"
-         data-ad-client="ca-pub-2904917114665090"
-         data-ad-slot="7478243169"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+        crossorigin="anonymous">
     </script>
 </head>
-<body class="chapter-deployment">
-<header>
+
+<body class="chapter-page chapter-deployment">
+
+<header class="site-header">
+
     <div class="logo">
-        <a href="/index.html" class="logo-link">
-            <h1>WZ STOREHOUSE</h1>
+        <a href="/index.html" class="logo-link" aria-label="WebZoneBW Home">
+            <h1>WEBZONEBW</h1>
             <p>Learn • Practice • Build • Share</p>
         </a>
     </div>
-    <nav>
-        <a href="/index.html">🏠 Home</a>
-        <a href="../Chapter-09-Git & GitHub/index.html">⬅ Previous</a>
-        <button id="settingsBtn">⚙ Settings</button>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/Workspace.html">Workspace</a>
+        <a href="/web-tools.html">Web Tools</a>
+        <a href="/image-tools.html">Image Tools</a>
+        <a href="/developer-tools.html">Developer Tools</a>
+        <a href="/learn.html" aria-current="page">Learn</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/about.html">About</a>
+        <button id="settingsBtn" type="button">⚙ Settings</button>
     </nav>
+
 </header>
-<div id="settingsPanel" class="settings-panel">
-    <h3>⚙ Settings</h3>
-    <button id="darkModeBtn">🌙 Dark Mode</button>
-    <button id="fontSizeBtn">🔤 Font Size</button>
-    <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+
+<div id="settingsPanel" class="settings-panel" hidden>
+
+    <h2>Settings</h2>
+
+    <button id="darkModeBtn" type="button">
+        🌙 Theme
+    </button>
+
+    <button id="fontSizeBtn" type="button">
+        Aa Font Size
+    </button>
+
+    <button id="closeSettingsBtn" class="close-btn" type="button">
+        ✕ Close
+    </button>
+
 </div>
-<main class="container chapter-page">
+
+<main class="container">
+
+    <!-- Breadcrumb -->
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/learn.html">Learn</a>
+        <span aria-hidden="true">→</span>
+        <span>Chapter 10</span>
+    </nav>
+
+
+    <!-- Final Chapter Hero -->
+
     <section class="chapter-hero">
-        <span class="chapter-badge">Chapter 10 • Capstone</span>
-        <h1>Final Project &amp; Live Deployment</h1>
-        <p>Synthesize everything you have mastered into a production portfolio website and deploy it live to the web for free.</p>
+
+        <span class="chapter-badge">Chapter 10 • Final Capstone</span>
+
+        <h1>Build It. Test It. Ship It.</h1>
+
+        <p class="chapter-intro">
+            Bring the skills from the entire course together in one practical
+            project. Design it, build it, test it, prepare it for production,
+            and publish it to the web.
+        </p>
 
         <div class="info-grid">
-            <div class="summary-card">
-                <h3>Difficulty</h3>
+
+            <article class="summary-card">
+                <h2>Level</h2>
                 <p>Advanced Capstone</p>
-            </div>
-            <div class="summary-card">
-                <h3>Duration</h3>
-                <p>5.0 Hours</p>
-            </div>
-            <div class="summary-card">
-                <h3>Key Concept</h3>
-                <p>CI/CD &amp; Static Hosting</p>
-            </div>
-            <div class="summary-card">
-                <h3>Outcome</h3>
-                <p>Live Deployed Custom Portfolio</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Estimated Time</h2>
+                <p>5 Hours</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Core Skills</h2>
+                <p>Build • Test • Deploy</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Final Outcome</h2>
+                <p>A working live project</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Final Journey -->
+
+    <section class="chapter-section connection-card">
+
+        <span class="eyebrow">The final journey</span>
+
+        <h2>From first file to live website.</h2>
+
+        <p>
+            You have learned individual pieces throughout the course.
+            This chapter connects them into one complete workflow.
+        </p>
+
+        <div class="connection-flow">
+            <span>Plan</span>
+            <span>→</span>
+            <span>Build</span>
+            <span>→</span>
+            <span>Test</span>
+            <span>→</span>
+            <span>Optimize</span>
+            <span>→</span>
+            <span>Deploy</span>
+            <span>→</span>
+            <span>Maintain</span>
+        </div>
+
+    </section>
+
+
+    <!-- Objectives -->
+
+    <section class="chapter-section" aria-labelledby="objectives-title">
+
+        <span class="eyebrow">Before you ship</span>
+
+        <h2 id="objectives-title">What You Will Put Together</h2>
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+                <span class="feature-icon">🧭</span>
+                <h3>Plan</h3>
+                <p>
+                    Define the purpose, structure, audience, content,
+                    navigation, and technical requirements of your project.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">🧱</span>
+                <h3>Build</h3>
+                <p>
+                    Combine HTML, CSS, JavaScript, responsive layouts,
+                    components, and assets into a working experience.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">🔍</span>
+                <h3>Test</h3>
+                <p>
+                    Check navigation, interactions, responsive behavior,
+                    assets, accessibility, performance, and errors.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">🚀</span>
+                <h3>Deploy</h3>
+                <p>
+                    Prepare the project for production and understand how
+                    hosting, domains, HTTPS, and deployment workflows connect.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- Capstone Milestones -->
+
+    <section class="chapter-section" aria-labelledby="milestones-title">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">Final project</span>
+                <h2 id="milestones-title">Capstone Milestones</h2>
             </div>
         </div>
-    </section>
 
-    <section class="chapter-section">
-        <h2>🎯 Learning Objectives</h2>
-        <ul class="chapter-list">
-            <li>✔ Architect a multi-section responsive portfolio with HTML5, CSS Grid, Flexbox, and JavaScript.</li>
-            <li>✔ Optimize images (WebP/AVIF) and assets for lightning-fast Core Web Vitals.</li>
-            <li>✔ Deploy live websites to GitHub Pages, Vercel, and Netlify with automatic HTTPS.</li>
-            <li>✔ Configure custom domains and Open Graph social sharing metadata.</li>
-        </ul>
-    </section>
-
-    <section class="chapter-section">
-        <h2>📚 Chapter Lessons &amp; Milestones</h2>
         <div class="lesson-grid">
-            <div class="lesson-card">
-                <h3>Capstone 01</h3>
-                <p>Portfolio Blueprint, Live Static Hosting &amp; GitHub Pages Launch</p>
-                <a href="/index.html" class="btn primary" style="margin-top: 10px; display: inline-block;">Open Interactive App →</a>
-            </div>
+
+            <article class="lesson-card">
+                <span class="lesson-number">01</span>
+
+                <h3>Project Blueprint</h3>
+
+                <p>
+                    Define the project idea, pages, content structure,
+                    user flow, components, and technical requirements.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-01.html"
+                    class="btn primary">
+                    Start Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">02</span>
+
+                <h3>Build the Interface</h3>
+
+                <p>
+                    Turn the blueprint into a responsive website using the
+                    HTML, CSS, and JavaScript skills developed throughout
+                    the course.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-02.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">03</span>
+
+                <h3>Connect the Experience</h3>
+
+                <p>
+                    Connect navigation, interactions, forms, tools,
+                    assets, and reusable components into one working system.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-03.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">04</span>
+
+                <h3>Test &amp; Optimize</h3>
+
+                <p>
+                    Find broken paths, layout problems, console errors,
+                    missing assets, accessibility issues, and performance
+                    opportunities.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-04.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">05</span>
+
+                <h3>Prepare for Production</h3>
+
+                <p>
+                    Organize assets, verify production paths, configure
+                    metadata, prepare the build, and review the project
+                    before release.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-05.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">06</span>
+
+                <h3>Deploy to the Web</h3>
+
+                <p>
+                    Learn the relationship between repositories, hosting,
+                    deployment, HTTPS, domains, and the live application.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-06.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">07</span>
+
+                <h3>Verify the Live Project</h3>
+
+                <p>
+                    Test the deployed website from the outside and confirm
+                    that routes, assets, interactions, metadata, and
+                    responsive behavior work in production.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-07.html"
+                    class="btn primary">
+                    Open Milestone →
+                </a>
+            </article>
+
+
+            <article class="lesson-card">
+                <span class="lesson-number">08</span>
+
+                <h3>Ship &amp; Maintain</h3>
+
+                <p>
+                    Learn what happens after launch: updates, version
+                    control, monitoring, fixes, improvements, and continued
+                    development.
+                </p>
+
+                <a
+                    href="/learn/chapter-10/lesson-08.html"
+                    class="btn primary">
+                    Complete Capstone →
+                </a>
+            </article>
+
         </div>
+
     </section>
 
-    <section class="chapter-section chapter-nav-links">
-        <a href="/index.html">🏠 Home Dashboard</a>
-        <a href="../Chapter-09-Git & GitHub/index.html">⬅ Chapter 09: Git &amp; GitHub</a>
-        <a href="/index.html">🎉 Course Complete! Return Home ➜</a>
+
+    <!-- Deployment Checklist -->
+
+    <section class="chapter-section" aria-labelledby="checklist-title">
+
+        <span class="eyebrow">Before going live</span>
+
+        <h2 id="checklist-title">Production Checklist</h2>
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+                <h3>Structure</h3>
+                <p>Routes, files, components, assets, and imports are organized.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Experience</h3>
+                <p>Navigation, interactions, forms, and responsive layouts work.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Quality</h3>
+                <p>No broken assets, obvious console errors, or unfinished states.</p>
+            </article>
+
+            <article class="feature-card">
+                <h3>Production</h3>
+                <p>Build, hosting, HTTPS, domain, and live routes have been verified.</p>
+            </article>
+
+        </div>
+
     </section>
+
+
+    <!-- Brain Note -->
+
+    <aside class="brain-note" aria-label="Brain Note">
+
+        <div class="brain-note-icon">🌋</div>
+
+        <div>
+            <span class="eyebrow">Brain Note</span>
+
+            <h2>Launching is not the end.</h2>
+
+            <p>
+                A deployed website is a starting point for observation,
+                maintenance, improvement, and the next version.
+            </p>
+        </div>
+
+    </aside>
+
+
+    <!-- Completion -->
+
+    <section class="chapter-section completion-card">
+
+        <span class="eyebrow">Chapter 10</span>
+
+        <h2>You reached the final chapter.</h2>
+
+        <p>
+            The course does not end with a button. Your final project is where
+            the concepts become something you can actually use, share, improve,
+            and continue building.
+        </p>
+
+        <a href="/learn/chapter-10/lesson-01.html" class="btn primary">
+            Begin the Capstone →
+        </a>
+
+    </section>
+
+
+    <!-- Navigation -->
+
+    <nav class="chapter-nav-links" aria-label="Chapter navigation">
+
+        <a
+            href="/learn/chapter-09/index.html"
+            class="btn secondary">
+            ← Chapter 09: Git &amp; GitHub
+        </a>
+
+        <a
+            href="/learn.html"
+            class="btn primary">
+            Course Complete → Learn Home
+        </a>
+
+    </nav>
+
 </main>
-<footer>
-    <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+
+
+<footer class="site-footer">
+
+    <p>
+        WebZoneBW.shop · Learn • Practice • Build • Share
+    </p>
+
+    <p>
+        Developed by Sameer Chouhan · © 2026
+    </p>
+
 </footer>
+
 </body>
 </html>

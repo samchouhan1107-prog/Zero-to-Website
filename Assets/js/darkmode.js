@@ -1,18 +1,18 @@
-/* ==================================================
-   WZ Storehouse
+﻿/* ==================================================
+   WebZoneBW SC
    darkmode.js
 ================================================== */
 
 const initDarkMode = () => {
     const darkModeBtn = document.getElementById("darkModeBtn");
     const body = document.body;
-    const storedTheme = localStorage.getItem("wz_storehouse_theme") || localStorage.getItem("wz-theme") || "dark";
+    const storedTheme = localStorage.getItem("webzonebw_storehouse_theme") || localStorage.getItem("webzonebw-theme") || "dark";
 
     const setButtonLabel = (isDark) => {
         if (!darkModeBtn) {
             return;
         }
-        darkModeBtn.textContent = isDark ? "☀️ Volcanic Porcelain" : "🌋 Red Volcanic";
+        darkModeBtn.textContent = isDark ? "â˜€ï¸ Volcanic Porcelain" : "ðŸŒ‹ Red Volcanic";
         darkModeBtn.setAttribute("aria-label", isDark ? "Switch to Volcanic Porcelain (Light)" : "Switch to Red Volcanic (Dark)");
     };
 
@@ -30,8 +30,8 @@ const initDarkMode = () => {
 
             const isDark = body.classList.contains("dark");
             const themeValue = isDark ? "dark" : "light";
-            localStorage.setItem("wz_storehouse_theme", themeValue);
-            localStorage.setItem("wz-theme", themeValue);
+            localStorage.setItem("webzonebw_storehouse_theme", themeValue);
+            localStorage.setItem("webzonebw-theme", themeValue);
             setButtonLabel(isDark);
         });
     }

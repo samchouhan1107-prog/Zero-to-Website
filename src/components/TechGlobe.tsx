@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Globe, Code, Palette, Zap, Server, Smartphone, Cloud } from 'lucide-react';
+import { Globe, Code, Palette, Zap, Server, Smartphone, Cloud, Shield, User, Database, Settings, Bug, CheckCircle, BookOpen, Accessibility, Users, Wrench, Expand, Building, Layers, Star } from 'lucide-react';
 
 interface TechNode {
   id: string;
@@ -364,14 +364,15 @@ const TechGlobe: React.FC = () => {
       
       // Draw nodes
       techNodes.forEach(node => {
+        const nodeRadius = radius;
         const rotatedX = node.x * Math.cos(rotation.y) - node.z * Math.sin(rotation.y);
         const rotatedZ = node.x * Math.sin(rotation.y) + node.z * Math.cos(rotation.y);
         const rotatedY = node.y * Math.cos(rotation.x) - rotatedZ * Math.sin(rotation.x);
         const finalZ = node.y * Math.sin(rotation.x) + rotatedZ * Math.cos(rotation.x);
-        
-        const scale = (radius + finalZ) / radius;
-        const screenX = centerX + rotatedX * radius * scale;
-        const screenY = centerY + rotatedY * radius * scale;
+
+        const scale = (nodeRadius + finalZ) / nodeRadius;
+        const screenX = centerX + rotatedX * nodeRadius * scale;
+        const screenY = centerY + rotatedY * nodeRadius * scale;
         
         if (scale > 0) {
           // Node glow effect
@@ -425,8 +426,7 @@ const TechGlobe: React.FC = () => {
             
             const scale1 = (radius + finalZ1) / radius;
             const scale2 = (radius + finalZ2) / radius;
-            
-            const screenX1 = centerX + rotatedX1 * radius * scale1;
+                        const screenX1 = centerX + rotatedX1 * radius * scale1;
             const screenY1 = centerY + rotatedY1 * radius * scale1;
             const screenX2 = centerX + rotatedX2 * radius * scale2;
             const screenY2 = centerY + rotatedY2 * radius * scale2;
@@ -461,16 +461,17 @@ const TechGlobe: React.FC = () => {
       
       let closestNode: TechNode | null = null;
       let closestDistance = Infinity;
-      
+            const hitRadius = Math.min(canvas.width, canvas.height) * 0.3;
+
       techNodes.forEach(node => {
         const rotatedX = node.x * Math.cos(rotation.y) - node.z * Math.sin(rotation.y);
         const rotatedZ = node.x * Math.sin(rotation.y) + node.z * Math.cos(rotation.y);
         const rotatedY = node.y * Math.cos(rotation.x) - rotatedZ * Math.sin(rotation.x);
         const finalZ = node.y * Math.sin(rotation.x) + rotatedZ * Math.cos(rotation.x);
-        
-        const scale = (radius + finalZ) / radius;
-        const screenX = canvas.width / 2 + rotatedX * radius * scale;
-        const screenY = canvas.height / 2 + rotatedY * radius * scale;
+
+        const scale = (hitRadius + finalZ) / hitRadius;
+        const screenX = canvas.width / 2 + rotatedX * hitRadius * scale;
+        const screenY = canvas.height / 2 + rotatedY * hitRadius * scale;
         
         const distance = Math.sqrt((mouseX - screenX) ** 2 + (mouseY - screenY) ** 2);
         if (distance < 20 && distance < closestDistance) {
@@ -521,7 +522,7 @@ const TechGlobe: React.FC = () => {
           </div>
         </div>
       )}
-      <style jsx>{`
+      <style>{`
         .tech-globe-container {
           position: relative;
           display: flex;

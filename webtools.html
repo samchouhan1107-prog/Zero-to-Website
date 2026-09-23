@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" class="dark">
 <head>
   <meta charset="UTF-8">
@@ -6,8 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   
   <!-- Primary SEO Meta Tags -->
-  <title>Web Tools | WebZoneBW SC — Interactive Web Development Tools</title>
-  <meta name="description" content="WebZoneBW Web Tools — Interactive web development tools including CSS flexbox visualizer, CSS grid generator, HTML sandbox, and JavaScript REPL for hands-on learning.">
+  <title>Web Tools | WebZoneBW SC â€” Interactive Web Development Tools</title>
+  <meta name="description" content="WebZoneBW Web Tools â€” Interactive web development tools including CSS flexbox visualizer, CSS grid generator, HTML sandbox, and JavaScript REPL for hands-on learning.">
   <meta name="keywords" content="web developer tools, CSS flexbox visualizer, CSS grid tool, HTML sandbox, JavaScript REPL, web development tools, interactive coding">
   <meta name="author" content="WebZoneBW">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
@@ -16,7 +16,7 @@
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://webzonebw.shop/webtools.html">
-  <meta property="og:title" content="Web Tools | WebZoneBW SC — Interactive Web Development Tools">
+  <meta property="og:title" content="Web Tools | WebZoneBW SC â€” Interactive Web Development Tools">
   <meta property="og:description" content="Interactive web development tools including CSS flexbox visualizer, CSS grid generator, HTML sandbox, and JavaScript REPL for hands-on learning.">
   <meta property="og:image" content="https://webzonebw.shop/og-image.svg">
   <meta property="og:site_name" content="WebZoneBW SC">
@@ -25,7 +25,7 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:url" content="https://webzonebw.shop/webtools.html">
-  <meta property="twitter:title" content="Web Tools | WebZoneBW SC — Interactive Web Development Tools">
+  <meta property="twitter:title" content="Web Tools | WebZoneBW SC â€” Interactive Web Development Tools">
   <meta property="twitter:description" content="Interactive web development tools including CSS flexbox visualizer, CSS grid generator, HTML sandbox, and JavaScript REPL for hands-on learning.">
   <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg">
   
@@ -44,7 +44,7 @@
   <meta name="theme-color" content="#0f172a" />
 
   <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ› ï¸</text></svg>" />
   
   <!-- Preconnect & Asset Loading Optimization -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -54,13 +54,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
   </noscript>
   
-  <!-- Shared Navigation -->
-  <link rel="stylesheet" href="/navigation.html">
-  
+  <!-- Shared Navigation (site-nav system) -->
+  <link rel="stylesheet" href="/Assets/css/site-nav.css">
+
   <!-- Styles -->
   <link rel="stylesheet" href="/Assets/css/main.css">
   <link rel="stylesheet" href="/Assets/css/webtools.css">
-  
+
   <style>
     body {
       margin: 0;
@@ -70,18 +70,18 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       min-height: 100vh;
     }
-    
+
     .webtools-container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 2rem;
     }
-    
+
     .webtools-hero {
       text-align: center;
       margin-bottom: 3rem;
     }
-    
+
     .webtools-hero h1 {
       font-size: 2.5rem;
       margin-bottom: 1rem;
@@ -90,21 +90,21 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-    
+
     .webtools-hero p {
       font-size: 1.2rem;
       color: #94a3b8;
       max-width: 600px;
       margin: 0 auto;
     }
-    
+
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
       margin-bottom: 3rem;
     }
-    
+
     .tool-card {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -116,13 +116,13 @@
       position: relative;
       overflow: hidden;
     }
-    
+
     .tool-card:hover {
       transform: translateY(-4px);
       border-color: rgba(16, 185, 129, 0.4);
       box-shadow: 0 20px 40px -10px rgba(16, 185, 129, 0.2);
     }
-    
+
     .tool-card::before {
       content: '';
       position: absolute;
@@ -133,11 +133,11 @@
       background: linear-gradient(90deg, transparent, rgba(16, 185, 129, 0.1), transparent);
       transition: left 0.5s ease;
     }
-    
+
     .tool-card:hover::before {
       left: 100%;
     }
-    
+
     .tool-icon {
       width: 48px;
       height: 48px;
@@ -149,26 +149,26 @@
       margin-bottom: 1rem;
       font-size: 1.5rem;
     }
-    
+
     .tool-card h3 {
       color: #10b981;
       margin-bottom: 0.5rem;
       font-size: 1.25rem;
     }
-    
+
     .tool-card p {
       color: #94a3b8;
       line-height: 1.5;
       margin-bottom: 1rem;
       font-size: 0.95rem;
     }
-    
+
     .tool-features {
       list-style: none;
       padding: 0;
       margin: 0 0 1rem 0;
     }
-    
+
     .tool-features li {
       color: #64748b;
       font-size: 0.875rem;
@@ -177,13 +177,13 @@
       align-items: center;
       gap: 0.5rem;
     }
-    
+
     .tool-features li::before {
-      content: '✓';
+      content: 'âœ“';
       color: #10b981;
       font-weight: bold;
     }
-    
+
     .tool-btn {
       background: linear-gradient(135deg, #10b981, #3b82f6);
       color: white;
@@ -199,12 +199,12 @@
       gap: 0.5rem;
       font-size: 0.95rem;
     }
-    
+
     .tool-btn:hover {
       transform: translateY(-1px);
       box-shadow: 0 8px 16px -4px rgba(16, 185, 129, 0.3);
     }
-    
+
     .featured-tools {
       background: rgba(30, 41, 59, 0.7);
       backdrop-filter: blur(12px);
@@ -213,19 +213,19 @@
       padding: 2rem;
       margin-bottom: 3rem;
     }
-    
+
     .featured-tools h2 {
       color: #10b981;
       margin-bottom: 1.5rem;
       text-align: center;
     }
-    
+
     .featured-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 1.5rem;
     }
-    
+
     .featured-tool {
       background: rgba(15, 23, 42, 0.8);
       border: 1px solid rgba(16, 185, 129, 0.2);
@@ -233,58 +233,52 @@
       padding: 1.5rem;
       text-align: center;
     }
-    
+
     .featured-tool .tool-icon {
       margin: 0 auto 1rem;
       width: 64px;
       height: 64px;
       font-size: 2rem;
     }
-    
+
     .featured-tool h4 {
       color: #10b981;
       margin-bottom: 0.5rem;
     }
-    
+
     .featured-tool p {
       color: #94a3b8;
       font-size: 0.9rem;
       line-height: 1.5;
     }
-    
+
     @media (max-width: 768px) {
       .webtools-container {
         padding: 1rem;
       }
-      
+
       .webtools-hero h1 {
         font-size: 2rem;
       }
-      
+
       .tools-grid {
         grid-template-columns: 1fr;
         gap: 1rem;
       }
-      
+
       .featured-grid {
         grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
-<body>
+<body data-breadcrumb="Home::/index.html | Web Tools">
 
-  <!-- Skip to main content link for screen readers -->
-  <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
-  
-  <!-- Shared Navigation -->
-  <div id="sharedNavigation"></div>
-  
-  <!-- Shared Breadcrumb -->
-  <div id="sharedBreadcrumb"></div>
-  
+  <!-- Shared Navigation (rendered by site-nav.js) -->
+  <div id="webzonebw-site-nav"></div>
+
   <div class="webtools-container">
-    
+
     <!-- Hero Section -->
     <section class="webtools-hero" id="main-content">
       <div class="badge">WebZoneBW Tools</div>
@@ -294,20 +288,20 @@
 
     <!-- Featured Tools -->
     <section class="featured-tools">
-      <h2>🌟 Featured Tools</h2>
+      <h2>ðŸŒŸ Featured Tools</h2>
       <div class="featured-grid">
         <div class="featured-tool">
-          <div class="tool-icon">🎨</div>
+          <div class="tool-icon">ðŸŽ¨</div>
           <h4>CSS Flexbox Studio</h4>
           <p>Interactive 1D flex container with live alignment controls and real-time visual feedback</p>
         </div>
         <div class="featured-tool">
-          <div class="tool-icon">📐</div>
+          <div class="tool-icon">ðŸ“</div>
           <h4>CSS Grid Matrix</h4>
           <p>Two-dimensional grid generator with fractional units and template areas visualization</p>
         </div>
         <div class="featured-tool">
-          <div class="tool-icon">🔧</div>
+          <div class="tool-icon">ðŸ”§</div>
           <h4>HTML/CSS/JS Sandbox</h4>
           <p>Real-time coding environment with live preview and instant compilation</p>
         </div>
@@ -317,7 +311,7 @@
     <!-- All Tools Grid -->
     <section class="tools-grid">
       <div class="tool-card" onclick="window.location.href='/imagetools.html'">
-        <div class="tool-icon">🎨</div>
+        <div class="tool-icon">ðŸŽ¨</div>
         <h3>CSS Visualizers</h3>
         <p>Master CSS layouts with interactive visual tools for Flexbox, Grid, and Box Model.</p>
         <ul class="tool-features">
@@ -325,11 +319,11 @@
           <li>Visual feedback</li>
           <li>Code generation</li>
         </ul>
-        <button class="tool-btn">Open Tools →</button>
+        <button class="tool-btn">Open Tools â†’</button>
       </div>
-      
+
       <div class="tool-card" onclick="window.location.href='/developertools.html'">
-        <div class="tool-icon">🔧</div>
+        <div class="tool-icon">ðŸ”§</div>
         <h3>Developer Tools</h3>
         <p>Professional browser dev tools simulation with network analysis and debugging capabilities.</p>
         <ul class="tool-features">
@@ -337,11 +331,11 @@
           <li>Memory profiling</li>
           <li>Security analysis</li>
         </ul>
-        <button class="tool-btn">Launch Dev Tools →</button>
+        <button class="tool-btn">Launch Dev Tools â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">📝</div>
+        <div class="tool-icon">ðŸ“</div>
         <h3>Code Sandbox</h3>
         <p>Write and test HTML, CSS, and JavaScript with live preview and instant feedback.</p>
         <ul class="tool-features">
@@ -349,11 +343,11 @@
           <li>Auto-save functionality</li>
           <li>Multi-file support</li>
         </ul>
-        <button class="tool-btn">Start Coding →</button>
+        <button class="tool-btn">Start Coding â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">🌐</div>
+        <div class="tool-icon">ðŸŒ</div>
         <h3>DOM Inspector</h3>
         <p>Interactive HTML tree visualization with live node inspection and attribute editing.</p>
         <ul class="tool-features">
@@ -361,11 +355,11 @@
           <li>Live editing</li>
           <li>Event simulation</li>
         </ul>
-        <button class="tool-btn">Inspect Elements →</button>
+        <button class="tool-btn">Inspect Elements â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">🌊</div>
+        <div class="tool-icon">ðŸŒŠ</div>
         <h3>Network Flow</h3>
         <p>Visualize HTTP requests, DNS resolution, and TLS negotiation with detailed timing analysis.</p>
         <ul class="tool-features">
@@ -373,11 +367,11 @@
           <li>Timing breakdown</li>
           <li>Caching analysis</li>
         </ul>
-        <button class="tool-btn">Trace Requests →</button>
+        <button class="tool-btn">Trace Requests â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">🌿</div>
+        <div class="tool-icon">ðŸŒ¿</div>
         <h3>Git Flow</h3>
         <p>Interactive commit history visualization with branching and merge operation simulation.</p>
         <ul class="tool-features">
@@ -385,11 +379,11 @@
           <li>Branch management</li>
           <li>Merge simulation</li>
         </ul>
-        <button class="tool-btn">Explore Git →</button>
+        <button class="tool-btn">Explore Git â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">📱</div>
+        <div class="tool-icon">ðŸ“±</div>
         <h3>Responsive Tester</h3>
         <p>Test your designs across multiple device sizes with viewport simulation.</p>
         <ul class="tool-features">
@@ -397,11 +391,11 @@
           <li>Custom sizing</li>
           <li>Orientation switching</li>
         </ul>
-        <button class="tool-btn">Test Responsiveness →</button>
+        <button class="tool-btn">Test Responsiveness â†’</button>
       </div>
-      
+
       <div class="tool-card">
-        <div class="tool-icon">🚀</div>
+        <div class="tool-icon">ðŸš€</div>
         <h3>Deployment Pipeline</h3>
         <p>Visualize the build and deployment process with CI/CD workflow simulation.</p>
         <ul class="tool-features">
@@ -409,7 +403,7 @@
           <li>Deployment flow</li>
           <li>Monitoring integration</li>
         </ul>
-        <button class="tool-btn">View Pipeline →</button>
+        <button class="tool-btn">View Pipeline â†’</button>
       </div>
     </section>
 
@@ -418,22 +412,22 @@
       <h2 style="color: #10b981; margin-bottom: 1rem;">Tool Categories</h2>
       <div style="display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
         <div style="text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🎨</div>
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸŽ¨</div>
           <h4 style="color: #10b981; margin: 0;">CSS Tools</h4>
           <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Layout & Styling</p>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸ”§</div>
           <h4 style="color: #10b981; margin: 0;">Dev Tools</h4>
           <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Debugging & Analysis</p>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">📝</div>
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸ“</div>
           <h4 style="color: #10b981; margin: 0;">Code Tools</h4>
           <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Development & Testing</p>
         </div>
         <div style="text-align: center;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸš€</div>
           <h4 style="color: #10b981; margin: 0;">Deployment</h4>
           <p style="color: #94a3b8; margin: 0; font-size: 0.9rem;">Build & Release</p>
         </div>
@@ -444,46 +438,14 @@
 
   <!-- Settings Panel -->
   <div class="settings-panel" id="settingsPanel">
-    <button class="close-btn" aria-label="Close settings">✖</button>
+    <button class="close-btn" aria-label="Close settings">âœ–</button>
     <h3>Settings</h3>
   </div>
-  
-  <!-- Shared Footer -->
+
+  <!-- Shared Footer (rendered by site-nav.js) -->
   <div id="sharedFooter"></div>
 
-  <!-- Load Shared Components -->
-  <script>
-    // Load shared navigation
-    fetch('/navigation.html')
-      .then(response => response.text())
-      .then(html => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const navigationContent = tempDiv.querySelector('#app-header').outerHTML;
-        document.getElementById('sharedNavigation').innerHTML = navigationContent;
-      });
-
-    // Load shared breadcrumb
-    fetch('/breadcrumb.html')
-      .then(response => response.text())
-      .then(html => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const breadcrumbContent = tempDiv.querySelector('.breadcrumb-container').outerHTML;
-        document.getElementById('sharedBreadcrumb').innerHTML = breadcrumbContent;
-      });
-
-    // Load shared footer
-    fetch('/footer.html')
-      .then(response => response.text())
-      .then(html => {
-        const tempDiv = document.createElement('div');
-        tempDiv.innerHTML = html;
-        const footerContent = tempDiv.querySelector('#app-footer').outerHTML;
-        document.getElementById('sharedFooter').innerHTML = footerContent;
-      });
-  </script>
-
-  <script src="/Assets/js/main.js"></script>
+  <script src="/Assets/js/site-nav.js" defer></script>
+  <script src="/Assets/js/main.js" defer></script>
 </body>
 </html>

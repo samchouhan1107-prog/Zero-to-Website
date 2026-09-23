@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from 'react';
+﻿import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CHAPTERS_DATA } from '../data/chaptersData';
 import { BLOG_POSTS } from '../data/blogData';
@@ -98,7 +98,7 @@ export default function App() {
   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
   const [theme, setTheme] = useState<AppTheme>(() => {
     try {
-      return normalizeAppTheme(localStorage.getItem('wz_storehouse_theme'));
+      return normalizeAppTheme(localStorage.getItem('webzonebw_storehouse_theme'));
     } catch {
       return 'dark';
     }
@@ -117,7 +117,7 @@ export default function App() {
     navigateToView('visual-lab');
   };
 
-  // Load progress — server is source of truth when authenticated, localStorage for guests
+  // Load progress â€” server is source of truth when authenticated, localStorage for guests
   const [progress, setProgress] = useState<UserProgress>(INITIAL_PROGRESS);
   const [progressLoaded, setProgressLoaded] = useState(false);
 
@@ -142,7 +142,7 @@ export default function App() {
     } else {
       // Guest: use localStorage as offline cache
       try {
-        const saved = localStorage.getItem('wz_storehouse_progress');
+        const saved = localStorage.getItem('webzonebw_storehouse_progress');
         if (saved) {
           const parsed = JSON.parse(saved);
           const merged: UserProgress = {
@@ -291,7 +291,7 @@ export default function App() {
     } catch {}
   }, [chapters]);
 
-  // Save progress — server is source of truth when authenticated, localStorage for guests
+  // Save progress â€” server is source of truth when authenticated, localStorage for guests
   useEffect(() => {
     if (!progressLoaded) return; // Don't save before initial load
     if (hasRealAccount) {
@@ -300,7 +300,7 @@ export default function App() {
     } else {
       // Guest fallback: localStorage only
       try {
-        localStorage.setItem('wz_storehouse_progress', JSON.stringify(progress));
+        localStorage.setItem('webzonebw_storehouse_progress', JSON.stringify(progress));
       } catch {}
     }
   }, [progress, hasRealAccount, progressLoaded]);
@@ -308,8 +308,8 @@ export default function App() {
   // Save theme to localStorage (synchronizing both React SPA and standalone keys)
   useEffect(() => {
     try {
-      localStorage.setItem('wz_storehouse_theme', theme);
-      localStorage.setItem('wz-theme', theme);
+      localStorage.setItem('webzonebw_storehouse_theme', theme);
+      localStorage.setItem('webzonebw-theme', theme);
     } catch {}
   }, [theme]);
 
@@ -399,7 +399,7 @@ export default function App() {
       });
 
       addToast(
-        'Activity Mastered! 🌟',
+        'Activity Mastered! ðŸŒŸ',
         `You earned +${xpReward} XP for conquering this post-class exercise!`,
         'success'
       );
@@ -431,12 +431,12 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Lesson Completed! 🎯', `Verified on server: +${res.xpAwarded} XP!`, 'success');
+          addToast('Lesson Completed! ðŸŽ¯', `Verified on server: +${res.xpAwarded} XP!`, 'success');
         }
 
         if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(`Achievement Unlocked! ${ach.icon || 'ðŸ†'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
           });
         }
       }
@@ -468,12 +468,12 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Challenge Mastered! ⚡', `Verified: +${res.xpAwarded} XP!`, 'success');
+          addToast('Challenge Mastered! âš¡', `Verified: +${res.xpAwarded} XP!`, 'success');
         }
 
         if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(`Achievement Unlocked! ${ach.icon || 'ðŸ†'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
           });
         }
       }
@@ -541,7 +541,7 @@ export default function App() {
         if (activeLesson) {
           return SEO_PRESETS.lesson(
             activeLesson.title,
-            activeLesson.tagline || activeLesson.learningObjectives?.[0] || `${activeLesson.title} — Free interactive lesson on WebZoneBW SC.`,
+            activeLesson.tagline || activeLesson.learningObjectives?.[0] || `${activeLesson.title} â€” Free interactive lesson on WebZoneBW SC.`,
             activeLesson.id
           );
         }
@@ -558,7 +558,7 @@ export default function App() {
 
   return (
     <div
-      id="wz-storehouse-app"
+      id="webzonebw-storehouse-app"
       className={`flex h-[100dvh] min-w-0 flex-col overflow-hidden bg-app-canvas text-app-ink ${fontClass}`}
     >
       {/* Sidebar Navigation */}

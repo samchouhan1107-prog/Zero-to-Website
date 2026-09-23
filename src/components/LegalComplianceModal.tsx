@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import {
   CheckCircle2,
   FileText,
@@ -57,7 +57,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
             </span>
             <div>
               <h2 id="legal-modal-title" className="text-base font-black text-app-ink">
-                WZ Storehouse Transparency &amp; Compliance Center
+                WebZoneBW Storehouse Transparency &amp; Compliance Center
               </h2>
               <p className="text-xs text-app-muted">
                 Google AdSense, GDPR &amp; CCPA Compliance Documentation
@@ -113,14 +113,14 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
                   Privacy Policy &amp; Data Transparency
                 </h3>
                 <p className="text-xs text-app-muted mt-1">
-                  Last Updated: 2026. WZ Storehouse respects your privacy and is dedicated to protecting your personal data in compliance with GDPR, CCPA, and Google AdSense publisher policies.
+                  Last Updated: 2026. WebZoneBW Storehouse respects your privacy and is dedicated to protecting your personal data in compliance with GDPR, CCPA, and Google AdSense publisher policies.
                 </p>
               </div>
 
               <div className="space-y-3">
                 <h4 className="font-bold text-app-ink text-sm">1. Information We Collect</h4>
                 <p className="text-app-muted">
-                  WZ Storehouse does not require mandatory account registration to access course lessons. When you use the interactive coding sandboxes, lesson checklists, notes, or AI tutor, data (such as code progress and XP points) is stored locally in your browser (LocalStorage).
+                  WebZoneBW Storehouse does not require mandatory account registration to access course lessons. When you use the interactive coding sandboxes, lesson checklists, notes, or AI tutor, data (such as code progress and XP points) is stored locally in your browser (LocalStorage).
                 </p>
 
                 <h4 className="font-bold text-app-ink text-sm">2. Third-Party Services</h4>
@@ -139,7 +139,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
 
                 <h4 className="font-bold text-app-ink text-sm">4. Children's Information (COPPA)</h4>
                 <p className="text-app-muted">
-                  WZ Storehouse does not knowingly collect any Personal Identifiable Information from children under the age of 13.
+                  WebZoneBW Storehouse does not knowingly collect any Personal Identifiable Information from children under the age of 13.
                 </p>
 
                 <h4 className="font-bold text-app-ink text-sm">5. Official Reach Out &amp; Privacy Enquiry</h4>
@@ -162,14 +162,14 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
                   Terms of Service &amp; Educational Disclaimer
                 </h3>
                 <p className="text-xs text-app-muted mt-1">
-                  By accessing WZ Storehouse, you agree to these Terms of Service.
+                  By accessing WebZoneBW Storehouse, you agree to these Terms of Service.
                 </p>
               </div>
 
               <div className="space-y-3">
                 <h4 className="font-bold text-app-ink text-sm">1. Use of Course Materials &amp; Sandboxes</h4>
                 <p className="text-app-muted">
-                  All educational content, interactive 3D visualizers, quizzes, and code challenges provided on WZ Storehouse are for personal educational and training purposes. Code snippets and practice challenges may be freely used in your own software projects.
+                  All educational content, interactive 3D visualizers, quizzes, and code challenges provided on WebZoneBW Storehouse are for personal educational and training purposes. Code snippets and practice challenges may be freely used in your own software projects.
                 </p>
 
                 <h4 className="font-bold text-app-ink text-sm">2. AI Tutor &amp; Sandbox Execution</h4>
@@ -179,7 +179,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
 
                 <h4 className="font-bold text-app-ink text-sm">3. Disclaimer of Warranty</h4>
                 <p className="text-app-muted">
-                  The curriculum and interactive instruments are provided on an "as is" basis without warranties of any kind. WZ Storehouse does not guarantee employment outcomes or software performance in production environments.
+                  The curriculum and interactive instruments are provided on an "as is" basis without warranties of any kind. WebZoneBW Storehouse does not guarantee employment outcomes or software performance in production environments.
                 </p>
               </div>
             </div>
@@ -216,7 +216,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
               <div className="rounded-xl border border-app-amber/30 bg-app-active/40 p-4">
                 <h3 className="text-sm font-black text-app-ink flex items-center gap-2">
                   <Info className="h-4 w-4 text-app-amber" />
-                  About WZ Storehouse &amp; Editorial Standards
+                  About WebZoneBW Storehouse &amp; Editorial Standards
                 </h3>
                 <p className="text-xs text-app-muted mt-1">
                   High-craft, interactive frontend engineering curriculum built by professional software engineers.
@@ -226,7 +226,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
               <div className="space-y-3">
                 <h4 className="font-bold text-app-ink text-sm">Mission Statement</h4>
                 <p className="text-app-muted">
-                  WZ Storehouse was engineered to bridge the gap between abstract academic programming textbooks and real-world frontend architecture. We replace passive reading with live interactive 3D visualizers, automated coding sandboxes, and production-grade project deliverables.
+                  WebZoneBW Storehouse was engineered to bridge the gap between abstract academic programming textbooks and real-world frontend architecture. We replace passive reading with live interactive 3D visualizers, automated coding sandboxes, and production-grade project deliverables.
                 </p>
 
                 <h4 className="font-bold text-app-ink text-sm">Editorial Standards &amp; Expertise (E-E-A-T)</h4>
@@ -324,7 +324,7 @@ export const LegalComplianceModal: React.FC<LegalComplianceModalProps> = ({
 
         {/* Footer */}
         <div className="flex shrink-0 items-center justify-between border-t border-app-border bg-app-surface px-6 py-3 text-[11px] text-app-subtle">
-          <span>&copy; {new Date().getFullYear()} WZ Storehouse. All rights reserved.</span>
+          <span>&copy; {new Date().getFullYear()} WebZoneBW Storehouse. All rights reserved.</span>
           <button
             type="button"
             onClick={onClose}

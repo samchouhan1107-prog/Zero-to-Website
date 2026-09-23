@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import {
   Play,
   Pause,
@@ -206,7 +206,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                     : 'bg-slate-800 text-slate-400'
                 }`}
               >
-                {isPlaying ? '● PLAYING' : currentTime > 0 ? 'PAUSED' : 'STOPPED'}
+                {isPlaying ? 'â— PLAYING' : currentTime > 0 ? 'PAUSED' : 'STOPPED'}
               </span>
             </div>
             <h3 className="text-sm sm:text-base font-bold text-white mt-1 line-clamp-1">{video.title}</h3>
@@ -257,7 +257,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   {video.demoAnimationType === 'packet-route' && (
                     <div className="w-full flex items-center justify-between px-4 text-xs font-mono text-slate-300 relative">
                       <div className="p-2 rounded-lg bg-indigo-950 border border-indigo-700 text-indigo-300 font-bold text-[11px]">
-                        🖥️ Client
+                        ðŸ–¥ï¸ Client
                       </div>
                       <div className="flex-1 mx-3 border-t-2 border-dashed border-indigo-500/50 relative">
                         <div
@@ -266,11 +266,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                             left: `${(currentTime % 10) * 10}%`,
                           }}
                         >
-                          📦
+                          ðŸ“¦
                         </div>
                       </div>
                       <div className="p-2 rounded-lg bg-purple-950 border border-purple-700 text-purple-300 font-bold text-[11px]">
-                        ☁️ DNS / Server
+                        â˜ï¸ DNS / Server
                       </div>
                     </div>
                   )}
@@ -280,11 +280,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                       <span className="px-2 py-1 rounded bg-indigo-900 text-indigo-200 border border-indigo-700 font-bold">
                         &lt;html&gt;
                       </span>
-                      <span className="text-slate-600">→</span>
+                      <span className="text-slate-600">â†’</span>
                       <span className="px-2 py-1 rounded bg-purple-900 text-purple-200 border border-purple-700 font-bold">
                         &lt;body&gt;
                       </span>
-                      <span className="text-slate-600">→</span>
+                      <span className="text-slate-600">â†’</span>
                       <span className="px-2 py-1 rounded bg-pink-900 text-pink-200 border border-pink-700 font-bold animate-pulse">
                         &lt;h1&gt; / &lt;p&gt;
                       </span>
@@ -336,7 +336,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   ) && (
                     <div className="flex items-center gap-2 text-xs font-mono text-indigo-300">
                       <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-                      <span>WZ Storehouse Concept Animation Loop</span>
+                      <span>WebZoneBW Storehouse Concept Animation Loop</span>
                     </div>
                   )}
                 </div>
