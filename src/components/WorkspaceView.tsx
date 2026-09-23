@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from "react";
 import {
   Code2,
   Play,
@@ -18,8 +18,8 @@ import {
   CheckCircle2,
   Layers,
   HelpCircle,
-} from 'lucide-react';
-import { UserProgress } from '../utils/types';
+} from "lucide-react";
+import { UserProgress } from "../utils/types";
 
 interface WorkspaceViewProps {
   progress?: UserProgress;
@@ -29,9 +29,9 @@ interface WorkspaceViewProps {
 
 const TEMPLATES = [
   {
-    id: 'starter-component',
-    title: 'Interactive Card & UI State',
-    desc: 'Modern CSS glass card with interactive button and dynamic counter state.',
+    id: "starter-component",
+    title: "Interactive Card & UI State",
+    desc: "Modern CSS glass card with interactive button and dynamic counter state.",
     html: `<div class="card">
   <div class="badge">WebZoneBW Workspace</div>
   <h2>Interactive Developer Studio</h2>
@@ -164,9 +164,9 @@ btn.addEventListener('click', () => {
 });`,
   },
   {
-    id: 'flex-grid-layout',
-    title: 'CSS Responsive Grid & Flexbox',
-    desc: 'Fluid responsive layout using CSS auto-fit Grid with flexbox sub-elements.',
+    id: "flex-grid-layout",
+    title: "CSS Responsive Grid & Flexbox",
+    desc: "Fluid responsive layout using CSS auto-fit Grid with flexbox sub-elements.",
     html: `<div class="container">
   <header class="header">
     <div class="logo">âš¡ LayoutMatrix</div>
@@ -257,9 +257,9 @@ p {
     js: `console.log('Responsive Grid & Flexbox template ready.');`,
   },
   {
-    id: 'api-simulator',
-    title: 'Mock API & Dynamic DOM Fetcher',
-    desc: 'Simulate asynchronous network requests, loading states, and dynamic DOM injection.',
+    id: "api-simulator",
+    title: "Mock API & Dynamic DOM Fetcher",
+    desc: "Simulate asynchronous network requests, loading states, and dynamic DOM injection.",
     html: `<div class="api-console">
   <div class="toolbar">
     <button id="fetch-btn" class="fetch-btn">Simulate API Request</button>
@@ -352,19 +352,25 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   onOpenTutor,
   onNavigateHome,
 }) => {
-  const [selectedTemplate, setSelectedTemplate] = useState<string>('starter-component');
+  const [selectedTemplate, setSelectedTemplate] =
+    useState<string>("starter-component");
   const [htmlCode, setHtmlCode] = useState<string>(TEMPLATES[0].html);
   const [cssCode, setCssCode] = useState<string>(TEMPLATES[0].css);
   const [jsCode, setJsCode] = useState<string>(TEMPLATES[0].js);
-  const [activeTab, setActiveTab] = useState<'html' | 'css' | 'js'>('html');
-  const [consoleLogs, setConsoleLogs] = useState<Array<{ type: string; message: string; time: string }>>([]);
+  const [activeTab, setActiveTab] = useState<"html" | "css" | "js">("html");
+  const [consoleLogs, setConsoleLogs] = useState<
+    Array<{ type: string; message: string; time: string }>
+  >([]);
   const [copied, setCopied] = useState<boolean>(false);
   const [isFullscreen, setIsFullscreen] = useState<boolean>(false);
   const [scratchpadNote, setScratchpadNote] = useState<string>(() => {
     try {
-      return localStorage.getItem('webzonebw_workspace_scratchpad') || '### Architectural Notes & Experiment Log\n- Test CSS Grid with auto-fit and minmax\n- Compare microtasks vs macrotasks in the event loop\n- Everything here saves locally on your device with 100% privacy';
+      return (
+        localStorage.getItem("webzonebw_workspace_scratchpad") ||
+        "### Architectural Notes & Experiment Log\n- Test CSS Grid with auto-fit and minmax\n- Compare microtasks vs macrotasks in the event loop\n- Everything here saves locally on your device with 100% privacy"
+      );
     } catch {
-      return '';
+      return "";
     }
   });
   const [scratchpadSaved, setScratchpadSaved] = useState(false);
@@ -374,7 +380,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   const handleSaveScratchpad = (val: string) => {
     setScratchpadNote(val);
     try {
-      localStorage.setItem('webzonebw_workspace_scratchpad', val);
+      localStorage.setItem("webzonebw_workspace_scratchpad", val);
       setScratchpadSaved(true);
       setTimeout(() => setScratchpadSaved(false), 2000);
     } catch {}
@@ -440,13 +446,21 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   // Listen to iframe postMessages
   useEffect(() => {
     const handleMessage = (e: MessageEvent) => {
-      if (e.data && (e.data.type === 'log' || e.data.type === 'warn' || e.data.type === 'error')) {
+      if (
+        e.data &&
+        (e.data.type === "log" ||
+          e.data.type === "warn" ||
+          e.data.type === "error")
+      ) {
         const time = new Date().toLocaleTimeString();
-        setConsoleLogs((prev) => [...prev.slice(-40), { type: e.data.type, message: String(e.data.message), time }]);
+        setConsoleLogs((prev) => [
+          ...prev.slice(-40),
+          { type: e.data.type, message: String(e.data.message), time },
+        ]);
       }
     };
-    window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
   }, []);
 
   // Update preview
@@ -458,17 +472,17 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
   const handleCopyCode = () => {
     let text = htmlCode;
-    if (activeTab === 'css') text = cssCode;
-    if (activeTab === 'js') text = jsCode;
+    if (activeTab === "css") text = cssCode;
+    if (activeTab === "js") text = jsCode;
     navigator.clipboard.writeText(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
   const handleDownloadProject = () => {
-    const blob = new Blob([generateBundle()], { type: 'text/html' });
+    const blob = new Blob([generateBundle()], { type: "text/html" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `${selectedTemplate}-workspace.html`;
     a.click();
@@ -476,7 +490,9 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
   };
 
   return (
-    <div className={`mx-auto w-full max-w-[1500px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 space-y-6 transition-all`}>
+    <div
+      className={`mx-auto w-full max-w-[1500px] px-4 py-6 sm:px-6 sm:py-8 lg:px-8 space-y-6 transition-all`}
+    >
       {/* 1. Header & Platform Independence Trust Banner */}
       <section className="rounded-2xl border border-app-border bg-app-surface/90 p-5 sm:p-6 shadow-sm backdrop-blur-md relative overflow-hidden">
         {/* Subtle accent glow */}
@@ -499,7 +515,9 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
               Interactive Web Workspace
             </h1>
             <p className="text-sm sm:text-base text-app-muted leading-relaxed max-w-2xl">
-              Write, inspect, and test modern HTML, CSS, and JavaScript in an isolated browser sandbox. Your code runs strictly in memory on your device with full export freedom.
+              Write, inspect, and test modern HTML, CSS, and JavaScript in an
+              isolated browser sandbox. Your code runs strictly in memory on
+              your device with full export freedom.
             </p>
           </div>
 
@@ -543,8 +561,8 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                 onClick={() => handleSelectTemplate(tmpl.id)}
                 className={`group inline-flex items-center gap-2 rounded-xl px-3.5 py-1.5 text-xs font-bold transition-all cursor-pointer ${
                   isSelected
-                    ? 'border border-blue-500 bg-blue-500/15 text-blue-500 dark:text-blue-400 shadow-xs'
-                    : 'border border-app-border bg-app-inset text-app-muted hover:border-app-muted hover:text-app-ink'
+                    ? "border border-blue-500 bg-blue-500/15 text-blue-500 dark:text-blue-400 shadow-xs"
+                    : "border border-app-border bg-app-inset text-app-muted hover:border-app-muted hover:text-app-ink"
                 }`}
               >
                 <span>{tmpl.title}</span>
@@ -558,14 +576,18 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
       </section>
 
       {/* 2. Main Multi-Pane Workspace Layout */}
-      <div className={`grid gap-6 ${isFullscreen ? 'fixed inset-4 z-50 bg-app-canvas overflow-y-auto' : 'lg:grid-cols-12'}`}>
+      <div
+        className={`grid gap-6 ${isFullscreen ? "fixed inset-4 z-50 bg-app-canvas overflow-y-auto" : "lg:grid-cols-12"}`}
+      >
         {/* Left Side: Code Editor (7 cols) */}
-        <div className={`space-y-4 ${isFullscreen ? 'lg:col-span-6' : 'lg:col-span-7'}`}>
+        <div
+          className={`space-y-4 ${isFullscreen ? "lg:col-span-6" : "lg:col-span-7"}`}
+        >
           <div className="rounded-2xl border border-app-border bg-app-surface overflow-hidden shadow-sm flex flex-col h-[560px]">
             {/* Editor Tab Bar */}
             <div className="flex items-center justify-between border-b border-app-border bg-app-inset px-3 py-2 shrink-0">
               <div className="flex items-center gap-1.5">
-                {(['html', 'css', 'js'] as const).map((tab) => {
+                {(["html", "css", "js"] as const).map((tab) => {
                   const isActive = activeTab === tab;
                   return (
                     <button
@@ -574,14 +596,18 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                       onClick={() => setActiveTab(tab)}
                       className={`group relative rounded-lg px-3.5 py-1.5 font-mono text-xs font-bold uppercase transition-all cursor-pointer ${
                         isActive
-                          ? 'bg-app-surface text-app-ink shadow-xs border border-app-border'
-                          : 'text-app-muted hover:text-app-ink hover:bg-app-surface/50'
+                          ? "bg-app-surface text-app-ink shadow-xs border border-app-border"
+                          : "text-app-muted hover:text-app-ink hover:bg-app-surface/50"
                       }`}
                     >
                       <span className="flex items-center gap-1.5">
                         <span
                           className={`h-2 w-2 rounded-full ${
-                            tab === 'html' ? 'bg-orange-500' : tab === 'css' ? 'bg-blue-500' : 'bg-amber-400'
+                            tab === "html"
+                              ? "bg-orange-500"
+                              : tab === "css"
+                                ? "bg-blue-500"
+                                : "bg-amber-400"
                           }`}
                         />
                         <span>{tab}</span>
@@ -599,8 +625,12 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                   className="flex items-center gap-1 rounded-lg border border-app-border bg-app-surface px-2.5 py-1 font-mono text-[11px] text-app-muted hover:text-app-ink transition-colors cursor-pointer"
                   title="Copy snippet"
                 >
-                  {copied ? <Check className="h-3 w-3 text-emerald-400" /> : <Copy className="h-3 w-3" />}
-                  <span>{copied ? 'Copied' : 'Copy'}</span>
+                  {copied ? (
+                    <Check className="h-3 w-3 text-emerald-400" />
+                  ) : (
+                    <Copy className="h-3 w-3" />
+                  )}
+                  <span>{copied ? "Copied" : "Copy"}</span>
                 </button>
 
                 <button
@@ -617,7 +647,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
             {/* Code Input Area */}
             <div className="flex-1 relative font-mono text-xs sm:text-sm bg-app-inset/80 p-0">
-              {activeTab === 'html' && (
+              {activeTab === "html" && (
                 <textarea
                   value={htmlCode}
                   onChange={(e) => setHtmlCode(e.target.value)}
@@ -626,7 +656,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                   placeholder="<!-- Enter HTML markup -->"
                 />
               )}
-              {activeTab === 'css' && (
+              {activeTab === "css" && (
                 <textarea
                   value={cssCode}
                   onChange={(e) => setCssCode(e.target.value)}
@@ -635,7 +665,7 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                   placeholder="/* Enter CSS styles */"
                 />
               )}
-              {activeTab === 'js' && (
+              {activeTab === "js" && (
                 <textarea
                   value={jsCode}
                   onChange={(e) => setJsCode(e.target.value)}
@@ -658,7 +688,9 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
         </div>
 
         {/* Right Side: Live Isolated Preview & Console (5 cols) */}
-        <div className={`space-y-4 ${isFullscreen ? 'lg:col-span-6' : 'lg:col-span-5'}`}>
+        <div
+          className={`space-y-4 ${isFullscreen ? "lg:col-span-6" : "lg:col-span-5"}`}
+        >
           <div className="rounded-2xl border border-app-border bg-app-surface overflow-hidden shadow-sm flex flex-col h-[560px]">
             {/* Preview Toolbar */}
             <div className="flex items-center justify-between border-b border-app-border bg-app-inset px-3 py-2 shrink-0">
@@ -678,9 +710,13 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                   type="button"
                   onClick={() => setIsFullscreen(!isFullscreen)}
                   className="p-1 rounded-lg border border-app-border bg-app-surface text-app-muted hover:text-app-ink transition-colors cursor-pointer"
-                  title={isFullscreen ? 'Exit full screen' : 'Expand workspace'}
+                  title={isFullscreen ? "Exit full screen" : "Expand workspace"}
                 >
-                  {isFullscreen ? <Minimize2 className="h-3.5 w-3.5" /> : <Maximize2 className="h-3.5 w-3.5" />}
+                  {isFullscreen ? (
+                    <Minimize2 className="h-3.5 w-3.5" />
+                  ) : (
+                    <Maximize2 className="h-3.5 w-3.5" />
+                  )}
                 </button>
               </div>
             </div>
@@ -713,20 +749,25 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
 
               <div className="flex-1 overflow-y-auto p-2 font-mono text-xs space-y-1 scrollbar-thin">
                 {consoleLogs.length === 0 ? (
-                  <p className="text-[11px] text-app-subtle italic">No log output yet. Call console.log() in JavaScript to inspect values.</p>
+                  <p className="text-[11px] text-app-subtle italic">
+                    No log output yet. Call console.log() in JavaScript to
+                    inspect values.
+                  </p>
                 ) : (
                   consoleLogs.map((log, idx) => (
                     <div
                       key={idx}
                       className={`flex items-start gap-2 text-[11px] leading-tight ${
-                        log.type === 'error'
-                          ? 'text-rose-400'
-                          : log.type === 'warn'
-                          ? 'text-amber-400'
-                          : 'text-app-ink'
+                        log.type === "error"
+                          ? "text-rose-400"
+                          : log.type === "warn"
+                            ? "text-amber-400"
+                            : "text-app-ink"
                       }`}
                     >
-                      <span className="text-app-subtle text-[10px] shrink-0">[{log.time}]</span>
+                      <span className="text-app-subtle text-[10px] shrink-0">
+                        [{log.time}]
+                      </span>
                       <span className="break-all">{log.message}</span>
                     </div>
                   ))
@@ -749,7 +790,8 @@ export const WorkspaceView: React.FC<WorkspaceViewProps> = ({
                 Developer Scratchpad &amp; Local Notes
               </h2>
               <p className="text-xs text-app-muted">
-                Persistent local notes. Autosaves to your browser's private storage.
+                Persistent local notes. Autosaves to your browser's private
+                storage.
               </p>
             </div>
           </div>

@@ -1,366 +1,454 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="en" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  
-  <!-- Primary SEO Meta Tags -->
-  <title>Workspace | WebZoneBW SC â€” Interactive Development Environment</title>
-  <meta name="description" content="WebZoneBW Workspace â€” Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation.">
-  <meta name="keywords" content="web development workspace, interactive coding environment, HTML CSS JavaScript sandbox, development tools, project workspace">
-  <meta name="author" content="WebZoneBW">
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-  <link rel="canonical" href="https://webzonebw.shop/Workspace.html">
-  
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://webzonebw.shop/Workspace.html">
-  <meta property="og:title" content="Workspace | WebZoneBW SC â€” Interactive Development Environment">
-  <meta property="og:description" content="Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation.">
-  <meta property="og:image" content="https://webzonebw.shop/og-image.svg">
-  <meta property="og:site_name" content="WebZoneBW SC">
-  <meta property="og:locale" content="en_US">
-  
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://webzonebw.shop/Workspace.html">
-  <meta name="twitter:title" content="Workspace | WebZoneBW SC â€” Interactive Development Environment">
-  <meta name="twitter:description" content="Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation.">
-  <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg">
-  
-  <!-- AdSense -->
-  <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
-  
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-       crossorigin="anonymous"></script>
-  
-  <!-- Legal Disclosures & Reach Out Connection -->
-  <link rel="privacy-policy" href="https://webzonebw.shop/privacy-policy.html" />
-  <link rel="terms-of-service" href="https://webzonebw.shop/terms-of-service.html" />
-  <link rel="copyright" href="https://webzonebw.shop/about.html" />
-  <link rel="help" href="https://webzonebw.in/" title="Official WebZoneBW Reach Out & Enquiry Reference" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <meta name="theme-color" content="#0f172a" />
+    <!-- Primary SEO Meta Tags -->
+    <title>
+      Workspace | WebZoneBW SC â€” Interactive Development Environment
+    </title>
+    <meta
+      name="description"
+      content="WebZoneBW Workspace â€” Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation."
+    />
+    <meta
+      name="keywords"
+      content="web development workspace, interactive coding environment, HTML CSS JavaScript sandbox, development tools, project workspace"
+    />
+    <meta name="author" content="WebZoneBW" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://webzonebw.shop/Workspace.html" />
 
-  <!-- Favicons -->
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ“š</text></svg>" />
-  
-  <!-- Preconnect & Asset Loading Optimization -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" media="print" onload="this.media='all'" />
-  <noscript>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" />
-  </noscript>
-  
-  <!-- Shared Navigation (site-nav system) -->
-  <link rel="stylesheet" href="/Assets/css/site-nav.css">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webzonebw.shop/Workspace.html" />
+    <meta
+      property="og:title"
+      content="Workspace | WebZoneBW SC â€” Interactive Development Environment"
+    />
+    <meta
+      property="og:description"
+      content="Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation."
+    />
+    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:site_name" content="WebZoneBW SC" />
+    <meta property="og:locale" content="en_US" />
 
-  <!-- Styles -->
-  <link rel="stylesheet" href="/Assets/css/main.css">
-  <link rel="stylesheet" href="/Assets/css/workspace.css">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://webzonebw.shop/Workspace.html" />
+    <meta
+      name="twitter:title"
+      content="Workspace | WebZoneBW SC â€” Interactive Development Environment"
+    />
+    <meta
+      name="twitter:description"
+      content="Interactive development environment with sandboxes, projects, and tools for web development practice and experimentation."
+    />
+    <meta
+      property="twitter:image"
+      content="https://webzonebw.shop/og-image.svg"
+    />
 
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      background: #0f172a;
-      color: #f8fafc;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-      min-height: 100vh;
-    }
+    <!-- AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
 
-    .workspace-container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem;
-    }
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+      crossorigin="anonymous"
+    ></script>
 
-    .workspace-hero {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
+    <!-- Legal Disclosures & Reach Out Connection -->
+    <link
+      rel="privacy-policy"
+      href="https://webzonebw.shop/privacy-policy.html"
+    />
+    <link
+      rel="terms-of-service"
+      href="https://webzonebw.shop/terms-of-service.html"
+    />
+    <link rel="copyright" href="https://webzonebw.shop/about.html" />
+    <link
+      rel="help"
+      href="https://webzonebw.in/"
+      title="Official WebZoneBW Reach Out & Enquiry Reference"
+    />
 
-    .workspace-hero h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+    <meta name="theme-color" content="#0f172a" />
 
-    .workspace-hero p {
-      font-size: 1.2rem;
-      color: #94a3b8;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>ðŸ“š</text></svg>"
+    />
 
-    .workspace-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
+    <!-- Preconnect & Asset Loading Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+      />
+    </noscript>
 
-    .workspace-card {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      transition: transform 0.2s ease, border-color 0.2s ease;
-    }
+    <!-- Shared Navigation (site-nav system) -->
+    <link rel="stylesheet" href="/Assets/css/site-nav.css" />
 
-    .workspace-card:hover {
-      transform: translateY(-2px);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
+    <!-- Styles -->
+    <link rel="stylesheet" href="/Assets/css/main.css" />
+    <link rel="stylesheet" href="/Assets/css/workspace.css" />
 
-    .workspace-card h3 {
-      color: #3b82f6;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        background: #0f172a;
+        color: #f8fafc;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        min-height: 100vh;
+      }
 
-    .workspace-card p {
-      color: #94a3b8;
-      line-height: 1.6;
-      margin-bottom: 1.5rem;
-    }
-
-    .workspace-btn {
-      background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-      color: white;
-      border: none;
-      padding: 0.75rem 1.5rem;
-      border-radius: 8px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .workspace-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
-    }
-
-    .interactive-demo {
-      background: rgba(30, 41, 59, 0.7);
-      backdrop-filter: blur(12px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 16px;
-      padding: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .demo-card {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .demo-card h4 {
-      color: #3b82f6;
-      margin-bottom: 0.5rem;
-    }
-
-    .metrics-row {
-      display: flex;
-      gap: 1rem;
-      margin: 1rem 0;
-    }
-
-    .metric {
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.2);
-      border-radius: 8px;
-      padding: 1rem;
-      text-align: center;
-      flex: 1;
-    }
-
-    .metric .val {
-      display: block;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #3b82f6;
-    }
-
-    .metric .lbl {
-      font-size: 0.875rem;
-      color: #94a3b8;
-    }
-
-    @media (max-width: 768px) {
       .workspace-container {
-        padding: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+
+      .workspace-hero {
+        text-align: center;
+        margin-bottom: 3rem;
       }
 
       .workspace-hero h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .workspace-hero p {
+        font-size: 1.2rem;
+        color: #94a3b8;
+        max-width: 600px;
+        margin: 0 auto;
       }
 
       .workspace-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-bottom: 3rem;
       }
-    }
-  </style>
-</head>
-<body data-breadcrumb="Home::/index.html | Workspace">
 
-  <!-- Shared Navigation (rendered by site-nav.js) -->
-  <div id="webzonebw-site-nav"></div>
+      .workspace-card {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease;
+      }
 
-  <div class="workspace-container">
+      .workspace-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(59, 130, 246, 0.4);
+      }
 
-    <!-- Hero Section -->
-    <section class="workspace-hero" id="main-content">
-      <div class="badge">WebZoneBW Workspace</div>
-      <h1>Interactive Developer Studio</h1>
-      <p>Modify HTML, CSS, and JavaScript live. Everything compiles client-side in memory. Practice, experiment, and build your web development skills in real-time.</p>
-    </section>
+      .workspace-card h3 {
+        color: #3b82f6;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
 
-    <!-- Interactive Demo -->
-    <section class="interactive-demo">
-      <h2>ðŸš€ Live Interactive Demo</h2>
-      <p>Experience the power of web development with this interactive workspace. Click the button below to see real-time updates!</p>
+      .workspace-card p {
+        color: #94a3b8;
+        line-height: 1.6;
+        margin-bottom: 1.5rem;
+      }
 
-      <div class="demo-card">
-        <h4>Interactive Component</h4>
-        <div class="metrics-row">
-          <div class="metric">
-            <span class="val" id="click-count">0</span>
-            <span class="lbl">Clicks Recorded</span>
+      .workspace-btn {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .workspace-btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 10px 20px -5px rgba(59, 130, 246, 0.4);
+      }
+
+      .interactive-demo {
+        background: rgba(30, 41, 59, 0.7);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .demo-card {
+        background: rgba(15, 23, 42, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .demo-card h4 {
+        color: #3b82f6;
+        margin-bottom: 0.5rem;
+      }
+
+      .metrics-row {
+        display: flex;
+        gap: 1rem;
+        margin: 1rem 0;
+      }
+
+      .metric {
+        background: rgba(59, 130, 246, 0.1);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+        border-radius: 8px;
+        padding: 1rem;
+        text-align: center;
+        flex: 1;
+      }
+
+      .metric .val {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #3b82f6;
+      }
+
+      .metric .lbl {
+        font-size: 0.875rem;
+        color: #94a3b8;
+      }
+
+      @media (max-width: 768px) {
+        .workspace-container {
+          padding: 1rem;
+        }
+
+        .workspace-hero h1 {
+          font-size: 2rem;
+        }
+
+        .workspace-grid {
+          grid-template-columns: 1fr;
+          gap: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body data-breadcrumb="Home::/index.html | Workspace">
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
+
+    <div class="workspace-container">
+      <!-- Hero Section -->
+      <section class="workspace-hero" id="main-content">
+        <div class="badge">WebZoneBW Workspace</div>
+        <h1>Interactive Developer Studio</h1>
+        <p>
+          Modify HTML, CSS, and JavaScript live. Everything compiles client-side
+          in memory. Practice, experiment, and build your web development skills
+          in real-time.
+        </p>
+      </section>
+
+      <!-- Interactive Demo -->
+      <section class="interactive-demo">
+        <h2>ðŸš€ Live Interactive Demo</h2>
+        <p>
+          Experience the power of web development with this interactive
+          workspace. Click the button below to see real-time updates!
+        </p>
+
+        <div class="demo-card">
+          <h4>Interactive Component</h4>
+          <div class="metrics-row">
+            <div class="metric">
+              <span class="val" id="click-count">0</span>
+              <span class="lbl">Clicks Recorded</span>
+            </div>
+            <div class="metric">
+              <span class="val" id="active-state">Ready</span>
+              <span class="lbl">Engine Status</span>
+            </div>
           </div>
-          <div class="metric">
-            <span class="val" id="active-state">Ready</span>
-            <span class="lbl">Engine Status</span>
+          <button id="action-btn" class="workspace-btn">
+            <span>Trigger Event</span>
+            <span class="arrow">â†’</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Workspace Features Grid -->
+      <section class="workspace-grid">
+        <div class="workspace-card">
+          <h3>ðŸ“ Code Sandbox</h3>
+          <p>
+            Write and test HTML, CSS, and JavaScript in real-time with live
+            preview. Perfect for experimenting with new concepts and debugging
+            code.
+          </p>
+          <a href="/webtools.html" class="workspace-btn">Open Sandbox â†’</a>
+        </div>
+
+        <div class="workspace-card">
+          <h3>ðŸŽ¨ Visual Tools</h3>
+          <p>
+            Interactive CSS visualizers for Flexbox, Grid, and Box Model.
+            Understand layout concepts visually with hands-on manipulation.
+          </p>
+          <a href="/imagetools.html" class="workspace-btn">Explore Tools â†’</a>
+        </div>
+
+        <div class="workspace-card">
+          <h3>ðŸ”§ Dev Tools</h3>
+          <p>
+            Professional browser developer tools simulation with network
+            analysis, memory profiling, and security inspection capabilities.
+          </p>
+          <a href="/developertools.html" class="workspace-btn"
+            >Launch Dev Tools â†’</a
+          >
+        </div>
+
+        <div class="workspace-card">
+          <h3>ðŸ“š Learning Hub</h3>
+          <p>
+            Structured curriculum with interactive lessons, practice challenges,
+            and hands-on projects for all skill levels from beginner to
+            advanced.
+          </p>
+          <a href="/learn.html" class="workspace-btn">Start Learning â†’</a>
+        </div>
+      </section>
+
+      <!-- Additional Features -->
+      <section class="workspace-card">
+        <h3>ðŸŒŸ Workspace Features</h3>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+          "
+        >
+          <div style="text-align: center; padding: 1rem">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">âš¡</div>
+            <h4>Real-time Compilation</h4>
+            <p style="color: #94a3b8; margin: 0">
+              Instant feedback on code changes
+            </p>
+          </div>
+          <div style="text-align: center; padding: 1rem">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">ðŸ’¾</div>
+            <h4>Auto-save</h4>
+            <p style="color: #94a3b8; margin: 0">
+              Work is automatically saved locally
+            </p>
+          </div>
+          <div style="text-align: center; padding: 1rem">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">ðŸ”</div>
+            <h4>Live Preview</h4>
+            <p style="color: #94a3b8; margin: 0">
+              See changes instantly in the preview pane
+            </p>
+          </div>
+          <div style="text-align: center; padding: 1rem">
+            <div style="font-size: 2rem; margin-bottom: 0.5rem">ðŸ“±</div>
+            <h4>Responsive Testing</h4>
+            <p style="color: #94a3b8; margin: 0">
+              Test on multiple device sizes
+            </p>
           </div>
         </div>
-        <button id="action-btn" class="workspace-btn">
-          <span>Trigger Event</span>
-          <span class="arrow">â†’</span>
-        </button>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <!-- Workspace Features Grid -->
-    <section class="workspace-grid">
-      <div class="workspace-card">
-        <h3>ðŸ“ Code Sandbox</h3>
-        <p>Write and test HTML, CSS, and JavaScript in real-time with live preview. Perfect for experimenting with new concepts and debugging code.</p>
-        <a href="/webtools.html" class="workspace-btn">Open Sandbox â†’</a>
-      </div>
+    <!-- Settings Panel -->
+    <div class="settings-panel" id="settingsPanel">
+      <button class="close-btn" aria-label="Close settings">âœ–</button>
+      <h3>Settings</h3>
+    </div>
 
-      <div class="workspace-card">
-        <h3>ðŸŽ¨ Visual Tools</h3>
-        <p>Interactive CSS visualizers for Flexbox, Grid, and Box Model. Understand layout concepts visually with hands-on manipulation.</p>
-        <a href="/imagetools.html" class="workspace-btn">Explore Tools â†’</a>
-      </div>
+    <!-- Shared Footer (rendered by site-nav.js) -->
+    <div id="sharedFooter"></div>
 
-      <div class="workspace-card">
-        <h3>ðŸ”§ Dev Tools</h3>
-        <p>Professional browser developer tools simulation with network analysis, memory profiling, and security inspection capabilities.</p>
-        <a href="/developertools.html" class="workspace-btn">Launch Dev Tools â†’</a>
-      </div>
+    <!-- Interactive JavaScript -->
+    <script src="/Assets/js/site-nav.js" defer></script>
+    <script src="/Assets/js/main.js" defer></script>
+    <script>
+      // Interactive demo functionality
+      let clickCount = 0;
+      const clickCountElement = document.getElementById("click-count");
+      const activeStateElement = document.getElementById("active-state");
+      const actionBtn = document.getElementById("action-btn");
 
-      <div class="workspace-card">
-        <h3>ðŸ“š Learning Hub</h3>
-        <p>Structured curriculum with interactive lessons, practice challenges, and hands-on projects for all skill levels from beginner to advanced.</p>
-        <a href="/learn.html" class="workspace-btn">Start Learning â†’</a>
-      </div>
-    </section>
+      actionBtn.addEventListener("click", function () {
+        clickCount++;
+        clickCountElement.textContent = clickCount;
 
-    <!-- Additional Features -->
-    <section class="workspace-card">
-      <h3>ðŸŒŸ Workspace Features</h3>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-        <div style="text-align: center; padding: 1rem;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">âš¡</div>
-          <h4>Real-time Compilation</h4>
-          <p style="color: #94a3b8; margin: 0;">Instant feedback on code changes</p>
-        </div>
-        <div style="text-align: center; padding: 1rem;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸ’¾</div>
-          <h4>Auto-save</h4>
-          <p style="color: #94a3b8; margin: 0;">Work is automatically saved locally</p>
-        </div>
-        <div style="text-align: center; padding: 1rem;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸ”</div>
-          <h4>Live Preview</h4>
-          <p style="color: #94a3b8; margin: 0;">See changes instantly in the preview pane</p>
-        </div>
-        <div style="text-align: center; padding: 1rem;">
-          <div style="font-size: 2rem; margin-bottom: 0.5rem;">ðŸ“±</div>
-          <h4>Responsive Testing</h4>
-          <p style="color: #94a3b8; margin: 0;">Test on multiple device sizes</p>
-        </div>
-      </div>
-    </section>
+        // Update active state
+        activeStateElement.textContent = "Active";
 
-  </div>
+        // Add visual feedback
+        this.style.transform = "scale(0.95)";
+        setTimeout(() => {
+          this.style.transform = "scale(1)";
+        }, 100);
 
-  <!-- Settings Panel -->
-  <div class="settings-panel" id="settingsPanel">
-    <button class="close-btn" aria-label="Close settings">âœ–</button>
-    <h3>Settings</h3>
-  </div>
+        // Show temporary success message
+        const originalText = this.querySelector("span").textContent;
+        this.querySelector("span").textContent = "âœ“ Success!";
+        setTimeout(() => {
+          this.querySelector("span").textContent = originalText;
+        }, 1000);
+      });
 
-  <!-- Shared Footer (rendered by site-nav.js) -->
-  <div id="sharedFooter"></div>
+      // Add hover effects
+      actionBtn.addEventListener("mouseenter", function () {
+        this.style.transform = "translateY(-2px)";
+      });
 
-  <!-- Interactive JavaScript -->
-  <script src="/Assets/js/site-nav.js" defer></script>
-  <script src="/Assets/js/main.js" defer></script>
-  <script>
-    // Interactive demo functionality
-    let clickCount = 0;
-    const clickCountElement = document.getElementById('click-count');
-    const activeStateElement = document.getElementById('active-state');
-    const actionBtn = document.getElementById('action-btn');
-    
-    actionBtn.addEventListener('click', function() {
-      clickCount++;
-      clickCountElement.textContent = clickCount;
-      
-      // Update active state
-      activeStateElement.textContent = 'Active';
-      
-      // Add visual feedback
-      this.style.transform = 'scale(0.95)';
-      setTimeout(() => {
-        this.style.transform = 'scale(1)';
-      }, 100);
-      
-      // Show temporary success message
-      const originalText = this.querySelector('span').textContent;
-      this.querySelector('span').textContent = 'âœ“ Success!';
-      setTimeout(() => {
-        this.querySelector('span').textContent = originalText;
-      }, 1000);
-    });
-    
-    // Add hover effects
-    actionBtn.addEventListener('mouseenter', function() {
-      this.style.transform = 'translateY(-2px)';
-    });
-    
-    actionBtn.addEventListener('mouseleave', function() {
-      this.style.transform = 'translateY(0)';
-    });
-  </script>
-
-</body>
+      actionBtn.addEventListener("mouseleave", function () {
+        this.style.transform = "translateY(0)";
+      });
+    </script>
+  </body>
 </html>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {
   ArrowUp,
   Award,
@@ -20,12 +20,11 @@ import {
   Sparkles,
   Terminal,
   Zap,
-} from 'lucide-react';
-import { WebZoneBrandLogo } from './WebZoneBrandLogo';
-import { PolicyTab } from './LegalComplianceModal';
-import { Chapter } from '../types';
-import { VisualizerId } from './VisualLab';
-
+} from "lucide-react";
+import { WebZoneBrandLogo } from "./WebZoneBrandLogo";
+import { PolicyTab } from "./LegalComplianceModal";
+import { Chapter } from "../types";
+import { VisualizerId } from "./VisualLab";
 
 interface FooterProps {
   onOpenLegal: (tab: PolicyTab) => void;
@@ -59,10 +58,10 @@ export const Footer: React.FC<FooterProps> = ({
   const currentYear = new Date().getFullYear();
 
   const handleScrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const mainEl = document.querySelector('main');
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const mainEl = document.querySelector("main");
     if (mainEl) {
-      mainEl.scrollTo({ top: 0, behavior: 'smooth' });
+      mainEl.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
@@ -72,22 +71,84 @@ export const Footer: React.FC<FooterProps> = ({
     }
   };
 
-  const defaultChapters = chapters && chapters.length > 0 ? chapters : [
-    { id: 'ch-00', number: '00', title: 'Web Foundations & Architecture', lessons: [{ id: 'ch-00-l-01' }] },
-    { id: 'ch-01', number: '01', title: 'DevTools & Environment', lessons: [{ id: 'ch-01-l-01' }] },
-    { id: 'ch-02', number: '02', title: 'Semantic HTML5 & a11y', lessons: [{ id: 'ch-02-l-01' }] },
-    { id: 'ch-03', number: '03', title: 'Box Model & Modern Styling', lessons: [{ id: 'ch-03-l-01' }] },
-    { id: 'ch-04', number: '04', title: 'Flexbox Layout Engine', lessons: [{ id: 'ch-04-l-01' }] },
-    { id: 'ch-05', number: '05', title: 'CSS Grid Matrix Layouts', lessons: [{ id: 'ch-05-l-01' }] },
-    { id: 'ch-06', number: '06', title: 'DOM Manipulation & State', lessons: [{ id: 'ch-06-l-01' }] },
-    { id: 'ch-07', number: '07', title: 'Responsive & Mobile-First', lessons: [{ id: 'ch-07-l-01' }] },
-    { id: 'ch-08', number: '08', title: 'Bootstrap & Component Systems', lessons: [{ id: 'ch-08-l-01' }] },
-    { id: 'ch-09', number: '09', title: 'Git & GitHub Version Control', lessons: [{ id: 'ch-09-l-01' }] },
-    { id: 'ch-10', number: '10', title: 'Capstone Project & Cloud Deploy', lessons: [{ id: 'ch-10-l-01' }] },
-  ];
+  const defaultChapters =
+    chapters && chapters.length > 0
+      ? chapters
+      : [
+          {
+            id: "ch-00",
+            number: "00",
+            title: "Web Foundations & Architecture",
+            lessons: [{ id: "ch-00-l-01" }],
+          },
+          {
+            id: "ch-01",
+            number: "01",
+            title: "DevTools & Environment",
+            lessons: [{ id: "ch-01-l-01" }],
+          },
+          {
+            id: "ch-02",
+            number: "02",
+            title: "Semantic HTML5 & a11y",
+            lessons: [{ id: "ch-02-l-01" }],
+          },
+          {
+            id: "ch-03",
+            number: "03",
+            title: "Box Model & Modern Styling",
+            lessons: [{ id: "ch-03-l-01" }],
+          },
+          {
+            id: "ch-04",
+            number: "04",
+            title: "Flexbox Layout Engine",
+            lessons: [{ id: "ch-04-l-01" }],
+          },
+          {
+            id: "ch-05",
+            number: "05",
+            title: "CSS Grid Matrix Layouts",
+            lessons: [{ id: "ch-05-l-01" }],
+          },
+          {
+            id: "ch-06",
+            number: "06",
+            title: "DOM Manipulation & State",
+            lessons: [{ id: "ch-06-l-01" }],
+          },
+          {
+            id: "ch-07",
+            number: "07",
+            title: "Responsive & Mobile-First",
+            lessons: [{ id: "ch-07-l-01" }],
+          },
+          {
+            id: "ch-08",
+            number: "08",
+            title: "Bootstrap & Component Systems",
+            lessons: [{ id: "ch-08-l-01" }],
+          },
+          {
+            id: "ch-09",
+            number: "09",
+            title: "Git & GitHub Version Control",
+            lessons: [{ id: "ch-09-l-01" }],
+          },
+          {
+            id: "ch-10",
+            number: "10",
+            title: "Capstone Project & Cloud Deploy",
+            lessons: [{ id: "ch-10-l-01" }],
+          },
+        ];
 
   return (
-    <footer id="main-platform-footer" role="contentinfo" className="mt-20 border-t border-app-border bg-app-surface/95 text-app-ink">
+    <footer
+      id="main-platform-footer"
+      role="contentinfo"
+      className="mt-20 border-t border-app-border bg-app-surface/95 text-app-ink"
+    >
       {/* Top Banner: Brand Mission, Realtime Status & Quick Actions */}
       <div className="border-b border-app-border/70 bg-app-inset/40 py-8 px-4 sm:px-6 lg:px-10">
         <div className="mx-auto flex w-full max-w-[1280px] flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
@@ -107,7 +168,10 @@ export const Footer: React.FC<FooterProps> = ({
               </span>
             </div>
             <p className="text-xs leading-relaxed text-app-muted">
-              WebZoneBW SC is a developer-centric suite of practical web tools, real-time visualizers, and an open engineering curriculum built for modern web standards, performance, and responsive architecture.
+              WebZoneBW SC is a developer-centric suite of practical web tools,
+              real-time visualizers, and an open engineering curriculum built
+              for modern web standards, performance, and responsive
+              architecture.
             </p>
           </div>
 
@@ -360,7 +424,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal('privacy')}
+                  onClick={() => onOpenLegal("privacy")}
                   className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Lock className="h-3.5 w-3.5 text-app-subtle" />
@@ -370,7 +434,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal('terms')}
+                  onClick={() => onOpenLegal("terms")}
                   className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Scale className="h-3.5 w-3.5 text-app-subtle" />
@@ -380,7 +444,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal('cookies')}
+                  onClick={() => onOpenLegal("cookies")}
                   className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <FileText className="h-3.5 w-3.5 text-app-subtle" />
@@ -390,7 +454,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal('about')}
+                  onClick={() => onOpenLegal("about")}
                   className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Shield className="h-3.5 w-3.5 text-app-subtle" />
@@ -400,7 +464,7 @@ export const Footer: React.FC<FooterProps> = ({
               <li>
                 <button
                   type="button"
-                  onClick={() => onOpenLegal('contact')}
+                  onClick={() => onOpenLegal("contact")}
                   className="flex min-h-[36px] items-center gap-2 py-1.5 hover:text-app-amber transition-colors text-left touch-manipulation"
                 >
                   <Mail className="h-3.5 w-3.5 text-app-subtle" />
@@ -421,8 +485,6 @@ export const Footer: React.FC<FooterProps> = ({
             </ul>
           </div>
         </div>
-
-        
 
         {/* Standards Badges Row */}
         <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-y border-app-border/70 py-4 font-mono text-[11px] text-app-subtle">
@@ -449,13 +511,14 @@ export const Footer: React.FC<FooterProps> = ({
         {/* Bottom Colophon Bar */}
         <div className="mt-6 flex flex-col items-center justify-between gap-4 sm:flex-row text-[11px] text-app-subtle">
           <p className="text-center sm:text-left">
-            &copy; {currentYear} WebZoneBW SC. Built for web engineering craftsmanship and open standards.
+            &copy; {currentYear} WebZoneBW SC. Built for web engineering
+            craftsmanship and open standards.
           </p>
 
           <div className="flex items-center gap-4">
             <button
               type="button"
-              onClick={() => onOpenLegal('privacy')}
+              onClick={() => onOpenLegal("privacy")}
               className="hover:text-app-ink transition-colors"
             >
               Privacy
@@ -463,7 +526,7 @@ export const Footer: React.FC<FooterProps> = ({
             <span>·</span>
             <button
               type="button"
-              onClick={() => onOpenLegal('terms')}
+              onClick={() => onOpenLegal("terms")}
               className="hover:text-app-ink transition-colors"
             >
               Terms
@@ -471,7 +534,7 @@ export const Footer: React.FC<FooterProps> = ({
             <span>·</span>
             <button
               type="button"
-              onClick={() => onOpenLegal('cookies')}
+              onClick={() => onOpenLegal("cookies")}
               className="hover:text-app-ink transition-colors"
             >
               Cookies
@@ -479,7 +542,7 @@ export const Footer: React.FC<FooterProps> = ({
             <span>·</span>
             <button
               type="button"
-              onClick={() => onOpenLegal('about')}
+              onClick={() => onOpenLegal("about")}
               className="hover:text-app-ink transition-colors"
             >
               About

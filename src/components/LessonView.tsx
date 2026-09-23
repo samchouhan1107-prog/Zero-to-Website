@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   Award,
@@ -29,29 +29,32 @@ import {
   Zap,
   Eye,
   Brain,
-} from 'lucide-react';
-import { Chapter, Lesson } from '../utils/types';
-import { evaluateReadingRecognition, getCalculatedImpressions } from '../utils/readingRecognitionAlgorithm';
-import { BRAIN_CONCEPT_STONES } from '../data/brainLanguageStones';
-import { BoxModelVisualizer } from './visualizers/BoxModelVisualizer';
-import { FlexboxVisualizer } from './visualizers/FlexboxVisualizer';
-import { GridVisualizer } from './visualizers/GridVisualizer';
-import { DomTreeVisualizer } from './visualizers/DomTreeVisualizer';
-import { GitFlowVisualizer } from './visualizers/GitFlowVisualizer';
-import { NetworkFlowVisualizer } from './visualizers/NetworkFlowVisualizer';
-import { DevToolsVisualizer } from './visualizers/DevToolsVisualizer';
-import { SemanticHtmlVisualizer } from './visualizers/SemanticHtmlVisualizer';
-import { JsDomEventVisualizer } from './visualizers/JsDomEventVisualizer';
-import { ResponsiveViewportVisualizer } from './visualizers/ResponsiveViewportVisualizer';
-import { BootstrapGridVisualizer } from './visualizers/BootstrapGridVisualizer';
-import { DeploymentPipelineVisualizer } from './visualizers/DeploymentPipelineVisualizer';
-import { PracticeSandbox } from './PracticeSandbox';
-import { VideoPlayer } from './VideoPlayer';
-import { DifficultyBadge } from './DifficultyBadge';
-import { getActivityDeckForLesson } from '../data/activitiesData';
+} from "lucide-react";
+import { Chapter, Lesson } from "../utils/types";
+import {
+  evaluateReadingRecognition,
+  getCalculatedImpressions,
+} from "../utils/readingRecognitionAlgorithm";
+import { BRAIN_CONCEPT_STONES } from "../data/brainLanguageStones";
+import { BoxModelVisualizer } from "./visualizers/BoxModelVisualizer";
+import { FlexboxVisualizer } from "./visualizers/FlexboxVisualizer";
+import { GridVisualizer } from "./visualizers/GridVisualizer";
+import { DomTreeVisualizer } from "./visualizers/DomTreeVisualizer";
+import { GitFlowVisualizer } from "./visualizers/GitFlowVisualizer";
+import { NetworkFlowVisualizer } from "./visualizers/NetworkFlowVisualizer";
+import { DevToolsVisualizer } from "./visualizers/DevToolsVisualizer";
+import { SemanticHtmlVisualizer } from "./visualizers/SemanticHtmlVisualizer";
+import { JsDomEventVisualizer } from "./visualizers/JsDomEventVisualizer";
+import { ResponsiveViewportVisualizer } from "./visualizers/ResponsiveViewportVisualizer";
+import { BootstrapGridVisualizer } from "./visualizers/BootstrapGridVisualizer";
+import { DeploymentPipelineVisualizer } from "./visualizers/DeploymentPipelineVisualizer";
+import { PracticeSandbox } from "./PracticeSandbox";
+import { VideoPlayer } from "./VideoPlayer";
+import { DifficultyBadge } from "./DifficultyBadge";
+import { getActivityDeckForLesson } from "../data/activitiesData";
 
-import { FinalProjectSubmission } from './FinalProjectSubmission';
-import { UserProgress } from '../utils/types';
+import { FinalProjectSubmission } from "./FinalProjectSubmission";
+import { UserProgress } from "../utils/types";
 
 interface LessonViewProps {
   lesson: Lesson;
@@ -90,15 +93,23 @@ export const LessonView: React.FC<LessonViewProps> = ({
   onUpdateProgress,
   onOpenCertificate,
 }) => {
-  const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<Record<string, number>>({});
+  const [selectedQuizAnswers, setSelectedQuizAnswers] = useState<
+    Record<string, number>
+  >({});
   const [quizSubmitted, setQuizSubmitted] = useState<boolean>(false);
-  const [activeCodeTab, setActiveCodeTab] = useState<'html' | 'css' | 'js'>('html');
-  const [noteText, setNoteText] = useState(userNote || '');
+  const [activeCodeTab, setActiveCodeTab] = useState<"html" | "css" | "js">(
+    "html",
+  );
+  const [noteText, setNoteText] = useState(userNote || "");
   const [noteSaved, setNoteSaved] = useState(false);
   const [copiedCode, setCopiedCode] = useState(false);
-  const [activeSection, setActiveSection] = useState<string>('section-theory');
-  const [miniProjectCheckedSpecs, setMiniProjectCheckedSpecs] = useState<Record<number, boolean>>({});
-  const [miniProjectCodeTab, setMiniProjectCodeTab] = useState<'html' | 'css' | 'js'>('html');
+  const [activeSection, setActiveSection] = useState<string>("section-theory");
+  const [miniProjectCheckedSpecs, setMiniProjectCheckedSpecs] = useState<
+    Record<number, boolean>
+  >({});
+  const [miniProjectCodeTab, setMiniProjectCodeTab] = useState<
+    "html" | "css" | "js"
+  >("html");
   const [copiedMiniCode, setCopiedMiniCode] = useState(false);
 
   // Reading Impression & Recognition Algorithm State
@@ -119,24 +130,28 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
   // Scroll depth tracking
   useEffect(() => {
-    const mainContainer = document.getElementById('main-content');
+    const mainContainer = document.getElementById("main-content");
     const updateScrollDepth = () => {
       const el = mainContainer || document.documentElement;
       const totalScroll = el.scrollHeight - el.clientHeight;
       if (totalScroll > 0) {
-        const depth = Math.min(100, Math.round((el.scrollTop / totalScroll) * 100));
+        const depth = Math.min(
+          100,
+          Math.round((el.scrollTop / totalScroll) * 100),
+        );
         setScrollDepth((prev) => Math.max(prev, depth));
       }
     };
 
     if (mainContainer) {
-      mainContainer.addEventListener('scroll', updateScrollDepth);
+      mainContainer.addEventListener("scroll", updateScrollDepth);
     }
-    window.addEventListener('scroll', updateScrollDepth);
+    window.addEventListener("scroll", updateScrollDepth);
 
     return () => {
-      if (mainContainer) mainContainer.removeEventListener('scroll', updateScrollDepth);
-      window.removeEventListener('scroll', updateScrollDepth);
+      if (mainContainer)
+        mainContainer.removeEventListener("scroll", updateScrollDepth);
+      window.removeEventListener("scroll", updateScrollDepth);
     };
   }, [lesson.id]);
 
@@ -147,7 +162,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
     copiedCode || copiedMiniCode,
     Object.keys(selectedQuizAnswers).length > 0,
     lesson.id,
-    chapter.id
+    chapter.id,
   );
 
   const calculatedImpressions = progress
@@ -158,12 +173,13 @@ export const LessonView: React.FC<LessonViewProps> = ({
   const allLessons = allChapters.flatMap((c) => c.lessons);
   const currentIndex = allLessons.findIndex((l) => l.id === lesson.id);
   const prevLesson = currentIndex > 0 ? allLessons[currentIndex - 1] : null;
-  const nextLesson = currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
+  const nextLesson =
+    currentIndex < allLessons.length - 1 ? allLessons[currentIndex + 1] : null;
 
   // Chapter progress calculations
   const totalChapterLessons = chapter.lessons.length;
   const completedChapterLessons = chapter.lessons.filter(
-    (l) => completedLessons[l.id] || (l.id === lesson.id && isCompleted)
+    (l) => completedLessons[l.id] || (l.id === lesson.id && isCompleted),
   ).length;
   const chapterProgressPercent =
     totalChapterLessons > 0
@@ -175,45 +191,46 @@ export const LessonView: React.FC<LessonViewProps> = ({
   useEffect(() => {
     setSelectedQuizAnswers({});
     setQuizSubmitted(false);
-    setNoteText(userNote || '');
+    setNoteText(userNote || "");
     setMiniProjectCheckedSpecs({});
-    setActiveSection('section-theory');
+    setActiveSection("section-theory");
 
     // Smooth rollover read from top to bottom
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const mainContainer = document.getElementById('main-content');
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const mainContainer = document.getElementById("main-content");
     if (mainContainer) {
-      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      mainContainer.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [lesson.id, userNote]);
 
   const navigateWithTopScroll = (targetLessonId: string) => {
     onNavigateLesson(targetLessonId);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    const mainContainer = document.getElementById('main-content');
+    window.scrollTo({ top: 0, behavior: "smooth" });
+    const mainContainer = document.getElementById("main-content");
     if (mainContainer) {
-      mainContainer.scrollTo({ top: 0, behavior: 'smooth' });
+      mainContainer.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
   const scrollToSection = (id: string) => {
     setActiveSection(id);
     const el = document.getElementById(id);
-    const scrollContainer = document.getElementById('main-content');
+    const scrollContainer = document.getElementById("main-content");
     if (el && scrollContainer) {
       const containerRect = scrollContainer.getBoundingClientRect();
       const elementRect = el.getBoundingClientRect();
       scrollContainer.scrollTo({
-        top: scrollContainer.scrollTop + elementRect.top - containerRect.top - 24,
-        behavior: 'smooth',
+        top:
+          scrollContainer.scrollTop + elementRect.top - containerRect.top - 24,
+        behavior: "smooth",
       });
     }
   };
 
   const handleCopyCode = () => {
     let textToCopy = lesson.codeExample.html;
-    if (activeCodeTab === 'css') textToCopy = lesson.codeExample.css;
-    if (activeCodeTab === 'js') textToCopy = lesson.codeExample.js || '';
+    if (activeCodeTab === "css") textToCopy = lesson.codeExample.css;
+    if (activeCodeTab === "js") textToCopy = lesson.codeExample.js || "";
 
     navigator.clipboard.writeText(textToCopy);
     setCopiedCode(true);
@@ -233,48 +250,52 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
   const renderVisualizer = () => {
     switch (lesson.visualType) {
-      case 'devtools-suite':
+      case "devtools-suite":
         return <DevToolsVisualizer />;
-      case 'semantic-html':
+      case "semantic-html":
         return <SemanticHtmlVisualizer />;
-      case 'box-model':
+      case "box-model":
         return <BoxModelVisualizer />;
-      case 'flexbox':
+      case "flexbox":
         return <FlexboxVisualizer />;
-      case 'grid':
-      case 'css-grid':
+      case "grid":
+      case "css-grid":
         return <GridVisualizer />;
-      case 'js-event':
-      case 'syntax-breakdown':
+      case "js-event":
+      case "syntax-breakdown":
         return <JsDomEventVisualizer />;
-      case 'responsive-view':
+      case "responsive-view":
         return <ResponsiveViewportVisualizer />;
-      case 'bootstrap-grid':
+      case "bootstrap-grid":
         return <BootstrapGridVisualizer />;
-      case 'git-flow':
+      case "git-flow":
         return <GitFlowVisualizer />;
-      case 'deployment-pipeline':
+      case "deployment-pipeline":
         return <DeploymentPipelineVisualizer />;
-      case 'dom-tree':
-      case 'html-skeleton':
+      case "dom-tree":
+      case "html-skeleton":
         return <DomTreeVisualizer />;
-      case 'network-flow':
+      case "network-flow":
       default:
         return <NetworkFlowVisualizer />;
     }
   };
 
   const sectionTabs = [
-    { id: 'section-theory', label: 'Theory', icon: BookOpen },
-    { id: 'section-analogy', label: 'Mental Model', icon: Lightbulb },
-    { id: 'section-visuals', label: 'Visual Lab', icon: Layers },
-    { id: 'section-code', label: 'Annotated Code', icon: Code2 },
-    { id: 'section-practice', label: 'Sandbox', icon: Zap },
-    ...(lesson.miniProject ? [{ id: 'section-miniproject', label: 'Mini-Project', icon: Sparkles }] : []),
-    ...(lesson.video ? [{ id: 'section-video', label: 'Video Lab', icon: Tv }] : []),
-    { id: 'section-quiz', label: 'Checkpoint', icon: HelpCircle },
-    { id: 'section-activities', label: 'Activities', icon: GraduationCap },
-    { id: 'section-notes', label: 'Notes', icon: FileEdit },
+    { id: "section-theory", label: "Theory", icon: BookOpen },
+    { id: "section-analogy", label: "Mental Model", icon: Lightbulb },
+    { id: "section-visuals", label: "Visual Lab", icon: Layers },
+    { id: "section-code", label: "Annotated Code", icon: Code2 },
+    { id: "section-practice", label: "Sandbox", icon: Zap },
+    ...(lesson.miniProject
+      ? [{ id: "section-miniproject", label: "Mini-Project", icon: Sparkles }]
+      : []),
+    ...(lesson.video
+      ? [{ id: "section-video", label: "Video Lab", icon: Tv }]
+      : []),
+    { id: "section-quiz", label: "Checkpoint", icon: HelpCircle },
+    { id: "section-activities", label: "Activities", icon: GraduationCap },
+    { id: "section-notes", label: "Notes", icon: FileEdit },
   ];
 
   return (
@@ -302,8 +323,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
               onClick={() => onToggleBookmark(lesson.id)}
               className={`flex items-center gap-2 rounded-xl border px-3.5 py-2 text-xs font-bold transition-all ${
                 isBookmarked
-                  ? 'border-app-amber bg-app-amber/15 text-app-amber shadow-xs'
-                  : 'border-app-border bg-app-inset text-app-muted hover:border-app-border hover:bg-app-active hover:text-app-ink'
+                  ? "border-app-amber bg-app-amber/15 text-app-amber shadow-xs"
+                  : "border-app-border bg-app-inset text-app-muted hover:border-app-border hover:bg-app-active hover:text-app-ink"
               }`}
             >
               {isBookmarked ? (
@@ -311,7 +332,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
               ) : (
                 <Bookmark className="h-4 w-4" />
               )}
-              <span className="hidden sm:inline">{isBookmarked ? 'Bookmarked' : 'Bookmark'}</span>
+              <span className="hidden sm:inline">
+                {isBookmarked ? "Bookmarked" : "Bookmark"}
+              </span>
             </button>
 
             <button
@@ -319,12 +342,14 @@ export const LessonView: React.FC<LessonViewProps> = ({
               onClick={() => onCompleteLesson(lesson.id)}
               className={`flex items-center gap-2 rounded-xl px-4 py-2 text-xs font-black transition-all shadow-sm ${
                 isCompleted
-                  ? 'bg-emerald-500 text-slate-950 hover:bg-emerald-400'
-                  : 'bg-app-amber text-slate-950 hover:bg-app-amber-hover hover:shadow-app-amber/20'
+                  ? "bg-emerald-500 text-slate-950 hover:bg-emerald-400"
+                  : "bg-app-amber text-slate-950 hover:bg-app-amber-hover hover:shadow-app-amber/20"
               }`}
             >
               <CheckCircle2 className="h-4 w-4" />
-              <span>{isCompleted ? 'Completed ✓' : 'Mark Complete (+50 XP)'}</span>
+              <span>
+                {isCompleted ? "Completed ✓" : "Mark Complete (+50 XP)"}
+              </span>
             </button>
           </div>
         </div>
@@ -364,7 +389,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
               </span>
             </div>
             <span className="font-mono text-xs font-bold text-app-amber">
-              {completedChapterLessons} / {totalChapterLessons} Lessons Finished ({chapterProgressPercent}%)
+              {completedChapterLessons} / {totalChapterLessons} Lessons Finished
+              ({chapterProgressPercent}%)
             </span>
           </div>
 
@@ -378,7 +404,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
           {/* Stepper nodes */}
           <div className="flex items-center gap-1.5 overflow-x-auto pt-1 no-scrollbar">
             {chapter.lessons.map((chLesson, idx) => {
-              const isChDone = !!completedLessons[chLesson.id] || (chLesson.id === lesson.id && isCompleted);
+              const isChDone =
+                !!completedLessons[chLesson.id] ||
+                (chLesson.id === lesson.id && isCompleted);
               const isCurrent = chLesson.id === lesson.id;
 
               return (
@@ -389,14 +417,16 @@ export const LessonView: React.FC<LessonViewProps> = ({
                   title={`Lesson ${chLesson.number}: ${chLesson.title}`}
                   className={`flex shrink-0 items-center gap-1.5 rounded-lg border px-3 py-1 text-xs font-mono transition-all ${
                     isCurrent
-                      ? 'border-app-amber bg-app-amber text-slate-950 font-black shadow-xs'
+                      ? "border-app-amber bg-app-amber text-slate-950 font-black shadow-xs"
                       : isChDone
-                      ? 'border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold'
-                      : 'border-app-border bg-app-surface text-app-muted hover:border-app-border hover:text-app-ink'
+                        ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-400 font-bold"
+                        : "border-app-border bg-app-surface text-app-muted hover:border-app-border hover:text-app-ink"
                   }`}
                 >
-                  <span>{isChDone ? '✓' : idx + 1}.</span>
-                  <span className="truncate max-w-[120px] sm:max-w-[180px]">{chLesson.title}</span>
+                  <span>{isChDone ? "✓" : idx + 1}.</span>
+                  <span className="truncate max-w-[120px] sm:max-w-[180px]">
+                    {chLesson.title}
+                  </span>
                 </button>
               );
             })}
@@ -420,11 +450,13 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 onClick={() => scrollToSection(tab.id)}
                 className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition-all ${
                   isActive
-                    ? 'bg-app-active text-app-amber border border-app-amber/60 shadow-xs'
-                    : 'text-app-muted hover:bg-app-inset hover:text-app-ink border border-transparent'
+                    ? "bg-app-active text-app-amber border border-app-amber/60 shadow-xs"
+                    : "text-app-muted hover:bg-app-inset hover:text-app-ink border border-transparent"
                 }`}
               >
-                <Icon className={`h-3.5 w-3.5 ${isActive ? 'text-app-amber' : 'text-app-subtle'}`} />
+                <Icon
+                  className={`h-3.5 w-3.5 ${isActive ? "text-app-amber" : "text-app-subtle"}`}
+                />
                 <span>{tab.label}</span>
               </button>
             );
@@ -433,7 +465,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </nav>
 
       {/* 3. Core Objectives */}
-      <section id="section-objectives" className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4">
+      <section
+        id="section-objectives"
+        className="rounded-xl border border-app-border bg-app-surface p-6 space-y-4"
+      >
         <h2 className="flex items-center gap-2 font-mono text-xs font-bold uppercase tracking-wider text-app-amber">
           <Compass className="h-4 w-4 text-app-amber" />
           Engineering Objectives
@@ -472,13 +507,12 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
         <div className="space-y-8 text-sm sm:text-base text-app-ink leading-relaxed">
           {lesson.theorySections.map((sec, idx) => (
-            <div key={idx} className="space-y-4 rounded-xl border border-app-border bg-app-surface p-6">
-              <h3 className="text-lg font-bold text-app-ink">
-                {sec.heading}
-              </h3>
-              <p className="text-app-muted leading-relaxed">
-                {sec.content}
-              </p>
+            <div
+              key={idx}
+              className="space-y-4 rounded-xl border border-app-border bg-app-surface p-6"
+            >
+              <h3 className="text-lg font-bold text-app-ink">{sec.heading}</h3>
+              <p className="text-app-muted leading-relaxed">{sec.content}</p>
 
               {sec.bulletPoints && (
                 <ul className="space-y-2 pl-2 text-sm text-app-ink">
@@ -493,7 +527,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
               {sec.callout && (
                 <div className="rounded-lg border-l-4 border-app-amber bg-app-inset p-4 text-xs sm:text-sm text-app-ink">
-                  <strong className="font-bold text-app-amber block mb-1">Key Takeaway:</strong>
+                  <strong className="font-bold text-app-amber block mb-1">
+                    Key Takeaway:
+                  </strong>
                   <span className="text-app-muted">{sec.callout.text}</span>
                 </div>
               )}
@@ -532,7 +568,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
               Interactive Visual Explainer
             </h2>
             <p className="mt-1 text-xs text-app-muted">
-              Interact with the live simulator controls to build visual mental models.
+              Interact with the live simulator controls to build visual mental
+              models.
             </p>
           </div>
           <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-xs font-bold text-violet-400">
@@ -551,12 +588,18 @@ export const LessonView: React.FC<LessonViewProps> = ({
               Annotated Code Breakdown
             </h2>
             <p className="mt-1 text-xs text-app-muted">
-              Inspect production-grade code structure with line-by-line architectural breakdown.
+              Inspect production-grade code structure with line-by-line
+              architectural breakdown.
             </p>
           </div>
           <button
             type="button"
-            onClick={() => onOpenTutor(lesson.codeExample.title, lesson.codeExample.html + '\n' + lesson.codeExample.css)}
+            onClick={() =>
+              onOpenTutor(
+                lesson.codeExample.title,
+                lesson.codeExample.html + "\n" + lesson.codeExample.css,
+              )
+            }
             className="flex items-center gap-1.5 rounded-lg border border-app-border bg-app-inset px-3 py-1.5 text-xs font-bold text-app-ink hover:border-app-amber hover:text-app-amber transition-all shadow-xs"
           >
             <Sparkles className="h-3.5 w-3.5 text-app-amber" />
@@ -569,9 +612,24 @@ export const LessonView: React.FC<LessonViewProps> = ({
           <div className="flex items-center justify-between border-b border-slate-800 bg-slate-900/90 px-4 py-2">
             <div className="flex items-center gap-1.5">
               {[
-                { id: 'html', label: 'index.html', badge: 'HTML5', tone: 'text-orange-400 bg-orange-500/10 border-orange-500/30' },
-                { id: 'css', label: 'style.css', badge: 'CSS3', tone: 'text-cyan-400 bg-cyan-500/10 border-cyan-500/30' },
-                { id: 'js', label: 'script.js', badge: 'JS ES6', tone: 'text-amber-400 bg-amber-500/10 border-amber-500/30' },
+                {
+                  id: "html",
+                  label: "index.html",
+                  badge: "HTML5",
+                  tone: "text-orange-400 bg-orange-500/10 border-orange-500/30",
+                },
+                {
+                  id: "css",
+                  label: "style.css",
+                  badge: "CSS3",
+                  tone: "text-cyan-400 bg-cyan-500/10 border-cyan-500/30",
+                },
+                {
+                  id: "js",
+                  label: "script.js",
+                  badge: "JS ES6",
+                  tone: "text-amber-400 bg-amber-500/10 border-amber-500/30",
+                },
               ].map((tab) => (
                 <button
                   key={tab.id}
@@ -579,11 +637,13 @@ export const LessonView: React.FC<LessonViewProps> = ({
                   onClick={() => setActiveCodeTab(tab.id as any)}
                   className={`flex items-center gap-2 rounded-lg px-3 py-1.5 font-mono text-xs font-bold transition-all ${
                     activeCodeTab === tab.id
-                      ? 'border border-slate-700 bg-slate-800 text-white shadow-xs'
-                      : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-200'
+                      ? "border border-slate-700 bg-slate-800 text-white shadow-xs"
+                      : "text-slate-400 hover:bg-slate-800/50 hover:text-slate-200"
                   }`}
                 >
-                  <span className={`rounded border px-1 text-[9px] font-bold ${tab.tone}`}>
+                  <span
+                    className={`rounded border px-1 text-[9px] font-bold ${tab.tone}`}
+                  >
                     {tab.badge}
                   </span>
                   <span>{tab.label}</span>
@@ -596,17 +656,23 @@ export const LessonView: React.FC<LessonViewProps> = ({
               onClick={handleCopyCode}
               className="flex items-center gap-1.5 rounded-lg border border-slate-700 bg-slate-800/80 px-3 py-1.5 font-mono text-xs text-slate-300 transition-colors hover:bg-slate-700 hover:text-white"
             >
-              {copiedCode ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
-              <span>{copiedCode ? 'Copied!' : 'Copy Code'}</span>
+              {copiedCode ? (
+                <Check className="h-3.5 w-3.5 text-emerald-400" />
+              ) : (
+                <Copy className="h-3.5 w-3.5" />
+              )}
+              <span>{copiedCode ? "Copied!" : "Copy Code"}</span>
             </button>
           </div>
 
           <div className="overflow-x-auto p-5 font-mono text-xs sm:text-sm text-slate-200 bg-slate-950">
             <pre>
               <code>
-                {activeCodeTab === 'html' && lesson.codeExample.html}
-                {activeCodeTab === 'css' && lesson.codeExample.css}
-                {activeCodeTab === 'js' && (lesson.codeExample.js || '// No JavaScript required for this architectural concept')}
+                {activeCodeTab === "html" && lesson.codeExample.html}
+                {activeCodeTab === "css" && lesson.codeExample.css}
+                {activeCodeTab === "js" &&
+                  (lesson.codeExample.js ||
+                    "// No JavaScript required for this architectural concept")}
               </code>
             </pre>
           </div>
@@ -629,7 +695,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
                       {item.lineRange}
                     </span>
                   </div>
-                  <p className="text-slate-300 leading-relaxed">{item.explanation}</p>
+                  <p className="text-slate-300 leading-relaxed">
+                    {item.explanation}
+                  </p>
                 </div>
               ))}
             </div>
@@ -646,7 +714,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
               Hands-On Practice Sandbox
             </h2>
             <p className="mt-1 text-xs text-app-muted">
-              Solve the coding challenge with live preview and automated verification tests.
+              Solve the coding challenge with live preview and automated
+              verification tests.
             </p>
           </div>
           <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 font-mono text-xs font-bold text-emerald-400">
@@ -683,8 +752,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
             relatedTopics={lesson.relatedTopics}
             allChapters={allChapters}
             onSelectLesson={onNavigateLesson}
-            onJumpToPractice={() => scrollToSection('section-practice')}
-            onJumpToVisualLab={() => scrollToSection('section-visuals')}
+            onJumpToPractice={() => scrollToSection("section-practice")}
+            onJumpToVisualLab={() => scrollToSection("section-visuals")}
           />
         </section>
       )}
@@ -716,7 +785,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
             <button
               type="button"
-              onClick={() => scrollToSection('section-practice')}
+              onClick={() => scrollToSection("section-practice")}
               className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs px-4 py-2.5 shadow-sm transition-all cursor-pointer"
             >
               <Zap className="h-4 w-4 text-amber-300" />
@@ -736,8 +805,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 Project Specifications &amp; Checklist
               </h4>
               <span className="font-mono text-[11px] text-app-subtle">
-                {Object.values(miniProjectCheckedSpecs).filter(Boolean).length} of{' '}
-                {lesson.miniProject.specifications.length} completed
+                {Object.values(miniProjectCheckedSpecs).filter(Boolean).length}{" "}
+                of {lesson.miniProject.specifications.length} completed
               </span>
             </div>
 
@@ -749,8 +818,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     key={sIdx}
                     className={`flex items-start gap-3 p-2.5 rounded-lg border text-xs cursor-pointer transition-all ${
                       isChecked
-                        ? 'border-emerald-500/40 bg-emerald-500/10 text-app-ink'
-                        : 'border-app-border bg-app-surface text-app-muted hover:text-app-ink'
+                        ? "border-emerald-500/40 bg-emerald-500/10 text-app-ink"
+                        : "border-app-border bg-app-surface text-app-muted hover:text-app-ink"
                     }`}
                   >
                     <input
@@ -764,7 +833,11 @@ export const LessonView: React.FC<LessonViewProps> = ({
                       }
                       className="mt-0.5 h-4 w-4 rounded border-slate-700 text-emerald-500 focus:ring-emerald-500 cursor-pointer"
                     />
-                    <span className={isChecked ? 'line-through opacity-80' : 'font-medium'}>
+                    <span
+                      className={
+                        isChecked ? "line-through opacity-80" : "font-medium"
+                      }
+                    >
                       {spec}
                     </span>
                   </label>
@@ -777,15 +850,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
           <div className="rounded-xl border border-slate-800 bg-[#121216] overflow-hidden space-y-0">
             <div className="flex items-center justify-between px-3 py-2 bg-[#0a0a0d] border-b border-slate-800">
               <div className="flex items-center gap-1.5 font-mono text-xs">
-                {(['html', 'css', 'js'] as const).map((tab) => (
+                {(["html", "css", "js"] as const).map((tab) => (
                   <button
                     key={tab}
                     type="button"
                     onClick={() => setMiniProjectCodeTab(tab)}
                     className={`px-3 py-1 rounded-md text-xs font-bold uppercase transition-colors cursor-pointer ${
                       miniProjectCodeTab === tab
-                        ? 'bg-slate-800 text-white border border-slate-700'
-                        : 'text-slate-400 hover:text-white'
+                        ? "bg-slate-800 text-white border border-slate-700"
+                        : "text-slate-400 hover:text-white"
                     }`}
                   >
                     {tab}
@@ -797,27 +870,35 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 type="button"
                 onClick={() => {
                   const code =
-                    miniProjectCodeTab === 'html'
-                      ? lesson.miniProject?.starterCode.html || ''
-                      : miniProjectCodeTab === 'css'
-                      ? lesson.miniProject?.starterCode.css || ''
-                      : lesson.miniProject?.starterCode.js || '';
+                    miniProjectCodeTab === "html"
+                      ? lesson.miniProject?.starterCode.html || ""
+                      : miniProjectCodeTab === "css"
+                        ? lesson.miniProject?.starterCode.css || ""
+                        : lesson.miniProject?.starterCode.js || "";
                   navigator.clipboard.writeText(code);
                   setCopiedMiniCode(true);
                   setTimeout(() => setCopiedMiniCode(false), 2000);
                 }}
                 className="flex items-center gap-1.5 px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white text-xs font-mono transition-colors cursor-pointer"
               >
-                {copiedMiniCode ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
-                <span>{copiedMiniCode ? 'Copied!' : 'Copy Code'}</span>
+                {copiedMiniCode ? (
+                  <Check className="w-3 h-3 text-emerald-400" />
+                ) : (
+                  <Copy className="w-3 h-3" />
+                )}
+                <span>{copiedMiniCode ? "Copied!" : "Copy Code"}</span>
               </button>
             </div>
 
             <pre className="p-4 font-mono text-xs text-slate-200 overflow-x-auto max-h-[220px] leading-relaxed">
               <code>
-                {miniProjectCodeTab === 'html' && lesson.miniProject.starterCode.html}
-                {miniProjectCodeTab === 'css' && lesson.miniProject.starterCode.css}
-                {miniProjectCodeTab === 'js' && (lesson.miniProject.starterCode.js || '// No JavaScript required for this stage')}
+                {miniProjectCodeTab === "html" &&
+                  lesson.miniProject.starterCode.html}
+                {miniProjectCodeTab === "css" &&
+                  lesson.miniProject.starterCode.css}
+                {miniProjectCodeTab === "js" &&
+                  (lesson.miniProject.starterCode.js ||
+                    "// No JavaScript required for this stage")}
               </code>
             </pre>
           </div>
@@ -830,7 +911,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 Think at Your Brain Level &amp; Use Your Own Ideas:
               </strong>
               <p className="text-app-muted leading-relaxed">
-                The textbook specifies the structure, but your personal creativity brings the site to life. Experiment with your own custom color scheme, invent a unique brand name, or add your own interactive elements!
+                The textbook specifies the structure, but your personal
+                creativity brings the site to life. Experiment with your own
+                custom color scheme, invent a unique brand name, or add your own
+                interactive elements!
               </p>
             </div>
           </div>
@@ -838,16 +922,18 @@ export const LessonView: React.FC<LessonViewProps> = ({
       )}
 
       {/* Capstone Final Project Submission (Chapter 10 specific) */}
-      {(lesson.id === 'ch-10-l-01' || lesson.chapterId === 'ch-10') && progress && onUpdateProgress && (
-        <FinalProjectSubmission
-          progress={progress}
-          onProjectSubmitted={(updated) => {
-            onUpdateProgress(updated);
-            onCompleteLesson(lesson.id);
-          }}
-          onOpenCertificate={onOpenCertificate}
-        />
-      )}
+      {(lesson.id === "ch-10-l-01" || lesson.chapterId === "ch-10") &&
+        progress &&
+        onUpdateProgress && (
+          <FinalProjectSubmission
+            progress={progress}
+            onProjectSubmitted={(updated) => {
+              onUpdateProgress(updated);
+              onCompleteLesson(lesson.id);
+            }}
+            onOpenCertificate={onOpenCertificate}
+          />
+        )}
 
       {/* 10. Checkpoint Quiz */}
       <section
@@ -861,7 +947,8 @@ export const LessonView: React.FC<LessonViewProps> = ({
               Checkpoint Sprint
             </h2>
             <p className="mt-1 text-xs text-app-muted">
-              Verify your architectural understanding before moving to the next concept.
+              Verify your architectural understanding before moving to the next
+              concept.
             </p>
           </div>
         </div>
@@ -876,16 +963,20 @@ export const LessonView: React.FC<LessonViewProps> = ({
                 {q.options.map((opt, optIdx) => {
                   const isSelected = selectedQuizAnswers[q.id] === optIdx;
                   const isCorrect = q.correctIndex === optIdx;
-                  let optionClass = 'border-app-border bg-app-inset text-app-ink hover:bg-app-active';
+                  let optionClass =
+                    "border-app-border bg-app-inset text-app-ink hover:bg-app-active";
 
                   if (quizSubmitted) {
                     if (isCorrect) {
-                      optionClass = 'border-emerald-500 bg-emerald-500/15 text-emerald-400 font-bold ring-1 ring-emerald-500';
+                      optionClass =
+                        "border-emerald-500 bg-emerald-500/15 text-emerald-400 font-bold ring-1 ring-emerald-500";
                     } else if (isSelected) {
-                      optionClass = 'border-red-500 bg-red-500/15 text-red-400 font-medium';
+                      optionClass =
+                        "border-red-500 bg-red-500/15 text-red-400 font-medium";
                     }
                   } else if (isSelected) {
-                    optionClass = 'border-app-amber bg-app-amber/15 text-app-amber font-bold ring-1 ring-app-amber';
+                    optionClass =
+                      "border-app-amber bg-app-amber/15 text-app-amber font-bold ring-1 ring-app-amber";
                   }
 
                   return (
@@ -896,7 +987,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
                       className={`w-full text-left p-3.5 rounded-xl border text-xs transition-all flex items-center justify-between ${optionClass}`}
                     >
                       <span>{opt}</span>
-                      {quizSubmitted && isCorrect && <Check className="h-4 w-4 text-emerald-400 shrink-0 ml-2" />}
+                      {quizSubmitted && isCorrect && (
+                        <Check className="h-4 w-4 text-emerald-400 shrink-0 ml-2" />
+                      )}
                     </button>
                   );
                 })}
@@ -904,8 +997,12 @@ export const LessonView: React.FC<LessonViewProps> = ({
 
               {quizSubmitted && (
                 <div className="rounded-xl border border-app-border bg-app-inset p-3.5 text-xs text-app-ink space-y-1">
-                  <strong className="text-app-amber font-bold block">Explanation:</strong>
-                  <span className="text-app-muted leading-relaxed">{q.explanation}</span>
+                  <strong className="text-app-amber font-bold block">
+                    Explanation:
+                  </strong>
+                  <span className="text-app-muted leading-relaxed">
+                    {q.explanation}
+                  </span>
                 </div>
               )}
             </div>
@@ -940,7 +1037,7 @@ export const LessonView: React.FC<LessonViewProps> = ({
       {/* 11. Post-Class Activities & Drills */}
       {(() => {
         const lessonDeck = getActivityDeckForLesson(lesson.id);
-        const overallDiff = lessonDeck.overallDifficulty || 'Beginner';
+        const overallDiff = lessonDeck.overallDifficulty || "Beginner";
         return (
           <section
             id="section-activities"
@@ -957,7 +1054,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
                       POST-CLASS DRILLS
                     </span>
                     <DifficultyBadge level={overallDiff} size="sm" />
-                    <span className="font-mono text-[11px] font-bold text-app-amber">+120 XP</span>
+                    <span className="font-mono text-[11px] font-bold text-app-amber">
+                      +120 XP
+                    </span>
                   </div>
                   <h2 className="text-xl font-bold text-app-ink mt-1">
                     Reinforce Memory with Interactive Drills
@@ -978,7 +1077,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
             </div>
 
             <p className="text-xs sm:text-sm text-app-muted leading-relaxed">
-              Lock in your memory for <strong>Lesson {lesson.number}</strong> with active recall flashcards, spot-the-bug puzzles, and rapid sprint checks.
+              Lock in your memory for <strong>Lesson {lesson.number}</strong>{" "}
+              with active recall flashcards, spot-the-bug puzzles, and rapid
+              sprint checks.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
@@ -988,10 +1089,15 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     <Layers className="h-3.5 w-3.5 text-app-amber" />
                     Recall Cards
                   </span>
-                  <DifficultyBadge level={lessonDeck.flashcards[0]?.difficulty || 'Beginner'} size="sm" showIcon={false} />
+                  <DifficultyBadge
+                    level={lessonDeck.flashcards[0]?.difficulty || "Beginner"}
+                    size="sm"
+                    showIcon={false}
+                  />
                 </div>
                 <p className="text-[11px] text-app-muted">
-                  Flip 5 active recall flashcards to solidify key syntax and rules.
+                  Flip 5 active recall flashcards to solidify key syntax and
+                  rules.
                 </p>
               </div>
 
@@ -1001,7 +1107,17 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     <Bug className="h-3.5 w-3.5 text-emerald-400" />
                     Bug Hunter
                   </span>
-                  <DifficultyBadge level={lessonDeck.bugHunt.difficulty === 'Hard' ? 'Advanced' : lessonDeck.bugHunt.difficulty === 'Medium' ? 'Intermediate' : 'Beginner'} size="sm" showIcon={false} />
+                  <DifficultyBadge
+                    level={
+                      lessonDeck.bugHunt.difficulty === "Hard"
+                        ? "Advanced"
+                        : lessonDeck.bugHunt.difficulty === "Medium"
+                          ? "Intermediate"
+                          : "Beginner"
+                    }
+                    size="sm"
+                    showIcon={false}
+                  />
                 </div>
                 <p className="text-[11px] text-app-muted">
                   Debug and fix broken code in live interactive IDE.
@@ -1014,7 +1130,13 @@ export const LessonView: React.FC<LessonViewProps> = ({
                     <Zap className="h-3.5 w-3.5 text-cyan-400" />
                     Speed Sprint
                   </span>
-                  <DifficultyBadge level={lessonDeck.speedQuiz[0]?.difficulty || 'Intermediate'} size="sm" showIcon={false} />
+                  <DifficultyBadge
+                    level={
+                      lessonDeck.speedQuiz[0]?.difficulty || "Intermediate"
+                    }
+                    size="sm"
+                    showIcon={false}
+                  />
                 </div>
                 <p className="text-[11px] text-app-muted">
                   Fast-paced rapid questions to evaluate concept retention.
@@ -1026,7 +1148,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
       })()}
 
       {/* 12. Student Notes Scratchpad */}
-      <section id="section-notes" className="rounded-xl border border-app-border bg-app-surface p-6 space-y-3">
+      <section
+        id="section-notes"
+        className="rounded-xl border border-app-border bg-app-surface p-6 space-y-3"
+      >
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-app-ink flex items-center gap-2">
             <FileEdit className="h-4 w-4 text-app-amber" />
@@ -1037,8 +1162,12 @@ export const LessonView: React.FC<LessonViewProps> = ({
             onClick={handleSaveNote}
             className="flex items-center gap-1.5 rounded-lg bg-app-amber px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-app-amber-hover transition-all shadow-xs"
           >
-            {noteSaved ? <Check className="h-3.5 w-3.5" /> : <Save className="h-3.5 w-3.5" />}
-            <span>{noteSaved ? 'Saved!' : 'Save Note'}</span>
+            {noteSaved ? (
+              <Check className="h-3.5 w-3.5" />
+            ) : (
+              <Save className="h-3.5 w-3.5" />
+            )}
+            <span>{noteSaved ? "Saved!" : "Save Note"}</span>
           </button>
         </div>
         <textarea
@@ -1050,7 +1179,10 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </section>
 
       {/* 13. Summary & Key Takeaways */}
-      <section id="section-summary" className="rounded-xl border border-emerald-500/30 bg-app-surface p-6 space-y-3">
+      <section
+        id="section-summary"
+        className="rounded-xl border border-emerald-500/30 bg-app-surface p-6 space-y-3"
+      >
         <h2 className="text-base font-bold text-emerald-400 flex items-center gap-2">
           <CheckCircle2 className="h-5 w-5 text-emerald-400" />
           Lesson Summary &amp; Key Takeaways
@@ -1066,7 +1198,6 @@ export const LessonView: React.FC<LessonViewProps> = ({
       </section>
 
       {/* Non-intrusive Sponsor Banner */}
-      
 
       {/* 14. Chapter Navigation Footer */}
       <nav
@@ -1081,8 +1212,12 @@ export const LessonView: React.FC<LessonViewProps> = ({
           >
             <ChevronLeft className="h-5 w-5 text-app-subtle transition-transform duration-200 group-hover:-translate-x-1" />
             <div>
-              <span className="font-mono text-[10px] text-app-subtle block">Previous Lesson</span>
-              <span className="text-xs font-bold text-app-ink">{prevLesson.title}</span>
+              <span className="font-mono text-[10px] text-app-subtle block">
+                Previous Lesson
+              </span>
+              <span className="text-xs font-bold text-app-ink">
+                {prevLesson.title}
+              </span>
             </div>
           </button>
         ) : (
@@ -1097,7 +1232,9 @@ export const LessonView: React.FC<LessonViewProps> = ({
             title="Read next chapter / lesson from top to bottom"
           >
             <div>
-              <span className="font-mono text-[10px] font-bold uppercase opacity-80 block">Next Chapter / Lesson</span>
+              <span className="font-mono text-[10px] font-bold uppercase opacity-80 block">
+                Next Chapter / Lesson
+              </span>
               <span className="text-xs font-black">{nextLesson.title}</span>
             </div>
             <ChevronRight className="h-5 w-5 transition-transform duration-200 group-hover:translate-x-1" />

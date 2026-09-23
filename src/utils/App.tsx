@@ -1,44 +1,57 @@
-﻿import React, { useRef, useState, useEffect, useCallback } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { CHAPTERS_DATA } from '../data/chaptersData';
-import { BLOG_POSTS } from '../data/blogData';
-import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
-import { applyAppTheme, normalizeAppTheme } from './theme';
-import { XP_MILESTONES } from '../data/milestonesData';
-import { calculateDailyStreak, getLocalDateString } from './streakUtils';
-import { Sidebar } from '../components/Sidebar';
-import { Header } from '../components/Header';
-import { HomeHero } from '../components/HomeHero';
-import { LessonView } from '../components/LessonView';
-import { PracticeHub } from '../components/PracticeHub';
-import { VisualLab, VisualizerId } from '../components/VisualLab';
-import { ActivitiesView } from '../components/ActivitiesView';
-import { SearchModal } from '../components/SearchModal';
-import { TutorModal } from '../components/TutorModal';
-import { SettingsModal } from '../components/SettingsModal';
-import { CertificateModal } from '../components/CertificateModal';
-import { XpMilestoneModal } from '../components/XpMilestoneModal';
-import { XpMilestonesRoadmapModal } from '../components/XpMilestonesRoadmapModal';
-import { CookieNotificationBanner } from '../components/CookieNotificationBanner';
-import { NotificationCenterModal } from '../components/NotificationCenterModal';
-import { AccountModal } from '../components/AccountModal';
-import { ToastNotification, ToastMessage } from '../components/ToastNotification';
-import { LegalComplianceModal, PolicyTab } from '../components/LegalComplianceModal';
-import { Footer } from '../components/Footer';
-import { BlogView } from '../components/BlogView';
-import { WorkspaceView } from '../components/WorkspaceView';
-import { AnimatedBackground } from '../components/AnimatedBackground';
-import { EnhancedDeveloperTools } from '../components/EnhancedDeveloperTools';
-import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
-import { NEWS_UPDATES } from '../data/newsData';
-import { useAuth } from './AuthContext';
-import * as authService from './authService';
+﻿import React, { useRef, useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { CHAPTERS_DATA } from "../data/chaptersData";
+import { BLOG_POSTS } from "../data/blogData";
+import {
+  UserProgress,
+  Chapter,
+  Lesson,
+  XpMilestone,
+  AppTheme,
+  ViewMode,
+} from "./types";
+import { applyAppTheme, normalizeAppTheme } from "./theme";
+import { XP_MILESTONES } from "../data/milestonesData";
+import { calculateDailyStreak, getLocalDateString } from "./streakUtils";
+import { Sidebar } from "../components/Sidebar";
+import { Header } from "../components/Header";
+import { HomeHero } from "../components/HomeHero";
+import { LessonView } from "../components/LessonView";
+import { PracticeHub } from "../components/PracticeHub";
+import { VisualLab, VisualizerId } from "../components/VisualLab";
+import { ActivitiesView } from "../components/ActivitiesView";
+import { SearchModal } from "../components/SearchModal";
+import { TutorModal } from "../components/TutorModal";
+import { SettingsModal } from "../components/SettingsModal";
+import { CertificateModal } from "../components/CertificateModal";
+import { XpMilestoneModal } from "../components/XpMilestoneModal";
+import { XpMilestonesRoadmapModal } from "../components/XpMilestonesRoadmapModal";
+import { CookieNotificationBanner } from "../components/CookieNotificationBanner";
+import { NotificationCenterModal } from "../components/NotificationCenterModal";
+import { AccountModal } from "../components/AccountModal";
+import {
+  ToastNotification,
+  ToastMessage,
+} from "../components/ToastNotification";
+import {
+  LegalComplianceModal,
+  PolicyTab,
+} from "../components/LegalComplianceModal";
+import { Footer } from "../components/Footer";
+import { BlogView } from "../components/BlogView";
+import { WorkspaceView } from "../components/WorkspaceView";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { EnhancedDeveloperTools } from "../components/EnhancedDeveloperTools";
+import { useSEOMeta, SEO_PRESETS } from "./useSEOMeta";
+import { NEWS_UPDATES } from "../data/newsData";
+import { useAuth } from "./AuthContext";
+import * as authService from "./authService";
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
   completedChallenges: {},
   quizScores: {},
-  claimedMilestones: ['milestone-100'],
+  claimedMilestones: ["milestone-100"],
   notes: {},
   bookmarks: [],
   xpPoints: 120,
@@ -49,8 +62,8 @@ const INITIAL_PROGRESS: UserProgress = {
 
 export default function App() {
   const [chapters] = useState<Chapter[]>(CHAPTERS_DATA);
-  const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
-  const [activeView, setActiveView] = useState<ViewMode>('home');
+  const [currentLessonId, setCurrentLessonId] = useState<string>("ch-00-l-01");
+  const [activeView, setActiveView] = useState<ViewMode>("home");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [tutorOpen, setTutorOpen] = useState(false);
@@ -58,31 +71,43 @@ export default function App() {
   const [aiCode, setAiCode] = useState<string | undefined>();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [certificateOpen, setCertificateOpen] = useState(false);
-  const [celebratingMilestone, setCelebratingMilestone] = useState<XpMilestone | null>(null);
+  const [celebratingMilestone, setCelebratingMilestone] =
+    useState<XpMilestone | null>(null);
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
-  const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
+  const [legalModalTab, setLegalModalTab] = useState<PolicyTab>("privacy");
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const { isAuthenticated, user } = useAuth();
-  const hasRealAccount = isAuthenticated && user?.method !== 'guest';
+  const hasRealAccount = isAuthenticated && user?.method !== "guest";
 
-  const requireAuth = useCallback((action: () => void) => {
-    if (hasRealAccount) {
-      action();
-    } else {
-      addToast('Sign In Required', 'Create a free account to save your progress and access all features.', 'info');
-      setAccountOpen(true);
-    }
-  }, [hasRealAccount]);
+  const requireAuth = useCallback(
+    (action: () => void) => {
+      if (hasRealAccount) {
+        action();
+      } else {
+        addToast(
+          "Sign In Required",
+          "Create a free account to save your progress and access all features.",
+          "info",
+        );
+        setAccountOpen(true);
+      }
+    },
+    [hasRealAccount],
+  );
 
-  const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
+  const handleOpenLegal = (tab: PolicyTab = "privacy") => {
     setLegalModalTab(tab);
     setLegalModalOpen(true);
   };
 
-  const addToast = (title: string, message: string, type: 'info' | 'success' | 'update' = 'info') => {
+  const addToast = (
+    title: string,
+    message: string,
+    type: "info" | "success" | "update" = "info",
+  ) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`;
     const newToast: ToastMessage = { id, title, message, type };
     setToasts((prev) => [...prev, newToast]);
@@ -98,23 +123,28 @@ export default function App() {
   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
   const [theme, setTheme] = useState<AppTheme>(() => {
     try {
-      return normalizeAppTheme(localStorage.getItem('webzonebw_storehouse_theme'));
+      return normalizeAppTheme(
+        localStorage.getItem("webzonebw_storehouse_theme"),
+      );
     } catch {
-      return 'dark';
+      return "dark";
     }
   });
-  const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
-  const [fontFamily, setFontFamily] = useState<'sans' | 'serif' | 'mono'>('sans');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedVisualizerTool, setSelectedVisualizerTool] = useState<VisualizerId>('box');
-  const [searchInitialQuery, setSearchInitialQuery] = useState<string>('');
+  const [fontSize, setFontSize] = useState<"sm" | "md" | "lg">("md");
+  const [fontFamily, setFontFamily] = useState<"sans" | "serif" | "mono">(
+    "sans",
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedVisualizerTool, setSelectedVisualizerTool] =
+    useState<VisualizerId>("box");
+  const [searchInitialQuery, setSearchInitialQuery] = useState<string>("");
   const [blogSlug, setBlogSlug] = useState<string | undefined>();
 
   const handleOpenVisualLab = (toolId?: string) => {
     if (toolId) {
       setSelectedVisualizerTool(toolId as VisualizerId);
     }
-    navigateToView('visual-lab');
+    navigateToView("visual-lab");
   };
 
   // Load progress â€” server is source of truth when authenticated, localStorage for guests
@@ -129,7 +159,9 @@ export default function App() {
           const merged: UserProgress = {
             ...INITIAL_PROGRESS,
             ...serverProgress,
-            claimedMilestones: serverProgress.claimedMilestones || ['milestone-100'],
+            claimedMilestones: serverProgress.claimedMilestones || [
+              "milestone-100",
+            ],
           };
           const { updatedProgress } = calculateDailyStreak(merged);
           setProgress(updatedProgress);
@@ -142,13 +174,13 @@ export default function App() {
     } else {
       // Guest: use localStorage as offline cache
       try {
-        const saved = localStorage.getItem('webzonebw_storehouse_progress');
+        const saved = localStorage.getItem("webzonebw_storehouse_progress");
         if (saved) {
           const parsed = JSON.parse(saved);
           const merged: UserProgress = {
             ...INITIAL_PROGRESS,
             ...parsed,
-            claimedMilestones: parsed.claimedMilestones || ['milestone-100'],
+            claimedMilestones: parsed.claimedMilestones || ["milestone-100"],
           };
           const { updatedProgress } = calculateDailyStreak(merged);
           setProgress(updatedProgress);
@@ -174,30 +206,34 @@ export default function App() {
     // Deep-link URL parameter & pathname resolution with resilient URL decoding
     try {
       const normalizeRouteToken = (token: string): string => {
-        if (!token) return '';
+        if (!token) return "";
         let decoded = token;
         try {
           decoded = decodeURIComponent(token);
         } catch {}
         // Fix missing percent in '%20' where URL became e.g. Chapter-01-Development20Environment
-        decoded = decoded.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, '$1 $2');
-        return decoded.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+        decoded = decoded.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, "$1 $2");
+        return decoded
+          .replace(/[-_]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
       };
 
       const params = new URLSearchParams(window.location.search);
-      const rawLessonParam = params.get('lesson');
-      const rawChapterParam = params.get('chapter');
-      const viewParam = params.get('view') as ViewMode | null;
-      const toolParam = params.get('tool') as VisualizerId | null;
-      const legalParam = params.get('legal') as PolicyTab | null;
-      const blogParam = params.get('blog') as string | null;
+      const rawLessonParam = params.get("lesson");
+      const rawChapterParam = params.get("chapter");
+      const viewParam = params.get("view") as ViewMode | null;
+      const toolParam = params.get("tool") as VisualizerId | null;
+      const legalParam = params.get("legal") as PolicyTab | null;
+      const blogParam = params.get("blog") as string | null;
 
       // Also check pathname (e.g. /Chapters/Chapter-01-Development20Environment/Lesson-02-...)
-      const pathname = window.location.pathname || '';
+      const pathname = window.location.pathname || "";
       let pathChapterMatch: string | null = null;
       let pathLessonMatch: string | null = null;
-      if (pathname.includes('/Chapters/') || pathname.includes('/chapter/')) {
-        const parts = pathname.split('/').filter(Boolean);
+      if (pathname.includes("/Chapters/") || pathname.includes("/chapter/")) {
+        const parts = pathname.split("/").filter(Boolean);
         for (const part of parts) {
           if (/chapter/i.test(part)) pathChapterMatch = part;
           if (/lesson/i.test(part)) pathLessonMatch = part;
@@ -211,7 +247,7 @@ export default function App() {
         const slug = decodeURIComponent(cleanBlogMatch[1]);
         if (BLOG_POSTS.some((p) => p.slug === slug)) {
           setBlogSlug(slug);
-          setActiveView('blog');
+          setActiveView("blog");
           return;
         }
       }
@@ -222,14 +258,17 @@ export default function App() {
       const chapterCandidate = rawChapterParam || pathChapterMatch;
       const lessonCandidate = rawLessonParam || pathLessonMatch;
 
-      if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
+      if (
+        legalParam &&
+        ["privacy", "terms", "cookies", "about", "contact"].includes(legalParam)
+      ) {
         setLegalModalTab(legalParam);
         setLegalModalOpen(true);
       }
 
       if (blogParam) {
         setBlogSlug(blogParam);
-        setActiveView('blog');
+        setActiveView("blog");
         return;
       }
 
@@ -239,7 +278,11 @@ export default function App() {
         // Direct ID match
         let foundLesson = chapters
           .flatMap((c) => c.lessons)
-          .find((l) => l.id.toLowerCase() === normLesson || l.id.toLowerCase() === lessonCandidate.toLowerCase());
+          .find(
+            (l) =>
+              l.id.toLowerCase() === normLesson ||
+              l.id.toLowerCase() === lessonCandidate.toLowerCase(),
+          );
 
         // Slug / title match
         if (!foundLesson) {
@@ -247,13 +290,15 @@ export default function App() {
             .flatMap((c) => c.lessons)
             .find((l) => {
               const normTitle = normalizeRouteToken(l.title);
-              return normLesson.includes(normTitle) || normTitle.includes(normLesson);
+              return (
+                normLesson.includes(normTitle) || normTitle.includes(normLesson)
+              );
             });
         }
 
         if (foundLesson) {
           setCurrentLessonId(foundLesson.id);
-          setActiveView('lesson');
+          setActiveView("lesson");
           return;
         }
       }
@@ -263,29 +308,53 @@ export default function App() {
         const normChapter = normalizeRouteToken(chapterCandidate);
         // Extract number like "01" or "1"
         const numMatch = chapterCandidate.match(/\b(0\d|10|\d)\b/);
-        const candidateNum = numMatch ? numMatch[1].padStart(2, '0') : null;
+        const candidateNum = numMatch ? numMatch[1].padStart(2, "0") : null;
 
         const foundChapter = chapters.find((c) => {
-          if (c.id.toLowerCase() === normChapter || c.id.toLowerCase() === chapterCandidate.toLowerCase()) return true;
+          if (
+            c.id.toLowerCase() === normChapter ||
+            c.id.toLowerCase() === chapterCandidate.toLowerCase()
+          )
+            return true;
           if (candidateNum && c.number === candidateNum) return true;
           const normTitle = normalizeRouteToken(c.title);
-          return normChapter.includes(normTitle) || normTitle.includes(normChapter);
+          return (
+            normChapter.includes(normTitle) || normTitle.includes(normChapter)
+          );
         });
 
         if (foundChapter && foundChapter.lessons.length > 0) {
           setCurrentLessonId(foundChapter.lessons[0].id);
-          setActiveView('lesson');
+          setActiveView("lesson");
           return;
         }
       }
 
-      if (toolParam && ['box', 'flex', 'grid', 'dom', 'git', 'net'].includes(toolParam)) {
+      if (
+        toolParam &&
+        ["box", "flex", "grid", "dom", "git", "net"].includes(toolParam)
+      ) {
         setSelectedVisualizerTool(toolParam);
-        setActiveView('visual-lab');
+        setActiveView("visual-lab");
         return;
       }
 
-      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog', 'workspace', 'developertools', 'imagetools', 'webtools'].includes(viewParam)) {
+      if (
+        viewParam &&
+        [
+          "home",
+          "lesson",
+          "practice-hub",
+          "visual-lab",
+          "activities",
+          "curriculum",
+          "blog",
+          "workspace",
+          "developertools",
+          "imagetools",
+          "webtools",
+        ].includes(viewParam)
+      ) {
         setActiveView(viewParam);
       }
     } catch {}
@@ -300,7 +369,10 @@ export default function App() {
     } else {
       // Guest fallback: localStorage only
       try {
-        localStorage.setItem('webzonebw_storehouse_progress', JSON.stringify(progress));
+        localStorage.setItem(
+          "webzonebw_storehouse_progress",
+          JSON.stringify(progress),
+        );
       } catch {}
     }
   }, [progress, hasRealAccount, progressLoaded]);
@@ -308,8 +380,8 @@ export default function App() {
   // Save theme to localStorage (synchronizing both React SPA and standalone keys)
   useEffect(() => {
     try {
-      localStorage.setItem('webzonebw_storehouse_theme', theme);
-      localStorage.setItem('webzonebw-theme', theme);
+      localStorage.setItem("webzonebw_storehouse_theme", theme);
+      localStorage.setItem("webzonebw-theme", theme);
     } catch {}
   }, [theme]);
 
@@ -318,7 +390,8 @@ export default function App() {
     const currentClaimed = progress.claimedMilestones || [];
     // Find uncelebrated milestones that the user has already reached
     const newlyReached = XP_MILESTONES.find(
-      (m) => progress.xpPoints >= m.xpRequired && !currentClaimed.includes(m.id)
+      (m) =>
+        progress.xpPoints >= m.xpRequired && !currentClaimed.includes(m.id),
     );
 
     if (newlyReached) {
@@ -338,13 +411,13 @@ export default function App() {
   // Global Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   // Find active lesson and chapter
@@ -361,7 +434,7 @@ export default function App() {
   }
 
   const scrollMainToTop = () => {
-    mainContentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    mainContentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   const navigateToView = (view: ViewMode) => {
@@ -371,7 +444,7 @@ export default function App() {
 
   const handleSelectLesson = (lessonId: string) => {
     setCurrentLessonId(lessonId);
-    setActiveView('lesson');
+    setActiveView("lesson");
     scrollMainToTop();
   };
 
@@ -379,7 +452,7 @@ export default function App() {
     if (lessonId) {
       setCurrentLessonId(lessonId);
     }
-    setActiveView('activities');
+    setActiveView("activities");
     scrollMainToTop();
   };
 
@@ -394,14 +467,16 @@ export default function App() {
             ...(withStreak.completedActivities || {}),
             [activityId]: true,
           },
-          xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
+          xpPoints: isAlreadyDone
+            ? withStreak.xpPoints
+            : withStreak.xpPoints + xpReward,
         };
       });
 
       addToast(
-        'Activity Mastered! ðŸŒŸ',
+        "Activity Mastered! ðŸŒŸ",
         `You earned +${xpReward} XP for conquering this post-class exercise!`,
-        'success'
+        "success",
       );
     });
   };
@@ -417,7 +492,9 @@ export default function App() {
           ...withStreak.completedLessons,
           [lessonId]: true,
         },
-        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
+        xpPoints: isAlreadyDone
+          ? withStreak.xpPoints
+          : withStreak.xpPoints + 50,
       };
     });
 
@@ -431,12 +508,23 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Lesson Completed! ðŸŽ¯', `Verified on server: +${res.xpAwarded} XP!`, 'success');
+          addToast(
+            "Lesson Completed! ðŸŽ¯",
+            `Verified on server: +${res.xpAwarded} XP!`,
+            "success",
+          );
         }
 
-        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+        if (
+          res.newlyUnlockedAchievements &&
+          res.newlyUnlockedAchievements.length > 0
+        ) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || 'ðŸ†'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(
+              `Achievement Unlocked! ${ach.icon || "ðŸ†"}`,
+              `${ach.title} (+${ach.xpReward} XP)`,
+              "success",
+            );
           });
         }
       }
@@ -454,7 +542,9 @@ export default function App() {
           ...(withStreak.completedChallenges || {}),
           [challengeId]: true,
         },
-        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
+        xpPoints: isAlreadyDone
+          ? withStreak.xpPoints
+          : withStreak.xpPoints + 50,
       };
     });
 
@@ -468,12 +558,23 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Challenge Mastered! âš¡', `Verified: +${res.xpAwarded} XP!`, 'success');
+          addToast(
+            "Challenge Mastered! âš¡",
+            `Verified: +${res.xpAwarded} XP!`,
+            "success",
+          );
         }
 
-        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+        if (
+          res.newlyUnlockedAchievements &&
+          res.newlyUnlockedAchievements.length > 0
+        ) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || 'ðŸ†'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(
+              `Achievement Unlocked! ${ach.icon || "ðŸ†"}`,
+              `${ach.title} (+${ach.xpReward} XP)`,
+              "success",
+            );
           });
         }
       }
@@ -520,12 +621,20 @@ export default function App() {
   };
 
   const fontClass =
-    fontFamily === 'serif' ? 'font-serif' : fontFamily === 'mono' ? 'font-mono' : 'font-sans';
+    fontFamily === "serif"
+      ? "font-serif"
+      : fontFamily === "mono"
+        ? "font-mono"
+        : "font-sans";
   const sizeClass =
-    fontSize === 'sm' ? 'text-sm leading-relaxed' : fontSize === 'lg' ? 'text-lg leading-loose' : 'text-base leading-normal';
+    fontSize === "sm"
+      ? "text-sm leading-relaxed"
+      : fontSize === "lg"
+        ? "text-lg leading-loose"
+        : "text-base leading-normal";
 
   const handleCycleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const totalLessons = chapters.flatMap((c) => c.lessons).length;
@@ -533,22 +642,24 @@ export default function App() {
   // Dynamic SEO meta tags per view
   const seoConfig = (() => {
     switch (activeView) {
-      case 'practice-hub':
+      case "practice-hub":
         return SEO_PRESETS.practiceHub;
-      case 'visual-lab':
+      case "visual-lab":
         return SEO_PRESETS.visualLab(selectedVisualizerTool);
-      case 'lesson':
+      case "lesson":
         if (activeLesson) {
           return SEO_PRESETS.lesson(
             activeLesson.title,
-            activeLesson.tagline || activeLesson.learningObjectives?.[0] || `${activeLesson.title} â€” Free interactive lesson on WebZoneBW SC.`,
-            activeLesson.id
+            activeLesson.tagline ||
+              activeLesson.learningObjectives?.[0] ||
+              `${activeLesson.title} â€” Free interactive lesson on WebZoneBW SC.`,
+            activeLesson.id,
           );
         }
         return SEO_PRESETS.home;
-      case 'activities':
+      case "activities":
         return SEO_PRESETS.activities;
-      case 'blog':
+      case "blog":
         return SEO_PRESETS.blog;
       default:
         return SEO_PRESETS.home;
@@ -570,9 +681,9 @@ export default function App() {
         isOpen={sidebarOpen}
         onCloseMobile={() => setSidebarOpen(false)}
         activeView={activeView}
-        onNavigateHome={() => navigateToView('home')}
-        onOpenPracticeHub={() => navigateToView('practice-hub')}
-        onOpenVisualLab={() => navigateToView('visual-lab')}
+        onNavigateHome={() => navigateToView("home")}
+        onOpenPracticeHub={() => navigateToView("practice-hub")}
+        onOpenVisualLab={() => navigateToView("visual-lab")}
         onOpenActivities={() => handleNavigateActivities()}
         onOpenMilestones={() => setRoadmapOpen(true)}
         onOpenTutor={() => handleOpenTutor()}
@@ -591,15 +702,18 @@ export default function App() {
           onOpenNotifications={() => setNotificationsOpen(true)}
           onOpenAccount={() => setAccountOpen(true)}
           unreadNewsCount={unreadNewsCount}
-          onNavigateHome={() => navigateToView('home')}
-          onNavigatePractice={() => navigateToView('practice-hub')}
+          onNavigateHome={() => navigateToView("home")}
+          onNavigatePractice={() => navigateToView("practice-hub")}
           onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
           onNavigateActivities={() => handleNavigateActivities()}
-          onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
-          onNavigateWorkspace={() => navigateToView('workspace')}
+          onNavigateBlog={() => {
+            setBlogSlug(undefined);
+            navigateToView("blog");
+          }}
+          onNavigateWorkspace={() => navigateToView("workspace")}
           onSelectCategory={(cat) => {
             setSelectedCategory(cat);
-            navigateToView('home');
+            navigateToView("home");
           }}
           progress={progress}
           activeView={activeView}
@@ -608,12 +722,16 @@ export default function App() {
         />
 
         {/* View Router with one independent scroll region */}
-        <main ref={mainContentRef} id="main-content" className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
+        <main
+          ref={mainContentRef}
+          id="main-content"
+          className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}
+        >
           {/* Animated Background with ambient nodes and cursor tracking */}
           <AnimatedBackground theme={theme} />
 
           <AnimatePresence mode="wait" initial={false}>
-            {activeView === 'home' && (
+            {activeView === "home" && (
               <motion.div
                 key="home-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -626,14 +744,14 @@ export default function App() {
                   chapters={chapters}
                   progress={progress}
                   onSelectLesson={handleSelectLesson}
-                  onOpenPracticeHub={() => navigateToView('practice-hub')}
+                  onOpenPracticeHub={() => navigateToView("practice-hub")}
                   onOpenVisualLab={(toolId) => handleOpenVisualLab(toolId)}
                   onOpenActivities={() => handleNavigateActivities()}
                   onOpenTutor={() => handleOpenTutor()}
                   onOpenMilestones={() => setRoadmapOpen(true)}
-                  onOpenWorkspace={() => navigateToView('workspace')}
+                  onOpenWorkspace={() => navigateToView("workspace")}
                   onOpenSearch={(query) => {
-                    setSearchInitialQuery(query || '');
+                    setSearchInitialQuery(query || "");
                     setSearchOpen(true);
                   }}
                   selectedCategory={selectedCategory}
@@ -641,7 +759,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'lesson' && activeLesson && activeChapter && (
+            {activeView === "lesson" && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
                 initial={{ opacity: 0, y: 14 }}
@@ -659,7 +777,7 @@ export default function App() {
                   isCompleted={!!progress.completedLessons[activeLesson.id]}
                   isBookmarked={progress.bookmarks.includes(activeLesson.id)}
                   onToggleBookmark={handleToggleBookmark}
-                  userNote={progress.notes[activeLesson.id] || ''}
+                  userNote={progress.notes[activeLesson.id] || ""}
                   onSaveNote={handleSaveNote}
                   onOpenTutor={handleOpenTutor}
                   allChapters={chapters}
@@ -671,7 +789,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'activities' && (
+            {activeView === "activities" && (
               <motion.div
                 key="activities-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -691,7 +809,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'practice-hub' && (
+            {activeView === "practice-hub" && (
               <motion.div
                 key="practice-hub-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -708,7 +826,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'visual-lab' && (
+            {activeView === "visual-lab" && (
               <motion.div
                 key="visual-lab-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -721,7 +839,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'blog' && (
+            {activeView === "blog" && (
               <motion.div
                 key="blog-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -731,13 +849,13 @@ export default function App() {
                 className="w-full relative z-10"
               >
                 <BlogView
-                  onNavigateHome={() => navigateToView('home')}
+                  onNavigateHome={() => navigateToView("home")}
                   initialSlug={blogSlug}
                 />
               </motion.div>
             )}
 
-            {activeView === 'workspace' && (
+            {activeView === "workspace" && (
               <motion.div
                 key="workspace-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -749,12 +867,12 @@ export default function App() {
                 <WorkspaceView
                   progress={progress}
                   onOpenTutor={() => handleOpenTutor()}
-                  onNavigateHome={() => navigateToView('home')}
+                  onNavigateHome={() => navigateToView("home")}
                 />
               </motion.div>
             )}
 
-            {activeView === 'developertools' && (
+            {activeView === "developertools" && (
               <motion.div
                 key="developertools-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -767,7 +885,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'imagetools' && (
+            {activeView === "imagetools" && (
               <motion.div
                 key="imagetools-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -780,23 +898,37 @@ export default function App() {
                   <h1 className="text-3xl font-bold mb-6">Image Tools</h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="imagetool-title text-xl font-semibold mb-3">Image Optimizer</h3>
-                      <p>Compress and optimize your images for better web performance.</p>
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">
+                        Image Optimizer
+                      </h3>
+                      <p>
+                        Compress and optimize your images for better web
+                        performance.
+                      </p>
                     </div>
                     <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="imagetool-title text-xl font-semibold mb-3">Image Resizer</h3>
-                      <p>Resize and crop images to fit your exact requirements.</p>
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">
+                        Image Resizer
+                      </h3>
+                      <p>
+                        Resize and crop images to fit your exact requirements.
+                      </p>
                     </div>
                     <div className="imagetool-item bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="imagetool-title text-xl font-semibold mb-3">Format Converter</h3>
-                      <p>Convert between different image formats (PNG, JPEG, WebP, etc.).</p>
+                      <h3 className="imagetool-title text-xl font-semibold mb-3">
+                        Format Converter
+                      </h3>
+                      <p>
+                        Convert between different image formats (PNG, JPEG,
+                        WebP, etc.).
+                      </p>
                     </div>
                   </div>
                 </div>
               </motion.div>
             )}
 
-            {activeView === 'webtools' && (
+            {activeView === "webtools" && (
               <motion.div
                 key="webtools-view"
                 initial={{ opacity: 0, y: 14 }}
@@ -809,16 +941,29 @@ export default function App() {
                   <h1 className="text-3xl font-bold mb-6">Web Tools</h1>
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="text-xl font-semibold mb-3">HTML Validator</h3>
-                      <p>Validate your HTML code for compliance and best practices.</p>
+                      <h3 className="text-xl font-semibold mb-3">
+                        HTML Validator
+                      </h3>
+                      <p>
+                        Validate your HTML code for compliance and best
+                        practices.
+                      </p>
                     </div>
                     <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="text-xl font-semibold mb-3">CSS Optimizer</h3>
-                      <p>Optimize and minify your CSS for better performance.</p>
+                      <h3 className="text-xl font-semibold mb-3">
+                        CSS Optimizer
+                      </h3>
+                      <p>
+                        Optimize and minify your CSS for better performance.
+                      </p>
                     </div>
                     <div className="webtool-card bg-white dark:bg-gray-800 p-6 rounded-lg shadow-lg">
-                      <h3 className="text-xl font-semibold mb-3">JSON Formatter</h3>
-                      <p>Format and validate JSON data with syntax highlighting.</p>
+                      <h3 className="text-xl font-semibold mb-3">
+                        JSON Formatter
+                      </h3>
+                      <p>
+                        Format and validate JSON data with syntax highlighting.
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -831,11 +976,14 @@ export default function App() {
             onOpenLegal={handleOpenLegal}
             onOpenTutor={() => handleOpenTutor()}
             onSelectLesson={handleSelectLesson}
-            onNavigateHome={() => navigateToView('home')}
-            onNavigatePractice={() => navigateToView('practice-hub')}
+            onNavigateHome={() => navigateToView("home")}
+            onNavigatePractice={() => navigateToView("practice-hub")}
             onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
             onNavigateActivities={() => handleNavigateActivities()}
-            onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
+            onNavigateBlog={() => {
+              setBlogSlug(undefined);
+              navigateToView("blog");
+            }}
             onOpenMilestones={() => setRoadmapOpen(true)}
             onOpenCertificate={() => setCertificateOpen(true)}
             onOpenSearch={() => setSearchOpen(true)}
@@ -864,7 +1012,7 @@ export default function App() {
         onClose={() => setSearchOpen(false)}
         chapters={chapters}
         onSelectLesson={handleSelectLesson}
-        onNavigatePractice={() => navigateToView('practice-hub')}
+        onNavigatePractice={() => navigateToView("practice-hub")}
         onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
         onNavigateActivities={() => handleNavigateActivities()}
         onOpenTutor={() => handleOpenTutor()}
@@ -928,7 +1076,7 @@ export default function App() {
         isOpen={notificationsOpen}
         onClose={() => setNotificationsOpen(false)}
         onNavigateView={(view, lessonId) => {
-          if (view === 'lesson' && lessonId) {
+          if (view === "lesson" && lessonId) {
             handleSelectLesson(lessonId);
           } else {
             navigateToView(view);
@@ -946,13 +1094,21 @@ export default function App() {
       {/* Cookie & Push Notification Consent Banner */}
       <CookieNotificationBanner
         onAcceptAll={() => {
-          addToast('Preferences Saved', 'Cookies and push notification preferences enabled.', 'success');
+          addToast(
+            "Preferences Saved",
+            "Cookies and push notification preferences enabled.",
+            "success",
+          );
         }}
         onPreferencesSaved={(prefs) => {
-          addToast('Preferences Updated', `Cookie settings saved with push ${prefs.pushNotifications ? 'enabled' : 'disabled'}.`, 'info');
+          addToast(
+            "Preferences Updated",
+            `Cookie settings saved with push ${prefs.pushNotifications ? "enabled" : "disabled"}.`,
+            "info",
+          );
         }}
         onOpenNews={() => setNotificationsOpen(true)}
-        onOpenPrivacy={() => handleOpenLegal('privacy')}
+        onOpenPrivacy={() => handleOpenLegal("privacy")}
       />
     </div>
   );

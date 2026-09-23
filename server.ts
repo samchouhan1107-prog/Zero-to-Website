@@ -18,12 +18,12 @@ app.use(express.json());
 
 // CORS â€” allow frontend (GitHub Pages) to call this API
 app.use((_req, res, next) => {
-  const origin = process.env.CORS_ORIGIN || _req.headers.origin || '*';
-  res.header('Access-Control-Allow-Origin', origin);
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  res.header('Access-Control-Allow-Credentials', 'true');
-  if (_req.method === 'OPTIONS') return res.sendStatus(204);
+  const origin = process.env.CORS_ORIGIN || _req.headers.origin || "*";
+  res.header("Access-Control-Allow-Origin", origin);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  if (_req.method === "OPTIONS") return res.sendStatus(204);
   next();
 });
 
@@ -63,7 +63,10 @@ app.use("/Chapters", (req, res, next) => {
   } catch {}
 
   // Normalization for missing percent in '%20' (e.g. Chapter-01-Development20Environment)
-  const normalizedCandidate = subPath.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, "$1 $2");
+  const normalizedCandidate = subPath.replace(
+    /([a-zA-Z0-9])20([a-zA-Z0-9])/g,
+    "$1 $2",
+  );
 
   // 1. Direct match on decoded path
   let targetPath = path.join(chaptersRoot, subPath);
@@ -89,7 +92,9 @@ app.use("/Chapters", (req, res, next) => {
 
   // 3. Fuzzy directory matching for chapter folders
   try {
-    const allChapterDirs = fs.existsSync(chaptersRoot) ? fs.readdirSync(chaptersRoot) : [];
+    const allChapterDirs = fs.existsSync(chaptersRoot)
+      ? fs.readdirSync(chaptersRoot)
+      : [];
     const segments = subPath.split("/").filter(Boolean);
     if (segments.length > 0) {
       const firstSegment = segments[0];
@@ -100,12 +105,18 @@ app.use("/Chapters", (req, res, next) => {
 
       const matchedDir = allChapterDirs.find((dir) => {
         const normDir = dir.replace(/[-_]+/g, " ").toLowerCase();
-        return normDir === normFirst || normDir.includes(normFirst) || normFirst.includes(normDir);
+        return (
+          normDir === normFirst ||
+          normDir.includes(normFirst) ||
+          normFirst.includes(normDir)
+        );
       });
 
       if (matchedDir) {
         const remaining = segments.slice(1).join("/");
-        const resolved = remaining ? path.join(chaptersRoot, matchedDir, remaining) : path.join(chaptersRoot, matchedDir);
+        const resolved = remaining
+          ? path.join(chaptersRoot, matchedDir, remaining)
+          : path.join(chaptersRoot, matchedDir);
         if (fs.existsSync(resolved)) {
           if (fs.statSync(resolved).isDirectory()) {
             const indexFile = path.join(resolved, "index.html");
@@ -137,13 +148,22 @@ app.get("/api/health", (_req, res) => {
 // Applied to ALL GET paths so any URL carrying ?lesson=/?blog= (including
 // /index.html, deep paths, or array-typed params) is permanently migrated
 // to the clean canonical route instead of ever rendering a duplicate page.
-const TRACKING_PARAM_RE = /^(utm_|fbclid|gclid|msclkid|ref|source|igshid|mc_[a-z])/i;
+const TRACKING_PARAM_RE =
+  /^(utm_|fbclid|gclid|msclkid|ref|source|igshid|mc_[a-z])/i;
 const CACHE_BUSTING_RE = /^(v|cache|nocache|ts|t|_)$/i;
 
-function legacyQueryRedirect(req: express.Request, res: express.Response, next: express.NextFunction) {
+function legacyQueryRedirect(
+  req: express.Request,
+  res: express.Response,
+  next: express.NextFunction,
+) {
   // Normalize array-typed params (?lesson=a&lesson=b) to first value
   const first = (v: unknown): string | null =>
-    typeof v === "string" && v ? v : Array.isArray(v) && typeof v[0] === "string" && v[0] ? v[0] : null;
+    typeof v === "string" && v
+      ? v
+      : Array.isArray(v) && typeof v[0] === "string" && v[0]
+        ? v[0]
+        : null;
 
   const blogSlug = first(req.query.blog);
   const lessonId = first(req.query.lesson);
@@ -153,13 +173,30 @@ function legacyQueryRedirect(req: express.Request, res: express.Response, next: 
     delete rest[exclude];
     // Drop tracking & cache-busting params so clean URLs stay clean
     const parts = Object.entries(rest)
-      .filter(([k, v]) => !TRACKING_PARAM_RE.test(k) && !CACHE_BUSTING_RE.test(k) && typeof v === "string" && v !== "")
-      .map(([k, v]) => `${encodeURIComponent(k)}=${encodeURIComponent(v as string)}`);
+      .filter(
+        ([k, v]) =>
+          !TRACKING_PARAM_RE.test(k) &&
+          !CACHE_BUSTING_RE.test(k) &&
+          typeof v === "string" &&
+          v !== "",
+      )
+      .map(
+        ([k, v]) =>
+          `${encodeURIComponent(k)}=${encodeURIComponent(v as string)}`,
+      );
     return parts.length ? `?${parts.join("&")}` : "";
   };
 
-  if (blogSlug) return res.redirect(301, `/blog/${encodeURIComponent(blogSlug)}${forward("blog")}`);
-  if (lessonId) return res.redirect(301, `/lessons/${encodeURIComponent(lessonId)}${forward("lesson")}`);
+  if (blogSlug)
+    return res.redirect(
+      301,
+      `/blog/${encodeURIComponent(blogSlug)}${forward("blog")}`,
+    );
+  if (lessonId)
+    return res.redirect(
+      301,
+      `/lessons/${encodeURIComponent(lessonId)}${forward("lesson")}`,
+    );
   next();
 }
 
@@ -174,19 +211,37 @@ interface PageSEO {
   canonical: string;
   ogType?: string;
   breadcrumb?: { name: string; url: string }[];
-  learningResource?: { name: string; description: string; url: string; inLanguage?: string };
-  blogPosting?: { headline: string; description: string; url: string; author: string; datePublished: string; keywords?: string[] };
+  learningResource?: {
+    name: string;
+    description: string;
+    url: string;
+    inLanguage?: string;
+  };
+  blogPosting?: {
+    headline: string;
+    description: string;
+    url: string;
+    author: string;
+    datePublished: string;
+    keywords?: string[];
+  };
 }
 
 function escapeHtml(s: string): string {
-  return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  return s
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function injectSEO(html: string, seo: PageSEO): string {
   const canonicalTag = `<link rel="canonical" href="${escapeHtml(seo.canonical)}" />`;
   const titleTag = `<title>${escapeHtml(seo.title)}</title>`;
   const descTag = `<meta name="description" content="${escapeHtml(seo.description)}" />`;
-  const ogTypeTag = seo.ogType ? `<meta property="og:type" content="${escapeHtml(seo.ogType)}" />` : "";
+  const ogTypeTag = seo.ogType
+    ? `<meta property="og:type" content="${escapeHtml(seo.ogType)}" />`
+    : "";
   const ogUrlTag = `<meta property="og:url" content="${escapeHtml(seo.canonical)}" />`;
 
   const jsonLdBlocks: object[] = [];
@@ -209,7 +264,11 @@ function injectSEO(html: string, seo: PageSEO): string {
       "@type": "LearningResource",
       name: lr.name,
       description: lr.description,
-      provider: { "@type": "EducationalOrganization", name: "WebZoneBW SC", url: "https://webzonebw.shop" },
+      provider: {
+        "@type": "EducationalOrganization",
+        name: "WebZoneBW SC",
+        url: "https://webzonebw.shop",
+      },
       url: lr.url,
       inLanguage: lr.inLanguage || "en",
       educationalLevel: "Beginner to Advanced",
@@ -225,12 +284,21 @@ function injectSEO(html: string, seo: PageSEO): string {
       url: bp.url,
       author: { "@type": "Person", name: bp.author },
       datePublished: bp.datePublished,
-      publisher: { "@type": "Organization", name: "WebZoneBW SC", url: "https://webzonebw.shop" },
+      publisher: {
+        "@type": "Organization",
+        name: "WebZoneBW SC",
+        url: "https://webzonebw.shop",
+      },
       ...(bp.keywords ? { keywords: bp.keywords.join(", ") } : {}),
     });
   }
   const jsonLdTag = jsonLdBlocks.length
-    ? jsonLdBlocks.map((b) => `<script type="application/ld+json">${JSON.stringify(b)}</script>`).join("\n    ")
+    ? jsonLdBlocks
+        .map(
+          (b) =>
+            `<script type="application/ld+json">${JSON.stringify(b)}</script>`,
+        )
+        .join("\n    ")
     : "";
 
   let out = html;
@@ -240,7 +308,10 @@ function injectSEO(html: string, seo: PageSEO): string {
   if (/<link rel="canonical"[^>]*>/.test(out)) {
     out = out.replace(/<link rel="canonical"[^>]*>/, canonicalTag);
   } else {
-    out = out.replace(/<title>[^<]*<\/title>/, `${titleTag}\n    ${canonicalTag}`);
+    out = out.replace(
+      /<title>[^<]*<\/title>/,
+      `${titleTag}\n    ${canonicalTag}`,
+    );
   }
   if (/<meta name="description"[^>]*>/.test(out)) {
     out = out.replace(/<meta name="description"[^>]*>/, descTag);
@@ -255,7 +326,10 @@ function injectSEO(html: string, seo: PageSEO): string {
   }
   // Inject JSON-LD right after the canonical tag
   if (jsonLdTag) {
-    out = out.replace(/<link rel="canonical"[^>]*>/, (m) => `${m}\n    ${jsonLdTag}`);
+    out = out.replace(
+      /<link rel="canonical"[^>]*>/,
+      (m) => `${m}\n    ${jsonLdTag}`,
+    );
   }
   return out;
 }
@@ -263,27 +337,40 @@ function injectSEO(html: string, seo: PageSEO): string {
 function baseUrlOf(req: express.Request): string {
   const host = req.get("host") || "webzonebw.shop";
   const protocol =
-    req.protocol === "https" || req.get("x-forwarded-proto") === "https" ? "https" : "http";
+    req.protocol === "https" || req.get("x-forwarded-proto") === "https"
+      ? "https"
+      : "http";
   return `${protocol}://${host}`;
 }
 
-function resolveLessonSEO(lessonId: string): (PageSEO & { chapterTitle: string }) | null {
+function resolveLessonSEO(
+  lessonId: string,
+): (PageSEO & { chapterTitle: string }) | null {
   for (const chapter of CHAPTERS_DATA) {
     const lesson = chapter.lessons.find((l) => l.id === lessonId);
     if (lesson) {
       return {
         title: `${lesson.title} â€” ${chapter.title} | WebZoneBW SC`,
-        description: lesson.tagline || `Interactive lesson on ${lesson.title} in ${chapter.title} at WebZoneBW SC.`,
+        description:
+          lesson.tagline ||
+          `Interactive lesson on ${lesson.title} in ${chapter.title} at WebZoneBW SC.`,
         canonical: `https://webzonebw.shop/lessons/${lesson.id}`,
         ogType: "article",
         breadcrumb: [
           { name: "Home", url: "https://webzonebw.shop/" },
-          { name: chapter.title, url: `https://webzonebw.shop/?chapter=${chapter.id}` },
-          { name: lesson.title, url: `https://webzonebw.shop/lessons/${lesson.id}` },
+          {
+            name: chapter.title,
+            url: `https://webzonebw.shop/?chapter=${chapter.id}`,
+          },
+          {
+            name: lesson.title,
+            url: `https://webzonebw.shop/lessons/${lesson.id}`,
+          },
         ],
         learningResource: {
           name: lesson.title,
-          description: lesson.tagline || `Interactive lesson on ${lesson.title}`,
+          description:
+            lesson.tagline || `Interactive lesson on ${lesson.title}`,
           url: `https://webzonebw.shop/lessons/${lesson.id}`,
           inLanguage: "en",
         },
@@ -299,7 +386,8 @@ function resolveBlogSEO(slug: string): PageSEO | null {
   if (!post) return null;
   return {
     title: `${post.title} | WebZoneBW SC Blog`,
-    description: post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
+    description:
+      post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
     canonical: `https://webzonebw.shop/blog/${post.slug}`,
     ogType: "article",
     breadcrumb: [
@@ -309,7 +397,8 @@ function resolveBlogSEO(slug: string): PageSEO | null {
     ],
     blogPosting: {
       headline: post.title,
-      description: post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
+      description:
+        post.excerpt || `Read "${post.title}" on the WebZoneBW SC blog.`,
       url: `https://webzonebw.shop/blog/${post.slug}`,
       author: post.author,
       datePublished: post.date,
@@ -323,14 +412,22 @@ let cachedIndexHtml: string | null = null;
 function getIndexHtml(): string | null {
   if (cachedIndexHtml) return cachedIndexHtml;
   try {
-    cachedIndexHtml = fs.readFileSync(path.join(process.cwd(), "dist", "index.html"), "utf-8");
+    cachedIndexHtml = fs.readFileSync(
+      path.join(process.cwd(), "dist", "index.html"),
+      "utf-8",
+    );
   } catch {
     return null;
   }
   return cachedIndexHtml;
 }
 
-function sendSEOPage(req: express.Request, res: express.Response, seo: PageSEO, fallbackRedirect: string) {
+function sendSEOPage(
+  req: express.Request,
+  res: express.Response,
+  seo: PageSEO,
+  fallbackRedirect: string,
+) {
   const html = getIndexHtml();
   if (!html) return res.redirect(301, fallbackRedirect);
   res.header("Content-Type", "text/html; charset=utf-8");
@@ -370,7 +467,7 @@ app.get("/sitemap.xml", (req, res) => {
   const addEntry = (
     url: string,
     priority: string,
-    changefreq: string = "weekly"
+    changefreq: string = "weekly",
   ) => {
     xml += `  <url>\n`;
     xml += `    <loc>${url}</loc>\n`;
@@ -431,7 +528,7 @@ const FALLBACK_MODELS = [
 async function generateWithFallback(
   ai: GoogleGenAI,
   prompt: string,
-  config?: any
+  config?: any,
 ): Promise<{ text: string; modelUsed: string; fallbackOccurred: boolean }> {
   let lastError: any = null;
 
@@ -467,7 +564,7 @@ async function generateWithFallback(
           errStatus === 503;
 
         console.warn(
-          `[Gemini] Attempt ${attempt} on model ${model} encountered: ${err?.message || err}. Moving to next attempt/model...`
+          `[Gemini] Attempt ${attempt} on model ${model} encountered: ${err?.message || err}. Moving to next attempt/model...`,
         );
 
         if (attempt < 2 && isUnavailableOrRateLimit) {
@@ -485,16 +582,30 @@ async function generateWithFallback(
 }
 
 // Built-in intelligent fallback tutor generator for textbook topics
-function getFallbackTutorExplanation(topic?: string, question?: string, code?: string): string {
+function getFallbackTutorExplanation(
+  topic?: string,
+  question?: string,
+  code?: string,
+): string {
   const query = `${topic || ""} ${question || ""}`.toLowerCase();
 
   let coreAnswer = "";
-  if (query.includes("box model") || query.includes("padding") || query.includes("margin")) {
-    coreAnswer = `### ðŸ“¦ CSS Box Model Resolution\n\n` +
+  if (
+    query.includes("box model") ||
+    query.includes("padding") ||
+    query.includes("margin")
+  ) {
+    coreAnswer =
+      `### ðŸ“¦ CSS Box Model Resolution\n\n` +
       `**Core Principle**: Every element on a web page is computed as 4 nested rectangular layers: **Content** âž” **Padding** (inner space) âž” **Border** (stroke) âž” **Margin** (outer space).\n\n` +
       `**Key Insight**: Always apply \`box-sizing: border-box;\` so specified widths include padding and borders rather than growing unpredictably.`;
-  } else if (query.includes("flexbox") || query.includes("center") || query.includes("align")) {
-    coreAnswer = `### ðŸ“ Flexbox & Centering Doubt Resolution\n\n` +
+  } else if (
+    query.includes("flexbox") ||
+    query.includes("center") ||
+    query.includes("align")
+  ) {
+    coreAnswer =
+      `### ðŸ“ Flexbox & Centering Doubt Resolution\n\n` +
       `**Fastest Centering Pattern**:\n` +
       `\`\`\`css\n` +
       `.container {\n` +
@@ -505,8 +616,13 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `}\n` +
       `\`\`\`\n` +
       `*Or with CSS Grid:* \`display: grid; place-items: center;\``;
-  } else if (query.includes("async") || query.includes("promise") || query.includes("await")) {
-    coreAnswer = `### âš¡ JavaScript Async/Await & Promises\n\n` +
+  } else if (
+    query.includes("async") ||
+    query.includes("promise") ||
+    query.includes("await")
+  ) {
+    coreAnswer =
+      `### âš¡ JavaScript Async/Await & Promises\n\n` +
       `**Mental Model**: Think of a Promise like ordering coffee. You get a buzzer (Promise) and continue talking with friends. When the buzzer goes off (\`await\`), you receive your drink without blocking the line!\n\n` +
       `\`\`\`javascript\n` +
       `async function loadData() {\n` +
@@ -520,7 +636,8 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `}\n` +
       `\`\`\``;
   } else if (code) {
-    coreAnswer = `### ðŸž Code Debugger & Inspection\n\n` +
+    coreAnswer =
+      `### ðŸž Code Debugger & Inspection\n\n` +
       `**Submitted Code Review**:\n` +
       `\`\`\`\n${code}\n\`\`\`\n\n` +
       `**Debugging Steps**:\n` +
@@ -528,13 +645,16 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
       `2. Verify that HTML tag pairs match and CSS class names correspond directly to markup.\n` +
       `3. In JavaScript, ensure event listeners attach after the DOM is fully loaded.`;
   } else {
-    coreAnswer = `### ðŸ’¡ Web Development Concept Resolution\n\n` +
+    coreAnswer =
+      `### ðŸ’¡ Web Development Concept Resolution\n\n` +
       `**Core Concept**: In modern web applications, the foundation rests on three pillars: **HTML** for semantic structure, **CSS** for visual hierarchy and responsive layout, and **JavaScript** for reactive logic.\n\n` +
       `**Best Practice**: Test interactively in the built-in Sandbox to inspect real-time DOM changes.`;
   }
 
-  return `${coreAnswer}\n\n` +
-    `*âš¡ Note: Generated via WebZoneBW Storehouse Continuous Learning Engine.*`;
+  return (
+    `${coreAnswer}\n\n` +
+    `*âš¡ Note: Generated via WebZoneBW Storehouse Continuous Learning Engine.*`
+  );
 }
 
 // 24/7 Web Dev Tutor / Explainer & Doubt Resolver endpoint
@@ -576,13 +696,17 @@ Guidelines for your response:
       modelUsed: result.modelUsed,
     });
   } catch (error: any) {
-    console.warn("AI Explain Upstream Warning (using fallback):", error?.message || error);
+    console.warn(
+      "AI Explain Upstream Warning (using fallback):",
+      error?.message || error,
+    );
     // Return high-quality structured response instead of 500 error during high demand spikes
     res.json({
       success: true,
       fallback: true,
       explanation: getFallbackTutorExplanation(topic, question, code),
-      notice: "Live model is experiencing temporary peak demand; answer served from built-in tutor engine.",
+      notice:
+        "Live model is experiencing temporary peak demand; answer served from built-in tutor engine.",
     });
   }
 });
@@ -594,7 +718,10 @@ app.post("/api/ai/review", async (req, res) => {
 
   const staticFallbackFeedback = {
     summary: "Code reviewed successfully using standard static linting checks.",
-    strengths: ["Semantic HTML structure verified", "CSS rules formatted properly"],
+    strengths: [
+      "Semantic HTML structure verified",
+      "CSS rules formatted properly",
+    ],
     suggestions: [
       "Ensure all interactive elements have accessible labels",
       "Test responsive scaling across mobile screen sizes",
@@ -649,12 +776,16 @@ Return a helpful review response in JSON format with these exact keys:
       modelUsed: result.modelUsed,
     });
   } catch (error: any) {
-    console.warn("AI Review Upstream Warning (using fallback):", error?.message || error);
+    console.warn(
+      "AI Review Upstream Warning (using fallback):",
+      error?.message || error,
+    );
     res.json({
       success: true,
       fallback: true,
       feedback: staticFallbackFeedback,
-      notice: "Live model is experiencing temporary peak demand; static review provided.",
+      notice:
+        "Live model is experiencing temporary peak demand; static review provided.",
     });
   }
 });
@@ -680,7 +811,10 @@ async function startServer() {
       });
       app.use(vite.middlewares);
     } catch (error) {
-      console.warn("[WARN] Vite not available, serving static dist:", error.message);
+      console.warn(
+        "[WARN] Vite not available, serving static dist:",
+        error.message,
+      );
       const distPath = path.join(process.cwd(), "dist");
       app.use(express.static(distPath));
     }
@@ -688,79 +822,101 @@ async function startServer() {
     const distPath = path.join(process.cwd(), "dist");
 
     // Static assets caching: hashed files in /assets get 1-year immutable cache
-    app.use('/assets', express.static(path.join(distPath, 'assets'), {
-      maxAge: '1y',
-      immutable: true,
-    }));
+    app.use(
+      "/assets",
+      express.static(path.join(distPath, "assets"), {
+        maxAge: "1y",
+        immutable: true,
+      }),
+    );
 
     // Repository static assets (/Assets) get 1-day cache with stale-while-revalidate
-    app.use('/Assets', express.static(path.join(process.cwd(), 'Assets'), {
-      maxAge: '1d',
-      setHeaders: (res, filePath) => {
-        if (/\.(css|js)$/.test(filePath)) {
-          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
-        }
-      }
-    }));
+    app.use(
+      "/Assets",
+      express.static(path.join(process.cwd(), "Assets"), {
+        maxAge: "1d",
+        setHeaders: (res, filePath) => {
+          if (/\.(css|js)$/.test(filePath)) {
+            res.setHeader(
+              "Cache-Control",
+              "public, max-age=86400, stale-while-revalidate=604800",
+            );
+          }
+        },
+      }),
+    );
 
     // Repository /public static pages (legal/contact) â€” served when absent from dist
-    app.use(express.static(path.join(process.cwd(), 'public'), {
-      index: false,
-      extensions: ['html'],
-    }));
+    app.use(
+      express.static(path.join(process.cwd(), "public"), {
+        index: false,
+        extensions: ["html"],
+      }),
+    );
 
     // Other static files in dist
-    app.use(express.static(distPath, {
-      index: 'index.html',
-      extensions: ['html'],
-      setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.html')) {
-          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
-        } else if (/\.(woff2?|ttf|eot|svg|png|jpg|jpeg|webp|ico)$/.test(filePath)) {
-          res.setHeader('Cache-Control', 'public, max-age=86400, stale-while-revalidate=604800');
-        }
-      }
-    }));
+    app.use(
+      express.static(distPath, {
+        index: "index.html",
+        extensions: ["html"],
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith(".html")) {
+            res.setHeader(
+              "Cache-Control",
+              "public, max-age=0, must-revalidate",
+            );
+          } else if (
+            /\.(woff2?|ttf|eot|svg|png|jpg|jpeg|webp|ico)$/.test(filePath)
+          ) {
+            res.setHeader(
+              "Cache-Control",
+              "public, max-age=86400, stale-while-revalidate=604800",
+            );
+          }
+        },
+      }),
+    );
 
     // Static HTML page routes
     const staticPages = [
-      'index.html',
-      'Workspace.html',
-      'webtools.html',
-      'imagetools.html',
-      'developertools.html',
-      'learn.html',
-      'blog.html',
-      'about.html',
-      'contact.html',
-      'privacy-policy.html',
-      'terms-of-service.html',
-      'cookie-policy.html',
-      '404.html'
+      "index.html",
+      "Workspace.html",
+      "webtools.html",
+      "imagetools.html",
+      "developertools.html",
+      "learn.html",
+      "blog.html",
+      "about.html",
+      "contact.html",
+      "privacy-policy.html",
+      "terms-of-service.html",
+      "cookie-policy.html",
+      "404.html",
     ];
 
     // Serve static HTML pages directly
-    staticPages.forEach(page => {
+    staticPages.forEach((page) => {
       app.get(`/${page}`, (req, res) => {
         // The repository root copy is the single source of truth for static
         // pages. Prefer it so stale build artifacts in dist/ can never shadow
         // an updated page (e.g. an old about.html missing the site-nav system).
         const repoPath = path.join(process.cwd(), page);
         if (fs.existsSync(repoPath)) {
-          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
           return res.sendFile(repoPath);
         }
         const pagePath = path.join(distPath, page);
         if (fs.existsSync(pagePath)) {
-          res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+          res.setHeader("Cache-Control", "public, max-age=0, must-revalidate");
           return res.sendFile(pagePath);
         }
-        res.redirect(301, '/index.html');
+        res.redirect(301, "/index.html");
       });
     });
 
     // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
-    const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
+    const BOT_USER_AGENTS =
+      /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
 
     // SPA catch-all â€” only routes that don't match static files
     app.get("*", (req, res) => {
@@ -784,15 +940,17 @@ async function startServer() {
 
   try {
     const server = app.listen(PORT, () => {
-      console.log(`WebZoneBW Storehouse Server running on http://0.0.0.0:${PORT}`);
+      console.log(
+        `WebZoneBW Storehouse Server running on http://0.0.0.0:${PORT}`,
+      );
       console.log(`Server address: ${server.address()}`);
     });
 
-    server.on('error', (err) => {
-      console.error('[ERROR] Failed to start server:', err);
+    server.on("error", (err) => {
+      console.error("[ERROR] Failed to start server:", err);
     });
 
-    server.on('listening', () => {
+    server.on("listening", () => {
       console.log(`[SUCCESS] Server is listening on port ${PORT}`);
       console.log(`[SUCCESS] Access at: http://localhost:${PORT}`);
     });
@@ -802,9 +960,8 @@ async function startServer() {
       console.log(`[DEBUG] Server actual address: ${server.address()}`);
       console.log(`[DEBUG] Server listening state: ${server.listening}`);
     }, 1000);
-
   } catch (err) {
-    console.error('[FATAL] Error creating server:', err);
+    console.error("[FATAL] Error creating server:", err);
   }
 }
 
