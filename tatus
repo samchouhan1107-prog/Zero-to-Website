@@ -1,0 +1,112 @@
+warning: in the working copy of '404.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'server.ts', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/404.html b/404.html[m
+[1mindex 58af625..c84cbe7 100644[m
+[1m--- a/404.html[m
+[1m+++ b/404.html[m
+[36m@@ -478,13 +478,36 @@[m
+         window.open(searchUrl, "_blank", "noopener,noreferrer");[m
+       });[m
+ [m
+[31m-      // Track 404 page views[m
+[31m-      if (typeof gtag !== "undefined") {[m
+[31m-        gtag("event", "page_view", {[m
+[31m-          page_title: "404 - Page Not Found",[m
+[31m-          page_location: window.location.href,[m
+[31m-        });[m
+[32m+[m[32m      // Track 404 page views safely[m
+[32m+[m[32m      function track404Page() {[m
+[32m+[m[32m        try {[m
+[32m+[m[32m          if (typeof gtag !== "undefined") {[m
+[32m+[m[32m            gtag("event", "page_view", {[m
+[32m+[m[32m              page_title: "404 - Page Not Found",[m
+[32m+[m[32m              page_location: window.location.href,[m
+[32m+[m[32m              page_path: window.location.pathname,[m
+[32m+[m[32m              send_to: "G-L1KR6MWWP3"[m
+[32m+[m[32m            });[m
+[32m+[m[41m            [m
+[32m+[m[32m            // Additional 404-specific tracking[m
+[32m+[m[32m            gtag("event", "404_error", {[m
+[32m+[m[32m              event_category: "error",[m
+[32m+[m[32m              event_label: window.location.pathname,[m
+[32m+[m[32m              value: 1[m
+[32m+[m[32m            });[m
+[32m+[m[32m          }[m
+[32m+[m[32m        } catch (error) {[m
+[32m+[m[32m          console.warn("GA4 tracking failed for 404 page:", error);[m
+[32m+[m[32m        }[m
+       }[m
+[32m+[m[41m      [m
+[32m+[m[32m      // Track immediately if gtag is available[m
+[32m+[m[32m      track404Page();[m
+[32m+[m[41m      [m
+[32m+[m[32m      // Fallback in case gtag loads later[m
+[32m+[m[32m      setTimeout(function() {[m
+[32m+[m[32m        track404Page();[m
+[32m+[m[32m      }, 1000);[m
+     </script>[m
+   </body>[m
+ </html>[m
+\ No newline at end of file[m
+[1mdiff --git a/server.ts b/server.ts[m
+[1mindex 3f44c23..682dd4e 100644[m
+[1m--- a/server.ts[m
+[1m+++ b/server.ts[m
+[36m@@ -437,14 +437,20 @@[m [mfunction sendSEOPage([m
+ // â”€â”€â”€ Clean lesson routes: /lessons/:lessonId â”€â”€â”€[m
+ app.get("/lessons/:lessonId", (req, res) => {[m
+   const seo = resolveLessonSEO(req.params.lessonId);[m
+[31m-  if (!seo) return res.redirect(301, "/");[m
+[32m+[m[32m  if (!seo) {[m
+[32m+[m[32m    const notFound = path.join(process.cwd(), "404.html");[m
+[32m+[m[32m    return res.status(404).sendFile(notFound);[m
+[32m+[m[32m  }[m
+   sendSEOPage(req, res, seo, "/");[m
+ });[m
+ [m
+ // â”€â”€â”€ Clean blog routes: /blog/:slug â”€â”€â”€[m
+ app.get("/blog/:slug", (req, res) => {[m
+   const seo = resolveBlogSEO(req.params.slug);[m
+[31m-  if (!seo) return res.redirect(301, "/?view=blog");[m
+[32m+[m[32m  if (!seo) {[m
+[32m+[m[32m    const notFound = path.join(process.cwd(), "404.html");[m
+[32m+[m[32m    return res.status(404).sendFile(notFound);[m
+[32m+[m[32m  }[m
+   sendSEOPage(req, res, seo, "/?view=blog");[m
+ });[m
+ [m
+[36m@@ -918,23 +924,19 @@[m [masync function startServer() {[m
+     const BOT_USER_AGENTS =[m
+       /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;[m
+ [m
+[31m-    // SPA catch-all â€” only routes that don't match static files[m
+[32m+[m[32m    // Final 404 handler — unknown URLs must never receive the SPA index with HTTP 200.[m
+[32m+[m[32m    // Valid static files and valid /lessons/:lessonId and /blog/:slug routes[m
+[32m+[m[32m    // have already been handled above.[m
+     app.get("*", (req, res) => {[m
+[31m-      const userAgent = req.headers["user-agent"] || "";[m
+[31m-      const isBot = BOT_USER_AGENTS.test(userAgent);[m
+[31m-[m
+[31m-      if (isBot) {[m
+[31m-        // Serve index.html with the pre-rendered noscript content for crawlers[m
+[31m-        const html = getIndexHtml();[m
+[31m-        if (html) {[m
+[31m-          res.header("Content-Type", "text/html; charset=utf-8");[m
+[31m-          res.send(html);[m
+[31m-        } else {[m
+[31m-          res.sendFile(path.join(distPath, "index.html"));[m
+[31m-        }[m
+[31m-      } else {[m
+[31m-        res.sendFile(path.join(distPath, "index.html"));[m
+[32m+[m[32m      const notFound = path.join(process.cwd(), "404.html");[m
+[32m+[m
+[32m+[m[32m      if (fs.existsSync(notFound)) {[m
+[32m+[m[32m        res.status(404);[m
+[32m+[m[32m        res.setHeader("Content-Type", "text/html; charset=utf-8");[m
+[32m+[m[32m        return res.sendFile(notFound);[m
+       }[m
+[32m+[m
+[32m+[m[32m      return res.status(404).send("404 Not Found");[m
+     });[m
+   }[m
+ [m

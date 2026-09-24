@@ -437,14 +437,20 @@ function sendSEOPage(
 // â”€â”€â”€ Clean lesson routes: /lessons/:lessonId â”€â”€â”€
 app.get("/lessons/:lessonId", (req, res) => {
   const seo = resolveLessonSEO(req.params.lessonId);
-  if (!seo) return res.redirect(301, "/");
+  if (!seo) {
+    const notFound = path.join(process.cwd(), "404.html");
+    return res.status(404).sendFile(notFound);
+  }
   sendSEOPage(req, res, seo, "/");
 });
 
 // â”€â”€â”€ Clean blog routes: /blog/:slug â”€â”€â”€
 app.get("/blog/:slug", (req, res) => {
   const seo = resolveBlogSEO(req.params.slug);
-  if (!seo) return res.redirect(301, "/?view=blog");
+  if (!seo) {
+    const notFound = path.join(process.cwd(), "404.html");
+    return res.status(404).sendFile(notFound);
+  }
   sendSEOPage(req, res, seo, "/?view=blog");
 });
 
@@ -918,23 +924,19 @@ async function startServer() {
     const BOT_USER_AGENTS =
       /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
 
-    // SPA catch-all â€” only routes that don't match static files
+    // Final 404 handler — unknown URLs must never receive the SPA index with HTTP 200.
+    // Valid static files and valid /lessons/:lessonId and /blog/:slug routes
+    // have already been handled above.
     app.get("*", (req, res) => {
-      const userAgent = req.headers["user-agent"] || "";
-      const isBot = BOT_USER_AGENTS.test(userAgent);
+      const notFound = path.join(process.cwd(), "404.html");
 
-      if (isBot) {
-        // Serve index.html with the pre-rendered noscript content for crawlers
-        const html = getIndexHtml();
-        if (html) {
-          res.header("Content-Type", "text/html; charset=utf-8");
-          res.send(html);
-        } else {
-          res.sendFile(path.join(distPath, "index.html"));
-        }
-      } else {
-        res.sendFile(path.join(distPath, "index.html"));
+      if (fs.existsSync(notFound)) {
+        res.status(404);
+        res.setHeader("Content-Type", "text/html; charset=utf-8");
+        return res.sendFile(notFound);
       }
+
+      return res.status(404).send("404 Not Found");
     });
   }
 

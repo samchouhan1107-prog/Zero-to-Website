@@ -478,13 +478,36 @@
         window.open(searchUrl, "_blank", "noopener,noreferrer");
       });
 
-      // Track 404 page views
-      if (typeof gtag !== "undefined") {
-        gtag("event", "page_view", {
-          page_title: "404 - Page Not Found",
-          page_location: window.location.href,
-        });
+      // Track 404 page views safely
+      function track404Page() {
+        try {
+          if (typeof gtag !== "undefined") {
+            gtag("event", "page_view", {
+              page_title: "404 - Page Not Found",
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              send_to: "G-L1KR6MWWP3"
+            });
+            
+            // Additional 404-specific tracking
+            gtag("event", "404_error", {
+              event_category: "error",
+              event_label: window.location.pathname,
+              value: 1
+            });
+          }
+        } catch (error) {
+          console.warn("GA4 tracking failed for 404 page:", error);
+        }
       }
+      
+      // Track immediately if gtag is available
+      track404Page();
+      
+      // Fallback in case gtag loads later
+      setTimeout(function() {
+        track404Page();
+      }, 1000);
     </script>
   </body>
 </html>
