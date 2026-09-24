@@ -103,7 +103,7 @@ describe("evaluateAchievements", () => {
     const { progress: updated, newlyUnlocked } = evaluateAchievements(progress);
     expect(newlyUnlocked.map((a) => a.id)).toContain("first-lesson");
     const firstLesson = ACHIEVEMENTS_CATALOG.find((a) => a.id === "first-lesson")!;
-    expect(updated.xpPoints).toBe(firstLesson.xpReward);
+    expect(updated.xpPoints).toBe(150); // first-lesson (50) + first-chapter (100)
     expect(updated.achievements?.["first-lesson"]).toBeDefined();
   });
 
