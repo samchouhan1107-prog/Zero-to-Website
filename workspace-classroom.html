@@ -1,0 +1,1430 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Interactive Classroom | WebZoneBW SC - Live Development Environment</title>
+    <meta
+      name="description"
+      content="Join our interactive classroom workspace for live coding practice. Collaborate with peers, get real-time feedback, and build projects with expert guidance."
+    />
+    <meta
+      name="keywords"
+      content="interactive classroom, live coding workspace, collaborative development, coding practice, real-time feedback, web development tools"
+    />
+    <meta name="author" content="WebZoneBW" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://webzonebw.shop/workspace-classroom.html" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webzonebw.shop/workspace-classroom.html" />
+    <meta
+      property="og:title"
+      content="Interactive Classroom | WebZoneBW SC - Live Development Environment"
+    />
+    <meta
+      property="og:description"
+      content="Join our interactive classroom workspace for live coding practice. Collaborate with peers, get real-time feedback, and build projects with expert guidance."
+    />
+    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:site_name" content="WebZoneBW SC" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://webzonebw.shop/workspace-classroom.html" />
+    <meta
+      property="twitter:title"
+      content="Interactive Classroom | WebZoneBW SC - Live Development Environment"
+    />
+    <meta
+      twitter:description"
+      content="Join our interactive classroom workspace for live coding practice. Collaborate with peers, get real-time feedback, and build projects with expert guidance."
+    />
+    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+
+    <!-- AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Legal Disclosures & Reach Out Connection -->
+    <link
+      rel="privacy-policy"
+      href="https://webzonebw.shop/privacy-policy.html"
+    />
+    <link
+      rel="terms-of-service"
+      href="https://webzonebw.shop/terms-of-service.html"
+    />
+    <link rel="copyright" href="https://webzonebw.shop/about.html" />
+    <link
+      rel="help"
+      href="https://webzonebw.in/"
+      title="Official WebZoneBW Reach Out & Enquiry Reference"
+    />
+
+    <meta name="theme-color" content="#1a1a2e" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>"
+    />
+
+    <!-- Preconnect & Asset Loading Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-L1KR6MWWP3");
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #7c3aed;
+        --accent: #06b6d4;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --error: #ef4444;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #f1f5f9;
+        --bg-code: #1e293b;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-tertiary: #94a3b8;
+        --border: #e2e8f0;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        --gradient-3: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+      }
+
+      /* Navigation */
+      nav {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .logo-icon {
+          width: 40px;
+          height: 40px;
+          background: var(--gradient-2);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.5rem;
+        }
+
+      .nav-links {
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        .nav-links a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s ease;
+          position: relative;
+        }
+
+        .nav-links a:hover {
+          color: var(--primary);
+        }
+
+        .nav-links a::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--primary);
+          transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+          width: 100%;
+        }
+
+        .cta-button {
+          background: var(--gradient-2);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+      /* Hero Section */
+      .hero {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        padding: 4rem 0 2rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23e2e8f0" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" opacity="0.3"/></svg>');
+        opacity: 0.5;
+      }
+
+      .hero-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero-content {
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: var(--gradient-2);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-content p {
+        font-size: 1.125rem;
+        color: var(--text-secondary);
+        margin-bottom: 2rem;
+        line-height: 1.6;
+      }
+
+      /* Classroom Workspace */
+      .workspace {
+        padding: 2rem 0;
+        background: white;
+      }
+
+      .workspace-container {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 2rem;
+      }
+
+      .workspace-grid {
+        display: grid;
+        grid-template-columns: 300px 1fr 350px;
+        gap: 1rem;
+        height: calc(100vh - 200px);
+      }
+
+      /* Sidebar */
+      .sidebar {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        padding: 1.5rem;
+        overflow-y: auto;
+        border: 1px solid var(--border);
+      }
+
+      .sidebar-section {
+        margin-bottom: 2rem;
+      }
+
+      .sidebar-section h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--text-primary);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .template-card {
+        background: white;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .template-card:hover {
+          border-color: var(--primary);
+          box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .template-card.active {
+          background: var(--gradient-2);
+          color: white;
+          border-color: var(--primary);
+        }
+
+        .template-icon {
+          font-size: 1.5rem;
+          margin-bottom: 0.5rem;
+        }
+
+        .template-title {
+          font-weight: 600;
+          margin-bottom: 0.25rem;
+        }
+
+        .template-description {
+          font-size: 0.875rem;
+          opacity: 0.8;
+        }
+
+      .collaboration-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .collaborator {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.75rem;
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+      }
+
+      .collaborator-avatar {
+          width: 32px;
+          height: 32px;
+          border-radius: 50%;
+          background: var(--gradient-2);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 0.875rem;
+          font-weight: 600;
+        }
+
+        .collaborator-info {
+          flex: 1;
+        }
+
+        .collaborator-name {
+          font-weight: 500;
+          font-size: 0.875rem;
+        }
+
+        .collaborator-status {
+          font-size: 0.75rem;
+          color: var(--text-tertiary);
+        }
+
+        .status-indicator {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: var(--success);
+        }
+
+      /* Editor Panel */
+      .editor-panel {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .editor-tabs {
+        display: flex;
+        background: var(--bg-tertiary);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .editor-tab {
+        background: transparent;
+        border: none;
+        color: var(--text-secondary);
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.2s ease;
+        position: relative;
+      }
+
+      .editor-tab:hover {
+        background: rgba(37, 99, 235, 0.1);
+        color: var(--primary);
+      }
+
+      .editor-tab.active {
+        background: white;
+        color: var(--primary);
+        border-bottom: 2px solid var(--primary);
+      }
+
+      .editor-toolbar {
+        background: white;
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .toolbar-left {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .toolbar-right {
+          display: flex;
+          gap: 0.5rem;
+        }
+
+        .tool-button {
+          background: var(--bg-tertiary);
+          border: none;
+          color: var(--text-primary);
+          padding: 0.5rem 1rem;
+          border-radius: 6px;
+          cursor: pointer;
+          font-weight: 500;
+          transition: all 0.2s ease;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+        }
+
+        .tool-button:hover {
+          background: var(--primary);
+          color: white;
+        }
+
+      .editor-content {
+        flex: 1;
+        background: var(--bg-code);
+        color: #e2e8f0;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 1rem;
+        overflow-y: auto;
+        outline: none;
+        resize: none;
+        width: 100%;
+          height: 100%;
+        }
+
+        .editor-content:focus {
+          background: #1a1a2e;
+        }
+
+        /* Preview Panel */
+      .preview-panel {
+        background: var(--bg-secondary);
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+
+      .preview-header {
+        background: white;
+        border-bottom: 1px solid var(--border);
+        padding: 0.75rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .preview-content {
+        flex: 1;
+        background: white;
+        overflow: auto;
+      }
+
+      .preview-iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+        background: white;
+      }
+
+      /* Status Bar */
+      .status-bar {
+        background: var(--bg-tertiary);
+        border-top: 1px solid var(--border);
+        padding: 0.5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+      }
+
+      /* AI Assistant */
+      .ai-assistant {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        padding: 1rem;
+        margin-bottom: 1rem;
+        position: relative;
+      }
+
+      .ai-assistant::before {
+        content: '🤖';
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        font-size: 1rem;
+      }
+
+      .ai-suggestion {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+      }
+
+      .ai-actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .ai-button {
+        background: var(--gradient-2);
+        color: white;
+        border: none;
+        padding: 0.375rem 0.75rem;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s ease;
+      }
+
+      .ai-button:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(37, 99, 235, 0.2);
+      }
+
+      .ai-button.secondary {
+        background: var(--bg-tertiary);
+        color: var(--text-primary);
+      }
+
+      /* Project Stats */
+      .project-stats {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid var(--border);
+        padding: 1rem;
+      }
+
+      .stat-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 0.75rem;
+        font-size: 0.875rem;
+      }
+
+      .stat-label {
+          color: var(--text-secondary);
+        }
+
+        .stat-value {
+          font-weight: 600;
+          color: var(--primary);
+        }
+
+      /* Responsive */
+      @media (max-width: 1200px) {
+        .workspace-grid {
+          grid-template-columns: 250px 1fr 300px;
+        }
+      }
+
+      @media (max-width: 768px) {
+        .nav-container {
+          padding: 0 1rem;
+          height: 70px;
+        }
+
+        .nav-links {
+          display: none;
+        }
+
+        .workspace-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto 1fr auto;
+          height: auto;
+          min-height: calc(100vh - 200px);
+        }
+
+        .sidebar {
+          grid-row: 1;
+          max-height: 200px;
+        }
+
+        .editor-panel {
+          grid-row: 2;
+          min-height: 400px;
+        }
+
+        .preview-panel {
+          grid-row: 3;
+          min-height: 300px;
+        }
+      }
+
+      /* Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .animate-fade-in {
+        animation: fadeInUp 0.6s ease-out;
+      }
+
+      .animate-fade-in-delay-1 {
+        animation: fadeInUp 0.6s ease-out 0.2s both;
+      }
+
+      .animate-fade-in-delay-2 {
+        animation: fadeInUp 0.6s ease-out 0.4s both;
+      }
+
+      /* Code Syntax Highlighting */
+      .code-keyword { color: #f472b6; font-weight: 500; }
+      .code-tag { color: #f472b6; font-weight: 500; }
+      .code-attribute { color: #60a5fa; }
+      .code-string { color: #34d399; }
+      .code-comment { color: #64748b; font-style: italic; }
+      .code-function { color: #fbbf24; }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">🎓</div>
+          WebZoneBW SC
+        </a>
+        <div class="nav-links">
+          <a href="/index-classroom.html">Home</a>
+          <a href="/learn.html">Learn</a>
+          <a href="/webtools.html">Tools</a>
+          <a href="/learning-path-classroom.html">Learning Path</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/workspace-classroom.html" class="cta-button">Classroom</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <h1>Interactive Development Classroom</h1>
+          <p>
+            Practice coding in real-time with our collaborative workspace. 
+            Work with peers, get instant feedback, and build projects with expert guidance.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Classroom Workspace -->
+    <section class="workspace">
+      <div class="workspace-container">
+        <div class="workspace-grid">
+          <!-- Sidebar -->
+          <aside class="sidebar animate-fade-in">
+            <div class="sidebar-section">
+              <h3>📚 Project Templates</h3>
+              <div class="template-card active" onclick="selectTemplate('basic')">
+                <div class="template-icon">📝</div>
+                <div class="template-title">Basic HTML</div>
+                <div class="template-description">Simple structure with CSS</div>
+              </div>
+              <div class="template-card" onclick="selectTemplate('portfolio')">
+                <div class="template-icon">💼</div>
+                <div class="template-title">Portfolio</div>
+                <div class="template-description">Professional layout</div>
+              </div>
+              <div class="template-card" onclick="selectTemplate('landing')">
+                <div class="template-icon">🎯</div>
+                <div class="template-title">Landing Page</div>
+                <div class="template-description">Marketing page</div>
+              </div>
+              <div class="template-card" onclick="selectTemplate('dashboard')">
+                <div class="template-icon">📊</div>
+                <div class="template-title">Dashboard</div>
+                <div class="template-description">Admin interface</div>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>🤖 AI Assistant</h3>
+              <div class="ai-assistant">
+                <p class="ai-suggestion">
+                  💡 Suggestion: Add a responsive navigation menu using Flexbox for better mobile experience.
+                </p>
+                <div class="ai-actions">
+                  <button class="ai-button" onclick="applySuggestion('flexbox')">Apply</button>
+                  <button class="ai-button secondary" onclick="showTutorial()">Learn</button>
+                </div>
+              </div>
+              <div class="ai-assistant">
+                <p class="ai-suggestion">
+                  🔍 Code Review: Consider using CSS Grid for your layout instead of multiple floats.
+                </p>
+                <div class="ai-actions">
+                  <button class="ai-button" onclick="applySuggestion('grid')">Apply</button>
+                  <button class="ai-button secondary" onclick="showTutorial()">Learn</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>👥 Active Collaborators</h3>
+              <div class="collaboration-list">
+                <div class="collaborator">
+                  <div class="collaborator-avatar">JD</div>
+                  <div class="collaborator-info">
+                    <div class="collaborator-name">John Doe</div>
+                    <div class="collaborator-status">Working on index.html</div>
+                  </div>
+                  <div class="status-indicator"></div>
+                </div>
+                <div class="collaborator">
+                  <div class="collaborator-avatar">AS</div>
+                  <div class="collaborator-info">
+                    <div class="collaborator-name">Alice Smith</div>
+                    <div class="collaborator-status">Reviewing CSS</div>
+                  </div>
+                  <div class="status-indicator"></div>
+                </div>
+                <div class="collaborator">
+                  <div class="collaborator-avatar">MJ</div>
+                  <div class="collaborator-info">
+                    <div class="collaborator-name">Mike Johnson</div>
+                    <div class="collaborator-status">JavaScript expert</div>
+                  </div>
+                  <div class="status-indicator"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="sidebar-section">
+              <h3>📊 Project Stats</h3>
+              <div class="project-stats">
+                <div class="stat-item">
+                  <span class="stat-label">Lines of Code:</span>
+                  <span class="stat-value" id="lineCount">0</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Active Users:</span>
+                  <span class="stat-value">3</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Last Saved:</span>
+                  <span class="stat-value" id="lastSaved">Just now</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Progress:</span>
+                  <span class="stat-value">65%</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Editor Panel -->
+          <div class="editor-panel animate-fade-in-delay-1">
+            <div class="editor-tabs">
+              <button class="editor-tab active" onclick="switchTab('index.html')">index.html</button>
+              <button class="editor-tab" onclick="switchTab('style.css')">style.css</button>
+              <button class="editor-tab" onclick="switchTab('script.js')">script.js</button>
+            </div>
+            
+            <div class="editor-toolbar">
+              <div class="toolbar-left">
+                <button class="tool-button" onclick="formatCode()">
+                  🎨 Format
+                </button>
+                <button class="tool-button" onclick="runCode()">
+                  ▶️ Run
+                </button>
+                <button class="tool-button" onclick="clearConsole()">
+                  🗑️ Clear
+                </button>
+              </div>
+              <div class="toolbar-right">
+                <button class="tool-button" onclick="saveProject()">
+                  💾 Save
+                </button>
+                <button class="tool-button" onclick="shareProject()">
+                  🔗 Share
+                </button>
+              </div>
+            </div>
+            
+            <div class="editor-content" id="codeEditor" contenteditable="true" spellcheck="false">
+              <span class="code-tag">&lt;!DOCTYPE html&gt;</span>
+<span class="code-tag">&lt;html lang="en"&gt;</span>
+<span class="code-tag">&lt;head&gt;</span>
+    <span class="code-tag">&lt;meta charset="UTF-8"&gt;</span>
+    <span class="code-tag">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</span>
+    <span class="code-tag">&lt;title&gt;</span>My First Webpage<span class="code-tag">&lt;/title&gt;</span>
+    <span class="code-tag">&lt;style&gt;</span>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+        }
+    <span class="code-tag">&lt;/style&gt;</span>
+<span class="code-tag">&lt;/head&gt;</span>
+<span class="code-tag">&lt;body&gt;</span>
+    <span class="code-tag">&lt;div class="container"&gt;</span>
+        <span class="code-tag">&lt;h1&gt;</span>Welcome to Web Development!<span class="code-tag">&lt;/h1&gt;</span>
+        <span class="code-tag">&lt;p class="subtitle"&gt;</span>Start your journey with interactive learning<span class="code-tag">&lt;/p&gt;</span>
+        <span class="code-tag">&lt;button class="button" onclick="showMessage()"&gt;</span>Click Me!<span class="code-tag">&lt;/button&gt;</span>
+    <span class="code-tag">&lt;/div&gt;</span>
+
+    <span class="code-tag">&lt;script&gt;</span>
+        <span class="code-function">function</span> <span class="code-function">showMessage</span>() {
+            <span class="code-function">alert</span>(<span class="code-string">'Congratulations! You\\'re learning web development!'</span>);
+        }
+    <span class="code-tag">&lt;/script&gt;</span>
+<span class="code-tag">&lt;/body&gt;</span>
+<span class="code-tag">&lt;/html&gt;</span>
+            </div>
+          </div>
+
+          <!-- Preview Panel -->
+          <div class="preview-panel animate-fade-in-delay-2">
+            <div class="preview-header">
+              <h3>🔍 Live Preview</h3>
+              <div class="toolbar-right">
+                <button class="tool-button" onclick="refreshPreview()">
+                  🔄 Refresh
+                </button>
+                <button class="tool-button" onclick="toggleDevice()">
+                  📱 Mobile
+                </button>
+                <button class="tool-button" onclick="openPreview()">
+                  🔍 Full Screen
+                </button>
+              </div>
+            </div>
+            
+            <div class="preview-content">
+              <iframe id="preview" class="preview-iframe" srcdoc=""></iframe>
+            </div>
+            
+            <div class="status-bar">
+              <span>Live Preview</span>
+              <span>Auto-refresh enabled</span>
+              <span id="deviceStatus">Desktop</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      let currentFile = 'index.html';
+      let isMobile = false;
+      let autoSaveTimer;
+
+      // Initialize with default content
+      const defaultHTML = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Webpage</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .button {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Web Development!</h1>
+        <p class="subtitle">Start your journey with interactive learning</p>
+        <button class="button" onclick="showMessage()">Click Me!</button>
+    </div>
+
+    <script>
+        function showMessage() {
+            alert('Congratulations! You\\'re learning web development!');
+        }
+    </script>
+</body>
+</html>`;
+
+      const defaultCSS = `/* CSS Styles */
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.button {
+    background: white;
+    color: #667eea;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.button:hover {
+    transform: translateY(-2px);
+}`;
+
+      const defaultJS = `// JavaScript
+function showMessage() {
+    alert('Hello from JavaScript!');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Page loaded successfully!');
+});`;
+
+      // Initialize editor
+      document.getElementById('codeEditor').textContent = defaultHTML;
+      updatePreview();
+      updateLineCount();
+
+      // Auto-update preview on input
+      document.getElementById('codeEditor').addEventListener('input', function() {
+        updatePreview();
+        updateLineCount();
+        resetAutoSave();
+      });
+
+      function updatePreview() {
+        const html = document.getElementById('codeEditor').textContent;
+        document.getElementById('preview').srcdoc = html;
+        updateEditorStatus('Preview updated');
+      }
+
+      function updateLineCount() {
+        const code = document.getElementById('codeEditor').textContent;
+        const lines = code.split('\n').length;
+        document.getElementById('lineCount').textContent = lines;
+      }
+
+      function updateEditorStatus(status) {
+        // Update status bar temporarily
+        setTimeout(() => {
+          document.getElementById('editorStatus').textContent = 'Ready';
+        }, 2000);
+      }
+
+      function switchTab(filename) {
+        currentFile = filename;
+        
+        // Update tab appearance
+        document.querySelectorAll('.editor-tab').forEach(tab => {
+          tab.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        // Update editor content based on file
+        let content = '';
+        let fileType = 'HTML';
+        
+        switch(filename) {
+          case 'style.css':
+            content = defaultCSS;
+            fileType = 'CSS';
+            break;
+          case 'script.js':
+            content = defaultJS;
+            fileType = 'JavaScript';
+            break;
+          default:
+            content = defaultHTML;
+            fileType = 'HTML';
+        }
+        
+        document.getElementById('codeEditor').textContent = content;
+        updatePreview();
+        updateLineCount();
+      }
+
+      function selectTemplate(template) {
+        document.querySelectorAll('.template-card').forEach(card => {
+          card.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        
+        let templateContent = '';
+        switch(template) {
+          case 'basic':
+            templateContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic HTML Page</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <p>This is a basic HTML page.</p>
+</body>
+</html>`;
+            break;
+          case 'portfolio':
+            templateContent = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - John Doe</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; line-height: 1.6; }
+        .header { background: #333; color: white; padding: 1rem; text-align: center; }
+        .content { padding: 2rem; }
+        .card { background: #f4f4f4; padding: 1rem; margin: 1rem 0; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>John Doe</h1>
+        <p>Web Developer & Designer</p>
+    </header>
+    <div class="content">
+        <div class="card">
+            <h2>About Me</h2>
+            <p>I create beautiful and functional websites.</p>
+        </div>
+        <div class="card">
+            <h2>Skills</h2>
+            <p>HTML, CSS, JavaScript, React</p>
+        </div>
+    </div>
+</body>
+</html>`;
+            break;
+        }
+        
+        document.getElementById('codeEditor').textContent = templateContent;
+        updatePreview();
+        updateLineCount();
+        showNotification('Template loaded successfully!', 'success');
+      }
+
+      function applySuggestion(suggestion) {
+        let enhancedCode = document.getElementById('codeEditor').textContent;
+        
+        if (suggestion === 'flexbox') {
+          const flexboxNav = `
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="nav-logo">Logo</div>
+                <div class="nav-menu">
+                    <a href="#" class="nav-item">Home</a>
+                    <a href="#" class="nav-item">About</a>
+                    <a href="#" class="nav-item">Contact</a>
+                </div>
+            </div>
+        </nav>
+        <style>
+            .navbar {
+                background: rgba(255,255,255,0.1);
+                backdrop-filter: blur(10px);
+                padding: 1rem 0;
+            }
+            .nav-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 2rem;
+            }
+            .nav-logo {
+                font-size: 1.5rem;
+                font-weight: bold;
+                color: white;
+            }
+            .nav-menu {
+                display: flex;
+                gap: 2rem;
+            }
+            .nav-item {
+                color: white;
+                text-decoration: none;
+                transition: color 0.3s ease;
+            }
+            .nav-item:hover {
+                color: #2563eb;
+            }
+        </style>`;
+          
+          enhancedCode = enhancedCode.replace(/<body>/, `<body>${flexboxNav}`);
+        }
+        
+        document.getElementById('codeEditor').textContent = enhancedCode;
+        updatePreview();
+        showNotification('Suggestion applied!', 'success');
+      }
+
+      function showTutorial() {
+        showNotification('Tutorial coming soon!', 'info');
+      }
+
+      function saveProject() {
+        const content = document.getElementById('codeEditor').textContent;
+        const blob = new Blob([content], { type: 'text/html' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'project.html';
+        a.click();
+        URL.revokeObjectURL(url);
+        
+        document.getElementById('lastSaved').textContent = 'Just now';
+        showNotification('Project saved successfully!', 'success');
+      }
+
+      function shareProject() {
+        const content = document.getElementById('codeEditor').textContent;
+        const encoded = btoa(content);
+        const shareUrl = `${window.location.origin}?code=${encoded}`;
+        
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          showNotification('Share link copied to clipboard!', 'success');
+        });
+      }
+
+      function formatCode() {
+        const code = document.getElementById('codeEditor').textContent;
+        // Simple formatting for HTML
+        const formatted = code
+          .replace(/></g, '>\n<')
+          .replace(/\s{2,}/g, ' ')
+          .split('\n')
+          .map(line => line.trim())
+          .filter(line => line.length > 0)
+          .join('\n');
+        
+        document.getElementById('codeEditor').textContent = formatted;
+        updatePreview();
+        showNotification('Code formatted!', 'success');
+      }
+
+      function runCode() {
+        updatePreview();
+        showNotification('Code executed!', 'success');
+      }
+
+      function clearConsole() {
+        console.clear();
+        showNotification('Console cleared!', 'info');
+      }
+
+      function refreshPreview() {
+        updatePreview();
+        showNotification('Preview refreshed!', 'info');
+      }
+
+      function toggleDevice() {
+        isMobile = !isMobile;
+        const iframe = document.getElementById('preview');
+        const deviceStatus = document.getElementById('deviceStatus');
+        
+        if (isMobile) {
+          iframe.style.width = '375px';
+          iframe.style.height = '667px';
+          deviceStatus.textContent = 'Mobile';
+        } else {
+          iframe.style.width = '100%';
+          iframe.style.height = '100%';
+          deviceStatus.textContent = 'Desktop';
+        }
+      }
+
+      function openPreview() {
+        const content = document.getElementById('codeEditor').textContent;
+        const newWindow = window.open();
+        newWindow.document.write(content);
+        newWindow.document.close();
+      }
+
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: ${type === 'success' ? '#10b981' : type === 'error' ? '#ef4444' : '#2563eb'};
+          color: white;
+          padding: 1rem 1.5rem;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+          z-index: 1000;
+          animation: slideIn 0.3s ease;
+        `;
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          notification.style.animation = 'slideOut 0.3s ease';
+          setTimeout(() => {
+            document.body.removeChild(notification);
+          }, 300);
+        }, 3000);
+      }
+
+      function resetAutoSave() {
+        clearTimeout(autoSaveTimer);
+        autoSaveTimer = setTimeout(() => {
+          document.getElementById('lastSaved').textContent = '2 min ago';
+        }, 120000); // 2 minutes
+      }
+
+      // Track page view
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          page_title: 'Interactive Classroom',
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          send_to: 'G-L1KR6MWWP3'
+        });
+      }
+
+      // Add CSS animations
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes slideIn {
+          from { transform: translateX(100%); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes slideOut {
+          from { transform: translateX(0); opacity: 1; }
+          to { transform: translateX(100%); opacity: 0; }
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
+  </body>
+</html>

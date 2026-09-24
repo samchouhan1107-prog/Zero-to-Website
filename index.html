@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
@@ -6,14 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
     <!-- Primary SEO Meta Tags -->
-    <title>WebZoneBW SC â€” Free Interactive Web Developer Tools</title>
+    <title>WebZoneBW SC — Complete Web Engineering Curriculum</title>
     <meta
       name="description"
-      content="WebZoneBW SC is a free developer platform with interactive web tools, CSS visualizers, HTML/CSS/JS sandboxes, a complete web engineering curriculum, and an AI code tutor. Build, test, and learn modern web development."
+      content="Master web development with our comprehensive curriculum covering HTML, CSS, JavaScript, React, and modern web technologies. Interactive learning with hands-on projects and expert guidance."
     />
     <meta
       name="keywords"
-      content="web developer tools, CSS flexbox visualizer, CSS grid tool, HTML sandbox, JavaScript REPL, web development tutorial, responsive design tools, DOM inspector, frontend developer, learn web development"
+      content="web development, HTML, CSS, JavaScript, React, web engineering, coding tutorials, interactive learning, responsive design, Bootstrap"
     />
     <meta name="author" content="WebZoneBW" />
     <meta
@@ -27,11 +27,11 @@
     <meta property="og:url" content="https://webzonebw.shop/" />
     <meta
       property="og:title"
-      content="WebZoneBW SC â€” Free Interactive Web Developer Tools"
+      content="WebZoneBW SC — Complete Web Engineering Curriculum"
     />
     <meta
       property="og:description"
-      content="Free developer platform with interactive web tools, CSS visualizers, code sandboxes, a complete web engineering curriculum, and an AI code tutor."
+      content="Master web development with our comprehensive curriculum covering HTML, CSS, JavaScript, React, and modern web technologies."
     />
     <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
     <meta property="og:site_name" content="WebZoneBW SC" />
@@ -39,16 +39,16 @@
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://webzonebw.shop/" />
+    <meta property="twitter:url" content="https://webzonebw.shop/" />
     <meta
-      name="twitter:title"
-      content="WebZoneBW SC â€” Free Interactive Web Developer Tools"
+      property="twitter:title"
+      content="WebZoneBW SC — Complete Web Engineering Curriculum"
     />
     <meta
-      name="twitter:description"
-      content="Free developer platform with interactive web tools, CSS visualizers, code sandboxes, and a complete web engineering curriculum."
+      property="twitter:description"
+      content="Master web development with our comprehensive curriculum covering HTML, CSS, JavaScript, React, and modern web technologies."
     />
-    <meta name="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
 
     <!-- AdSense -->
     <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
@@ -72,7 +72,7 @@
     <link
       rel="help"
       href="https://webzonebw.in/"
-      title="Official WebZoneBW Reach Out &amp; Enquiry Reference"
+      title="Official WebZoneBW Reach Out & Enquiry Reference"
     />
 
     <meta name="theme-color" content="#0f172a" />
@@ -83,13 +83,6 @@
       type="image/svg+xml"
       href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>"
     />
-    <link
-      rel="sitemap"
-      type="application/xml"
-      title="Sitemap"
-      href="/sitemap.xml"
-    />
-    <link rel="alternate" hreflang="en" href="https://webzonebw.shop/" />
 
     <!-- Preconnect & Asset Loading Optimization -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -108,33 +101,6 @@
     </noscript>
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
-    <link rel="preconnect" href="https://www.google-analytics.com" />
-
-    <!-- Schema.org JSON-LD Snippet -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "webzonebw.shop",
-        "url": "https://webzonebw.shop"
-      }
-    </script>
-
-    <!-- Structured Data: EducationalOrganization -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
-        "name": "WebZoneBW SC",
-        "url": "https://webzonebw.shop",
-        "description": "An interactive developer platform offering free web engineering tools, tutorials, and hands-on practice sandboxes.",
-        "sameAs": [],
-        "founder": {
-          "@type": "Organization",
-          "name": "WebZoneBW"
-        }
-      }
-    </script>
 
     <!-- Google tag (gtag.js) -->
     <script
@@ -149,120 +115,341 @@
       gtag("js", new Date());
       gtag("config", "G-L1KR6MWWP3");
     </script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family:
+          "Inter",
+          system-ui,
+          -apple-system,
+          sans-serif;
+        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        color: #e2e8f0;
+        min-height: 100vh;
+      }
+
+      .hero-gradient {
+        background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      .progress-bar {
+        background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+        height: 4px;
+        border-radius: 2px;
+        transition: width 0.3s ease;
+      }
+
+      @media (max-width: 768px) {
+        .hero-gradient {
+          padding: 2rem 1rem;
+        }
+        
+        .feature-icon {
+          font-size: 2rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- SEO: Pre-rendered content for crawlers and AdSense reviewers -->
-    <div id="root">
-      <noscript id="main-content">
-        <div
-          style="
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 20px;
-            font-family: system-ui, sans-serif;
-            color: #222;
-          "
-        >
-          <h1>WebZoneBW SC â€” Free Interactive Web Developer Tools</h1>
-          <p>
-            WebZoneBW SC is a free developer platform featuring interactive web
-            tools, CSS visualizers, HTML/CSS/JavaScript code sandboxes, a
-            complete web engineering curriculum, and an AI-powered code tutor.
-          </p>
-          <h2>Our Developer Tools</h2>
-          <ul>
-            <li>
-              <strong>Interactive Web REPL Sandbox</strong> â€” Real-time HTML,
-              CSS, and JavaScript coding sandbox with live preview.
-            </li>
-            <li>
-              <strong>CSS Box Model Studio</strong> â€” Visualize margins,
-              borders, padding, and content-box vs border-box calculations.
-            </li>
-            <li>
-              <strong>Flexbox Studio</strong> â€” Interactive 1D flex container
-              engine with live alignment and flex-wrap controls.
-            </li>
-            <li>
-              <strong>CSS Grid Matrix</strong> â€” Two-dimensional CSS grid
-              tracks generator with fractional units and template areas.
-            </li>
-            <li>
-              <strong>DOM Tree Inspector</strong> â€” Inspect live HTML nodes,
-              parent-child document structures, and attribute state.
-            </li>
-            <li>
-              <strong>HTTP &amp; DNS Flow Trace</strong> â€” Trace client-server
-              request pipelines, DNS resolution, and TLS negotiation.
-            </li>
-            <li>
-              <strong>Git Commit DAG Explorer</strong> â€” Visualize commit
-              history, branching topology, and merge operations.
-            </li>
-          </ul>
-          <h2>Web Engineering Curriculum</h2>
-          <p>
-            Our free curriculum covers web foundations, semantic HTML5, CSS
-            styling, Flexbox, CSS Grid, JavaScript DOM manipulation, responsive
-            design, Bootstrap, Git &amp; GitHub, and a capstone project with
-            deployment.
-          </p>
-          <h2>Additional Features</h2>
-          <ul>
-            <li>24/7 AI Code Tutor for instant help</li>
-            <li>Recall Drills &amp; Bug Hunt debugging arena</li>
-            <li>Developer Milestones &amp; XP tracking</li>
-            <li>Certificate of Completion</li>
-            <li>Global Search across all tools and lessons</li>
-          </ul>
-          <h2>Official Enquiry &amp; Reach Out Connection</h2>
-          <p>
-            For privacy rights, academic partnerships, and general enquiries,
-            connect with our official portal at
-            <a href="https://webzonebw.in/">webzonebw.in</a> or email
-            <a href="mailto:enquiry@webzonebw.in">enquiry@webzonebw.in</a>.
-          </p>
-          <p><a href="https://webzonebw.shop">Visit WebZoneBW SC â†’</a></p>
+    <!-- Navigation -->
+    <nav class="bg-slate-900/90 backdrop-blur-sm border-b border-slate-700 sticky top-0 z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-16">
+          <div class="flex items-center">
+            <a href="/" class="flex items-center space-x-2">
+              <span class="text-2xl">📚</span>
+              <span class="text-xl font-bold text-white">WebZoneBW</span>
+            </a>
+          </div>
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="/learn.html" class="text-gray-300 hover:text-white transition-colors">Learn</a>
+            <a href="/webtools.html" class="text-gray-300 hover:text-white transition-colors">Tools</a>
+            <a href="/Workspace.html" class="text-gray-300 hover:text-white transition-colors">Workspace</a>
+            <a href="/blog.html" class="text-gray-300 hover:text-white transition-colors">Blog</a>
+            <a href="/contact.html" class="text-gray-300 hover:text-white transition-colors">Contact</a>
+            <a href="/Workspace.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">Launch Interactive Sandbox</a>
+          </div>
+          <div class="md:hidden">
+            <button class="text-gray-300 hover:text-white">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+              </svg>
+            </button>
+          </div>
         </div>
-      </noscript>
-    </div>
+      </div>
+    </nav>
 
-    <!-- AdSense Unit - Handled by React components with responsive bounds -->
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 class="text-5xl md:text-7xl font-bold mb-6">
+          Interactive Web Developer Tools & AI Sandbox
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-blue-100">
+          From HTML basics to advanced React applications. Learn by doing with our interactive curriculum.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/learn.html" class="bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+            Start Learning
+          </a>
+          <a href="/Workspace.html" class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
+            Launch Interactive Sandbox
+          </a>
+        </div>
+      </div>
+    </section>
 
-    <!-- Footer with legal disclosures and reach out links (visible to crawlers & AdSense reviewers) -->
-    <footer
-      style="
-        text-align: center;
-        padding: 20px;
-        font-size: 0.85rem;
-        color: #71717a;
-        border-top: 1px solid #27272a;
-      "
-    >
-      <p>
-        <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> Â·
-        <a href="/cookie-policy.html" rel="nofollow">Cookie Policy</a> Â·
-        <a href="/terms-of-service.html" rel="nofollow">Terms of Service</a> Â·
-        <a href="/about.html" rel="nofollow">About</a> Â·
-        <a href="/contact.html" rel="nofollow">Contact</a> Â·
-        <a
-          href="https://webzonebw.in/"
-          target="_blank"
-          rel="noopener noreferrer"
-          >Reach Out &amp; Enquiry (webzonebw.in)</a
-        >
-      </p>
-      <p>
-        &copy; 2026 WebZoneBW SC. Connected with
-        <a
-          href="https://webzonebw.in/"
-          style="color: #a1a1aa; text-decoration: underline"
-          >webzonebw.in</a
-        >
-        for inquiries and data transparency.
-      </p>
+    <!-- Features Section -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">Why Choose WebZoneBW?</h2>
+          <p class="text-xl text-gray-400">A comprehensive learning experience designed for modern web development</p>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-8">
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 card-hover border border-slate-700">
+            <div class="feature-icon">🎯</div>
+            <h3 class="text-2xl font-bold text-white mb-4">Structured Learning Path</h3>
+            <p class="text-gray-400">Follow a carefully curated curriculum that takes you from beginner to advanced levels with hands-on projects.</p>
+          </div>
+          
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 card-hover border border-slate-700">
+            <div class="feature-icon">🛠️</div>
+            <h3 class="text-2xl font-bold text-white mb-4">Interactive Tools</h3>
+            <p class="text-gray-400">Practice coding with our live development environment and interactive tools for CSS Grid, Flexbox, and more.</p>
+          </div>
+          
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-8 card-hover border border-slate-700">
+            <div class="feature-icon">🚀</div>
+            <h3 class="text-2xl font-bold text-white mb-4">Modern Technologies</h3>
+            <p class="text-gray-400">Learn current industry standards including React, TypeScript, and modern CSS frameworks.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section class="py-20 bg-slate-800/30">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">Your Learning Journey</h2>
+          <p class="text-xl text-gray-400">Progress through our comprehensive curriculum at your own pace</p>
+        </div>
+        
+        <div class="space-y-8">
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-white">Chapter 00: Introduction</h3>
+              <span class="text-green-400 font-semibold">✓ Complete</span>
+            </div>
+            <p class="text-gray-400 mb-2">Welcome and setup your development environment</p>
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="progress-bar w-full"></div>
+            </div>
+          </div>
+          
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-white">Chapter 01: Development Environment</h3>
+              <span class="text-blue-400 font-semibold">📖 In Progress</span>
+            </div>
+            <p class="text-gray-400 mb-2">Code editors, browser tools, and project structure</p>
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="progress-bar w-3/4"></div>
+            </div>
+          </div>
+          
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-white">Chapter 02: HTML Fundamentals</h3>
+              <span class="text-gray-400 font-semibold">🔲 Locked</span>
+            </div>
+            <p class="text-gray-400 mb-2">Master HTML structure and semantic markup</p>
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="progress-bar w-0"></div>
+            </div>
+          </div>
+          
+          <div class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 border border-slate-700">
+            <div class="flex items-center justify-between mb-4">
+              <h3 class="text-xl font-bold text-white">Chapter 03: CSS Styling</h3>
+              <span class="text-gray-400 font-semibold">🔲 Locked</span>
+            </div>
+            <p class="text-gray-400 mb-2">CSS fundamentals, selectors, and responsive design</p>
+            <div class="w-full bg-slate-700 rounded-full h-2">
+              <div class="progress-bar w-0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tools Showcase -->
+    <section class="py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-bold text-white mb-4">Interactive Learning Tools</h2>
+          <p class="text-xl text-gray-400">Hands-on practice with our developer tools</p>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <a href="/webtools.html#css-grid" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 text-center card-hover border border-slate-700">
+            <div class="text-4xl mb-4">📐</div>
+            <h3 class="text-lg font-bold text-white mb-2">CSS Grid</h3>
+            <p class="text-gray-400 text-sm">Interactive grid layout builder</p>
+          </a>
+          
+          <a href="/webtools.html#flexbox" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 text-center card-hover border border-slate-700">
+            <div class="text-4xl mb-4">📦</div>
+            <h3 class="text-lg font-bold text-white mb-2">Flexbox</h3>
+            <p class="text-gray-400 text-sm">Flexible layout playground</p>
+          </a>
+          
+          <a href="/webtools.html#html-sandbox" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 text-center card-hover border border-slate-700">
+            <div class="text-4xl mb-4">📝</div>
+            <h3 class="text-lg font-bold text-white mb-2">HTML Sandbox</h3>
+            <p class="text-gray-400 text-sm">Live HTML editing environment</p>
+          </a>
+          
+          <a href="/webtools.html#javascript-repl" class="bg-slate-800/50 backdrop-blur-sm rounded-xl p-6 text-center card-hover border border-slate-700">
+            <div class="text-4xl mb-4">⚡</div>
+            <h3 class="text-lg font-bold text-white mb-2">JavaScript REPL</h3>
+            <p class="text-gray-400 text-sm">Interactive JavaScript console</p>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-blue-600/20">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h2 class="text-4xl font-bold text-white mb-6">Ready to Start Your Journey?</h2>
+        <p class="text-xl text-blue-100 mb-8">
+          Join thousands of learners mastering web development with our interactive curriculum
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href="/learn.html" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
+            Begin Learning
+          </a>
+          <a href="/contact.html" class="border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-600 hover:text-white transition-colors">
+            Get Help
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900/90 border-t border-slate-700 py-12">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+          <div>
+            <div class="flex items-center space-x-2 mb-4">
+              <span class="text-2xl">📚</span>
+              <span class="text-xl font-bold text-white">WebZoneBW</span>
+            </div>
+            <p class="text-gray-400">Master web development with our comprehensive curriculum and interactive tools.</p>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-4">Learning</h3>
+            <ul class="space-y-2">
+              <li><a href="/learn.html" class="text-gray-400 hover:text-white transition-colors">Curriculum</a></li>
+              <li><a href="/Chapters" class="text-gray-400 hover:text-white transition-colors">Chapters</a></li>
+              <li><a href="/Workspace.html" class="text-gray-400 hover:text-white transition-colors">Workspace</a></li>
+              <li><a href="/blog.html" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-4">Tools</h3>
+            <ul class="space-y-2">
+              <li><a href="/webtools.html" class="text-gray-400 hover:text-white transition-colors">Web Tools</a></li>
+              <li><a href="/developertools.html" class="text-gray-400 hover:text-white transition-colors">Dev Tools</a></li>
+              <li><a href="/imagetools.html" class="text-gray-400 hover:text-white transition-colors">Image Tools</a></li>
+              <li><a href="/Workspace.html" class="text-gray-400 hover:text-white transition-colors">Live Editor</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h3 class="text-lg font-semibold text-white mb-4">Support</h3>
+            <ul class="space-y-2">
+              <li><a href="/contact.html" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+              <li><a href="/about.html" class="text-gray-400 hover:text-white transition-colors">About</a></li>
+              <li><a href="/privacy-policy.html" class="text-gray-400 hover:text-white transition-colors">Privacy</a></li>
+              <li><a href="/terms-of-service.html" class="text-gray-400 hover:text-white transition-colors">Terms</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-8 pt-8 border-t border-slate-700 text-center">
+          <p class="text-gray-400">
+            © 2026 WebZoneBW SC. Connected with 
+            <a href="https://webzonebw.in/" class="text-blue-400 hover:text-blue-300 transition-colors">webzonebw.in</a>
+            for inquiries and data transparency.
+          </p>
+        </div>
+      </div>
     </footer>
 
-    <script type="module" src="/src/utils/main.tsx"></script>
+    <script>
+      // Track page view
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'page_view', {
+          page_title: 'Home',
+          page_location: window.location.href,
+          page_path: window.location.pathname,
+          send_to: 'G-L1KR6MWWP3'
+        });
+      }
+
+      // Mobile menu toggle
+      const mobileMenuBtn = document.querySelector('button');
+      if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', () => {
+          // Implement mobile menu toggle logic
+          console.log('Mobile menu toggle');
+        });
+      }
+
+      // Smooth scrolling for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    </script>
   </body>
 </html>

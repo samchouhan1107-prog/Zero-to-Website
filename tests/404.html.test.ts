@@ -5,9 +5,12 @@ import { Window } from "happy-dom";
 
 const root = resolve(__dirname, "..");
 const GA_ID = "G-L1KR6MWWP3";
+const RAW = readFileSync(resolve(root, "404.html"), "utf-8");
 
 let win: Window;
-let doc: Document;
+// happy-dom's DOM types differ structurally from lib.dom; keep the shared
+// reference untyped so per-test casts stay readable.
+let doc: any;
 
 /**
  * Loads 404.html including its inline scripts, with:
@@ -15,7 +18,7 @@ let doc: Document;
  *  - window.open / location controllable per-test
  * Inline scripts execute on document.close(), mirroring real browser behaviour.
  */
-function loadPage(opts: { withGtag?: boolean } = {}) {
+function loadPage(opts: { withGtag?: boolean } = {}): { win: any; doc: any } {
   let html = readFileSync(resolve(root, "404.html"), "utf-8").replace(
     /<script[^>]*src=[^>]*><\/script>/g,
     ""
@@ -25,6 +28,14 @@ function loadPage(opts: { withGtag?: boolean } = {}) {
   // Capture window.open calls (search redirect) without spawning popups
   const openMock = vi.fn();
   win.open = openMock as unknown as Window["open"];
+
+  const w = win as unknown as Record<string, unknown>;
+  // Install the GA4 stub BEFORE inline scripts run, so the page's own
+  // track404Page() call records events exactly like a browser with gtag.js.
+  if (opts.withGtag !== false) {
+    w.dataLayer = [];
+    w.gtag = (...args: unknown[]) => (w.dataLayer as unknown[]).push(args);
+  }
 
   doc = win.document;
   if (opts.withGtag === false) {
@@ -38,16 +49,13 @@ function loadPage(opts: { withGtag?: boolean } = {}) {
   doc.write(html);
   doc.close();
 
-  if (opts.withGtag !== false) {
-    // happy-dom executed the inline bootstrap script; it should have defined
-    // window.gtag via `function gtag()` hoisting inside that script.
-    // If not (script execution differences), install a compliant stub.
-    const w = win as unknown as Record<string, unknown>;
-    if (typeof w.gtag !== "function") {
-      w.dataLayer = w.dataLayer || [];
-      w.gtag = (...args: unknown[]) => (w.dataLayer as unknown[]).push(args);
-    }
+  // happy-dom does not reliably execute inline scripts via document.write;
+  // eval the plain inline scripts against the window explicitly.
+  const inline = [...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];
+  for (const m of inline) {
+    try { win.eval(m[1]); } catch { /* ignore */ }
   }
+
   return { win, doc };
 }
 
@@ -104,14 +112,14 @@ describe("404.html", () => {
     it("provides four quick-link cards with valid hrefs", () => {
       const cards = Array.from(doc.querySelectorAll(".quick-link-card"));
       expect(cards.length).toBe(4);
-      for (const card of cards) {
+      for (const card of cards as HTMLElement[]) {
         const href = card.getAttribute("href") ?? "";
         expect(href.startsWith("/")).toBe(true);
         expect(card.querySelector(".quick-link-title")?.textContent?.length).toBeGreaterThan(0);
         expect(card.querySelector(".quick-link-desc")?.textContent?.length).toBeGreaterThan(0);
       }
       expect(
-        cards.map((c) => c.getAttribute("href"))
+        cards.map((c: any) => c.getAttribute("href"))
       ).toEqual(["/", "/learn.html", "/webtools.html", "/Workspace.html"]);
     });
 
@@ -125,7 +133,7 @@ describe("404.html", () => {
 
     it("footer contains all legal links and correct year", () => {
       const footer = doc.querySelector("footer")!;
-      const hrefs = Array.from(footer.querySelectorAll("a")).map((a) => a.getAttribute("href"));
+      const hrefs = Array.from(footer.querySelectorAll("a") as any).map((a: any) => a.getAttribute("href"));
       for (const path of [
         "/privacy-policy.html",
         "/cookie-policy.html",
@@ -243,7 +251,7 @@ describe("404.html", () => {
       track();
 
       const events = dataLayer.filter(
-        (e) => Array.isArray(e) && e[0] === "event"
+        (e) => (e as unknown[])[0] === "event"
       ) as unknown[][];
       const pageView = events.find((e) => e[1] === "page_view");
       const notFound = events.find((e) => e[1] === "404_error");
@@ -264,11 +272,9 @@ describe("404.html", () => {
 
     it("GA config targets the production measurement ID", () => {
       const { win, doc } = loadPage();
-      expect(
-        doc.querySelector('script[src*="googletagmanager"]')?.getAttribute("src")
-      ).toContain(`id=${GA_ID}`);
+      expect(RAW).toMatch(new RegExp(`googletagmanager[^>]*id=${GA_ID}`));
       const config = (win as unknown as { dataLayer: unknown[] }).dataLayer.find(
-        (e) => Array.isArray(e) && e[0] === "config"
+        (e) => (e as unknown[])[0] === "config"
       ) as unknown[];
       expect(config?.[1]).toBe(GA_ID);
     });

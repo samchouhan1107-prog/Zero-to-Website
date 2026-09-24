@@ -1,0 +1,1174 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>WebZoneBW SC - Interactive Web Development Classroom</title>
+    <meta
+      name="description"
+      content="Join our interactive web development classroom. Learn HTML, CSS, JavaScript, and modern web technologies with hands-on projects and expert guidance."
+    />
+    <meta
+      name="keywords"
+      content="web development classroom, interactive learning, coding education, HTML CSS JavaScript courses, tech education, programming classes"
+    />
+    <meta name="author" content="WebZoneBW" />
+    <meta
+      name="robots"
+      content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+    />
+    <link rel="canonical" href="https://webzonebw.shop/" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://webzonebw.shop/" />
+    <meta
+      property="og:title"
+      content="WebZoneBW SC - Interactive Web Development Classroom"
+    />
+    <meta
+      property="og:description"
+      content="Join our interactive web development classroom. Learn HTML, CSS, JavaScript, and modern web technologies with hands-on projects."
+    />
+    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:site_name" content="WebZoneBW SC" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://webzonebw.shop/" />
+    <meta
+      property="twitter:title"
+      content="WebZoneBW SC - Interactive Web Development Classroom"
+    />
+    <meta
+      property="twitter:description"
+      content="Join our interactive web development classroom. Learn HTML, CSS, JavaScript, and modern web technologies."
+    />
+    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+
+    <!-- AdSense -->
+    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
+
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Legal Disclosures & Reach Out Connection -->
+    <link
+      rel="privacy-policy"
+      href="https://webzonebw.shop/privacy-policy.html"
+    />
+    <link
+      rel="terms-of-service"
+      href="https://webzonebw.shop/terms-of-service.html"
+    />
+    <link rel="copyright" href="https://webzonebw.shop/about.html" />
+    <link
+      rel="help"
+      href="https://webzonebw.in/"
+      title="Official WebZoneBW Reach Out & Enquiry Reference"
+    />
+
+    <meta name="theme-color" content="#0f172a" />
+
+    <!-- Favicons -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>"
+    />
+
+    <!-- Preconnect & Asset Loading Optimization -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      media="print"
+      onload="this.media = 'all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+      />
+    </noscript>
+    <link rel="preconnect" href="https://www.googletagmanager.com" />
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-L1KR6MWWP3");
+    </script>
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #7c3aed;
+        --accent: #06b6d4;
+        --success: #10b981;
+        --warning: #f59e0b;
+        --error: #ef4444;
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #f1f5f9;
+        --text-primary: #1e293b;
+        --text-secondary: #64748b;
+        --text-tertiary: #94a3b8;
+        --border: #e2e8f0;
+        --shadow: rgba(0, 0, 0, 0.1);
+        --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --gradient-2: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+        --gradient-3: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+      }
+
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        line-height: 1.6;
+        overflow-x: hidden;
+      }
+
+      .mono {
+        font-family: "JetBrains Mono", "Courier New", monospace;
+      }
+
+      /* Navigation */
+      nav {
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: all 0.3s ease;
+      }
+
+      .nav-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+      }
+
+      .logo {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary);
+        text-decoration: none;
+      }
+
+      .logo-icon {
+          width: 40px;
+          height: 40px;
+          background: var(--gradient-2);
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 1.5rem;
+        }
+
+      .nav-links {
+          display: flex;
+          gap: 2rem;
+          align-items: center;
+        }
+
+        .nav-links a {
+          color: var(--text-secondary);
+          text-decoration: none;
+          font-weight: 500;
+          transition: color 0.3s ease;
+          position: relative;
+        }
+
+        .nav-links a:hover {
+          color: var(--primary);
+        }
+
+        .nav-links a::after {
+          content: '';
+          position: absolute;
+          bottom: -5px;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background: var(--primary);
+          transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+          width: 100%;
+        }
+
+        .cta-button {
+          background: var(--gradient-2);
+          color: white;
+          padding: 0.75rem 1.5rem;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .cta-button:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+          background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+          padding: 6rem 0 4rem;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .hero::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="%23e2e8f0" stroke-width="1"/></pattern></defs><rect width="100%" height="100%" fill="url(%23grid)" opacity="0.3"/></svg>');
+          opacity: 0.5;
+        }
+
+        .hero-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          position: relative;
+          z-index: 1;
+        }
+
+        .hero-content {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 4rem;
+          align-items: center;
+        }
+
+        .hero-text h1 {
+          font-size: 3.5rem;
+          font-weight: 800;
+          line-height: 1.2;
+          margin-bottom: 1.5rem;
+          background: var(--gradient-2);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+        }
+
+        .hero-text .subtitle {
+          font-size: 1.25rem;
+          color: var(--text-secondary);
+          margin-bottom: 2rem;
+          line-height: 1.6;
+        }
+
+        .hero-buttons {
+          display: flex;
+          gap: 1rem;
+          flex-wrap: wrap;
+        }
+
+        .primary-btn {
+          background: var(--gradient-2);
+          color: white;
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+        }
+
+        .primary-btn:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        .secondary-btn {
+          background: white;
+          color: var(--primary);
+          border: 2px solid var(--primary);
+          padding: 1rem 2rem;
+          border-radius: 8px;
+          text-decoration: none;
+          font-weight: 600;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: all 0.3s ease;
+        }
+
+        .secondary-btn:hover {
+          background: var(--primary);
+          color: white;
+        }
+
+        .hero-visual {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .code-window {
+          background: #1e293b;
+          border-radius: 12px;
+            padding: 2rem;
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+          max-width: 500px;
+          width: 100%;
+        }
+
+        .code-header {
+          display: flex;
+          gap: 0.5rem;
+          margin-bottom: 1rem;
+        }
+
+        .code-dot {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+        }
+
+        .code-dot.red { background: #ef4444; }
+        .code-dot.yellow { background: #f59e0b; }
+        .code-dot.green { background: #10b981; }
+
+        .code-content {
+          color: #e2e8f0;
+          font-family: "JetBrains Mono", monospace;
+          font-size: 0.9rem;
+          line-height: 1.6;
+        }
+
+        .code-line {
+          margin-bottom: 0.5rem;
+        }
+
+        .code-tag { color: #f472b6; }
+        .code-attr { color: #60a5fa; }
+        .code-string { color: #34d399; }
+        .code-comment { color: #64748b; font-style: italic; }
+
+        /* Features Section */
+        .features {
+          padding: 6rem 0;
+          background: white;
+        }
+
+        .features-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        .section-header {
+          text-align: center;
+          margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: var(--text-primary);
+        }
+
+        .section-header p {
+          font-size: 1.125rem;
+          color: var(--text-secondary);
+          max-width: 600px;
+          margin: 0 auto;
+        }
+
+        .features-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+          gap: 2rem;
+        }
+
+        .feature-card {
+          background: white;
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          padding: 2rem;
+          transition: all 0.3s ease;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .feature-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          height: 4px;
+          background: var(--gradient-2);
+          transform: scaleX(0);
+          transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover::before {
+          transform: scaleX(1);
+        }
+
+        .feature-icon {
+          width: 60px;
+          height: 60px;
+          background: var(--gradient-2);
+          border-radius: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.5rem;
+          margin-bottom: 1.5rem;
+          color: white;
+        }
+
+        .feature-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+          color: var(--text-primary);
+        }
+
+        .feature-description {
+          color: var(--text-secondary);
+          line-height: 1.6;
+          margin-bottom: 1.5rem;
+        }
+
+        .feature-link {
+          color: var(--primary);
+          text-decoration: none;
+          font-weight: 500;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.5rem;
+          transition: gap 0.3s ease;
+        }
+
+        .feature-link:hover {
+          gap: 1rem;
+        }
+
+        /* Learning Path Section */
+        .learning-path {
+          padding: 6rem 0;
+          background: var(--bg-secondary);
+        }
+
+        .path-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        .path-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+          gap: 2rem;
+        }
+
+        .path-card {
+          background: white;
+          border-radius: 16px;
+          padding: 2rem;
+          border: 1px solid var(--border);
+          transition: all 0.3s ease;
+          position: relative;
+        }
+
+        .path-card:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .path-number {
+          position: absolute;
+          top: -15px;
+          left: 20px;
+          width: 40px;
+          height: 40px;
+          background: var(--gradient-2);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-weight: 700;
+          font-size: 1.125rem;
+        }
+
+        .path-title {
+          font-size: 1.25rem;
+          font-weight: 600;
+          margin: 1rem 0 0.5rem;
+          color: var(--text-primary);
+        }
+
+        .path-subtitle {
+          color: var(--text-secondary);
+          font-size: 0.875rem;
+          margin-bottom: 1rem;
+        }
+
+        .path-progress {
+          background: var(--bg-tertiary);
+          height: 8px;
+          border-radius: 4px;
+          overflow: hidden;
+          margin-bottom: 1rem;
+        }
+
+        .progress-fill {
+          height: 100%;
+          background: var(--gradient-2);
+          border-radius: 4px;
+          transition: width 0.3s ease;
+        }
+
+        .path-status {
+          display: inline-block;
+          padding: 0.25rem 0.75rem;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 500;
+        }
+
+        .status-completed {
+          background: #dcfce7;
+          color: #166534;
+        }
+
+        .status-current {
+          background: #dbeafe;
+          color: #1d4ed8;
+        }
+
+        .status-upcoming {
+          background: #f1f5f9;
+          color: #64748b;
+        }
+
+        /* Stats Section */
+        .stats {
+          padding: 4rem 0;
+          background: var(--gradient-2);
+          color: white;
+        }
+
+        .stats-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          text-align: center;
+        }
+
+        .stats-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          gap: 3rem;
+          margin-top: 3rem;
+        }
+
+        .stat-item h3 {
+          font-size: 3rem;
+          font-weight: 700;
+          margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+          font-size: 1.125rem;
+          opacity: 0.9;
+        }
+
+        /* CTA Section */
+        .cta {
+          padding: 6rem 0;
+          background: white;
+        }
+
+        .cta-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+          text-align: center;
+        }
+
+        .cta h2 {
+          font-size: 2.5rem;
+          font-weight: 700;
+          margin-bottom: 1rem;
+          color: var(--text-primary);
+        }
+
+        .cta p {
+          font-size: 1.25rem;
+          color: var(--text-secondary);
+          margin-bottom: 2rem;
+          max-width: 600px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        .cta-buttons {
+          display: flex;
+          gap: 1rem;
+          justify-content: center;
+          flex-wrap: wrap;
+        }
+
+        /* Footer */
+        footer {
+          background: #1e293b;
+          color: white;
+          padding: 4rem 0 2rem;
+        }
+
+        .footer-container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 2rem;
+        }
+
+        .footer-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+          gap: 2rem;
+          margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+          font-size: 1.125rem;
+          font-weight: 600;
+          margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+          list-style: none;
+        }
+
+        .footer-section ul li {
+          margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+          color: #94a3b8;
+          text-decoration: none;
+          transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+          color: white;
+        }
+
+        .footer-bottom {
+          border-top: 1px solid #334155;
+          padding-top: 2rem;
+          text-align: center;
+          color: #94a3b8;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .nav-container {
+            padding: 0 1rem;
+            height: 70px;
+          }
+
+          .nav-links {
+            display: none;
+          }
+
+          .hero-content {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            text-align: center;
+          }
+
+          .hero-text h1 {
+            font-size: 2.5rem;
+          }
+
+          .hero-buttons {
+            justify-content: center;
+          }
+
+          .features-grid,
+          .path-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+          }
+
+          .cta-buttons {
+            flex-direction: column;
+            align-items: center;
+          }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .animate-fade-in {
+          animation: fadeInUp 0.6s ease-out;
+        }
+
+        .animate-fade-in-delay-1 {
+          animation: fadeInUp 0.6s ease-out 0.2s both;
+        }
+
+        .animate-fade-in-delay-2 {
+          animation: fadeInUp 0.6s ease-out 0.4s both;
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Navigation -->
+    <nav>
+      <div class="nav-container">
+        <a href="/" class="logo">
+          <div class="logo-icon">🎓</div>
+          WebZoneBW SC
+        </a>
+        <div class="nav-links">
+          <a href="/learn.html">Learn</a>
+          <a href="/webtools.html">Tools</a>
+          <a href="/Workspace.html">Workspace</a>
+          <a href="/blog.html">Blog</a>
+          <a href="/learn.html#learning-path" class="cta-button">Learning Path</a>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-container">
+        <div class="hero-content">
+          <div class="hero-text animate-fade-in">
+            <h1>Master Web Development Through Interactive Learning</h1>
+            <p class="subtitle">
+              Join our virtual classroom and learn HTML, CSS, JavaScript, and modern web technologies
+              with hands-on projects, expert guidance, and a collaborative learning environment.
+            </p>
+            <div class="hero-buttons">
+              <a href="/learn.html" class="primary-btn">
+                🚀 Start Learning
+              </a>
+              <a href="/Workspace.html" class="secondary-btn">
+                💻 Try Workspace
+              </a>
+            </div>
+          </div>
+          <div class="hero-visual animate-fade-in-delay-1">
+            <div class="code-window">
+              <div class="code-header">
+                <div class="code-dot red"></div>
+                <div class="code-dot yellow"></div>
+                <div class="code-dot green"></div>
+              </div>
+              <div class="code-content">
+                <div class="code-line">
+                  <span class="code-tag">&lt;html&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;head&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;title&gt;</span>Welcome to WebZoneBW<span class="code-tag">&lt;/title&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;/head&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;body&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;h1&gt;</span>Hello, World!<span class="code-tag">&lt;/h1&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-comment">&lt;!-- Your learning journey starts here --&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;/body&gt;</span>
+                </div>
+                <div class="code-line">
+                  <span class="code-tag">&lt;/html&gt;</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+      <div class="features-container">
+        <div class="section-header">
+          <h2>Why Choose Our Classroom Experience?</h2>
+          <p>Learn web development with the structure and support of a traditional classroom, but with the flexibility of online learning.</p>
+        </div>
+        <div class="features-grid">
+          <div class="feature-card animate-fade-in">
+            <div class="feature-icon">🎯</div>
+            <h3 class="feature-title">Structured Curriculum</h3>
+            <p class="feature-description">
+              Follow a carefully designed learning path from beginner to advanced levels,
+              with clear milestones and progressive skill building.
+            </p>
+            <a href="/learn.html#learning-path" class="feature-link">
+              Explore Learning Path →
+            </a>
+          </div>
+          <div class="feature-card animate-fade-in-delay-1">
+            <div class="feature-icon">🛠️</div>
+            <h3 class="feature-title">Interactive Tools</h3>
+            <p class="feature-description">
+              Practice coding with our live development environment, interactive sandboxes,
+              and real-time feedback on your projects.
+            </p>
+            <a href="/webtools.html" class="feature-link">
+              Explore Tools →
+            </a>
+          </div>
+          <div class="feature-card animate-fade-in-delay-2">
+            <div class="feature-icon">👥</div>
+            <h3 class="feature-title">Community Learning</h3>
+            <p class="feature-description">
+              Connect with fellow learners, participate in discussions,
+              and get help from instructors and peers in our virtual classroom.
+            </p>
+            <a href="/blog.html" class="feature-link">
+              Join Community →
+            </a>
+          </div>
+          <div class="feature-card animate-fade-in">
+            <div class="feature-icon">📊</div>
+            <h3 class="feature-title">Progress Tracking</h3>
+            <p class="feature-description">
+              Monitor your learning progress with detailed analytics,
+              achievement badges, and personalized recommendations.
+            </p>
+            <a href="/learn.html#learning-path" class="feature-link">
+              View Progress →
+            </a>
+          </div>
+          <div class="feature-card animate-fade-in-delay-1">
+            <div class="feature-icon">🏆</div>
+            <h3 class="feature-title">Real Projects</h3>
+            <p class="feature-description">
+              Build real-world projects that you can add to your portfolio,
+              with guided exercises and open-ended challenges.
+            </p>
+            <a href="/Workspace.html" class="feature-link">
+              Start Building →
+            </a>
+          </div>
+          <div class="feature-card animate-fade-in-delay-2">
+            <div class="feature-icon">🎓</div>
+            <h3 class="feature-title">Expert Guidance</h3>
+            <p class="feature-description">
+              Learn from experienced web developers with industry knowledge
+              and practical insights from real-world projects.
+            </p>
+            <a href="/contact.html" class="feature-link">
+              Meet Instructors →
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Learning Path Section -->
+    <section class="learning-path">
+      <div class="path-container">
+        <div class="section-header">
+          <h2>Your Learning Journey</h2>
+          <p>Progress through our comprehensive curriculum at your own pace with structured guidance.</p>
+        </div>
+        <div class="path-grid">
+          <div class="path-card animate-fade-in">
+            <div class="path-number">01</div>
+            <h3 class="path-title">Introduction</h3>
+            <p class="path-subtitle">Welcome & Course Overview</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <span class="path-status status-completed">✓ Completed</span>
+          </div>
+          <div class="path-card animate-fade-in-delay-1">
+            <div class="path-number">02</div>
+            <h3 class="path-title">Development Environment</h3>
+            <p class="path-subtitle">Tools & Setup</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 100%"></div>
+            </div>
+            <span class="path-status status-completed">✓ Completed</span>
+          </div>
+          <div class="path-card animate-fade-in-delay-2">
+            <div class="path-number">03</div>
+            <h3 class="path-title">HTML Fundamentals</h3>
+            <p class="path-subtitle">Structure & Semantics</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 75%"></div>
+            </div>
+            <span class="path-status status-current">📖 In Progress</span>
+          </div>
+          <div class="path-card animate-fade-in">
+            <div class="path-number">04</div>
+            <h3 class="path-title">CSS Styling</h3>
+            <p class="path-subtitle">Visual Design & Layout</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="path-status status-upcoming">🔲 Locked</span>
+          </div>
+          <div class="path-card animate-fade-in-delay-1">
+            <div class="path-number">05</div>
+            <h3 class="path-title">CSS Flexbox</h3>
+            <p class="path-subtitle">One-Dimensional Layout</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="path-status status-upcoming">🔲 Locked</span>
+          </div>
+          <div class="path-card animate-fade-in-delay-2">
+            <div class="path-number">06</div>
+            <h3 class="path-title">CSS Grid</h3>
+            <p class="path-subtitle">Two-Dimensional Layout</p>
+            <div class="path-progress">
+              <div class="progress-fill" style="width: 0%"></div>
+            </div>
+            <span class="path-status status-upcoming">🔲 Locked</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+      <div class="stats-container">
+        <h2>Join Thousands of Learners</h2>
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>10,000+</h3>
+            <p>Active Students</p>
+          </div>
+          <div class="stat-item">
+            <h3>50+</h3>
+            <p>Expert Instructors</p>
+          </div>
+          <div class="stat-item">
+            <h3>100+</h3>
+            <p>Interactive Projects</p>
+          </div>
+          <div class="stat-item">
+            <h3>95%</h3>
+            <p>Success Rate</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+      <div class="cta-container">
+        <h2>Ready to Start Your Learning Journey?</h2>
+        <p>
+          Join our interactive classroom and transform your career with web development skills
+          that employers are looking for.
+        </p>
+        <div class="cta-buttons">
+          <a href="/learn.html" class="primary-btn">
+            🎓 Enroll Now
+          </a>
+          <a href="/Workspace.html" class="secondary-btn">
+            💻 Free Trial
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div class="footer-container">
+        <div class="footer-grid">
+          <div class="footer-section">
+            <h3>Learning</h3>
+            <ul>
+              <li><a href="/learn.html">Curriculum</a></li>
+              <li><a href="/learn.html#learning-path">Learning Path</a></li>
+              <li><a href="/Workspace.html">Workspace</a></li>
+              <li><a href="/blog.html">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Tools</h3>
+            <ul>
+              <li><a href="/webtools.html">Web Tools</a></li>
+              <li><a href="/developertools.html">Dev Tools</a></li>
+              <li><a href="/imagetools.html">Image Tools</a></li>
+              <li><a href="/Workspace.html">Live Editor</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Support</h3>
+            <ul>
+              <li><a href="/contact.html">Contact</a></li>
+              <li><a href="/about.html">About</a></li>
+              <li><a href="/privacy-policy.html">Privacy</a></li>
+              <li><a href="/terms-of-service.html">Terms</a></li>
+            </ul>
+          </div>
+          <div class="footer-section">
+            <h3>Connect</h3>
+            <ul>
+              <li><a href="/contact.html">Contact &amp; Social</a></li>
+              <li><a href="https://webzonebw.in/" target="_blank" rel="noopener noreferrer">Reach Out Portal</a></li>
+              <li><a href="/about.html">About WebZoneBW</a></li>
+              <li><a href="/blog.html">Blog &amp; Community</a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2026 WebZoneBW SC. Connected with <a href="https://webzonebw.in/" style="color: #60a5fa;">webzonebw.in</a> for inquiries and data transparency.</p>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // Track page view — guarded, single-fire (matches 404.html convention;
+      // gtag('config') already sends an automatic page_view)
+      function trackClassroomPage() {
+        try {
+          if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+              page_title: 'Interactive Web Development Classroom',
+              page_location: window.location.href,
+              page_path: window.location.pathname,
+              send_to: 'G-L1KR6MWWP3'
+            });
+          }
+        } catch (error) {
+          console.warn('GA4 tracking failed for classroom page:', error);
+        }
+      }
+      trackClassroomPage();
+
+      // Smooth scroll for anchor links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+
+      // Add scroll effect to navigation
+      window.addEventListener('scroll', function() {
+        const nav = document.querySelector('nav');
+        if (window.scrollY > 100) {
+          nav.style.background = 'rgba(255, 255, 255, 0.98)';
+          nav.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.1)';
+        } else {
+          nav.style.background = 'rgba(255, 255, 255, 0.95)';
+          nav.style.boxShadow = 'none';
+        }
+      });
+
+      // Intersection Observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animated elements
+      document.querySelectorAll('.animate-fade-in, .animate-fade-in-delay-1, .animate-fade-in-delay-2').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
+      });
+    </script>
+  </body>
+</html>
