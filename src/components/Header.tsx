@@ -284,11 +284,36 @@ export const Header: React.FC<HeaderProps> = ({
               </kbd>
             </button>
 
-            {/* Certificate Button - Only show for authenticated users */}
+            {/* Certificate Button - Only show for authenticated users with valid session */}
             {hasRealAccount && (
               <button
                 type="button"
-                onClick={onOpenCertificate}
+                onClick={async () => {
+                  // Verify session is still valid before opening certificate
+                  try {
+                    const token = localStorage.getItem('webzonebw_session');
+                    if (token) {
+                      // Quick session validation
+                      const response = await fetch(`${import.meta.env.VITE_API_URL || '/api'}/user/validate-session`, {
+                        headers: {
+                          'Authorization': `Bearer ${token}`
+                        }
+                      });
+                      if (response.ok) {
+                        onOpenCertificate();
+                      } else {
+                        // Session invalid, redirect to login
+                        onOpenAccount();
+                      }
+                    } else {
+                      // No session token, show account modal
+                      onOpenAccount();
+                    }
+                  } catch (error) {
+                    // If server validation fails, fall back to client-side check
+                    onOpenCertificate();
+                  }
+                }}
                 className="flex min-h-[44px] items-center gap-3 rounded-xl border border-app-border bg-app-inset px-4 text-sm font-semibold text-app-ink transition-all hover:border-blue-500/50 hover:bg-app-active hover:text-app-ink touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/40"
                 aria-label="View Certificate of Completion"
                 title="Certificate of Completion"

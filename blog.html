@@ -1119,16 +1119,59 @@
         });
 
       // Category filter functionality
+      const blogPosts = [
+        { slug: 'complete-guide-css-flexbox', category: 'CSS' },
+        { slug: 'understanding-css-grid', category: 'CSS' },
+        { slug: 'html5-semantic-elements-seo', category: 'HTML' },
+        { slug: 'javascript-dom-manipulation', category: 'JavaScript' },
+        { slug: 'responsive-web-design-best-practices', category: 'Design' },
+        { slug: 'getting-started-with-webzonebw', category: 'General' }
+      ];
+
+      const categories = ['All', 'CSS', 'HTML', 'JavaScript', 'Design', 'General'];
+      
       document.querySelectorAll(".category-btn").forEach((btn) => {
         btn.addEventListener("click", function () {
           document
             .querySelectorAll(".category-btn")
             .forEach((b) => b.classList.remove("active"));
           this.classList.add("active");
-          // Here you would implement actual filtering logic
-          console.log("Filtering by category:", this.textContent);
+          
+          const selectedCategory = this.textContent;
+          filterBlogPosts(selectedCategory);
         });
       });
+
+      function filterBlogPosts(category) {
+        const blogGrid = document.querySelector(".blog-grid");
+        blogGrid.innerHTML = '';
+        
+        const filteredPosts = category === 'All' 
+          ? blogPosts 
+          : blogPosts.filter(post => post.category === category);
+        
+        filteredPosts.forEach(post => {
+          const blogCard = document.createElement("div");
+          blogCard.className = "blog-card";
+          blogCard.innerHTML = `
+            <div class="blog-image">📝</div>
+            <div class="blog-content">
+              <div class="blog-meta">
+                <span class="blog-date">📅 ${post.category}</span>
+                <span class="blog-category">${post.category}</span>
+              </div>
+              <h3 class="blog-title">${post.slug.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</h3>
+              <p class="blog-excerpt">Learn about ${post.category.toLowerCase()} concepts and best practices.</p>
+              <div class="blog-tags">
+                <span class="blog-tag">${post.category}</span>
+                <span class="blog-tag">Tutorial</span>
+              </div>
+              <a href="/blog/${post.slug}" class="blog-read-more">Read More →</a>
+            </div>
+          `;
+          blogGrid.appendChild(blogCard);
+        });
+      }
     </script>
 
     <script src="/Assets/js/site-nav.js" defer></script>
