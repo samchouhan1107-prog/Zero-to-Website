@@ -153,39 +153,7 @@
         margin: 0 auto;
       }
 
-      .blog-stats {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
-      }
 
-      .stat-card {
-        background: rgba(30, 41, 59, 0.7);
-        backdrop-filter: blur(12px);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 16px;
-        padding: 1.5rem;
-        text-align: center;
-        transition: all 0.3s ease;
-      }
-
-      .stat-card:hover {
-        transform: translateY(-2px);
-        border-color: rgba(16, 185, 129, 0.4);
-      }
-
-      .stat-number {
-        font-size: 2rem;
-        font-weight: bold;
-        color: #10b981;
-        margin-bottom: 0.5rem;
-      }
-
-      .stat-label {
-        color: #94a3b8;
-        font-size: 0.875rem;
-      }
 
       .blog-categories {
         display: flex;
@@ -731,20 +699,16 @@
       <!-- Blog Statistics -->
       <section class="blog-stats">
         <div class="stat-card">
-          <div class="stat-number">60+</div>
+          <div class="stat-number">11</div>
           <div class="stat-label">Articles Published</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">30k+</div>
-          <div class="stat-label">Monthly Readers</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-number">18</div>
+          <div class="stat-number">6</div>
           <div class="stat-label">Categories</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">4.9â­</div>
-          <div class="stat-label">Average Rating</div>
+          <div class="stat-number">Not yet</div>
+          <div class="stat-label">Ratings Implemented</div>
         </div>
       </section>
 
@@ -763,363 +727,271 @@
             <div class="blog-date">📅 March 15, 2026</div>
             <div class="blog-category">CSS</div>
           </div>
-          <a href="#" class="blog-read-more">Read Article â†’</a>
+          <a href="/blog/css-grid-layout-fundamentals" class="blog-read-more">Read Article â†’</a>
         </div>
         <div class="featured-image">🎨</div>
       </section>
 
       <!-- Blog Categories -->
       <section class="blog-categories">
-        <button class="category-btn active">All Posts</button>
-        <button class="category-btn">HTML</button>
-        <button class="category-btn">CSS</button>
-        <button class="category-btn">JavaScript</button>
-        <button class="category-btn">React</button>
-        <button class="category-btn">Performance</button>
-        <button class="category-btn">Tools</button>
-        <button class="category-btn">Security</button>
-        <button class="category-btn">Responsive</button>
-        <button class="category-btn">Testing</button>
-        <button class="category-btn">Deployment</button>
-        <button class="category-btn">Accessibility</button>
-        <button class="category-btn">Design</button>
-        <button class="category-btn">PWA</button>
+        <button class="category-btn active" data-category="All">All Posts</button>
+        <button class="category-btn" data-category="CSS">CSS</button>
+        <button class="category-btn" data-category="JavaScript">JavaScript</button>
+        <button class="category-btn" data-category="HTML">HTML</button>
+        <button class="category-btn" data-category="Design">Design</button>
+        <button class="category-btn" data-category="Performance">Performance</button>
+        <button class="category-btn" data-category="Tools">Tools</button>
       </section>
 
       <!-- Blog Posts Grid -->
-      <section class="blog-grid">
-        <article class="blog-card">
-          <div class="blog-image">ðŸŽ¨</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 March 10, 2026</div>
-              <div class="blog-category">CSS</div>
-            </div>
-            <h3 class="blog-title">
-              CSS Flexbox: Complete Guide to 1D Layouts
-            </h3>
-            <p class="blog-excerpt">
-              Master CSS Flexbox with practical examples and best practices.
-              Learn how to create flexible, responsive layouts that work across
-              all devices.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">CSS</span>
-              <span class="blog-tag">Layout</span>
-              <span class="blog-tag">Responsive</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">⚡</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 March 8, 2026</div>
-              <div class="blog-category">JavaScript</div>
-            </div>
-            <h3 class="blog-title">Advanced JavaScript: Closures and Scope</h3>
-            <p class="blog-excerpt">
-              Deep dive into JavaScript closures, scope chains, and execution
-              contexts. Understand how these fundamental concepts power modern
-              JavaScript applications.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">JavaScript</span>
-              <span class="blog-tag">Advanced</span>
-              <span class="blog-tag">Concepts</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">📱</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 March 5, 2026</div>
-              <div class="blog-category">Responsive</div>
-            </div>
-            <h3 class="blog-title">Mobile-First Design: Best Practices</h3>
-            <p class="blog-excerpt">
-              Learn mobile-first design principles and create websites that
-              perform beautifully on all devices. From breakpoints to touch
-              interactions.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Design</span>
-              <span class="blog-tag">Mobile</span>
-              <span class="blog-tag">UX</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🔧</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 March 3, 2026</div>
-              <div class="blog-category">Tools</div>
-            </div>
-            <h3 class="blog-title">Essential Developer Tools in 2026</h3>
-            <p class="blog-excerpt">
-              Discover the must-have developer tools that will boost your
-              productivity in 2026. From code editors to deployment tools, we've
-              got you covered.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Tools</span>
-              <span class="blog-tag">Productivity</span>
-              <span class="blog-tag">Development</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🚀</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 28, 2026</div>
-              <div class="blog-category">Performance</div>
-            </div>
-            <h3 class="blog-title">Web Performance Optimization Guide</h3>
-            <p class="blog-excerpt">
-              Optimize your websites for speed and performance. Learn techniques
-              for faster loading times, better Core Web Vitals, and improved
-              user experience.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Performance</span>
-              <span class="blog-tag">Optimization</span>
-              <span class="blog-tag">Speed</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🎯</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 25, 2026</div>
-              <div class="blog-category">HTML</div>
-            </div>
-            <h3 class="blog-title">Semantic HTML5 for Better SEO</h3>
-            <p class="blog-excerpt">
-              Write semantic HTML5 that improves accessibility and SEO. Learn
-              how proper markup can boost your search rankings and user
-              experience.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">HTML</span>
-              <span class="blog-tag">SEO</span>
-              <span class="blog-tag">Accessibility</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More â†’</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🎨</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 20, 2026</div>
-              <div class="blog-category">CSS</div>
-            </div>
-            <h3 class="blog-title">CSS Custom Properties: The Future of Theming</h3>
-            <p class="blog-excerpt">
-              Master CSS custom properties (variables) to create dynamic,
-              maintainable styles. Learn how to build flexible design systems
-              that adapt to user preferences and brand requirements.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">CSS</span>
-              <span class="blog-tag">Variables</span>
-              <span class="blog-tag">Design System</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">⚡</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 18, 2026</div>
-              <div class="blog-category">JavaScript</div>
-            </div>
-            <h3 class="blog-title">JavaScript Performance Optimization Tips</h3>
-            <p class="blog-excerpt">
-              Optimize your JavaScript code for better performance. Learn about
-              event delegation, memoization, lazy loading, and other techniques
-              to make your web applications faster and more efficient.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">JavaScript</span>
-              <span class="blog-tag">Performance</span>
-              <span class="blog-tag">Optimization</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🔒</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 15, 2026</div>
-              <div class="blog-category">Security</div>
-            </div>
-            <h3 class="blog-title">Web Security Best Practices for 2026</h3>
-            <p class="blog-excerpt">
-              Stay ahead of security threats with comprehensive web security
-              practices. Learn about CORS, CSP, XSS prevention, and secure
-              authentication methods.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Security</span>
-              <span class="blog-tag">Web</span>
-              <span class="blog-tag">Best Practices</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">📱</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 12, 2026</div>
-              <div class="blog-category">Responsive</div>
-            </div>
-            <h3 class="blog-title">Progressive Web Apps: The Complete Guide</h3>
-            <p class="blog-excerpt">
-              Build Progressive Web Apps that work offline, installable, and
-              provide native app experiences. Learn service workers, app manifests,
-              and modern PWA techniques.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">PWA</span>
-              <span class="blog-tag">Progressive</span>
-              <span class="blog-tag">Mobile</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🧪</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 10, 2026</div>
-              <div class="blog-category">Testing</div>
-            </div>
-            <h3 class="blog-title">Unit Testing JavaScript with Modern Tools</h3>
-            <p class="blog-excerpt">
-              Implement comprehensive unit testing for your JavaScript applications
-              using Jest, Vitest, and other modern testing frameworks. Learn
-              testing patterns, mocking, and CI/CD integration.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Testing</span>
-              <span class="blog-tag">Jest</span>
-              <span class="blog-tag">Vitest</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🚀</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 8, 2026</div>
-              <div class="blog-category">Deployment</div>
-            </div>
-            <h3 class="blog-title">Modern Web Deployment Strategies</h3>
-            <p class="blog-excerpt">
-              Explore modern deployment strategies including static site hosting,
-              serverless architecture, and containerization. Learn how to deploy
-              your applications efficiently and cost-effectively.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Deployment</span>
-              <span class="blog-tag">DevOps</span>
-              <span class="blog-tag">CI/CD</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🎯</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 5, 2026</div>
-              <div class="blog-category">Accessibility</div>
-            </div>
-            <h3 class="blog-title">Web Accessibility: WCAG 2.2 Compliance</h3>
-            <p class="blog-excerpt">
-              Ensure your websites are accessible to everyone. Learn WCAG 2.2
-              guidelines, ARIA attributes, and how to create inclusive digital
-              experiences for users with disabilities.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">Accessibility</span>
-              <span class="blog-tag">WCAG</span>
-              <span class="blog-tag">Inclusive</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🎨</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 3, 2026</div>
-              <div class="blog-category">Design</div>
-            </div>
-            <h3 class="blog-title">UI/UX Design Principles for Developers</h3>
-            <p class="blog-excerpt">
-                Bridge the gap between development and design. Learn essential
-                UI/UX principles, design thinking methodologies, and how to create
-                beautiful, user-friendly interfaces.
-              </p>
-            <div class="blog-tags">
-              <span class="blog-tag">UI/UX</span>
-              <span class="blog-tag">Design</span>
-              <span class="blog-tag">User Experience</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
-
-        <article class="blog-card">
-          <div class="blog-image">🔧</div>
-          <div class="blog-content">
-            <div class="blog-meta">
-              <div class="blog-date">📅 February 1, 2026</div>
-              <div class="blog-category">Tools</div>
-            </div>
-            <h3 class="blog-title">Essential VS Code Extensions for 2026</h3>
-            <p class="blog-excerpt">
-              Boost your productivity with the best VS Code extensions. From
-              IntelliSense to debugging tools, discover the must-have extensions
-              that will transform your coding experience.
-            </p>
-            <div class="blog-tags">
-              <span class="blog-tag">VS Code</span>
-              <span class="blog-tag">Extensions</span>
-              <span class="blog-tag">Productivity</span>
-            </div>
-            <a href="#" class="blog-read-more">Read More →</a>
-          </div>
-        </article>
+      <section class="blog-grid" id="blogGrid">
+        <!-- Blog posts will be dynamically loaded here -->
       </section>
+
+      <script>
+        // Real blog data from the system
+        const blogPosts = [
+          {
+            id: 'blog-001',
+            slug: 'complete-guide-css-flexbox',
+            title: 'A Complete Guide to CSS Flexbox',
+            excerpt: 'Master CSS Flexbox with this comprehensive guide. Learn about flex containers, flex items, alignment properties, and real-world layout patterns that every modern developer needs.',
+            date: '2025-01-15',
+            category: 'CSS',
+            tags: ['CSS', 'Flexbox', 'Layout', 'Frontend', 'Web Design'],
+            readTime: '12 min read'
+          },
+          {
+            id: 'blog-002',
+            slug: 'understanding-javascript-async-await',
+            title: 'Understanding JavaScript Async/Await',
+            excerpt: 'Master asynchronous JavaScript with async/await syntax. Learn how to handle promises, error handling, and clean async code patterns for modern web development.',
+            date: '2025-01-20',
+            category: 'JavaScript',
+            tags: ['JavaScript', 'Async', 'Promises', 'ES6+', 'Web Development'],
+            readTime: '8 min read'
+          },
+          {
+            id: 'blog-003',
+            slug: 'html5-semantic-elements-explained',
+            title: 'HTML5 Semantic Elements Explained',
+            excerpt: 'Understand HTML5 semantic elements and their importance for accessibility, SEO, and maintainable web structure. Learn proper usage and best practices.',
+            date: '2025-01-25',
+            category: 'HTML',
+            tags: ['HTML', 'Semantic', 'Accessibility', 'SEO', 'Web Standards'],
+            readTime: '6 min read'
+          },
+          {
+            id: 'blog-004',
+            slug: 'css-grid-layout-fundamentals',
+            title: 'CSS Grid Layout Fundamentals',
+            excerpt: 'Master CSS Grid from basics to advanced techniques. Learn how to create complex, responsive layouts with ease and precision.',
+            date: '2025-02-01',
+            category: 'CSS',
+            tags: ['CSS', 'Grid', 'Layout', 'Responsive', 'Frontend'],
+            readTime: '10 min read'
+          },
+          {
+            id: 'blog-005',
+            slug: 'javascript-es6-features-guide',
+            title: 'JavaScript ES6+ Features Guide',
+            excerpt: 'Explore modern JavaScript features including arrow functions, destructuring, modules, and more. Level up your JavaScript skills with ES6+.',
+            date: '2025-02-05',
+            category: 'JavaScript',
+            tags: ['JavaScript', 'ES6', 'Modern', 'Features', 'Development'],
+            readTime: '9 min read'
+          },
+          {
+            id: 'blog-006',
+            slug: 'responsive-web-design-principles',
+            title: 'Responsive Web Design Principles',
+            excerpt: 'Learn responsive design principles and create websites that work beautifully on all devices. Mobile-first approach and best practices.',
+            date: '2025-02-10',
+            category: 'Design',
+            tags: ['Design', 'Responsive', 'Mobile', 'UX', 'CSS'],
+            readTime: '7 min read'
+          },
+          {
+            id: 'blog-007',
+            slug: 'web-performance-optimization',
+            title: 'Web Performance Optimization',
+            excerpt: 'Optimize your websites for speed and performance. Learn techniques for faster loading times, better Core Web Vitals, and improved user experience.',
+            date: '2025-02-15',
+            category: 'Performance',
+            tags: ['Performance', 'Optimization', 'Speed', 'Web Vitals', 'UX'],
+            readTime: '11 min read'
+          },
+          {
+            id: 'blog-008',
+            slug: 'css-animations-transitions',
+            title: 'CSS Animations and Transitions',
+            excerpt: 'Create stunning animations and smooth transitions with CSS. Learn keyframes, transitions, and animation best practices for engaging user interfaces.',
+            date: '2025-02-20',
+            category: 'CSS',
+            tags: ['CSS', 'Animations', 'Transitions', 'UI', 'Design'],
+            readTime: '8 min read'
+          },
+          {
+            id: 'blog-009',
+            slug: 'javascript-error-handling',
+            title: 'JavaScript Error Handling',
+            excerpt: 'Master JavaScript error handling with try/catch, promises, and modern error patterns. Build robust applications that handle errors gracefully.',
+            date: '2025-02-25',
+            category: 'JavaScript',
+            tags: ['JavaScript', 'Error Handling', 'Debugging', 'Best Practices', 'Development'],
+            readTime: '9 min read'
+          },
+          {
+            id: 'blog-010',
+            slug: 'modern-css-techniques',
+            title: 'Modern CSS Techniques',
+            excerpt: 'Explore modern CSS techniques including custom properties, container queries, and advanced layout methods for contemporary web design.',
+            date: '2025-03-01',
+            category: 'CSS',
+            tags: ['CSS', 'Modern', 'Custom Properties', 'Layout', 'Design'],
+            readTime: '10 min read'
+          },
+          {
+            id: 'blog-011',
+            slug: 'web-development-best-practices',
+            title: 'Web Development Best Practices',
+            excerpt: 'Essential best practices for modern web development including code organization, performance, accessibility, and maintainability.',
+            date: '2025-03-05',
+            category: 'Tools',
+            tags: ['Best Practices', 'Development', 'Code Quality', 'Standards', 'Tools'],
+            readTime: '12 min read'
+          }
+        ];
+
+        // Function to render blog posts
+        function renderBlogPosts(posts) {
+          const blogGrid = document.getElementById('blogGrid');
+          blogGrid.innerHTML = '';
+
+          posts.forEach(post => {
+            const postElement = document.createElement('article');
+            postElement.className = 'blog-card';
+            postElement.innerHTML = `
+              <div class="blog-image">${getCategoryIcon(post.category)}</div>
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <div class="blog-date">📅 ${formatDate(post.date)}</div>
+                  <div class="blog-category">${post.category}</div>
+                </div>
+                <h3 class="blog-title">${post.title}</h3>
+                <p class="blog-excerpt">${post.excerpt}</p>
+                <div class="blog-tags">
+                  ${post.tags.slice(0, 3).map(tag => `<span class="blog-tag">${tag}</span>`).join('')}
+                </div>
+                <a href="/blog/${post.slug}" class="blog-read-more">Read More →</a>
+              </div>
+            `;
+            blogGrid.appendChild(postElement);
+          });
+        }
+
+        // Function to get category icon
+        function getCategoryIcon(category) {
+          const icons = {
+            'CSS': 'ðŸŽ¨',
+            'JavaScript': '⚡',
+            'HTML': '📄',
+            'Design': '🎨',
+            'Performance': '🚀',
+            'Tools': '🔧'
+          };
+          return icons[category] || '📝';
+        }
+
+        // Function to format date
+        function formatDate(dateString) {
+          const date = new Date(dateString);
+          return date.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric' 
+          });
+        }
+
+        // Category filtering functionality
+        function filterByCategory(category) {
+          const filteredPosts = category === 'All' 
+            ? blogPosts 
+            : blogPosts.filter(post => post.category === category);
+          
+          renderBlogPosts(filteredPosts);
+          
+          // Update active state
+          document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.classList.remove('active');
+            if (btn.getAttribute('data-category') === category) {
+              btn.classList.add('active');
+            }
+          });
+        }
+
+        // Initialize blog
+        document.addEventListener('DOMContentLoaded', function() {
+          // Render all posts initially
+          renderBlogPosts(blogPosts);
+
+          // Add category button event listeners
+          document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const category = this.getAttribute('data-category');
+              filterByCategory(category);
+            });
+          });
+
+          // Track blog interactions in Google Analytics
+          // Track category selection
+          document.querySelectorAll('.category-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+              const category = this.getAttribute('data-category');
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'blog_category_select', {
+                  event_category: 'Blog',
+                  event_label: category,
+                  value: 1
+                });
+              }
+            });
+          });
+
+          // Track AI assistant opening
+          const aiChatToggle = document.getElementById('aiChatToggle');
+          if (aiChatToggle) {
+            aiChatToggle.addEventListener('click', function() {
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'blog_assistant_open', {
+                  event_category: 'Blog',
+                  event_label: 'Learning Assistant',
+                  value: 1
+                });
+              }
+            });
+          }
+
+          // Track AI messages
+          const aiChatInput = document.getElementById('aiChatInput');
+          if (aiChatInput) {
+            let messageTracked = false;
+            aiChatInput.addEventListener('keypress', function(e) {
+              if (e.key === 'Enter' && !messageTracked) {
+                messageTracked = true;
+                setTimeout(() => { messageTracked = false; }, 1000);
+                if (typeof gtag !== 'undefined') {
+                  gtag('event', 'blog_assistant_message', {
+                    event_category: 'Blog',
+                    event_label: 'Learning Assistant',
+                    value: 1
+                  });
+                }
+              }
+            });
+          }
+        });
+      </script>
 
       <!-- Newsletter Section -->
       <section class="newsletter-section">
@@ -1152,7 +1024,7 @@
         <div class="ai-chat-header">
           <div class="ai-chat-title">
             <span class="ai-chat-icon">🤖</span>
-            <h3>Web Development AI Assistant</h3>
+            <h3>WebZoneBW Learning Assistant</h3>
           </div>
           <button class="ai-chat-close" id="aiChatClose" aria-label="Close AI Chat">âœ–</button>
         </div>
@@ -1160,7 +1032,7 @@
         <div class="ai-chat-messages" id="aiChatMessages">
           <div class="ai-message ai-welcome">
             <div class="ai-message-content">
-              <p>Hello! I'm your AI assistant for web development. I can help you with:</p>
+              <p>Hello! I'm your WebZoneBW Learning Assistant. I provide guidance using predefined topics and responses.</p>
               <ul>
                 <li>🎯 Explaining blog concepts</li>
                 <li>💻 Code examples and explanations</li>
@@ -1304,7 +1176,7 @@
         // Show typing indicator
         showTypingIndicator();
 
-        // Simulate AI response
+        // Generate predefined assistant response
         setTimeout(() => {
           removeTypingIndicator();
           const response = getAIResponse(message);
@@ -1349,11 +1221,11 @@
         
         // Default response
         const defaultResponses = [
-          "That's a great question! Let me help you with web development concepts. Could you be more specific about what you'd like to know?",
-          "I'd be happy to help you understand web development better. What specific topic or concept are you interested in?",
-          "Web development is a vast field! Are you looking for information about HTML, CSS, JavaScript, or a specific framework?",
-          "Great question! I can provide detailed explanations and examples. What aspect of web development would you like to explore?",
-          "Let me help you with that. Web development involves many technologies - are you focusing on frontend, backend, or full-stack development?"
+          "I'm a pre-programmed learning assistant. I can help with common web development topics, but I don't have access to live AI or real-time information. For your specific question, I'd recommend checking our blog posts or documentation for detailed guidance.",
+          "As a learning assistant with predefined responses, I'm designed to help with common web development topics. For your specific question, you might find more detailed information in our blog articles or by searching our documentation.",
+          "I provide guidance using predefined topics and responses. For your specific question, I'd suggest exploring our blog posts which contain comprehensive tutorials and examples on various web development subjects.",
+          "My current capabilities are limited to predefined responses about common web development topics. For your specific question, you may want to browse our blog articles or check our learning resources for more detailed information.",
+          "I'm a learning assistant that helps with web development topics using predefined content. For your specific question, I recommend visiting our blog where you'll find in-depth articles and tutorials on various subjects."
         ];
         
         return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
