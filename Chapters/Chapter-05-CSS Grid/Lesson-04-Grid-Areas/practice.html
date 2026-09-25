@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 04 | Grid Areas - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 5.4</span>
+            <h1>Construct a Holy Grail Layout with Grid Areas</h1>
+            <p>Declare <code>grid-template-areas</code> with "head head", "nav main", and "foot foot" tracks.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Define <code>grid-template-areas: "header header" "sidebar content" "footer footer";</code>.</li>
+                <li>2. Connect each child element to its corresponding <code>grid-area: header;</code>, etc.</li>
+                <li>3. Add distinctive color tones and padding to each zone.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .holy-grail {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    grid-template-rows: 50px 140px 40px;
+    grid-template-areas:
+      "header  header"
+      "sidebar main"
+      "footer  footer";
+    gap: 8px;
+    max-width: 500px;
+    margin: 20px auto;
+    font-family: system-ui, sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: center;
+  }
+  .hg-header { grid-area: header; background: #ef233c; color: white; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+  .hg-sidebar { grid-area: sidebar; background: #0f172a; color: white; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+  .hg-main { grid-area: main; background: #e2e8f0; color: #1e293b; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+  .hg-footer { grid-area: footer; background: #475569; color: white; display: flex; align-items: center; justify-content: center; border-radius: 6px; }
+</style>
+
+<div class="holy-grail">
+  <div class="hg-header">HEADER (grid-area: header)</div>
+  <div class="hg-sidebar">SIDEBAR</div>
+  <div class="hg-main">MAIN CONTENT</div>
+  <div class="hg-footer">FOOTER (grid-area: footer)</div>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 04</a>
+            <a href="../Lesson-05-Auto-Fit-Minmax/lesson.html">Next: Lesson 05 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

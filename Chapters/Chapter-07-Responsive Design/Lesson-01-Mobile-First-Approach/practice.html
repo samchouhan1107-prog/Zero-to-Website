@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 01 | Mobile-First Stacked Profile Card - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 07.01</span>
+            <h1>Mobile-First Stacked Profile Card</h1>
+            <p>Create a user profile card that is vertically stacked by default, transitioning to a side-by-side layout at 600px+ width.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Write default mobile styles: flex-direction: column and 100% width</li>
+<li>2. Add an additive @media (min-width: 600px) query</li>
+<li>3. Switch flex-direction to row with 24px column gap on desktop</li>
+<li>4. Ensure buttons meet the 44px touch height minimum</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    text-align: center;
+    gap: 16px;
+    max-width: 480px;
+    margin: 20px auto;
+    font-family: system-ui, sans-serif;
+  }
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: #3b82f6;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .action-btn {
+    min-height: 44px;
+    padding: 0 20px;
+    background: #1e40af;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* Progressive Enhancement for larger screens */
+  @media (min-width: 600px) {
+    .profile-card {
+      flex-direction: row;
+      text-align: left;
+    }
+  }
+&lt;/style&gt;
+
+&lt;div class=&quot;profile-card&quot;&gt;
+  &lt;div class=&quot;avatar&quot;&gt;SC&lt;/div&gt;
+  &lt;div style=&quot;flex: 1;&quot;&gt;
+    &lt;h3 style=&quot;margin: 0 0 4px; color: #0f172a;&quot;&gt;Sameer Chouhan&lt;/h3&gt;
+    &lt;p style=&quot;margin: 0 0 12px; color: #64748b; font-size: 14px;&quot;&gt;Senior Frontend Architect&lt;/p&gt;
+    &lt;button class=&quot;action-btn&quot;&gt;Connect Profile&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

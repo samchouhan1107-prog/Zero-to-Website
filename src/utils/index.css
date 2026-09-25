@@ -1,0 +1,604 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme inline {
+  --color-app-canvas: var(--app-canvas);
+  --color-app-surface: var(--app-surface);
+  --color-app-active: var(--app-active);
+  --color-app-inset: var(--app-inset);
+  --color-app-border: var(--app-border);
+  --color-app-ink: var(--app-ink);
+  --color-app-muted: var(--app-muted);
+  --color-app-subtle: var(--app-subtle);
+  --color-app-amber: var(--app-amber);
+  --color-app-amber-hover: var(--app-amber-hover);
+  --color-app-focus: var(--app-focus);
+  --color-app-lesson-strip: var(--app-lesson-strip);
+  --color-app-lesson-strip-ink: var(--app-lesson-strip-ink);
+  --color-mdn-blue: #2b7fff;
+  --color-mdn-link: #4ea8ff;
+  --color-auth0-purple: #635dff;
+  --font-sans: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Recursive Mono', 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+  --radius-panel: 14px;
+  --radius-control: 6px;
+}
+
+@layer base {
+  :root,
+  html.dark {
+    color-scheme: dark;
+    --app-canvas: #151515;
+    --app-surface: #1e1e1e;
+    --app-active: #2b2b2b;
+    --app-inset: #111111;
+    --app-border: #333333;
+    --app-ink: #ffffff;
+    --app-muted: #b0b0b0;
+    --app-subtle: #7a7a7a;
+    --app-amber: #2b7fff;
+    --app-amber-hover: #4ea8ff;
+    --app-focus: #2b7fff;
+    --app-lesson-strip: #1a1a1a;
+    --app-lesson-strip-ink: #ffffff;
+    --app-panel-shadow: 0 16px 32px -20px rgb(0 0 0 / 0.85);
+  }
+
+  html.light {
+    color-scheme: light;
+    --app-canvas: #f8fafc;
+    --app-surface: #ffffff;
+    --app-active: #f1f5f9;
+    --app-inset: #f8fafc;
+    --app-border: #e2e8f0;
+    --app-ink: #0f172a;
+    --app-muted: #475569;
+    --app-subtle: #64748b;
+    --app-amber: #2563eb;
+    --app-amber-hover: #1d4ed8;
+    --app-focus: #2563eb;
+    --app-lesson-strip: #0f172a;
+    --app-lesson-strip-ink: #ffffff;
+    --app-panel-shadow: 0 4px 16px -2px rgb(15 23 42 / 0.08), 0 2px 4px -2px rgb(15 23 42 / 0.04);
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  html {
+    background: var(--app-canvas);
+  }
+
+  body {
+    margin: 0;
+    overflow-x: clip;
+    background: var(--app-canvas);
+    color: var(--app-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    text-rendering: optimizeLegibility;
+  }
+
+  #root {
+    min-width: 0;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--app-focus);
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--app-amber) 34%, transparent);
+    color: var(--app-ink);
+  }
+}
+
+@utility panel-surface {
+  background-color: var(--app-surface);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-panel);
+  box-shadow: var(--app-panel-shadow);
+}
+
+@utility inset-surface {
+  background-color: var(--app-inset);
+  border: 1px solid var(--app-border);
+  border-radius: var(--radius-control);
+}
+
+@utility ledger-rule {
+  border-color: var(--app-border);
+  border-style: solid;
+}
+
+@utility no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility scrollbar-thin {
+  scrollbar-color: var(--app-border) transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: var(--app-border);
+    border-radius: 999px;
+  }
+}
+
+/* Compatibility aliases for the existing lesson/activity surfaces while they migrate to semantic tokens. */
+@layer utilities {
+  html.dark .bg-white,
+  html.dark .bg-slate-50,
+  html.dark .bg-slate-100 {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.dark .bg-slate-800 {
+    background-color: var(--app-active) !important;
+  }
+
+  html.dark .bg-slate-900 {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.dark .bg-slate-950 {
+    background-color: var(--app-canvas) !important;
+  }
+
+  html.dark .border-slate-100,
+  html.dark .border-slate-200,
+  html.dark .border-slate-300,
+  html.dark .border-slate-700,
+  html.dark .border-slate-800 {
+    border-color: var(--app-border) !important;
+  }
+
+  html.dark .text-white,
+  html.dark .text-slate-100,
+  html.dark .text-slate-200,
+  html.dark .text-slate-700,
+  html.dark .text-slate-800,
+  html.dark .text-slate-900 {
+    color: var(--app-ink) !important;
+  }
+
+  html.dark .text-slate-300,
+  html.dark .text-slate-400,
+  html.dark .text-slate-500,
+  html.dark .text-slate-600 {
+    color: var(--app-muted) !important;
+  }
+
+  html.light .bg-white {
+    background-color: #ffffff !important;
+  }
+
+  html.light .bg-slate-50 {
+    background-color: #f8fafc !important;
+  }
+
+  html.light .bg-slate-100 {
+    background-color: #f1f5f9 !important;
+  }
+
+  html.light .border-slate-100,
+  html.light .border-slate-200 {
+    border-color: #e2e8f0 !important;
+  }
+
+  html.light .border-slate-300 {
+    border-color: #cbd5e1 !important;
+  }
+
+  html.light .border-slate-700,
+  html.light .border-slate-800 {
+    border-color: var(--app-border) !important;
+  }
+
+  html.light .text-slate-900,
+  html.light .text-slate-800 {
+    color: #0f172a !important;
+  }
+
+  html.light .text-slate-700,
+  html.light .text-slate-600 {
+    color: #334155 !important;
+  }
+
+  html.light .text-slate-500,
+  html.light .text-slate-400 {
+    color: #64748b !important;
+  }
+
+  /* Safe fallback for legacy hardcoded dark panels in light mode */
+  html.light .bg-\[\#121215\],
+  html.light .bg-\[\#141417\],
+  html.light .bg-\[\#16161a\],
+  html.light .bg-\[\#16161c\],
+  html.light .bg-\[\#18181c\],
+  html.light .bg-\[\#111114\],
+  html.light .bg-\[\#0e0e11\],
+  html.light .bg-\[\#101012\],
+  html.light .bg-\[\#222228\] {
+    background-color: var(--app-surface) !important;
+  }
+
+  html.light .border-\[\#27272a\],
+  html.light .border-\[\#3f3f46\],
+  html.light .border-\[\#3b3b45\] {
+    border-color: var(--app-border) !important;
+  }
+
+  html.light .text-\[\#d4d4d8\],
+  html.light .text-\[\#e4e4e7\] {
+    color: var(--app-ink) !important;
+  }
+
+  html.light .text-\[\#a1a1aa\],
+  html.light .text-\[\#9ca3af\],
+  html.light .text-\[\#71717a\] {
+    color: var(--app-muted) !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ========================================================================
+   PRINT MEDIA QUERY (PDF-Optimized Lesson & Study Sheet Formatter)
+   ======================================================================== */
+@media print {
+  @page {
+    margin: 1.5cm 1.2cm 1.6cm 1.2cm;
+    size: A4 portrait;
+  }
+
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 10.5pt !important;
+    line-height: 1.55 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* Hide screen-only navigation and interactive widgets */
+  header,
+  aside,
+  nav,
+  #cookie-push-notification-banner,
+  #chapter-progress-bar,
+  #section-video,
+  #section-practice,
+  #section-visuals,
+  .no-print,
+  [aria-label='Lesson Outline Tabs'],
+  [aria-label='Lesson Navigation'],
+  [aria-live='polite'],
+  .pointer-events-none {
+    display: none !important;
+  }
+
+  button:not(#section-quiz button):not(.print-keep) {
+    display: none !important;
+  }
+
+  article {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+  }
+
+  .print-header-banner {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2pt solid #0f172a;
+    padding-bottom: 6pt;
+    margin-bottom: 14pt;
+    font-size: 8.5pt;
+    font-family: monospace;
+    font-weight: 700;
+    color: #475569;
+  }
+
+  article > section:first-of-type {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1.5pt solid #cbd5e1 !important;
+    border-radius: 8pt !important;
+    padding: 14pt 18pt !important;
+    margin-bottom: 16pt !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  article > section:first-of-type * {
+    color: #0f172a !important;
+  }
+
+  article > section:first-of-type h1 {
+    font-size: 20pt !important;
+    font-weight: 900 !important;
+    line-height: 1.2 !important;
+    margin: 6pt 0 !important;
+    color: #0f172a !important;
+  }
+
+  article > section:first-of-type p {
+    font-size: 11pt !important;
+    color: #334155 !important;
+    line-height: 1.5 !important;
+  }
+
+  section {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    margin-bottom: 14pt !important;
+    padding: 12pt 14pt !important;
+    border-radius: 6pt !important;
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+    color: #0f172a !important;
+    font-weight: 800 !important;
+  }
+
+  h2 {
+    font-size: 13.5pt !important;
+    margin-top: 10pt !important;
+    margin-bottom: 6pt !important;
+    border-bottom: 1pt solid #cbd5e1 !important;
+    padding-bottom: 3pt !important;
+  }
+
+  h3 {
+    font-size: 11.5pt !important;
+    margin-top: 8pt !important;
+    margin-bottom: 4pt !important;
+  }
+
+  p,
+  li {
+    color: #334155 !important;
+    font-size: 10pt !important;
+    line-height: 1.55 !important;
+    orphans: 3;
+    widows: 3;
+  }
+
+  ul,
+  ol {
+    margin-top: 4pt !important;
+    margin-bottom: 6pt !important;
+  }
+
+  #section-objectives {
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+    border-left: 4pt solid #4f46e5 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-objectives ul li {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+    color: #1e293b !important;
+  }
+
+  #section-analogy {
+    background: #fffdf5 !important;
+    border: 1pt solid #fde68a !important;
+    border-left: 4pt solid #d97706 !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-analogy p {
+    background: #ffffff !important;
+    border: 1pt solid #fef3c7 !important;
+    color: #451a03 !important;
+    font-style: italic !important;
+  }
+
+  #section-code {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #ffffff !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  #section-code .bg-slate-950,
+  #section-code pre,
+  code {
+    background: #f8fafc !important;
+    color: #0f172a !important;
+    border: 1pt solid #e2e8f0 !important;
+    border-radius: 4pt !important;
+    font-family: 'JetBrains Mono', 'Courier New', Courier, monospace !important;
+    font-size: 9pt !important;
+    line-height: 1.45 !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+  }
+
+  #section-code pre {
+    padding: 8pt 10pt !important;
+    margin: 0 !important;
+  }
+
+  #section-code .bg-slate-900\/90,
+  #section-code .bg-slate-900\/80 {
+    background: #f1f5f9 !important;
+    border-color: #cbd5e1 !important;
+    color: #0f172a !important;
+  }
+
+  #section-code .text-slate-100,
+  #section-code .text-slate-300,
+  #section-code .text-slate-400 {
+    color: #334155 !important;
+  }
+
+  #section-code .bg-slate-950 div {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  #section-quiz {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #f8fafc !important;
+    border: 1pt solid #cbd5e1 !important;
+  }
+
+  #section-quiz button {
+    display: flex !important;
+    border: 1pt solid #cbd5e1 !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    padding: 4pt 8pt !important;
+    border-radius: 4pt !important;
+    margin-bottom: 3pt !important;
+    font-size: 9pt !important;
+    cursor: default !important;
+  }
+
+  #section-notes {
+    page-break-inside: avoid;
+    break-inside: avoid;
+    background: #fefce8 !important;
+    border: 1pt dashed #ca8a04 !important;
+  }
+
+  #section-notes textarea {
+    border: 1pt solid #fef08a !important;
+    background: #ffffff !important;
+    color: #1e293b !important;
+    font-size: 9.5pt !important;
+    height: auto !important;
+    min-height: 50pt !important;
+    resize: none !important;
+  }
+
+  #section-summary {
+    background: #f0fdf4 !important;
+    border: 1pt solid #bbf7d0 !important;
+    border-left: 4pt solid #16a34a !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-summary h2 {
+    color: #14532d !important;
+    border-bottom: none !important;
+  }
+
+  #section-summary li {
+    color: #166534 !important;
+  }
+
+  #section-related {
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  #section-related .bg-white,
+  #section-related .dark\:bg-slate-900 {
+    background: #ffffff !important;
+    border: 1pt solid #e2e8f0 !important;
+  }
+
+  .print-footer-banner {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1pt solid #cbd5e1;
+    padding-top: 8pt;
+    margin-top: 20pt;
+    font-size: 8pt;
+    color: #64748b;
+    font-family: monospace;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}

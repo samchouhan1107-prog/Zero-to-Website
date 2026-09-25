@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 09 | Password Strength & Match Validator - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.09</span>
+            <h1>Password Strength & Match Validator</h1>
+            <p>Build a registration credential checker that inspects length, special characters, and matching confirm password.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Listen to 'input' event on password fields</li>
+<li>2. Evaluate criteria: 8+ characters, contains number, passwords match</li>
+<li>3. Update a color-coded strength bar (Red -> Yellow -> Green)</li>
+<li>4. Enable submit button only when all criteria pass</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #0f172a;&quot;&gt;Password Verification Gate&lt;/h3&gt;
+  &lt;label style=&quot;font-size: 13px; color: #475569;&quot;&gt;Enter Password:&lt;/label&gt;
+  &lt;input type=&quot;password&quot; id=&quot;pwd&quot; placeholder=&quot;Min 8 characters&quot; style=&quot;width: 100%; box-sizing: border-box; padding: 8px; margin: 4px 0 8px; border: 1px solid #cbd5e1; border-radius: 6px;&quot;&gt;
+  &lt;div id=&quot;strengthBar&quot; style=&quot;height: 6px; width: 0%; background: #ef4444; border-radius: 3px; transition: all 0.3s; margin-bottom: 8px;&quot;&gt;&lt;/div&gt;
+  &lt;p id=&quot;pwdFeedback&quot; style=&quot;font-size: 12px; color: #64748b; margin: 0;&quot;&gt;Password is too short.&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const pwd = document.getElementById(&#x27;pwd&#x27;);
+  const bar = document.getElementById(&#x27;strengthBar&#x27;);
+  const feedback = document.getElementById(&#x27;pwdFeedback&#x27;);
+
+  pwd.addEventListener(&#x27;input&#x27;, () =&gt; {
+    const val = pwd.value;
+    if (val.length === 0) {
+      bar.style.width = &#x27;0%&#x27;;
+      feedback.textContent = &#x27;Enter password.&#x27;;
+    } else if (val.length &lt; 6) {
+      bar.style.width = &#x27;30%&#x27;;
+      bar.style.background = &#x27;#ef4444&#x27;;
+      feedback.textContent = &#x27;Weak: needs more characters.&#x27;;
+    } else if (val.length &lt; 10 || !/\d/.test(val)) {
+      bar.style.width = &#x27;65%&#x27;;
+      bar.style.background = &#x27;#f59e0b&#x27;;
+      feedback.textContent = &#x27;Medium: add numbers or symbols.&#x27;;
+    } else {
+      bar.style.width = &#x27;100%&#x27;;
+      bar.style.background = &#x27;#10b981&#x27;;
+      feedback.textContent = &#x27;Strong password! Ready to proceed.&#x27;;
+    }
+  });
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

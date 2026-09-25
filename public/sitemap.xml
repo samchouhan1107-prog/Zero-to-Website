@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+
+  <!-- Primary Landing Pages -->
+  <url>
+    <loc>https://webzonebw.shop/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Workspace.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/webtools.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/imagetools.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/developertools.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/learn.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/blog.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.95</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/about.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.90</priority>
+  </url>
+
+  <!-- Legal Pages -->
+  <url>
+    <loc>https://webzonebw.shop/privacy-policy.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/terms-of-service.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/cookie-policy.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/contact.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.70</priority>
+  </url>
+
+  <!-- Complete Web Engineering Chapters -->
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-00-Introduction/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-02-HTML/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-09-Git%20%26%20GitHub/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-10-Final%20Project%20%26%20Deployment/index.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <!-- Key Lessons -->
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/Lesson-01-Your-First-Webpage/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/Lesson-02-Code-Editor-Setup/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/Lesson-03-Browser-Developer-Tools/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/Lesson-04-Files-Folders-Project-Structure/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-01-Development%20Environment/Lesson-05-Running-and-Testing-a-Website/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-02-HTML/lessons/lesson-01-what-is-html.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-01-Box-Model/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-02-Selectors-Specificity/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-03-Colors-Typography/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-04-Display-Positioning/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-05-Spacing-Visual-Styling/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-06-Practical-CSS-Page-Build/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-03-CSS/Lesson-07-Advanced-Selectors/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-01-Introduction/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-02-Flex-Container/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-03-Flex-Items/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-04-Justify-Content/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-05-Align-Items/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-06-Flex-Wrap/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-04-Flexbox/Lesson-07-Mini-Project/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-01-Introduction-Grid/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-02-Grid-Container/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-03-Rows-Columns/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-04-Grid-Areas/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-05-Auto-Fit-Minmax/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-05-CSS%20Grid/Lesson-06-Grid-Alignment/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-01-JavaScript-Introduction/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-02-Variables-Data-Types/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-03-Operators-Conditions/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-04-Functions/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-05-Arrays-Objects/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-06-Loops/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-07-DOM-Manipulation/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-08-Events/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-09-Forms-Validation/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-06-JavaScript/Lesson-10-Mini-Project/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-01-Mobile-First-Approach/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-02-Viewport-Media-Queries/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-03-Fluid-Units-Clamp/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-04-Responsive-Images-Media/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-05-Responsive-Typography/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-06-Responsive-Navigation/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-07-Responsive%20Design/Lesson-07-Responsive-Portfolio-Build/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/Lesson-01-Bootstrap-Introduction/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/Lesson-02-Bootstrap-Grid-System/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/Lesson-03-Typography-Colors-Spacing/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/Lesson-04-Buttons-Cards-Badges/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+  <url>
+    <loc>https://webzonebw.shop/Chapters/Chapter-08-Bootstrap/Lesson-05-Navbars-Headers/lesson.html</loc>
+    <lastmod>2026-09-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.80</priority>
+  </url>
+
+</urlset>

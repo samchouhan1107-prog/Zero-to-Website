@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Practical Page Build - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.6</span>
+            <h1>Assemble a High-Conversion Product Showcase</h1>
+            <p>Combine CSS variables, relative/absolute positioning, concentric corner radiuses, and high-contrast typography into a polished landing card.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Style a hero product showcase with price badge, description, and feature list.</li>
+                <li>2. Add a call-to-action button with 2:1 padding ratio.</li>
+                <li>3. Ensure clean spacing between all elements.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 24px; max-width: 420px; margin: 20px auto; font-family: system-ui, sans-serif; box-shadow: 0 10px 30px rgba(0,0,0,0.06);">
+  <div style="display: flex; justify-content: space-between; align-items: baseline;">
+    <span style="background: #fee2e2; color: #b91c1c; font-size: 12px; font-weight: bold; padding: 4px 10px; border-radius: 9999px;">PRO BUNDLE</span>
+    <span style="font-size: 24px; font-weight: 800; color: #0f172a;">$49<span style="font-size: 14px; font-weight: normal; color: #64748b;">/mo</span></span>
+  </div>
+
+  <h3 style="margin: 16px 0 8px; color: #0f172a; font-size: 20px;">Frontend Mastery Pass</h3>
+  <p style="color: #475569; font-size: 14px; line-height: 1.5; margin: 0 0 16px;">
+    Complete access to HTML, CSS, Flexbox, CSS Grid, and JavaScript interactive workspaces.
+  </p>
+
+  <ul style="padding-left: 20px; color: #334155; font-size: 14px; line-height: 1.8; margin-bottom: 20px;">
+    <li>✔ 10 Comprehensive Chapters</li>
+    <li>✔ Live Browser Code Sandboxes</li>
+    <li>✔ Real-Time Progress Persistence</li>
+  </ul>
+
+  <button style="width: 100%; background: #ef233c; color: white; border: none; padding: 12px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 15px;">
+    Enroll Now 🚀
+  </button>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 06</a>
+            <a href="../Lesson-07-Advanced-Selectors/lesson.html">Next: Lesson 07 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Grid Alignment - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 5.6</span>
+            <h1>Flawless Centering with place-items</h1>
+            <p>Use CSS Grid's <code>place-items: center</code> shorthand to center an authentication modal directly inside the viewport.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Apply <code>display: grid; place-items: center;</code> to the container.</li>
+                <li>2. Give the inner card a max width of 360px and clean shadows.</li>
+                <li>3. Add a primary submit button with full width.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .viewport-center {
+    display: grid;
+    place-items: center;
+    min-height: 280px;
+    background: #f1f5f9;
+    border-radius: 12px;
+    padding: 20px;
+    font-family: system-ui, sans-serif;
+  }
+  .login-card {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: 28px;
+    width: 100%;
+    max-width: 320px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.06);
+    text-align: center;
+  }
+  .login-card h3 { margin: 0 0 8px; color: #0f172a; }
+  .login-card p { margin: 0 0 20px; color: #64748b; font-size: 13px; }
+  .login-card button {
+    width: 100%;
+    background: #ef233c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+</style>
+
+<div class="viewport-center">
+  <div class="login-card">
+    <h3>Welcome Back</h3>
+    <p>Sign in to your learning dashboard</p>
+    <button>Continue with SSO 🔐</button>
+  </div>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 06</a>
+            <a href="../../Chapter-06-JavaScript/index.html">Next: Chapter 06 JavaScript ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

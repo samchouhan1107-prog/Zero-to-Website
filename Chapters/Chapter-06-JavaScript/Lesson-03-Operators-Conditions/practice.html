@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 03 | Grade & Access Gatekeeper - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.03</span>
+            <h1>Grade & Access Gatekeeper</h1>
+            <p>Create a discount or course tier evaluator that checks user input and applies conditional badges based on scores.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Parse an integer score from the provided input element</li>
+<li>2. Check boundary conditions: 90+ ('Senior Honors'), 75-89 ('Proficient Coder'), <75 ('Practice Needed')</li>
+<li>3. Use strict comparison operators (===, >=, <=)</li>
+<li>4. Style the resulting badge container dynamically with appropriate border and background colors</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 10px; text-align: center;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #1e293b;&quot;&gt;Coding Assessment Gate&lt;/h3&gt;
+  &lt;p style=&quot;font-size: 14px; color: #64748b;&quot;&gt;Enter your practice challenge points (0-100):&lt;/p&gt;
+  &lt;input type=&quot;number&quot; id=&quot;quizScore&quot; placeholder=&quot;Score (e.g. 85)&quot; style=&quot;padding: 8px; width: 140px; text-align: center; border: 1px solid #94a3b8; border-radius: 6px;&quot;&gt;
+  &lt;br&gt;&lt;br&gt;
+  &lt;button id=&quot;calcBtn&quot; style=&quot;background: #6366f1; color: white; border: none; padding: 10px 18px; border-radius: 6px; font-weight: bold; cursor: pointer;&quot;&gt;Calculate Tier&lt;/button&gt;
+  &lt;div id=&quot;badgeCard&quot; style=&quot;margin-top: 16px; padding: 12px; border-radius: 8px; font-weight: bold; display: none;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const calcBtn = document.getElementById(&#x27;calcBtn&#x27;);
+  const quizInput = document.getElementById(&#x27;quizScore&#x27;);
+  const badgeCard = document.getElementById(&#x27;badgeCard&#x27;);
+
+  calcBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+    const score = Number(quizInput.value);
+    badgeCard.style.display = &#x27;block&#x27;;
+
+    if (score &gt;= 90) {
+      badgeCard.textContent = &#x27;🌟 Master Level (Age 15+ Advanced Developer)&#x27;;
+      badgeCard.style.background = &#x27;#e0e7ff&#x27;;
+      badgeCard.style.color = &#x27;#3730a3&#x27;;
+    } else if (score &gt;= 70) {
+      badgeCard.textContent = &#x27;⚡ Proficient Apprentice Developer&#x27;;
+      badgeCard.style.background = &#x27;#dbeafe&#x27;;
+      badgeCard.style.color = &#x27;#1e40af&#x27;;
+    } else {
+      badgeCard.textContent = &#x27;🌱 Foundation Level - Keep Practicing!&#x27;;
+      badgeCard.style.background = &#x27;#fef3c7&#x27;;
+      badgeCard.style.color = &#x27;#92400e&#x27;;
+    }
+  });
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 02 | Responsive 3-Tier Dashboard Grid - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 08.02</span>
+            <h1>Responsive 3-Tier Dashboard Grid</h1>
+            <p>Build a responsive grid featuring a full-width header, 3 metric cards (col-md-4), and an asymmetrical 8/4 content split.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Create a .row with 3 metric cards using col-12 col-md-4</li>
+<li>2. Add an inter-card gutter using class 'g-3'</li>
+<li>3. Add a secondary row with main chart (col-md-8) and side activity feed (col-md-4)</li>
+<li>4. Ensure borders and padding are consistent across all tiles</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+
+&lt;div class=&quot;container py-4&quot;&gt;
+  &lt;h4 class=&quot;mb-3 text-dark fw-bold&quot;&gt;Performance Dashboard&lt;/h4&gt;
+  &lt;!-- Metric Cards Row --&gt;
+  &lt;div class=&quot;row g-3 mb-3&quot;&gt;
+    &lt;div class=&quot;col-12 col-md-4&quot;&gt;
+      &lt;div class=&quot;p-3 bg-light border rounded-3&quot;&gt;
+        &lt;div class=&quot;text-muted small&quot;&gt;Completed Lessons&lt;/div&gt;
+        &lt;div class=&quot;h3 fw-bold text-primary mb-0&quot;&gt;52 / 52&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-12 col-md-4&quot;&gt;
+      &lt;div class=&quot;p-3 bg-light border rounded-3&quot;&gt;
+        &lt;div class=&quot;text-muted small&quot;&gt;Practice Score&lt;/div&gt;
+        &lt;div class=&quot;h3 fw-bold text-success mb-0&quot;&gt;100%&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;col-12 col-md-4&quot;&gt;
+      &lt;div class=&quot;p-3 bg-light border rounded-3&quot;&gt;
+        &lt;div class=&quot;text-muted small&quot;&gt;Developer Level&lt;/div&gt;
+        &lt;div class=&quot;h3 fw-bold text-info mb-0&quot;&gt;Senior Ready&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

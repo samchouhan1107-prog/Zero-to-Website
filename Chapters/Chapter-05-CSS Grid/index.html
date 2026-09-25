@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 05 | CSS Grid Layouts — WebZoneBW</title>
+
+<meta
+    name="description"
+    content="Chapter 05 of WebZoneBW: learn CSS Grid, two-dimensional layouts, tracks, columns, rows, grid areas, auto-fit, minmax, and alignment."
+>
+
+<meta name="theme-color" content="#111111">
+
+<link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon/favicon.ico"
+>
+
+<link
+    rel="stylesheet"
+    href="/assets/css/style.css"
+>
+
+<script
+    src="/assets/js/main.js"
+    defer
+></script>
+
+<!-- AdSense -->
+<script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+    crossorigin="anonymous"
+></script>
+
+</head>
+
+<body class="chapter-page chapter-grid">
+<!-- =========================
+     SITE HEADER
+========================== -->
+<header class="site-header">
+
+    <div class="logo">
+        <a
+            href="/index.html"
+            class="logo-link"
+            aria-label="WebZoneBW home"
+        >
+            <h1>WebZoneBW</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
+    </div>
+
+    <nav aria-label="Primary navigation">
+
+        <a href="/index.html">
+            🏠 Home
+        </a>
+
+        <a href="../Chapter-04-Flexbox/index.html">
+            ← Previous
+        </a>
+
+        <a href="../Chapter-06-JavaScript/index.html">
+            Next →
+        </a>
+
+        <button
+            type="button"
+            id="settingsBtn"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+        >
+            ⚙ Settings
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================== -->
+<aside
+    id="settingsPanel"
+    class="settings-panel"
+    aria-label="Site settings"
+    hidden
+>
+
+    <h2>⚙ Settings</h2>
+
+    <button
+        type="button"
+        id="darkModeBtn"
+    >
+        🌙 Dark Mode
+    </button>
+
+    <button
+        type="button"
+        id="fontSizeBtn"
+    >
+        🔤 Font Size
+    </button>
+
+    <button
+        type="button"
+        id="closeSettingsBtn"
+        class="close-btn"
+    >
+        ✕ Close
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+<main class="container chapter-page">
+
+    <!-- =========================
+         CHAPTER HERO
+    ========================== -->
+    <section
+        class="chapter-hero"
+        aria-labelledby="chapter-title"
+    >
+
+        <span class="chapter-badge">
+            Chapter 05
+        </span>
+
+        <h1 id="chapter-title">
+            CSS Grid Matrix Layouts
+        </h1>
+
+        <p>
+            Master two-dimensional CSS layouts using columns,
+            rows, fractional units, responsive grid patterns,
+            named template areas, and precise alignment.
+        </p>
+
+
+        <div class="info-grid">
+
+            <article class="summary-card">
+                <h2>Difficulty</h2>
+                <p>Intermediate</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Duration</h2>
+                <p>3.5 Hours</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Key Concept</h2>
+                <p>2D Grid Layout</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Outcome</h2>
+                <p>Responsive Grid Interfaces</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING OBJECTIVES
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="objectives-title"
+    >
+
+        <h2 id="objectives-title">
+            🎯 Learning Objectives
+        </h2>
+
+        <ul class="chapter-list">
+
+            <li>
+                ✔ Understand how CSS Grid differs from the
+                one-dimensional Flexbox layout model.
+            </li>
+
+            <li>
+                ✔ Understand grid containers, tracks, lines,
+                cells, rows, columns, and gaps.
+            </li>
+
+            <li>
+                ✔ Use fractional units such as
+                <code>1fr</code> and functions such as
+                <code>repeat()</code>.
+            </li>
+
+            <li>
+                ✔ Build responsive layouts with
+                <code>auto-fit</code> and
+                <code>minmax()</code>.
+            </li>
+
+            <li>
+                ✔ Map interface structures using
+                <code>grid-template-areas</code>.
+            </li>
+
+            <li>
+                ✔ Control item and track alignment with
+                <code>place-items</code>,
+                <code>place-self</code>, and related properties.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- =========================
+         LESSONS
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="lessons-title"
+    >
+
+        <h2 id="lessons-title">
+            📚 Chapter 05 Lessons &amp; Practice
+        </h2>
+
+        <div class="lesson-grid">
+
+
+            <!-- LESSON 01 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 01</h3>
+
+                <p>
+                    <strong>Introduction to CSS Grid</strong>
+                    — Understand the two-dimensional grid model,
+                    tracks, lines, cells, and how Grid organizes
+                    page structure.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-01-Introduction-Grid/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-01-Introduction-Grid/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 02 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 02</h3>
+
+                <p>
+                    <strong>The Grid Container</strong>
+                    — Activate Grid with <code>display: grid</code>
+                    and control layout spacing with
+                    <code>gap</code>, <code>row-gap</code>, and
+                    <code>column-gap</code>.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-02-Grid-Container/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-02-Grid-Container/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 03 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 03</h3>
+
+                <p>
+                    <strong>Rows &amp; Columns</strong>
+                    — Define grid tracks using fractional units,
+                    fixed measurements, and <code>repeat()</code>
+                    patterns.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-03-Rows-Columns/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-03-Rows-Columns/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 04 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 04</h3>
+
+                <p>
+                    <strong>Grid Template Areas</strong>
+                    — Design page structures with named grid areas
+                    and map layouts visually before writing the CSS.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-04-Grid-Areas/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-04-Grid-Areas/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 05 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 05</h3>
+
+                <p>
+                    <strong>Auto-Fit &amp; Minmax</strong>
+                    — Create flexible responsive grids with
+                    <code>auto-fit</code> and
+                    <code>minmax()</code> without depending on
+                    fixed breakpoint rules.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-05-Auto-Fit-Minmax/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-05-Auto-Fit-Minmax/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 06 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 06</h3>
+
+                <p>
+                    <strong>Grid Alignment</strong>
+                    — Control the position of grid content and tracks
+                    with alignment properties including
+                    <code>place-items</code> and
+                    <code>place-self</code>.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-06-Grid-Alignment/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-06-Grid-Alignment/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHAPTER CONNECTION
+    ========================== -->
+    <section
+        class="chapter-section chapter-connection"
+        aria-labelledby="connection-title"
+    >
+
+        <h2 id="connection-title">
+            🔗 Chapter Connection
+        </h2>
+
+        <p>
+            Chapter 05 moves from the one-dimensional layout thinking
+            of Flexbox into two-dimensional page composition. Once
+            your layout structure is controlled with Grid, Chapter 06
+            adds behavior and interaction with JavaScript.
+        </p>
+
+        <div class="chapter-nav-links">
+
+            <a
+                href="../Chapter-04-Flexbox/index.html"
+            >
+                ← Chapter 04: Flexbox
+            </a>
+
+            <a
+                href="../Chapter-06-JavaScript/index.html"
+            >
+                Chapter 06: JavaScript →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BRAIN NOTE
+    ========================== -->
+    <section
+        class="chapter-section brain-note"
+        aria-label="WebZoneBW Brain Note"
+    >
+
+        <p>
+            🌋 <strong>Brain Note:</strong>
+            Flexbox helps you arrange things along one direction.
+            Grid lets you reason about rows and columns together.
+            Think:
+            <strong>Structure → Tracks → Placement → Adaptation</strong>.
+        </p>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+<footer>
+
+    <p>
+        WebZoneBW |
+        Learn • Practice • Build • Share |
+        &copy; 2026 All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

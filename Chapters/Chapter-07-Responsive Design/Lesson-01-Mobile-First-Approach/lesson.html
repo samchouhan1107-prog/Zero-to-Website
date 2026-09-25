@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | Mobile-First Philosophy & Core Architecture - WEBZONEBW</title>
+    
+    <!-- Critical CSS for above-the-fold content -->
+    <style>
+        /* Critical mobile styles */
+        body {
+            font-family: Inter, system-ui, -apple-system, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #fcf7f7;
+            color: #1c0b0f;
+        }
+        
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e6ccd0;
+            padding: 16px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .logo h1 {
+            font-size: 1.375rem;
+            color: #d90429;
+            margin: 0;
+            font-weight: 900;
+        }
+        
+        .logo p {
+            font-size: 0.75rem;
+            color: #5e3a40;
+            margin: 0;
+        }
+        
+        .mobile-nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #1c0b0f;
+            padding: 4px;
+        }
+        
+        .mobile-nav-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border-top: 1px solid #e6ccd0;
+            padding: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .mobile-nav-menu.active {
+            display: block;
+        }
+        
+        .mobile-nav-menu a {
+            display: block;
+            padding: 12px;
+            margin-bottom: 4px;
+            border-radius: 6px;
+            text-decoration: none;
+            color: #1c0b0f;
+            font-weight: 500;
+            transition: background-color 0.2s;
+        }
+        
+        .mobile-nav-menu a:hover {
+            background: #fcf7f7;
+        }
+        
+        nav {
+            display: flex;
+            gap: 16px;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #1c0b0f;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.875rem;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: color 0.2s ease;
+        }
+        
+        nav a:hover {
+            color: #d90429;
+        }
+        
+        .btn {
+            padding: 10px 16px;
+            background: #d90429;
+            color: #ffffff;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            min-height: 44px;
+            min-width: 44px;
+        }
+        
+        .btn:hover {
+            background: #ef233c;
+            transform: translateY(-1px);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        .btn:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        /* Touch-friendly settings panel */
+        .settings-panel {
+            position: fixed;
+            top: 0;
+            right: -350px;
+            width: 350px;
+            height: 100vh;
+            background: #ffffff;
+            border-left: 1px solid #e6ccd0;
+            padding: 20px;
+            transition: right 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+        }
+        
+        .settings-panel.active {
+            right: 0;
+        }
+        
+        .settings-panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid #e6ccd0;
+        }
+        
+        .settings-panel-header h3 {
+            margin: 0;
+            color: #1c0b0f;
+            font-size: 1.25rem;
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.25rem;
+            color: #5e3a40;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 50%;
+            transition: all 0.2s ease;
+        }
+        
+        .close-btn:hover {
+            background: #fcf7f7;
+            color: #1c0b0f;
+        }
+        
+        .settings-panel-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .settings-btn {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            width: 100%;
+            padding: 16px;
+            background: #ffffff;
+            border: 1px solid #e6ccd0;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 0.875rem;
+            min-height: 56px;
+            touch-action: manipulation;
+        }
+        
+        .settings-btn:hover {
+            background: #fcf7f7;
+            border-color: #d90429;
+            transform: translateY(-1px);
+        }
+        
+        .settings-btn:active {
+            transform: translateY(0);
+        }
+        
+        .settings-btn:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        .btn-icon {
+            font-size: 1.25rem;
+            min-width: 24px;
+        }
+        
+        .btn-text {
+            font-weight: 500;
+            color: #1c0b0f;
+        }
+        
+        /* Mobile responsive adjustments */
+        @media (max-width: 767px) {
+            .mobile-nav-toggle {
+                display: block;
+            }
+            
+            nav {
+                display: none;
+                position: relative;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            .mobile-nav-menu {
+                display: none;
+            }
+            
+            .mobile-nav-menu.active {
+                display: block;
+            }
+            
+            .settings-panel {
+                width: 100%;
+                right: -100%;
+                top: 0;
+                height: 100vh;
+                max-height: 100vh;
+                overflow-y: auto;
+                z-index: 1001;
+            }
+            
+            .settings-panel.active,
+            .settings-panel.show {
+                right: 0;
+            }
+            
+            .settings-panel-header {
+                padding-bottom: 12px;
+            }
+            
+            .settings-btn {
+                padding: 14px;
+                font-size: 0.8125rem;
+                min-height: 48px;
+            }
+            
+            .btn-icon {
+                font-size: 1.125rem;
+            }
+        }
+        
+        /* Focus indicators for accessibility */
+        *:focus {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+        
+        /* Reduced motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+        
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .btn {
+                border: 2px solid currentColor;
+            }
+            
+            .settings-btn {
+                border: 2px solid currentColor;
+            }
+        }
+    </style>
+    
+    <!-- Non-critical CSS loaded asynchronously -->
+    <link rel="preload" href="/Assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Assets/css/main.css"></noscript>
+    <link rel="preload" href="/Assets/css/lesson.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/Assets/css/lesson.css"></noscript>    <noscript></noscript>
+    
+    <!-- Critical JS -->
+    <script>
+        // Mobile navigation toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileToggle = document.getElementById('mobileNavToggle');
+            const nav = document.querySelector('nav');
+            const mobileMenu = document.querySelector('.mobile-nav-menu');
+            const settingsPanel = document.getElementById('settingsPanel');
+            const closeSettingsBtn = document.getElementById('closeSettingsBtn');
+            const mobileNavClose = document.getElementById('mobileNavClose');
+            const settingsBtnMobile = document.getElementById('settingsBtnMobile');
+            
+            // Mobile navigation functionality
+            if (mobileToggle && nav) {
+                mobileToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    nav.classList.toggle('active');
+                    mobileMenu.classList.toggle('active');
+                    
+                    // Update aria-expanded for accessibility
+                    const isExpanded = nav.classList.contains('active');
+                    mobileToggle.setAttribute('aria-expanded', isExpanded);
+                    mobileToggle.setAttribute('aria-label', isExpanded ? 'Close navigation menu' : 'Open navigation menu');
+                });
+            }
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!nav.contains(e.target) && !mobileToggle.contains(e.target) && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                }
+            });
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    if (nav.classList.contains('active')) {
+                        nav.classList.remove('active');
+                        mobileMenu.classList.remove('active');
+                        mobileToggle.setAttribute('aria-expanded', 'false');
+                        mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                        mobileToggle.focus();
+                    }
+                    if (settingsPanel && settingsPanel.classList.contains('active')) {
+                        settingsPanel.classList.remove('active');
+                        settingsBtnMobile.focus();
+                    }
+                }
+            });
+            
+            // Settings panel functionality
+            if (closeSettingsBtn && settingsPanel) {
+                closeSettingsBtn.addEventListener('click', function() {
+                    settingsPanel.classList.remove('active');
+                    settingsBtnMobile.focus();
+                });
+            }
+            
+            // Mobile navigation close from settings
+            if (mobileNavClose && nav && mobileMenu) {
+                mobileNavClose.addEventListener('click', function() {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    settingsPanel.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                    mobileToggle.focus();
+                });
+            }
+            
+            // Settings button in mobile menu
+            if (settingsBtnMobile && settingsPanel) {
+                settingsBtnMobile.addEventListener('click', function() {
+                    settingsPanel.classList.add('active');
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                });
+            }
+            
+            // Touch gesture support
+            let touchStartX = 0;
+            let touchEndX = 0;
+            
+            document.addEventListener('touchstart', function(e) {
+                touchStartX = e.changedTouches[0].screenX;
+            });
+            
+            document.addEventListener('touchend', function(e) {
+                touchEndX = e.changedTouches[0].screenX;
+                handleSwipe();
+            });
+            
+            function handleSwipe() {
+                const swipeThreshold = 50;
+                const diff = touchStartX - touchEndX;
+                
+                // Swipe left to open navigation
+                if (diff > swipeThreshold && !nav.classList.contains('active')) {
+                    nav.classList.add('active');
+                    mobileMenu.classList.add('active');
+                    mobileToggle.setAttribute('aria-expanded', 'true');
+                    mobileToggle.setAttribute('aria-label', 'Close navigation menu');
+                }
+                
+                // Swipe right to close navigation
+                if (diff < -swipeThreshold && nav.classList.contains('active')) {
+                    nav.classList.remove('active');
+                    mobileMenu.classList.remove('active');
+                    mobileToggle.setAttribute('aria-expanded', 'false');
+                    mobileToggle.setAttribute('aria-label', 'Open navigation menu');
+                }
+            }
+            
+            // Performance optimization: throttle touch events
+            let touchThrottle = false;
+            document.addEventListener('touchmove', function(e) {
+                if (!touchThrottle) {
+                    touchThrottle = true;
+                    setTimeout(() => {
+                        touchThrottle = false;
+                    }, 100);
+                }
+            }, { passive: true });
+        });
+    </script>
+    
+    <!-- Performance monitoring -->
+    
+    <!-- Non-critical JS loaded with async -->
+    <script src="/Assets/js/main.js" async fetchpriority="low"></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        
+        <!-- Mobile Navigation Toggle -->
+        <button id="mobileNavToggle" class="mobile-nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+            ☰
+        </button>
+        
+        <nav>
+            <a href="../../../index.html" aria-label="Go to home page">🏠 Home</a>
+            <a href="/index.html" aria-label="Go to chapter overview">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn" class="btn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+        
+        <!-- Mobile Navigation Menu -->
+        <div class="mobile-nav-menu">
+            <a href="../../../index.html" aria-label="Go to home page">🏠 Home</a>
+            <a href="/index.html" aria-label="Go to chapter overview">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtnMobile" class="btn" aria-label="Open settings panel" style="width: 100%;">⚙ Settings</button>
+        </div>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <div class="settings-panel-header">
+            <h3>⚙ Settings</h3>
+            <button id="closeSettingsBtn" class="close-btn" aria-label="Close settings panel">✖</button>
+        </div>
+        
+        <div class="settings-panel-content">
+            <button id="darkModeBtn" class="settings-btn" aria-label="Toggle dark mode">
+                <span class="btn-icon">🌙</span>
+                <span class="btn-text">Dark Mode</span>
+            </button>
+            <button id="fontSizeBtn" class="settings-btn" aria-label="Adjust font size">
+                <span class="btn-icon">🔤</span>
+                <span class="btn-text">Font Size</span>
+            </button>
+            <button id="mobileNavClose" class="settings-btn" aria-label="Close settings and navigation">
+                <span class="btn-icon">📱</span>
+                <span class="btn-text">Mobile Navigation</span>
+            </button>
+        </div>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 01</span>
+            <h1>Mobile-First Philosophy & Core Architecture</h1>
+            <p>Design for constrained viewports first, progressively enhancing as screen real estate expands.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Strategy</h3>
+                    <p>Mobile-First vs Desktop-Down</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Constraint</h3>
+                    <p>Touch Targets (min 44px)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Progressive</h3>
+                    <p>Enhancement with min-width</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Performance</h3>
+                    <p>Lean default mobile payloads</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Understand why mobile-first CSS results in cleaner, more maintainable codebases</li>
+<li>✔ Replace complex desktop overriding with additive min-width media queries</li>
+<li>✔ Establish ergonomic touch target standards (minimum 44x44px for thumbs)</li>
+<li>✔ Optimize asset loading and rendering order for high mobile network efficiency</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Why Mobile-First Wins</h2>
+            <p>Over 60% of global web traffic originates from mobile devices. Designing mobile-first ensures the default stylesheet contains lightweight, linear, touch-friendly styling. Larger screens simply layer on multi-column layouts via min-width breakpoints.</p>
+            <ul class='chapter-list'><li>Default CSS = Mobile rules (no media query needed)</li>
+<li>@media (min-width: 768px) = Tablet enhancements</li>
+<li>@media (min-width: 1024px) = Desktop grid & wide layout expansions</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto;&quot;&gt;
+  &lt;div style=&quot;background: #e0e7ff; color: #3730a3; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 12px;&quot;&gt;
+    Mobile-First Card (Scales Up Cleanly)
+  &lt;/div&gt;
+  &lt;p style=&quot;color: #475569; font-size: 14px; line-height: 1.5;&quot;&gt;
+    Notice how all base styles work perfectly inside small containers without horizontal overflow.
+  &lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="/index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

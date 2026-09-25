@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 08 | Interactive FAQ Accordion with Event Delegation - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.08</span>
+            <h1>Interactive FAQ Accordion with Event Delegation</h1>
+            <p>Build an expandable FAQ list where clicking any question toggles the answer visibility using a single delegated listener.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Attach an event listener to the parent .accordion container</li>
+<li>2. Check if event.target has class .faq-header</li>
+<li>3. Toggle display or class on the sibling .faq-body</li>
+<li>4. Close other open questions (single open accordion pattern)</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #0f172a;&quot;&gt;Developer Track FAQ&lt;/h3&gt;
+  &lt;div id=&quot;faqList&quot; style=&quot;display: flex; flex-direction: column; gap: 8px;&quot;&gt;
+    &lt;div class=&quot;faq-item&quot; style=&quot;border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;&quot;&gt;
+      &lt;button class=&quot;faq-btn&quot; style=&quot;width: 100%; text-align: left; padding: 12px; background: #f8fafc; border: none; font-weight: bold; cursor: pointer;&quot;&gt;What is the age recommendation for this course?&lt;/button&gt;
+      &lt;div class=&quot;faq-content&quot; style=&quot;padding: 12px; font-size: 14px; color: #475569; display: none; border-top: 1px solid #e2e8f0;&quot;&gt;This course is optimized for learners aged 15 and older, covering real industry tools, syntax, and workflows.&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;faq-item&quot; style=&quot;border: 1px solid #e2e8f0; border-radius: 6px; overflow: hidden;&quot;&gt;
+      &lt;button class=&quot;faq-btn&quot; style=&quot;width: 100%; text-align: left; padding: 12px; background: #f8fafc; border: none; font-weight: bold; cursor: pointer;&quot;&gt;Do I need prior coding experience?&lt;/button&gt;
+      &lt;div class=&quot;faq-content&quot; style=&quot;padding: 12px; font-size: 14px; color: #475569; display: none; border-top: 1px solid #e2e8f0;&quot;&gt;No, Chapter 00 and 01 teach core development environments from complete scratch.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.getElementById(&#x27;faqList&#x27;).addEventListener(&#x27;click&#x27;, (e) =&gt; {
+    if (e.target.classList.contains(&#x27;faq-btn&#x27;)) {
+      const content = e.target.nextElementSibling;
+      const isOpen = content.style.display === &#x27;block&#x27;;
+      content.style.display = isOpen ? &#x27;none&#x27; : &#x27;block&#x27;;
+      e.target.style.background = isOpen ? &#x27;#f8fafc&#x27; : &#x27;#ede9fe&#x27;;
+    }
+  });
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 07 | Complete Responsive Landing Page Showcase - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 07.07</span>
+            <h1>Complete Responsive Landing Page Showcase</h1>
+            <p>Assemble a responsive 3-section page featuring a fluid header, responsive feature cards, and an interactive contact card.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Implement a fluid container with min(100% - 32px, 800px)</li>
+<li>2. Create a 3-column project grid that wraps to 1 column automatically on mobile</li>
+<li>3. Add interactive hover micro-transitions on cards</li>
+<li>4. Verify responsive view in the sandbox window</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .site-container {
+    width: min(100% - 32px, 720px);
+    margin: 20px auto;
+    font-family: system-ui, sans-serif;
+  }
+  .hero-card {
+    padding: clamp(20px, 5vw, 40px);
+    background: #0f172a;
+    color: white;
+    border-radius: 16px;
+    text-align: center;
+    margin-bottom: 24px;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+  }
+  .feature-card {
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+  }
+&lt;/style&gt;
+
+&lt;div class=&quot;site-container&quot;&gt;
+  &lt;div class=&quot;hero-card&quot;&gt;
+    &lt;h2 style=&quot;font-size: clamp(1.4rem, 3.5vw, 2.2rem); margin: 0 0 8px;&quot;&gt;Responsive Engineer Portfolio&lt;/h2&gt;
+    &lt;p style=&quot;color: #94a3b8; margin: 0; font-size: clamp(0.9rem, 2vw, 1rem);&quot;&gt;Built for Age 15+ up to Senior Cloud Architects&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;card-grid&quot;&gt;
+    &lt;div class=&quot;feature-card&quot;&gt;
+      &lt;h4 style=&quot;margin: 0 0 6px; color: #1e40af;&quot;&gt;📱 Mobile-First&lt;/h4&gt;
+      &lt;p style=&quot;margin: 0; font-size: 13px; color: #64748b;&quot;&gt;Optimized for one-handed mobile ergonomic thumb navigation.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;feature-card&quot;&gt;
+      &lt;h4 style=&quot;margin: 0 0 6px; color: #059669;&quot;&gt;⚡ CSS Grid 2D&lt;/h4&gt;
+      &lt;p style=&quot;margin: 0; font-size: 13px; color: #64748b;&quot;&gt;Media-query-free card reflow using auto-fit and minmax.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;feature-card&quot;&gt;
+      &lt;h4 style=&quot;margin: 0 0 6px; color: #7c3aed;&quot;&gt;🎨 Fluid Design&lt;/h4&gt;
+      &lt;p style=&quot;margin: 0; font-size: 13px; color: #64748b;&quot;&gt;Mathematical precision with CSS clamp and custom properties.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

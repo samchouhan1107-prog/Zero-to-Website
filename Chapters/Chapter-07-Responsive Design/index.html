@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 07 | Responsive Web Design — WebZoneBW</title>
+
+<meta
+    name="description"
+    content="Chapter 07 of WebZoneBW: learn responsive web design through seven practical lessons covering mobile-first CSS, media queries, fluid units, responsive media, typography, navigation, and a portfolio build."
+>
+
+<meta name="theme-color" content="#111111">
+
+<link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon/favicon.ico"
+>
+
+<link
+    rel="stylesheet"
+    href="/assets/css/style.css"
+>
+
+<script
+    src="/assets/js/main.js"
+    defer
+></script>
+
+<!-- AdSense -->
+<script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+    crossorigin="anonymous"
+></script>
+
+</head>
+
+<body class="chapter-page chapter-responsive">
+<!-- =========================
+     SITE HEADER
+========================== -->
+<header class="site-header">
+
+    <div class="logo">
+        <a
+            href="/index.html"
+            class="logo-link"
+            aria-label="WebZoneBW home"
+        >
+            <h1>WebZoneBW</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
+    </div>
+
+    <nav aria-label="Primary navigation">
+
+        <a href="/index.html">
+            🏠 Home
+        </a>
+
+        <a href="../Chapter-06-JavaScript/index.html">
+            ← Previous
+        </a>
+
+        <a href="../Chapter-08-Bootstrap/index.html">
+            Next →
+        </a>
+
+        <button
+            type="button"
+            id="settingsBtn"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+        >
+            ⚙ Settings
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================== -->
+<aside
+    id="settingsPanel"
+    class="settings-panel"
+    aria-label="Site settings"
+    hidden
+>
+
+    <h2>⚙ Settings</h2>
+
+    <button
+        type="button"
+        id="darkModeBtn"
+    >
+        🌙 Dark Mode
+    </button>
+
+    <button
+        type="button"
+        id="fontSizeBtn"
+    >
+        🔤 Font Size
+    </button>
+
+    <button
+        type="button"
+        id="closeSettingsBtn"
+        class="close-btn"
+    >
+        ✕ Close
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+<main class="container chapter-page">
+
+    <!-- =========================
+         CHAPTER HERO
+    ========================== -->
+    <section
+        class="chapter-hero"
+        aria-labelledby="chapter-title"
+    >
+
+        <span class="chapter-badge">
+            Chapter 07
+        </span>
+
+        <h1 id="chapter-title">
+            Responsive Web Design &amp; Fluid Layouts
+        </h1>
+
+        <p>
+            Build interfaces that adapt naturally across smartphones,
+            tablets, laptops, desktops, and wider screens using
+            mobile-first CSS, responsive media, fluid sizing,
+            and adaptive navigation.
+        </p>
+
+
+        <div class="info-grid">
+
+            <article class="summary-card">
+                <h2>Difficulty</h2>
+                <p>Intermediate</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Duration</h2>
+                <p>3 Hours</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Key Technique</h2>
+                <p>Mobile-First CSS</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Outcome</h2>
+                <p>Adaptive Multi-Device Layouts</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING OBJECTIVES
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="objectives-title"
+    >
+
+        <h2 id="objectives-title">
+            🎯 Learning Objectives
+        </h2>
+
+        <ul class="chapter-list">
+
+            <li>
+                ✔ Configure the responsive viewport using the
+                <code>viewport</code> meta tag.
+            </li>
+
+            <li>
+                ✔ Write mobile-first media queries using
+                <code>min-width</code> breakpoints.
+            </li>
+
+            <li>
+                ✔ Create fluid layouts using
+                <code>clamp()</code>, <code>min()</code>,
+                <code>max()</code>, and viewport units.
+            </li>
+
+            <li>
+                ✔ Build responsive images and media using
+                <code>srcset</code> and <code>picture</code>.
+            </li>
+
+            <li>
+                ✔ Design readable typography that adapts across
+                different screen sizes.
+            </li>
+
+            <li>
+                ✔ Build responsive navigation with touch-friendly
+                interactions.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- =========================
+         LESSONS
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="lessons-title"
+    >
+
+        <h2 id="lessons-title">
+            📚 Chapter 07 Lessons &amp; Practice
+        </h2>
+
+        <div class="lesson-grid">
+
+
+            <!-- LESSON 01 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 01
+                </h3>
+
+                <p>
+                    <strong>
+                        Mobile-First Approach
+                    </strong>
+                    — Learn progressive enhancement, lean default
+                    layouts, and touch-friendly interface targets.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-01-Mobile-First-Approach/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-01-Mobile-First-Approach/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 02 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 02
+                </h3>
+
+                <p>
+                    <strong>
+                        Viewport &amp; Media Queries
+                    </strong>
+                    — Understand the viewport, responsive breakpoints,
+                    mobile-first media queries, and range syntax.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-02-Viewport-Media-Queries/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-02-Viewport-Media-Queries/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 03 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 03
+                </h3>
+
+                <p>
+                    <strong>
+                        Fluid Units &amp; Clamp
+                    </strong>
+                    — Create fluid sizing with
+                    <code>clamp()</code>, <code>min()</code>,
+                    <code>max()</code>, and dynamic viewport units.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-03-Fluid-Units-Clamp/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-03-Fluid-Units-Clamp/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 04 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 04
+                </h3>
+
+                <p>
+                    <strong>
+                        Responsive Images &amp; Media
+                    </strong>
+                    — Build flexible media using responsive images,
+                    <code>srcset</code>, density descriptors,
+                    and <code>picture</code> art direction.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-04-Responsive-Images-Media/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-04-Responsive-Images-Media/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 05 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 05
+                </h3>
+
+                <p>
+                    <strong>
+                        Responsive Typography
+                    </strong>
+                    — Control readable line lengths, rem-based
+                    scaling, line height, and responsive text wrapping.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-05-Responsive-Typography/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-05-Responsive-Typography/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 06 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 06
+                </h3>
+
+                <p>
+                    <strong>
+                        Responsive Navigation
+                    </strong>
+                    — Build mobile navigation drawers,
+                    desktop navigation bars, and touch-friendly
+                    navigation behavior.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-06-Responsive-Navigation/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-06-Responsive-Navigation/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 07 -->
+            <article class="lesson-card">
+
+                <h3>
+                    Lesson 07
+                </h3>
+
+                <p>
+                    <strong>
+                        Responsive Portfolio Build
+                    </strong>
+                    — Combine fluid layouts, responsive cards,
+                    adaptive typography, and mobile-first techniques
+                    into a complete portfolio project.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-07-Responsive-Portfolio-Build/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-07-Responsive-Portfolio-Build/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHAPTER CONNECTION
+    ========================== -->
+    <section
+        class="chapter-section chapter-connection"
+        aria-labelledby="connection-title"
+    >
+
+        <h2 id="connection-title">
+            🔗 Continue the Journey
+        </h2>
+
+        <p>
+            Responsive design gives you the foundation for building
+            interfaces that adapt to different screens. In the next
+            chapter, you'll explore Bootstrap 5 and see how a
+            component-based framework can accelerate common
+            responsive interface patterns.
+        </p>
+
+        <div class="chapter-nav-links">
+
+            <a
+                href="../Chapter-06-JavaScript/index.html"
+            >
+                ← Chapter 06: JavaScript
+            </a>
+
+            <a
+                href="../Chapter-08-Bootstrap/index.html"
+            >
+                Chapter 08: Bootstrap 5 →
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         BRAIN NOTE
+    ========================== -->
+    <section
+        class="chapter-section brain-note"
+        aria-label="WebZoneBW Brain Note"
+    >
+
+        <p>
+            🌋 <strong>Brain Note:</strong>
+            Responsive design is not about designing for a list
+            of device sizes. Build flexible rules so the interface
+            can adapt even when the screen size is something you
+            did not explicitly plan for.
+        </p>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================== -->
+<footer>
+
+    <p>
+        WebZoneBW |
+        Learn • Practice • Build • Share |
+        &copy; 2026 All Rights Reserved.
+    </p>
+
+</footer>
+
+</body>
+</html>

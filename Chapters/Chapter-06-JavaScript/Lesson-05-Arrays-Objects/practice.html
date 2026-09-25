@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 05 | Inventory & Price Filter System - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.05</span>
+            <h1>Inventory & Price Filter System</h1>
+            <p>Build a product inventory search using JavaScript array filter() and map() that updates dynamically.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Create an array of at least 4 product objects with id, name, category, and price</li>
+<li>2. Use .filter() to find items matching category or price under $50</li>
+<li>3. Use .map() to construct formatted HTML list items</li>
+<li>4. Render the total count of matched products in the summary bar</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #0f172a;&quot;&gt;Dev Equipment Catalog&lt;/h3&gt;
+  &lt;div style=&quot;display: flex; gap: 8px; margin-bottom: 12px;&quot;&gt;
+    &lt;button id=&quot;allBtn&quot; style=&quot;padding: 6px 12px; border: 1px solid #94a3b8; background: #f8fafc; border-radius: 6px; cursor: pointer;&quot;&gt;All&lt;/button&gt;
+    &lt;button id=&quot;budgetBtn&quot; style=&quot;padding: 6px 12px; border: 1px solid #94a3b8; background: #f8fafc; border-radius: 6px; cursor: pointer;&quot;&gt;Under $50&lt;/button&gt;
+    &lt;button id=&quot;hardwareBtn&quot; style=&quot;padding: 6px 12px; border: 1px solid #94a3b8; background: #f8fafc; border-radius: 6px; cursor: pointer;&quot;&gt;Peripherals&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;productGrid&quot; style=&quot;display: flex; flex-direction: column; gap: 8px;&quot;&gt;&lt;/div&gt;
+  &lt;p id=&quot;itemCount&quot; style=&quot;font-size: 12px; color: #64748b; margin-top: 12px;&quot;&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const products = [
+    { id: 1, name: &quot;Mechanical Keyboard&quot;, price: 79, cat: &quot;peripherals&quot; },
+    { id: 2, name: &quot;Optical Mouse&quot;, price: 29, cat: &quot;peripherals&quot; },
+    { id: 3, name: &quot;Desk Mat&quot;, price: 19, cat: &quot;accessories&quot; },
+    { id: 4, name: &quot;USB-C Multi-Hub&quot;, price: 45, cat: &quot;accessories&quot; },
+    { id: 5, name: &quot;Monitor Arm&quot;, price: 89, cat: &quot;furniture&quot; }
+  ];
+
+  const grid = document.getElementById(&#x27;productGrid&#x27;);
+  const countEl = document.getElementById(&#x27;itemCount&#x27;);
+
+  function showProducts(items) {
+    grid.innerHTML = items.map(p =&gt; `
+      &lt;div style=&quot;padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;&quot;&gt;
+        &lt;div&gt;&lt;strong&gt;${p.name}&lt;/strong&gt; &lt;span style=&quot;font-size: 11px; color: #64748b;&quot;&gt;[${p.cat}]&lt;/span&gt;&lt;/div&gt;
+        &lt;div style=&quot;color: #059669; font-weight: bold;&quot;&gt;$${p.price}&lt;/div&gt;
+      &lt;/div&gt;
+    `).join(&#x27;&#x27;);
+    countEl.textContent = `Showing ${items.length} of ${products.length} products.`;
+  }
+
+  showProducts(products);
+
+  document.getElementById(&#x27;allBtn&#x27;).onclick = () =&gt; showProducts(products);
+  document.getElementById(&#x27;budgetBtn&#x27;).onclick = () =&gt; showProducts(products.filter(p =&gt; p.price &lt; 50));
+  document.getElementById(&#x27;hardwareBtn&#x27;).onclick = () =&gt; showProducts(products.filter(p =&gt; p.cat === &#x27;peripherals&#x27;));
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 03 | Flex Items: flex-grow, flex-shrink & flex-basis - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 04.03</span>
+            <h1>Flex Items: flex-grow, flex-shrink & flex-basis</h1>
+            <p>Control item growth and shrinking rates with shorthand flex: 1 1 auto.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Apply flex-grow: 2 to the middle highlighted card</li>
+<li>2. Set flex-shrink: 0 on avatar icons so they never collapse</li>
+<li>3. Use flex-basis: 250px as starting baseline width</li>
+<li>4. Test browser resizing to observe proportional space distribution</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .item-container {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    background: #f1f5f9;
+    border-radius: 8px;
+  }
+  .card-standard {
+    flex: 1;
+    padding: 16px;
+    background: white;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+  }
+  .card-featured {
+    flex: 2;
+    padding: 16px;
+    background: #eff6ff;
+    border: 2px solid #2563eb;
+    border-radius: 6px;
+  }
+&lt;/style&gt;
+&lt;div class=&quot;item-container&quot;&gt;
+  &lt;div class=&quot;card-standard&quot;&gt;Normal Card (flex: 1)&lt;/div&gt;
+  &lt;div class=&quot;card-featured&quot;&gt;&lt;strong&gt;Featured Card (flex: 2)&lt;/strong&gt;&lt;/div&gt;
+  &lt;div class=&quot;card-standard&quot;&gt;Normal Card (flex: 1)&lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 06 | Loops, Iteration & Performance - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 06</span>
+            <h1>Loops, Iteration & Performance</h1>
+            <p>Master repetition: for, while, for...of, for...in, break, continue, and avoiding blocking the main thread.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>for Loop</h3>
+                    <p>Indexed counter iteration</p>
+                </div>
+                <div class="summary-card">
+                    <h3>for...of</h3>
+                    <p>Clean iterable sequence traversal</p>
+                </div>
+                <div class="summary-card">
+                    <h3>for...in</h3>
+                    <p>Enumerable object key reflection</p>
+                </div>
+                <div class="summary-card">
+                    <h3>while/do</h3>
+                    <p>Condition-driven loops</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Use for...of loops for intuitive iteration over arrays, strings, and NodeLists</li>
+<li>✔ Safely use while and do...while loops with guaranteed termination conditions</li>
+<li>✔ Control flow cleanly using break and continue statements</li>
+<li>✔ Understand why expensive loops should not block the browser render frame (60fps)</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Selecting the Right Loop for the Job</h2>
+            <p>JavaScript offers multiple looping primitives. Choosing the most idiomatic construct improves readability and minimizes off-by-one errors.</p>
+            <ul class='chapter-list'><li>for (const item of array): Best for arrays, Sets, and Maps</li>
+<li>for (const key in object): Best for inspecting object properties (pair with Object.hasOwn)</li>
+<li>for (let i = 0; i < n; i++): Best when the index position is directly needed for step calculations</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; padding: 20px; max-width: 420px; margin: auto;&quot;&gt;
+  &lt;h4 style=&quot;margin-top: 0; color: #1e293b;&quot;&gt;Generate Number Matrix&lt;/h4&gt;
+  &lt;input type=&quot;number&quot; id=&quot;rowsInput&quot; value=&quot;5&quot; min=&quot;1&quot; max=&quot;10&quot; style=&quot;padding: 6px; width: 60px;&quot;&gt;
+  &lt;button id=&quot;genBtn&quot; style=&quot;padding: 6px 12px; background: #0284c7; color: white; border: none; border-radius: 6px; cursor: pointer;&quot;&gt;Generate&lt;/button&gt;
+  &lt;div id=&quot;gridOutput&quot; style=&quot;margin-top: 14px; font-family: monospace; line-height: 1.6; background: #f8fafc; padding: 12px; border-radius: 8px;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.getElementById(&#x27;genBtn&#x27;).onclick = () =&gt; {
+    const rows = parseInt(document.getElementById(&#x27;rowsInput&#x27;).value, 10) || 3;
+    let output = &#x27;&#x27;;
+    for (let r = 1; r &lt;= rows; r++) {
+      let line = &#x27;&#x27;;
+      for (let c = 1; c &lt;= r; c++) {
+        line += &#x27;★ &#x27;;
+      }
+      output += line + &#x27;&lt;br&gt;&#x27;;
+    }
+    document.getElementById(&#x27;gridOutput&#x27;).innerHTML = output;
+  };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="/index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

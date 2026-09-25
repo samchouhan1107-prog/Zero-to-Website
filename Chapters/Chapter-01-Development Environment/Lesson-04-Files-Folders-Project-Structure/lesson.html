@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 04 | Files, Folders & Project Structure - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 04</span>
+            <h1>Files, Folders &amp; Project Structure</h1>
+            <p>Master professional directory organization, relative vs absolute paths, naming conventions, and file management for production websites.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Root Entry</h3>
+                    <p>index.html</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Asset Dirs</h3>
+                    <p>css / js / images</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Paths</h3>
+                    <p>Relative (./ and ../)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>25 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Professional Web Project Layout</h2>
+            <p>Every maintainable website separates structural markup, styles, scripts, and media into dedicated directories:</p>
+            <div class="code-box">
+                <pre><code>my-web-project/
+├── index.html          &lt;!-- Main homepage / root entry point --&gt;
+├── about.html          &lt;!-- Secondary pages in root or subdirectories --&gt;
+├── contact.html
+└── assets/
+    ├── css/
+    │   └── style.css   &lt;!-- Global styling rules --&gt;
+    ├── js/
+    │   └── app.js     &lt;!-- Interactive scripts --&gt;
+    └── images/
+        └── logo.svg    &lt;!-- Visual assets &amp; photography --&gt;</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Relative File Paths Demystified</h2>
+            <ul class="chapter-list">
+                <li><code>style.css</code>: In the exact same folder as the referencing HTML file.</li>
+                <li><code>./assets/css/style.css</code>: Step down into the <code>assets</code> folder, then <code>css</code>.</li>
+                <li><code>../index.html</code>: Step UP one parent directory level.</li>
+                <li><code>../../Assets/css/main.css</code>: Step UP two levels to reach the root Assets folder.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Safe File Naming Rules</h2>
+            <ul class="chapter-list">
+                <li>✔ Always use all-lowercase letters (e.g. <code>profile-picture.jpg</code>).</li>
+                <li>✔ Use hyphens (<code>-</code>) instead of spaces to avoid broken URL encoding like <code>%20</code>.</li>
+                <li>✔ Never use special symbols like <code>#</code>, <code>?</code>, <code>&amp;</code>, or accented characters in web filenames.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>4. Practice Challenge</h2>
+            <p>Build a navigation card linking to relative file resources in the practice sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 04 Practice Challenge →</h3>
+                <p>Construct clean relative hyperlinks and image references.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-03-Browser-Developer-Tools/lesson.html">⬅ Lesson 03: Browser Developer Tools</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

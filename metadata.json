@@ -1,0 +1,7 @@
+{
+  "name": "WebZoneBW SC",
+  "description": "Powerful Web Tools, Built for the Modern Web. Explore practical web, image, developer, and performance tools to build, test, and improve modern websites.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

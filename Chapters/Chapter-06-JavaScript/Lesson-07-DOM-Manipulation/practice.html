@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 07 | Interactive Notification & Alert Banner Manager - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.07</span>
+            <h1>Interactive Notification & Alert Banner Manager</h1>
+            <p>Build a dynamic toast notification generator that appends alert messages to the screen and auto-dismisses them after a timeout.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Select the toast container element</li>
+<li>2. Create a new toast <div> on button click with message and status style</li>
+<li>3. Append the toast element to the active notification container</li>
+<li>4. Use setTimeout() to smoothly fade out and remove the element after 3 seconds</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #1e293b;&quot;&gt;Toast Alert Generator&lt;/h3&gt;
+  &lt;div style=&quot;display: flex; gap: 8px; margin-bottom: 16px;&quot;&gt;
+    &lt;button id=&quot;successBtn&quot; style=&quot;padding: 8px 14px; background: #10b981; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;&quot;&gt;Success Toast&lt;/button&gt;
+    &lt;button id=&quot;warnBtn&quot; style=&quot;padding: 8px 14px; background: #f59e0b; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;&quot;&gt;Warning Toast&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;toastArea&quot; style=&quot;display: flex; flex-direction: column; gap: 8px;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  function showToast(message, color, bg) {
+    const toastArea = document.getElementById(&#x27;toastArea&#x27;);
+    const toast = document.createElement(&#x27;div&#x27;);
+    toast.style.cssText = `padding: 10px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; color: ${color}; background: ${bg}; border: 1px solid ${color}; transition: opacity 0.3s;`;
+    toast.textContent = message;
+    toastArea.appendChild(toast);
+
+    setTimeout(() =&gt; {
+      toast.style.opacity = &#x27;0&#x27;;
+      setTimeout(() =&gt; toast.remove(), 300);
+    }, 2500);
+  }
+
+  document.getElementById(&#x27;successBtn&#x27;).onclick = () =&gt; showToast(&#x27;✔ Lesson progress saved successfully!&#x27;, &#x27;#065f46&#x27;, &#x27;#d1fae5&#x27;);
+  document.getElementById(&#x27;warnBtn&#x27;).onclick = () =&gt; showToast(&#x27;⚠ Sandbox code has unsaved modifications.&#x27;, &#x27;#92400e&#x27;, &#x27;#fef3c7&#x27;);
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

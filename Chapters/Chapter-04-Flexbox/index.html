@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chapter 04 | CSS Flexbox — WebZoneBW</title>
+
+<meta
+    name="description"
+    content="Chapter 04 of WebZoneBW: learn CSS Flexbox, containers, flex items, axes, alignment, spacing, wrapping, and build a responsive mini project."
+>
+
+<meta name="theme-color" content="#111111">
+
+<link
+    rel="icon"
+    type="image/x-icon"
+    href="/assets/favicon/favicon.ico"
+>
+
+<link
+    rel="stylesheet"
+    href="/assets/css/style.css"
+>
+
+<script
+    src="/assets/js/main.js"
+    defer
+></script>
+
+<!-- AdSense -->
+<script
+    async
+    src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+    crossorigin="anonymous"
+></script>
+
+</head>
+
+<body class="chapter-page chapter-flexbox">
+<!-- =========================
+     SITE HEADER
+========================== -->
+<header class="site-header">
+
+    <div class="logo">
+        <a
+            href="/index.html"
+            class="logo-link"
+            aria-label="WebZoneBW home"
+        >
+            <h1>WebZoneBW</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
+    </div>
+
+    <nav aria-label="Primary navigation">
+
+        <a href="/index.html">
+            🏠 Home
+        </a>
+
+        <a href="../Chapter-03-CSS/index.html">
+            ← Previous
+        </a>
+
+        <a href="../Chapter-05-CSS Grid/index.html">
+            Next →
+        </a>
+
+        <button
+            type="button"
+            id="settingsBtn"
+            aria-controls="settingsPanel"
+            aria-expanded="false"
+        >
+            ⚙ Settings
+        </button>
+
+    </nav>
+
+</header>
+
+
+<!-- =========================
+     SETTINGS PANEL
+========================== -->
+<aside
+    id="settingsPanel"
+    class="settings-panel"
+    aria-label="Site settings"
+    hidden
+>
+
+    <h2>⚙ Settings</h2>
+
+    <button
+        type="button"
+        id="darkModeBtn"
+    >
+        🌙 Dark Mode
+    </button>
+
+    <button
+        type="button"
+        id="fontSizeBtn"
+    >
+        🔤 Font Size
+    </button>
+
+    <button
+        type="button"
+        id="closeSettingsBtn"
+        class="close-btn"
+    >
+        ✕ Close
+    </button>
+
+</aside>
+
+
+<!-- =========================
+     MAIN CONTENT
+========================== -->
+<main class="container chapter-page">
+
+    <!-- =========================
+         CHAPTER HERO
+    ========================== -->
+    <section
+        class="chapter-hero"
+        aria-labelledby="chapter-title"
+    >
+
+        <span class="chapter-badge">
+            Chapter 04
+        </span>
+
+        <h1 id="chapter-title">
+            CSS Flexbox
+        </h1>
+
+        <p>
+            Learn how to build modern one-dimensional layouts with
+            Flexbox. Understand containers, items, axes, alignment,
+            spacing, wrapping, and responsive positioning.
+        </p>
+
+
+        <div class="info-grid">
+
+            <article class="summary-card">
+                <h2>Difficulty</h2>
+                <p>Intermediate</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Lessons</h2>
+                <p>7 Interactive Lessons</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Key Concept</h2>
+                <p>One-Dimensional Layout</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Outcome</h2>
+                <p>Flexible Responsive Layouts</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         CHAPTER OVERVIEW
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="overview-title"
+    >
+
+        <h2 id="overview-title">
+            📖 Chapter Overview
+        </h2>
+
+        <p>
+            Flexbox simplifies layout by arranging elements along
+            a main axis while giving you precise control over
+            alignment, spacing, sizing, and wrapping.
+        </p>
+
+        <p>
+            The lessons move from the basic Flexbox model into
+            practical alignment and responsive behavior, ending
+            with a mini project that brings the concepts together.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         LEARNING OBJECTIVES
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="objectives-title"
+    >
+
+        <h2 id="objectives-title">
+            🎯 Learning Objectives
+        </h2>
+
+        <ul class="chapter-list">
+
+            <li>
+                ✔ Understand the purpose and layout model of
+                CSS Flexbox.
+            </li>
+
+            <li>
+                ✔ Create and configure Flex containers.
+            </li>
+
+            <li>
+                ✔ Understand Flex items and their relationship
+                with the container.
+            </li>
+
+            <li>
+                ✔ Work with the main axis and cross axis.
+            </li>
+
+            <li>
+                ✔ Control distribution with
+                <code>justify-content</code>.
+            </li>
+
+            <li>
+                ✔ Control cross-axis alignment with
+                <code>align-items</code>.
+            </li>
+
+            <li>
+                ✔ Use <code>flex-wrap</code> to create layouts
+                that adapt to available space.
+            </li>
+
+            <li>
+                ✔ Combine Flexbox concepts to build practical
+                responsive interfaces.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+    <!-- =========================
+         LESSONS
+    ========================== -->
+    <section
+        class="chapter-section"
+        aria-labelledby="lessons-title"
+    >
+
+        <h2 id="lessons-title">
+            📚 Chapter 04 Lessons &amp; Practice
+        </h2>
+
+        <div class="lesson-grid">
+
+
+            <!-- LESSON 01 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 01</h3>
+
+                <p>
+                    <strong>Introduction to Flexbox</strong>
+                    — Learn what Flexbox is, why it exists, and
+                    how the one-dimensional layout model works.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-01-Introduction/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-01-Introduction/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 02 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 02</h3>
+
+                <p>
+                    <strong>Flex Container</strong>
+                    — Activate Flexbox and understand how the
+                    container controls the layout direction,
+                    spacing, and available alignment behavior.
+                </p>
+
+                <div class="lesson-actions">
+
+                    <a
+                        class="btn primary"
+                        href="Lesson-02-Flex-Container/lesson.html"
+                    >
+                        Read Lesson →
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="Lesson-02-Flex-Container/practice.html"
+                    >
+                        Practice Class ⚡
+                    </a>
+
+                </div>
+
+            </article>
+
+
+            <!-- LESSON 03 -->
+            <article class="lesson-card">
+
+                <h3>Lesson 03</h3>
+
+                <p>
+                    <strong>

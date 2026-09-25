@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 04 | Functions, Scope & Arrow Syntax - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 04</span>
+            <h1>Functions, Scope & Arrow Syntax</h1>
+            <p>Master reusable modular code: declaration vs expression, ES6 arrow functions, default parameters, and closures.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Declarations</h3>
+                    <p>Hoisted function keyword</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Arrow Syntax</h3>
+                    <p>() => {} with lexical this</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Parameters</h3>
+                    <p>Default values & Rest (...) parameters</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Scope</h3>
+                    <p>Global, Function, and Block scope</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Differentiate between function declarations and arrow function expressions</li>
+<li>✔ Understand block scoping (let/const) versus function scoping</li>
+<li>✔ Write clean functions with single responsibilities and return values</li>
+<li>✔ Use closures to preserve private state variables across multiple function invocations</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. The Anatomy of Modern Functions</h2>
+            <p>A function encapsulates a specific task or calculation. Modern JavaScript makes extensive use of ES6 arrow functions for concise logic and predictable lexical binding.</p>
+            <ul class='chapter-list'><li>Arrow Function: const add = (a, b) => a + b;</li>
+<li>Implicit Return: Omit curly braces for single-expression returns</li>
+<li>Default Parameters: const greet = (name = 'Developer') => `Hello, ${name}`;</li>
+</ul>
+        </section>
+        <section class="chapter-section">
+            <h2>2. Understanding Closures</h2>
+            <p>A closure is the combination of a function bundled together with references to its surrounding state (the lexical environment). Closures allow an inner function to access an outer function's scope even after the outer function has finished executing.</p>
+            <ul class='chapter-list'><li>Private State: Creating counter variables that cannot be modified from outside code</li>
+<li>Factory Functions: Creating specialized handlers configured with preset parameters</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; padding: 20px; max-width: 440px; margin: auto; text-align: center;&quot;&gt;
+  &lt;h3 style=&quot;color: #0f172a; margin: 0 0 12px;&quot;&gt;Counter with Closure&lt;/h3&gt;
+  &lt;div id=&quot;counterVal&quot; style=&quot;font-size: 40px; font-weight: 800; color: #2563eb; margin: 10px 0;&quot;&gt;0&lt;/div&gt;
+  &lt;div style=&quot;display: flex; justify-content: center; gap: 10px;&quot;&gt;
+    &lt;button id=&quot;decBtn&quot; style=&quot;padding: 8px 16px; border: 1px solid #cbd5e1; background: white; border-radius: 6px; cursor: pointer; font-weight: bold;&quot;&gt;- 1&lt;/button&gt;
+    &lt;button id=&quot;incBtn&quot; style=&quot;padding: 8px 16px; border: none; background: #2563eb; color: white; border-radius: 6px; cursor: pointer; font-weight: bold;&quot;&gt;+ 1&lt;/button&gt;
+    &lt;button id=&quot;resetBtn&quot; style=&quot;padding: 8px 16px; border: 1px solid #f87171; color: #dc2626; background: white; border-radius: 6px; cursor: pointer;&quot;&gt;Reset&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  // Closure Factory
+  function createCounter(initial = 0) {
+    let count = initial;
+    return {
+      increment: () =&gt; ++count,
+      decrement: () =&gt; --count,
+      reset: () =&gt; { count = initial; return count; },
+      get: () =&gt; count
+    };
+  }
+
+  const myCounter = createCounter(0);
+  const display = document.getElementById(&#x27;counterVal&#x27;);
+
+  document.getElementById(&#x27;incBtn&#x27;).onclick = () =&gt; { display.textContent = myCounter.increment(); };
+  document.getElementById(&#x27;decBtn&#x27;).onclick = () =&gt; { display.textContent = myCounter.decrement(); };
+  document.getElementById(&#x27;resetBtn&#x27;).onclick = () =&gt; { display.textContent = myCounter.reset(); };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="/index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

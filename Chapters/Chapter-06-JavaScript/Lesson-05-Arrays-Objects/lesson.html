@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 05 | Arrays, Objects & Modern Data Structures - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 05</span>
+            <h1>Arrays, Objects & Modern Data Structures</h1>
+            <p>Work with structured data: map(), filter(), reduce(), destructuring, spread operators, and JSON.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Iterators</h3>
+                    <p>map, filter, find, some, every</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Destructuring</h3>
+                    <p>const { title } = lesson;</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Spread</h3>
+                    <p>[...items] and {...props}</p>
+                </div>
+                <div class="summary-card">
+                    <h3>JSON</h3>
+                    <p>JSON.stringify and JSON.parse</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Store and transform collections with map() and filter() without mutating originals</li>
+<li>✔ Use object and array destructuring for clean, readable variable extraction</li>
+<li>✔ Merge and clone arrays and objects using the spread operator (...)</li>
+<li>✔ Serialize and deserialize client data with JSON.stringify and JSON.parse</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Declarative Array Iteration</h2>
+            <p>Rather than writing classic imperative for-loops, modern frontend engineers use immutable functional array methods.</p>
+            <ul class='chapter-list'><li>map(): Creates a new array with the results of calling a provided function on every element</li>
+<li>filter(): Creates a new array with all elements that pass the test implemented by the function</li>
+<li>find(): Returns the first element that satisfies the testing condition</li>
+<li>reduce(): Executes a reducer function on each element, resulting in a single output value</li>
+</ul>
+        </section>
+        <section class="chapter-section">
+            <h2>2. Modern Destructuring and Spread Syntax</h2>
+            <p>Destructuring extracts properties directly into standalone variables. The spread operator shallow-copies elements cleanly.</p>
+            <ul class='chapter-list'><li>const { name, level } = user; (Direct property unpacking)</li>
+<li>const updatedList = [...oldList, newItem]; (Pure immutable addition)</li>
+<li>const mergedUser = { ...user, role: 'admin' }; (Immutable attribute override)</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: auto; padding: 20px;&quot;&gt;
+  &lt;h4 style=&quot;margin: 0 0 10px; color: #1e293b;&quot;&gt;Active Learning Modules&lt;/h4&gt;
+  &lt;ul id=&quot;courseList&quot; style=&quot;list-style: none; padding: 0; margin: 0;&quot;&gt;&lt;/ul&gt;
+  &lt;div style=&quot;margin-top: 14px;&quot;&gt;
+    &lt;button id=&quot;filterBtn&quot; style=&quot;padding: 8px 14px; background: #6366f1; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 13px;&quot;&gt;Show Only Advanced (Age 15+)&lt;/button&gt;
+    &lt;button id=&quot;resetListBtn&quot; style=&quot;padding: 8px 14px; background: #e2e8f0; color: #334155; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; margin-left: 6px;&quot;&gt;Show All&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const modules = [
+    { title: &quot;HTML5 Semantic Web&quot;, level: &quot;Beginner&quot;, hours: 2 },
+    { title: &quot;CSS Grid Architecture&quot;, level: &quot;Advanced&quot;, hours: 4 },
+    { title: &quot;JavaScript Call Stack&quot;, level: &quot;Advanced&quot;, hours: 5 },
+    { title: &quot;Flexbox Layouts&quot;, level: &quot;Beginner&quot;, hours: 3 }
+  ];
+
+  const listEl = document.getElementById(&#x27;courseList&#x27;);
+
+  function render(items) {
+    listEl.innerHTML = items.map(item =&gt; `
+      &lt;li style=&quot;padding: 10px; border-bottom: 1px solid #f1f5f9; display: flex; justify-content: space-between;&quot;&gt;
+        &lt;span&gt;&lt;strong&gt;${item.title}&lt;/strong&gt; (${item.hours} hrs)&lt;/span&gt;
+        &lt;span style=&quot;font-size: 12px; padding: 2px 8px; border-radius: 4px; background: ${item.level === &#x27;Advanced&#x27; ? &#x27;#fee2e2; color: #991b1b;&#x27; : &#x27;#e0f2fe; color: #075985;&#x27;}&quot;&gt;${item.level}&lt;/span&gt;
+      &lt;/li&gt;
+    `).join(&#x27;&#x27;);
+  }
+
+  render(modules);
+  document.getElementById(&#x27;filterBtn&#x27;).onclick = () =&gt; render(modules.filter(m =&gt; m.level === &#x27;Advanced&#x27;));
+  document.getElementById(&#x27;resetListBtn&#x27;).onclick = () =&gt; render(modules);
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="/index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

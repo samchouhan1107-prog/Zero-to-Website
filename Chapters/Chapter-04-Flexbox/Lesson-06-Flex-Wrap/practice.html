@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Multi-Line Flex Wrapping & Responsive Reflow - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 04.06</span>
+            <h1>Multi-Line Flex Wrapping & Responsive Reflow</h1>
+            <p>Prevent horizontal scrolling by allowing flex children to wrap onto multiple lines smoothly.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Set flex-wrap: wrap on the container</li>
+<li>2. Add a 10px gap between wrapped rows and columns</li>
+<li>3. Style chips with subtle border and hover feedback</li>
+<li>4. Resize container to verify that items reflow without clipping</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .tags-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    max-width: 320px;
+  }
+  .tag {
+    padding: 6px 12px;
+    background: #f1f5f9;
+    color: #334155;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+  }
+&lt;/style&gt;
+&lt;div class=&quot;tags-wrapper&quot;&gt;
+  &lt;span class=&quot;tag&quot;&gt;#HTML5&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#CSS3&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#Flexbox&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#Grid2D&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#JavaScriptES6&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#Bootstrap5&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#GitWorkflows&lt;/span&gt;
+  &lt;span class=&quot;tag&quot;&gt;#WebDeployment&lt;/span&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="/index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | Your First Webpage - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <link rel="stylesheet" href="/Assets/css/tabs.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+         crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+
+<body class="lesson-page">
+
+    <!-- ==========================
+         HEADER
+    =========================== -->
+
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <!-- ==========================
+         SETTINGS PANEL
+    =========================== -->
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn" aria-label="Toggle dark mode">🌙 Dark Mode</button>
+        <button id="fontSizeBtn" aria-label="Adjust font size">🔤 Font Size</button>
+        <button id="languageBtn" aria-label="Change language">🌐 Language</button>
+        <button id="readingModeBtn" aria-label="Toggle reading mode">📖 Reading Mode</button>
+        <button id="helpBtn" aria-label="Get help">❓ Help</button>
+        <button id="closeSettingsBtn" class="close-btn" aria-label="Close settings panel">✖ Close</button>
+    </div>
+
+    <!-- ==========================
+         MAIN CONTENT
+    =========================== -->
+
+    <main class="container chapter-page">
+
+        <!-- 1. Lesson Header -->
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 01</span>
+            <h1>Your First Webpage</h1>
+            <p>Write, save, and preview your very first HTML document inside your browser.</p>
+        </section>
+
+        <!-- 2. Tab Navigation -->
+        <section class="tab-navigation">
+            <div class="tab-container">
+                <button class="tab-btn active" data-tab="introduction">📚 Introduction</button>
+                <button class="tab-btn" data-tab="objectives">🎯 Learning Objectives</button>
+                <button class="tab-btn" data-tab="theory">📖 Theory & Explanation</button>
+                <button class="tab-btn" data-tab="example">🌍 Real-World Example</button>
+                <button class="tab-btn" data-tab="visual">🎨 Visual Explanation</button>
+                <button class="tab-btn" data-tab="code">💻 Code Example & Playground</button>
+                <button class="tab-btn" data-tab="breakdown">🔍 Code Breakdown</button>
+                <button class="tab-btn" data-tab="related">🔗 Related Topics</button>
+                <button class="tab-btn" data-tab="practice">🏆 Practice Challenge</button>
+                <button class="tab-btn" data-tab="summary">✅ Summary</button>
+            </div>
+        </section>
+
+        <!-- Tab Content Container -->
+        <div class="tab-content-container">
+            <!-- Introduction Tab -->
+            <div class="tab-content active" id="introduction">
+                <section class="chapter-section">
+                    <h2>1. Introduction</h2>
+                    <p>Every website in the world begins with a single file: <code>index.html</code>. In this lesson, you will create a real HTML file, write basic tags, open it in your web browser, and see your code transform into a live webpage.</p>
+                </section>
+            </div>
+
+            <!-- Learning Objectives Tab -->
+            <div class="tab-content" id="objectives">
+                <section class="chapter-section">
+                    <h2>2. Learning Objectives</h2>
+                    <ul class="chapter-list">
+                        <li>✔ Create and save an <code>index.html</code> file.</li>
+                        <li>✔ Write the basic HTML5 document boilerplate structure.</li>
+                        <li>✔ Understand the purpose of <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code>.</li>
+                        <li>✔ Open your file in Google Chrome, Edge, or Firefox.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Theory & Explanation Tab -->
+            <div class="tab-content" id="theory">
+                <section class="chapter-section">
+                    <h2>3. Theory & Explanation</h2>
+                    <p>When you double-click an <code>.html</code> file on your computer, your default web browser reads the file from top to bottom. It does not display the angle brackets <code>&lt; &gt;</code> on screen; instead, it uses them as instructions to format headings, paragraphs, and images.</p>
+                    <div class="callout-box">
+                        <h4>Key Principle</h4>
+                        <p>Content you want visitors to see (headings, buttons, text, pictures) must always live inside the <strong><code>&lt;body&gt;</code></strong> tag.</p>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Real-World Example Tab -->
+            <div class="tab-content" id="example">
+                <section class="chapter-section">
+                    <h2>4. Real-World Example</h2>
+                    <p>Think of an HTML file like writing a letter:</p>
+                    <ul class="chapter-list">
+                        <li><strong>The Envelope (<code>&lt;head&gt;</code>):</strong> Contains the recipient name, postage stamp, and title (metadata).</li>
+                        <li><strong>The Letter Paper (<code>&lt;body&gt;</code>):</strong> Contains the actual message, words, and drawings you want the reader to experience.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Visual Explanation Tab -->
+            <div class="tab-content" id="visual">
+                <section class="chapter-section">
+                    <h2>5. Visual Explanation</h2>
+                    <div class="code-box">
+<pre><code>📁 My-First-Website
+└── 📄 index.html
+      ├── &lt;!DOCTYPE html&gt;  (Informs browser: HTML5 standard)
+      ├── &lt;html&gt;
+      │     ├── &lt;head&gt;      (Page title & charset)
+      │     └── &lt;body&gt;      (Visible website content)
+      │           ├── &lt;h1&gt;Hello World&lt;/h1&gt;
+      │           └── &lt;p&gt;Welcome to my site.&lt;/p&gt;
+      └── &lt;/html&gt;</code></pre>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Code Example & Playground Tab -->
+            <div class="tab-content" id="code">
+                <section class="chapter-section">
+                    <h2>6. Code Example & Live Playground</h2>
+                    <p>Edit the HTML below and click <strong>Run Code</strong> to see it render in real time:</p>
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>HTML Editor</h3>
+                            <textarea id="htmlEditor">&lt;h1&gt;My First Webpage&lt;/h1&gt;
+&lt;p&gt;Hello World! I am learning web development at WEBZONEBW.&lt;/p&gt;
+&lt;button&gt;Click Me&lt;/button&gt;</textarea>
+                            <button type="button" id="runCodeBtn" onclick="runHTML()">Run Code ⚡</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Live Preview Window</h3>
+                            <iframe id="previewWindow"></iframe>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Code Breakdown Tab -->
+            <div class="tab-content" id="breakdown">
+                <section class="chapter-section">
+                    <h2>7. Code Breakdown</h2>
+                    <ul class="chapter-list">
+                        <li><code>&lt;h1&gt;</code>: Defines the highest priority heading for the page title.</li>
+                        <li><code>&lt;p&gt;</code>: Wraps regular paragraph text with comfortable reading line heights.</li>
+                        <li><code>&lt;button&gt;</code>: Creates an interactive clickable button element.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Related Topics Tab -->
+            <div class="tab-content" id="related">
+                <section class="chapter-section">
+                    <h2>8. Related Topics</h2>
+                    <ul class="chapter-list">
+                        <li>Used again in Chapter 02: Semantic HTML Architecture</li>
+                        <li>Applied in Chapter 03: Styling with CSS Box Model</li>
+                        <li>Required for Chapter 10: Final Deployment</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Practice Challenge Tab -->
+            <div class="tab-content" id="practice">
+                <section class="chapter-section">
+                    <h2>9. Practice Challenge</h2>
+                    <p>Ready to test your new skills? Open the practice workspace to build your first standalone card:</p>
+                    <a class="lesson-card" href="practice.html">
+                        <h3>Open Practice Challenge →</h3>
+                        <p>Guided coding exercise with instant feedback.</p>
+                    </a>
+                </section>
+            </div>
+
+            <!-- Summary Tab -->
+            <div class="tab-content" id="summary">
+                <section class="chapter-section">
+                    <h2>10. Summary</h2>
+                    <ul class="chapter-list">
+                        <li>HTML provides the foundational structure of all web pages.</li>
+                        <li>The <code>index.html</code> filename is the standard entrypoint for all web servers.</li>
+                        <li>Visible elements belong inside the <code>&lt;body&gt;</code> container.</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <!-- 11. Navigation -->
+        <section class="chapter-section chapter-nav-links">
+            <a href="/index.html">⬅ Chapter 01 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+
+    </main>
+
+    <!-- ==========================
+         FOOTER
+    =========================== -->
+
+    <footer>
+        <p>WEBZONEBW | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+
+    <!-- Tab System JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+
+            // Initialize code playground if present
+            if (document.getElementById("htmlEditor") && document.getElementById("previewWindow")) {
+                runHTML();
+            }
+        });
+    </script>
+
+</body>
+
+</html>

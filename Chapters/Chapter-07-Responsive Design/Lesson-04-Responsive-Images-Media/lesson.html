@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 04 | Responsive Images: srcset, sizes & picture - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 04</span>
+            <h1>Responsive Images: srcset, sizes & picture</h1>
+            <p>Serve optimal image resolutions: max-width: 100%, srcset descriptor tags, and art direction with picture.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Core CSS</h3>
+                    <p>max-width: 100%; height: auto;</p>
+                </div>
+                <div class="summary-card">
+                    <h3>srcset</h3>
+                    <p>Density (2x) & Width (w) descriptors</p>
+                </div>
+                <div class="summary-card">
+                    <h3>sizes</h3>
+                    <p>Informs browser layout slot width</p>
+                </div>
+                <div class="summary-card">
+                    <h3><picture></h3>
+                    <p>Art direction & WebP/AVIF fallback</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Prevent image blowout bugs with max-width: 100% and height: auto</li>
+<li>✔ Deliver Retina/HiDPI images using srcset 2x descriptors</li>
+<li>✔ Serve modern WebP and AVIF formats with automatic PNG/JPEG fallback using <picture></li>
+<li>✔ Implement art direction by cropping landscape photos into portrait on mobile screens</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Fluid Image Basics & The picture Element</h2>
+            <p>Standard <img> tags download the full image regardless of whether the user is on a 4K monitor or a budget smartphone. By using srcset and the HTML5 <picture> element, you serve lightweight images to mobile users and sharp visuals to desktop screens.</p>
+            <ul class='chapter-list'><li>img { max-width: 100%; height: auto; display: block; }</li>
+<li><picture><source media='(max-width: 768px)' srcset='mobile.jpg'><img src='desktop.jpg'></picture></li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;max-width: 440px; margin: auto; font-family: sans-serif; padding: 16px; border: 1px solid #e2e8f0; border-radius: 12px;&quot;&gt;
+  &lt;div style=&quot;width: 100%; height: 160px; background: #3b82f6; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;&quot;&gt;
+    Fluid Aspect Ratio Container (100% Fluid)
+  &lt;/div&gt;
+  &lt;h4 style=&quot;margin: 12px 0 4px; color: #1e293b;&quot;&gt;Responsive Media Container&lt;/h4&gt;
+  &lt;p style=&quot;font-size: 13px; color: #64748b; margin: 0;&quot;&gt;Preserves aspect ratio and eliminates layout shift (CLS).&lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="/index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 05 | Spacing & Visual Styling - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.5</span>
+            <h1>Craft Balanced Spacing &amp; Concentric Corner Radii</h1>
+            <p>Style a card with 16px outer radius and an inner image with 8px radius (16px outer - 8px padding = 8px inner), with an elevated soft shadow.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Give the outer container <code>border-radius: 16px; padding: 16px;</code>.</li>
+                <li>2. Give the inner banner <code>border-radius: 8px;</code> to maintain optical concentric harmony.</li>
+                <li>3. Apply a 2:1 horizontal to vertical padding ratio on the action button (e.g. <code>padding: 10px 20px;</code>).</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 16px; max-width: 400px; margin: 20px auto; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 8px 10px -6px rgba(0,0,0,0.04); font-family: system-ui, sans-serif;">
+  <!-- Inner banner with concentric radius (16px outer - 8px offset = 8px) -->
+  <div style="background: linear-gradient(135deg, #ef233c, #9b111e); color: white; padding: 32px 20px; border-radius: 8px; text-align: center;">
+    <h3 style="margin: 0; font-size: 20px;">Visual Styling Engine</h3>
+    <p style="margin: 6px 0 0; opacity: 0.9; font-size: 13px;">Concentric radii &amp; layered depth</p>
+  </div>
+
+  <div style="padding: 16px 4px 8px;">
+    <p style="color: #475569; font-size: 14px; line-height: 1.5; margin: 0 0 16px;">
+      Mathematical padding and border-radius proportions create a calm, polished, premium aesthetic.
+    </p>
+    <button style="background: #0f172a; color: white; border: none; padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 14px;">
+      Explore Design Tokens
+    </button>
+  </div>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 05</a>
+            <a href="../Lesson-07-Advanced-Selectors/lesson.html">Next: Lesson 07 Advanced Selectors ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

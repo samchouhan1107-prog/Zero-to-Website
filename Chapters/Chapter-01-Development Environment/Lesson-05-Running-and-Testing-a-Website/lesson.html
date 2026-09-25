@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 05 | Running and Testing a Website - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 05</span>
+            <h1>Running and Testing a Website</h1>
+            <p>Understand local HTTP servers vs the file:// protocol, cross-browser verification, mobile viewport checks, and W3C validation workflows.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Protocol</h3>
+                    <p>http:// vs file://</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Localhost</h3>
+                    <p>127.0.0.1:3000 / 5500</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Validation</h3>
+                    <p>W3C HTML / CSS Checker</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Why You Need a Local Server</h2>
+            <p>Double-clicking an HTML file opens it in your browser with the <code>file:///</code> protocol. While simple, <code>file:///</code> blocks modern web features like web fonts (CORS restrictions), JavaScript ES modules (<code>import/export</code>), and Fetch API requests due to browser security sandboxes.</p>
+            <p>Running via a local HTTP server (like VS Code Live Server or Node/Vite) serves pages over <code>http://localhost:port</code>, exactly replicating how production web hosts behave.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. The Testing Checklist</h2>
+            <ul class="chapter-list">
+                <li><strong>Cross-Browser:</strong> Test your pages on Chromium (Chrome/Edge), Gecko (Firefox), and WebKit (Safari).</li>
+                <li><strong>Responsive Breakpoints:</strong> Test at 360px (mobile), 768px (tablet), 1024px (laptop), and 1440px+ (desktop).</li>
+                <li><strong>Console Cleanliness:</strong> Ensure 0 red JavaScript errors or 404 missing resource warnings in the DevTools Console.</li>
+                <li><strong>Cache Invalidation:</strong> Use <code>Ctrl+Shift+R</code> (or <code>Cmd+Shift+R</code> on Mac) to bypass the browser cache and load fresh assets.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Code Example: Testing Meta &amp; Title</h2>
+            <div class="code-box">
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My Tested Website&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;p&gt;Server verified and ready for deployment!&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>4. Practice Challenge</h2>
+            <p>Create a live test verification card with system indicators:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 05 Practice Challenge →</h3>
+                <p>Build a real-time site audit status badge.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-04-Files-Folders-Project-Structure/lesson.html">⬅ Lesson 04: Files & Folders</a>
+            <a href="../../Chapter-02-HTML/index.html">Next: Chapter 02 HTML ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

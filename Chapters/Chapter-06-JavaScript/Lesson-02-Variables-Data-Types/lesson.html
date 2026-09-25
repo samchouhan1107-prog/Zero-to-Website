@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | Variables & Data Types - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 06</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 02</span>
+            <h1>Variables, Scope &amp; Data Types</h1>
+            <p>Master modern JavaScript memory storage using <code>const</code> and <code>let</code>, and explore primitive types (string, number, boolean) and reference types.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Golden Rule</h3>
+                    <p>Default to const, let when mutating</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Avoid</h3>
+                    <p>var (function scoped)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Primitives</h3>
+                    <p>String, Number, Boolean</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. const vs. let</h2>
+            <ul class="chapter-list">
+                <li><code>const</code>: Block-scoped, immutable binding. Use this for values, DOM elements, and arrays/objects that you don't reassign.</li>
+                <li><code>let</code>: Block-scoped, reassignable. Use this for counters, loops, and state variables that change over time.</li>
+                <li><code>var</code>: Legacy function-scoped declaration with hoisting pitfalls. Strictly avoid in modern projects.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Template Literals &amp; Interpolation</h2>
+            <div class="code-box">
+                <pre><code>const userName = "Sameer";
+const lessonsCompleted = 12;
+
+// Clean backtick string interpolation
+const statusMessage = `Welcome back ${userName}! You have completed ${lessonsCompleted} lessons.`;</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Practice Challenge</h2>
+            <p>Compute values using variables and update the DOM interactively in the sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 02 Practice Challenge →</h3>
+                <p>Build a dynamic greeting and counter using const, let, and template literals.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="/index.html">⬅ Chapter 06 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

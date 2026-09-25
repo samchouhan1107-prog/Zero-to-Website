@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | Code Editor Setup & Productivity - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 02</span>
+            <h1>Code Editor Setup & Productivity</h1>
+            <p>Configure Visual Studio Code with essential extensions, linting, keyboard shortcuts, and Emmet autocomplete for high-speed development.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Editor Focus</h3>
+                    <p>VS Code / Modern IDE</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Extensions</h3>
+                    <p>Prettier &amp; Live Server</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Skill Boost</h3>
+                    <p>Emmet &amp; Hotkeys</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>25 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Lesson Overview</h2>
+            <p>Professional developers don't write web code in Notepad. A configured code editor provides syntax highlighting, real-time error squiggles, auto-formatting, and keyboard shortcuts that multiply your coding speed.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Essential Extensions</h2>
+            <ul class="chapter-list">
+                <li><strong>Live Server:</strong> Launches a local development server with automatic reload whenever you save a file.</li>
+                <li><strong>Prettier - Code Formatter:</strong> Automatically cleans up indentation, quotation marks, and line breaks on save.</li>
+                <li><strong>Auto Rename Tag:</strong> Renames paired HTML tags simultaneously when you edit the opening or closing tag.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Emmet Abbreviations</h2>
+            <p>VS Code includes Emmet out of the box. Typing shorthand expressions and pressing <code>Tab</code> expands into clean HTML instantly:</p>
+            <div class="code-box">
+                <pre><code>! ➔ Generates complete HTML5 boilerplate
+header>nav>ul>li*3>a ➔ Generates header with 3 navigation links
+.card>h2.title+p.desc ➔ Generates div.card with heading and paragraph</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>4. Code Example</h2>
+            <div class="code-box">
+                <pre><code>&lt;!-- Generated with Emmet: main.container>article.post*2>h2+p+button --&gt;
+&lt;main class="container"&gt;
+    &lt;article class="post"&gt;
+        &lt;h2&gt;First Post&lt;/h2&gt;
+        &lt;p&gt;Built in VS Code with Emmet speed!&lt;/p&gt;
+        &lt;button&gt;Read More&lt;/button&gt;
+    &lt;/article&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>5. Practice Challenge</h2>
+            <p>Test your editor structure skills by generating a multi-element layout in the interactive sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 02 Practice Challenge →</h3>
+                <p>Build a clean article layout with structured semantic markup.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-01-Your-First-Webpage/lesson.html">⬅ Lesson 01: Your First Webpage</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

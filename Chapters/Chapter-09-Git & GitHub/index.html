@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Chapter 09 | Git &amp; GitHub — WebZoneBW</title>
+    <meta
+        name="description"
+        content="Learn Git and GitHub through practical version-control lessons, commands, branches, commits, remotes, collaboration, and deployment workflows."
+    >
+
+    <link rel="icon" href="/assets/favicon/favicon.ico">
+    <link rel="stylesheet" href="/assets/css/style.css">
+    <script src="/assets/js/main.js" defer></script>
+
+    <!-- AdSense -->
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
+        crossorigin="anonymous">
+    </script>
+</head>
+
+<body class="chapter-page chapter-git">
+
+<header class="site-header">
+    <div class="logo">
+        <a href="/index.html" class="logo-link" aria-label="WebZoneBW Home">
+            <h1>WEBZONEBW</h1>
+            <p>Learn • Practice • Build • Share</p>
+        </a>
+    </div>
+
+    <nav class="site-nav" aria-label="Primary navigation">
+        <a href="/index.html">Home</a>
+        <a href="/Workspace.html">Workspace</a>
+        <a href="/web-tools.html">Web Tools</a>
+        <a href="/image-tools.html">Image Tools</a>
+        <a href="/developer-tools.html">Developer Tools</a>
+        <a href="/learn.html" aria-current="page">Learn</a>
+        <a href="/blog.html">Blog</a>
+        <a href="/about.html">About</a>
+        <button id="settingsBtn" type="button">⚙ Settings</button>
+    </nav>
+</header>
+
+<div id="settingsPanel" class="settings-panel" hidden>
+    <h2>Settings</h2>
+
+    <button id="darkModeBtn" type="button">
+        🌙 Theme
+    </button>
+
+    <button id="fontSizeBtn" type="button">
+        Aa Font Size
+    </button>
+
+    <button id="closeSettingsBtn" class="close-btn" type="button">
+        ✕ Close
+    </button>
+</div>
+
+<main class="container">
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/learn.html">Learn</a>
+        <span aria-hidden="true">→</span>
+        <span>Chapter 09</span>
+    </nav>
+
+    <!-- Chapter Hero -->
+    <section class="chapter-hero">
+
+        <span class="chapter-badge">Chapter 09</span>
+
+        <h1>Git &amp; GitHub</h1>
+
+        <p class="chapter-intro">
+            Learn how developers track changes, create safe versions of their work,
+            experiment with branches, collaborate through GitHub, and move projects
+            from a local machine to the wider web.
+        </p>
+
+        <div class="info-grid">
+
+            <article class="summary-card">
+                <h2>Level</h2>
+                <p>Intermediate</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Lessons</h2>
+                <p>8 Lessons</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Core Tools</h2>
+                <p>Git CLI + GitHub</p>
+            </article>
+
+            <article class="summary-card">
+                <h2>Outcome</h2>
+                <p>Manage &amp; publish a real repository</p>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Chapter Progress -->
+    <section class="chapter-section chapter-progress" aria-labelledby="progress-title">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">Your path</span>
+                <h2 id="progress-title">Chapter Progress</h2>
+            </div>
+
+            <strong>0 / 8 Lessons</strong>
+        </div>
+
+        <div
+            class="progress-track"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax="8"
+            aria-valuenow="0"
+            aria-label="Chapter 09 progress">
+            <span style="width: 0%;"></span>
+        </div>
+
+    </section>
+
+    <!-- Learning Objectives -->
+    <section class="chapter-section" aria-labelledby="objectives-title">
+
+        <span class="eyebrow">Before you begin</span>
+
+        <h2 id="objectives-title">What You Will Learn</h2>
+
+        <div class="feature-grid">
+
+            <article class="feature-card">
+                <span class="feature-icon">📸</span>
+                <h3>Snapshots</h3>
+                <p>
+                    Understand repositories, working files, staging, commits,
+                    and how Git remembers changes.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">🌿</span>
+                <h3>Branches</h3>
+                <p>
+                    Create isolated development paths and understand when
+                    branching becomes useful.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">☁️</span>
+                <h3>GitHub</h3>
+                <p>
+                    Connect a local repository to a remote repository and
+                    understand push, pull, and clone workflows.
+                </p>
+            </article>
+
+            <article class="feature-card">
+                <span class="feature-icon">🔄</span>
+                <h3>Collaboration</h3>
+                <p>
+                    Work with branches, pull requests, merges, and practical
+                    team workflows.
+                </p>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Lessons -->
+    <section class="chapter-section" aria-labelledby="lessons-title">
+
+        <div class="section-heading">
+            <div>
+                <span class="eyebrow">Chapter 09</span>
+                <h2 id="lessons-title">Git &amp; GitHub Lessons</h2>
+            </div>
+        </div>
+
+        <div class="lesson-grid">
+
+            <article class="lesson-card">
+                <span class="lesson-number">01</span>
+                <h3>Git Foundations</h3>
+                <p>
+                    Understand version control, repositories, Git installation,
+                    and your first <code>git init</code>.
+                </p>
+                <a href="/learn/chapter-09/lesson-01.html" class="btn primary">
+                    Start Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">02</span>
+                <h3>Working with Commits</h3>
+                <p>
+                    Learn status, staging, commits, commit messages, and how
+                    Git records project history.
+                </p>
+                <a href="/learn/chapter-09/lesson-02.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">03</span>
+                <h3>Branches &amp; Safe Experimentation</h3>
+                <p>
+                    Create branches, switch contexts, and develop changes
+                    without disturbing the main line.
+                </p>
+                <a href="/learn/chapter-09/lesson-03.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">04</span>
+                <h3>Merge &amp; Resolve</h3>
+                <p>
+                    Understand merging and learn how to approach conflicts
+                    when two lines of work meet.
+                </p>
+                <a href="/learn/chapter-09/lesson-04.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">05</span>
+                <h3>GitHub &amp; Remote Repositories</h3>
+                <p>
+                    Connect local Git projects with GitHub and understand
+                    remote repository relationships.
+                </p>
+                <a href="/learn/chapter-09/lesson-05.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">06</span>
+                <h3>Push, Pull &amp; Clone</h3>
+                <p>
+                    Move project history between local and remote repositories
+                    using practical Git workflows.
+                </p>
+                <a href="/learn/chapter-09/lesson-06.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">07</span>
+                <h3>Pull Requests &amp; Collaboration</h3>
+                <p>
+                    Learn how branches become reviewable contributions through
+                    GitHub pull requests.
+                </p>
+                <a href="/learn/chapter-09/lesson-07.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+            <article class="lesson-card">
+                <span class="lesson-number">08</span>
+                <h3>Real Repository Workflow</h3>
+                <p>
+                    Bring everything together by managing and publishing a
+                    practical project from start to finish.
+                </p>
+                <a href="/learn/chapter-09/lesson-08.html" class="btn primary">
+                    Open Lesson →
+                </a>
+            </article>
+
+        </div>
+
+    </section>
+
+    <!-- Practical Connection -->
+    <section class="chapter-section connection-card">
+
+        <span class="eyebrow">Think beyond the command</span>
+
+        <h2>Git is a history of decisions.</h2>
+
+        <p>
+            A commit is more than a command. It records a point where you decided
+            that a change was worth keeping. Branches give you room to explore.
+            GitHub gives that history a place where it can be shared, reviewed,
+            and continued.
+        </p>
+
+        <div class="connection-flow">
+            <span>Change</span>
+            <span>→</span>
+            <span>Commit</span>
+            <span>→</span>
+            <span>Branch</span>
+            <span>→</span>
+            <span>Review</span>
+            <span>→</span>
+            <span>Share</span>
+        </div>
+
+    </section>
+
+    <!-- Brain Note -->
+    <aside class="brain-note" aria-label="Brain Note">
+
+        <div class="brain-note-icon">🌋</div>
+
+        <div>
+            <span class="eyebrow">Brain Note</span>
+            <h2>Keep the history useful.</h2>
+            <p>
+                A clear commit message makes it easier to understand what changed
+                when you return to the project later.
+            </p>
+        </div>
+
+    </aside>
+
+    <!-- Chapter Navigation -->
+    <nav class="chapter-nav-links" aria-label="Chapter navigation">
+
+        <a href="/learn/chapter-08/index.html" class="btn secondary">
+            ← Chapter 08
+        </a>
+
+        <a href="/learn.html" class="btn secondary">
+            All Chapters
+        </a>
+
+        <a href="/learn/chapter-10/index.html" class="btn primary">
+            Chapter 10 →
+        </a>
+
+    </nav>
+
+</main>
+
+<footer class="site-footer">
+    <p>
+        WebZoneBW.shop · Learn • Practice • Build • Share
+    </p>
+
+    <p>
+        Developed by Sameer Chouhan · © 2026
+    </p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 03 | Browser Developer Tools - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 01 • Lesson 03</span>
+            <h1>Browser Developer Tools</h1>
+            <p>Inspect the DOM, live-edit CSS styles, debug JavaScript in the Console, simulate mobile screens, and diagnose layout issues like an expert.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Shortcut</h3>
+                    <p>F12 / Cmd+Opt+I</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Key Panels</h3>
+                    <p>Elements &amp; Console</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Feature</h3>
+                    <p>Device Emulation</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Lesson Overview</h2>
+            <p>Every modern browser (Chrome, Edge, Firefox, Safari) includes built-in Developer Tools (DevTools). DevTools lets you inspect what the browser renders in real time, view computed CSS dimensions, and test styling experiments before changing your source files.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. The Core Panels</h2>
+            <ul class="chapter-list">
+                <li><strong>Elements / Inspector Panel:</strong> Displays the live DOM tree. Double click any HTML tag or attribute to change it live. Inspect applied CSS rules and the interactive Box Model diagram.</li>
+                <li><strong>Console Panel:</strong> Displays error messages, warnings, and lets you evaluate JavaScript expressions interactively with <code>console.log()</code>.</li>
+                <li><strong>Network Panel:</strong> Tracks every HTTP request, image, stylesheet, and font loaded, including download times and response status codes (200, 404, 500).</li>
+                <li><strong>Device Toolbar:</strong> Toggles viewport simulation to test how your page looks on iPhone, Pixel, iPad, or custom responsive widths.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Inspecting CSS Styles Live</h2>
+            <div class="code-box">
+                <pre><code>/* DevTools Style Pane Simulation */
+.product-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 16px; /* Toggle checkbox to test spacing instantly */
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>4. Practice Challenge</h2>
+            <p>Practice targeting and styling elements using an interactive debugger card:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 03 Practice Challenge →</h3>
+                <p>Simulate inspecting and modifying an element's inline attributes and style state.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-02-Code-Editor-Setup/lesson.html">⬅ Lesson 02: Code Editor Setup</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

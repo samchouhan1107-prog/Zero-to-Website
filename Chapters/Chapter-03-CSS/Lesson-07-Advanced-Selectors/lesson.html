@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 07 | Advanced Selectors & Combinators - WEBZONEBW</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-L1KR6MWWP3');
+    </script></head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/index.html">⬅ Chapter 03</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 03 • Lesson 07</span>
+            <h1>Advanced Selectors &amp; Combinators</h1>
+            <p>Master pseudo-classes (:nth-child, :is, :where, :has), attribute selectors, child combinators (&gt;), and adjacent sibling selectors (+ and ~).</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>The Game Changer</h3>
+                    <p>:has() parent selector</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Combinators</h3>
+                    <p>&gt;, +, ~</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Pseudo Classes</h3>
+                    <p>:nth-child(), :not(), :is()</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Combinators Breakdown</h2>
+            <ul class="chapter-list">
+                <li><code>parent &gt; child</code>: <strong>Direct Child Combinator</strong> &mdash; Selects only immediate children, ignoring nested descendants.</li>
+                <li><code>elem + sibling</code>: <strong>Adjacent Sibling Combinator</strong> &mdash; Selects the element immediately following another element.</li>
+                <li><code>elem ~ sibling</code>: <strong>General Sibling Combinator</strong> &mdash; Selects all following siblings at the same DOM level.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Modern Pseudo-Classes</h2>
+            <div class="code-box">
+                <pre><code>/* 1. Target every second row in a table or list */
+li:nth-child(even) { background: #f8fafc; }
+
+/* 2. Group complex selectors with zero specificity penalty */
+:where(header, main, footer) a { color: #ef233c; }
+
+/* 3. The parent selector :has() */
+.card:has(img) { padding-top: 0; } /* Styles the card IF it contains an image! */
+
+/* 4. Attribute selection */
+a[href^="https://"]::after { content: " ↗"; } /* External link indicator */</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Practice Challenge</h2>
+            <p>Construct a dynamic list using alternating nth-child and sibling combinator styling in the interactive sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 07 Practice Challenge →</h3>
+                <p>Build advanced selector rules and test :nth-child patterns.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-05-Spacing-Visual-Styling/lesson.html">⬅ Lesson 05: Spacing & Styling</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WEBZONEBW | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
