@@ -440,6 +440,269 @@
           flex-direction: column;
         }
       }
+
+      /* AI Chat Assistant Styles */
+      .ai-chat-assistant {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+      }
+
+      .ai-chat-toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+        transition: all 0.3s ease;
+        font-size: 0.875rem;
+      }
+
+      .ai-chat-toggle:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(59, 130, 246, 0.6);
+      }
+
+      .ai-icon {
+        font-size: 1.2rem;
+      }
+
+      .ai-text {
+        font-size: 0.875rem;
+      }
+
+      .ai-chat-panel {
+        position: absolute;
+        bottom: 100%;
+        right: 0;
+        width: 380px;
+        height: 500px;
+        background: white;
+        border-radius: 16px;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        margin-bottom: 10px;
+      }
+
+      .ai-chat-panel.active {
+        display: flex;
+      }
+
+      .ai-chat-header {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        padding: 16px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .ai-chat-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .ai-chat-title h3 {
+        margin: 0;
+        font-size: 1rem;
+        font-weight: 600;
+      }
+
+      .ai-chat-close {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 4px;
+        transition: background 0.2s;
+      }
+
+      .ai-chat-close:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .ai-chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 16px;
+        background: #f8fafc;
+      }
+
+      .ai-message {
+        margin-bottom: 16px;
+        animation: fadeIn 0.3s ease;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      .ai-message-content {
+        background: white;
+        padding: 12px 16px;
+        border-radius: 12px;
+        border-left: 4px solid #3b82f6;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .ai-message-content p {
+        margin: 0 0 8px 0;
+        line-height: 1.5;
+      }
+
+      .ai-message-content ul {
+        margin: 8px 0;
+        padding-left: 20px;
+      }
+
+      .ai-message-content li {
+        margin-bottom: 4px;
+      }
+
+      .ai-message-time {
+        font-size: 0.75rem;
+        color: #64748b;
+        text-align: right;
+        margin-top: 4px;
+      }
+
+      .ai-chat-input-container {
+        display: flex;
+        padding: 16px;
+        border-top: 1px solid #e2e8f0;
+        gap: 8px;
+      }
+
+      .ai-chat-input {
+        flex: 1;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        outline: none;
+        transition: border-color 0.2s;
+      }
+
+      .ai-chat-input:focus {
+        border-color: #3b82f6;
+      }
+
+      .ai-chat-send {
+        background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+
+      .ai-chat-send:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
+      }
+
+      .ai-chat-suggestions {
+        padding: 16px;
+        border-top: 1px solid #e2e8f0;
+        background: #f8fafc;
+      }
+
+      .suggestions-title {
+        font-size: 0.875rem;
+        color: #475569;
+        margin-bottom: 8px;
+        font-weight: 600;
+      }
+
+      .suggestion-buttons {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
+
+      .suggestion-btn {
+        background: white;
+        border: 1px solid #e2e8f0;
+        padding: 8px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-align: left;
+      }
+
+      .suggestion-btn:hover {
+        background: #f1f5f9;
+        border-color: #3b82f6;
+      }
+
+      /* Dark mode support */
+      .dark .ai-chat-panel {
+        background: #1e293b;
+        color: white;
+      }
+
+      .dark .ai-message-content {
+        background: #334155;
+        border-left-color: #3b82f6;
+      }
+
+      .dark .ai-chat-input {
+        background: #334155;
+        border-color: #475569;
+        color: white;
+      }
+
+      .dark .ai-chat-suggestions {
+        background: #1e293b;
+      }
+
+      .dark .suggestion-btn {
+        background: #334155;
+        border-color: #475569;
+        color: white;
+      }
+
+      .dark .suggestion-btn:hover {
+        background: #475569;
+        border-color: #3b82f6;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .ai-chat-assistant {
+          bottom: 10px;
+          right: 10px;
+        }
+
+        .ai-chat-panel {
+          width: calc(100vw - 20px);
+          right: -10px;
+          height: calc(100vh - 120px);
+        }
+
+        .suggestion-buttons {
+          grid-template-columns: 1fr;
+        }
+      }
     </style>
       <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
@@ -468,19 +731,19 @@
       <!-- Blog Statistics -->
       <section class="blog-stats">
         <div class="stat-card">
-          <div class="stat-number">50+</div>
+          <div class="stat-number">60+</div>
           <div class="stat-label">Articles Published</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">25k+</div>
+          <div class="stat-number">30k+</div>
           <div class="stat-label">Monthly Readers</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">15</div>
+          <div class="stat-number">18</div>
           <div class="stat-label">Categories</div>
         </div>
         <div class="stat-card">
-          <div class="stat-number">4.8â­</div>
+          <div class="stat-number">4.9â­</div>
           <div class="stat-label">Average Rating</div>
         </div>
       </section>
@@ -514,6 +777,13 @@
         <button class="category-btn">React</button>
         <button class="category-btn">Performance</button>
         <button class="category-btn">Tools</button>
+        <button class="category-btn">Security</button>
+        <button class="category-btn">Responsive</button>
+        <button class="category-btn">Testing</button>
+        <button class="category-btn">Deployment</button>
+        <button class="category-btn">Accessibility</button>
+        <button class="category-btn">Design</button>
+        <button class="category-btn">PWA</button>
       </section>
 
       <!-- Blog Posts Grid -->
@@ -651,6 +921,204 @@
             <a href="#" class="blog-read-more">Read More â†’</a>
           </div>
         </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🎨</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 20, 2026</div>
+              <div class="blog-category">CSS</div>
+            </div>
+            <h3 class="blog-title">CSS Custom Properties: The Future of Theming</h3>
+            <p class="blog-excerpt">
+              Master CSS custom properties (variables) to create dynamic,
+              maintainable styles. Learn how to build flexible design systems
+              that adapt to user preferences and brand requirements.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">CSS</span>
+              <span class="blog-tag">Variables</span>
+              <span class="blog-tag">Design System</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">⚡</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 18, 2026</div>
+              <div class="blog-category">JavaScript</div>
+            </div>
+            <h3 class="blog-title">JavaScript Performance Optimization Tips</h3>
+            <p class="blog-excerpt">
+              Optimize your JavaScript code for better performance. Learn about
+              event delegation, memoization, lazy loading, and other techniques
+              to make your web applications faster and more efficient.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">JavaScript</span>
+              <span class="blog-tag">Performance</span>
+              <span class="blog-tag">Optimization</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🔒</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 15, 2026</div>
+              <div class="blog-category">Security</div>
+            </div>
+            <h3 class="blog-title">Web Security Best Practices for 2026</h3>
+            <p class="blog-excerpt">
+              Stay ahead of security threats with comprehensive web security
+              practices. Learn about CORS, CSP, XSS prevention, and secure
+              authentication methods.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">Security</span>
+              <span class="blog-tag">Web</span>
+              <span class="blog-tag">Best Practices</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">📱</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 12, 2026</div>
+              <div class="blog-category">Responsive</div>
+            </div>
+            <h3 class="blog-title">Progressive Web Apps: The Complete Guide</h3>
+            <p class="blog-excerpt">
+              Build Progressive Web Apps that work offline, installable, and
+              provide native app experiences. Learn service workers, app manifests,
+              and modern PWA techniques.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">PWA</span>
+              <span class="blog-tag">Progressive</span>
+              <span class="blog-tag">Mobile</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🧪</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 10, 2026</div>
+              <div class="blog-category">Testing</div>
+            </div>
+            <h3 class="blog-title">Unit Testing JavaScript with Modern Tools</h3>
+            <p class="blog-excerpt">
+              Implement comprehensive unit testing for your JavaScript applications
+              using Jest, Vitest, and other modern testing frameworks. Learn
+              testing patterns, mocking, and CI/CD integration.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">Testing</span>
+              <span class="blog-tag">Jest</span>
+              <span class="blog-tag">Vitest</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🚀</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 8, 2026</div>
+              <div class="blog-category">Deployment</div>
+            </div>
+            <h3 class="blog-title">Modern Web Deployment Strategies</h3>
+            <p class="blog-excerpt">
+              Explore modern deployment strategies including static site hosting,
+              serverless architecture, and containerization. Learn how to deploy
+              your applications efficiently and cost-effectively.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">Deployment</span>
+              <span class="blog-tag">DevOps</span>
+              <span class="blog-tag">CI/CD</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🎯</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 5, 2026</div>
+              <div class="blog-category">Accessibility</div>
+            </div>
+            <h3 class="blog-title">Web Accessibility: WCAG 2.2 Compliance</h3>
+            <p class="blog-excerpt">
+              Ensure your websites are accessible to everyone. Learn WCAG 2.2
+              guidelines, ARIA attributes, and how to create inclusive digital
+              experiences for users with disabilities.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">Accessibility</span>
+              <span class="blog-tag">WCAG</span>
+              <span class="blog-tag">Inclusive</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🎨</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 3, 2026</div>
+              <div class="blog-category">Design</div>
+            </div>
+            <h3 class="blog-title">UI/UX Design Principles for Developers</h3>
+            <p class="blog-excerpt">
+                Bridge the gap between development and design. Learn essential
+                UI/UX principles, design thinking methodologies, and how to create
+                beautiful, user-friendly interfaces.
+              </p>
+            <div class="blog-tags">
+              <span class="blog-tag">UI/UX</span>
+              <span class="blog-tag">Design</span>
+              <span class="blog-tag">User Experience</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
+
+        <article class="blog-card">
+          <div class="blog-image">🔧</div>
+          <div class="blog-content">
+            <div class="blog-meta">
+              <div class="blog-date">📅 February 1, 2026</div>
+              <div class="blog-category">Tools</div>
+            </div>
+            <h3 class="blog-title">Essential VS Code Extensions for 2026</h3>
+            <p class="blog-excerpt">
+              Boost your productivity with the best VS Code extensions. From
+              IntelliSense to debugging tools, discover the must-have extensions
+              that will transform your coding experience.
+            </p>
+            <div class="blog-tags">
+              <span class="blog-tag">VS Code</span>
+              <span class="blog-tag">Extensions</span>
+              <span class="blog-tag">Productivity</span>
+            </div>
+            <a href="#" class="blog-read-more">Read More →</a>
+          </div>
+        </article>
       </section>
 
       <!-- Newsletter Section -->
@@ -671,6 +1139,64 @@
           <button type="submit" class="newsletter-btn">Subscribe</button>
         </form>
       </section>
+    </div>
+
+    <!-- AI Chat Assistant -->
+    <div class="ai-chat-assistant" id="aiChatAssistant">
+      <button class="ai-chat-toggle" id="aiChatToggle" aria-label="Open AI Chat">
+        <span class="ai-icon">🤖</span>
+        <span class="ai-text">AI Assistant</span>
+      </button>
+      
+      <div class="ai-chat-panel" id="aiChatPanel">
+        <div class="ai-chat-header">
+          <div class="ai-chat-title">
+            <span class="ai-chat-icon">🤖</span>
+            <h3>Web Development AI Assistant</h3>
+          </div>
+          <button class="ai-chat-close" id="aiChatClose" aria-label="Close AI Chat">âœ–</button>
+        </div>
+        
+        <div class="ai-chat-messages" id="aiChatMessages">
+          <div class="ai-message ai-welcome">
+            <div class="ai-message-content">
+              <p>Hello! I'm your AI assistant for web development. I can help you with:</p>
+              <ul>
+                <li>🎯 Explaining blog concepts</li>
+                <li>💻 Code examples and explanations</li>
+                <li>📚 Web development tutorials</li>
+                <li>🔧 Best practices and tips</li>
+                <li>❓ Answering your questions</li>
+              </ul>
+              <p>What would you like to learn about today?</p>
+            </div>
+            <div class="ai-message-time">Just now</div>
+          </div>
+        </div>
+        
+        <div class="ai-chat-input-container">
+          <input 
+            type="text" 
+            id="aiChatInput" 
+            class="ai-chat-input" 
+            placeholder="Ask me about web development..."
+            aria-label="Ask a question"
+          />
+          <button id="aiChatSend" class="ai-chat-send" aria-label="Send message">
+            <span>Send</span>
+          </button>
+        </div>
+        
+        <div class="ai-chat-suggestions">
+          <p class="suggestions-title">Quick questions:</p>
+          <div class="suggestion-buttons">
+            <button class="suggestion-btn" data-question="What is CSS Grid?">What is CSS Grid?</button>
+            <button class="suggestion-btn" data-question="How to optimize JavaScript performance?">JavaScript Performance</button>
+            <button class="suggestion-btn" data-question="Best practices for responsive design?">Responsive Design</button>
+            <button class="suggestion-btn" data-question="How to make a website accessible?">Web Accessibility</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Settings Panel -->
@@ -735,5 +1261,183 @@
 
     <script src="/Assets/js/site-nav.js" defer></script>
     <script src="/Assets/js/main.js" defer></script>
+    
+    <script>
+      // AI Chat Assistant functionality
+      const aiChatToggle = document.getElementById("aiChatToggle");
+      const aiChatPanel = document.getElementById("aiChatPanel");
+      const aiChatClose = document.getElementById("aiChatClose");
+      const aiChatInput = document.getElementById("aiChatInput");
+      const aiChatSend = document.getElementById("aiChatSend");
+      const aiChatMessages = document.getElementById("aiChatMessages");
+
+      // AI responses database
+      const aiResponses = {
+        "what is css grid": "CSS Grid is a powerful layout system that allows you to create complex, two-dimensional layouts with ease. It works by defining grid containers and grid items, giving you precise control over both rows and columns.\n\nKey features:\n- Two-dimensional layout control\n- Responsive design capabilities\n- Complex layouts made simple\n- Better performance than traditional methods\n\nExample:\n```css\n.container {\n  display: grid;\n  grid-template-columns: 1fr 2fr 1fr;\n  grid-template-rows: auto 1fr auto;\n  gap: 20px;\n}\n```",
+        "how to optimize javascript performance": "JavaScript performance optimization involves several key strategies:\n\n1. **Code Splitting**: Break your code into smaller chunks\n2. **Lazy Loading**: Load resources only when needed\n3. **Event Delegation**: Handle events at a higher level\n4. **Memoization**: Cache function results\n5. **Minification**: Remove unnecessary characters\n\nExample of lazy loading:\n```javascript\nconst lazyLoadImage = (img) => {\n  const observer = new IntersectionObserver((entries) => {\n    entries.forEach(entry => {\n      if (entry.isIntersecting) {\n        img.src = img.dataset.src;\n        observer.unobserve(img);\n      }\n    });\n  });\n  observer.observe(img);\n};\n```",
+        "best practices for responsive design": "Responsive design best practices:\n\n1. **Mobile-First Approach**: Design for mobile, then scale up\n2. **Flexible Layouts**: Use relative units (%, em, rem)\n3. **Media Queries**: Breakpoints for different screen sizes\n4. **Flexible Images**: Use max-width: 100%\n5. **Touch-Friendly**: Ensure adequate touch targets\n\nExample breakpoint structure:\n```css\n/* Mobile */\n.container { width: 100%; }\n\n/* Tablet */\n@media (min-width: 768px) {\n  .container { width: 750px; margin: 0 auto; }\n}\n\n/* Desktop */\n@media (min-width: 1024px) {\n  .container { width: 960px; }\n}\n```",
+        "how to make a website accessible": "Web accessibility best practices:\n\n1. **Semantic HTML**: Use proper HTML elements\n2. **Alt Text**: Provide descriptions for images\n3. **Keyboard Navigation**: Ensure keyboard accessibility\n4. **Color Contrast**: Maintain sufficient contrast ratios\n5. **ARIA Labels**: Use ARIA for complex widgets\n\nExample accessible form:\n```html\n<form>\n  <label for=\"email\">Email Address</label>\n  <input \n    type=\"email\" \n    id=\"email\" \n    name=\"email\" \n    required \n    aria-describedby=\"email-help\"\n  >\n  <div id=\"email-help\" class=\"help-text\">\n    We'll never share your email with anyone else.\n  </div>\n</form>\n```",
+        "what is css flexbox": "CSS Flexbox is a one-dimensional layout method for arranging items in rows or columns. It's perfect for component-level layouts.\n\nKey concepts:\n- **Flex Container**: The parent element with display: flex\n- **Flex Items**: Direct children of the flex container\n- **Main Axis**: Primary direction (row or column)\n- **Cross Axis**: Perpendicular to main axis\n\nExample:\n```css\n.flex-container {\n  display: flex;\n  justify-content: space-between;  /* Main axis alignment */\n  align-items: center;             /* Cross axis alignment */\n  gap: 16px;\n}\n```"
+      };
+
+      // Toggle AI chat panel
+      aiChatToggle.addEventListener("click", () => {
+        aiChatPanel.classList.toggle("active");
+        aiChatToggle.style.display = aiChatPanel.classList.contains("active") ? "none" : "flex";
+      });
+
+      // Close AI chat panel
+      aiChatClose.addEventListener("click", () => {
+        aiChatPanel.classList.remove("active");
+        aiChatToggle.style.display = "flex";
+      });
+
+      // Send message function
+      function sendMessage() {
+        const message = aiChatInput.value.trim();
+        if (!message) return;
+
+        // Add user message
+        addMessage(message, "user");
+        aiChatInput.value = "";
+
+        // Show typing indicator
+        showTypingIndicator();
+
+        // Simulate AI response
+        setTimeout(() => {
+          removeTypingIndicator();
+          const response = getAIResponse(message);
+          addMessage(response, "ai");
+        }, 1000 + Math.random() * 1000);
+      }
+
+      // Add message to chat
+      function addMessage(text, sender) {
+        const messageDiv = document.createElement("div");
+        messageDiv.className = `ai-message ${sender}-message`;
+        
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "ai-message-content";
+        
+        const timeDiv = document.createElement("div");
+        timeDiv.className = "ai-message-time";
+        timeDiv.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        
+        // Format text with line breaks
+        const formattedText = text.replace(/\n/g, "<br>");
+        contentDiv.innerHTML = formattedText;
+        
+        messageDiv.appendChild(contentDiv);
+        messageDiv.appendChild(timeDiv);
+        aiChatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }
+
+      // Get AI response
+      function getAIResponse(message) {
+        const lowerMessage = message.toLowerCase();
+        
+        // Check for predefined responses
+        for (const [key, response] of Object.entries(aiResponses)) {
+          if (lowerMessage.includes(key)) {
+            return response;
+          }
+        }
+        
+        // Default response
+        const defaultResponses = [
+          "That's a great question! Let me help you with web development concepts. Could you be more specific about what you'd like to know?",
+          "I'd be happy to help you understand web development better. What specific topic or concept are you interested in?",
+          "Web development is a vast field! Are you looking for information about HTML, CSS, JavaScript, or a specific framework?",
+          "Great question! I can provide detailed explanations and examples. What aspect of web development would you like to explore?",
+          "Let me help you with that. Web development involves many technologies - are you focusing on frontend, backend, or full-stack development?"
+        ];
+        
+        return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+      }
+
+      // Show typing indicator
+      function showTypingIndicator() {
+        const typingDiv = document.createElement("div");
+        typingDiv.className = "ai-message ai-typing";
+        typingDiv.id = "typingIndicator";
+        
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "ai-message-content";
+        contentDiv.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+        
+        typingDiv.appendChild(contentDiv);
+        aiChatMessages.appendChild(typingDiv);
+        aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      }
+
+      // Remove typing indicator
+      function removeTypingIndicator() {
+        const typingIndicator = document.getElementById("typingIndicator");
+        if (typingIndicator) {
+          typingIndicator.remove();
+        }
+      }
+
+      // Send button click
+      aiChatSend.addEventListener("click", sendMessage);
+
+      // Enter key to send
+      aiChatInput.addEventListener("keypress", (e) => {
+        if (e.key === "Enter") {
+          sendMessage();
+        }
+      });
+
+      // Suggestion buttons
+      document.querySelectorAll(".suggestion-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const question = btn.getAttribute("data-question");
+          aiChatInput.value = question;
+          sendMessage();
+        });
+      });
+
+      // Add CSS for typing indicator
+      const style = document.createElement('style');
+      style.textContent = `
+        .ai-typing .ai-message-content {
+          display: flex;
+          align-items: center;
+          gap: 4px;
+        }
+        
+        .typing-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #64748b;
+          animation: typing 1.4s infinite;
+        }
+        
+        .typing-dot:nth-child(2) {
+          animation-delay: 0.2s;
+        }
+        
+        .typing-dot:nth-child(3) {
+          animation-delay: 0.4s;
+        }
+        
+        @keyframes typing {
+          0%, 60%, 100% {
+            opacity: 0.3;
+            transform: scale(0.8);
+          }
+          30% {
+            opacity: 1;
+            transform: scale(1);
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
   </body>
 </html>
