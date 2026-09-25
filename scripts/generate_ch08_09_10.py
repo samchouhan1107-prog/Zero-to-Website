@@ -244,7 +244,7 @@ ch08_lessons = [
       <span class="badge bg-success mb-2">Verified Skill</span>
       <h5 class="card-title">Bootstrap 5 Specialist</h5>
       <p class="card-text text-muted small">Demonstrates proficiency in responsive grid architecture and utility classes.</p>
-      <a href="/test-certificate.html" class="btn btn-primary btn-sm">View Certificate</a>
+      <a href="/certificate.html" class="btn btn-primary btn-sm">View Certificate</a>
     </div>
   </div>
 </div>""",
@@ -1256,7 +1256,7 @@ ch10_lessons = [
   <p style="color: #166534; font-size: 14px; margin: 0 0 16px;">
     Congratulations! You have mastered all 10 chapters and 52 comprehensive lessons in the WZ Storehouse curriculum.
   </p>
-  <a href="/test-certificate.html" style="padding: 10px 20px; background: #16a34a; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Download Certificate 🏆</a>
+  <a href="/certificate.html" style="padding: 10px 20px; background: #16a34a; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-block;">Download Certificate 🏆</a>
 </div>""",
         "practice": {
             "title": "Final Portfolio Showcase & Capstone Delivery",

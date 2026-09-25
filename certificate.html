@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebZoneBW Certificate of Completion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        
+        .header-nav {
+            background: #667eea;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .header-nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            margin-right: 20px;
+        }
+        
+        .certificate-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .certificate-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .certificate-content {
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .editable-name {
+            font-size: 32px;
+            font-weight: bold;
+            border: 2px dashed #ddd;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+        
+        .editable-name:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+        
+        .name-input {
+            font-size: 32px;
+            font-weight: bold;
+            border: 2px solid #667eea;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            width: 100%;
+            display: none;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            min-width: 150px;
+        }
+        
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #48bb78;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #38a169;
+            transform: translateY(-2px);
+        }
+        
+        .btn-danger {
+            background: #e53e3e;
+            color: white;
+        }
+        
+        .btn-danger:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+        
+        .certificate-footer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding: 20px;
+            background: #f7fafc;
+            border-top: 1px solid #e2e8f0;
+        }
+        
+        .footer-item {
+            text-align: center;
+        }
+        
+        .footer-label {
+            font-size: 12px;
+            color: #718096;
+            text-transform: uppercase;
+            font-weight: 600;
+        }
+        
+        .footer-value {
+            font-size: 14px;
+            font-weight: bold;
+            color: #2d3748;
+            margin-top: 4px;
+        }
+        
+        .instructions {
+            background: #f0f4ff;
+            border: 1px solid #667eea;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .instructions h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .instructions p {
+            color: #4a5568;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        @media (max-width: 768px) {
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .certificate-footer {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .editable-name {
+                font-size: 24px;
+            }
+            
+            .name-input {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-nav">
+        <a href="/">← Back to WebZoneBW</a>
+        <h1 style="margin: 0; display: inline;">🎓 Certificate of Completion</h1>
+    </div>
+    
+    <div class="certificate-container">
+        <div class="certificate-header">
+            <h1>🎓 Certificate of Completion</h1>
+            <p>WebZoneBW Digital Academy</p>
+        </div>
+        
+        <div class="certificate-content">
+            <h2>Official Certification of Achievement</h2>
+            <p>This is to officially certify that</p>
+            
+            <div id="name-container">
+                <div class="editable-name" id="editable-name" onclick="editName()">
+                    Your Name
+                </div>
+                <input type="text" class="name-input" id="name-input" onblur="saveName()" onkeypress="handleNameKeyPress(event)">
+            </div>
+            
+            <p style="max-width: 600px; margin: 0 auto; line-height: 1.6; font-size: 16px;">
+                has demonstrated technical proficiency across 11 Comprehensive Chapters (00–10) in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox & Grid Systems, JavaScript (DOM & Async), Responsive Engineering, React Components, and Cloud Deployment.
+            </p>
+            
+            <div class="action-buttons">
+                <button class="btn btn-primary" onclick="window.print()">
+                    🖨️ Print Certificate
+                </button>
+                <button class="btn btn-secondary" onclick="downloadCertificate()">
+                    💾 Download HTML
+                </button>
+                <button class="btn btn-danger" onclick="window.close()">
+                    ✖ Close Window
+                </button>
+            </div>
+            
+            <div class="instructions">
+                <h3>💡 How to Use Your Certificate</h3>
+                <p>
+                    <strong>1. Edit Your Name:</strong> Click on your name above to edit it. Press Enter or click outside to save.<br>
+                    <strong>2. Print/Save as PDF:</strong> Click "Print Certificate" and choose "Save as PDF" in your browser's print dialog.<br>
+                    <strong>3. Download HTML:</strong> Save a complete HTML copy of your certificate for sharing or archiving.<br>
+                    <strong>4. Close Window:</strong> Return to the main WebZoneBW platform.
+                </p>
+            </div>
+        </div>
+        
+        <div class="certificate-footer">
+            <div class="footer-item">
+                <div class="footer-label">Verification ID</div>
+                <div class="footer-value" id="verification-id">webzonebw-STOREHOUSE-ABC123</div>
+            </div>
+            <div class="footer-item">
+                <div class="footer-label">Mastery Score</div>
+                <div class="footer-value">1200 XP Points • 25/40 Lessons</div>
+            </div>
+            <div class="footer-item">
+                <div class="footer-label">Date of Issue</div>
+                <div class="footer-value" id="issue-date">January 15, 2024</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initialize certificate
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current date
+            document.getElementById('issue-date').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            
+            // Generate random verification ID
+            document.getElementById('verification-id').textContent = `webzonebw-STOREHOUSE-${Math.random().toString(36).substring(2, 9).toUpperCase()}`;
+            
+            // Load saved name
+            const savedName = localStorage.getItem('certificateUserName');
+            if (savedName) {
+                document.getElementById('editable-name').textContent = savedName;
+            }
+        });
+        
+        function editName() {
+            const editableName = document.getElementById('editable-name');
+            const nameInput = document.getElementById('name-input');
+            
+            editableName.style.display = 'none';
+            nameInput.style.display = 'block';
+            nameInput.value = editableName.textContent;
+            nameInput.focus();
+            nameInput.select();
+        }
+        
+        function saveName() {
+            const editableName = document.getElementById('editable-name');
+            const nameInput = document.getElementById('name-input');
+            
+            const newName = nameInput.value.trim() || 'Your Name';
+            editableName.textContent = newName;
+            localStorage.setItem('certificateUserName', newName);
+            
+            editableName.style.display = 'block';
+            nameInput.style.display = 'none';
+        }
+        
+        function handleNameKeyPress(event) {
+            if (event.key === 'Enter') {
+                saveName();
+            }
+        }
+        
+        function downloadCertificate() {
+            const userName = document.getElementById('editable-name').textContent;
+            const verificationId = document.getElementById('verification-id').textContent;
+            const issueDate = document.getElementById('issue-date').textContent;
+            
+            const htmlContent = `
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>Certificate of Completion</title>
+                    <style>
+                        body { 
+                            font-family: serif; 
+                            text-align: center; 
+                            padding: 40px; 
+                            background: linear-gradient(to bottom, #f0f4ff, #ffffff);
+                            margin: 0;
+                        }
+                        .certificate { 
+                            padding: 60px; 
+                            border: 8px double #667eea; 
+                            background: linear-gradient(to bottom, #f0f4ff, #ffffff, #f0f4ff); 
+                            max-width: 800px;
+                            margin: 0 auto;
+                            border-radius: 12px;
+                        }
+                        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 12px 12px 0 0; }
+                        .title { font-size: 28px; font-weight: 900; margin-bottom: 10px; }
+                        .subtitle { font-size: 18px; opacity: 0.9; }
+                        .name { font-size: 36px; font-weight: 900; margin: 30px 0; color: #2d3748; }
+                        .description { max-width: 600px; margin: 0 auto 40px; line-height: 1.6; color: #4a5568; font-size: 16px; }
+                        .footer { display: flex; justify-content: space-between; margin-top: 40px; padding: 20px; background: #f7fafc; border-radius: 0 0 12px 12px; }
+                        .footer-item { text-align: center; }
+                        .footer-label { font-size: 12px; color: #718096; text-transform: uppercase; font-weight: 600; }
+                        .footer-value { font-size: 14px; font-weight: bold; color: #2d3748; margin-top: 4px; }
+                    </style>
+                </head>
+                <body>
+                    <div class="certificate">
+                        <div class="header">
+                            <div class="title">🎓 Certificate of Completion</div>
+                            <div class="subtitle">WebZoneBW Digital Academy</div>
+                        </div>
+                        
+                        <div class="content">
+                            <div class="title">Official Certification of Achievement</div>
+                            <p>This is to officially certify that</p>
+                            
+                            <div class="name">${userName}</div>
+                            
+                            <div class="description">
+                                has demonstrated technical proficiency across 11 Comprehensive Chapters (00–10) in Modern Web Development, encompassing HTML5 Semantic Architecture, Modern CSS3, Flexbox & Grid Systems, JavaScript (DOM & Async), Responsive Engineering, React Components, and Cloud Deployment.
+                            </div>
+                        </div>
+                        
+                        <div class="footer">
+                            <div class="footer-item">
+                                <div class="footer-label">Verification ID</div>
+                                <div class="footer-value">${verificationId}</div>
+                            </div>
+                            <div class="footer-item">
+                                <div class="footer-label">Mastery Score</div>
+                                <div class="footer-value">1200 XP Points • 25/40 Lessons</div>
+                            </div>
+                            <div class="footer-item">
+                                <div class="footer-label">Date of Issue</div>
+                                <div class="footer-value">${issueDate}</div>
+                            </div>
+                        </div>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            const blob = new Blob([htmlContent], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `webzonebw-certificate-${userName.replace(/\s+/g, '-').toLowerCase()}.html`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
