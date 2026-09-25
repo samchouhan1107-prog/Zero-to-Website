@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Certificate Test</title>
+    <title>WebZoneBW Certificate of Completion</title>
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -109,6 +109,11 @@
     </style>
 </head>
 <body>
+    <div style="background: #667eea; color: white; padding: 15px 20px; text-align: center;">
+        <a href="/" style="color: white; text-decoration: none; font-weight: 600; margin-right: 20px;">← Back to WebZoneBW</a>
+        <h1 style="margin: 0; display: inline;">🎓 Certificate of Completion</h1>
+    </div>
+    
     <div class="certificate-container">
         <div class="certificate-header">
             <h1>🎓 Certificate of Completion</h1>
@@ -127,11 +132,19 @@
             
             <div class="action-buttons">
                 <button class="btn btn-primary" onclick="window.print()">
-                    🖨️ Print / Save PDF
+                    🖨️ Print Certificate
                 </button>
                 <button class="btn btn-secondary" onclick="downloadCertificate()">
                     💾 Download HTML
                 </button>
+                <button class="btn btn-secondary" onclick="window.close()">
+                    ✖ Close Window
+                </button>
+            </div>
+            <div style="margin-top: 20px; padding: 15px; background: #f0f4ff; border-radius: 8px; border-left: 4px solid #667eea;">
+                <p style="margin: 0; color: #4a5568; font-size: 14px;">
+                    <strong>💡 Instructions:</strong> Click on your name to edit it. Use Print to save as PDF, or Download to save as HTML file. Your progress is automatically saved.
+                </p>
             </div>
         </div>
         
