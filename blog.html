@@ -748,6 +748,125 @@
       </section>
 
       <script>
+        // Blog posts data
+        const blogPosts = [
+          {
+            id: 'blog-001',
+            slug: 'complete-guide-css-flexbox',
+            title: 'A Complete Guide to CSS Flexbox',
+            excerpt: 'Master CSS Flexbox with this comprehensive guide. Learn about flex containers, flex items, alignment properties, and real-world layout patterns.',
+            category: 'CSS',
+            date: '2025-01-15',
+            readTime: '12 min read'
+          },
+          {
+            id: 'blog-002',
+            slug: 'understanding-css-grid',
+            title: 'Understanding CSS Grid: From Basics to Advanced',
+            excerpt: 'CSS Grid is the most powerful layout system in CSS. This guide covers grid containers, tracks, areas, and advanced techniques.',
+            category: 'CSS',
+            date: '2025-02-08',
+            readTime: '14 min read'
+          },
+          {
+            id: 'blog-003',
+            slug: 'html5-semantic-elements-seo',
+            title: 'HTML5 Semantic Elements: Why They Matter for SEO',
+            excerpt: 'Discover how HTML5 semantic elements improve your site\'s search engine rankings and accessibility for all users.',
+            category: 'HTML',
+            date: '2025-03-12',
+            readTime: '10 min read'
+          },
+          {
+            id: 'blog-004',
+            slug: 'javascript-dom-manipulation',
+            title: 'JavaScript DOM Manipulation: A Developer\'s Handbook',
+            excerpt: 'Learn how to interact with the Document Object Model using JavaScript. Covers selecting elements, event handling, and more.',
+            category: 'JavaScript',
+            date: '2025-04-05',
+            readTime: '15 min read'
+          },
+          {
+            id: 'blog-005',
+            slug: 'responsive-web-design-best-practices',
+            title: 'Responsive Web Design: Best Practices for Modern Websites',
+            excerpt: 'Build websites that look great on every device. Covers media queries, fluid typography, and mobile-first design.',
+            category: 'Design',
+            date: '2025-05-20',
+            readTime: '11 min read'
+          },
+          {
+            id: 'blog-006',
+            slug: 'getting-started-with-webzonebw',
+            title: 'Getting Started: Your Path to Web Development Mastery',
+            excerpt: 'Welcome to WebZoneBW SC! Learn how to navigate our interactive platform and follow our comprehensive curriculum.',
+            category: 'General',
+            date: '2025-06-01',
+            readTime: '8 min read'
+          }
+        ];
+
+        // Load blog posts
+        function loadBlogPosts(category = 'All') {
+          const blogGrid = document.getElementById('blogGrid');
+          blogGrid.innerHTML = '';
+          
+          const filteredPosts = category === 'All' 
+            ? blogPosts 
+            : blogPosts.filter(post => post.category === category);
+          
+          filteredPosts.forEach(post => {
+            const blogCard = document.createElement("div");
+            blogCard.className = "blog-card";
+            blogCard.innerHTML = `
+              <div class="blog-image">📝</div>
+              <div class="blog-content">
+                <div class="blog-meta">
+                  <span class="blog-date">📅 ${post.date}</span>
+                  <span class="blog-category">${post.category}</span>
+                </div>
+                <h3 class="blog-title">${post.title}</h3>
+                <p class="blog-excerpt">${post.excerpt}</p>
+                <div class="blog-tags">
+                  <span class="blog-tag">${post.category}</span>
+                  <span class="blog-tag">${post.readTime}</span>
+                </div>
+                <a href="/blog/${post.slug}" class="blog-read-more">Read More →</a>
+              </div>
+            `;
+            blogGrid.appendChild(blogCard);
+          });
+        }
+
+        // Initialize blog posts
+        document.addEventListener('DOMContentLoaded', function() {
+          loadBlogPosts('All');
+          
+          // Category filter functionality
+          document.querySelectorAll(".category-btn").forEach((btn) => {
+            btn.addEventListener("click", function () {
+              document
+                .querySelectorAll(".category-btn")
+                .forEach((b) => b.classList.remove("active"));
+              this.classList.add("active");
+              
+              const selectedCategory = this.getAttribute('data-category');
+              loadBlogPosts(selectedCategory);
+              
+              // Track category selection
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'blog_category_select', {
+                  event_category: 'Blog',
+                  event_label: selectedCategory,
+                  value: 1
+                });
+              }
+            });
+          });
+        });
+      </script>
+
+      <script>
         // Real blog data from the system
         const blogPosts = [
           {
