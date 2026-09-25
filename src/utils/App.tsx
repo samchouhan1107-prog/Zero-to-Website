@@ -698,7 +698,13 @@ export default function App() {
         : "text-base leading-normal";
 
   const handleCycleTheme = () => {
-    setTheme(theme === "dark" ? "light" : "dark");
+    if (theme === "auto") {
+      setTheme("dark");
+    } else if (theme === "dark") {
+      setTheme("light");
+    } else {
+      setTheme("auto");
+    }
   };
 
   const totalLessons = chapters.flatMap((c) => c.lessons).length;
