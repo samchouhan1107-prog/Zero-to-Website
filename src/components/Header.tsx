@@ -409,18 +409,26 @@ export const Header: React.FC<HeaderProps> = ({
                 type="button"
                 onClick={onToggleTheme}
                 className="flex min-h-[36px] items-center gap-1.5 rounded-lg border border-app-border bg-app-surface px-3 py-1 text-[11px] font-medium text-app-ink transition-colors hover:bg-app-active touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/50"
-                aria-label={`Current theme: ${theme}. Click to switch theme`}
-                title={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
+                aria-label={`Current theme: ${theme === 'auto' ? 'auto (system preference)' : theme}. Click to switch theme`}
+                title={`Switch theme mode (current: ${theme})`}
               >
                 {theme === "dark" ? (
                   <>
                     <Sun className="h-3.5 w-3.5 text-amber-400" />
                     <span className="hidden xs:inline">Theme: Dark</span>
                   </>
-                ) : (
+                ) : theme === "light" ? (
                   <>
                     <Moon className="h-3.5 w-3.5 text-blue-500" />
                     <span className="hidden xs:inline">Theme: Light</span>
+                  </>
+                ) : (
+                  <>
+                    <div className="flex items-center gap-1">
+                      <Sun className="h-3.5 w-3.5 text-amber-400" />
+                      <Moon className="h-3.5 w-3.5 text-blue-500" />
+                    </div>
+                    <span className="hidden xs:inline">Theme: Auto</span>
                   </>
                 )}
               </button>
