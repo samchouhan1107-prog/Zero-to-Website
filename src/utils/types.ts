@@ -307,7 +307,7 @@ export interface UserProgress {
   dailyCheckInClaimedDate?: string;
 }
 
-export type AppTheme = 'dark' | 'light';
+export type AppTheme = 'dark' | 'light' | 'auto';
 
 export interface AppSettings {
   theme: AppTheme;

@@ -125,8 +125,14 @@ export default function App() {
   const mainContentRef = useRef<HTMLElement>(null);
 
   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
-  const [theme, setTheme] = useState<AppTheme>(() => {
+  const [theme, setTheme] = useState<AppTheme | 'auto'>(() => {
     try {
+      // Check cookie theme preference first
+      const cookieTheme = localStorage.getItem("webzone_theme_preference");
+      if (cookieTheme === 'light' || cookieTheme === 'dark' || cookieTheme === 'auto') {
+        return cookieTheme as AppTheme | 'auto';
+      }
+      // Fall back to legacy theme setting
       return normalizeAppTheme(
         localStorage.getItem("webzonebw_storehouse_theme"),
       );
@@ -418,6 +424,7 @@ export default function App() {
     try {
       localStorage.setItem("webzonebw_storehouse_theme", theme);
       localStorage.setItem("webzonebw-theme", theme);
+      localStorage.setItem("webzone_theme_preference", theme);
     } catch {}
   }, [theme]);
 
@@ -442,6 +449,18 @@ export default function App() {
   // Apply the selected reading mode without leaving legacy classes behind.
   useEffect(() => {
     applyAppTheme(theme);
+  }, [theme]);
+
+  // Handle auto theme detection
+  useEffect(() => {
+    if (theme === 'auto') {
+      const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+      const handleChange = (e: MediaQueryListEvent) => {
+        applyAppTheme('auto');
+      };
+      mediaQuery.addEventListener('change', handleChange);
+      return () => mediaQuery.removeEventListener('change', handleChange);
+    }
   }, [theme]);
 
   // Global Keyboard shortcuts

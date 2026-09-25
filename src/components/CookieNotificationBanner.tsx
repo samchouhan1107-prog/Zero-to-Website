@@ -4,20 +4,20 @@ import {
   Cookie,
   Bell,
   BellRing,
-  ShieldCheck,
   Check,
   ChevronDown,
   ChevronUp,
-  Settings,
+  Moon,
+  ShieldCheck,
   Sparkles,
   X,
-  Volume2,
 } from 'lucide-react';
 
 export interface CookiePreferences {
   essential: boolean;
   pushNotifications: boolean;
   analytics: boolean;
+  themePreference: 'dark' | 'light' | 'auto';
   timestamp: string;
 }
 
@@ -40,6 +40,7 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
   const [isExpanded, setIsExpanded] = useState(false);
   const [pushEnabled, setPushEnabled] = useState(true);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
+  const [themePreference, setThemePreference] = useState<'dark' | 'light' | 'auto'>('auto');
   const [permissionStatus, setPermissionStatus] = useState<NotificationPermission>('default');
 
   useEffect(() => {
@@ -56,6 +57,12 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
     if ('Notification' in window) {
       setPermissionStatus(Notification.permission);
     }
+
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('webzone_theme_preference');
+    if (savedTheme) {
+      setThemePreference(savedTheme as 'dark' | 'light' | 'auto');
+    }
   }, []);
 
   const handleAcceptAll = async () => {
@@ -63,10 +70,12 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
       essential: true,
       pushNotifications: true,
       analytics: true,
+      themePreference: themePreference,
       timestamp: new Date().toISOString(),
     };
     localStorage.setItem('webzone_cookie_consent', JSON.stringify(prefs));
     localStorage.setItem('webzone_push_enabled', 'true');
+    localStorage.setItem('webzone_theme_preference', themePreference);
 
     // Request browser notification permission if supported
     if ('Notification' in window && Notification.permission === 'default') {
@@ -94,10 +103,12 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
       essential: true,
       pushNotifications: pushEnabled,
       analytics: analyticsEnabled,
+      themePreference: themePreference,
       timestamp: new Date().toISOString(),
     };
     localStorage.setItem('webzone_cookie_consent', JSON.stringify(prefs));
     localStorage.setItem('webzone_push_enabled', pushEnabled ? 'true' : 'false');
+    localStorage.setItem('webzone_theme_preference', themePreference);
 
     if (pushEnabled && 'Notification' in window && Notification.permission === 'default') {
       try {
@@ -117,10 +128,12 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
       essential: true,
       pushNotifications: false,
       analytics: false,
+      themePreference: themePreference,
       timestamp: new Date().toISOString(),
     };
     localStorage.setItem('webzone_cookie_consent', JSON.stringify(prefs));
     localStorage.setItem('webzone_push_enabled', 'false');
+    localStorage.setItem('webzone_theme_preference', themePreference);
     setIsVisible(false);
     onPreferencesSaved?.(prefs);
   };
@@ -248,6 +261,26 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
                     />
                     <div className="w-9 h-5 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-cyan-500"></div>
                   </label>
+                </div>
+
+                {/* 4. Theme Preference */}
+                <div className="flex items-center justify-between p-3 rounded-2xl bg-slate-800/50 dark:bg-[#141722]/70 border border-slate-700/40">
+                  <div className="flex items-center gap-2.5">
+                    <Moon className="w-4 h-4 text-purple-400 shrink-0" />
+                    <div>
+                      <h4 className="text-xs font-bold text-white">Visual Theme Preference</h4>
+                      <p className="text-[11px] text-slate-400">Save your preferred theme (dark/light) for future visits.</p>
+                    </div>
+                  </div>
+                  <select
+                    value={themePreference}
+                    onChange={(e) => setThemePreference(e.target.value as 'dark' | 'light' | 'auto')}
+                    className="bg-slate-700 border border-slate-600 rounded-lg px-2 py-1 text-xs text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                  >
+                    <option value="auto">Auto</option>
+                    <option value="dark">Dark</option>
+                    <option value="light">Light</option>
+                  </select>
                 </div>
               </motion.div>
             )}

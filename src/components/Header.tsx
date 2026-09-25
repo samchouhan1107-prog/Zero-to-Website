@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {
+  Award,
   ChevronDown,
   Globe,
   Laptop,
@@ -282,6 +283,20 @@ export const Header: React.FC<HeaderProps> = ({
                 ⌘K
               </kbd>
             </button>
+
+            {/* Certificate Button - Only show for authenticated users */}
+            {hasRealAccount && (
+              <button
+                type="button"
+                onClick={onOpenCertificate}
+                className="flex min-h-[44px] items-center gap-3 rounded-xl border border-app-border bg-app-inset px-4 text-sm font-semibold text-app-ink transition-all hover:border-blue-500/50 hover:bg-app-active hover:text-app-ink touch-manipulation focus:outline-none focus:ring-2 focus:ring-blue-500/40"
+                aria-label="View Certificate of Completion"
+                title="Certificate of Completion"
+              >
+                <Award className="h-5 w-5 shrink-0 text-blue-500" />
+                <span className="hidden sm:inline font-sans">Certificate</span>
+              </button>
+            )}
 
             {/* Sign In / Account Access */}
             <button
