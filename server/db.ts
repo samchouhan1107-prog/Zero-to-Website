@@ -46,6 +46,7 @@ export interface DbProgress {
   quizScores: Record<string, number>;
   notes: Record<string, string>;
   bookmarks: string[];
+  preferredName?: string; // Certificate name preference
   xpPoints: number;
   streakDays: number;
   lastActiveDate: string;
@@ -404,6 +405,7 @@ export function createDefaultProgress(userId: string): DbProgress {
     quizScores: {},
     notes: {},
     bookmarks: [],
+    preferredName: undefined,
     xpPoints: 0,
     streakDays: 0,
     lastActiveDate: "",

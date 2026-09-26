@@ -31,6 +31,7 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
   const [isVerifying, setIsVerifying] = useState(false);
   const [verificationStatus, setVerificationStatus] = useState<'idle' | 'verifying' | 'eligible' | 'ineligible'>('idle');
   const [serverCertificateId, setServerCertificateId] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   
   // Calculate actual completion status
   const completedCount = Object.values(progress.completedLessons).filter(Boolean).length;
@@ -74,11 +75,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
   const verifyCompletionStatus = async () => {
     if (!isAuthenticated) {
       setVerificationStatus('ineligible');
+      setError(null);
       return;
     }
     
     setIsVerifying(true);
     setVerificationStatus('verifying');
+    setError(null);
     
     try {
       // Verify with server
@@ -104,8 +107,13 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
           } else {
             setVerificationStatus('ineligible');
           }
+        } else if (response.status === 401) {
+          // Unauthorized - session expired
+          setVerificationStatus('ineligible');
+          setError('Session expired. Please sign in again.');
         } else {
           // Fallback to client-side verification if server unavailable
+          console.warn('Server certificate endpoint unavailable, using client-side verification');
           if (meetsRequirements) {
             setVerificationStatus('eligible');
           } else {
@@ -115,9 +123,11 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
       } else {
         // No session token, not authenticated
         setVerificationStatus('ineligible');
+        setError('No active session found. Please sign in.');
       }
     } catch (error) {
       console.warn('Server verification failed, using client-side verification:', error);
+      setError('Unable to verify server status. Using local data.');
       // Fallback to client-side verification
       if (meetsRequirements) {
         setVerificationStatus('eligible');
@@ -219,33 +229,88 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
 
         {/* Certificate Canvas / Frame */}
         <div className="p-6 overflow-y-auto max-h-[75vh]">
-          {!isEligible && verificationStatus === 'ineligible' && (
-            <div className="mb-6 p-4 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-920/20 text-center">
-              <div className="flex items-center justify-center gap-2 mb-2">
-                <AlertCircle className="w-5 h-5 text-amber-600 dark:text-amber-400" />
-                <h3 className="font-bold text-sm text-amber-800 dark:text-amber-200">
-                  Certificate Not Available
-                </h3>
-              </div>
-              <p className="text-xs text-amber-700 dark:text-amber-300">
-                Complete the learning requirements to unlock your certificate:
-              </p>
-              <ul className="text-xs text-amber-600 dark:text-amber-400 mt-2 space-y-1">
-                <li>• At least {COMPLETION_REQUIREMENTS.MIN_LESSONS} lessons completed</li>
-                <li>• At least {COMPLETION_REQUIREMENTS.MIN_XP} XP points earned</li>
-                <li>• Lessons from at least {COMPLETION_REQUIREMENTS.MIN_CHAPTERS} different chapters</li>
-              </ul>
-              <div className="mt-3 text-xs">
-                <span className="text-amber-600 dark:text-amber-400 font-semibold">
-                  Progress: {completedCount}/{COMPLETION_REQUIREMENTS.MIN_LESSONS} lessons, 
-                  {progress.xpPoints}/{COMPLETION_REQUIREMENTS.MIN_XP} XP, 
-                  {completedChapters}/{COMPLETION_REQUIREMENTS.MIN_CHAPTERS} chapters
-                </span>
+          {/* Loading State */}
+          {isVerifying && (
+            <div className="text-center py-8">
+              <div className="flex flex-col items-center gap-4">
+                <div className="animate-spin w-8 h-8 border-4 border-indigo-200 border-t-indigo-600 rounded-full"></div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Verifying your completion status...</p>
               </div>
             </div>
           )}
 
-          {isEligible && (
+          {/* Authentication Required State */}
+          {!isVerifying && !isAuthenticated && (
+            <div className="text-center py-8">
+              <div className="flex flex-col items-center gap-4">
+                <User className="w-12 h-12 text-slate-400" />
+                <h3 className="font-bold text-lg text-slate-900 dark:text-white">Sign In Required</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md">
+                  Please create a free account or sign in to access your Certificate of Completion and track your learning progress.
+                </p>
+              </div>
+            </div>
+          )}
+
+          {/* Error State */}
+          {!isVerifying && error && (
+            <div className="text-center py-8">
+              <div className="flex flex-col items-center gap-4">
+                <AlertCircle className="w-12 h-12 text-amber-500" />
+                <h3 className="font-bold text-lg text-slate-900 dark:text-white">Unable to Verify Certificate</h3>
+                <p className="text-sm text-slate-600 dark:text-slate-400 max-w-md mb-4">
+                  {error}
+                </p>
+                <button
+                  onClick={verifyCompletionStatus}
+                  className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium text-sm rounded-lg transition-colors"
+                >
+                  Try Again
+                </button>
+              </div>
+            </div>
+          )}
+
+          {/* Not Eligible State */}
+          {!isVerifying && isAuthenticated && verificationStatus === 'ineligible' && (
+            <div className="mb-6 p-6 rounded-xl border border-amber-200 dark:border-amber-800 bg-amber-50 dark:bg-amber-920/20 text-center">
+              <div className="flex flex-col items-center gap-4">
+                <AlertCircle className="w-12 h-12 text-amber-600 dark:text-amber-400" />
+                <h3 className="font-bold text-lg text-amber-800 dark:text-amber-200">
+                  Certificate Not Available
+                </h3>
+                <p className="text-sm text-amber-700 dark:text-amber-300 max-w-md">
+                  Complete the learning requirements to unlock your Certificate of Completion:
+                </p>
+                <ul className="text-sm text-amber-600 dark:text-amber-400 mt-4 space-y-2 w-full max-w-xs">
+                  <li className="flex items-center justify-between">
+                    <span>Lessons Completed:</span>
+                    <span className="font-semibold">
+                      {completedCount}/{COMPLETION_REQUIREMENTS.MIN_LESSONS}
+                    </span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span>XP Points Earned:</span>
+                    <span className="font-semibold">
+                      {progress.xpPoints}/{COMPLETION_REQUIREMENTS.MIN_XP}
+                    </span>
+                  </li>
+                  <li className="flex items-center justify-between">
+                    <span>Chapters Completed:</span>
+                    <span className="font-semibold">
+                      {completedChapters}/{COMPLETION_REQUIREMENTS.MIN_CHAPTERS}
+                    </span>
+                  </li>
+                </ul>
+                <div className="mt-4 text-xs text-amber-600 dark:text-amber-400">
+                  Keep learning to unlock your certificate!
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Eligible State */}
+          {!isVerifying && isAuthenticated && verificationStatus === 'eligible' && (
             <>
               <div className="p-8 rounded-2xl border-8 border-double border-indigo-200 dark:border-indigo-900/60 bg-gradient-to-b from-indigo-50/40 via-white to-indigo-50/40 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 text-center space-y-6 shadow-inner relative certificate-content">
                 <div className="flex justify-center">
@@ -336,15 +401,6 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                     <strong>{progress.courseCompletedAt ? new Date(progress.courseCompletedAt).toLocaleDateString() : new Date().toLocaleDateString()}</strong>
                   </div>
                 </div>
-
-                {isVerifying && (
-                  <div className="text-xs text-slate-500">
-                    <div className="flex items-center justify-center gap-2">
-                      <div className="animate-spin w-4 h-4 border-2 border-slate-300 border-t-indigo-600 rounded-full"></div>
-                      Verifying completion status...
-                    </div>
-                  </div>
-                )}
               </div>
 
               {/* Action Bar */}
@@ -420,6 +476,16 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                 </div>
               </div>
             </>
+          )}
+
+          {/* Unknown/Fallback State */}
+          {!isVerifying && verificationStatus === 'idle' && (
+            <div className="text-center py-8">
+              <div className="flex flex-col items-center gap-4">
+                <div className="w-12 h-12 border-4 border-slate-200 border-t-slate-400 rounded-full animate-spin"></div>
+                <p className="text-sm text-slate-600 dark:text-slate-400">Preparing certificate...</p>
+              </div>
+            </div>
           )}
         </div>
       </div>

@@ -1,4 +1,4 @@
-import { Router, Response } from "express";
+import express, { Router } from "express";
 import { requireAuth, AuthRequest } from "./authMiddleware";
 import type { DbProgress } from "./db";
 import {
@@ -12,6 +12,17 @@ import {
 } from "./db";
 
 const router = Router();
+
+// Simple hash function for generating consistent IDs
+function simpleHash(str: string): string {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = ((hash << 5) - hash) + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+  return Math.abs(hash).toString(36);
+}
 
 /* ── Shared helpers ────────────────────────────────────── */
 
@@ -324,6 +335,75 @@ router.post("/complete-challenge", requireAuth, async (req: AuthRequest, res) =>
   const xpPoints = (progress.xpPoints || 0) + (isAlreadyDone ? 0 : 50);
   const updated = await updateProgress(req.userId!, { completedChallenges, xpPoints });
   res.json({ success: true, progress: updated, xpAwarded: isAlreadyDone ? 0 : 50 });
+});
+
+/* ── GET /api/user/certificate-eligibility ─────────────── */
+router.get("/certificate-eligibility", requireAuth, (req: AuthRequest, res) => {
+  const progress = getProgress(req.userId!);
+  
+  // Calculate completion status
+  const completedCount = Object.keys(progress.completedLessons || {}).length;
+  const completedChapters = new Set(
+    Object.entries(progress.completedLessons || {})
+      .filter(([_, completed]) => completed)
+      .map(([lessonId]) => {
+        const match = lessonId.match(/ch-(\d+)/);
+        return match ? match[1] : null;
+      })
+      .filter(Boolean)
+  ).size;
+  
+  // Certificate requirements (same as frontend)
+  const MIN_LESSONS = 10;
+  const MIN_XP = 500;
+  const MIN_CHAPTERS = 3;
+  
+  const meetsRequirements = completedCount >= MIN_LESSONS &&
+                           progress.xpPoints >= MIN_XP &&
+                           completedChapters >= MIN_CHAPTERS;
+  
+  // Generate certificate ID if eligible
+  let certificateId = null;
+  if (meetsRequirements) {
+    const timestamp = progress.courseCompletedAt || new Date().toISOString();
+    const userId = req.userId!;
+    const hash = simpleHash(`${userId}-${timestamp}`);
+    certificateId = `WZ-CERT-${hash.substring(0, 8).toUpperCase()}`;
+  }
+  
+  res.json({
+    success: true,
+    eligible: meetsRequirements,
+    certificateId,
+    preferredName: progress.preferredName || req.user?.name || null,
+    requirements: {
+      lessons: { current: completedCount, required: MIN_LESSONS },
+      xp: { current: progress.xpPoints, required: MIN_XP },
+      chapters: { current: completedChapters, required: MIN_CHAPTERS }
+    }
+  });
+});
+
+/* ── PUT /api/user/certificate-name ────────────────────── */
+router.put("/certificate-name", requireAuth, async (req: AuthRequest, res) => {
+  const { preferredName } = req.body;
+  
+  if (!preferredName || typeof preferredName !== 'string' || !preferredName.trim()) {
+    return res.status(400).json({ error: "Valid name is required" });
+  }
+  
+  const progress = getProgress(req.userId!);
+  const updatedProgress = {
+    ...progress,
+    preferredName: preferredName.trim()
+  };
+  
+  await updateProgress(req.userId!, updatedProgress);
+  
+  res.json({
+    success: true,
+    preferredName: updatedProgress.preferredName
+  });
 });
 
 /* ── DELETE /api/user/account ──────────────────────────── */

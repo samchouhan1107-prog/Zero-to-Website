@@ -1,7 +1,7 @@
 import fs from "fs";
-import express from "express";
+import express, { Application, Request, Response, NextFunction } from "express";
 import path from "path";
-import { createServer as createViteServer } from "vite";
+import createServer from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
@@ -11,14 +11,14 @@ import { cleanupExpiredSessions } from "./server/db";
 
 dotenv.config();
 
-const app = express();
+const app: Application = express();
 const PORT = 3000;
 
 app.use(express.json());
 
-// CORS â€” allow frontend (GitHub Pages) to call this API
-app.use((_req, res, next) => {
-  const origin = process.env.CORS_ORIGIN || _req.headers.origin || "*";
+// CORS — allow frontend (GitHub Pages) to call this API
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const origin = process.env.CORS_ORIGIN || req.headers.origin || "*";
   res.header("Access-Control-Allow-Origin", origin);
   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
