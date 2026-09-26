@@ -4,6 +4,32 @@ import { UserProgress } from '../utils/types';
 import { useAuth } from '../utils/AuthContext';
 import * as authService from '../utils/authService';
 
+// Type matching the real API contract of GET /api/user/certificate-eligibility (server/api.ts)
+interface CertificateEligibilityResponse {
+  success: boolean;
+  eligible: boolean;
+  certificateId: string | null;
+  preferredName: string | null;
+  requirements: {
+    lessons: { current: number; required: number };
+    xp: { current: number; required: number };
+    chapters: { current: number; required: number };
+  };
+}
+
+// Runtime guard: server responses are untrusted at the boundary.
+function isCertificateEligibilityResponse(data: unknown): data is CertificateEligibilityResponse {
+  if (typeof data !== 'object' || data === null) return false;
+  const d = data as Record<string, unknown>;
+  return (
+    typeof d.success === 'boolean' &&
+    typeof d.eligible === 'boolean' &&
+    (typeof d.certificateId === 'string' || d.certificateId === null) &&
+    (typeof d.preferredName === 'string' || d.preferredName === null) &&
+    typeof d.requirements === 'object'
+  );
+}
+
 interface CertificateModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -95,7 +121,10 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
         });
         
         if (response.ok) {
-          const data = await response.json();
+          const data: unknown = await response.json();
+          if (!isCertificateEligibilityResponse(data)) {
+            throw new Error('Unexpected server response for certificate eligibility');
+          }
           if (data.eligible) {
             setVerificationStatus('eligible');
             setServerCertificateId(data.certificateId);

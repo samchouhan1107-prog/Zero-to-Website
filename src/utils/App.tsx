@@ -10,7 +10,7 @@ import {
   AppTheme,
   ViewMode,
 } from "./types";
-import { applyAppTheme, normalizeAppTheme } from "./theme";
+import { applyAppTheme, normalizeAppTheme, resolveAppTheme } from "./theme";
 import { XP_MILESTONES } from "../data/milestonesData";
 import { calculateDailyStreak, getLocalDateString } from "./streakUtils";
 import { Sidebar } from "../components/Sidebar";
@@ -125,12 +125,12 @@ export default function App() {
   const mainContentRef = useRef<HTMLElement>(null);
 
   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
-  const [theme, setTheme] = useState<AppTheme | 'auto'>(() => {
+  const [theme, setTheme] = useState<AppTheme>(() => {
     try {
       // Check cookie theme preference first
       const cookieTheme = localStorage.getItem("webzone_theme_preference");
       if (cookieTheme === 'light' || cookieTheme === 'dark' || cookieTheme === 'auto') {
-        return cookieTheme as AppTheme | 'auto';
+        return cookieTheme as AppTheme;
       }
       // Fall back to legacy theme setting
       return normalizeAppTheme(
@@ -805,7 +805,7 @@ export default function App() {
           className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}
         >
           {/* Animated Background with ambient nodes and cursor tracking */}
-          <AnimatedBackground theme={theme} />
+          <AnimatedBackground theme={resolveAppTheme(theme)} />
 
           <AnimatePresence mode="wait" initial={false}>
             {activeView === "home" && (

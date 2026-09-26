@@ -1,0 +1,1109 @@
+/* ==================================================
+   WebZoneBW SC - Enhanced Main Styles
+   Author  : Sameer Chouhan
+   Version : 2.1 (Enhanced with Royal Design)
+   Status  : Production Ready
+   ================================================= */
+
+/* ==================================================
+   ENHANCED COLOR SYSTEM - Standard + Royal
+   ================================================= */
+
+:root {
+    /* Standard WebZoneBW Colors (Maintain) */
+    --primary: #d90429;
+    --primary-light: #ff4458;
+    --primary-dark: #b8031f;
+    
+    /* Standard Text Colors */
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --text-lighter: #9ca3af;
+    --text-dark: #111827;
+    
+    /* Standard Background Colors */
+    --background: #ffffff;
+    --surface: #f9fafb;
+    --surface-light: #f3f4f6;
+    --border: #e5e7eb;
+    --border-light: #f3f4f6;
+    
+    /* Standard Shadow System */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    
+    /* Standard Spacing */
+    --spacing-xs: 0.25rem;   /* 4px */
+    --spacing-sm: 0.5rem;    /* 8px */
+    --spacing-md: 1rem;      /* 16px */
+    --spacing-lg: 1.5rem;    /* 24px */
+    --spacing-xl: 2rem;      /* 32px */
+    --spacing-2xl: 3rem;     /* 48px */
+    
+    /* Standard Border Radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+    --radius-2xl: 24px;
+    
+    /* Standard Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* Royal Design Colors (Enhanced) */
+:root {
+    /* Royal Color Palette */
+    --royal-blue: #1e40af;
+    --royal-blue-light: #3b82f6;
+    --royal-blue-dark: #1e3a8a;
+    
+    --gold-accent: #f59e0b;
+    --gold-light: #fbbf24;
+    --gold-dark: #d97706;
+    
+    --deep-purple: #6366f1;
+    --purple-light: #818cf8;
+    --purple-dark: #4f46e5;
+    
+    --emerald: #10b981;
+    --emerald-light: #34d399;
+    --emerald-dark: #059669;
+    
+    --crimson: #ef4444;
+    --crimson-light: #f87171;
+    --crimson-dark: #dc2626;
+    
+    /* Royal Gradients */
+    --gradient-royal: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+    --gradient-gold: linear-gradient(135deg, var(--gold-accent), var(--gold-light));
+    --gradient-success: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+    --gradient-danger: linear-gradient(135deg, var(--crimson), var(--crimson-light));
+    
+    /* Royal Shadows */
+    --shadow-royal: 0 10px 30px rgba(30, 64, 175, 0.3);
+    --shadow-gold: 0 10px 30px rgba(245, 158, 11, 0.3);
+    --shadow-purple: 0 10px 30px rgba(99, 102, 241, 0.3);
+    --shadow-emerald: 0 10px 30px rgba(16, 185, 129, 0.3);
+    
+    /* Royal Animations */
+    --animation-bounce: 0.6s ease-out;
+    --animation-fade: 0.5s ease-in-out;
+    --animation-slide: 0.3s ease-out;
+}
+
+/* ==================================================
+   ACCESSIBILITY & FOCUS MANAGEMENT (Maintain + Enhance)
+   ================================================= */
+
+:root {
+    --focus-ring: 2px solid var(--primary, #d90429);
+    --focus-offset: 3px;
+}
+
+:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: var(--focus-offset);
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+    outline: var(--focus-ring);
+    outline-offset: 2px;
+}
+
+/* Royal enhanced focus states */
+.royal-focus:focus-visible {
+    outline: 2px solid var(--royal-blue);
+    outline-offset: 3px;
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Skip link (Maintain) */
+.skip-link {
+    position: absolute;
+    top: -60px;
+    left: 12px;
+    background: #0f172a;
+    color: #ffffff;
+    padding: 12px 20px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-decoration: none;
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+    z-index: 10000;
+    box-shadow: var(--shadow-lg);
+    transition: top var(--transition-fast);
+}
+
+.skip-link:focus,
+.skip-link:focus-visible {
+    top: 12px;
+    outline: 3px solid #38bdf8;
+    outline-offset: 2px;
+}
+
+/* Screen reader only utility (Maintain) */
+.sr-only {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+}
+
+/* Reduced motion support (Maintain) */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ==================================================
+   RESET & RESPONSIVE ESSENTIALS (Maintain + Enhance)
+   ================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
+}
+
+img, picture, video, canvas, svg {
+    display: block;
+    max-width: 100%;
+}
+
+button, input, select, textarea, a {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/* Standard Typography (Maintain) */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--background);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Enhanced Typography with Royal Styles */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: var(--spacing-md);
+    color: var(--text-dark);
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+h4 { font-size: 1.25rem; }
+h5 { font-size: 1.125rem; }
+h6 { font-size: 1rem; }
+
+/* Royal Typography Enhancements */
+.royal-title {
+    background: var(--gradient-royal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+}
+
+.royal-subtitle {
+    color: var(--royal-blue);
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+/* Standard Text Elements (Maintain) */
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+a:hover {
+    color: var(--primary-light);
+}
+
+/* Royal Link Enhancements */
+.royal-link {
+    color: var(--royal-blue);
+    font-weight: 500;
+    position: relative;
+    text-decoration: none;
+    transition: all var(--transition-normal);
+}
+
+.royal-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--royal-blue);
+    transition: width var(--transition-normal);
+}
+
+.royal-link:hover::after {
+    width: 100%;
+}
+
+/* ==================================================
+   STANDARD LAYOUT COMPONENTS (Maintain + Enhance)
+   ================================================= */
+
+/* Container System (Maintain) */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.container-fluid {
+    width: 100%;
+    padding: 0 var(--spacing-lg);
+}
+
+.container-sm {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.container-md {
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.container-lg {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+/* Royal Container Enhancements */
+.royal-container {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.royal-container-inner {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+}
+
+/* Grid System (Maintain) */
+.grid {
+    display: grid;
+    gap: var(--spacing-lg);
+}
+
+.grid-cols-1 { grid-template-columns: repeat(1, 1fr); }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Flexbox System (Maintain) */
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-between {
+    justify-content: space-between;
+}
+
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* ==================================================
+   STANDARD BUTTON COMPONENTS (Maintain + Enhance)
+   ================================================= */
+
+/* Base Button Styles (Maintain) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    min-height: 44px;
+    white-space: nowrap;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn:focus {
+    outline: none;
+}
+
+/* Button Variants (Maintain) */
+.btn-primary {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    background: var(--surface);
+    color: var(--text);
+    border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+    background: var(--border-light);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.btn-success {
+    background: var(--emerald);
+    color: white;
+}
+
+.btn-success:hover {
+    background: var(--emerald-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-emerald);
+}
+
+.btn-danger {
+    background: var(--crimson);
+    color: white;
+}
+
+.btn-danger:hover {
+    background: var(--crimson-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Royal Button Enhancements */
+.royal-btn {
+    background: var(--gradient-royal);
+    color: white;
+    border: none;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md) var(--spacing-xl);
+    font-weight: 600;
+    font-size: 1rem;
+    box-shadow: var(--shadow-royal);
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+}
+
+.royal-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.royal-btn:hover::before {
+    left: 100%;
+}
+
+.royal-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px rgba(30, 64, 175, 0.4);
+}
+
+.royal-btn:active {
+    transform: translateY(0);
+}
+
+.royal-btn-secondary {
+    background: var(--gradient-gold);
+    color: white;
+    box-shadow: var(--shadow-gold);
+}
+
+.royal-btn-secondary:hover {
+    box-shadow: 0 15px 40px rgba(245, 158, 11, 0.4);
+}
+
+.royal-btn-success {
+    background: var(--gradient-success);
+    color: white;
+    box-shadow: var(--shadow-emerald);
+}
+
+.royal-btn-success:hover {
+    box-shadow: 0 15px 40px rgba(16, 185, 129, 0.4);
+}
+
+/* Button Sizes */
+.btn-sm {
+    padding: var(--spacing-xs) var(--spacing-md);
+    font-size: 0.875rem;
+    min-height: 36px;
+}
+
+.btn-lg {
+    padding: var(--spacing-md) var(--spacing-2xl);
+    font-size: 1.125rem;
+    min-height: 52px;
+}
+
+.btn-xl {
+    padding: var(--spacing-lg) var(--spacing-2xl);
+    font-size: 1.25rem;
+    min-height: 60px;
+}
+
+/* ==================================================
+   CARD COMPONENTS (Enhanced Royal Design)
+   ================================================= */
+
+/* Standard Card (Maintain) */
+.card {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+    transition: all var(--transition-normal);
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Royal Card Enhancements */
+.royal-card {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid rgba(30, 64, 175, 0.1);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.royal-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-royal);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.royal-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-royal);
+}
+
+.royal-card:hover::before {
+    transform: scaleX(1);
+}
+
+.royal-card-header {
+    margin-bottom: var(--spacing-lg);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.royal-card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-sm);
+}
+
+.royal-card-subtitle {
+    color: var(--royal-blue);
+    font-weight: 500;
+    font-size: 1rem;
+}
+
+.royal-card-body {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.royal-card-footer {
+    margin-top: var(--spacing-lg);
+    padding-top: var(--spacing-md);
+    border-top: 1px solid var(--border-light);
+}
+
+/* Card Variants */
+.card-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    border: none;
+}
+
+.card-secondary {
+    background: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+    color: white;
+    border: none;
+}
+
+.card-success {
+    background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+    color: white;
+    border: none;
+}
+
+/* ==================================================
+   FORM COMPONENTS (Maintain + Enhance)
+   ================================================= */
+
+/* Standard Form Elements (Maintain) */
+input, textarea, select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all var(--transition-fast);
+    background: white;
+}
+
+input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(217, 4, 41, 0.1);
+}
+
+input::placeholder, textarea::placeholder {
+    color: var(--text-lighter);
+}
+
+/* Enhanced Form Elements */
+.form-control {
+    position: relative;
+    margin-bottom: var(--spacing-md);
+}
+
+.form-label {
+    display: block;
+    margin-bottom: var(--spacing-xs);
+    font-weight: 600;
+    color: var(--text-dark);
+    font-size: 0.875rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    transition: all var(--transition-normal);
+    background: white;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--royal-blue);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.form-input.royal-focus {
+    border-color: var(--royal-blue);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+/* Royal Form Enhancements */
+.royal-form {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.02), rgba(99, 102, 241, 0.02));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.royal-form .form-input {
+    background: white;
+    border: 2px solid var(--border-light);
+}
+
+.royal-form .form-input:focus {
+    border-color: var(--royal-blue);
+    box-shadow: 0 0 0 4px rgba(30, 64, 175, 0.1);
+}
+
+/* ==================================================
+   NAVIGATION COMPONENTS (Enhanced Royal Design)
+   ================================================= */
+
+/* Standard Navigation (Maintain) */
+nav {
+    background: white;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 64px;
+}
+
+.nav-brand {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.nav-brand:hover {
+    color: var(--primary-light);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: var(--spacing-lg);
+    align-items: center;
+}
+
+.nav-link {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-fast);
+    padding: var(--spacing-sm) var(--spacing-sm);
+    border-radius: var(--radius-md);
+}
+
+.nav-link:hover {
+    color: var(--primary);
+    background: rgba(217, 4, 41, 0.1);
+}
+
+/* Royal Navigation Enhancements */
+.royal-nav {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.95), rgba(99, 102, 241, 0.95));
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-royal);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.royal-nav .nav-brand {
+    background: var(--gradient-royal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.royal-nav .nav-link {
+    color: white;
+    position: relative;
+    transition: all var(--transition-normal);
+}
+
+.royal-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--gold-accent);
+    transition: all var(--transition-normal);
+    transform: translateX(-50%);
+}
+
+.royal-nav .nav-link:hover::after {
+    width: 80%;
+}
+
+.royal-nav .nav-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+/* ==================================================
+   FOOTER COMPONENTS (Enhanced Royal Design)
+   ================================================= */
+
+/* Standard Footer (Maintain) */
+footer {
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: var(--spacing-2xl) 0;
+    margin-top: var(--spacing-2xl);
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-lg);
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-2xl);
+    margin-bottom: var(--spacing-xl);
+}
+
+.footer-section h4 {
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-md);
+    font-size: 1.125rem;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: var(--spacing-sm);
+}
+
+.footer-section ul li a {
+    color: var(--text-light);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+}
+
+.footer-section ul li a:hover {
+    color: var(--primary);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: var(--spacing-xl);
+    border-top: 1px solid var(--border);
+    color: var(--text-light);
+    font-size: 0.875rem;
+}
+
+/* Royal Footer Enhancements */
+.royal-footer {
+    background: linear-gradient(135deg, var(--text-dark), #1f2937);
+    border-top: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.royal-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-royal);
+}
+
+.royal-footer .footer-section h4 {
+    color: white;
+    margin-bottom: var(--spacing-md);
+}
+
+.royal-footer .footer-section ul li a {
+    color: rgba(255, 255, 255, 0.8);
+    transition: all var(--transition-normal);
+}
+
+.royal-footer .footer-section ul li a:hover {
+    color: var(--gold-accent);
+    transform: translateX(4px);
+}
+
+.royal-footer .footer-bottom {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==================================================
+   UTILITY CLASSES (Maintain + Enhance)
+   ================================================= */
+
+/* Spacing Utilities */
+.m-0 { margin: 0; }
+.m-1 { margin: var(--spacing-xs); }
+.m-2 { margin: var(--spacing-sm); }
+.m-3 { margin: var(--spacing-md); }
+.m-4 { margin: var(--spacing-lg); }
+.m-5 { margin: var(--spacing-xl); }
+
+.p-0 { padding: 0; }
+.p-1 { padding: var(--spacing-xs); }
+.p-2 { padding: var(--spacing-sm); }
+.p-3 { padding: var(--spacing-md); }
+.p-4 { padding: var(--spacing-lg); }
+.p-5 { padding: var(--spacing-xl); }
+
+/* Text Utilities */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.text-primary { color: var(--primary); }
+.text-success { color: var(--emerald); }
+.text-danger { color: var(--crimson); }
+.text-warning { color: var(--gold-accent); }
+
+.text-sm { font-size: 0.875rem; }
+.text-lg { font-size: 1.125rem; }
+.text-xl { font-size: 1.25rem; }
+.text-2xl { font-size: 1.5rem; }
+
+/* Display Utilities */
+.d-none { display: none; }
+.d-block { display: block; }
+.d-inline { display: inline; }
+.d-inline-block { display: inline-block; }
+.d-flex { display: flex; }
+.d-grid { display: grid; }
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 var(--spacing-md);
+    }
+    
+    .grid-cols-2 {
+        grid-template-columns: 1fr;
+    }
+    
+    .nav-menu {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .btn {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.875rem;
+    }
+    
+    .royal-btn {
+        padding: var(--spacing-sm) var(--spacing-md);
+        font-size: 0.875rem;
+    }
+}
+
+/* ==================================================
+   ANIMATION UTILITIES (Enhanced Royal Design)
+   ================================================= */
+
+/* Standard Animations */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+/* Royal Animations */
+.royal-fade-in {
+    animation: royalFadeIn 0.6s ease-out;
+}
+
+@keyframes royalFadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+    }
+}
+
+.royal-bounce-in {
+    animation: royalBounceIn 0.8s ease-out;
+}
+
+@keyframes royalBounceIn {
+    0% { 
+        transform: scale(0.3); 
+        opacity: 0;
+    }
+    50% { 
+        transform: scale(1.05); 
+        opacity: 0.8;
+    }
+    70% { 
+        transform: scale(0.9); 
+        opacity: 0.9;
+    }
+    100% { 
+        transform: scale(1); 
+        opacity: 1;
+    }
+}
+
+.royal-slide-up {
+    animation: royalSlideUp 0.6s ease-out;
+}
+
+@keyframes royalSlideUp {
+    from { 
+        opacity: 0; 
+        transform: translateY(50px);
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0);
+    }
+}
+
+/* ==================================================
+   PRINT STYLES (Maintain)
+   ================================================= */
+
+@media print {
+    * {
+        background: transparent !important;
+        color: black !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+    }
+    
+    .nav, .footer, .btn, .modal {
+        display: none !important;
+    }
+    
+    body {
+        font-size: 12pt;
+        line-height: 1.4;
+    }
+    
+    h1 { font-size: 20pt; }
+    h2 { font-size: 16pt; }
+    h3 { font-size: 14pt; }
+    
+    a {
+        text-decoration: underline;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+    
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+    
+    .ir a:after, a[href^="javascript:"]:after, a[href^="#"]:after {
+        content: "";
+    }
+}

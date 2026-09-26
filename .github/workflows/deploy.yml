@@ -33,7 +33,7 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_BASE: "/Zero-to-Website/"
+          VITE_BASE: "/"
           VITE_API_URL: "https://zero-to-website.onrender.com/api"
 
       - name: Setup Pages

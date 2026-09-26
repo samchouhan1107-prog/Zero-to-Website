@@ -32,6 +32,12 @@ export function applyAppTheme(theme: AppTheme | 'auto'): void {
   }
 }
 
+/** Resolve an AppTheme (which may be 'auto') to a concrete 'dark' | 'light'. */
+export function resolveAppTheme(theme: AppTheme): 'dark' | 'light' {
+  if (theme !== 'auto') return theme;
+  return getSystemThemePreference();
+}
+
 export function getSystemThemePreference(): 'dark' | 'light' {
   if (typeof window === 'undefined') return 'dark';
   return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';

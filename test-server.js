@@ -1,27 +1,23 @@
+// Simple server test script
 const http = require('http');
 
 const options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/',
-  method: 'GET',
-  timeout: 5000
+  path: '/test',
+  method: 'GET'
 };
 
 const req = http.request(options, (res) => {
   console.log(`statusCode: ${res.statusCode}`);
+  
   res.on('data', (d) => {
     process.stdout.write(d);
   });
 });
 
-req.on('error', (e) => {
-  console.error(`Error: ${e.message}`);
-});
-
-req.on('timeout', () => {
-  console.error('Request timed out');
-  req.destroy();
+req.on('error', (error) => {
+  console.error(`Error: ${error.message}`);
 });
 
 req.end();

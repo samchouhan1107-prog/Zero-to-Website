@@ -3,6 +3,7 @@ import { findSession } from "./db";
 
 export interface AuthRequest extends Request {
   userId?: string;
+  user?: { name?: string };
 }
 
 export function requireAuth(req: AuthRequest, res: Response, next: NextFunction) {

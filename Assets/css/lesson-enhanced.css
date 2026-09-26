@@ -1,0 +1,1265 @@
+/* ==================================================
+   WebZoneBW SC - Enhanced Lesson Styles
+   Author  : Sameer Chouhan
+   Version : 2.2 (Enhanced with Royal Design)
+   Status  : Production Ready
+   ================================================= */
+
+/* ==================================================
+   LESSON PAGE BASE (Maintain + Enhance)
+   ================================================= */
+
+.lesson-page {
+    background: var(--background);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+.lesson-page.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.02), rgba(99, 102, 241, 0.02));
+}
+
+/* ==================================================
+   LESSON HEADER (Maintain + Enhance)
+   ================================================= */
+
+.lesson-header {
+    margin-bottom: var(--spacing-2xl);
+    text-align: center;
+    position: relative;
+    padding: var(--spacing-2xl) 0;
+}
+
+.lesson-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-royal);
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+.lesson-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin: var(--spacing-lg) 0;
+    position: relative;
+}
+
+.lesson-header.royal-enhanced h1 {
+    background: var(--gradient-royal);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lesson-header p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Royal Lesson Header Enhancements */
+.royal-lesson-header {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(99, 102, 241, 0.1));
+    border-radius: var(--radius-2xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid rgba(30, 64, 175, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.royal-lesson-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: var(--gradient-royal);
+}
+
+.royal-lesson-header h1 {
+    font-size: 2.75rem;
+    margin-bottom: var(--spacing-lg);
+    position: relative;
+}
+
+.royal-lesson-header .subtitle {
+    color: var(--royal-blue);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: var(--spacing-md);
+}
+
+.royal-lesson-header .description {
+    color: var(--text);
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+/* ==================================================
+   LEARNING OBJECTIVES (Enhanced Royal Design)
+   ================================================= */
+
+.objectives-section {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.objectives-section.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.objectives-section h2 {
+    color: var(--royal-blue);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.objectives-section h2::before {
+    content: '🎯';
+    font-size: 1.5rem;
+}
+
+.objectives-list {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.objectives-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--royal-blue);
+    transition: all var(--transition-normal);
+}
+
+.objectives-list li:hover {
+    background: rgba(30, 64, 175, 0.1);
+    transform: translateX(8px);
+}
+
+.objectives-list li::before {
+    content: '✅';
+    font-size: 1.25rem;
+    color: var(--emerald);
+}
+
+/* ==================================================
+   THEORY & EXPLANATION (Enhanced Royal Design)
+   ================================================= */
+
+.theory-section {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.theory-section.royal-enhanced {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(251, 191, 36, 0.05));
+    border: 1px solid rgba(245, 158, 11, 0.1);
+}
+
+.theory-section h2 {
+    color: var(--gold-accent);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.theory-section h2::before {
+    content: '🔧';
+    font-size: 1.5rem;
+}
+
+.theory-content {
+    color: var(--text);
+    line-height: 1.7;
+}
+
+/* Royal Callout Boxes */
+.royal-callout {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(99, 102, 241, 0.1));
+    border: 1px solid rgba(30, 64, 175, 0.2);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    position: relative;
+}
+
+.royal-callout::before {
+    content: '💎';
+    position: absolute;
+    top: -12px;
+    left: 20px;
+    background: var(--gradient-royal);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: var(--shadow-royal);
+}
+
+.royal-callout h4 {
+    color: var(--royal-blue);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.royal-callout p {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ==================================================
+   CODE EXAMPLES (Maintain + Enhance)
+   ================================================= */
+
+.code-example {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+}
+
+.code-example.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.02), rgba(99, 102, 241, 0.02));
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.code-example h4 {
+    color: var(--royal-blue);
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.code-example pre {
+    background: var(--text-dark);
+    color: #e5e7eb;
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.code-example code {
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Royal Code Enhancements */
+.royal-code-example {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(99, 102, 241, 0.1));
+    border: 2px solid rgba(30, 64, 175, 0.2);
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    position: relative;
+}
+
+.royal-code-example::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-royal);
+}
+
+.royal-code-example h4 {
+    color: var(--royal-blue);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.royal-code-example h4::before {
+    content: '💻';
+    font-size: 1.5rem;
+}
+
+.royal-code-example pre {
+    background: var(--text-dark);
+    color: #e5e7eb;
+    padding: var(--spacing-xl);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    position: relative;
+}
+
+.royal-code-example pre::before {
+    content: 'Code';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: var(--royal-blue);
+    color: white;
+    padding: 4px 12px;
+    border-radius: var(--radius-sm);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ==================================================
+   PRACTICE WORKSPACE (Enhanced Royal Design)
+   ================================================= */
+
+.practice-workspace {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.practice-workspace.royal-enhanced {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(52, 211, 153, 0.05));
+    border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.practice-workspace h4 {
+    color: var(--emerald);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.practice-workspace h4::before {
+    content: '🎮';
+    font-size: 1.5rem;
+}
+
+.editor-container {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    border: 1px solid var(--border);
+}
+
+.editor-toolbar {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-md);
+    padding-bottom: var(--spacing-md);
+    border-bottom: 1px solid var(--border-light);
+}
+
+.editor-btn {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    background: var(--royal-blue);
+    color: white;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.editor-btn:hover {
+    background: var(--royal-blue-dark);
+    transform: translateY(-1px);
+}
+
+.html-editor {
+    width: 100%;
+    min-height: 300px;
+    padding: var(--spacing-lg);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    background: var(--background);
+    color: var(--text-dark);
+    resize: vertical;
+}
+
+.html-editor:focus {
+    outline: none;
+    border-color: var(--royal-blue);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+}
+
+.preview-container {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    border: 1px solid var(--border);
+}
+
+.preview-container h4 {
+    color: var(--royal-blue);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.preview-container h4::before {
+    content: '👁️';
+    font-size: 1.25rem;
+}
+
+.preview-window {
+    width: 100%;
+    min-height: 300px;
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    background: white;
+}
+
+/* ==================================================
+   TAB SYSTEM (Maintain + Enhance)
+   ================================================= */
+
+.tab-container {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.tab-container.royal-enhanced {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(129, 140, 248, 0.05));
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.tab-nav {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-xl);
+    border-bottom: 2px solid var(--border);
+    padding-bottom: var(--spacing-sm);
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    padding: var(--spacing-sm) var(--spacing-lg);
+    background: transparent;
+    color: var(--text-light);
+    border: none;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.tab-btn::before {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--royal-blue);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.tab-btn:hover {
+    color: var(--royal-blue);
+    background: rgba(30, 64, 175, 0.1);
+}
+
+.tab-btn.active {
+    color: var(--royal-blue);
+    background: rgba(30, 64, 175, 0.1);
+}
+
+.tab-btn.active::before {
+    transform: scaleX(1);
+}
+
+.tab-content {
+    display: none;
+    animation: royalFadeIn 0.5s ease-out;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* ==================================================
+   CHALLENGE SECTION (Enhanced Royal Design)
+   ================================================= */
+
+.challenge-section {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.challenge-section.royal-enhanced {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.05), rgba(248, 113, 113, 0.05));
+    border: 1px solid rgba(239, 68, 68, 0.1);
+}
+
+.challenge-section h2 {
+    color: var(--crimson);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.challenge-section h2::before {
+    content: '🏆';
+    font-size: 1.5rem;
+}
+
+.challenge-card {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+    border: 1px solid var(--border);
+    transition: all var(--transition-normal);
+}
+
+.challenge-card.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(99, 102, 241, 0.1));
+    border: 2px solid rgba(30, 64, 175, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.challenge-card.royal-enhanced::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-royal);
+}
+
+.challenge-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.challenge-card h3 {
+    color: var(--text-dark);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.challenge-card p {
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+.challenge-rewards {
+    display: flex;
+    gap: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.reward-item {
+    padding: var(--spacing-xs) var(--spacing-md);
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+}
+
+.reward-item.xp {
+    background: var(--gradient-royal);
+    color: white;
+}
+
+.reward-item.streak {
+    background: var(--gradient-gold);
+    color: white;
+}
+
+.reward-item.badge {
+    background: var(--gradient-purple);
+    color: white;
+}
+
+.challenge-requirements {
+    background: var(--surface);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin: var(--spacing-lg) 0;
+}
+
+.challenge-requirements h4 {
+    color: var(--royal-blue);
+    font-size: 1rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.challenge-requirements ul {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-sm);
+}
+
+.challenge-requirements li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-sm);
+    border-left: 3px solid var(--emerald);
+}
+
+.challenge-requirements li::before {
+    content: '✅';
+    color: var(--emerald);
+    font-weight: bold;
+}
+
+/* ==================================================
+   HELP SECTION (Enhanced Royal Design)
+   ================================================= */
+
+.help-section {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.05), rgba(251, 191, 36, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    border: 1px solid rgba(245, 158, 11, 0.1);
+    text-align: center;
+}
+
+.help-section h4 {
+    color: var(--gold-accent);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+}
+
+.help-section p {
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ==================================================
+   NAVIGATION LINKS (Maintain + Enhance)
+   ================================================= */
+
+.chapter-nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: var(--spacing-2xl) 0;
+    gap: var(--spacing-lg);
+    flex-wrap: wrap;
+}
+
+.chapter-nav-links.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-xl);
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.chapter-nav-links a {
+    padding: var(--spacing-md) var(--spacing-xl);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.chapter-nav-links a:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* ==================================================
+   VISUAL LEARNING COMPONENTS (Enhanced Royal Design)
+   ================================================= */
+
+.visual-diagram {
+    background: white;
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    box-shadow: var(--shadow-md);
+    border: 1px solid var(--border);
+}
+
+.visual-diagram.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.visual-diagram h4 {
+    color: var(--royal-blue);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.visual-diagram h4::before {
+    content: '🎨';
+    font-size: 1.5rem;
+}
+
+.diagram-container {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-lg);
+}
+
+.diagram-box {
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    text-align: center;
+    font-weight: 600;
+    color: var(--text-dark);
+    transition: all var(--transition-normal);
+}
+
+.diagram-box:hover {
+    background: rgba(30, 64, 175, 0.1);
+    border-color: var(--royal-blue);
+    transform: translateY(-2px);
+}
+
+.diagram-box.doctype {
+    background: var(--gradient-royal);
+    color: white;
+    border: none;
+}
+
+.diagram-box.html {
+    background: var(--gradient-gold);
+    color: white;
+    border: none;
+}
+
+.diagram-box.head {
+    background: rgba(30, 64, 175, 0.1);
+    border-color: var(--royal-blue);
+}
+
+.diagram-box.body {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--emerald);
+}
+
+.diagram-box.meta {
+    background: var(--surface);
+    border-color: var(--border);
+    font-size: 0.875rem;
+}
+
+.diagram-box.title {
+    background: var(--surface);
+    border-color: var(--border);
+    font-size: 0.875rem;
+}
+
+.diagram-box.content {
+    background: var(--surface);
+    border-color: var(--border);
+    font-style: italic;
+}
+
+/* Interactive Hotspots */
+.diagram-hotspots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-lg);
+}
+
+.hotspot {
+    background: var(--royal-blue);
+    color: white;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    position: relative;
+}
+
+.hotspot:hover {
+    background: var(--royal-blue-dark);
+    transform: scale(1.05);
+    box-shadow: var(--shadow-royal);
+}
+
+/* Interactive Demo */
+.interactive-demo {
+    background: var(--surface);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-xl) 0;
+    border: 1px solid var(--border);
+}
+
+.interactive-demo h4 {
+    color: var(--royal-blue);
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 600;
+}
+
+.interactive-demo p {
+    color: var(--text);
+    line-height: 1.6;
+    margin-bottom: var(--spacing-lg);
+}
+
+/* ==================================================
+   PRACTICE TIPS (Enhanced Royal Design)
+   ================================================= */
+
+.practice-tips {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.05), rgba(52, 211, 153, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    border: 1px solid rgba(16, 185, 129, 0.1);
+}
+
+.practice-tips h4 {
+    color: var(--emerald);
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.practice-tips h4::before {
+    content: '💡';
+    font-size: 1.5rem;
+}
+
+.practice-tips ul {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.practice-tips li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--emerald);
+    transition: all var(--transition-normal);
+}
+
+.practice-tips li:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+.practice-tips li::before {
+    content: '🎯';
+    font-size: 1.25rem;
+    color: var(--emerald);
+}
+
+/* ==================================================
+   EXPLANATION GRID (Enhanced Royal Design)
+   ================================================= */
+
+.explanation-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--spacing-lg);
+    margin: var(--spacing-xl) 0;
+}
+
+.explanation-item {
+    background: white;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-xl);
+    border: 1px solid var(--border);
+    transition: all var(--transition-normal);
+}
+
+.explanation-item:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.explanation-item.royal-enhanced {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.explanation-item h4 {
+    color: var(--royal-blue);
+    font-size: 1.125rem;
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.explanation-item h4::before {
+    content: '🔤';
+    font-size: 1.25rem;
+}
+
+.explanation-item p {
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ==================================================
+   SUMMARY SECTION (Enhanced Royal Design)
+   ================================================= */
+
+.summary-section {
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.05), rgba(99, 102, 241, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    border: 1px solid rgba(30, 64, 175, 0.1);
+}
+
+.summary-section h2 {
+    color: var(--royal-blue);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.summary-section h2::before {
+    content: '📋';
+    font-size: 1.5rem;
+}
+
+.summary-list {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.summary-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--royal-blue);
+    transition: all var(--transition-normal);
+}
+
+.summary-list li:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-list li::before {
+    content: '✓';
+    color: var(--emerald);
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+
+/* ==================================================
+   RELATED TOPICS (Enhanced Royal Design)
+   ================================================= */
+
+.related-topics {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.05), rgba(129, 140, 248, 0.05));
+    border-radius: var(--radius-xl);
+    padding: var(--spacing-2xl);
+    margin: var(--spacing-2xl) 0;
+    border: 1px solid rgba(99, 102, 241, 0.1);
+}
+
+.related-topics h2 {
+    color: var(--deep-purple);
+    font-size: 1.75rem;
+    margin-bottom: var(--spacing-lg);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.related-topics h2::before {
+    content: '🔗';
+    font-size: 1.5rem;
+}
+
+.related-list {
+    list-style: none;
+    display: grid;
+    gap: var(--spacing-md);
+}
+
+.related-list li {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md);
+    background: white;
+    border-radius: var(--radius-md);
+    border-left: 4px solid var(--deep-purple);
+    transition: all var(--transition-normal);
+}
+
+.related-list li:hover {
+    transform: translateX(8px);
+    box-shadow: var(--shadow-md);
+    background: rgba(99, 102, 241, 0.05);
+}
+
+.related-list li::before {
+    content: '📖';
+    color: var(--deep-purple);
+    font-size: 1.25rem;
+}
+
+/* ==================================================
+   RESPONSIVE DESIGN (Maintain + Enhance)
+   ================================================= */
+
+@media (max-width: 768px) {
+    .lesson-header h1 {
+        font-size: 2rem;
+    }
+    
+    .royal-lesson-header h1 {
+        font-size: 2.25rem;
+    }
+    
+    .tab-nav {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: left;
+        border-radius: var(--radius-md);
+        margin-bottom: var(--spacing-xs);
+    }
+    
+    .tab-btn::before {
+        display: none;
+    }
+    
+    .explanation-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .challenge-rewards {
+        flex-direction: column;
+    }
+    
+    .chapter-nav-links {
+        flex-direction: column;
+    }
+    
+    .chapter-nav-links a {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .lesson-header h1 {
+        font-size: 1.75rem;
+    }
+    
+    .royal-lesson-header h1 {
+        font-size: 2rem;
+    }
+    
+    .royal-lesson-header {
+        padding: var(--spacing-xl);
+    }
+    
+    .tab-container,
+    .theory-section,
+    .practice-workspace,
+    .challenge-section,
+    .visual-diagram {
+        padding: var(--spacing-lg);
+    }
+    
+    .editor-toolbar {
+        flex-wrap: wrap;
+    }
+    
+    .editor-btn {
+        flex: 1;
+        min-width: 80px;
+    }
+    
+    .html-editor {
+        min-height: 200px;
+        font-size: 0.875rem;
+    }
+}
+
+/* ==================================================
+   ANIMATIONS (Enhanced Royal Design)
+   ================================================= */
+
+@keyframes royalSlideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes royalPulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes royalGlow {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(30, 64, 175, 0.3);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(30, 64, 175, 0.6);
+    }
+}
+
+.royal-slide-in {
+    animation: royalSlideInUp 0.6s ease-out;
+}
+
+.royal-pulse {
+    animation: royalPulse 2s infinite;
+}
+
+.royal-glow {
+    animation: royalGlow 3s infinite;
+}
+
+/* ==================================================
+   PRINT STYLES (Maintain)
+   ================================================= */
+
+@media print {
+    .tab-nav,
+    .editor-toolbar,
+    .challenge-rewards,
+    .interactive-demo,
+    .help-section,
+    .practice-tips {
+        display: none !important;
+    }
+    
+    .tab-container,
+    .theory-section,
+    .practice-workspace,
+    .challenge-section,
+    .visual-diagram {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+    
+    .html-editor,
+    .preview-window {
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+    }
+}

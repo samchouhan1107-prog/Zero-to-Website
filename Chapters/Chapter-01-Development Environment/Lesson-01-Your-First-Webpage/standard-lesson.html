@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | Your First Webpage - WEBZONEBW</title>
+    
+    <!-- Standard SEO Meta Tags (Maintain) -->
+    <meta name="description" content="Create your first HTML webpage with proper structure and basic content. Learn the fundamentals of web development with WebZoneBW.">
+    <meta name="keywords" content="HTML tutorial, first webpage, web development basics, learn HTML, WebZoneBW">
+    
+    <!-- Standard CSS Integration (Maintain + Enhance) -->
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/main-enhanced.css">
+    <link rel="stylesheet" href="/Assets/css/lesson.css">
+    <link rel="stylesheet" href="/Assets/css/lesson-enhanced.css">
+    <link rel="stylesheet" href="/Assets/css/royal-design.css">
+    <link rel="stylesheet" href="/Assets/css/modals.css">
+    <link rel="stylesheet" href="/Assets/css/tabs.css">
+    
+    <!-- Standard JavaScript Integration (Maintain + Enhance) -->
+    <script src="/Assets/js/main.js" defer></script>
+    <script src="/Assets/js/lesson.js" defer></script>
+    <script src="/Assets/js/gamification.js" defer></script>
+    
+    <!-- AdSense (Maintain) -->
+    <script async src="https://pagead2.googlesyndication.com/js/adsbygoogle.js?client=ca-pub-2904917114665090" crossorigin="anonymous"></script>
+
+    <!-- Google tag (gtag.js) (Maintain) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-L1KR6MWWP3');
+    </script>
+</head>
+
+<body class="lesson-page enhanced-royal-page">
+
+    <!-- ROYAL GAMIFICATION OVERLAY -->
+    <div class="gamification-overlay royal-overlay">
+        <div class="user-progress">
+            <div class="xp-bar">
+                <span class="xp-fill" style="width: 0%"></span>
+            </div>
+            <div class="level-info">
+                <span class="current-level">Level 1: Web Beginner</span>
+                <span class="xp-needed">0/100 XP</span>
+            </div>
+        </div>
+        
+        <div class="quick-stats">
+            <div class="stat-item">
+                <span class="stat-icon">📚</span>
+                <span class="stat-text">0 Lessons</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🏆</span>
+                <span class="stat-text">0 Badges</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-icon">🔥</span>
+                <span class="stat-text">0 Day Streak</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- STANDARD HEADER (Maintain + Enhance) -->
+    <header class="lesson-header royal-lesson-header">
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1 class="royal-title">WEBZONEBW</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+
+        <nav class="royal-nav" aria-label="Primary navigation">
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="/Chapters/Chapter-01-Development%20Environment/index.html">⬅ Chapter 01</a>
+            <button id="settingsBtn" class="royal-btn royal-btn-secondary">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn" class="royal-btn royal-btn-secondary">🌙 Dark Mode</button>
+        <button id="fontSizeBtn" class="royal-btn royal-btn-secondary">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn royal-btn royal-btn-outline">✖ Close</button>
+    </div>
+
+    <!-- MAIN CONTENT (Maintain + Enhance) -->
+    <main class="container chapter-page royal-container">
+        
+        <!-- LEARNING PATH SECTION (New Royal Feature) -->
+        <section class="learning-path royal-container">
+            <h3>🗺️ Your Learning Journey</h3>
+            <div class="path-timeline">
+                <div class="path-milestone completed">
+                    <div class="milestone-icon">🏁</div>
+                    <div class="milestone-content">
+                        <h3>Introduction</h3>
+                        <p>Get started with web development basics</p>
+                        <div class="milestone-progress">✅ Completed</div>
+                    </div>
+                </div>
+                
+                <div class="path-milestone current">
+                    <div class="milestone-icon">🎯</div>
+                    <div class="milestone-content">
+                        <h3>Development Environment</h3>
+                        <p>Set up your workspace and tools</p>
+                        <div class="milestone-progress">🔄 In Progress</div>
+                    </div>
+                </div>
+                
+                <div class="path-milestone upcoming">
+                    <div class="milestone-icon">📝</div>
+                    <div class="milestone-content">
+                        <h3>HTML Fundamentals</h3>
+                        <p>Master web page structure</p>
+                        <div class="milestone-progress">⏳ Upcoming</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER HERO SECTION (Maintain + Enhance) -->
+        <section class="lesson-header royal-lesson-header">
+            <span class="chapter-badge royal-badge">Chapter 01 • Lesson 01</span>
+            <h1 class="royal-title">Your First Webpage</h1>
+            <p>Every website in the world begins with a single file: <code>index.html</code>. In this lesson, you will create a real HTML file, write basic tags, open it in your web browser, and see your code transform into a live webpage.</p>
+
+            <div class="info-grid">
+                <div class="summary-card royal-card">
+                    <h3>🎯 Learning Objectives</h3>
+                    <ul>
+                        <li>✔ Create and save an <code>index.html</code> file</li>
+                        <li>✔ Write the basic HTML5 document structure</li>
+                        <li>✔ Understand <code>&lt;!DOCTYPE html&gt;</code>, <code>&lt;head&gt;</code>, and <code>&lt;body&gt;</code></li>
+                        <li>✔ Open your file in Google Chrome, Edge, or Firefox</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-card royal-card">
+                    <h3>⏱️ Time to Complete</h3>
+                    <p><strong>15-20 minutes</strong></p>
+                    <p>Perfect for beginners with no prior experience</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DAILY CHALLENGE SECTION (New Royal Feature) -->
+        <section class="daily-challenges-section royal-container">
+            <div class="challenges-container">
+                <h3>🎯 Daily Challenge</h3>
+                <div class="challenges-grid">
+                    <div class="challenge-card royal-card">
+                        <div class="challenge-header">
+                            <span class="challenge-difficulty">Easy</span>
+                            <span class="challenge-xp">+50 XP</span>
+                        </div>
+                        <h3>🚀 First Webpage Builder</h3>
+                        <p>Create your very first HTML webpage with proper structure and basic content.</p>
+                        <div class="challenge-rewards">
+                            <span class="reward-item xp">🎁 +50 XP</span>
+                            <span class="reward-item streak">⭐ 2x Streak</span>
+                        </div>
+                        <button class="royal-btn royal-btn-primary" onclick="startChallenge('first-webpage')">
+                            Start Challenge
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB SYSTEM (Maintain + Enhance) -->
+        <div class="tab-container royal-container">
+            <div class="tab-nav">
+                <button class="tab-btn active" data-tab="introduction">📖 Introduction</button>
+                <button class="tab-btn" data-tab="theory">🔧 Theory</button>
+                <button class="tab-btn" data-tab="visual">🎨 Visual Guide</button>
+                <button class="tab-btn" data-tab="practice">💻 Practice</button>
+                <button class="tab-btn" data-tab="challenge">🏆 Challenge</button>
+            </div>
+
+            <!-- Tab Content Container -->
+            <div class="tab-content-container">
+                <!-- Introduction Tab -->
+                <div class="tab-content active" id="introduction">
+                    <section class="chapter-section royal-container">
+                        <h2>1. Welcome to Web Development!</h2>
+                        <p>Every website you visit, from Google to Facebook to your favorite blog, starts with a simple HTML file. Think of HTML as the skeleton of a webpage - it provides the basic structure and content that browsers display.</p>
+                        
+                        <div class="royal-callout">
+                            <h4>🌟 Key Insight</h4>
+                            <p>HTML stands for <strong>HyperText Markup Language</strong>. It's not a programming language, but a markup language that uses tags to describe content structure.</p>
+                        </div>
+
+                        <div class="example-box royal-card">
+                            <h4>📝 Real-World Example</h4>
+                            <p>Think of building a house: HTML is like the blueprint and framing, CSS is like the paint and decorations, and JavaScript is like the electrical and plumbing systems.</p>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Theory Tab -->
+                <div class="tab-content" id="theory">
+                    <section class="chapter-section royal-container">
+                        <h2>2. HTML Document Structure</h2>
+                        <p>Every HTML file follows a basic structure. Let's break down the essential components:</p>
+                        
+                        <div class="code-example royal-code-example">
+                            <h4>Basic HTML Template</h4>
+                            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                        </div>
+
+                        <div class="explanation-grid">
+                            <div class="explanation-item royal-card">
+                                <h4>🔤 &lt;!DOCTYPE html&gt;</h4>
+                                <p>Tells the browser this is an HTML5 document</p>
+                            </div>
+                            <div class="explanation-item royal-card">
+                                <h4>📋 &lt;head&gt;</h4>
+                                <p>Contains meta information and title (not visible on page)</p>
+                            </div>
+                            <div class="explanation-item royal-card">
+                                <h4>🎯 &lt;body&gt;</h4>
+                                <p>Contains all visible content (headings, paragraphs, images)</p>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Visual Guide Tab -->
+                <div class="tab-content" id="visual">
+                    <section class="chapter-section royal-container">
+                        <h2>3. Visual Learning Guide</h2>
+                        
+                        <div class="visual-diagram royal-container">
+                            <h4>HTML Document Structure</h4>
+                            <div class="diagram-container">
+                                <div class="diagram-box doctype">
+                                    &lt;!DOCTYPE html&gt;
+                                </div>
+                                <div class="diagram-box html">
+                                    &lt;html&gt;
+                                    <div class="diagram-box head">
+                                        &lt;head&gt;
+                                        <div class="diagram-box meta">
+                                            meta tags
+                                        </div>
+                                        <div class="diagram-box title">
+                                            &lt;title&gt;Page Title&lt;/title&gt;
+                                        </div>
+                                        &lt;/head&gt;
+                                    </div>
+                                    <div class="diagram-box body">
+                                        &lt;body&gt;
+                                        <div class="diagram-box content">
+                                            Visible content here
+                                        </div>
+                                        &lt;/body&gt;
+                                    </div>
+                                    &lt;/html&gt;
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="interactive-demo royal-card">
+                            <h4>🎮 Try It Yourself</h4>
+                            <p>Click on different parts of the diagram to learn more:</p>
+                            <div class="diagram-hotspots">
+                                <div class="hotspot" data-info="The DOCTYPE declaration tells the browser which version of HTML to use. HTML5 is the current standard.">
+                                    DOCTYPE
+                                </div>
+                                <div class="hotspot" data-info="The head section contains metadata about the page, including the title character set, and viewport settings.">
+                                    Head Section
+                                </div>
+                                <div class="hotspot" data-info="The body section contains all the visible content that users will see in their browser window.">
+                                    Body Section
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Practice Tab -->
+                <div class="tab-content" id="practice">
+                    <section class="chapter-section royal-container">
+                        <h2>4. Interactive Practice</h2>
+                        
+                        <div class="practice-workspace royal-container">
+                            <h4>💻 Code Editor</h4>
+                            <div class="editor-container">
+                                <div class="editor-toolbar">
+                                    <button class="editor-btn" onclick="runHTML()">▶️ Run</button>
+                                    <button class="editor-btn" onclick="clearEditor()">🗑️ Clear</button>
+                                    <button class="editor-btn" onclick="resetExample()">🔄 Reset</button>
+                                </div>
+                                <textarea id="htmlEditor" class="html-editor" placeholder="Enter your HTML code here...">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                            </div>
+                            
+                            <div class="preview-container">
+                                <h4>👁️ Live Preview</h4>
+                                <iframe id="previewWindow" class="preview-window"></iframe>
+                            </div>
+                        </div>
+
+                        <div class="practice-tips royal-container">
+                            <h4>💡 Practice Tips</h4>
+                            <ul>
+                                <li>🎯 Try changing the text between the <code>&lt;h1&gt;</code> tags</li>
+                                <li>🎯 Add a new paragraph using <code>&lt;p&gt;</code> tags</li>
+                                <li>🎯 Experiment with different heading levels (<code>&lt;h2&gt;</code>, <code>&lt;h3&gt;</code>)</li>
+                                <li>🎯 Click "Run" to see your changes instantly</li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
+
+                <!-- Challenge Tab -->
+                <div class="tab-content" id="challenge">
+                    <section class="chapter-section royal-container">
+                        <h2>5. Final Challenge</h2>
+                        
+                        <div class="challenge-section royal-container">
+                            <div class="challenge-card royal-card">
+                                <h3>🏆 Build Your First Complete Webpage</h3>
+                                <p>Create a complete HTML webpage that includes:</p>
+                                <div class="challenge-requirements">
+                                    <h4>Requirements:</h4>
+                                    <ul>
+                                        <li>✅ Proper DOCTYPE declaration</li>
+                                        <li>✅ HTML5 document structure</li>
+                                        <li>✅ Head section with title</li>
+                                        <li>✅ Body section with content</li>
+                                        <li>✅ At least one heading (h1-h6)</li>
+                                        <li>✅ At least two paragraphs</li>
+                                        <li>✅ Your name in the title</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="challenge-rewards">
+                                    <span class="reward-item xp">🎁 +100 XP</span>
+                                    <span class="reward-item streak">⭐ 3x Streak</span>
+                                    <span class="reward-item badge">🏅 First Webpage Badge</span>
+                                </div>
+                                
+                                <button class="royal-btn royal-btn-primary" onclick="startFinalChallenge()">
+                                    Start Final Challenge
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="help-section royal-container">
+                            <h4>🆘 Need Help?</h4>
+                            <p>If you're stuck, check the Introduction and Theory tabs, or use the Practice tab to experiment with the code editor.</p>
+                            <button class="royal-btn royal-btn-secondary" onclick="showHint()">
+                                💡 Show Hint
+                            </button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <!-- COMMUNITY SECTION (New Royal Feature) -->
+        <section class="community-section royal-container">
+            <h3>👥 Learning Together</h3>
+            <div class="recent-activity">
+                <!-- Activity items will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- ACHIEVEMENTS SECTION (New Royal Feature) -->
+        <section class="achievements-section royal-container">
+            <h3>🏆 Your Achievements</h3>
+            <div class="achievements">
+                <!-- Achievement badges will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- NAVIGATION SECTION (Maintain + Enhance) -->
+        <section class="chapter-nav-links royal-container">
+            <a href="/Chapters/Chapter-01-Development%20Environment/index.html" class="royal-btn royal-btn-outline">
+                ⬅ Chapter 01 Overview
+            </a>
+            <a href="practice.html" class="royal-btn royal-btn-primary">
+                Next: Practice Activity ➜
+            </a>
+        </section>
+
+    </main>
+
+    <!-- STANDARD FOOTER (Maintain) -->
+    <footer class="footer royal-footer">
+        <p>WEBZONEBW | Version 1.0 | Developed by Sameer Chouhan | © 2026 All Rights Reserved.</p>
+    </footer>
+
+    <!-- Celebration Modal Template -->
+    <div id="celebrationTemplate" style="display: none;">
+        <div class="celebration">
+            <div class="celebration-content">
+                <div class="celebration-icon">🎉</div>
+                <h3 id="celebrationTitle">Congratulations!</h3>
+                <p id="celebrationMessage">You've completed something amazing!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tab System JavaScript (Maintain)
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetTab = this.getAttribute('data-tab');
+
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+
+                    // Add active class to clicked button and corresponding content
+                    this.classList.add('active');
+                    document.getElementById(targetTab).classList.add('active');
+                });
+            });
+
+            // Initialize code playground if present
+            if (document.getElementById("htmlEditor") && document.getElementById("previewWindow")) {
+                runHTML();
+            }
+
+            // Initialize gamification
+            if (window.gameEngine) {
+                window.gameEngine.updateUI();
+            }
+        });
+
+        // HTML Editor Functions (Maintain)
+        function runHTML() {
+            const htmlCode = document.getElementById('htmlEditor').value;
+            const previewWindow = document.getElementById('previewWindow');
+            
+            const previewDoc = previewWindow.contentDocument || previewWindow.contentWindow.document;
+            previewDoc.open();
+            previewDoc.write(htmlCode);
+            previewDoc.close();
+        }
+
+        function clearEditor() {
+            document.getElementById('htmlEditor').value = '';
+            runHTML();
+        }
+
+        function resetExample() {
+            document.getElementById('htmlEditor').value = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My First Webpage</title>
+</head>
+<body>
+    <h1>Hello, World!</h1>
+    <p>This is my first webpage.</p>
+</body>
+</html>`;
+            runHTML();
+        }
+
+        function startFinalChallenge() {
+            if (window.gameEngine) {
+                window.gameEngine.startChallenge('first-webpage');
+            }
+        }
+
+        function showHint() {
+            alert('💡 Hint: Start with <!DOCTYPE html> and follow the structure shown in the Theory tab. Remember to put your visible content inside the <body> tags!');
+        }
+
+        // Diagram hotspot functionality (New)
+        document.addEventListener('DOMContentLoaded', function() {
+            const hotspots = document.querySelectorAll('.hotspot');
+            hotspots.forEach(hotspot => {
+                hotspot.addEventListener('click', function() {
+                    const info = this.getAttribute('data-info');
+                    alert(info);
+                });
+            });
+        });
+
+        // Settings functionality (Maintain)
+        document.getElementById('settingsBtn').addEventListener('click', function() {
+            document.getElementById('settingsPanel').classList.toggle('hidden');
+        });
+
+        document.getElementById('closeSettingsBtn').addEventListener('click', function() {
+            document.getElementById('settingsPanel').classList.add('hidden');
+        });
+
+        // Dark mode functionality (Maintain)
+        document.getElementById('darkModeBtn').addEventListener('click', function() {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark'));
+        });
+
+        // Font size functionality (New)
+        document.getElementById('fontSizeBtn').addEventListener('click', function() {
+            const currentSize = document.body.style.fontSize || '16px';
+            const newSize = currentSize === '16px' ? '18px' : currentSize === '18px' ? '20px' : '16px';
+            document.body.style.fontSize = newSize;
+            localStorage.setItem('fontSize', newSize);
+        });
+    </script>
+
+</body>
+
+</html>

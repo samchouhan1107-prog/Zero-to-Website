@@ -1,0 +1,675 @@
+/* ==================================================
+   ROYAL DESIGN SYSTEM - Enhanced from Waaree & W3Schools
+   ================================================= */
+
+:root {
+    /* Royal Color Palette from Waaree.com */
+    --royal-blue: #1e40af;
+    --gold-accent: #f59e0b;
+    --deep-purple: #6366f1;
+    --emerald: #10b981;
+    --crimson: #ef4444;
+    
+    /* Enhanced Primary Colors */
+    --primary: var(--royal-blue);
+    --primary-light: #3b82f6;
+    --primary-dark: #1e3a8a;
+    
+    /* Secondary Colors */
+    --secondary: var(--gold-accent);
+    --secondary-light: #fbbf24;
+    --secondary-dark: #d97706;
+    
+    /* Success & Warning */
+    --success: var(--emerald);
+    --warning: #f59e0b;
+    --danger: var(--crimson);
+    
+    /* Neutral Colors */
+    --gray-50: #f9fafb;
+    --gray-100: #f3f4f6;
+    --gray-200: #e5e7eb;
+    --gray-300: #d1d5db;
+    --gray-400: #9ca3af;
+    --gray-500: #6b7280;
+    --gray-600: #4b5563;
+    --gray-700: #374151;
+    --gray-800: #1f2937;
+    --gray-900: #111827;
+    
+    /* Royal Gradients */
+    --gradient-royal: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+    --gradient-gold: linear-gradient(135deg, var(--gold-accent), var(--secondary-light));
+    --gradient-success: linear-gradient(135deg, var(--emerald), #34d399);
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    --shadow-royal: 0 10px 30px rgba(30, 64, 175, 0.3);
+    --shadow-gold: 0 10px 30px rgba(245, 158, 11, 0.3);
+    
+    /* Animations */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* ==================================================
+   ROYAL BUTTON STYLES - Enhanced from Waaree.com
+   ================================================= */
+
+.royal-btn {
+    position: relative;
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.royal-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.5s;
+}
+
+.royal-btn:hover::before {
+    left: 100%;
+}
+
+.royal-btn-primary {
+    background: var(--gradient-royal);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.royal-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-royal);
+}
+
+.royal-btn-secondary {
+    background: var(--gradient-gold);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.royal-btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-gold);
+}
+
+.royal-btn-success {
+    background: var(--gradient-success);
+    color: white;
+    box-shadow: var(--shadow-md);
+}
+
+.royal-btn-outline {
+    background: transparent;
+    color: var(--royal-blue);
+    border: 2px solid var(--royal-blue);
+}
+
+.royal-btn-outline:hover {
+    background: var(--royal-blue);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* ==================================================
+   GAMIFICATION ELEMENTS - W3Schools Style Enhanced
+   ================================================= */
+
+.user-progress {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 24px;
+    border: 1px solid var(--gray-200);
+}
+
+.xp-bar {
+    width: 100%;
+    height: 12px;
+    background: var(--gray-200);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.xp-fill {
+    height: 100%;
+    background: var(--gradient-royal);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+    position: relative;
+}
+
+.xp-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.level-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.current-level {
+    font-weight: 700;
+    color: var(--royal-blue);
+}
+
+.xp-needed {
+    color: var(--gray-600);
+}
+
+/* ==================================================
+   ACHIEVEMENT BADGES - Royal System
+   ================================================= */
+
+.achievements {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin: 24px 0;
+}
+
+.badge {
+    background: white;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid var(--gray-200);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.badge.earned {
+    border-color: var(--gold-accent);
+    box-shadow: var(--shadow-gold);
+}
+
+.badge.earned:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.badge.locked {
+    opacity: 0.6;
+    background: var(--gray-100);
+}
+
+.badge-icon {
+    font-size: 2rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.badge-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.badge.earned .badge-name {
+    color: var(--royal-blue);
+}
+
+/* ==================================================
+   CHALLENGE CARDS - Enhanced from W3Schools
+   ================================================= */
+
+.challenge-card {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--gray-200);
+    transition: all var(--transition-normal);
+    position: relative;
+    overflow: hidden;
+}
+
+.challenge-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: var(--gradient-royal);
+}
+
+.challenge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.challenge-card h3 {
+    margin-bottom: 16px;
+    color: var(--royal-blue);
+    font-size: 1.2rem;
+}
+
+.challenge-card p {
+    color: var(--gray-700);
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.challenge-rewards {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.reward-item {
+    background: var(--gray-100);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-700);
+}
+
+.reward-item.xp {
+    background: linear-gradient(135deg, var(--royal-blue), var(--deep-purple));
+    color: white;
+}
+
+.reward-item.streak {
+    background: linear-gradient(135deg, var(--gold-accent), var(--secondary-light));
+    color: white;
+}
+
+.start-challenge {
+    width: 100%;
+    padding: 12px;
+    background: var(--gradient-royal);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-normal);
+}
+
+.start-challenge:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-royal);
+}
+
+/* ==================================================
+   LEARNING PATH - Visual Journey
+   ================================================= */
+
+.learning-path {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    margin: 24px 0;
+}
+
+.learning-path h3 {
+    margin-bottom: 20px;
+    color: var(--royal-blue);
+    font-size: 1.2rem;
+}
+
+.path-timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.path-timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--gray-300);
+}
+
+.path-item {
+    position: relative;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: var(--gray-50);
+    border-radius: 8px;
+    border-left: 4px solid var(--gray-300);
+    transition: all var(--transition-normal);
+}
+
+.path-item:hover {
+    background: var(--gray-100);
+    transform: translateX(5px);
+}
+
+.path-item.completed {
+    border-left-color: var(--emerald);
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(52, 211, 153, 0.1));
+}
+
+.path-item.current {
+    border-left-color: var(--royal-blue);
+    background: linear-gradient(135deg, rgba(30, 64, 175, 0.1), rgba(99, 102, 241, 0.1));
+    box-shadow: var(--shadow-md);
+}
+
+.path-item.upcoming {
+    border-left-color: var(--gray-400);
+    opacity: 0.7;
+}
+
+.path-item::before {
+    content: '';
+    position: absolute;
+    left: -37px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--gray-400);
+}
+
+.path-item.completed::before {
+    background: var(--emerald);
+    border-color: var(--emerald);
+}
+
+.path-item.current::before {
+    background: var(--royal-blue);
+    border-color: var(--royal-blue);
+    animation: pulse 2s infinite;
+}
+
+.path-item.upcoming::before {
+    background: var(--gray-400);
+    border-color: var(--gray-400);
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0.7); }
+    70% { box-shadow: 0 0 0 10px rgba(30, 64, 175, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(30, 64, 175, 0); }
+}
+
+.path-completed,
+.path-current,
+.path-upcoming {
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.path-completed {
+    color: var(--emerald);
+}
+
+.path-current {
+    color: var(--royal-blue);
+}
+
+.path-upcoming {
+    color: var(--gray-500);
+}
+
+/* ==================================================
+   COMMUNITY SECTION - Social Learning
+   ================================================= */
+
+.community-section {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    margin: 24px 0;
+}
+
+.community-section h3 {
+    margin-bottom: 20px;
+    color: var(--royal-blue);
+    font-size: 1.2rem;
+}
+
+.recent-activity {
+    space-y: 16px;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    background: var(--gray-50);
+    border-radius: 8px;
+    transition: all var(--transition-normal);
+}
+
+.activity-item:hover {
+    background: var(--gray-100);
+    transform: translateX(5px);
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 12px;
+    border: 2px solid var(--gray-300);
+}
+
+.activity-text {
+    flex: 1;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--gray-800);
+    margin-right: 4px;
+}
+
+.lesson-title {
+    color: var(--royal-blue);
+    font-weight: 500;
+}
+
+/* ==================================================
+   ENHANCED LESSON CARDS - Interactive Hover Effects
+   ================================================= */
+
+.lesson-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+    border: 2px solid transparent;
+    transition: all var(--transition-normal);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.lesson-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-royal);
+    transform: scaleX(0);
+    transition: transform var(--transition-normal);
+}
+
+.lesson-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--royal-blue);
+    box-shadow: var(--shadow-royal);
+}
+
+.lesson-card:hover::before {
+    transform: scaleX(1);
+}
+
+.lesson-card h3 {
+    color: var(--royal-blue);
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.lesson-card p {
+    color: var(--gray-600);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.lesson-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 12px;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+.lesson-status {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.lesson-status.completed {
+    background: rgba(16, 185, 129, 0.1);
+    color: var(--emerald);
+}
+
+.lesson-status.current {
+    background: rgba(30, 64, 175, 0.1);
+    color: var(--royal-blue);
+}
+
+.lesson-status.upcoming {
+    background: rgba(107, 114, 128, 0.1);
+    color: var(--gray-500);
+}
+
+/* ==================================================
+   ROYAL ANIMATIONS & TRANSITIONS
+   ================================================= */
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.slide-in {
+    animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); }
+    to { transform: translateX(0); }
+}
+
+.bounce-in {
+    animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+    0% { transform: scale(0.3); opacity: 0; }
+    50% { transform: scale(1.05); }
+    70% { transform: scale(0.9); }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* ==================================================
+   RESPONSIVE ROYAL DESIGN
+   ================================================= */
+
+@media (max-width: 768px) {
+    .achievements {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 12px;
+    }
+    
+    .challenge-rewards {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .path-timeline {
+        padding-left: 20px;
+    }
+    
+    .path-item::before {
+        left: -27px;
+    }
+    
+    .activity-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .user-avatar {
+        margin-bottom: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .royal-btn {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+    }
+    
+    .badge {
+        padding: 12px;
+    }
+    
+    .badge-icon {
+        font-size: 1.5rem;
+    }
+    
+    .challenge-card {
+        padding: 16px;
+    }
+    
+    .learning-path {
+        padding: 16px;
+    }
+}

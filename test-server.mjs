@@ -1,9 +1,10 @@
+// Simple server test script (ES Module)
 import http from 'http';
 
 const options = {
   hostname: 'localhost',
   port: 3000,
-  path: '/',
+  path: '/test',
   method: 'GET'
 };
 
@@ -16,7 +17,7 @@ const req = http.request(options, (res) => {
 });
 
 req.on('error', (error) => {
-  console.error(error);
+  console.error(`Error: ${error.message}`);
 });
 
 req.end();

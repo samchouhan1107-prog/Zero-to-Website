@@ -1,4 +1,4 @@
-import express, { Router } from "express";
+import express, { Router, Response as ExpressResponse } from "express";
 import { requireAuth, AuthRequest } from "./authMiddleware";
 import type { DbProgress } from "./db";
 import {
@@ -272,10 +272,10 @@ router.get("/notes", requireAuth, (req: AuthRequest, res) => {
 });
 
 /* ── PUT/POST /api/user/notes/:lessonId ───────────────── */
-const handleSaveNote = async (req: AuthRequest, res: Response) => {
+const handleSaveNote = async (req: AuthRequest, res: ExpressResponse) => {
   try {
-    const notes = await saveNote(req.userId!, req.params.lessonId, req.body?.content);
-    res.json({ success: true, notes });
+    const savedNotes = await saveNote(req.userId!, req.params.lessonId, req.body?.content);
+    res.json({ success: true, notes: savedNotes });
   } catch (err) {
     console.error("[API] Failed to save note:", err);
     res.status(500).json({ error: "Failed to save note" });

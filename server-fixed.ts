@@ -12,11 +12,11 @@ import { cleanupExpiredSessions } from "./server/db";
 dotenv.config();
 
 const app: Application = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 
-// CORS — allow frontend (GitHub Pages) to call this API
+// CORS — allow frontend to call this API
 app.use((req: Request, res: Response, next: NextFunction) => {
   const origin = process.env.CORS_ORIGIN || req.headers.origin || "*";
   res.header("Access-Control-Allow-Origin", origin);
@@ -48,6 +48,25 @@ function getAi(): GoogleGenAI | null {
     });
   }
   return aiClient;
+}
+
+// Ensure data directory exists
+const DB_DIR = path.join(process.cwd(), "data");
+if (!fs.existsSync(DB_DIR)) {
+  fs.mkdirSync(DB_DIR, { recursive: true });
+  console.log("[INFO] Created data directory");
+}
+
+// Initialize default database if it doesn't exist
+const DB_PATH = path.join(DB_DIR, "webzonebw.json");
+if (!fs.existsSync(DB_PATH)) {
+  const defaultData = {
+    users: [],
+    sessions: [],
+    progress: []
+  };
+  fs.writeFileSync(DB_PATH, JSON.stringify(defaultData, null, 2));
+  console.log("[INFO] Initialized default database");
 }
 
 // Resilient static routing & URL decoding for /Chapters and /Assets (handles spaces, %20, and '20' without percent)
@@ -145,7 +164,7 @@ app.get("/api/health", (_req, res) => {
   res.json({ status: "ok", timestamp: new Date().toISOString() });
 });
 
-// â”€â”€â”€ Legacy query-URL migration (301 permanent redirects) â”€â”€â”€
+// Legacy query-URL migration (301 permanent redirects)
 // Applied to ALL GET paths so any URL carrying ?lesson=/?blog= (including
 // /index.html, deep paths, or array-typed params) is permanently migrated
 // to the clean canonical route instead of ever rendering a duplicate page.
@@ -203,7 +222,7 @@ function legacyQueryRedirect(
 
 app.use(legacyQueryRedirect);
 
-// â”€â”€â”€ SSR helpers: resolve lesson / blog data and inject SEO head tags â”€â”€â”€
+// SSR helpers: resolve lesson / blog data and inject SEO head tags
 import { BLOG_POSTS } from "./src/data/blogData";
 
 interface PageSEO {
@@ -351,7 +370,7 @@ function resolveLessonSEO(
     const lesson = chapter.lessons.find((l) => l.id === lessonId);
     if (lesson) {
       return {
-        title: `${lesson.title} â€” ${chapter.title} | WebZoneBW SC`,
+        title: `${lesson.title} — ${chapter.title} | WebZoneBW SC`,
         description:
           lesson.tagline ||
           `Interactive lesson on ${lesson.title} in ${chapter.title} at WebZoneBW SC.`,
@@ -418,7 +437,15 @@ function getIndexHtml(): string | null {
       "utf-8",
     );
   } catch {
-    return null;
+    // Fallback to enhanced index if dist doesn't exist
+    try {
+      cachedIndexHtml = fs.readFileSync(
+        path.join(process.cwd(), "index-enhanced.html"),
+        "utf-8",
+      );
+    } catch {
+      return null;
+    }
   }
   return cachedIndexHtml;
 }
@@ -435,14 +462,14 @@ function sendSEOPage(
   return res.send(injectSEO(html, seo));
 }
 
-// â”€â”€â”€ Clean lesson routes: /lessons/:lessonId â”€â”€â”€
+// Clean lesson routes: /lessons/:lessonId
 app.get("/lessons/:lessonId", (req, res) => {
   const seo = resolveLessonSEO(req.params.lessonId);
   if (!seo) return res.redirect(301, "/");
   sendSEOPage(req, res, seo, "/");
 });
 
-// â”€â”€â”€ Clean blog routes: /blog/:slug â”€â”€â”€
+// Clean blog routes: /blog/:slug
 app.get("/blog/:slug", (req, res) => {
   const seo = resolveBlogSEO(req.params.slug);
   if (!seo) return res.redirect(301, "/?view=blog");
@@ -481,7 +508,7 @@ app.get("/sitemap.xml", (req, res) => {
   // Primary Landing Page
   addEntry(`${baseUrl}/`, "1.0", "daily");
 
-  // All Chapters â†’ Clean lesson URLs (canonical)
+  // All Chapters → Clean lesson URLs (canonical)
   for (const chapter of CHAPTERS_DATA) {
     for (const lesson of chapter.lessons) {
       addEntry(`${baseUrl}/lessons/${lesson.id}`, "0.80", "monthly");
@@ -494,7 +521,7 @@ app.get("/sitemap.xml", (req, res) => {
   addEntry(`${baseUrl}/cookie-policy.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/about.html`, "0.70", "monthly");
 
-  // Blog Posts â€” Clean canonical URLs
+  // Blog Posts — Clean canonical URLs
   for (const post of BLOG_POSTS) {
     addEntry(`${baseUrl}/blog/${post.slug}`, "0.85", "monthly");
   }
@@ -597,8 +624,8 @@ function getFallbackTutorExplanation(
     query.includes("margin")
   ) {
     coreAnswer =
-      `### ðŸ“¦ CSS Box Model Resolution\n\n` +
-      `**Core Principle**: Every element on a web page is computed as 4 nested rectangular layers: **Content** âž” **Padding** (inner space) âž” **Border** (stroke) âž” **Margin** (outer space).\n\n` +
+      `### 📦 CSS Box Model Resolution\n\n` +
+      `**Core Principle**: Every element on a web page is computed as 4 nested rectangular layers: **Content** ↔ **Padding** (inner space) ↔ **Border** (stroke) ↔ **Margin** (outer space).\n\n` +
       `**Key Insight**: Always apply \`box-sizing: border-box;\` so specified widths include padding and borders rather than growing unpredictably.`;
   } else if (
     query.includes("flexbox") ||
@@ -606,7 +633,7 @@ function getFallbackTutorExplanation(
     query.includes("align")
   ) {
     coreAnswer =
-      `### ðŸ“ Flexbox & Centering Doubt Resolution\n\n` +
+      `### 🎯 Flexbox & Centering Doubt Resolution\n\n` +
       `**Fastest Centering Pattern**:\n` +
       `\`\`\`css\n` +
       `.container {\n` +
@@ -623,7 +650,7 @@ function getFallbackTutorExplanation(
     query.includes("await")
   ) {
     coreAnswer =
-      `### âš¡ JavaScript Async/Await & Promises\n\n` +
+      `### ⚡ JavaScript Async/Await & Promises\n\n` +
       `**Mental Model**: Think of a Promise like ordering coffee. You get a buzzer (Promise) and continue talking with friends. When the buzzer goes off (\`await\`), you receive your drink without blocking the line!\n\n` +
       `\`\`\`javascript\n` +
       `async function loadData() {\n` +
@@ -638,7 +665,7 @@ function getFallbackTutorExplanation(
       `\`\`\``;
   } else if (code) {
     coreAnswer =
-      `### ðŸž Code Debugger & Inspection\n\n` +
+      `### 🐛 Code Debugger & Inspection\n\n` +
       `**Submitted Code Review**:\n` +
       `\`\`\`\n${code}\n\`\`\`\n\n` +
       `**Debugging Steps**:\n` +
@@ -647,14 +674,14 @@ function getFallbackTutorExplanation(
       `3. In JavaScript, ensure event listeners attach after the DOM is fully loaded.`;
   } else {
     coreAnswer =
-      `### ðŸ’¡ Web Development Concept Resolution\n\n` +
+      `### 💡 Web Development Concept Resolution\n\n` +
       `**Core Concept**: In modern web applications, the foundation rests on three pillars: **HTML** for semantic structure, **CSS** for visual hierarchy and responsive layout, and **JavaScript** for reactive logic.\n\n` +
       `**Best Practice**: Test interactively in the built-in Sandbox to inspect real-time DOM changes.`;
   }
 
   return (
     `${coreAnswer}\n\n` +
-    `*âš¡ Note: Generated via WebZoneBW Storehouse Continuous Learning Engine.*`
+    `*💡 Note: Generated via WebZoneBW Storehouse Continuous Learning Engine.*`
   );
 }
 
@@ -848,7 +875,7 @@ async function startServer() {
       }),
     );
 
-    // Repository /public static pages (legal/contact) â€” served when absent from dist
+    // Repository /public static pages (legal/contact) — served when absent from dist
     app.use(
       express.static(path.join(process.cwd(), "public"), {
         index: false,
@@ -920,7 +947,7 @@ async function startServer() {
     const BOT_USER_AGENTS =
       /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
 
-    // SPA catch-all â€” only routes that don't match static files
+    // SPA catch-all — only routes that don't match static files
     app.get("*", (req, res) => {
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
@@ -943,9 +970,10 @@ async function startServer() {
   try {
     const server = app.listen(PORT, "0.0.0.0", () => {
       console.log(
-        `WebZoneBW Storehouse Server running on http://0.0.0.0:${PORT}`,
+        `🚀 WebZoneBW Storehouse Server running on http://0.0.0.0:${PORT}`,
       );
-      console.log(`Server address: ${server.address()}`);
+      console.log(`🌐 Server address: ${server.address()}`);
+      console.log(`✅ Server is ready to serve requests!`);
     });
 
     server.on("error", (err) => {
