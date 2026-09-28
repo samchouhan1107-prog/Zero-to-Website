@@ -149,10 +149,10 @@ if (pre) pre.textContent = JSON.stringify(sampleManifest, null, 2);`,
           'Declare const getUpperLimit = () => "< 3.0.0";',
           'Write the string to #semverOutput'
         ],
-        starterHtml: `<div class="semver-card">
+        sharedHtml: `<div class="semver-card">
   <p>Caret Range for ^2.4.1: <strong id="semverOutput">--</strong></p>
 </div>`,
-        starterCss: `.semver-card {
+        sharedCss: `.semver-card {
   padding: 1.5rem;
   background: white;
   border-radius: 8px;
@@ -161,16 +161,6 @@ if (pre) pre.textContent = JSON.stringify(sampleManifest, null, 2);`,
 }`,
         starterJs: `// Output SemVer range
 `,
-        solutionHtml: `<div class="semver-card">
-  <p>Caret Range for ^2.4.1: <strong id="semverOutput">--</strong></p>
-</div>`,
-        solutionCss: `.semver-card {
-  padding: 1.5rem;
-  background: white;
-  border-radius: 8px;
-  border: 1px solid #cbd5e1;
-  font-weight: 600;
-}`,
         solutionJs: `const out = document.getElementById("semverOutput");
 if (out) out.textContent = "< 3.0.0";`,
         hints: [

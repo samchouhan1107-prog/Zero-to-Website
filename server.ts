@@ -12,7 +12,54 @@ import { cleanupExpiredSessions } from "./server/db";
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = Number(process.env.PORT) || 3000;
+const CANONICAL_ORIGIN = 'https://webzonebw.shop';
+
+/**
+ * Give crawlers and no-JavaScript visitors a truthful, lesson-specific document
+ * instead of the generic SPA shell. React replaces this snapshot once the app
+ * starts for interactive visitors.
+ */
+const escapeHtml = (value: string) => value
+  .replace(/&/g, '&amp;')
+  .replace(/</g, '&lt;')
+  .replace(/>/g, '&gt;')
+  .replace(/"/g, '&quot;')
+  .replace(/'/g, '&#39;');
+
+const renderLessonSnapshot = (lessonId: string) => {
+  const chapter = CHAPTERS_DATA.find((candidate) => candidate.lessons.some((lesson) => lesson.id === lessonId));
+  const lesson = chapter?.lessons.find((candidate) => candidate.id === lessonId);
+  if (!chapter || !lesson) return null;
+
+  // Canonicals intentionally contain only the resolved public lesson ID. Never
+  // reflect tracking, cache-busting, host, or protocol values from the request.
+  const canonical = `${CANONICAL_ORIGIN}/?lesson=${encodeURIComponent(lesson.id)}`;
+  const objectives = lesson.learningObjectives.map((objective) => `<li>${escapeHtml(objective)}</li>`).join('');
+  const sections = lesson.theorySections.map((section) => `<section><h2>${escapeHtml(section.heading)}</h2><p>${escapeHtml(section.content)}</p>${section.bulletPoints?.length ? `<ul>${section.bulletPoints.map((point) => `<li>${escapeHtml(point)}</li>`).join('')}</ul>` : ''}</section>`).join('');
+  const code = [lesson.codeExample.html, lesson.codeExample.css, lesson.codeExample.js].filter(Boolean).join('\n\n');
+  const content = `<main id="lesson-server-content"><nav aria-label="Breadcrumb"><a href="/">WebZoneBW SC</a> / Chapter ${escapeHtml(chapter.number)} / ${escapeHtml(lesson.title)}</nav><article><p>Chapter ${escapeHtml(chapter.number)} · ${escapeHtml(lesson.durationMinutes.toString())} minute lesson</p><h1>${escapeHtml(lesson.title)}</h1><p>${escapeHtml(lesson.tagline)}</p><h2>What you will learn</h2><ul>${objectives}</ul>${sections}<section><h2>${escapeHtml(lesson.codeExample.title)}</h2><p>${escapeHtml(lesson.codeExample.description)}</p><pre><code>${escapeHtml(code)}</code></pre></section><section><h2>Practice</h2><p>${escapeHtml(lesson.practice.prompt)}</p><p>Open this lesson in the interactive platform to complete its sandbox challenge and quiz.</p></section></article></main>`;
+  return { title: `${lesson.title} | WebZoneBW SC`, description: lesson.tagline, canonical, content };
+};
+
+const injectLessonSnapshot = (html: string, lessonId: string) => {
+  const snapshot = renderLessonSnapshot(lessonId);
+  if (!snapshot) return html;
+  const documentWithMetadata = html
+    .replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(snapshot.title)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(snapshot.description)}$2`)
+    .replace(/(<meta property="og:url" content=")[^"]*("\s*\/?>)/i, `$1${snapshot.canonical}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(snapshot.title)}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(snapshot.description)}$2`)
+    .replace(/(<meta property="twitter:url" content=")[^"]*("\s*\/?>)/i, `$1${snapshot.canonical}$2`)
+    .replace(/(<meta property="twitter:title" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(snapshot.title)}$2`)
+    .replace(/(<meta property="twitter:description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(snapshot.description)}$2`);
+  // Remove any template canonical before adding precisely one canonical link.
+  const withOneCanonical = documentWithMetadata
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/gi, '')
+    .replace('<head>', `<head>\n    <link rel="canonical" href="${snapshot.canonical}" />`);
+  return withOneCanonical.replace('<div id="root">', `<div id="root">${snapshot.content}`);
+};
 
 app.use(express.json());
 
@@ -554,9 +601,11 @@ async function startServer() {
     }
   } else {
     const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath, { index: 'index.html', extensions: ['html'] }));
+    // Do not let the static middleware answer `/` with index.html first: the
+    // catch-all below needs to inspect query parameters for lesson snapshots.
+    app.use(express.static(distPath, { index: false, extensions: ['html'] }));
 
-    // Bot-aware SEO: serve enhanced HTML to crawlers with pre-rendered content
+    // Bot-aware SEO: serve a lesson-specific HTML snapshot to crawlers.
     const BOT_USER_AGENTS = /googlebot|bingbot|yandexbot|baiduspider|slurp|duckduckbot|facebot|facebookexternalhit|applebot|semrushbot|ahrefsbot/i;
     let cachedIndexHtml: string | null = null;
 
@@ -564,6 +613,7 @@ async function startServer() {
     app.get("*", (req, res) => {
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
+      const requestedLessonId = typeof req.query.lesson === "string" ? req.query.lesson : undefined;
 
       if (isBot) {
         // Serve index.html with the pre-rendered noscript content for crawlers
@@ -572,7 +622,7 @@ async function startServer() {
             cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
           }
           res.header("Content-Type", "text/html; charset=utf-8");
-          res.send(cachedIndexHtml);
+          res.send(requestedLessonId ? injectLessonSnapshot(cachedIndexHtml, requestedLessonId) : cachedIndexHtml);
         } catch {
           res.sendFile(path.join(distPath, "index.html"));
         }

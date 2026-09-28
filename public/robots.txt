@@ -4,10 +4,6 @@ Allow: /
 Disallow: /api/
 Disallow: /server/
 
-# Full access for Google AdSense Crawler
-User-agent: Mediapartners-Google
-Allow: /
-
 # Full access for Google Search & Image Crawlers
 User-agent: Googlebot
 Allow: /

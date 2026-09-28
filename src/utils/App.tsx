@@ -349,6 +349,14 @@ export default function App() {
     mainContentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  // The static skip link is available before React hydrates. Move focus into the
+  // application's independent scroll region once it exists as well.
+  useEffect(() => {
+    if (window.location.hash === '#main-content') {
+      mainContentRef.current?.focus();
+    }
+  }, []);
+
   const navigateToView = (view: ViewMode) => {
     setActiveView(view);
     scrollMainToTop();
@@ -573,7 +581,7 @@ export default function App() {
         />
 
         {/* View Router with one independent scroll region */}
-        <main ref={mainContentRef} id="main-content" className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
+        <main ref={mainContentRef} id="main-content" tabIndex={-1} className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
           <AnimatePresence mode="wait" initial={false}>
             {activeView === 'home' && (
               <motion.div
@@ -729,7 +737,7 @@ initial={{ opacity: 0, y: 14 }}
             )}
           </AnimatePresence>
 
-          {/* Educational Platform Footer with AdSense & Legal Compliance Links */}
+          {/* Educational platform footer and policy links */}
           <Footer
             onOpenLegal={handleOpenLegal}
             onOpenTutor={() => handleOpenTutor()}
@@ -872,4 +880,3 @@ initial={{ opacity: 0, y: 14 }}
     </div>
   );
 }
-

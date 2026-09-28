@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 01 | Portfolio Architecture - WebZoneBW SC</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW SC</h1>
+                <p>Free Interactive Web Developer Tools & Curriculum</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 10.01</span>
+            <h1>Portfolio Architecture Implementation</h1>
+            <p>Build a responsive portfolio hero section with project showcase data model and structured navigation</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Advanced)</h2>
+            <ul class="chapter-list">
+                <li>1. Create semantic HTML5 structure for portfolio layout</li>
+                <li>2. Implement responsive hero section with value proposition</li>
+                <li>3. Build project showcase data model with TypeScript interfaces</li>
+                <li>4. Create accessible navigation with proper ARIA labels</li>
+                <li>5. Implement contact form with validation and feedback</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>📁 Starter Files</h2>
+            <div class="file-structure">
+                <h3>Project Structure:</h3>
+                <pre><code>portfolio-capstone/
+├── index.html
+├── css/
+│   ├── main.css
+│   └── responsive.css
+├── js/
+│   ├── main.js
+│   └── portfolio-data.js
+└── assets/
+    └── images/</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎨 Design Requirements</h2>
+            <div class="design-specs">
+                <h3>Hero Section Requirements:</h3>
+                <ul class="chapter-list">
+                    <li>Semantic header with navigation menu</li>
+                    <li>Hero title with specialization areas</li>
+                    <li>Call-to-action buttons (Resume, Contact)</li>
+                    <li>Social media links with proper icons</li>
+                    <li>Responsive design for mobile/tablet/desktop</li>
+                </ul>
+
+                <h3>Project Showcase Requirements:</h3>
+                <ul class="chapter-list">
+                    <li>Filterable project grid with category tags</li>
+                    <li>Project cards with live demo links</li>
+                    <li>GitHub repository links</li>
+                    <li>Technology stack badges</li>
+                    <li>Featured project highlighting</li>
+                </ul>
+
+                <h3>Contact Form Requirements:</h3>
+                <ul class="chapter-list">
+                    <li>Accessible form with proper labels</li>
+                    <li>Client-side validation</li>
+                    <li>Success/error messaging</li>
+                    <li>Spam protection measures</li>
+                    <li>Responsive layout</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Implementation Steps</h2>
+            <div class="implementation-guide">
+                <h3>Step 1: HTML Structure</h3>
+                <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Your Developer Portfolio&lt;/title&gt;
+    &lt;link rel="stylesheet" href="css/main.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;nav&gt;
+            &lt;!-- Navigation links --&gt;
+        &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;section id="hero"&gt;
+            &lt;!-- Hero content --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="projects"&gt;
+            &lt;!-- Project showcase --&gt;
+        &lt;/section&gt;
+        
+        &lt;section id="contact"&gt;
+            &lt;!-- Contact form --&gt;
+        &lt;/section&gt;
+    &lt;/main&gt;
+    
+    &lt;footer&gt;
+        &lt;!-- Footer content --&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+                <h3>Step 2: TypeScript Data Model</h3>
+                <pre><code>// portfolio-data.js
+interface Project {
+    id: string;
+    title: string;
+    tagline: string;
+    category: string;
+    techStack: string[];
+    liveUrl: string;
+    repoUrl: string;
+    description: string;
+    featured: boolean;
+}
+
+interface PortfolioData {
+    projects: Project[];
+    skills: {
+        languages: string[];
+        frameworks: string[];
+        tools: string[];
+        cloud: string[];
+    };
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🧪 Test Cases</h2>
+            <div class="test-cases">
+                <h3>Validation Criteria:</h3>
+                <ul class="chapter-list">
+                    <li><strong>Accessibility:</strong> All interactive elements must be keyboard navigable</li>
+                    <li><strong>Responsive:</strong> Layout must adapt to mobile, tablet, and desktop screens</li>
+                    <li><strong>Performance:</strong> Page load time under 3 seconds on 3G connection</li>
+                    <li><strong>SEO:</strong> Proper meta tags, heading hierarchy, and semantic HTML</li>
+                    <li><strong>Functionality:</strong> All links must work, form must validate properly</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>📋 Submission Requirements</h2>
+            <div class="submission-guide">
+                <h3>Portfolio Checklist:</h3>
+                <ul class="chapter-list">
+                    <li>[ ] Complete HTML5 semantic structure</li>
+                    <li>[ ] Responsive CSS with media queries</li>
+                    <li>[ ] TypeScript interfaces for data models</li>
+                    <li>[ ] Interactive project filtering system</li>
+                    <li>[ ] Accessible contact form with validation</li>
+                    <li>[ ] Performance optimization (images, CSS, JS)</li>
+                    <li>[ ] Cross-browser compatibility (Chrome, Firefox, Safari, Edge)</li>
+                    <li>[ ] Mobile-first responsive design</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🚀 Next Steps</h2>
+            <p>After completing this practice challenge, you'll be ready to move on to the next lesson where you'll implement the full portfolio project with advanced features like performance optimization, accessibility testing, and deployment preparation.</p>
+            
+            <div class="next-lesson">
+                <p>👉 <a href="../Lesson-02-Core-Components/index.html">Continue to Lesson 02: Core Components Implementation</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WebZoneBW SC. All rights reserved.</p>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-of-service.html">Terms of Service</a> | <a href="/about.html">About</a></p>
+        </div>
+    </footer>
+</body>
+</html>

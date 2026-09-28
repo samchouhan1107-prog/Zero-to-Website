@@ -175,14 +175,14 @@ export const CookieNotificationBanner: React.FC<CookieNotificationBannerProps> =
 
           {/* Description */}
           <p className="text-xs text-slate-300 leading-relaxed font-medium">
-            We use essential local cookies to store your learning milestones and themes. We partner with third-party networks such as Google AdSense to serve personalized ads under GDPR/CCPA standards.{' '}
+            We use essential browser storage to save learning milestones, notes, and theme preferences. WebZoneBW SC does not currently serve advertising on the learning platform.{' '}
             {onOpenPrivacy && (
               <button
                 type="button"
                 onClick={onOpenPrivacy}
                 className="text-amber-300 underline hover:text-amber-200 cursor-pointer font-bold inline"
               >
-                Read our Privacy Policy &amp; Ad Disclosure
+                Read our Privacy and storage policy
               </button>
             )}
           </p>

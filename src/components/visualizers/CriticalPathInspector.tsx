@@ -1,367 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { 
-  Eye, 
-  Zap, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Clock,
-  FileText,
-  Palette,
-  Code,
-  Layers,
-  PaintBucket,
-  Layout,
-  CheckCircle2,
-  AlertCircle,
-  Info
-} from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+import { CheckCircle2, Clock, FileText, Info, Layers, Layout, PaintBucket, Palette, Pause, Play, RotateCcw } from 'lucide-react';
 
-interface CriticalPathStep {
-  id: string;
-  name: string;
-  description: string;
-  status: 'pending' | 'active' | 'completed' | 'error';
-  duration: number;
-  icon: React.ComponentType<any>;
-}
+type StepId = 'html' | 'css' | 'render' | 'layout' | 'paint';
+type StepState = 'pending' | 'active' | 'completed';
+const STEPS: ReadonlyArray<{ id: StepId; name: string; description: string; duration: number; icon: React.ComponentType<{ size?: number }> }> = [
+  { id: 'html', name: 'HTML parsing', description: 'The browser reads markup and creates the DOM.', duration: 2, icon: FileText },
+  { id: 'css', name: 'CSS parsing', description: 'Stylesheets become the CSS object model (CSSOM).', duration: 1, icon: Palette },
+  { id: 'render', name: 'Render tree', description: 'Visible DOM nodes are combined with computed styles.', duration: 1, icon: Layers },
+  { id: 'layout', name: 'Layout', description: 'The browser calculates visible box sizes and positions.', duration: 3, icon: Layout },
+  { id: 'paint', name: 'Paint', description: 'The browser draws boxes, text, borders, and pixels.', duration: 2, icon: PaintBucket },
+];
+const sampleTree = [{ name: 'html', children: ['head', 'body'] }, { name: 'head', children: ['meta', 'title', 'link'] }, { name: 'body', children: ['header', 'main'] }];
 
 export const CriticalPathInspector: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isPlaying, setIsPlaying] = useState(false);
   const [speed, setSpeed] = useState(1000);
-  const [criticalCSS, setCriticalCSS] = useState('');
-  const [renderTree, setRenderTree] = useState<any[]>([]);
-  const [layoutMetrics, setLayoutMetrics] = useState({
-    width: 0,
-    height: 0,
-    paintTime: 0
-  });
-
-  const criticalPathSteps: CriticalPathStep[] = [
-    {
-      id: 'html-parsing',
-      name: 'HTML Parsing',
-      description: 'Browser parses HTML and builds the DOM tree',
-      status: 'pending',
-      duration: 2,
-      icon: FileText
-    },
-    {
-      id: 'css-parsing',
-      name: 'CSS Parsing',
-      description: 'Browser parses CSS and builds the CSSOM tree',
-      status: 'pending',
-      duration: 1,
-      icon: Palette
-    },
-    {
-      id: 'render-tree',
-      name: 'Render Tree Construction',
-      description: 'Combine DOM and CSSOM to create render tree',
-      status: 'pending',
-      duration: 1,
-      icon: Layers
-    },
-    {
-      id: 'layout',
-      name: 'Layout (Reflow)',
-      description: 'Calculate positions and dimensions for each element',
-      status: 'pending',
-      duration: 3,
-      icon: Layout
-    },
-    {
-      id: 'paint',
-      name: 'Paint',
-      description: 'Convert render tree to pixels on screen',
-      status: 'pending',
-      duration: 2,
-      icon: PaintBucket
-    }
-  ];
-
+  const [completed, setCompleted] = useState<StepId[]>([]);
+  const [viewport, setViewport] = useState({ width: 0, height: 0 });
+  useEffect(() => { const update = () => setViewport({ width: window.innerWidth, height: window.innerHeight }); update(); window.addEventListener('resize', update); return () => window.removeEventListener('resize', update); }, []);
   useEffect(() => {
-    let interval: NodeJS.Timeout;
-    
-    if (isPlaying && currentStep < criticalPathSteps.length) {
-      interval = setTimeout(() => {
-        // Update current step
-        const newSteps = [...criticalPathSteps];
-        newSteps[currentStep].status = 'completed';
-        
-        if (currentStep < criticalPathSteps.length - 1) {
-          newSteps[currentStep + 1].status = 'active';
-          setCurrentStep(currentStep + 1);
-        } else {
-          setIsPlaying(false);
-        }
-        
-        // Simulate data updates based on step
-        updateStepData(newSteps[currentStep]);
-      }, speed);
-    }
-    
-    return () => {
-      if (interval) clearTimeout(interval);
-    };
-  }, [isPlaying, currentStep, speed]);
-
-  const updateStepData = (step: CriticalPathStep) => {
-    switch (step.id) {
-      case 'html-parsing':
-        setRenderTree([
-          { id: 'html', name: 'HTML Root', type: 'document', children: ['head', 'body'] },
-          { id: 'head', name: 'Head', type: 'head', children: ['title', 'meta'] },
-          { id: 'body', name: 'Body', type: 'body', children: ['header', 'main'] }
-        ]);
-        break;
-      case 'css-parsing':
-        setCriticalCSS(`
-          body { font-family: Arial, sans-serif; }
-          header { background: #fff; padding: 20px; }
-          h1 { color: #333; margin: 0; }
-        `);
-        break;
-      case 'render-tree':
-        setRenderTree(prev => prev.map(node => ({
-          ...node,
-          styles: { computed: 'visible', display: 'block' }
-        })));
-        break;
-      case 'layout':
-        setLayoutMetrics({
-          width: 1200,
-          height: 800,
-          paintTime: 16.7
-        });
-        break;
-      case 'paint':
-        setLayoutMetrics(prev => ({
-          ...prev,
-          paintTime: 12.3
-        }));
-        break;
-    }
-  };
-
-  const resetAnimation = () => {
-    const resetSteps = criticalPathSteps.map(step => ({
-      ...step,
-      status: step.id === 'html-parsing' ? 'active' : 'pending'
-    }));
-    setCurrentStep(0);
-    setIsPlaying(false);
-    setCriticalCSS('');
-    setRenderTree([]);
-    setLayoutMetrics({ width: 0, height: 0, paintTime: 0 });
-  };
-
-  const togglePlay = () => {
-    if (currentStep >= criticalPathSteps.length) {
-      resetAnimation();
-    }
-    setIsPlaying(!isPlaying);
-  };
-
-  const getStatusColor = (status: CriticalPathStep['status']) => {
-    switch (status) {
-      case 'active': return 'bg-blue-500 text-white';
-      case 'completed': return 'bg-green-500 text-white';
-      case 'error': return 'bg-red-500 text-white';
-      default: return 'bg-gray-300 text-gray-600';
-    }
-  };
-
-  return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h2 className="text-xl font-bold text-app-ink">Critical Rendering Path Inspector</h2>
-          <p className="text-sm text-app-muted">
-            Visualize how browsers convert HTML, CSS, and JS into pixels on screen
-          </p>
-        </div>
-        <div className="flex items-center gap-2">
-          <button
-            onClick={togglePlay}
-            className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg flex items-center gap-2"
-          >
-            {isPlaying ? <Pause size={16} /> : <Play size={16} />}
-            {currentStep >= criticalPathSteps.length ? 'Restart' : 
-             isPlaying ? 'Pause' : 'Play Animation'}
-          </button>
-          <button
-            onClick={resetAnimation}
-            className="px-4 py-2 bg-gray-600 hover:bg-gray-500 text-white rounded-lg flex items-center gap-2"
-          >
-            <RotateCcw size={16} />
-            Reset
-          </button>
-        </div>
-      </div>
-
-      {/* Speed Control */}
-      <div className="flex items-center gap-4">
-        <span className="text-sm text-app-muted">Animation Speed:</span>
-        <select
-          value={speed}
-          onChange={(e) => setSpeed(Number(e.target.value))}
-          className="px-3 py-1 bg-app-surface border border-app-border rounded-lg text-sm"
-        >
-          <option value={2000}>Slow</option>
-          <option value={1000}>Normal</option>
-          <option value={500}>Fast</option>
-        </select>
-      </div>
-
-      {/* Critical Path Steps */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-        {criticalPathSteps.map((step, index) => {
-          const Icon = step.icon;
-          return (
-            <div
-              key={step.id}
-              className={`p-4 rounded-lg border-2 ${
-                step.status === 'active' 
-                  ? 'border-blue-500 bg-blue-50' 
-                  : step.status === 'completed'
-                  ? 'border-green-500 bg-green-50'
-                  : 'border-gray-200 bg-gray-50'
-              }`}
-            >
-              <div className="flex items-center gap-2 mb-2">
-                <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getStatusColor(step.status)}`}>
-                  <Icon size={16} />
-                </div>
-                <span className="text-xs font-medium text-app-muted">Step {index + 1}</span>
-              </div>
-              <h3 className="font-semibold text-sm text-app-ink mb-1">{step.name}</h3>
-              <p className="text-xs text-app-muted">{step.description}</p>
-              <div className="mt-2 text-xs text-app-subtle">
-                Duration: {step.duration}ms
-              </div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Visual Representation */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* DOM Tree Visualization */}
-        <div className="bg-app-surface border border-app-border rounded-lg p-4">
-          <h3 className="font-semibold text-app-ink mb-3 flex items-center gap-2">
-            <Layers size={16} /> DOM Tree
-          </h3>
-          <div className="space-y-2">
-            {renderTree.map((node) => (
-              <div
-                key={node.id}
-                className="p-2 bg-app-inset rounded border border-app-border"
-              >
-                <div className="font-mono text-sm text-app-ink">
-                  &lt;{node.name}&gt;
-                </div>
-                {node.children && (
-                  <div className="ml-4 mt-1 space-y-1">
-                    {node.children.map((childId: string) => (
-                      <div
-                        key={childId}
-                        className="text-xs text-app-muted font-mono"
-                      >
-                        &lt;{childId}&gt;
-                      </div>
-                    ))}
-                  </div>
-                )}
-                {node.styles && (
-                  <div className="mt-1 text-xs text-blue-600">
-                    <span className="font-mono">computed: {node.styles.computed}</span>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Critical CSS Display */}
-        <div className="bg-app-surface border border-app-border rounded-lg p-4">
-          <h3 className="font-semibold text-app-ink mb-3 flex items-center gap-2">
-            <Palette size={16} /> Critical CSS
-          </h3>
-          <div className="bg-gray-900 rounded p-3 font-mono text-xs text-green-400 overflow-auto max-h-40">
-            {criticalCSS || 'No CSS loaded yet...'}
-          </div>
-        </div>
-
-        {/* Performance Metrics */}
-        <div className="bg-app-surface border border-app-border rounded-lg p-4">
-          <h3 className="font-semibold text-app-ink mb-3 flex items-center gap-2">
-            <Clock size={16} /> Performance Metrics
-          </h3>
-          <div className="space-y-3">
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-app-muted">Viewport Size:</span>
-              <span className="text-sm font-mono text-app-ink">
-                {layoutMetrics.width} × {layoutMetrics.height}px
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-app-muted">Paint Time:</span>
-              <span className="text-sm font-mono text-app-ink">
-                {layoutMetrics.paintTime > 0 ? `${layoutMetrics.paintTime}ms` : 'N/A'}
-              </span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="text-sm text-app-muted">Total Steps:</span>
-              <span className="text-sm font-mono text-app-ink">
-                {currentStep}/{criticalPathSteps.length}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Status Panel */}
-        <div className="bg-app-surface border border-app-border rounded-lg p-4">
-          <h3 className="font-semibold text-app-ink mb-3 flex items-center gap-2">
-            <Info size={16} /> Current Status
-          </h3>
-          <div className="space-y-2">
-            {currentStep < criticalPathSteps.length ? (
-              <>
-                <div className="flex items-center gap-2">
-                  <div className={`w-3 h-3 rounded-full ${getStatusColor(criticalPathSteps[currentStep].status)}`} />
-                  <span className="text-sm text-app-ink">
-                    {criticalPathSteps[currentStep].name}
-                  </span>
-                </div>
-                <p className="text-xs text-app-muted">
-                  {criticalPathSteps[currentStep].description}
-                </p>
-              </>
-            ) : (
-              <div className="flex items-center gap-2 text-green-600">
-                <CheckCircle2 size={16} />
-                <span className="text-sm font-semibold">Critical Rendering Path Complete!</span>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Explanation Panel */}
-      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-        <h3 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
-          <AlertCircle size={16} /> Why This Matters
-        </h3>
-        <p className="text-sm text-blue-800">
-          The Critical Rendering Path determines how quickly your page becomes visible to users. 
-          By understanding this process, you can optimize your HTML, CSS, and JavaScript to 
-          achieve faster first paint and improved user experience. Each step in the process 
-          builds upon the previous one, making early optimization crucial for performance.
-        </p>
-      </div>
-    </div>
-  );
+    if (!isPlaying || currentStep >= STEPS.length) return;
+    const timer = window.setTimeout(() => { const id = STEPS[currentStep].id; setCompleted((previous) => previous.includes(id) ? previous : [...previous, id]); if (currentStep === STEPS.length - 1) { setCurrentStep(STEPS.length); setIsPlaying(false); } else setCurrentStep((step) => step + 1); }, speed);
+    return () => window.clearTimeout(timer);
+  }, [currentStep, isPlaying, speed]);
+  const reset = () => { setCurrentStep(0); setCompleted([]); setIsPlaying(false); };
+  const stateFor = (id: StepId, index: number): StepState => completed.includes(id) ? 'completed' : index === currentStep && currentStep < STEPS.length ? 'active' : 'pending';
+  const hasReached = (id: StepId) => completed.includes(id);
+  const current = currentStep < STEPS.length ? STEPS[currentStep] : undefined;
+  const elapsed = completed.reduce((sum, id) => sum + (STEPS.find((step) => step.id === id)?.duration || 0), 0);
+  const styleFor = (state: StepState) => state === 'completed' ? 'border-emerald-500/60 bg-emerald-500/10' : state === 'active' ? 'border-blue-500 bg-blue-500/10' : 'border-app-border bg-app-inset';
+  return <section className="space-y-6" aria-labelledby="crp-title">
+    <div className="flex flex-wrap items-start justify-between gap-4"><div><h2 id="crp-title" className="text-xl font-bold text-app-ink">Critical Rendering Path Inspector</h2><p className="mt-1 max-w-2xl text-sm text-app-muted">Step through a small page model. This explains the rendering path; it is not a measurement of this site’s network performance.</p></div><div className="flex flex-wrap gap-2"><button type="button" onClick={() => currentStep === STEPS.length ? (reset(), setIsPlaying(true)) : setIsPlaying((playing) => !playing)} className="inline-flex min-h-11 items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-500">{isPlaying ? <Pause size={16} /> : <Play size={16} />}{currentStep === STEPS.length ? 'Restart' : isPlaying ? 'Pause' : 'Play animation'}</button><button type="button" onClick={reset} className="inline-flex min-h-11 items-center gap-2 rounded-lg border border-app-border bg-app-surface px-4 py-2 text-sm font-semibold text-app-ink hover:bg-app-inset"><RotateCcw size={16} />Reset</button></div></div>
+    <label className="flex flex-wrap items-center gap-3 text-sm text-app-muted">Animation speed <select value={speed} onChange={(event) => setSpeed(Number(event.target.value))} className="rounded-lg border border-app-border bg-app-surface px-3 py-2 text-app-ink"><option value={2000}>Slow</option><option value={1000}>Normal</option><option value={500}>Fast</option></select></label>
+    <ol className="grid grid-cols-1 gap-3 md:grid-cols-5">{STEPS.map((step, index) => { const Icon = step.icon; const state = stateFor(step.id, index); return <li key={step.id} className={`rounded-lg border p-4 ${styleFor(state)}`}><div className="flex items-center gap-2"><Icon size={17} aria-hidden="true" /><span className="font-mono text-[11px] uppercase tracking-wide text-app-subtle">Step {index + 1} · {state}</span></div><h3 className="mt-2 text-sm font-bold text-app-ink">{step.name}</h3><p className="mt-1 text-xs leading-relaxed text-app-muted">{step.description}</p></li>; })}</ol>
+    <div className="grid gap-5 lg:grid-cols-2"><section className="rounded-lg border border-app-border bg-app-surface p-4"><h3 className="flex items-center gap-2 font-semibold text-app-ink"><Layers size={16} />DOM and render tree</h3>{hasReached('html') ? <div className="mt-3 space-y-2">{sampleTree.map((node) => <div key={node.name} className="rounded border border-app-border bg-app-inset p-2 font-mono text-xs text-app-ink">&lt;{node.name}&gt;<div className="ml-4 mt-1 text-app-muted">{node.children.map((child) => <span key={child} className="mr-2">&lt;{child}&gt;</span>)}</div>{hasReached('render') && <div className="mt-1 text-emerald-400">computed: visible / block</div>}</div>)}</div> : <p className="mt-3 text-sm leading-relaxed text-app-muted">The page model is ready. Press Play to parse its HTML into a DOM tree.</p>}</section><section className="rounded-lg border border-app-border bg-app-surface p-4"><h3 className="flex items-center gap-2 font-semibold text-app-ink"><Palette size={16} />Critical CSS</h3><pre className="mt-3 overflow-x-auto rounded bg-slate-950 p-3 text-xs leading-relaxed text-emerald-300">{hasReached('css') ? 'body { font: 16px system-ui; }\nheader { padding: 1rem; }\nmain { display: block; }' : 'Stylesheet waiting to be parsed…'}</pre></section><section className="rounded-lg border border-app-border bg-app-surface p-4"><h3 className="flex items-center gap-2 font-semibold text-app-ink"><Clock size={16} />Model metrics</h3><dl className="mt-3 space-y-2 text-sm"><div className="flex justify-between gap-4"><dt className="text-app-muted">Viewport</dt><dd className="font-mono text-app-ink">{viewport.width ? `${viewport.width} × ${viewport.height}px` : 'Reading…'}</dd></div><div className="flex justify-between gap-4"><dt className="text-app-muted">Completed model time</dt><dd className="font-mono text-app-ink">{elapsed} ms</dd></div><div className="flex justify-between gap-4"><dt className="text-app-muted">Layout available</dt><dd className="font-mono text-app-ink">{hasReached('layout') ? 'Yes' : 'Not yet'}</dd></div></dl></section><section className="rounded-lg border border-app-border bg-app-surface p-4"><h3 className="flex items-center gap-2 font-semibold text-app-ink"><Info size={16} />Current status</h3>{current ? <><p className="mt-3 text-sm font-semibold text-app-ink">{current.name}</p><p className="mt-1 text-sm leading-relaxed text-app-muted">{current.description}</p></> : <p className="mt-3 flex items-center gap-2 text-sm font-semibold text-emerald-400"><CheckCircle2 size={16} />Model complete — reset to replay it.</p>}</section></div>
+  </section>;
 };

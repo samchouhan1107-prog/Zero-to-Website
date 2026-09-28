@@ -74,7 +74,7 @@ export interface TestCase {
   description: string;
   hint: string;
   // Rule definition evaluated on rendered sandbox
-  checkType: 'selector-exists' | 'style-computed' | 'text-contains' | 'js-executed' | 'attribute-equals';
+  checkType: 'selector-exists' | 'style-computed' | 'text-contains' | 'js-executed' | 'attribute-equals' | 'text-equals';
   target?: string;
   expectedValue?: string;
 }
@@ -89,8 +89,12 @@ export interface PracticeChallenge {
   starterHtml: string;
   starterCss: string;
   starterJs: string;
-  solutionHtml: string;
-  solutionCss: string;
+  /** Shared markup for starter and solution. When set, solutionHtml/starterHtml are redundant. */
+  sharedHtml?: string;
+  /** Shared styles for starter and solution. When set, solutionCss/starterCss are redundant. */
+  sharedCss?: string;
+  solutionHtml?: string;
+  solutionCss?: string;
   solutionJs: string;
   hints: string[];
   testCases: TestCase[];

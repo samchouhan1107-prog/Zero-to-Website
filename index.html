@@ -29,9 +29,6 @@
     <meta property="twitter:description" content="Free developer platform with interactive web tools, CSS visualizers, code sandboxes, and a complete web engineering curriculum." />
     <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
 
-    <!-- AdSense -->
-    
-    
     <!-- CRITICAL CSS - INLINE FOR ABOVE-THE-FOLD CONTENT -->
     <style>
       /* Critical CSS - Above the fold styles */
@@ -210,7 +207,6 @@
 
     <!-- Preconnect for Performance -->
     <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
 
     <!-- Non-critical CSS - Deferred Loading -->
@@ -277,7 +273,6 @@
         
         // Load non-critical scripts
         const scripts = [
-          // AdSense removed - no longer serving advertisements
         ];
         
         scripts.forEach(src => {
@@ -299,7 +294,7 @@
     <!-- Skip to main content link for screen readers -->
     <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
 
-    <!-- SEO: Pre-rendered content for crawlers and AdSense reviewers -->
+    <!-- Fallback learning-platform summary for visitors without JavaScript -->
     <div id="root">
       <noscript id="main-content">
         <div style="max-width:800px;margin:40px auto;padding:20px;font-family:system-ui,sans-serif;color:#222;">
@@ -351,7 +346,7 @@
       });
     </script>
 
-    <!-- Footer with legal disclosures (visible to crawlers & AdSense reviewers) -->
+    <!-- Fallback footer for visitors without JavaScript -->
     <footer style="text-align:center;padding:20px;font-size:0.85rem;color:#71717a;border-top:1px solid #27272a">
       <p>
         <a href="/privacy-policy.html" rel="nofollow">Privacy Policy</a> ·
