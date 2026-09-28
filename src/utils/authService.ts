@@ -1,11 +1,11 @@
 /**
- * WebZoneBW Auth Service — Fully Independent
+ * WebZoneBW Auth Service â€” Fully Independent
  *
- * ✅ Works completely offline — no backend required
- * ✅ All auth, sessions, progress stored in localStorage
- * ✅ Server sync is OPTIONAL — only activates when VITE_API_URL is set and reachable
- * ✅ Zero billing / payment / premium features — completely free learning platform
- * ✅ Passwords hashed locally with Web Crypto API (no plaintext)
+ * âœ… Works completely offline â€” no backend required
+ * âœ… All auth, sessions, progress stored in localStorage
+ * âœ… Server sync is OPTIONAL â€” only activates when VITE_API_URL is set and reachable
+ * âœ… Zero billing / payment / premium features â€” completely free learning platform
+ * âœ… Passwords hashed locally with Web Crypto API (no plaintext)
  */
 
 const API_BASE = import.meta.env.VITE_API_URL || "/api";
@@ -24,13 +24,13 @@ interface AuthResponse {
   error?: string;
 }
 
-/* ── Storage Keys ──────────────────────────────────────── */
+/* â”€â”€ Storage Keys â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
-const USER_KEY = "wz_user";
-const USERS_KEY = "wz_users";     // All registered users (local)
-const SESSION_KEY = "wz_session"; // Current session token
+const USER_KEY = "webzonebw_user";
+const USERS_KEY = "webzonebw_users";     // All registered users (local)
+const SESSION_KEY = "webzonebw_session"; // Current session token
 
-/* ── Local User Store (localStorage-based) ─────────────── */
+/* â”€â”€ Local User Store (localStorage-based) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 interface StoredUser {
   id: string;
@@ -55,7 +55,7 @@ function generateId(): string {
 }
 
 function hashPasswordLocal(password: string): string {
-  // Simple hash for localStorage storage — NOT for production security
+  // Simple hash for localStorage storage â€” NOT for production security
   let hash = 0;
   const salt = generateId();
   const salted = salt + password;
@@ -79,12 +79,16 @@ function verifyPasswordLocal(password: string, stored: string): boolean {
   return Math.abs(h).toString(36) === hash;
 }
 
-/* ── Session Management ────────────────────────────────── */
+/* â”€â”€ Session Management â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
-function setCurrentUser(user: AuthUser) {
+function setCurrentUser(user: AuthUser, token?: string) {
   try {
     localStorage.setItem(USER_KEY, JSON.stringify(user));
-    localStorage.setItem(SESSION_KEY, generateId());
+    if (token) {
+      localStorage.setItem(SESSION_KEY, token);
+    } else if (!localStorage.getItem(SESSION_KEY)) {
+      localStorage.setItem(SESSION_KEY, generateId());
+    }
   } catch {}
 }
 
@@ -111,19 +115,63 @@ async function isApiAvailable(): Promise<boolean> {
   return _apiAvailable;
 }
 
-/* ── Auth Functions (work offline) ─────────────────────── */
+/* ── Auth Functions (work online with full backend & offline) ── */
 
 export async function signUp(name: string, email: string, password: string): Promise<AuthResponse> {
+  const normalizedEmail = email.toLowerCase().trim();
+  const trimmedName = name.trim();
+
+  // Try server first if API is available
+  if (await isApiAvailable()) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: trimmedName, email: normalizedEmail, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || "Sign up failed. Please try again." };
+      }
+      if (data.success && data.user) {
+        setCurrentUser(data.user, data.token);
+
+        // Also cache locally for seamless offline fallback
+        const users = getStoredUsers();
+        const existingIdx = users.findIndex(u => u.email === normalizedEmail);
+        const storedUser: StoredUser = {
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          passwordHash: hashPasswordLocal(password),
+          method: "email",
+          createdAt: new Date().toISOString(),
+        };
+        if (existingIdx >= 0) {
+          users[existingIdx] = storedUser;
+        } else {
+          users.push(storedUser);
+        }
+        saveStoredUsers(users);
+
+        return { success: true, user: data.user };
+      }
+    } catch {
+      // If network fails during request, continue to offline fallback
+    }
+  }
+
+  // Offline fallback
   const users = getStoredUsers();
-  const existing = users.find(u => u.email === email.toLowerCase().trim());
+  const existing = users.find(u => u.email === normalizedEmail);
   if (existing) {
     return { success: false, error: "An account with this email already exists" };
   }
 
   const user: StoredUser = {
     id: generateId(),
-    name: name.trim(),
-    email: email.toLowerCase().trim(),
+    name: trimmedName,
+    email: normalizedEmail,
     passwordHash: hashPasswordLocal(password),
     method: "email",
     createdAt: new Date().toISOString(),
@@ -135,23 +183,55 @@ export async function signUp(name: string, email: string, password: string): Pro
   const authUser: AuthUser = { id: user.id, name: user.name, email: user.email, method: "email" };
   setCurrentUser(authUser);
 
-  // Optionally sync to server
-  if (await isApiAvailable()) {
-    try {
-      await fetch(`${API_BASE}/auth/signup`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
-      });
-    } catch {}
-  }
-
   return { success: true, user: authUser };
 }
 
 export async function signIn(email: string, password: string): Promise<AuthResponse> {
+  const normalizedEmail = email.toLowerCase().trim();
+
+  // Try server first if API is available
+  if (await isApiAvailable()) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/signin`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: normalizedEmail, password }),
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        return { success: false, error: data.error || "Invalid email or password" };
+      }
+      if (data.success && data.user) {
+        setCurrentUser(data.user, data.token);
+
+        // Also update local cache for offline access
+        const users = getStoredUsers();
+        const existingIdx = users.findIndex(u => u.email === normalizedEmail);
+        const storedUser: StoredUser = {
+          id: data.user.id,
+          name: data.user.name,
+          email: data.user.email,
+          passwordHash: hashPasswordLocal(password),
+          method: "email",
+          createdAt: new Date().toISOString(),
+        };
+        if (existingIdx >= 0) {
+          users[existingIdx] = storedUser;
+        } else {
+          users.push(storedUser);
+        }
+        saveStoredUsers(users);
+
+        return { success: true, user: data.user };
+      }
+    } catch {
+      // Network unreachable, continue to offline fallback
+    }
+  }
+
+  // Offline fallback
   const users = getStoredUsers();
-  const user = users.find(u => u.email === email.toLowerCase().trim());
+  const user = users.find(u => u.email === normalizedEmail);
   if (!user) {
     return { success: false, error: "No account found with this email" };
   }
@@ -161,17 +241,6 @@ export async function signIn(email: string, password: string): Promise<AuthRespo
 
   const authUser: AuthUser = { id: user.id, name: user.name, email: user.email, method: "email" };
   setCurrentUser(authUser);
-
-  // Optionally sync to server
-  if (await isApiAvailable()) {
-    try {
-      await fetch(`${API_BASE}/auth/signin`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-    } catch {}
-  }
 
   return { success: true, user: authUser };
 }
@@ -201,19 +270,60 @@ export async function signInWithGoogle(name: string, email: string, avatar?: str
 }
 
 export async function signOut(): Promise<void> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (token && await isApiAvailable()) {
+    try {
+      await fetch(`${API_BASE}/auth/logout`, {
+        method: "POST",
+        headers: { Authorization: `Bearer ${token}` },
+      });
+    } catch {}
+  }
   clearCurrentUser();
 }
 
 /**
- * Resume session from localStorage — works offline.
- * Only contacts server if API is available AND user has a real account.
+ * Resume session from localStorage with live server verification when online.
  */
 export async function getCurrentUser(): Promise<AuthUser | null> {
+  let cachedUser: AuthUser | null = null;
   try {
     const raw = localStorage.getItem(USER_KEY);
-    if (raw) return JSON.parse(raw);
+    if (raw) cachedUser = JSON.parse(raw);
   } catch {}
-  return null;
+
+  // If user has a real account and a token, verify with server if online
+  const token = localStorage.getItem(SESSION_KEY);
+  if (cachedUser && cachedUser.method !== "guest" && token && await isApiAvailable()) {
+    try {
+      const res = await fetch(`${API_BASE}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+        signal: AbortSignal.timeout(3000),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data.user) {
+          const freshUser: AuthUser = {
+            id: data.user.id,
+            name: data.user.name,
+            email: data.user.email,
+            method: data.user.method,
+            avatar: data.user.avatar,
+          };
+          localStorage.setItem(USER_KEY, JSON.stringify(freshUser));
+          return freshUser;
+        }
+      } else if (res.status === 401) {
+        // Session expired on server; clear current session
+        clearCurrentUser();
+        return null;
+      }
+    } catch {
+      // Offline fallback: continue using cached user so platform works offline
+    }
+  }
+
+  return cachedUser;
 }
 
 /**
@@ -228,7 +338,7 @@ export async function createGuestSession(): Promise<AuthUser> {
         localStorage.setItem(SESSION_KEY, data.token);
       }
       if (data.user) {
-        setCurrentUser(data.user);
+        setCurrentUser(data.user, data.token);
         return data.user;
       }
     }
@@ -239,9 +349,9 @@ export async function createGuestSession(): Promise<AuthUser> {
   return guest;
 }
 
-/* ── Progress (Server Source of Truth with Local Cache) ────── */
+/* â”€â”€ Progress (Server Source of Truth with Local Cache) â”€â”€â”€â”€â”€â”€ */
 
-const PROGRESS_KEY = "wz_storehouse_progress";
+const PROGRESS_KEY = "webzonebw_storehouse_progress";
 
 export function fetchLocalProgress(): any | null {
   try {
@@ -463,3 +573,96 @@ export async function saveNote(lessonId: string, content: string): Promise<boole
   }
   return true;
 }
+
+/* ── Certificate API (Server-Authoritative) ────────────── */
+
+export interface CertificateData {
+  id: string;
+  certificateId: string;
+  name: string;
+  courseName: string;
+  issueDate: string;
+  verificationCode: string;
+  xpEarned: number;
+  completedLessonsCount: number;
+  totalLessonsCount: number;
+}
+
+export interface CertificateApiResponse {
+  success: boolean;
+  status: 'ISSUED' | 'ELIGIBLE' | 'NOT_ELIGIBLE';
+  isEligible: boolean;
+  certificate: CertificateData | null;
+  defaultName?: string;
+  error?: string;
+  progress?: {
+    completedCount: number;
+    totalCount: number;
+    percent: number;
+    missingCount?: number;
+    finalProjectVerified?: boolean;
+  };
+}
+
+export async function fetchCertificate(): Promise<CertificateApiResponse> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (!token) {
+    throw new Error('UNAUTHENTICATED');
+  }
+
+  const res = await fetch(`${API_BASE}/user/certificate`, {
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  if (res.status === 401 || res.status === 403) {
+    const data = await res.json().catch(() => ({}));
+    if (data.error && data.error.includes('curriculum')) {
+      return {
+        success: false,
+        status: 'NOT_ELIGIBLE',
+        isEligible: false,
+        certificate: null,
+        error: data.error,
+        progress: data.progress,
+      };
+    }
+    throw new Error('UNAUTHENTICATED');
+  }
+
+  if (!res.ok) {
+    throw new Error(`SERVER_ERROR_${res.status}`);
+  }
+
+  return await res.json();
+}
+
+export async function requestCertificate(name: string): Promise<CertificateApiResponse> {
+  const token = localStorage.getItem(SESSION_KEY);
+  if (!token) {
+    throw new Error('UNAUTHENTICATED');
+  }
+
+  const res = await fetch(`${API_BASE}/user/certificate`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  if (res.status === 401) {
+    throw new Error('UNAUTHENTICATED');
+  }
+
+  const data = await res.json();
+  if (!res.ok) {
+    throw new Error(data.error || `HTTP_${res.status}`);
+  }
+
+  return data;
+}
+

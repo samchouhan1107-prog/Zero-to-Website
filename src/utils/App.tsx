@@ -1,56 +1,75 @@
-import React, { useRef, useState, useEffect, useCallback, lazy, Suspense } from 'react';
-/* Code-splitting: heavy views & modals are lazy-loaded so the initial
- * bundle stays small and the first paint is fast.
- */
-const LessonView = lazy(() => import('../components/LessonView').then((m) => ({ default: m.LessonView })));
-const PracticeHub = lazy(() => import('../components/PracticeHub').then((m) => ({ default: m.PracticeHub })));
-const VisualLab = lazy(() => import('../components/VisualLab').then((m) => ({ default: m.VisualLab }))) as unknown as React.FC<{ initialTool?: VisualizerId }> & { VisualizerId: VisualizerId };
-const ActivitiesView = lazy(() => import('../components/ActivitiesView').then((m) => ({ default: m.ActivitiesView })));
-const BlogView = lazy(() => import('../components/BlogView').then((m) => ({ default: m.BlogView })));
-const Footer = lazy(() => import('../components/Footer').then((m) => ({ default: m.Footer })));
-const SearchModal = lazy(() => import('../components/SearchModal').then((m) => ({ default: m.SearchModal })));
-const TutorModal = lazy(() => import('../components/TutorModal').then((m) => ({ default: m.TutorModal })));
-const SettingsModal = lazy(() => import('../components/SettingsModal').then((m) => ({ default: m.SettingsModal })));
-const CertificateModal = lazy(() => import('../components/CertificateModal').then((m) => ({ default: m.CertificateModal })));
-const XpMilestoneModal = lazy(() => import('../components/XpMilestoneModal').then((m) => ({ default: m.XpMilestoneModal })));
-const XpMilestonesRoadmapModal = lazy(() => import('../components/XpMilestonesRoadmapModal').then((m) => ({ default: m.XpMilestonesRoadmapModal })));
-const CookieNotificationBanner = lazy(() => import('../components/CookieNotificationBanner').then((m) => ({ default: m.CookieNotificationBanner })));
-const NotificationCenterModal = lazy(() => import('../components/NotificationCenterModal').then((m) => ({ default: m.NotificationCenterModal })));
-const AccountModal = lazy(() => import('../components/AccountModal').then((m) => ({ default: m.AccountModal })));
-const LegalComplianceModal = lazy(() => import('../components/LegalComplianceModal').then((m) => ({ default: m.LegalComplianceModal })));
-import { motion, AnimatePresence } from 'motion/react';
-import { CHAPTERS_DATA } from '../data/chaptersData';
-import { UserProgress, Chapter, Lesson, XpMilestone, AppTheme, ViewMode } from './types';
-import { applyAppTheme, normalizeAppTheme } from './theme';
-import { XP_MILESTONES } from '../data/milestonesData';
-import { calculateDailyStreak, getLocalDateString } from './streakUtils';
-import { Sidebar } from '../components/Sidebar';
-import { Header } from '../components/Header';
-import { HomeHero } from '../components/HomeHero';
-import { VisualizerId } from '../components/VisualLab';
-import { ToastNotification, ToastMessage } from '../components/ToastNotification';
-import { PolicyTab } from '../components/LegalComplianceModal';
-import { useSEOMeta, SEO_PRESETS } from './useSEOMeta';
-import { NEWS_UPDATES } from '../data/newsData';
-import { useAuth } from './AuthContext';
-import * as authService from './authService';
+import React, { useRef, useState, useEffect, useCallback } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { CHAPTERS_DATA } from "../data/chaptersData";
+import { BLOG_POSTS } from "../data/blogData";
+import {
+  UserProgress,
+  Chapter,
+  Lesson,
+  XpMilestone,
+  AppTheme,
+  ViewMode,
+} from "./types";
+import { applyAppTheme, normalizeAppTheme } from "./theme";
+import { XP_MILESTONES } from "../data/milestonesData";
+import { calculateDailyStreak, getLocalDateString } from "./streakUtils";
+import { Sidebar } from "../components/Sidebar";
+import { Header } from "../components/Header";
+import { HomeHero } from "../components/HomeHero";
+import { LessonView } from "../components/LessonView";
+import { PracticeHub } from "../components/PracticeHub";
+import { VisualLab, VisualizerId } from "../components/VisualLab";
+import { ActivitiesView } from "../components/ActivitiesView";
+import { SearchModal } from "../components/SearchModal";
+import { TutorModal } from "../components/TutorModal";
+import { SettingsModal } from "../components/SettingsModal";
+import { CertificateModal } from "../components/CertificateModal";
+import { XpMilestoneModal } from "../components/XpMilestoneModal";
+import { XpMilestonesRoadmapModal } from "../components/XpMilestonesRoadmapModal";
+import { CookieNotificationBanner } from "../components/CookieNotificationBanner";
+import { NotificationCenterModal } from "../components/NotificationCenterModal";
+import { AccountModal } from "../components/AccountModal";
+import {
+  ToastNotification,
+  ToastMessage,
+} from "../components/ToastNotification";
+import {
+  LegalComplianceModal,
+  PolicyTab,
+} from "../components/LegalComplianceModal";
+import { Footer } from "../components/Footer";
+import { BlogView } from "../components/BlogView";
+import { WorkspaceView } from "../components/WorkspaceView";
+import { AnimatedBackground } from "../components/AnimatedBackground";
+import { EnhancedDeveloperTools } from "../components/EnhancedDeveloperTools";
+import { LearnView } from "../components/LearnView";
+import { WebToolsView } from "../components/WebToolsView";
+import { ImageToolsView } from "../components/ImageToolsView";
+import { AboutView } from "../components/AboutView";
+import { BrainCardModal } from "../components/BrainCardModal";
+import { BrainCardFloatingButton } from "../components/BrainCardFloatingButton";
+import { useSEOMeta, SEO_PRESETS } from "./useSEOMeta";
+import { NEWS_UPDATES } from "../data/newsData";
+import { useAuth } from "./AuthContext";
+import * as authService from "./authService";
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
   completedChallenges: {},
   quizScores: {},
-  claimedMilestones: ['milestone-100'],
+  claimedMilestones: ["milestone-100"],
   notes: {},
   bookmarks: [],
   xpPoints: 120,
-  streakDays: 3,
+  conceptsMastered: 1,
+  studyMinutes: 15,
   lastActiveDate: getLocalDateString(),
 };
 
 export default function App() {
   const [chapters] = useState<Chapter[]>(CHAPTERS_DATA);
-  const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
-  const [activeView, setActiveView] = useState<ViewMode>('home');
+  const [currentLessonId, setCurrentLessonId] = useState<string>("ch-00-l-01");
+  const [activeView, setActiveView] = useState<ViewMode>("home");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [tutorOpen, setTutorOpen] = useState(false);
@@ -58,31 +77,44 @@ export default function App() {
   const [aiCode, setAiCode] = useState<string | undefined>();
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [certificateOpen, setCertificateOpen] = useState(false);
-  const [celebratingMilestone, setCelebratingMilestone] = useState<XpMilestone | null>(null);
+  const [brainCardOpen, setBrainCardOpen] = useState(false);
+  const [celebratingMilestone, setCelebratingMilestone] =
+    useState<XpMilestone | null>(null);
   const [roadmapOpen, setRoadmapOpen] = useState(false);
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [accountOpen, setAccountOpen] = useState(false);
   const [legalModalOpen, setLegalModalOpen] = useState(false);
-  const [legalModalTab, setLegalModalTab] = useState<PolicyTab>('privacy');
+  const [legalModalTab, setLegalModalTab] = useState<PolicyTab>("privacy");
   const [toasts, setToasts] = useState<ToastMessage[]>([]);
   const { isAuthenticated, user } = useAuth();
-  const hasRealAccount = isAuthenticated && user?.method !== 'guest';
+  const hasRealAccount = isAuthenticated && user?.method !== "guest";
 
-  const requireAuth = useCallback((action: () => void) => {
-    if (hasRealAccount) {
-      action();
-    } else {
-      addToast('Sign In Required', 'Create a free account to save your progress and access all features.', 'info');
-      setAccountOpen(true);
-    }
-  }, [hasRealAccount]);
+  const requireAuth = useCallback(
+    (action: () => void) => {
+      if (hasRealAccount) {
+        action();
+      } else {
+        addToast(
+          "Sign In Required",
+          "Create a free account to save your progress and access all features.",
+          "info",
+        );
+        setAccountOpen(true);
+      }
+    },
+    [hasRealAccount],
+  );
 
-  const handleOpenLegal = (tab: PolicyTab = 'privacy') => {
+  const handleOpenLegal = (tab: PolicyTab = "privacy") => {
     setLegalModalTab(tab);
     setLegalModalOpen(true);
   };
 
-  const addToast = (title: string, message: string, type: 'info' | 'success' | 'update' = 'info') => {
+  const addToast = (
+    title: string,
+    message: string,
+    type: "info" | "success" | "update" = "info",
+  ) => {
     const id = `toast-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`;
     const newToast: ToastMessage = { id, title, message, type };
     setToasts((prev) => [...prev, newToast]);
@@ -98,26 +130,31 @@ export default function App() {
   // Keep the reading mode migration-safe: all legacy themes resolve to dark.
   const [theme, setTheme] = useState<AppTheme>(() => {
     try {
-      return normalizeAppTheme(localStorage.getItem('wz_storehouse_theme'));
+      return normalizeAppTheme(
+        localStorage.getItem("webzonebw_storehouse_theme"),
+      );
     } catch {
-      return 'dark';
+      return "dark";
     }
   });
-  const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
-  const [fontFamily, setFontFamily] = useState<'sans' | 'serif' | 'mono'>('sans');
-  const [selectedCategory, setSelectedCategory] = useState<string>('All');
-  const [selectedVisualizerTool, setSelectedVisualizerTool] = useState<VisualizerId>('box');
-  const [searchInitialQuery, setSearchInitialQuery] = useState<string>('');
+  const [fontSize, setFontSize] = useState<"sm" | "md" | "lg">("md");
+  const [fontFamily, setFontFamily] = useState<"sans" | "serif" | "mono">(
+    "sans",
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedVisualizerTool, setSelectedVisualizerTool] =
+    useState<VisualizerId>("box");
+  const [searchInitialQuery, setSearchInitialQuery] = useState<string>("");
   const [blogSlug, setBlogSlug] = useState<string | undefined>();
 
   const handleOpenVisualLab = (toolId?: string) => {
     if (toolId) {
       setSelectedVisualizerTool(toolId as VisualizerId);
     }
-    navigateToView('visual-lab');
+    navigateToView("visual-lab");
   };
 
-  // Load progress — server is source of truth when authenticated, localStorage for guests
+  // Load progress â€” server is source of truth when authenticated, localStorage for guests
   const [progress, setProgress] = useState<UserProgress>(INITIAL_PROGRESS);
   const [progressLoaded, setProgressLoaded] = useState(false);
 
@@ -129,7 +166,9 @@ export default function App() {
           const merged: UserProgress = {
             ...INITIAL_PROGRESS,
             ...serverProgress,
-            claimedMilestones: serverProgress.claimedMilestones || ['milestone-100'],
+            claimedMilestones: serverProgress.claimedMilestones || [
+              "milestone-100",
+            ],
           };
           const { updatedProgress } = calculateDailyStreak(merged);
           setProgress(updatedProgress);
@@ -142,13 +181,13 @@ export default function App() {
     } else {
       // Guest: use localStorage as offline cache
       try {
-        const saved = localStorage.getItem('wz_storehouse_progress');
+        const saved = localStorage.getItem("webzonebw_storehouse_progress");
         if (saved) {
           const parsed = JSON.parse(saved);
           const merged: UserProgress = {
             ...INITIAL_PROGRESS,
             ...parsed,
-            claimedMilestones: parsed.claimedMilestones || ['milestone-100'],
+            claimedMilestones: parsed.claimedMilestones || ["milestone-100"],
           };
           const { updatedProgress } = calculateDailyStreak(merged);
           setProgress(updatedProgress);
@@ -174,47 +213,95 @@ export default function App() {
     // Deep-link URL parameter & pathname resolution with resilient URL decoding
     try {
       const normalizeRouteToken = (token: string): string => {
-        if (!token) return '';
+        if (!token) return "";
         let decoded = token;
         try {
           decoded = decodeURIComponent(token);
         } catch {}
         // Fix missing percent in '%20' where URL became e.g. Chapter-01-Development20Environment
-        decoded = decoded.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, '$1 $2');
-        return decoded.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+        decoded = decoded.replace(/([a-zA-Z0-9])20([a-zA-Z0-9])/g, "$1 $2");
+        return decoded
+          .replace(/[-_]+/g, " ")
+          .replace(/\s+/g, " ")
+          .trim()
+          .toLowerCase();
       };
 
       const params = new URLSearchParams(window.location.search);
-      const rawLessonParam = params.get('lesson');
-      const rawChapterParam = params.get('chapter');
-      const viewParam = params.get('view') as ViewMode | null;
-      const toolParam = params.get('tool') as VisualizerId | null;
-      const legalParam = params.get('legal') as PolicyTab | null;
-      const blogParam = params.get('blog') as string | null;
+      const rawLessonParam = params.get("lesson");
+      const rawChapterParam = params.get("chapter");
+      const viewParam = params.get("view") as ViewMode | null;
+      const toolParam = params.get("tool") as VisualizerId | null;
+      const legalParam = params.get("legal") as PolicyTab | null;
+      const blogParam = params.get("blog") as string | null;
 
       // Also check pathname (e.g. /Chapters/Chapter-01-Development20Environment/Lesson-02-...)
-      const pathname = window.location.pathname || '';
+      const pathname = window.location.pathname || "";
       let pathChapterMatch: string | null = null;
       let pathLessonMatch: string | null = null;
-      if (pathname.includes('/Chapters/') || pathname.includes('/chapter/')) {
-        const parts = pathname.split('/').filter(Boolean);
+      if (pathname.includes("/Chapters/") || pathname.includes("/chapter/")) {
+        const parts = pathname.split("/").filter(Boolean);
         for (const part of parts) {
           if (/chapter/i.test(part)) pathChapterMatch = part;
           if (/lesson/i.test(part)) pathLessonMatch = part;
         }
       }
 
+      // Clean SEO routes: /lessons/:lessonId and /blog/:slug
+      const cleanLessonMatch = pathname.match(/^\/lessons\/([\w.-]+)\/??$/);
+      const cleanBlogMatch = pathname.match(/^\/blog\/([\w.-]+)\/??$/);
+      if (cleanBlogMatch) {
+        const slug = decodeURIComponent(cleanBlogMatch[1]);
+        if (BLOG_POSTS.some((p) => p.slug === slug)) {
+          setBlogSlug(slug);
+          setActiveView("blog");
+          return;
+        }
+      }
+      if (cleanLessonMatch) {
+        pathLessonMatch = decodeURIComponent(cleanLessonMatch[1]);
+      }
+
+      // Standalone HTML pathname resolution
+      if (pathname.includes("/learn.html") || pathname.includes("/curriculum")) {
+        setActiveView("learn");
+        return;
+      }
+      if (pathname.includes("/Workspace.html")) {
+        setActiveView("workspace");
+        return;
+      }
+      if (pathname.includes("/webtools.html")) {
+        setActiveView("webtools");
+        return;
+      }
+      if (pathname.includes("/imagetools.html")) {
+        setActiveView("imagetools");
+        return;
+      }
+      if (pathname.includes("/developertools.html")) {
+        setActiveView("developertools");
+        return;
+      }
+      if (pathname.includes("/about.html")) {
+        setActiveView("about");
+        return;
+      }
+
       const chapterCandidate = rawChapterParam || pathChapterMatch;
       const lessonCandidate = rawLessonParam || pathLessonMatch;
 
-      if (legalParam && ['privacy', 'terms', 'cookies', 'about', 'contact'].includes(legalParam)) {
+      if (
+        legalParam &&
+        ["privacy", "terms", "cookies", "about", "contact"].includes(legalParam)
+      ) {
         setLegalModalTab(legalParam);
         setLegalModalOpen(true);
       }
 
       if (blogParam) {
         setBlogSlug(blogParam);
-        setActiveView('blog');
+        setActiveView("blog");
         return;
       }
 
@@ -224,7 +311,11 @@ export default function App() {
         // Direct ID match
         let foundLesson = chapters
           .flatMap((c) => c.lessons)
-          .find((l) => l.id.toLowerCase() === normLesson || l.id.toLowerCase() === lessonCandidate.toLowerCase());
+          .find(
+            (l) =>
+              l.id.toLowerCase() === normLesson ||
+              l.id.toLowerCase() === lessonCandidate.toLowerCase(),
+          );
 
         // Slug / title match
         if (!foundLesson) {
@@ -232,13 +323,15 @@ export default function App() {
             .flatMap((c) => c.lessons)
             .find((l) => {
               const normTitle = normalizeRouteToken(l.title);
-              return normLesson.includes(normTitle) || normTitle.includes(normLesson);
+              return (
+                normLesson.includes(normTitle) || normTitle.includes(normLesson)
+              );
             });
         }
 
         if (foundLesson) {
           setCurrentLessonId(foundLesson.id);
-          setActiveView('lesson');
+          setActiveView("lesson");
           return;
         }
       }
@@ -248,35 +341,65 @@ export default function App() {
         const normChapter = normalizeRouteToken(chapterCandidate);
         // Extract number like "01" or "1"
         const numMatch = chapterCandidate.match(/\b(0\d|10|\d)\b/);
-        const candidateNum = numMatch ? numMatch[1].padStart(2, '0') : null;
+        const candidateNum = numMatch ? numMatch[1].padStart(2, "0") : null;
 
         const foundChapter = chapters.find((c) => {
-          if (c.id.toLowerCase() === normChapter || c.id.toLowerCase() === chapterCandidate.toLowerCase()) return true;
+          if (
+            c.id.toLowerCase() === normChapter ||
+            c.id.toLowerCase() === chapterCandidate.toLowerCase()
+          )
+            return true;
           if (candidateNum && c.number === candidateNum) return true;
           const normTitle = normalizeRouteToken(c.title);
-          return normChapter.includes(normTitle) || normTitle.includes(normChapter);
+          return (
+            normChapter.includes(normTitle) || normTitle.includes(normChapter)
+          );
         });
 
         if (foundChapter && foundChapter.lessons.length > 0) {
           setCurrentLessonId(foundChapter.lessons[0].id);
-          setActiveView('lesson');
+          setActiveView("lesson");
           return;
         }
       }
 
-      if (toolParam && ['box', 'flex', 'grid', 'dom', 'git', 'net'].includes(toolParam)) {
+      if (
+        toolParam &&
+        ["box", "flex", "grid", "dom", "git", "net"].includes(toolParam)
+      ) {
         setSelectedVisualizerTool(toolParam);
-        setActiveView('visual-lab');
+        setActiveView("visual-lab");
         return;
       }
 
-      if (viewParam && ['home', 'lesson', 'practice-hub', 'visual-lab', 'activities', 'curriculum', 'blog'].includes(viewParam)) {
-        setActiveView(viewParam);
+      if (
+        viewParam &&
+        [
+          "home",
+          "lesson",
+          "practice-hub",
+          "visual-lab",
+          "activities",
+          "curriculum",
+          "learn",
+          "blog",
+          "workspace",
+          "developertools",
+          "imagetools",
+          "webtools",
+          "about",
+        ].includes(viewParam)
+      ) {
+        if (viewParam === "curriculum" || viewParam === "learn") {
+          setActiveView("learn");
+        } else {
+          setActiveView(viewParam);
+        }
       }
     } catch {}
   }, [chapters]);
 
-  // Save progress — server is source of truth when authenticated, localStorage for guests
+  // Save progress â€” server is source of truth when authenticated, localStorage for guests
   useEffect(() => {
     if (!progressLoaded) return; // Don't save before initial load
     if (hasRealAccount) {
@@ -285,7 +408,10 @@ export default function App() {
     } else {
       // Guest fallback: localStorage only
       try {
-        localStorage.setItem('wz_storehouse_progress', JSON.stringify(progress));
+        localStorage.setItem(
+          "webzonebw_storehouse_progress",
+          JSON.stringify(progress),
+        );
       } catch {}
     }
   }, [progress, hasRealAccount, progressLoaded]);
@@ -293,8 +419,8 @@ export default function App() {
   // Save theme to localStorage (synchronizing both React SPA and standalone keys)
   useEffect(() => {
     try {
-      localStorage.setItem('wz_storehouse_theme', theme);
-      localStorage.setItem('wz-theme', theme);
+      localStorage.setItem("webzonebw_storehouse_theme", theme);
+      localStorage.setItem("webzonebw-theme", theme);
     } catch {}
   }, [theme]);
 
@@ -303,7 +429,8 @@ export default function App() {
     const currentClaimed = progress.claimedMilestones || [];
     // Find uncelebrated milestones that the user has already reached
     const newlyReached = XP_MILESTONES.find(
-      (m) => progress.xpPoints >= m.xpRequired && !currentClaimed.includes(m.id)
+      (m) =>
+        progress.xpPoints >= m.xpRequired && !currentClaimed.includes(m.id),
     );
 
     if (newlyReached) {
@@ -323,13 +450,13 @@ export default function App() {
   // Global Keyboard shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
         e.preventDefault();
         setSearchOpen((prev) => !prev);
       }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
   // Find active lesson and chapter
@@ -346,25 +473,26 @@ export default function App() {
   }
 
   const scrollMainToTop = () => {
-    mainContentRef.current?.scrollTo({ top: 0, behavior: 'smooth' });
+    mainContentRef.current?.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  // The static skip link is available before React hydrates. Move focus into the
-  // application's independent scroll region once it exists as well.
-  useEffect(() => {
-    if (window.location.hash === '#main-content') {
-      mainContentRef.current?.focus();
-    }
-  }, []);
 
   const navigateToView = (view: ViewMode) => {
     setActiveView(view);
     scrollMainToTop();
+    try {
+      const url = new URL(window.location.href);
+      if (view === "home") {
+        url.searchParams.delete("view");
+      } else {
+        url.searchParams.set("view", view);
+      }
+      window.history.pushState({}, "", url.toString());
+    } catch {}
   };
 
   const handleSelectLesson = (lessonId: string) => {
     setCurrentLessonId(lessonId);
-    setActiveView('lesson');
+    setActiveView("lesson");
     scrollMainToTop();
   };
 
@@ -372,7 +500,7 @@ export default function App() {
     if (lessonId) {
       setCurrentLessonId(lessonId);
     }
-    setActiveView('activities');
+    setActiveView("activities");
     scrollMainToTop();
   };
 
@@ -387,14 +515,16 @@ export default function App() {
             ...(withStreak.completedActivities || {}),
             [activityId]: true,
           },
-          xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + xpReward,
+          xpPoints: isAlreadyDone
+            ? withStreak.xpPoints
+            : withStreak.xpPoints + xpReward,
         };
       });
 
       addToast(
-        'Activity Mastered! 🌟',
+        "Activity Mastered! ðŸŒŸ",
         `You earned +${xpReward} XP for conquering this post-class exercise!`,
-        'success'
+        "success",
       );
     });
   };
@@ -410,7 +540,9 @@ export default function App() {
           ...withStreak.completedLessons,
           [lessonId]: true,
         },
-        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
+        xpPoints: isAlreadyDone
+          ? withStreak.xpPoints
+          : withStreak.xpPoints + 50,
       };
     });
 
@@ -424,12 +556,23 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Lesson Completed! 🎯', `Verified on server: +${res.xpAwarded} XP!`, 'success');
+          addToast(
+            "Lesson Completed! ðŸŽ¯",
+            `Verified on server: +${res.xpAwarded} XP!`,
+            "success",
+          );
         }
 
-        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+        if (
+          res.newlyUnlockedAchievements &&
+          res.newlyUnlockedAchievements.length > 0
+        ) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(
+              `Achievement Unlocked! ${ach.icon || "ðŸ†"}`,
+              `${ach.title} (+${ach.xpReward} XP)`,
+              "success",
+            );
           });
         }
       }
@@ -444,10 +587,12 @@ export default function App() {
       return {
         ...withStreak,
         completedChallenges: {
-          ...withStreak.completedChallenges,
+          ...(withStreak.completedChallenges || {}),
           [challengeId]: true,
         },
-        xpPoints: isAlreadyDone ? withStreak.xpPoints : withStreak.xpPoints + 50,
+        xpPoints: isAlreadyDone
+          ? withStreak.xpPoints
+          : withStreak.xpPoints + 50,
       };
     });
 
@@ -461,12 +606,23 @@ export default function App() {
         }));
 
         if (res.xpAwarded > 0) {
-          addToast('Challenge Mastered! ⚡', `Verified: +${res.xpAwarded} XP!`, 'success');
+          addToast(
+            "Challenge Mastered! âš¡",
+            `Verified: +${res.xpAwarded} XP!`,
+            "success",
+          );
         }
 
-        if (res.newlyUnlockedAchievements && res.newlyUnlockedAchievements.length > 0) {
+        if (
+          res.newlyUnlockedAchievements &&
+          res.newlyUnlockedAchievements.length > 0
+        ) {
           res.newlyUnlockedAchievements.forEach((ach) => {
-            addToast(`Achievement Unlocked! ${ach.icon || '🏆'}`, `${ach.title} (+${ach.xpReward} XP)`, 'success');
+            addToast(
+              `Achievement Unlocked! ${ach.icon || "ðŸ†"}`,
+              `${ach.title} (+${ach.xpReward} XP)`,
+              "success",
+            );
           });
         }
       }
@@ -513,12 +669,20 @@ export default function App() {
   };
 
   const fontClass =
-    fontFamily === 'serif' ? 'font-serif' : fontFamily === 'mono' ? 'font-mono' : 'font-sans';
+    fontFamily === "serif"
+      ? "font-serif"
+      : fontFamily === "mono"
+        ? "font-mono"
+        : "font-sans";
   const sizeClass =
-    fontSize === 'sm' ? 'text-sm leading-relaxed' : fontSize === 'lg' ? 'text-lg leading-loose' : 'text-base leading-normal';
+    fontSize === "sm"
+      ? "text-sm leading-relaxed"
+      : fontSize === "lg"
+        ? "text-lg leading-loose"
+        : "text-base leading-normal";
 
   const handleCycleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
+    setTheme(theme === "dark" ? "light" : "dark");
   };
 
   const totalLessons = chapters.flatMap((c) => c.lessons).length;
@@ -526,22 +690,24 @@ export default function App() {
   // Dynamic SEO meta tags per view
   const seoConfig = (() => {
     switch (activeView) {
-      case 'practice-hub':
+      case "practice-hub":
         return SEO_PRESETS.practiceHub;
-      case 'visual-lab':
+      case "visual-lab":
         return SEO_PRESETS.visualLab(selectedVisualizerTool);
-      case 'lesson':
+      case "lesson":
         if (activeLesson) {
           return SEO_PRESETS.lesson(
             activeLesson.title,
-            activeLesson.tagline || activeLesson.learningObjectives?.[0] || `${activeLesson.title} — Free interactive lesson on WebZoneBW SC.`,
-            activeLesson.id
+            activeLesson.tagline ||
+              activeLesson.learningObjectives?.[0] ||
+              `${activeLesson.title} â€” Free interactive lesson on WebZoneBW SC.`,
+            activeLesson.id,
           );
         }
         return SEO_PRESETS.home;
-      case 'activities':
+      case "activities":
         return SEO_PRESETS.activities;
-      case 'blog':
+      case "blog":
         return SEO_PRESETS.blog;
       default:
         return SEO_PRESETS.home;
@@ -551,28 +717,59 @@ export default function App() {
 
   return (
     <div
-      id="wz-storehouse-app"
-      className="flex h-screen min-w-0 flex-col overflow-hidden bg-gray-900 text-white"
+      id="webzonebw-storehouse-app"
+      className={`flex h-[100dvh] min-w-0 flex-col overflow-hidden bg-app-canvas text-app-ink ${fontClass}`}
     >
-      {/* Sticky Header */}
-      <Header
+      {/* Sidebar Navigation */}
+      <Sidebar
+        chapters={chapters}
+        currentLessonId={currentLessonId}
+        onSelectLesson={handleSelectLesson}
+        progress={progress}
+        isOpen={sidebarOpen}
+        onCloseMobile={() => setSidebarOpen(false)}
+        activeView={activeView}
+        onNavigateHome={() => navigateToView("home")}
+        onNavigateLearn={() => navigateToView("learn")}
+        onOpenPracticeHub={() => navigateToView("practice-hub")}
+        onOpenVisualLab={() => navigateToView("visual-lab")}
+        onOpenActivities={() => handleNavigateActivities()}
+        onOpenMilestones={() => setRoadmapOpen(true)}
+        onOpenTutor={() => handleOpenTutor()}
+      />
+
+      {/* Main Content Area */}
+      <div className="flex min-h-0 min-w-0 flex-col overflow-hidden">
+        {/* Sticky Header */}
+        <Header
           onToggleSidebar={() => setSidebarOpen(!sidebarOpen)}
           onOpenSearch={() => setSearchOpen(true)}
           onOpenTutor={() => handleOpenTutor()}
+          onOpenBrainCard={() => setBrainCardOpen(true)}
           onOpenMilestones={() => setRoadmapOpen(true)}
-          onOpenSettings={() => requireAuth(() => setSettingsOpen(true))}
-          onOpenCertificate={() => requireAuth(() => setCertificateOpen(true))}
+          onOpenSettings={() => setSettingsOpen(true)}
+          onOpenCertificate={() => setCertificateOpen(true)}
           onOpenNotifications={() => setNotificationsOpen(true)}
           onOpenAccount={() => setAccountOpen(true)}
           unreadNewsCount={unreadNewsCount}
-          onNavigateHome={() => navigateToView('home')}
-          onNavigatePractice={() => navigateToView('practice-hub')}
+          onNavigateHome={() => navigateToView("home")}
+          onNavigatePractice={() => navigateToView("practice-hub")}
           onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
           onNavigateActivities={() => handleNavigateActivities()}
-          onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
+          onNavigateBlog={() => {
+            setBlogSlug(undefined);
+            navigateToView("blog");
+          }}
+          onNavigateWorkspace={() => navigateToView("workspace")}
+          onNavigateWebTools={() => navigateToView("webtools")}
+          onNavigateImageTools={() => navigateToView("imagetools")}
+          onNavigateDeveloperTools={() => navigateToView("developertools")}
+          onNavigateLearn={() => navigateToView("learn")}
+          onNavigateAbout={() => navigateToView("about")}
+          onNavigateView={(view) => navigateToView(view)}
           onSelectCategory={(cat) => {
             setSelectedCategory(cat);
-            navigateToView('home');
+            navigateToView("home");
           }}
           progress={progress}
           activeView={activeView}
@@ -581,28 +778,36 @@ export default function App() {
         />
 
         {/* View Router with one independent scroll region */}
-        <main ref={mainContentRef} id="main-content" tabIndex={-1} className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}>
+        <main
+          ref={mainContentRef}
+          id="main-content"
+          className={`min-h-0 min-w-0 flex-1 ${sizeClass} overflow-x-hidden overflow-y-auto relative`}
+        >
+          {/* Animated Background with ambient nodes and cursor tracking */}
+          <AnimatedBackground theme={theme} />
+
           <AnimatePresence mode="wait" initial={false}>
-            {activeView === 'home' && (
+            {activeView === "home" && (
               <motion.div
                 key="home-view"
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
+                className="w-full relative z-10"
               >
                 <HomeHero
                   chapters={chapters}
                   progress={progress}
                   onSelectLesson={handleSelectLesson}
-                  onOpenPracticeHub={() => navigateToView('practice-hub')}
+                  onOpenPracticeHub={() => navigateToView("practice-hub")}
                   onOpenVisualLab={(toolId) => handleOpenVisualLab(toolId)}
                   onOpenActivities={() => handleNavigateActivities()}
                   onOpenTutor={() => handleOpenTutor()}
                   onOpenMilestones={() => setRoadmapOpen(true)}
+                  onOpenWorkspace={() => navigateToView("workspace")}
                   onOpenSearch={(query) => {
-                    setSearchInitialQuery(query || '');
+                    setSearchInitialQuery(query || "");
                     setSearchOpen(true);
                   }}
                   selectedCategory={selectedCategory}
@@ -610,7 +815,7 @@ export default function App() {
               </motion.div>
             )}
 
-            {activeView === 'lesson' && activeLesson && activeChapter && (
+            {activeView === "lesson" && activeLesson && activeChapter && (
               <motion.div
                 key={`lesson-${activeLesson.id}`}
                 initial={{ opacity: 0, y: 14 }}
@@ -619,11 +824,6 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading lesson…</span>
-                  </div>
-                }>
                 <LessonView
                   lesson={activeLesson}
                   chapter={activeChapter}
@@ -633,7 +833,7 @@ export default function App() {
                   isCompleted={!!progress.completedLessons[activeLesson.id]}
                   isBookmarked={progress.bookmarks.includes(activeLesson.id)}
                   onToggleBookmark={handleToggleBookmark}
-                  userNote={progress.notes[activeLesson.id] || ''}
+                  userNote={progress.notes[activeLesson.id] || ""}
                   onSaveNote={handleSaveNote}
                   onOpenTutor={handleOpenTutor}
                   allChapters={chapters}
@@ -642,24 +842,38 @@ export default function App() {
                   onUpdateProgress={(updated) => setProgress(updated)}
                   onOpenCertificate={() => setCertificateOpen(true)}
                 />
-                </Suspense>
               </motion.div>
             )}
 
-            {activeView === 'activities' && (
+            {(activeView === "learn" || activeView === "curriculum") && (
+              <motion.div
+                key="learn-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <LearnView
+                  chapters={chapters}
+                  progress={progress}
+                  onSelectLesson={handleSelectLesson}
+                  onOpenPractice={() => navigateToView("practice-hub")}
+                  onOpenTutor={(topic) => handleOpenTutor(topic)}
+                  onNavigateHome={() => navigateToView("home")}
+                />
+              </motion.div>
+            )}
+
+            {activeView === "activities" && (
               <motion.div
                 key="activities-view"
-initial={{ opacity: 0, y: 14 }}
+                initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading activities…</span>
-                  </div>
-                }>
                 <ActivitiesView
                   chapters={chapters}
                   currentLessonId={currentLessonId}
@@ -668,175 +882,242 @@ initial={{ opacity: 0, y: 14 }}
                   progress={progress}
                   onCompleteActivity={handleCompleteActivity}
                 />
-                </Suspense>
               </motion.div>
             )}
 
-            {activeView === 'practice-hub' && (
+            {activeView === "practice-hub" && (
               <motion.div
                 key="practice-hub-view"
-initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
-              >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading practice hub…</span>
-                  </div>
-                }>
-                <PracticeHub
-                  chapters={chapters}
-                  progress={progress}
-                  onCompleteChallenge={handleCompleteChallenge}
-                />
-                </Suspense>
-              </motion.div>
-            )}
-
-            {activeView === 'visual-lab' && (
-              <motion.div
-                key="visual-lab-view"
-initial={{ opacity: 0, y: 14 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-                className="w-full"
-              >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading visual lab…</span>
-                  </div>
-                }>
-                <VisualLab initialTool={selectedVisualizerTool} />
-                </Suspense>
-              </motion.div>
-            )}
-
-            {activeView === 'blog' && (
-              <motion.div
-                key="blog-view"
                 initial={{ opacity: 0, y: 14 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <Suspense fallback={
-                  <div className="flex items-center justify-center py-24 text-slate-400" role="status" aria-live="polite">
-                    <span className="animate-pulse">Loading blog…</span>
-                  </div>
-                }>
+                <PracticeHub
+                  chapters={chapters}
+                  progress={progress}
+                  onCompleteChallenge={handleCompleteChallenge}
+                />
+              </motion.div>
+            )}
+
+            {activeView === "visual-lab" && (
+              <motion.div
+                key="visual-lab-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full"
+              >
+                <VisualLab initialTool={selectedVisualizerTool} />
+              </motion.div>
+            )}
+
+            {activeView === "blog" && (
+              <motion.div
+                key="blog-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
                 <BlogView
-                  onNavigateHome={() => navigateToView('home')}
+                  onNavigateHome={() => navigateToView("home")}
+                  onNavigateView={(view) => navigateToView(view as any)}
+                  onSelectLesson={handleSelectLesson}
                   initialSlug={blogSlug}
                 />
-                </Suspense>
+              </motion.div>
+            )}
+
+            {activeView === "workspace" && (
+              <motion.div
+                key="workspace-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <WorkspaceView
+                  progress={progress}
+                  onOpenTutor={() => handleOpenTutor()}
+                  onNavigateHome={() => navigateToView("home")}
+                />
+              </motion.div>
+            )}
+
+            {activeView === "developertools" && (
+              <motion.div
+                key="developertools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <EnhancedDeveloperTools />
+              </motion.div>
+            )}
+
+            {activeView === "imagetools" && (
+              <motion.div
+                key="imagetools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <ImageToolsView
+                  onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+                  onNavigateWorkspace={() => navigateToView("workspace")}
+                />
+              </motion.div>
+            )}
+
+            {activeView === "webtools" && (
+              <motion.div
+                key="webtools-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <WebToolsView
+                  onNavigateWorkspace={() => navigateToView("workspace")}
+                  onNavigateDevTools={() => navigateToView("developertools")}
+                  onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+                />
+              </motion.div>
+            )}
+
+            {activeView === "about" && (
+              <motion.div
+                key="about-view"
+                initial={{ opacity: 0, y: 14 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+                className="w-full relative z-10"
+              >
+                <AboutView
+                  onNavigateHome={() => navigateToView("home")}
+                  onNavigateLearn={() => navigateToView("learn")}
+                  onNavigateWorkspace={() => navigateToView("workspace")}
+                  onNavigateWebTools={() => navigateToView("webtools")}
+                  onNavigateImageTools={() => navigateToView("imagetools")}
+                  onNavigateDevTools={() => navigateToView("developertools")}
+                  onOpenLegal={handleOpenLegal}
+                  onOpenTutor={() => handleOpenTutor()}
+                />
               </motion.div>
             )}
           </AnimatePresence>
 
-          {/* Educational platform footer and policy links */}
+          {/* Educational Platform Footer with AdSense & Legal Compliance Links */}
           <Footer
             onOpenLegal={handleOpenLegal}
             onOpenTutor={() => handleOpenTutor()}
             onSelectLesson={handleSelectLesson}
-            onNavigateHome={() => navigateToView('home')}
-            onNavigatePractice={() => navigateToView('practice-hub')}
+            onNavigateHome={() => navigateToView("home")}
+            onNavigatePractice={() => navigateToView("practice-hub")}
             onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
             onNavigateActivities={() => handleNavigateActivities()}
-            onNavigateBlog={() => { setBlogSlug(undefined); navigateToView('blog'); }}
+            onNavigateBlog={() => {
+              setBlogSlug(undefined);
+              navigateToView("blog");
+            }}
+            onNavigateWorkspace={() => navigateToView("workspace")}
+            onNavigateWebTools={() => navigateToView("webtools")}
+            onNavigateImageTools={() => navigateToView("imagetools")}
+            onNavigateDeveloperTools={() => navigateToView("developertools")}
+            onNavigateLearn={() => navigateToView("learn")}
+            onNavigateAbout={() => navigateToView("about")}
             onOpenMilestones={() => setRoadmapOpen(true)}
             onOpenCertificate={() => setCertificateOpen(true)}
             onOpenSearch={() => setSearchOpen(true)}
             chapters={chapters}
           />
+        </main>
+      </div>
 
-          </main>
-          {/* Global Modals & Drawers */}
-          <Suspense fallback={null}>
-            <AccountModal
-              isOpen={accountOpen}
-              onClose={() => setAccountOpen(false)}
-              onAuthSuccess={() => setAccountOpen(false)}
-              progress={progress}
-              onOpenCertificate={() => setCertificateOpen(true)}
-              onOpenMilestones={() => setRoadmapOpen(true)}
-              onOpenSettings={() => setSettingsOpen(true)}
-            />
-          </Suspense>
-          
-          <Suspense fallback={null}>
-            <LegalComplianceModal
-              isOpen={legalModalOpen}
-              onClose={() => setLegalModalOpen(false)}
-              initialTab={legalModalTab}
-            />
-          </Suspense>
-          
-          <Suspense fallback={null}>
-            <SearchModal
-              isOpen={searchOpen}
-              onClose={() => setSearchOpen(false)}
-              chapters={chapters}
-              onSelectLesson={handleSelectLesson}
-              onNavigatePractice={() => navigateToView('practice-hub')}
-              onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-              onNavigateActivities={() => handleNavigateActivities()}
-              onOpenTutor={() => handleOpenTutor()}
-              initialQuery={searchInitialQuery}
-            />
-          </Suspense>
+      {/* Global Modals & Drawers */}
+      <AccountModal
+        isOpen={accountOpen}
+        onClose={() => setAccountOpen(false)}
+        onAuthSuccess={() => setAccountOpen(false)}
+        progress={progress}
+        onOpenCertificate={() => setCertificateOpen(true)}
+        onOpenMilestones={() => setRoadmapOpen(true)}
+        onOpenSettings={() => setSettingsOpen(true)}
+      />
+      <LegalComplianceModal
+        isOpen={legalModalOpen}
+        onClose={() => setLegalModalOpen(false)}
+        initialTab={legalModalTab}
+      />
+      <SearchModal
+        isOpen={searchOpen}
+        onClose={() => setSearchOpen(false)}
+        chapters={chapters}
+        onSelectLesson={handleSelectLesson}
+        onNavigatePractice={() => navigateToView("practice-hub")}
+        onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+        onNavigateActivities={() => handleNavigateActivities()}
+        onOpenTutor={() => handleOpenTutor()}
+        initialQuery={searchInitialQuery}
+      />
 
-          <Suspense fallback={null}>
-            <TutorModal
-              isOpen={tutorOpen}
-              onClose={() => setTutorOpen(false)}
-              initialTopic={aiTopic}
-              initialCode={aiCode}
-              allChapters={chapters}
-              onNavigateLesson={handleSelectLesson}
-            />
-          </Suspense>
+      <TutorModal
+        isOpen={tutorOpen}
+        onClose={() => setTutorOpen(false)}
+        initialTopic={aiTopic}
+        initialCode={aiCode}
+        allChapters={chapters}
+        onNavigateLesson={handleSelectLesson}
+      />
 
-          <Suspense fallback={null}>
-            <SettingsModal
-              isOpen={settingsOpen}
-              onClose={() => setSettingsOpen(false)}
-              theme={theme}
-              onSelectTheme={setTheme}
-              fontSize={fontSize}
-              onSelectFontSize={setFontSize}
-              fontFamily={fontFamily}
-              onSelectFontFamily={setFontFamily}
-              onResetProgress={handleResetProgress}
-              progress={progress}
-              onOpenLegal={handleOpenLegal}
-            />
-          </Suspense>
+      <SettingsModal
+        isOpen={settingsOpen}
+        onClose={() => setSettingsOpen(false)}
+        theme={theme}
+        onSelectTheme={setTheme}
+        fontSize={fontSize}
+        onSelectFontSize={setFontSize}
+        fontFamily={fontFamily}
+        onSelectFontFamily={setFontFamily}
+        onResetProgress={handleResetProgress}
+        progress={progress}
+        onOpenLegal={handleOpenLegal}
+      />
 
-          <Suspense fallback={null}>
-            <CertificateModal
+      <CertificateModal
         isOpen={certificateOpen}
         onClose={() => setCertificateOpen(false)}
         progress={progress}
         totalLessons={totalLessons}
-      /></Suspense>
+        onOpenAccount={() => setAccountOpen(true)}
+        onNavigateLesson={handleSelectLesson}
+      />
 
       {/* Congratulatory XP Milestone Celebration Modal */}
       {celebratingMilestone && (
-        <Suspense fallback={null}><XpMilestoneModal
+        <XpMilestoneModal
           milestone={celebratingMilestone}
           isOpen={!!celebratingMilestone}
           onClose={() => setCelebratingMilestone(null)}
           onOpenRoadmap={() => setRoadmapOpen(true)}
           currentXp={progress.xpPoints}
-        /></Suspense>
+        />
       )}
 
       {/* XP Milestones & Level Roadmap Modal */}
-      <Suspense fallback={null}><XpMilestonesRoadmapModal
+      <XpMilestonesRoadmapModal
         isOpen={roadmapOpen}
         onClose={() => setRoadmapOpen(false)}
         progress={progress}
@@ -844,21 +1125,21 @@ initial={{ opacity: 0, y: 14 }}
           setRoadmapOpen(false);
           setCelebratingMilestone(m);
         }}
-      /></Suspense>
+      />
 
       {/* Notifications & Release News Modal */}
-      <Suspense fallback={null}><NotificationCenterModal
+      <NotificationCenterModal
         isOpen={notificationsOpen}
         onClose={() => setNotificationsOpen(false)}
         onNavigateView={(view, lessonId) => {
-          if (view === 'lesson' && lessonId) {
+          if (view === "lesson" && lessonId) {
             handleSelectLesson(lessonId);
           } else {
             navigateToView(view);
           }
         }}
         onTriggerToast={addToast}
-      /></Suspense>
+      />
 
       {/* Toast Notification Container */}
       <ToastNotification
@@ -867,16 +1148,39 @@ initial={{ opacity: 0, y: 14 }}
       />
 
       {/* Cookie & Push Notification Consent Banner */}
-      <Suspense fallback={null}><CookieNotificationBanner
+      <CookieNotificationBanner
         onAcceptAll={() => {
-          addToast('Preferences Saved', 'Cookies and push notification preferences enabled.', 'success');
+          addToast(
+            "Preferences Saved",
+            "Cookies and push notification preferences enabled.",
+            "success",
+          );
         }}
         onPreferencesSaved={(prefs) => {
-          addToast('Preferences Updated', `Cookie settings saved with push ${prefs.pushNotifications ? 'enabled' : 'disabled'}.`, 'info');
+          addToast(
+            "Preferences Updated",
+            `Cookie settings saved with push ${prefs.pushNotifications ? "enabled" : "disabled"}.`,
+            "info",
+          );
         }}
         onOpenNews={() => setNotificationsOpen(true)}
-        onOpenPrivacy={() => handleOpenLegal('privacy')}
-      /></Suspense>
+        onOpenPrivacy={() => handleOpenLegal("privacy")}
+      />
+
+      {/* Brain Card Floating Quick-Trigger & Full Interactive Hub */}
+      <BrainCardFloatingButton onClick={() => setBrainCardOpen(true)} />
+      <BrainCardModal
+        isOpen={brainCardOpen}
+        onClose={() => setBrainCardOpen(false)}
+        onNavigateLesson={handleSelectLesson}
+        onAwardXp={(amt, reason) => {
+          setProgress((prev) => ({
+            ...prev,
+            xpPoints: (prev.xpPoints || 0) + amt,
+          }));
+          addToast("Daily Bonus Claimed! 🎁", `${reason} (+${amt} XP)`, "success");
+        }}
+      />
     </div>
   );
 }

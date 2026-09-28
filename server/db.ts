@@ -56,6 +56,18 @@ export interface DbProgress {
   finalProjectDetails?: { title: string; techStack?: string[]; description?: string; submittedAt: string };
   courseCompleted?: boolean;
   courseCompletedAt?: string;
+  certificateIssued?: boolean;
+  certificateData?: {
+    id: string;
+    certificateId: string;
+    name: string;
+    courseName: string;
+    issueDate: string;
+    verificationCode: string;
+    xpEarned: number;
+    completedLessonsCount: number;
+    totalLessonsCount: number;
+  };
 }
 
 export interface AchievementDef {

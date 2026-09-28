@@ -8,6 +8,7 @@ import {
   calculateSmartResume,
   COURSE_LESSON_CHAIN,
   ACHIEVEMENTS_CATALOG,
+  findUserById,
 } from "./db";
 
 const router = Router();
@@ -307,6 +308,117 @@ router.post("/complete-challenge", requireAuth, (req: AuthRequest, res) => {
   const xpPoints = (progress.xpPoints || 0) + (isAlreadyDone ? 0 : 50);
   const updated = updateProgress(req.userId!, { completedChallenges, xpPoints });
   res.json({ success: true, progress: updated, xpAwarded: isAlreadyDone ? 0 : 50 });
+});
+
+/* ── GET /api/user/certificate ─────────────────────────── */
+router.get("/certificate", requireAuth, (req: AuthRequest, res) => {
+  const userId = req.userId!;
+  const user = findUserById(userId);
+  const progress = getProgress(userId);
+
+  const completedCount = Object.keys(progress.completedLessons || {}).filter(
+    (id) => COURSE_LESSON_CHAIN.some((c) => c.id === id)
+  ).length;
+  const totalCount = COURSE_LESSON_CHAIN.length;
+  const isEligible = !!progress.courseCompleted ||
+    (completedCount >= totalCount && !!progress.finalProjectVerified) ||
+    completedCount >= totalCount;
+
+  // If already issued, return persistent certificate
+  if (progress.certificateIssued && progress.certificateData) {
+    return res.json({
+      success: true,
+      status: "ISSUED",
+      isEligible: true,
+      certificate: progress.certificateData,
+      progress: {
+        completedCount,
+        totalCount,
+        percent: Math.round((completedCount / (totalCount || 1)) * 100),
+      },
+    });
+  }
+
+  // Not yet issued
+  res.json({
+    success: true,
+    status: isEligible ? "ELIGIBLE" : "NOT_ELIGIBLE",
+    isEligible,
+    certificate: null,
+    defaultName: user?.name || "WebZone Scholar",
+    progress: {
+      completedCount,
+      totalCount,
+      percent: Math.round((completedCount / (totalCount || 1)) * 100),
+      missingCount: Math.max(0, totalCount - completedCount),
+      finalProjectVerified: !!progress.finalProjectVerified,
+    },
+  });
+});
+
+/* ── POST /api/user/certificate ────────────────────────── */
+router.post("/certificate", requireAuth, async (req: AuthRequest, res) => {
+  const userId = req.userId!;
+  const { name } = req.body;
+  const user = findUserById(userId);
+  const progress = getProgress(userId);
+
+  const completedCount = Object.keys(progress.completedLessons || {}).filter(
+    (id) => COURSE_LESSON_CHAIN.some((c) => c.id === id)
+  ).length;
+  const totalCount = COURSE_LESSON_CHAIN.length;
+  const isEligible = !!progress.courseCompleted ||
+    (completedCount >= totalCount && !!progress.finalProjectVerified) ||
+    completedCount >= totalCount;
+
+  if (!isEligible) {
+    return res.status(403).json({
+      success: false,
+      error: "User has not completed the required course curriculum.",
+      progress: {
+        completedCount,
+        totalCount,
+        percent: Math.round((completedCount / (totalCount || 1)) * 100),
+      },
+    });
+  }
+
+  // Generate or retain persistent certificate ID
+  const certId =
+    progress.certificateData?.id ||
+    `WZ-CERT-${new Date().getFullYear()}-${userId.slice(0, 4).toUpperCase()}-${Math.random()
+      .toString(36)
+      .substring(2, 7)
+      .toUpperCase()}`;
+  const studentName =
+    name && typeof name === "string" && name.trim().length > 0
+      ? name.trim()
+      : user?.name || "WebZone Scholar";
+  const issueDate = progress.certificateData?.issueDate || new Date().toISOString();
+
+  const certificateData = {
+    id: certId,
+    certificateId: certId,
+    name: studentName,
+    courseName: "WebZone Storehouse Full-Stack Web Development Program",
+    issueDate,
+    verificationCode: `VERIFY-${certId.slice(-6)}`,
+    xpEarned: progress.xpPoints || 120,
+    completedLessonsCount: completedCount,
+    totalLessonsCount: totalCount,
+  };
+
+  const updated = await updateProgress(userId, {
+    certificateIssued: true,
+    certificateData,
+  });
+
+  res.json({
+    success: true,
+    status: "ISSUED",
+    isEligible: true,
+    certificate: updated.certificateData,
+  });
 });
 
 /* ── DELETE /api/user/account ──────────────────────────── */

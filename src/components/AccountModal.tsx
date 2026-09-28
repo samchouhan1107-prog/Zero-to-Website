@@ -544,7 +544,15 @@ export const AccountModal: React.FC<AccountModalProps> = ({
                     )}
 
                     <div className="flex items-center justify-end">
-                      <button type="button" className="text-xs text-zinc-500 hover:text-blue-400 transition-colors">
+                      <button
+                        type="button"
+                        onClick={() =>
+                          setError(
+                            "To reset your student password, contact support@webzonebw.shop or create a fresh profile."
+                          )
+                        }
+                        className="text-xs text-zinc-500 hover:text-blue-400 transition-colors"
+                      >
                         Forgot password?
                       </button>
                     </div>
