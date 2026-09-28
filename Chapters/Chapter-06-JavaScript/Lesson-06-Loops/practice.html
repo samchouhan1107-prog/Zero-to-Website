@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Prime Number & Factor Finder - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 06.06</span>
+            <h1>Prime Number & Factor Finder</h1>
+            <p>Write a script that loops through numbers from 1 to N and identifies prime numbers or multiples.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Read an upper bound integer N from the user input</li>
+<li>2. Use a loop with an internal conditional to check divisibility</li>
+<li>3. Accumulate matched numbers into a formatted list</li>
+<li>4. Display results with distinct colored tags</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 420px; margin: 20px auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px; text-align: center;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #1e293b;&quot;&gt;FizzBuzz Multiples Generator&lt;/h3&gt;
+  &lt;p style=&quot;font-size: 13px; color: #64748b;&quot;&gt;Generate sequence up to:&lt;/p&gt;
+  &lt;input type=&quot;number&quot; id=&quot;limitInput&quot; value=&quot;20&quot; min=&quot;5&quot; max=&quot;50&quot; style=&quot;padding: 8px; width: 80px; text-align: center; border: 1px solid #94a3b8; border-radius: 6px;&quot;&gt;
+  &lt;button id=&quot;runLoopBtn&quot; style=&quot;padding: 8px 16px; background: #8b5cf6; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; margin-left: 8px;&quot;&gt;Generate&lt;/button&gt;
+  &lt;div id=&quot;resultsContainer&quot; style=&quot;margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.getElementById(&#x27;runLoopBtn&#x27;).onclick = () =&gt; {
+    const limit = parseInt(document.getElementById(&#x27;limitInput&#x27;).value, 10) || 15;
+    const container = document.getElementById(&#x27;resultsContainer&#x27;);
+    container.innerHTML = &#x27;&#x27;;
+
+    for (let i = 1; i &lt;= limit; i++) {
+      let text = i;
+      let bg = &#x27;#e2e8f0&#x27;;
+      let color = &#x27;#334155&#x27;;
+
+      if (i % 15 === 0) {
+        text = &#x27;FizzBuzz&#x27;; bg = &#x27;#fef08a&#x27;; color = &#x27;#854d0e&#x27;;
+      } else if (i % 3 === 0) {
+        text = &#x27;Fizz&#x27;; bg = &#x27;#bbf7d0&#x27;; color = &#x27;#166534&#x27;;
+      } else if (i % 5 === 0) {
+        text = &#x27;Buzz&#x27;; bg = &#x27;#fed7aa&#x27;; color = &#x27;#9a3412&#x27;;
+      }
+
+      const badge = document.createElement(&#x27;span&#x27;);
+      badge.style.cssText = `padding: 4px 8px; font-size: 12px; font-weight: bold; border-radius: 4px; background: ${bg}; color: ${color};`;
+      badge.textContent = text;
+      container.appendChild(badge);
+    }
+  };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="../index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

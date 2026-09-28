@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 10 | Chapter 06 Capstone: Interactive Web App - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 10</span>
+            <h1>Chapter 06 Capstone: Interactive Web App</h1>
+            <p>Synthesize all Chapter 06 concepts: state management, event handling, DOM rendering, and local persistence.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Architecture</h3>
+                    <p>State -> Render -> Event loop</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Persistence</h3>
+                    <p>localStorage client store</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Synthesis</h3>
+                    <p>DOM, Arrays, and Functions</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Outcome</h3>
+                    <p>Interactive Pomodoro / Task Manager</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Structure an application around a single source of truth (state object)</li>
+<li>✔ Persist application state across browser reloads using localStorage</li>
+<li>✔ Handle user interactions cleanly without DOM/state desynchronization</li>
+<li>✔ Deliver a complete, production-ready interactive micro-application</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. The Single Source of Truth Pattern</h2>
+            <p>Rather than scraping data directly from HTML tags, maintain your state in JavaScript data structures (arrays and objects). When an action occurs, update the state, save to localStorage, and re-render the view.</p>
+            <ul class='chapter-list'><li>State: let tasks = JSON.parse(localStorage.getItem('tasks') || '[]');</li>
+<li>Update: tasks.push(newTask);</li>
+<li>Persist & Render: saveTasks(); renderUI();</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: auto; padding: 20px; border: 1px solid #cbd5e1; border-radius: 12px; background: white;&quot;&gt;
+  &lt;h3 style=&quot;margin-top: 0; color: #1e293b; display: flex; justify-content: space-between;&quot;&gt;
+    &lt;span&gt;Quick Task Tracker&lt;/span&gt;
+    &lt;span id=&quot;badgeCount&quot; style=&quot;font-size: 12px; background: #e0e7ff; color: #4338ca; padding: 2px 8px; border-radius: 12px;&quot;&gt;0 items&lt;/span&gt;
+  &lt;/h3&gt;
+  &lt;div style=&quot;display: flex; gap: 8px; margin-bottom: 12px;&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;newInput&quot; placeholder=&quot;New task...&quot; style=&quot;flex: 1; padding: 8px; border: 1px solid #94a3b8; border-radius: 6px;&quot;&gt;
+    &lt;button id=&quot;addBtn&quot; style=&quot;padding: 8px 14px; background: #4f46e5; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;&quot;&gt;Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;todoContainer&quot; style=&quot;display: flex; flex-direction: column; gap: 6px;&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  let items = [&#x27;Read Chapter 06&#x27;, &#x27;Complete Practice Sandbox&#x27;];
+  const input = document.getElementById(&#x27;newInput&#x27;);
+  const container = document.getElementById(&#x27;todoContainer&#x27;);
+  const badge = document.getElementById(&#x27;badgeCount&#x27;);
+
+  function render() {
+    badge.textContent = items.length + &#x27; items&#x27;;
+    container.innerHTML = items.map((t, idx) =&gt; `
+      &lt;div style=&quot;display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px;&quot;&gt;
+        &lt;span&gt;${t}&lt;/span&gt;
+        &lt;button onclick=&quot;removeItem(${idx})&quot; style=&quot;border: none; background: none; color: #ef4444; font-weight: bold; cursor: pointer;&quot;&gt;✕&lt;/button&gt;
+      &lt;/div&gt;
+    `).join(&#x27;&#x27;);
+  }
+
+  window.removeItem = (idx) =&gt; { items.splice(idx, 1); render(); };
+  document.getElementById(&#x27;addBtn&#x27;).onclick = () =&gt; {
+    if (input.value.trim()) { items.push(input.value.trim()); input.value = &#x27;&#x27;; render(); }
+  };
+  render();
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

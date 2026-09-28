@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Interactive Feedback & Modal Dialog Form - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 08.06</span>
+            <h1>Interactive Feedback & Modal Dialog Form</h1>
+            <p>Build a modal checkout/confirmation window with floating label inputs and validation feedback.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Create a modal dialog with .modal-dialog-centered</li>
+<li>2. Add two .form-floating inputs (Name and Email)</li>
+<li>3. Add a dismissible success alert inside the page</li>
+<li>4. Test modal opening and closing cleanly</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;container py-4&quot;&gt;
+  &lt;div class=&quot;alert alert-success alert-dismissible fade show&quot; role=&quot;alert&quot;&gt;
+    &lt;strong&gt;Success!&lt;/strong&gt; All curriculum files are compiled and ready.
+    &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;alert&quot;&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;button class=&quot;btn btn-dark&quot; data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#practiceModal&quot;&gt;Launch Dialog&lt;/button&gt;
+
+  &lt;div class=&quot;modal fade&quot; id=&quot;practiceModal&quot; tabindex=&quot;-1&quot;&gt;
+    &lt;div class=&quot;modal-dialog&quot;&gt;
+      &lt;div class=&quot;modal-content&quot;&gt;
+        &lt;div class=&quot;modal-header&quot;&gt;
+          &lt;h5 class=&quot;modal-title&quot;&gt;Verification Gate&lt;/h5&gt;
+          &lt;button class=&quot;btn-close&quot; data-bs-dismiss=&quot;modal&quot;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;modal-body&quot;&gt;
+          &lt;p class=&quot;text-muted&quot;&gt;Enter verification credentials to register completion.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;modal-footer&quot;&gt;
+          &lt;button class=&quot;btn btn-primary&quot; data-bs-dismiss=&quot;modal&quot;&gt;Confirm&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="../index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

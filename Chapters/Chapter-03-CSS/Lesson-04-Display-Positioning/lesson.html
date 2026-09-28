@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 04 | Display & Positioning - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 03</a>
+            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 03 • Lesson 04</span>
+            <h1>Display &amp; Positioning</h1>
+            <p>Master block, inline, inline-block, and none, alongside static, relative, absolute, fixed, and sticky positioning modes.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Display Modes</h3>
+                    <p>block, inline, inline-block</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Positioning</h3>
+                    <p>relative, absolute, sticky</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Stacking</h3>
+                    <p>z-index &amp; context</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>30 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Display Property Explained</h2>
+            <ul class="chapter-list">
+                <li><strong>block:</strong> Starts on a new line and spans full width (e.g. <code>&lt;div&gt;</code>, <code>&lt;p&gt;</code>). Accepts custom width, height, margins, and padding.</li>
+                <li><strong>inline:</strong> Flows within text (e.g. <code>&lt;span&gt;</code>, <code>&lt;a&gt;</code>). Ignores top/bottom margins and height.</li>
+                <li><strong>inline-block:</strong> Flows inline like text, but accepts width, height, and vertical padding. Perfect for buttons and badges.</li>
+                <li><strong>none:</strong> Removes the element completely from document flow.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. The 5 CSS Position Modes</h2>
+            <div class="code-box">
+                <pre><code>/* 1. Static (Default document flow) */
+position: static;
+
+/* 2. Relative (Offset relative to normal position, establishes anchor) */
+position: relative;
+top: 10px;
+
+/* 3. Absolute (Removed from flow, positioned relative to nearest positioned ancestor) */
+position: absolute;
+top: 0;
+right: 0;
+
+/* 4. Fixed (Positioned relative to the browser viewport, stays on scroll) */
+position: fixed;
+bottom: 20px;
+right: 20px;
+
+/* 5. Sticky (Hybrid: scrolls until a threshold, then sticks to screen) */
+position: sticky;
+top: 0;</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>3. Code Example: Badge Overlay Pattern</h2>
+            <div class="code-box">
+                <pre><code>.card {
+    position: relative; /* Anchor for absolute child */
+    padding: 24px;
+    background: #ffffff;
+}
+
+.card .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: #ef233c;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 9999px;
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>4. Practice Challenge</h2>
+            <p>Construct a notification card with an absolute badge overlay in the interactive sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 04 Practice Challenge →</h3>
+                <p>Build badge overlays and sticky headers with live preview.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../index.html">⬅ Chapter 03 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

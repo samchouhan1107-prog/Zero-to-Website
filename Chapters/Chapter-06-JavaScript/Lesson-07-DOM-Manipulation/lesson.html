@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 07 | DOM Selection, Creation & Modification - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 06: JavaScript</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 06 • Lesson 07</span>
+            <h1>DOM Selection, Creation & Modification</h1>
+            <p>Master the Document Object Model: querySelector, createElement, appendChild, classList, and attributes.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Selection</h3>
+                    <p>querySelector & querySelectorAll</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Creation</h3>
+                    <p>document.createElement</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Insertion</h3>
+                    <p>append, prepend, insertAdjacentHTML</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Classes</h3>
+                    <p>classList.add, remove, toggle</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Traverse and select elements using standard CSS selector strings</li>
+<li>✔ Construct new DOM nodes dynamically and mount them to the page tree</li>
+<li>✔ Manipulate CSS classes cleanly using element.classList methods</li>
+<li>✔ Understand innerHTML security risks (XSS) and when to use textContent instead</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Modern DOM Query Methods</h2>
+            <p>Forget legacy getElementsByClassName. Modern web standards provide document.querySelector (which matches the first element matching a CSS selector) and document.querySelectorAll (which returns a static NodeList).</p>
+            <ul class='chapter-list'><li>const mainHeader = document.querySelector('header.site-nav h1');</li>
+<li>const cards = document.querySelectorAll('.card-item');</li>
+<li>NodeList iteration: cards.forEach(card => ...)</li>
+</ul>
+        </section>
+        <section class="chapter-section">
+            <h2>2. Safe Element Construction vs innerHTML</h2>
+            <p>Using innerHTML with untrusted user input introduces Cross-Site Scripting (XSS) vulnerabilities. Always use document.createElement and set textContent when rendering user-submitted text.</p>
+            <ul class='chapter-list'><li>Safe: const el = document.createElement('div'); el.textContent = userInput;</li>
+<li>Safe class toggle: el.classList.toggle('active-state');</li>
+<li>Safe attribute removal: el.removeAttribute('disabled');</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 440px; margin: auto; padding: 20px;&quot;&gt;
+  &lt;div style=&quot;display: flex; gap: 8px;&quot;&gt;
+    &lt;input type=&quot;text&quot; id=&quot;taskInput&quot; placeholder=&quot;Add new learning objective...&quot; style=&quot;flex: 1; padding: 8px; border: 1px solid #cbd5e1; border-radius: 6px;&quot;&gt;
+    &lt;button id=&quot;addTaskBtn&quot; style=&quot;padding: 8px 14px; background: #059669; color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer;&quot;&gt;Add&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;ul id=&quot;taskList&quot; style=&quot;list-style: none; padding: 0; margin-top: 16px; display: flex; flex-direction: column; gap: 6px;&quot;&gt;&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const taskInput = document.getElementById(&#x27;taskInput&#x27;);
+  const addBtn = document.getElementById(&#x27;addTaskBtn&#x27;);
+  const taskList = document.getElementById(&#x27;taskList&#x27;);
+
+  addBtn.onclick = () =&gt; {
+    const val = taskInput.value.trim();
+    if (!val) return;
+
+    const li = document.createElement(&#x27;li&#x27;);
+    li.style.cssText = &#x27;padding: 8px 12px; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;&#x27;;
+
+    const span = document.createElement(&#x27;span&#x27;);
+    span.textContent = val;
+
+    const delBtn = document.createElement(&#x27;button&#x27;);
+    delBtn.textContent = &#x27;✕&#x27;;
+    delBtn.style.cssText = &#x27;border: none; background: none; color: #ef4444; font-weight: bold; cursor: pointer; padding: 4px;&#x27;;
+    delBtn.onclick = () =&gt; li.remove();
+
+    li.appendChild(span);
+    li.appendChild(delBtn);
+    taskList.appendChild(li);
+
+    taskInput.value = &#x27;&#x27;;
+    taskInput.focus();
+  };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

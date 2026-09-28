@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | The Grid Container - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 05</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 05 • Lesson 02</span>
+            <h1>The Grid Container &amp; Gap Spacing</h1>
+            <p>Activate the 2D matrix engine with <code>display: grid</code> and learn how <code>gap</code>, <code>row-gap</code>, and <code>column-gap</code> separate grid tracks without margin collapses.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Activation</h3>
+                    <p>display: grid</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Spacing</h3>
+                    <p>gap: row col</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Inline Grid</h3>
+                    <p>display: inline-grid</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>25 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. Activating CSS Grid</h2>
+            <p>Declaring <code>display: grid</code> on an element transforms all of its direct children into grid items aligned along horizontal rows and vertical columns simultaneously.</p>
+            <div class="code-box">
+                <pre><code>.grid-container {
+    display: grid;
+    gap: 16px; /* Uniform 16px gap between all rows and columns */
+    row-gap: 24px; /* Optional custom row separation */
+    column-gap: 16px; /* Optional custom column separation */
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Practice Challenge</h2>
+            <p>Configure a grid container and control row/column gap spacing interactively:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 02 Practice Challenge →</h3>
+                <p>Build a responsive grid container with customized gap tokens.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../index.html">⬅ Chapter 05 Overview</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

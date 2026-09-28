@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 03 | Accessibility Testing - WebZoneBW SC</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WEBZONEBW SC</h1>
+                <p>Free Interactive Web Developer Tools & Curriculum</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <a href="../Lesson-02-Core-Components/lesson.html">← Previous Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 10.03</span>
+            <h1>Accessibility Testing & WCAG Compliance</h1>
+            <p>Conduct comprehensive accessibility audits and ensure your portfolio meets WCAG 2.1 AA standards</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Advanced)</h2>
+            <ul class="chapter-list">
+                <li>1. Run automated accessibility testing with axe DevTools</li>
+                <li>2. Conduct manual keyboard navigation testing</li>
+                <li>3. Test with screen readers and identify issues</li>
+                <li>4. Fix common accessibility problems found</li>
+                <li>5. Implement continuous accessibility monitoring</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>📁 Testing Tools Setup</h2>
+            <div class="file-structure">
+                <h3>Required Tools:</h3>
+                <ul class="chapter-list">
+                    <li><strong>axe DevTools:</strong> Chrome extension for automated testing</li>
+                    <li><strong>Lighthouse:</strong> Built-in Chrome accessibility scoring</li>
+                    <li><strong>WAVE:</strong> Web Accessibility Evaluation Tool</li>
+                    <li><strong>NVDA:</strong> Free screen reader for testing</li>
+                    <li><strong>Keyboard Navigation:</strong> Manual testing with Tab/Shift+Tab</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Testing Checklist</h2>
+            <div class="testing-checklist">
+                <h3>Automated Testing Items:</h3>
+                <ul class="chapter-list">
+                    <li>[ ] Run axe DevTools scan on all pages</li>
+                    <li>[ ] Check for critical and serious violations</li>
+                    <li>[ ] Verify color contrast ratios (minimum 4.5:1)</li>
+                    <li>[ ] Test form labels and ARIA attributes</li>
+                    <li>[ ] Check heading structure and hierarchy</li>
+                    <li>[ ] Verify image alt text completeness</li>
+                    <li>[ ] Test focus indicators and keyboard traps</li>
+                </ul>
+
+                <h3>Manual Testing Items:</h3>
+                <ul class="chapter-list">
+                    <li>[ ] Navigate entire site with keyboard only</li>
+                    <li>[ ] Test with screen reader (NVDA/VoiceOver)</li>
+                    <li>[ ] Check color contrast with accessibility tools</li>
+                    <li>[ ] Verify form validation feedback</li>
+                    <li>[ ] Test responsive design on mobile devices</li>
+                    <li>[ ] Check focus order is logical</li>
+                    <li>[ ] Test with reduced motion preferences</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🔧 Common Accessibility Issues to Fix</h2>
+            <div class="issue-fixes">
+                <h3>Priority Issues (Critical):</h3>
+                <ul class="chapter-list">
+                    <li><strong>Missing Alt Text:</strong> Add descriptive alt attributes to all meaningful images</li>
+                    <li><strong>Missing Form Labels:</strong> Ensure all form inputs have proper labels</li>
+                    <li><strong>Keyboard Traps:</strong> Fix elements that trap keyboard focus</li>
+                    <li><strong>Missing ARIA Labels:</strong> Add ARIA labels for complex interactive elements</li>
+                </ul>
+
+                <h3>High Priority Issues (Serious):</h3>
+                <ul class="chapter-list">
+                    <li><strong>Low Color Contrast:</strong> Ensure text meets 4.5:1 contrast ratio</li>
+                    <li><strong>Poor Focus Management:</strong> Ensure logical tab order and visible focus indicators</li>
+                    <li><strong>Missing Headings:</strong> Create proper heading hierarchy</li>
+                    <li><strong>Language Attribute:</strong> Add lang attribute to HTML element</li>
+                </ul>
+
+                <h3>Medium Priority Issues (Moderate):</h3>
+                    <ul class="chapter-list">
+                    <li><strong>Missing Skip Links:</strong> Add skip navigation links</li>
+                    <li><strong>Time Limits:</strong> Remove or adjust time limits for forms</li>
+                    <li><strong>Seizure Risks:</strong> Remove flashing animations or provide controls</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>📊 Testing Implementation</h2>
+            <div class="implementation-guide">
+                <h3>Automated Testing Script:</h3>
+                <pre><code>// accessibility-test.js
+const { AxePuppeteer } = require('@axe-core/puppeteer');
+const puppeteer = require('puppeteer');
+
+class AccessibilityTester {
+    constructor() {
+        this.results = [];
+        this.criticalIssues = [];
+        this.seriousIssues = [];
+    }
+
+    async runFullTest(portfolioUrl) {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        
+        // Configure viewport for responsive testing
+        await page.setViewport({ width: 1920, height: 1080 });
+        
+        try {
+            await page.goto(portfolioUrl, { waitUntil: 'networkidle2' });
+            
+            // Run axe core analysis
+            const axeResults = await AxePuppeteer(page).analyze();
+            
+            // Categorize issues by severity
+            this.categorizeIssues(axeResults.violations);
+            
+            // Generate report
+            this.generateReport(axeResults);
+            
+            return {
+                totalViolations: axeResults.violations.length,
+                criticalIssues: this.criticalIssues.length,
+                seriousIssues: this.seriousIssues.length,
+                report: this.generateReport(axeResults)
+            };
+            
+        } catch (error) {
+            console.error('Accessibility test failed:', error);
+            throw error;
+        } finally {
+            await browser.close();
+        }
+    }
+
+    categorizeIssues(violations) {
+        violations.forEach(violation => {
+            if (violation.impact === 'critical') {
+                this.criticalIssues.push(violation);
+            } else if (violation.impact === 'serious') {
+                this.seriousIssues.push(violation);
+            }
+        });
+    }
+
+    generateReport(results) {
+        return {
+            timestamp: new Date().toISOString(),
+            summary: {
+                total: results.violations.length,
+                critical: this.criticalIssues.length,
+                serious: this.seriousIssues.length,
+                moderate: results.violations.filter(v => v.impact === 'moderate').length,
+                minor: results.violations.filter(v => v.impact === 'minor').length
+            },
+            violations: results.violations,
+            passes: results.passes,
+            incomplete: results.incomplete
+        };
+    }
+}
+
+// Usage
+const tester = new AccessibilityTester();
+tester.runFullTest('https://your-portfolio.com')
+    .then(results => {
+        console.log('Accessibility Test Results:', results);
+        if (results.criticalIssues.length > 0) {
+            console.log('CRITICAL ISSUES FOUND:');
+            results.criticalIssues.forEach(issue => {
+                console.log(`- ${issue.description}: ${issue.help}`);
+            });
+        }
+    })
+    .catch(error => {
+        console.error('Test failed:', error);
+    });</code></pre>
+
+                <h3>Manual Testing Guide:</h3>
+                <pre><code>// Manual accessibility testing checklist
+class ManualAccessibilityTest {
+    constructor() {
+        this.issues = [];
+        this.checks = [
+            'keyboardNavigation',
+            'screenReader',
+            'colorContrast',
+            'formLabels',
+            'headingStructure'
+        ];
+    }
+
+    async runManualTests(portfolioUrl) {
+        const browser = await puppeteer.launch();
+        const page = await browser.newPage();
+        
+        for (const check of this.checks) {
+            await this[check](page);
+        }
+        
+        await browser.close();
+        return this.issues;
+    }
+
+    async keyboardNavigation(page) {
+        // Test forward tab navigation
+        await page.keyboard.press('Tab');
+        
+        // Check if focus is visible
+        const focusedElement = await page.evaluate(() => {
+            return document.activeElement;
+        });
+        
+        // Check if element has visible focus indicator
+        const hasFocusIndicator = await page.evaluate(() => {
+            const activeElement = document.activeElement;
+            const style = window.getComputedStyle(activeElement);
+            return style.outline !== 'none' || 
+                   style.boxShadow !== 'none' || 
+                   style.border.includes('solid');
+        });
+        
+        if (!hasFocusIndicator) {
+            this.issues.push({
+                type: 'keyboard',
+                severity: 'serious',
+                message: 'Element lacks visible focus indicator'
+            });
+        }
+    }
+
+    async screenReader(page) {
+        // This would require more complex setup with actual screen reader
+        // For now, check basic ARIA attributes
+        const ariaIssues = await page.evaluate(() => {
+            const issues = [];
+            const elements = document.querySelectorAll('[aria-required], [aria-label]');
+            
+            elements.forEach(element => {
+                if (element.getAttribute('aria-required') && !element.id) {
+                    issues.push('Element with aria-required missing id for label reference');
+                }
+            });
+            
+            return issues;
+        });
+        
+        ariaIssues.forEach(issue => {
+            this.issues.push({
+                type: 'screenreader',
+                severity: 'moderate',
+                message: issue
+            });
+        });
+    }
+
+    async colorContrast(page) {
+        // Simplified color contrast check
+        // In practice, use a proper color contrast library
+        const contrastIssues = await page.evaluate(() => {
+            const issues = [];
+            const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6');
+            
+            textElements.forEach(element => {
+                const style = window.getComputedStyle(element);
+                // Simplified check - real implementation would calculate actual contrast
+                if (style.color === 'rgb(255, 255, 255)' && style.backgroundColor === 'rgb(255, 255, 255)') {
+                    issues.push('Text color matches background color');
+                }
+            });
+            
+            return issues;
+        });
+        
+        contrastIssues.forEach(issue => {
+            this.issues.push({
+                type: 'contrast',
+                severity: 'critical',
+                message: issue
+            });
+        });
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🛠️ Accessibility Fixes Implementation</h2>
+            <div class="fixes-implementation">
+                <h3>Common Accessibility Fixes:</h3>
+                <pre><code>// accessibility-fixes.js
+class AccessibilityFixer {
+    constructor() {
+        this.fixes = {
+            images: this.fixImages.bind(this),
+            forms: this.fixForms.bind(this),
+            headings: this.fixHeadings.bind(this),
+            contrast: this.fixContrast.bind(this),
+            keyboard: this.fixKeyboard.bind(this)
+        };
+    }
+
+    applyAllFixes() {
+        Object.values(this.fixes).forEach(fix => fix());
+    }
+
+    fixImages() {
+        const images = document.querySelectorAll('img:not([alt])');
+        images.forEach(img => {
+            if (img.getAttribute('alt') === '') {
+                img.setAttribute('alt', 'Decorative image');
+            } else if (!img.getAttribute('alt')) {
+                // Try to derive alt text from surrounding context
+                const altText = this.deriveImageAlt(img);
+                img.setAttribute('alt', altText);
+            }
+        });
+    }
+
+    deriveImageAlt(img) {
+        // Simple logic to derive alt text from context
+        const parent = img.parentElement;
+        const heading = parent.querySelector('h1, h2, h3, h4, h5, h6');
+        if (heading) {
+            return `Image related to ${heading.textContent}`;
+        }
+        return 'Image';
+    }
+
+    fixForms() {
+        const inputs = document.querySelectorAll('input:not([type="hidden"]):not([type="submit"]):not([type="button"])');
+        inputs.forEach(input => {
+            if (!input.getAttribute('aria-label') && !input.getAttribute('aria-labelledby')) {
+                const label = document.querySelector(`label[for="${input.id}"]`);
+                if (!label) {
+                    // Create hidden label
+                    const hiddenLabel = document.createElement('label');
+                    hiddenLabel.textContent = input.placeholder || 'Input field';
+                    hiddenLabel.style.position = 'absolute';
+                    hiddenLabel.style.clip = 'rect(0, 0, 0, 0)';
+                    hiddenLabel.style.clipPath = 'inset(50%)';
+                    hiddenLabel.style.height = '1px';
+                    hiddenLabel.style.overflow = 'hidden';
+                    hiddenLabel.style.whiteSpace = 'nowrap';
+                    hiddenLabel.style.width = '1px';
+                    input.parentNode.insertBefore(hiddenLabel, input);
+                    input.setAttribute('aria-labelledby', hiddenLabel.id);
+                }
+            }
+        });
+    }
+
+    fixHeadings() {
+        // Ensure proper heading hierarchy
+        const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+        let lastLevel = 0;
+        
+        headings.forEach((heading, index) => {
+            const currentLevel = parseInt(heading.tagName.charAt(1));
+            
+            if (currentLevel > lastLevel + 1) {
+                // Skip level detected
+                console.warn(`Heading skip detected: ${heading.tagName} follows h${lastLevel}`);
+            }
+            
+            lastLevel = currentLevel;
+        });
+    }
+
+    fixContrast() {
+        const textElements = document.querySelectorAll('p, h1, h2, h3, h4, h5, h6, span, div');
+        textElements.forEach(element => {
+            const style = window.getComputedStyle(element);
+            const color = this.rgbToHex(style.color);
+            const bgColor = this.rgbToHex(style.backgroundColor);
+            
+            const contrast = this.calculateContrast(color, bgColor);
+            if (contrast < 4.5) {
+                // Suggest fix or apply automatically
+                element.style.color = this.getContrastColor(bgColor);
+            }
+        });
+    }
+
+    rgbToHex(rgb) {
+        const result = rgb.match(/\d+/g);
+        if (!result) return '#000000';
+        return '#' + result.map(x => parseInt(x).toString(16).padStart(2, '0')).join('');
+    }
+
+    calculateContrast(color1, color2) {
+        // Simplified contrast calculation
+        // In practice, use a proper color contrast library
+        return 4.5; // Placeholder
+    }
+
+    getContrastColor(bgColor) {
+        // Return contrasting color
+        return '#000000'; // Black for most backgrounds
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+                    <h2>📈 Success Criteria</h2>
+            <div class="success-criteria">
+                <h3>Accessibility Compliance Requirements:</h3>
+                <ul class="chapter-list">
+                    <li><strong>WCAG 2.1 AA Compliance:</strong> Zero critical violations, minimal serious issues</li>
+                    <li><strong>Keyboard Accessibility:</strong> Full keyboard navigation without traps</li>
+                    <li><strong>Screen Reader Compatible:</strong> Content makes sense when read aloud</li>
+                    <li><strong>Color Contrast:</strong> All text meets 4.5:1 contrast ratio</li>
+                    <li><strong>Form Accessibility:</strong> All forms properly labeled and validated</li>
+                    <li><strong>Responsive Design:</strong> Works across all device sizes</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>📋 Submission Requirements</h2>
+            <div class="submission-guide">
+                <h3>Accessibility Testing Checklist:</h3>
+                <ul class="chapter-list">
+                    <li>[ ] Automated accessibility test report (axe/Lighthouse)</li>
+                    <li>[ ] Manual keyboard navigation test results</li>
+                    <li>[ ] Screen reader testing documentation</li>
+                    <li>[ ] Fixed accessibility issues with evidence</li>
+                    <li>[ ] WCAG 2.1 AA compliance verification</li>
+                    <li>[ ] Continuous monitoring setup</li>
+                    <li>[ ] Accessibility documentation and guidelines</li>
+                    <li>[ ] User testing with assistive technologies</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🚀 Next Steps</h2>
+            <p>After completing this practice challenge, you'll be ready to move on to performance optimization and Core Web Vitals. You'll learn how to ensure your portfolio loads quickly and performs well across all devices and network conditions.</p>
+            
+            <div class="next-lesson">
+                <p>👉 <a href="../Lesson-04-Performance-Optimization/index.html">Continue to Lesson 04: Performance Optimization</a></p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 WebZoneBW SC. All rights reserved.</p>
+            <p><a href="/privacy-policy.html">Privacy Policy</a> | <a href="/terms-ofservice.html">Terms of Service</a> | <a href="/about.html">About</a></p>
+        </div>
+    </footer>
+</body>
+</html>

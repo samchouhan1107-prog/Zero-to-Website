@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 01 | The Box Model - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.1</span>
+            <h1>Construct a Layered Box Model Visualizer</h1>
+            <p>Build a visual representation of Margin, Border, Padding, and Content with colored layers and clear dimensions.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Give the outer box <code>margin: 20px;</code> and an orange dotted outline to visualize the margin layer.</li>
+                <li>2. Give the middle box <code>border: 4px solid #ef233c;</code> to visualize the border boundary.</li>
+                <li>3. Add <code>padding: 24px; background: #e0f2fe;</code> to visualize the inner padding cushion.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><div style="background: #fed7aa; padding: 20px; border-radius: 12px; font-family: system-ui, sans-serif; max-width: 440px; margin: 20px auto; text-align: center;">
+  <span style="font-size: 11px; font-weight: bold; color: #9a3412;">MARGIN (Outer Buffer)</span>
+  
+  <div style="background: #fde68a; border: 4px solid #ef233c; border-radius: 8px; padding: 20px; margin-top: 10px;">
+    <span style="font-size: 11px; font-weight: bold; color: #b45309;">BORDER: 4px solid #ef233c</span>
+    
+    <div style="background: #bae6fd; padding: 18px; border-radius: 6px; margin-top: 10px;">
+      <span style="font-size: 11px; font-weight: bold; color: #0369a1;">PADDING (Breathable Space)</span>
+      
+      <div style="background: #ffffff; padding: 14px; border-radius: 4px; margin-top: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+        <strong style="color: #0f172a; font-size: 15px;">CONTENT BOX</strong>
+        <p style="margin: 4px 0 0; font-size: 12px; color: #64748b;">Text, media, and child components.</p>
+      </div>
+    </div>
+  </div>
+</div></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 01</a>
+            <a href="../Lesson-02-Selectors-Specificity/lesson.html">Next: Lesson 02 ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

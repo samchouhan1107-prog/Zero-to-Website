@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 01 | Mobile-First Philosophy & Core Architecture - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 01</span>
+            <h1>Mobile-First Philosophy & Core Architecture</h1>
+            <p>Design for constrained viewports first, progressively enhancing as screen real estate expands.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Strategy</h3>
+                    <p>Mobile-First vs Desktop-Down</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Constraint</h3>
+                    <p>Touch Targets (min 44px)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Progressive</h3>
+                    <p>Enhancement with min-width</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Performance</h3>
+                    <p>Lean default mobile payloads</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Understand why mobile-first CSS results in cleaner, more maintainable codebases</li>
+<li>✔ Replace complex desktop overriding with additive min-width media queries</li>
+<li>✔ Establish ergonomic touch target standards (minimum 44x44px for thumbs)</li>
+<li>✔ Optimize asset loading and rendering order for high mobile network efficiency</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Why Mobile-First Wins</h2>
+            <p>Over 60% of global web traffic originates from mobile devices. Designing mobile-first ensures the default stylesheet contains lightweight, linear, touch-friendly styling. Larger screens simply layer on multi-column layouts via min-width breakpoints.</p>
+            <ul class='chapter-list'><li>Default CSS = Mobile rules (no media query needed)</li>
+<li>@media (min-width: 768px) = Tablet enhancements</li>
+<li>@media (min-width: 1024px) = Desktop grid & wide layout expansions</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; padding: 20px; max-width: 500px; margin: auto;&quot;&gt;
+  &lt;div style=&quot;background: #e0e7ff; color: #3730a3; padding: 12px; border-radius: 8px; text-align: center; font-weight: bold; margin-bottom: 12px;&quot;&gt;
+    Mobile-First Card (Scales Up Cleanly)
+  &lt;/div&gt;
+  &lt;p style=&quot;color: #475569; font-size: 14px; line-height: 1.5;&quot;&gt;
+    Notice how all base styles work perfectly inside small containers without horizontal overflow.
+  &lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

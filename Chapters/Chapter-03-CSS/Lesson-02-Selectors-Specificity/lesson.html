@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 02 | Selectors & Specificity - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 03</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 03 • Lesson 02</span>
+            <h1>Selectors, Specificity &amp; The Cascade</h1>
+            <p>Understand how the browser resolves conflicting style rules using the specificity score: IDs, Classes, and Type Selectors.</p>
+
+            <div class="info-grid">
+                <div class="summary-card">
+                    <h3>Hierarchy</h3>
+                    <p>Inline &gt; ID &gt; Class &gt; Tag</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Weight</h3>
+                    <p>(0, 1, 0) vs (0, 0, 1)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Escape Hatch</h3>
+                    <p>Avoid !important</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Estimated Time</h3>
+                    <p>25 Minutes</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>1. The Specificity Point System</h2>
+            <ul class="chapter-list">
+                <li><strong>Inline Styles (1, 0, 0, 0):</strong> Directly on the HTML element via <code>style=""</code>. Highest non-important precedence.</li>
+                <li><strong>IDs (0, 1, 0, 0):</strong> Example: <code>#header</code>. Beats classes and tags.</li>
+                <li><strong>Classes &amp; Attributes (0, 0, 1, 0):</strong> Example: <code>.btn</code>, <code>[type="text"]</code>, <code>:hover</code>. The workhorse of maintainable CSS.</li>
+                <li><strong>Element Tags (0, 0, 0, 1):</strong> Example: <code>div</code>, <code>p</code>, <code>h1</code>. Low priority baseline defaults.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>2. Practice Challenge</h2>
+            <p>Resolve conflicting CSS rules in the interactive sandbox:</p>
+            <a class="lesson-card" href="practice.html">
+                <h3>Open Lesson 02 Practice Challenge →</h3>
+                <p>Test class vs tag vs ID cascade rules with live color feedback.</p>
+            </a>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="../Lesson-01-Box-Model/lesson.html">⬅ Lesson 01: Box Model</a>
+            <a href="practice.html">Next: Practice Activity ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

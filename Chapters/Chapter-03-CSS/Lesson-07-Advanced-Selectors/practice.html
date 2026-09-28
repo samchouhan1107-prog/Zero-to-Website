@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 07 | Advanced Selectors - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 3.7</span>
+            <h1>Style a Data List with :nth-child and Combinators</h1>
+            <p>Write CSS rules targeting even/odd rows, first and last list items, and external anchor attributes.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks</h2>
+            <ul class="chapter-list">
+                <li>1. Apply zebra striping with <code>li:nth-child(even)</code> giving light grey background <code>#f8fafc</code>.</li>
+                <li>2. Style <code>li:first-child</code> with rounded top corners and <code>li:last-child</code> with rounded bottom corners.</li>
+                <li>3. Add a highlight border to any list item with class <code>.featured</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML &amp; CSS)</h3>
+                    <textarea id="htmlEditor"><style>
+  .user-list {
+    list-style: none;
+    padding: 0;
+    margin: 20px auto;
+    max-width: 440px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: system-ui, sans-serif;
+  }
+  .user-list li {
+    padding: 14px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .user-list li:last-child {
+    border-bottom: none;
+  }
+  /* Zebra striping */
+  .user-list li:nth-child(even) {
+    background-color: #f8fafc;
+  }
+  /* Featured tag highlighting */
+  .user-list li.vip {
+    background: #fff1f2;
+    font-weight: bold;
+    color: #9f1239;
+  }
+</style>
+
+<ul class="user-list">
+  <li><span>Alex Rivera</span> <span style="font-size: 12px; color: #64748b;">Member</span></li>
+  <li class="vip"><span>Sameer Chouhan</span> <span style="background: #ef233c; color: white; padding: 2px 8px; border-radius: 9999px; font-size: 11px;">PRO</span></li>
+  <li><span>Jordan Smith</span> <span style="font-size: 12px; color: #64748b;">Member</span></li>
+  <li><span>Taylor Kim</span> <span style="font-size: 12px; color: #64748b;">Member</span></li>
+</ul></textarea>
+                    <div style="display: flex; gap: 10px; margin-top: 12px;">
+                        <button type="button" id="runCodeBtn" onclick="runHTML()">Run &amp; Preview ⚡</button>
+                    </div>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links">
+            <a href="lesson.html">⬅ Back to Lesson 07</a>
+            <a href="../../Chapter-04-Flexbox/index.html">Next: Chapter 04 Flexbox ➜</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

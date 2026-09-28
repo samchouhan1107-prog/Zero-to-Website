@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 06 | Responsive Navigation: Hamburger Menus & Drawers - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 06</span>
+            <h1>Responsive Navigation: Hamburger Menus & Drawers</h1>
+            <p>Build mobile-first navigation: desktop horizontal bars, mobile slide-out drawers, and accessibility.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Mobile Drawer</h3>
+                    <p>Fixed off-canvas drawer with CSS transform</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Toggle</h3>
+                    <p>Hamburger icon with aria-expanded</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Desktop Bar</h3>
+                    <p>Horizontal flex layout at 768px+</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Accessibility</h3>
+                    <p>Keyboard Esc key & focus trapping</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Implement a slide-out mobile drawer using CSS transform: translateX(-100%)</li>
+<li>✔ Switch seamlessly from mobile drawer to horizontal navbar at 768px breakpoint</li>
+<li>✔ Ensure keyboard accessibility (Esc closes drawer, focus trap)</li>
+<li>✔ Animate the hamburger icon into an 'X' close state smoothly</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Mobile-First Navigation Patterns</h2>
+            <p>Navigation menus are among the most common responsive challenges. Mobile screens lack horizontal space for 6 navigation links, requiring a collapsible drawer or accordion pattern.</p>
+            <ul class='chapter-list'><li>Mobile (<768px): Hamburger button toggles an off-canvas drawer with backdrop overlay</li>
+<li>Desktop (>=768px): Drawer properties reset; links display inline in a clean horizontal row</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; max-width: 500px; margin: auto; border: 1px solid #cbd5e1; border-radius: 8px; overflow: hidden;&quot;&gt;
+  &lt;div style=&quot;display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: #0f172a; color: white;&quot;&gt;
+    &lt;strong&gt;MyBrand&lt;/strong&gt;
+    &lt;button id=&quot;toggleMenuBtn&quot; style=&quot;background: none; border: 1px solid #475569; color: white; border-radius: 4px; padding: 6px 10px; cursor: pointer;&quot;&gt;☰ Menu&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;drawerMenu&quot; style=&quot;display: none; padding: 12px; background: #1e293b; color: #cbd5e1;&quot;&gt;
+    &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: white; text-decoration: none; border-bottom: 1px solid #334155;&quot;&gt;Dashboard&lt;/a&gt;
+    &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: white; text-decoration: none; border-bottom: 1px solid #334155;&quot;&gt;Curriculum&lt;/a&gt;
+    &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: white; text-decoration: none;&quot;&gt;Settings&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  const btn = document.getElementById(&#x27;toggleMenuBtn&#x27;);
+  const menu = document.getElementById(&#x27;drawerMenu&#x27;);
+  btn.onclick = () =&gt; {
+    const isHidden = menu.style.display === &#x27;none&#x27;;
+    menu.style.display = isHidden ? &#x27;block&#x27; : &#x27;none&#x27;;
+    btn.textContent = isHidden ? &#x27;✕ Close&#x27; : &#x27;☰ Menu&#x27;;
+  };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

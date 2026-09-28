@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 04 | Justify Content</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+</head>
+<body class="chapter-flexbox">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Back to Chapter</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+    <div id="settingsPanel" class="settings-panel"></div>
+    <main class="container chapter-page">
+        <section class="chapter-header">
+            <span class="chapter-badge">Chapter 04</span>
+            <h1>Lesson 04 — Justify Content</h1>
+            <p>Learn how <code>justify-content</code> aligns flex items along the main axis and controls spacing between them.</p>
+        </section>
+
+        <section class="chapter-overview chapter-block">
+            <h2>Lesson Overview</h2>
+            <p>This lesson explains the main-axis alignment values for Flexbox, including <code>start</code>, <code>center</code>, <code>end</code>, <code>space-between</code>, <code>space-around</code>, and <code>space-evenly</code>.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Introduction</h2>
+            <p><code>justify-content</code> moves flex items along the main axis. It is one of the most common properties for distributing space inside a flex container.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>Understand how <code>justify-content</code> affects item placement.</li>
+                <li>Learn the difference between start, center, and end.</li>
+                <li>Use spacing values like <code>space-between</code>, <code>space-around</code>, and <code>space-evenly</code>.</li>
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Theory</h2>
+            <p>When items are placed along the main axis, <code>justify-content</code> determines the starting point and spacing strategy. Different values position items at the start, center, end, or distribute the extra space evenly.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Real World Example</h2>
+            <p>Use <code>justify-content</code> in header toolbars, button groups, and card layouts so items are spaced clearly across the row.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Visual Explanation</h2>
+            <p><code>start</code> packs items at the beginning, <code>center</code> balances them, <code>end</code> pushes them to the end, and the space values distribute remaining room.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Example</h2>
+            <div class="code-box">
+                <pre><code>.flex-container {
+    display: flex;
+    justify-content: space-between;
+}
+</code></pre>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Code Breakdown</h2>
+            <p><code>space-between</code> places the first item at the start and the last item at the end, spreading the remaining items evenly between them.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Related Topics</h2>
+            <p>After this lesson, the next step is aligning items on the cross axis with <code>align-items</code> in Lesson 05.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Practice Challenge</h2>
+            <p>Create a navigation bar where the logo stays at the left and menu items stretch evenly across the row.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Mini Project</h2>
+            <p>Build a toolbar layout with three buttons: one at the start, one centered, and one at the end.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>Summary</h2>
+            <p><code>justify-content</code> is the key Flexbox property for spacing flex items along the main axis. Choose the alignment value based on how you want items distributed.</p>
+        </section>
+
+        <section class="chapter-actions chapter-block">
+            <a href="../index.html" class="btn secondary">⬅ Back to Chapter</a>
+            <a href="../Lesson-05-Align-Items/lesson.html" class="btn primary">Next Lesson ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 1.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

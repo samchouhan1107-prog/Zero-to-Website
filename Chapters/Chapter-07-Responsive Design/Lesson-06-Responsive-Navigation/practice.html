@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Practice Challenge 06 | Full Responsive Header with Animated Drawer - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="lesson.html">⬅ Back to Lesson</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Practice Challenge 07.06</span>
+            <h1>Full Responsive Header with Animated Drawer</h1>
+            <p>Build a responsive header that displays a top navigation bar on desktop, collapsing to an accessible slide-in drawer on mobile.</p>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Challenge Tasks (Level: Age 15+ to Professional)</h2>
+            <ul class="chapter-list">
+                <li>1. Style the desktop header with logo on left, navigation links on right</li>
+<li>2. Hide desktop links and display hamburger button on mobile screens (<768px)</li>
+<li>3. Write JavaScript toggle to slide drawer into view</li>
+<li>4. Ensure drawer closes when any menu item is clicked</li>
+
+            </ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Coding Sandbox</h2>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Code Editor (HTML, CSS &amp; JavaScript)</h3>
+                    <textarea id="htmlEditor">&lt;style&gt;
+  .app-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 20px;
+    background: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    font-family: system-ui, sans-serif;
+  }
+  .nav-links {
+    display: none;
+    gap: 20px;
+  }
+  .nav-links a {
+    text-decoration: none;
+    color: #334155;
+    font-weight: 600;
+  }
+  .hamburger-btn {
+    display: block;
+    background: none;
+    border: 1px solid #cbd5e1;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  @media (min-width: 768px) {
+    .nav-links {
+      display: flex;
+    }
+    .hamburger-btn {
+      display: none;
+    }
+  }
+&lt;/style&gt;
+
+&lt;header class=&quot;app-nav&quot;&gt;
+  &lt;div style=&quot;font-weight: 800; font-size: 18px; color: #1e40af;&quot;&gt;WZ Storehouse&lt;/div&gt;
+  &lt;nav class=&quot;nav-links&quot;&gt;
+    &lt;a href=&quot;#&quot;&gt;Chapters&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Practice&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Showcase&lt;/a&gt;
+    &lt;a href=&quot;#&quot;&gt;Profile&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;button class=&quot;hamburger-btn&quot; id=&quot;mobileMenuBtn&quot;&gt;☰&lt;/button&gt;
+&lt;/header&gt;
+&lt;div id=&quot;mobileDrawer&quot; style=&quot;display: none; padding: 16px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; font-family: system-ui, sans-serif;&quot;&gt;
+  &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: #1e293b; text-decoration: none;&quot;&gt;Chapters&lt;/a&gt;
+  &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: #1e293b; text-decoration: none;&quot;&gt;Practice Sandbox&lt;/a&gt;
+  &lt;a href=&quot;#&quot; style=&quot;display: block; padding: 8px 0; color: #1e293b; text-decoration: none;&quot;&gt;Community Showcase&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  document.getElementById(&#x27;mobileMenuBtn&#x27;).onclick = function() {
+    const d = document.getElementById(&#x27;mobileDrawer&#x27;);
+    d.style.display = d.style.display === &#x27;block&#x27; ? &#x27;none&#x27; : &#x27;block&#x27;;
+  };
+&lt;/script&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output Preview</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 320px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="lesson.html" class="btn secondary">⬅ Review Lesson Theory</a>
+            <a href="../index.html" class="btn primary">Chapter Index ➜</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Practice Class Matrix | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 03 | Fluid Layouts with clamp(), min() & max() - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 07: Responsive Design</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 07 • Lesson 03</span>
+            <h1>Fluid Layouts with clamp(), min() & max()</h1>
+            <p>Ditch rigid pixel media queries in favor of modern fluid CSS mathematical functions.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>clamp()</h3>
+                    <p>clamp(min, preferred, max)</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Viewport Units</h3>
+                    <p>vw, vh, vi, dvh</p>
+                </div>
+                <div class="summary-card">
+                    <h3>min() & max()</h3>
+                    <p>Dynamic boundaries</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Fluid Spaces</h3>
+                    <p>Fluid padding and gaps</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Use clamp(min, preferred, max) to interpolate font sizes and paddings smoothly</li>
+<li>✔ Understand new dynamic viewport units: dvh, lvh, and svh for mobile address bar resilience</li>
+<li>✔ Combine percentages with calc() and min() to eliminate layout breaking</li>
+<li>✔ Build zero-breakpoint fluid components that look effortless on any viewport</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. The Magic of CSS clamp()</h2>
+            <p>clamp(MIN, VAL, MAX) takes three values: a minimum limit, a preferred scaling value (usually containing a viewport unit like vw), and an upper limit. The browser automatically calculates the exact proportional value without jumping between discrete media queries.</p>
+            <ul class='chapter-list'><li>font-size: clamp(1.2rem, 3vw + 0.5rem, 2.5rem);</li>
+<li>padding: clamp(12px, 4vw, 36px);</li>
+<li>width: min(100% - 32px, 1200px); (Safe centered container pattern)</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;div style=&quot;font-family: sans-serif; padding: clamp(16px, 4vw, 36px); background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; text-align: center;&quot;&gt;
+  &lt;h2 style=&quot;font-size: clamp(1.4rem, 4vw, 2.8rem); margin: 0 0 10px; color: #0f172a; line-height: 1.2;&quot;&gt;
+    Truly Fluid Typography
+  &lt;/h2&gt;
+  &lt;p style=&quot;font-size: clamp(0.9rem, 2vw, 1.15rem); color: #475569; margin: 0;&quot;&gt;
+    This heading scales smoothly pixel-by-pixel with the viewport width, staying strictly between 1.4rem and 2.8rem.
+  &lt;/p&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

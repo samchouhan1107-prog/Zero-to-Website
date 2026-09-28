@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 06 | Modals, Forms, Accordions & Interactive Feedback - WZ Storehouse</title>
+    <link rel="stylesheet" href="../../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <script src="../../../Assets/js/main.js" defer></script>
+    <script src="../../../Assets/js/lesson.js" defer></script>
+</head>
+<body class="lesson-page">
+    <header>
+        <div class="logo">
+            <a href="../../../index.html" class="logo-link">
+                <h1>WZ STOREHOUSE</h1>
+                <p>Learn • Practice • Build • Share</p>
+            </a>
+        </div>
+        <nav>
+            <a href="../../../index.html">🏠 Home</a>
+            <a href="../index.html">⬅ Chapter 08: Bootstrap</a>
+            <button id="settingsBtn">⚙ Settings</button>
+        </nav>
+    </header>
+
+    <div id="settingsPanel" class="settings-panel">
+        <h3>⚙ Settings</h3>
+        <button id="darkModeBtn">🌙 Dark Mode</button>
+        <button id="fontSizeBtn">🔤 Font Size</button>
+        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
+    </div>
+
+    <main class="container chapter-page">
+        <section class="chapter-hero">
+            <span class="chapter-badge">Chapter 08 • Lesson 06</span>
+            <h1>Modals, Forms, Accordions & Interactive Feedback</h1>
+            <p>Master rich user input: floating labels, modal dialogs, collapsible accordions, and dismissible alerts.</p>
+
+            <div class="info-grid">
+                
+                <div class="summary-card">
+                    <h3>Modals</h3>
+                    <p>modal, modal-dialog, modal-content</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Forms</h3>
+                    <p>form-control, form-floating, form-select</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Accordions</h3>
+                    <p>accordion-item & accordion-collapse</p>
+                </div>
+                <div class="summary-card">
+                    <h3>Dismissible</h3>
+                    <p>alert-dismissible with data-bs-dismiss</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section">
+            <h2>🎯 Learning Objectives</h2>
+            <ul class="chapter-list">
+                <li>✔ Build accessible modal dialogs with backdrop blur and keyboard escape exit</li>
+<li>✔ Use modern floating label inputs (.form-floating) for compact forms</li>
+<li>✔ Create collapsible FAQ accordions that keep only one item open at a time</li>
+<li>✔ Provide dismissible feedback alerts using data-bs-dismiss='alert'</li>
+
+            </ul>
+        </section>
+
+        
+        <section class="chapter-section">
+            <h2>1. Modern Floating Labels and Dialogs</h2>
+            <p>Bootstrap 5 floating labels provide clean Google Material-style inputs where the placeholder smoothly animates into a top label when focused.</p>
+            <ul class='chapter-list'><li><div class='form-floating mb-3'><input class='form-control' placeholder='name@domain.com'><label>Email address</label></div></li>
+<li>Accessible modals prevent background scroll and trap focus automatically</li>
+</ul>
+        </section>
+
+        <section class="chapter-section">
+            <h2>💻 Interactive Code Demo</h2>
+            <p>Review the snippet below, then try the hands-on practice challenge.</p>
+            <div class="code-playground">
+                <div class="editor-panel">
+                    <h3>Source Snippet</h3>
+                    <textarea id="htmlEditor">&lt;link href=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;script src=&quot;https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;div class=&quot;container py-3 text-center&quot;&gt;
+  &lt;button class=&quot;btn btn-primary&quot; data-bs-toggle=&quot;modal&quot; data-bs-target=&quot;#infoModal&quot;&gt;
+    Open Registration Modal ⚡
+  &lt;/button&gt;
+
+  &lt;div class=&quot;modal fade&quot; id=&quot;infoModal&quot; tabindex=&quot;-1&quot;&gt;
+    &lt;div class=&quot;modal-dialog modal-dialog-centered&quot;&gt;
+      &lt;div class=&quot;modal-content text-start&quot;&gt;
+        &lt;div class=&quot;modal-header&quot;&gt;
+          &lt;h5 class=&quot;modal-title fw-bold&quot;&gt;Student Registration&lt;/h5&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn-close&quot; data-bs-dismiss=&quot;modal&quot;&gt;&lt;/button&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;modal-body&quot;&gt;
+          &lt;div class=&quot;form-floating mb-3&quot;&gt;
+            &lt;input type=&quot;text&quot; class=&quot;form-control&quot; id=&quot;fName&quot; placeholder=&quot;Alex&quot;&gt;
+            &lt;label for=&quot;fName&quot;&gt;Developer Handle&lt;/label&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;modal-footer&quot;&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-secondary&quot; data-bs-dismiss=&quot;modal&quot;&gt;Cancel&lt;/button&gt;
+          &lt;button type=&quot;button&quot; class=&quot;btn btn-primary&quot; data-bs-dismiss=&quot;modal&quot;&gt;Save Profile&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</textarea>
+                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
+                </div>
+                <div class="preview-panel">
+                    <h3>Live Output</h3>
+                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
+                </div>
+            </div>
+        </section>
+
+        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
+            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
+            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
+        </section>
+    </main>
+    <footer>
+        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
