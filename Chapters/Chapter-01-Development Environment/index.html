@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 01 | Development Environment - WebZoneBW.shop</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../Assets/css/responsive.css">
+    
+    <script src="../../Assets/js/main.js" defer></script>
+    <script src="../../Assets/js/lesson.js" defer></script>
+    <script src="../../Assets/js/navigation.js" defer></script>
+</head>
+<body class="chapter-page">
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
+
+    <main class="container" id="main-content">
+        <!-- CHAPTER HERO - LEARNING ROADMAP -->
+        <section class="chapter-hero">
+            <div class="chapter-badge">Chapter 01</div>
+            <h1>Development Environment Setup</h1>
+            <p class="chapter-subtitle">Learn the essential tools and workflows for modern web development</p>
+            
+            <!-- CHAPTER METADATA -->
+            <div class="chapter-meta">
+                <div class="lessons-info">
+                    <span class="lessons-count">📚 5 Lessons</span>
+                    <span class="progress-info">📈 Progress: <span id="chapterProgress">0%</span></span>
+                </div>
+                <div class="difficulty-info">
+                    <span class="difficulty-label">Difficulty:</span>
+                    <div class="difficulty-dots">
+                        <span class="difficulty-dot active"></span>
+                        <span class="difficulty-dot active"></span>
+                        <span class="difficulty-dot"></span>
+                        <span class="difficulty-dot"></span>
+                        <span class="difficulty-dot"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LEARNING PATH OVERVIEW -->
+        <section class="learning-path">
+            <h2>🗺️ Learning Path</h2>
+            <div class="path-timeline" id="pathTimeline">
+                <!-- Lesson states will be populated by JavaScript -->
+                <div class="path-stage" data-lesson="1">
+                    <div class="stage-icon">📝</div>
+                    <div class="stage-title">Your First Webpage</div>
+                    <div class="stage-description">Create and preview HTML files</div>
+                </div>
+                <div class="path-stage" data-lesson="2">
+                    <div class="stage-icon">💻</div>
+                    <div class="stage-title">Code Editor Setup</div>
+                    <div class="stage-description">Choose and configure your editor</div>
+                </div>
+                <div class="path-stage" data-lesson="3">
+                    <div class="stage-icon">🔍</div>
+                    <div class="stage-title">Browser Developer Tools</div>
+                    <div class="stage-description">Debug and inspect websites</div>
+                </div>
+                <div class="path-stage" data-lesson="4">
+                    <div class="stage-icon">📁</div>
+                    <div class="stage-title">Project Structure</div>
+                    <div class="stage-description">Organize files and folders</div>
+                </div>
+                <div class="path-stage" data-lesson="5">
+                    <div class="stage-icon">🚀</div>
+                    <div class="stage-title">Running & Testing</div>
+                    <div class="stage-description">Local development servers</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CHAPTER INTRODUCTION -->
+        <section class="chapter-section">
+            <h2>🎯 What You'll Learn</h2>
+            <p>This chapter introduces the essential tools and workflows you'll need to become an effective web developer. You'll learn how to set up your development environment, use code editors effectively, and understand how browsers work with your code.</p>
+        </section>
+
+        <!-- WHY IT MATTERS -->
+        <section class="chapter-section">
+            <h2>💡 Why This Matters</h2>
+            <p>A properly configured development environment is the foundation of all web development work. Just as a carpenter needs good tools, web developers need the right setup to write, test, and debug code efficiently.</p>
+        </section>
+
+        <!-- LEARNING OUTCOMES -->
+        <section class="chapter-section">
+            <h2>🧠 What You'll Understand</h2>
+            <ul class="chapter-list">
+                <li>How browsers interpret and display HTML, CSS, and JavaScript</li>
+                <li>The purpose and importance of semantic HTML5 markup</li>
+                <li>How to use browser developer tools for debugging</li>
+                <li>Best practices for organizing project files and folders</li>
+                <li>How to run local development servers for testing</li>
+            </ul>
+        </section>
+
+        <!-- PRACTICAL SKILLS -->
+        <section class="chapter-section">
+            <h2>🛠️ What You'll Be Able to Do</h2>
+            <ul class="chapter-list">
+                <li>Create and save HTML files with proper structure</li>
+                <li>Configure and use a code editor efficiently</li>
+                <li>Inspect and debug web pages using browser tools</li>
+                <li>Organize projects with logical file structures</li>
+                <li>Test websites locally before deployment</li>
+            </ul>
+        </section>
+
+        <!-- CURRENT LESSON INDICATOR -->
+        <section class="chapter-section" id="currentLessonSection" style="display: none;">
+            <h2>▶️ Current Lesson</h2>
+            <div class="current-lesson-info">
+                <p>You're currently working on: <strong id="currentLessonName"></strong></p>
+                <p><a href="#" id="continueCurrentLesson" class="btn-primary">Continue Learning</a></p>
+            </div>
+        </section>
+
+        <!-- LESSON NAVIGATION -->
+        <section class="lesson-navigation">
+            <h3>📖 Start Learning</h3>
+            <div class="lesson-grid" id="lessonGrid">
+                <!-- Lesson cards will be populated by JavaScript -->
+            </div>
+        </section>
+
+        <!-- QUICK START -->
+        <section class="quick-start">
+            <h2>🚀 Quick Start</h2>
+            <p>Begin with <strong>Lesson 1: Your First Webpage</strong> to create your first HTML file and see how browsers display web content.</p>
+            <a href="Lesson-01-Your-First-Webpage/lesson.html" class="btn-primary">Start Lesson 1 →</a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Chapter progress tracking
+        let chapterData = {
+            chapter: "Chapter-01-Development Environment",
+            lessons: [
+                { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "not-started" },
+                { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "not-started" },
+                { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "not-started" },
+                { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "not-started" },
+                { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+            ]
+        };
+
+        // Load progress from localStorage
+        function loadProgress() {
+            const saved = localStorage.getItem(`progress_${chapterData.chapter}`);
+            if (saved) {
+                const progress = JSON.parse(saved);
+                chapterData.lessons = progress.lessons || chapterData.lessons;
+            }
+            updateUI();
+        }
+
+        // Update UI based on progress
+        function updateUI() {
+            const completed = chapterData.lessons.filter(l => l.status === 'completed').length;
+            const total = chapterData.lessons.length;
+            const percentage = Math.round((completed / total) * 100);
+            
+            // Update progress display
+            document.getElementById('chapterProgress').textContent = `${percentage}%`;
+            
+            // Update path timeline
+            const pathStages = document.querySelectorAll('.path-stage');
+            pathStages.forEach((stage, index) => {
+                const lesson = chapterData.lessons[index];
+                stage.classList.remove('completed', 'current', 'not-started');
+                
+                if (lesson.status === 'completed') {
+                    stage.classList.add('completed');
+                    stage.querySelector('.stage-icon').innerHTML = '✓';
+                } else if (lesson.status === 'in-progress') {
+                    stage.classList.add('current');
+                } else {
+                    stage.classList.add('not-started');
+                }
+            });
+            
+            // Update lesson grid
+            const lessonGrid = document.getElementById('lessonGrid');
+            lessonGrid.innerHTML = '';
+            
+            chapterData.lessons.forEach((lesson, index) => {
+                const lessonCard = createLessonCard(lesson, index + 1);
+                lessonGrid.appendChild(lessonCard);
+            });
+            
+            // Show current lesson if any
+            const currentLesson = chapterData.lessons.find(l => l.status === 'in-progress');
+            if (currentLesson) {
+                document.getElementById('currentLessonSection').style.display = 'block';
+                document.getElementById('currentLessonName').textContent = currentLesson.title;
+                document.getElementById('continueCurrentLesson').href = `${currentLesson.id}/lesson.html`;
+            }
+        }
+
+        // Create lesson card
+        function createLessonCard(lesson, lessonNumber) {
+            const card = document.createElement('div');
+            card.className = `lesson-card ${lesson.status}`;
+            
+            const statusIcon = lesson.status === 'completed' ? '✅' : 
+                             lesson.status === 'in-progress' ? '🟡' : '⚪';
+            
+            card.innerHTML = `
+                <div class="lesson-header">
+                    <span class="lesson-number">${lessonNumber}</span>
+                    <span class="lesson-status">${statusIcon}</span>
+                </div>
+                <h3>${lesson.title}</h3>
+                <a href="${lesson.id}/lesson.html" class="btn-primary lesson-link">
+                    ${lesson.status === 'completed' ? 'Review' : 'Start'} Lesson
+                </a>
+            `;
+            
+            return card;
+        }
+
+        // Save progress
+        function saveProgress() {
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Mark lesson as started
+        function startLesson(lessonId) {
+            const lesson = chapterData.lessons.find(l => l.id === lessonId);
+            if (lesson && lesson.status === 'not-started') {
+                lesson.status = 'in-progress';
+                saveProgress();
+                updateUI();
+            }
+        }
+
+        // Mark lesson as completed
+        function completeLesson(lessonId) {
+            const lesson = chapterData.lessons.find(l => l.id === lessonId);
+            if (lesson) {
+                lesson.status = 'completed';
+                saveProgress();
+                updateUI();
+            }
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            
+            // Add click handlers for lesson cards
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('lesson-link')) {
+                    const lessonId = e.target.closest('.lesson-card').dataset.lessonId;
+                    if (lessonId) {
+                        startLesson(lessonId);
+                    }
+                }
+            });
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+                const links = Array.from(document.querySelectorAll('.lesson-link'));
+                const currentIndex = links.findIndex(link => link.matches(':focus'));
+                
+                if (e.key === 'ArrowRight' && currentIndex < links.length - 1) {
+                    links[currentIndex + 1].focus();
+                } else if (e.key === 'ArrowLeft' && currentIndex > 0) {
+                    links[currentIndex - 1].focus();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
