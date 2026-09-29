@@ -3,106 +3,529 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 03 | Browser Developer Tools - WZ Storehouse</title>
-    <link rel="stylesheet" href="../../../Assets/css/main.css">
-    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
-    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
-    <script src="../../../Assets/js/main.js" defer></script>
-    <script src="../../../Assets/js/lesson.js" defer></script>
+    <title>Lesson 03 | Browser Developer Tools - WebZoneBW.shop</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../Assets/css/responsive.css">
+    <link rel="stylesheet" href="../../Assets/css/w3schools-milkyway.css">
+    
+    <script src="../../Assets/js/main.js" defer></script>
+    <script src="../../Assets/js/lesson.js" defer></script>
+    <script src="../../Assets/js/navigation.js" defer></script>
 </head>
 <body class="lesson-page">
-    <header>
-        <div class="logo">
-            <a href="../../../index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
-        </div>
-        <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 01</a>
-            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
-        </nav>
-    </header>
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
 
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-    </div>
-
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 01 • Lesson 03</span>
+    <main class="container" id="main-content">
+        <!-- LESSON HEADER -->
+        <section class="lesson-header">
+            <div class="lesson-meta">
+                <span class="chapter-badge">Chapter 01</span>
+                <span class="lesson-progress">📈 Lesson 3 of 5</span>
+            </div>
             <h1>Browser Developer Tools</h1>
-            <p>Inspect the DOM, live-edit CSS styles, debug JavaScript in the Console, simulate mobile screens, and diagnose layout issues like an expert.</p>
-
-            <div class="info-grid">
-                <div class="summary-card">
-                    <h3>Shortcut</h3>
-                    <p>F12 / Cmd+Opt+I</p>
+            <p class="lesson-subtitle">Master the built-in tools that help you debug, inspect, and understand web pages.</p>
+            
+            <!-- Progress bar -->
+            <div class="lesson-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
                 </div>
-                <div class="summary-card">
-                    <h3>Key Panels</h3>
-                    <p>Elements &amp; Console</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Feature</h3>
-                    <p>Device Emulation</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Estimated Time</h3>
-                    <p>30 Minutes</p>
-                </div>
+                <span class="progress-text">0% Complete</span>
             </div>
         </section>
 
-        <section class="chapter-section">
-            <h2>1. Lesson Overview</h2>
-            <p>Every modern browser (Chrome, Edge, Firefox, Safari) includes built-in Developer Tools (DevTools). DevTools lets you inspect what the browser renders in real time, view computed CSS dimensions, and test styling experiments before changing your source files.</p>
-        </section>
+        <!-- LESSON CONTENT STRUCTURE -->
+        <div class="lesson-content">
+            <!-- CONCEPT SECTION -->
+            <section class="lesson-section">
+                <h2>🧩 Concept</h2>
+                <div class="concept-box">
+                    <h3>Understanding Developer Tools</h3>
+                    <p>Every modern web browser includes powerful developer tools that allow you to inspect, debug, and modify web pages in real-time. These tools are essential for understanding how websites work and for fixing problems in your code.</p>
+                </div>
+            </section>
 
-        <section class="chapter-section">
-            <h2>2. The Core Panels</h2>
-            <ul class="chapter-list">
-                <li><strong>Elements / Inspector Panel:</strong> Displays the live DOM tree. Double click any HTML tag or attribute to change it live. Inspect applied CSS rules and the interactive Box Model diagram.</li>
-                <li><strong>Console Panel:</strong> Displays error messages, warnings, and lets you evaluate JavaScript expressions interactively with <code>console.log()</code>.</li>
-                <li><strong>Network Panel:</strong> Tracks every HTTP request, image, stylesheet, and font loaded, including download times and response status codes (200, 404, 500).</li>
-                <li><strong>Device Toolbar:</strong> Toggles viewport simulation to test how your page looks on iPhone, Pixel, iPad, or custom responsive widths.</li>
-            </ul>
-        </section>
+            <!-- EXPLANATION SECTION -->
+            <section class="lesson-section">
+                <h2>📖 Explanation</h2>
+                <div class="explanation-content">
+                    <h3>Developer Tools Overview</h3>
+                    <p>Browser developer tools provide multiple panels for different aspects of web development:</p>
+                    
+                    <div class="code-example">
+                        <pre><code>Developer Tools Panels:
+├── Elements (🔍)
+│   ├── HTML structure inspection
+│   ├── CSS rules and properties
+│   ├── Real-time DOM editing
+│   └── Computed styles
+├── Console (📟)
+│   ├── Error messages
+│   ├── Console.log output
+│   ├── Warning notifications
+│   └── Execution debugging
+├── Sources (📄)
+│   ├── JavaScript files
+│   ├── Breakpoints and debugging
+│   ├── Call stack inspection
+│   └── Variable watching
+├── Network (🌐)
+│   ├── HTTP requests
+│   ├── Loading performance
+│   ├── Resource timing
+│   └── Request headers
+└── Application (📱)
+    ├── Local storage
+    ├── Cookies
+    ├── Service workers
+    └── Manifest files</code></pre>
+                    </div>
 
-        <section class="chapter-section">
-            <h2>3. Inspecting CSS Styles Live</h2>
-            <div class="code-box">
-                <pre><code>/* DevTools Style Pane Simulation */
-.product-card {
-    background: #ffffff;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    padding: 16px; /* Toggle checkbox to test spacing instantly */
-}</code></pre>
+                    <div class="explanation-points">
+                        <div class="point-item">
+                            <h4>🔍 Elements Panel</h4>
+                            <p>Inspect and modify HTML structure and CSS styles in real-time.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>📟 Console Panel</h4>
+                            <p>View JavaScript errors, log messages, and debug output.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🌐 Network Panel</h4>
+                            <p>Analyze website loading performance and HTTP requests.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>📄 Sources Panel</h4>
+                            <p>Debug JavaScript code with breakpoints and step-through execution.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXAMPLE SECTION -->
+            <section class="lesson-section">
+                <h2>💡 Example</h2>
+                <div class="example-content">
+                    <h3>Real-World Debugging Scenarios</h3>
+                    <p>Developer tools help you solve common web development problems:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>🐛 CSS Debugging</h4>
+                            <ul>
+                                <li>Why isn't my element styled correctly?</li>
+                                <li>Which CSS rule is being applied?</li>
+                                <li>Why is my layout broken?</li>
+                                <li>How can I override inherited styles?</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>⚡ JavaScript Debugging</h4>
+                            <ul>
+                                <li>Why is my function not working?</li>
+                                <li>What are the variable values?</li>
+                                <li>Where is the error occurring?</li>
+                                <li>How can I step through code?</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🔍 Performance Analysis</h4>
+                            <ul>
+                                <li>Why is my page loading slowly?</li>
+                                <li>Which resources are blocking rendering?</li>
+                                <li>How can I optimize load time?</li>
+                                <li>What's causing layout shifts?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICAL CONTEXT SECTION -->
+            <section class="lesson-section">
+                <h2>🏠 Practical Context</h2>
+                <div class="practical-content">
+                    <h3>Why This Matters for Development</h3>
+                    <p>Mastering developer tools is crucial because:</p>
+                    
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <h4>🚀 Faster Debugging</h4>
+                            <p>Identify and fix issues in minutes instead of hours.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🎨 Learning from Others</h4>
+                            <p>Inspect how professional websites are built.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🔧 Performance Optimization</h4>
+                            <p>Find and fix performance bottlenecks.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>📊 Understanding Web Standards</h4>
+                            <p>See how browsers interpret your code.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICE SECTION -->
+            <section class="lesson-section">
+                <h2>🧪 Practice</h2>
+                <div class="practice-content">
+                    <h3>Interactive Developer Tools Tutorial</h3>
+                    <p>Follow this guide to explore developer tools:</p>
+                    
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>Steps to Open Developer Tools</h3>
+                            <textarea id="devToolsSteps">1. Open any webpage
+   (e.g., google.com)
+   
+2. Open Developer Tools:
+   • Chrome: F12 or Ctrl+Shift+I
+   • Firefox: Ctrl+Shift+I
+   • Edge: F12 or Ctrl+Shift+I
+   
+3. Explore the Elements Panel:
+   • Click on elements in the DOM tree
+   • See computed CSS styles
+   • Modify styles in real-time
+   
+4. Try the Console:
+   • Type console.log("Hello")
+   • Check for error messages
+   
+5. Use Network Panel:
+   • Reload the page
+   • See all loaded resources</textarea>
+                            <button onclick="openDevTools()" class="run-btn">Open Tools</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Live Demo Page</h3>
+                            <div id="demoPage">
+                                <div class="demo-header">
+                                    <h2>Developer Tools Demo</h2>
+                                    <p>Open developer tools and explore this page!</p>
+                                </div>
+                                <div class="demo-content">
+                                    <h3>Sample HTML Structure</h3>
+                                    <p>This paragraph demonstrates how you can inspect elements.</p>
+                                    <button onclick="showAlert()">Click Me</button>
+                                    <div class="demo-box">
+                                        <p>Inspect this box to see its CSS properties.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KNOWLEDGE CHECK SECTION -->
+            <section class="lesson-section">
+                <h2>❓ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <h3>Test Your Understanding</h3>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 1: Which panel shows HTML structure?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) Console</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) Elements</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) Network</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) Sources</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q1', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 2: How do you open developer tools in Chrome?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span>A) Ctrl+Alt+D</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span>B) F12 or Ctrl+Shift+I</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span>C) Alt+F4</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span>D) Ctrl+P</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q2', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON OUTCOME -->
+            <section class="lesson-section">
+                <h2>🎯 Learning Outcome</h2>
+                <div class="outcome-content">
+                    <h3>What You've Learned</h3>
+                    <div class="outcome-grid">
+                        <div class="outcome-item">
+                            <h4>🔍 Developer Tools Overview</h4>
+                            <p>You understand the different panels and their purposes in browser developer tools.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🔧 Real-time Inspection</h4>
+                            <p>You know how to inspect HTML, CSS, and modify content in real-time.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🐛 Debugging Techniques</h4>
+                            <p>You can identify and fix common web development issues using developer tools.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>📊 Performance Analysis</h4>
+                            <p>You understand how to analyze website performance and loading issues.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON COMPLETE -->
+            <section class="lesson-complete" id="lessonComplete" style="display: none;">
+                <div class="complete-content">
+                    <h2>✅ Lesson Complete!</h2>
+                    <div class="complete-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Lesson Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2/2</span>
+                            <span class="stat-label">Questions Correct</span>
+                        </div>
+                    </div>
+                    
+                    <div class="complete-message">
+                        <h3>Great job! You're now equipped with debugging superpowers.</h3>
+                        <p>You can now use developer tools to inspect, debug, and optimize any web page.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LESSON NAVIGATION -->
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                ⬅ Previous Lesson
+            </button>
+            <div class="lesson-counter">
+                <span class="current-lesson">3</span> of <span class="total-lessons">5</span>
             </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>4. Practice Challenge</h2>
-            <p>Practice targeting and styling elements using an interactive debugger card:</p>
-            <a class="lesson-card" href="practice.html">
-                <h3>Open Lesson 03 Practice Challenge →</h3>
-                <p>Simulate inspecting and modifying an element's inline attributes and style state.</p>
-            </a>
-        </section>
-
-        <section class="chapter-section chapter-nav-links">
-            <a href="../Lesson-02-Code-Editor-Setup/lesson.html">⬅ Lesson 02: Code Editor Setup</a>
-            <a href="practice.html">Next: Practice Activity ➜</a>
-        </section>
+            <button class="nav-btn next-btn" id="nextBtn">
+                Next Lesson ➡
+            </button>
+        </nav>
     </main>
 
     <footer>
-        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Lesson state management
+        let lessonState = {
+            id: "Lesson-03-Browser-Developer-Tools",
+            chapter: "Chapter-01-Development Environment",
+            progress: 0,
+            completed: false,
+            quizAnswers: {}
+        };
+
+        // Load lesson state
+        function loadLessonState() {
+            const saved = localStorage.getItem(`lesson_${lessonState.id}`);
+            if (saved) {
+                const state = JSON.parse(saved);
+                lessonState = { ...lessonState, ...state };
+                updateUI();
+            }
+        }
+
+        // Save lesson state
+        function saveLessonState() {
+            localStorage.setItem(`lesson_${lessonState.id}`, JSON.stringify(lessonState));
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            progressFill.style.width = `${lessonState.progress}%`;
+            progressText.textContent = `${lessonState.progress}% Complete`;
+
+            // Update navigation
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = false; // Has previous lesson
+            nextBtn.disabled = !lessonState.completed;
+
+            // Show completion message
+            if (lessonState.completed) {
+                document.getElementById('lessonComplete').style.display = 'block';
+                nextBtn.innerHTML = 'Continue to Lesson 4 ➡';
+            }
+        }
+
+        // Open developer tools
+        function openDevTools() {
+            const preview = document.getElementById('demoPage');
+            preview.innerHTML += `
+                <div class="tools-tip">
+                    <h4>💡 Pro Tip:</h4>
+                    <p>Press F12 or Ctrl+Shift+I to open developer tools!</p>
+                    <p>Try clicking on different elements in the Elements panel to see their properties.</p>
+                </div>
+            `;
+            
+            // Update progress
+            if (lessonState.progress < 80) {
+                lessonState.progress = 80;
+                saveLessonState();
+                updateUI();
+            }
+        }
+
+        // Show demo alert
+        function showAlert() {
+            alert('This button works! Check the Console panel for any messages.');
+        }
+
+        // Check quiz answers
+        function checkAnswer(questionId, correctAnswer) {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            if (!selected) return;
+
+            const isCorrect = selected.value === correctAnswer;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            lessonState.quizAnswers[questionId] = isCorrect;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">✅ Correct! Well done.</span>';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">❌ Try again. Review the explanation above.</span>';
+                feedback.className = 'feedback incorrect';
+            }
+
+            // Check if all questions are answered correctly
+            const allCorrect = Object.values(lessonState.quizAnswers).every(answer => answer === true);
+            if (allCorrect && Object.keys(lessonState.quizAnswers).length === 2) {
+                lessonState.progress = 100;
+                lessonState.completed = true;
+                saveLessonState();
+                updateUI();
+                
+                // Update chapter progress
+                updateChapterProgress();
+            }
+        }
+
+        // Update chapter progress
+        function updateChapterProgress() {
+            const chapterData = {
+                chapter: "Chapter-01-Development Environment",
+                lessons: [
+                    { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "completed" },
+                    { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "completed" },
+                    { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "completed" },
+                    { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "not-started" },
+                    { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+                ]
+            };
+            
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Navigation handlers
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            // Navigate to previous lesson
+            window.location.href = '../Lesson-02-Code-Editor-Setup/lesson.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (lessonState.completed) {
+                // Navigate to next lesson
+                window.location.href = '../Lesson-04-Files-Folders-Project-Structure/lesson.html';
+            } else {
+                // Show completion message
+                alert('Please complete the lesson first!');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) {
+                document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLessonState();
+        });
+    </script>
+
+    <style>
+        .demo-header {
+            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+        
+        .demo-content {
+            padding: 1rem;
+            background: #f8fafc;
+            border-radius: 8px;
+        }
+        
+        .demo-box {
+            background: #e0f2fe;
+            border: 2px solid #0ea5e9;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+        
+        .tools-tip {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+    </style>
 </body>
 </html>

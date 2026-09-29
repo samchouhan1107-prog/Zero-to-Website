@@ -3,115 +3,544 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 04 | Files, Folders & Project Structure - WZ Storehouse</title>
-    <link rel="stylesheet" href="../../../Assets/css/main.css">
-    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
-    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
-    <script src="../../../Assets/js/main.js" defer></script>
-    <script src="../../../Assets/js/lesson.js" defer></script>
+    <title>Lesson 04 | Files Folders Project Structure - WebZoneBW.shop</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../Assets/css/responsive.css">
+    <link rel="stylesheet" href="../../Assets/css/w3schools-milkyway.css">
+    
+    <script src="../../Assets/js/main.js" defer></script>
+    <script src="../../Assets/js/lesson.js" defer></script>
+    <script src="../../Assets/js/navigation.js" defer></script>
 </head>
 <body class="lesson-page">
-    <header>
-        <div class="logo">
-            <a href="../../../index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
+
+    <main class="container" id="main-content">
+        <!-- LESSON HEADER -->
+        <section class="lesson-header">
+            <div class="lesson-meta">
+                <span class="chapter-badge">Chapter 01</span>
+                <span class="lesson-progress">📈 Lesson 4 of 5</span>
+            </div>
+            <h1>Files Folders Project Structure</h1>
+            <p class="lesson-subtitle">Organize your web projects with proper file and folder structure for maintainability and scalability.</p>
+            
+            <!-- Progress bar -->
+            <div class="lesson-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% Complete</span>
+            </div>
+        </section>
+
+        <!-- LESSON CONTENT STRUCTURE -->
+        <div class="lesson-content">
+            <!-- CONCEPT SECTION -->
+            <section class="lesson-section">
+                <h2>🧩 Concept</h2>
+                <div class="concept-box">
+                    <h3>Understanding Project Organization</h3>
+                    <p>A well-organized project structure makes your web development work more efficient, maintainable, and scalable. Just as a library needs systematic organization, your code files need logical structure to be easily understood and managed.</p>
+                </div>
+            </section>
+
+            <!-- EXPLANATION SECTION -->
+            <section class="lesson-section">
+                <h2>📖 Explanation</h2>
+                <div class="explanation-content">
+                    <h3>File and Folder Structure Basics</h3>
+                    <p>Professional web projects follow consistent patterns for organizing files:</p>
+                    
+                    <div class="code-example">
+                        <pre><code>Standard Web Project Structure:
+📁 my-website/
+├── 📄 index.html          # Main entry point
+├── 📄 about.html          # About page
+├── 📄 contact.html        # Contact page
+│
+├── 📁 assets/             # All project assets
+│   ├── 📁 css/           # Stylesheets
+│   │   ├── 📄 main.css   # Main styles
+│   │   └── 📄 responsive.css
+│   ├── 📁 js/            # JavaScript files
+│   │   ├── 📄 main.js    # Main scripts
+│   │   └── 📄 utils.js
+│   ├── 📁 images/        # Image assets
+│   │   ├── 📄 logo.png
+│   │   └── 📄 hero.jpg
+│   └── 📁 fonts/         # Font files
+│       └── 📄 roboto.ttf
+│
+├── 📁 pages/             # Individual pages
+│   ├── 📄 home.html
+│   └── 📄 blog/
+│       ├── 📄 post1.html
+│       └── 📄 post2.html
+│
+└── 📄 README.md          # Project documentation</code></pre>
+                    </div>
+
+                    <div class="explanation-points">
+                        <div class="point-item">
+                            <h4>📁 Logical Grouping</h4>
+                            <p>Organize files by type (CSS, JS, images) and by purpose (pages, components).</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🔗 Relative Paths</h4>
+                            <p>Use relative paths for linking files within your project for portability.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>📝 Naming Conventions</h4>
+                            <p>Use descriptive, consistent names for files and folders.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🚀 Scalability</h4>
+                            <p>Structure that grows with your project and team.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXAMPLE SECTION -->
+            <section class="lesson-section">
+                <h2>💡 Example</h2>
+                <div class="example-content">
+                    <h3>Real-World Project Examples</h3>
+                    <p>Here are examples of different types of web projects and their structures:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>🏠 Personal Portfolio</h4>
+                            <ul>
+                                <li>Simple structure with few pages</li>
+                                <li>CSS and JS in separate files</li>
+                                <li>Images in dedicated folder</li>
+                                <li>Easy to maintain and update</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🛍️ E-commerce Site</h4>
+                            <ul>
+                                <li>Complex product categories</li>
+                                <li>Multiple CSS files for sections</li>
+                                <li>JavaScript for cart functionality</li>
+                                <li>Asset organization by type</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>📖 Blog Platform</h4>
+                            <ul>
+                                <li>Posts in organized folders</li>
+                                <li>Template system for consistency</li>
+                                <li>Separate CSS for different views</li>
+                                <li>Media management system</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICAL CONTEXT SECTION -->
+            <section class="lesson-section">
+                <h2>🏠 Practical Context</h2>
+                <div class="practical-content">
+                    <h3>Why This Matters for Your Career</h3>
+                    <p>Proper project organization is essential because:</p>
+                    
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <h4>👥 Team Collaboration</h4>
+                            <p>Clear structure helps teams work together efficiently.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🔧 Maintainability</h4>
+                            <p>Easy to find and modify files as projects grow.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🚀 Performance</h4>
+                            <p>Optimized file structure improves loading times.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>📚 Documentation</h4>
+                            <p>Clear organization makes self-documentation easier.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICE SECTION -->
+            <section class="lesson-section">
+                <h2>🧪 Practice</h2>
+                <div class="practice-content">
+                    <h3>Interactive Project Structure Builder</h3>
+                    <p>Create a proper project structure by following these steps:</p>
+                    
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>Project Structure Commands</h3>
+                            <textarea id="projectCommands"># Create project directory structure
+mkdir my-website
+cd my-website
+
+# Create main HTML files
+touch index.html
+touch about.html
+touch contact.html
+
+# Create asset directories
+mkdir -p assets/css
+mkdir -p assets/js
+mkdir -p assets/images
+mkdir -p assets/fonts
+
+# Create CSS files
+touch assets/css/main.css
+touch assets/css/responsive.css
+
+# Create JavaScript files
+touch assets/js/main.js
+touch assets/js/utils.js
+
+# Create README for documentation
+touch README.md
+
+# Verify structure
+tree my-website</textarea>
+                            <button onclick="createProject()" class="run-btn">Create Project</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Generated Structure</h3>
+                            <div id="projectStructure">
+                                <p>Click "Create Project" to see the folder structure.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KNOWLEDGE CHECK SECTION -->
+            <section class="lesson-section">
+                <h2>❓ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <h3>Test Your Understanding</h3>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 1: What is the purpose of the assets folder?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) To store HTML files</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) To organize CSS, JS, images, and other media</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) To store documentation</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) To backup project files</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q1', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 2: Which file is typically the main entry point?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span>A) main.html</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span>B) start.html</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span>C) index.html</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span>D) home.html</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q2', 'c')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON OUTCOME -->
+            <section class="lesson-section">
+                <h2>🎯 Learning Outcome</h2>
+                <div class="outcome-content">
+                    <h3>What You've Learned</h3>
+                    <div class="outcome-grid">
+                        <div class="outcome-item">
+                            <h4>📁 Project Organization</h4>
+                            <p>You understand how to organize files and folders for web projects.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🔗 File Linking</h4>
+                            <p>You know how to use relative paths to link files within your project.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🏗️ Structure Patterns</h4>
+                            <p>You can create appropriate structures for different types of web projects.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🚀 Scalability</h4>
+                            <p>You understand how to structure projects that can grow with your needs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON COMPLETE -->
+            <section class="lesson-complete" id="lessonComplete" style="display: none;">
+                <div class="complete-content">
+                    <h2>✅ Lesson Complete!</h2>
+                    <div class="complete-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Lesson Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2/2</span>
+                            <span class="stat-label">Questions Correct</span>
+                        </div>
+                    </div>
+                    
+                    <div class="complete-message">
+                        <h3>Excellent! You're now organized for success.</h3>
+                        <p>You can now create and manage well-structured web projects that are easy to maintain and scale.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-        <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 01</a>
-            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+
+        <!-- LESSON NAVIGATION -->
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                ⬅ Previous Lesson
+            </button>
+            <div class="lesson-counter">
+                <span class="current-lesson">4</span> of <span class="total-lessons">5</span>
+            </div>
+            <button class="nav-btn next-btn" id="nextBtn">
+                Next Lesson ➡
+            </button>
         </nav>
-    </header>
-
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-    </div>
-
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 01 • Lesson 04</span>
-            <h1>Files, Folders &amp; Project Structure</h1>
-            <p>Master professional directory organization, relative vs absolute paths, naming conventions, and file management for production websites.</p>
-
-            <div class="info-grid">
-                <div class="summary-card">
-                    <h3>Root Entry</h3>
-                    <p>index.html</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Asset Dirs</h3>
-                    <p>css / js / images</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Paths</h3>
-                    <p>Relative (./ and ../)</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Estimated Time</h3>
-                    <p>25 Minutes</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>1. Professional Web Project Layout</h2>
-            <p>Every maintainable website separates structural markup, styles, scripts, and media into dedicated directories:</p>
-            <div class="code-box">
-                <pre><code>my-web-project/
-├── index.html          &lt;!-- Main homepage / root entry point --&gt;
-├── about.html          &lt;!-- Secondary pages in root or subdirectories --&gt;
-├── contact.html
-└── assets/
-    ├── css/
-    │   └── style.css   &lt;!-- Global styling rules --&gt;
-    ├── js/
-    │   └── app.js     &lt;!-- Interactive scripts --&gt;
-    └── images/
-        └── logo.svg    &lt;!-- Visual assets &amp; photography --&gt;</code></pre>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>2. Relative File Paths Demystified</h2>
-            <ul class="chapter-list">
-                <li><code>style.css</code>: In the exact same folder as the referencing HTML file.</li>
-                <li><code>./assets/css/style.css</code>: Step down into the <code>assets</code> folder, then <code>css</code>.</li>
-                <li><code>../index.html</code>: Step UP one parent directory level.</li>
-                <li><code>../../Assets/css/main.css</code>: Step UP two levels to reach the root Assets folder.</li>
-            </ul>
-        </section>
-
-        <section class="chapter-section">
-            <h2>3. Safe File Naming Rules</h2>
-            <ul class="chapter-list">
-                <li>✔ Always use all-lowercase letters (e.g. <code>profile-picture.jpg</code>).</li>
-                <li>✔ Use hyphens (<code>-</code>) instead of spaces to avoid broken URL encoding like <code>%20</code>.</li>
-                <li>✔ Never use special symbols like <code>#</code>, <code>?</code>, <code>&amp;</code>, or accented characters in web filenames.</li>
-            </ul>
-        </section>
-
-        <section class="chapter-section">
-            <h2>4. Practice Challenge</h2>
-            <p>Build a navigation card linking to relative file resources in the practice sandbox:</p>
-            <a class="lesson-card" href="practice.html">
-                <h3>Open Lesson 04 Practice Challenge →</h3>
-                <p>Construct clean relative hyperlinks and image references.</p>
-            </a>
-        </section>
-
-        <section class="chapter-section chapter-nav-links">
-            <a href="../Lesson-03-Browser-Developer-Tools/lesson.html">⬅ Lesson 03: Browser Developer Tools</a>
-            <a href="practice.html">Next: Practice Activity ➜</a>
-        </section>
     </main>
 
     <footer>
-        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Lesson state management
+        let lessonState = {
+            id: "Lesson-04-Files-Folders-Project-Structure",
+            chapter: "Chapter-01-Development Environment",
+            progress: 0,
+            completed: false,
+            quizAnswers: {}
+        };
+
+        // Load lesson state
+        function loadLessonState() {
+            const saved = localStorage.getItem(`lesson_${lessonState.id}`);
+            if (saved) {
+                const state = JSON.parse(saved);
+                lessonState = { ...lessonState, ...state };
+                updateUI();
+            }
+        }
+
+        // Save lesson state
+        function saveLessonState() {
+            localStorage.setItem(`lesson_${lessonState.id}`, JSON.stringify(lessonState));
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            progressFill.style.width = `${lessonState.progress}%`;
+            progressText.textContent = `${lessonState.progress}% Complete`;
+
+            // Update navigation
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = false; // Has previous lesson
+            nextBtn.disabled = !lessonState.completed;
+
+            // Show completion message
+            if (lessonState.completed) {
+                document.getElementById('lessonComplete').style.display = 'block';
+                nextBtn.innerHTML = 'Continue to Lesson 5 ➡';
+            }
+        }
+
+        // Create project structure
+        function createProject() {
+            const structure = document.getElementById('projectStructure');
+            structure.innerHTML = `
+                <div class="tree-view">
+                    <h4>📁 my-website/</h4>
+                    <div style="margin-left: 20px;">
+                        <p>📄 index.html</p>
+                        <p>📄 about.html</p>
+                        <p>📄 contact.html</p>
+                        <div style="margin-left: 20px;">
+                            <h5>📁 assets/</h5>
+                            <div style="margin-left: 20px;">
+                                <h6>📁 css/</h6>
+                                <div style="margin-left: 20px;">
+                                    <p>📄 main.css</p>
+                                    <p>📄 responsive.css</p>
+                                </div>
+                                <h6>📁 js/</h6>
+                                <div style="margin-left: 20px;">
+                                    <p>📄 main.js</p>
+                                    <p>📄 utils.js</p>
+                                </div>
+                                <h6>📁 images/</h6>
+                                <h6>📁 fonts/</h6>
+                            </div>
+                        </div>
+                        <p>📄 README.md</p>
+                    </div>
+                </div>
+                <div class="success-message">
+                    <h4>✅ Project Structure Created!</h4>
+                    <p>Your web project is now properly organized with logical file separation.</p>
+                </div>
+            `;
+            
+            // Update progress
+            if (lessonState.progress < 80) {
+                lessonState.progress = 80;
+                saveLessonState();
+                updateUI();
+            }
+        }
+
+        // Check quiz answers
+        function checkAnswer(questionId, correctAnswer) {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            if (!selected) return;
+
+            const isCorrect = selected.value === correctAnswer;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            lessonState.quizAnswers[questionId] = isCorrect;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">✅ Correct! Well done.</span>';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">❌ Try again. Review the explanation above.</span>';
+                feedback.className = 'feedback incorrect';
+            }
+
+            // Check if all questions are answered correctly
+            const allCorrect = Object.values(lessonState.quizAnswers).every(answer => answer === true);
+            if (allCorrect && Object.keys(lessonState.quizAnswers).length === 2) {
+                lessonState.progress = 100;
+                lessonState.completed = true;
+                saveLessonState();
+                updateUI();
+                
+                // Update chapter progress
+                updateChapterProgress();
+            }
+        }
+
+        // Update chapter progress
+        function updateChapterProgress() {
+            const chapterData = {
+                chapter: "Chapter-01-Development Environment",
+                lessons: [
+                    { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "completed" },
+                    { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "completed" },
+                    { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "completed" },
+                    { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "completed" },
+                    { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+                ]
+            };
+            
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Navigation handlers
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            // Navigate to previous lesson
+            window.location.href = '../Lesson-03-Browser-Developer-Tools/lesson.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (lessonState.completed) {
+                // Navigate to next lesson
+                window.location.href = '../Lesson-05-Running-and-Testing-a-Website/lesson.html';
+            } else {
+                // Show completion message
+                alert('Please complete the lesson first!');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) {
+                document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLessonState();
+        });
+    </script>
+
+    <style>
+        .tree-view {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1rem;
+            font-family: monospace;
+        }
+        
+        .tree-view h4,
+        .tree-view h5,
+        .tree-view h6 {
+            margin: 0.5rem 0;
+            color: var(--primary);
+        }
+        
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .success-message h4 {
+            color: #166534;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </body>
 </html>

@@ -3,126 +3,512 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 01 | JavaScript Introduction & Runtime - WZ Storehouse</title>
+    <title>Lesson 01 | JavaScript Introduction - WebZoneBW.shop</title>
     <link rel="stylesheet" href="../../../Assets/css/main.css">
     <link rel="stylesheet" href="../../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../../Assets/css/responsive.css">
+    <link rel="stylesheet" href="../../../Assets/css/w3schools-milkyway.css">
+    
     <script src="../../../Assets/js/main.js" defer></script>
     <script src="../../../Assets/js/lesson.js" defer></script>
+    <script src="../../../Assets/js/navigation.js" defer></script>
 </head>
 <body class="lesson-page">
-    <header>
-        <div class="logo">
-            <a href="../../../index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
+
+    <main class="container" id="main-content">
+        <!-- LESSON HEADER -->
+        <section class="lesson-header">
+            <div class="lesson-meta">
+                <span class="chapter-badge">Chapter 06</span>
+                <span class="lesson-progress">📈 Lesson 1 of 10</span>
+            </div>
+            <h1>JavaScript Introduction</h1>
+            <p class="lesson-subtitle">Unlock the power of interactive web pages with JavaScript programming fundamentals.</p>
+            
+            <!-- Progress bar -->
+            <div class="lesson-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% Complete</span>
+            </div>
+        </section>
+
+        <!-- LESSON CONTENT STRUCTURE -->
+        <div class="lesson-content">
+            <!-- CONCEPT SECTION -->
+            <section class="lesson-section">
+                <h2>🧩 Concept</h2>
+                <div class="concept-box">
+                    <h3>Understanding JavaScript</h3>
+                    <p>JavaScript is the programming language of the web that brings interactivity and dynamic behavior to websites. While HTML provides structure and CSS provides styling, JavaScript adds functionality, animations, user interactions, and real-time updates to web pages.</p>
+                </div>
+            </section>
+
+            <!-- EXPLANATION SECTION -->
+            <section class="lesson-section">
+                <h2>📖 Explanation</h2>
+                <div class="explanation-content">
+                    <h3>JavaScript Fundamentals</h3>
+                    <p>JavaScript is a versatile programming language that runs in web browsers and enables dynamic web experiences:</p>
+                    
+                    <div class="code-example">
+                        <pre><code>JavaScript Core Concepts:
+├── 🎯 Programming Language
+│   ├── Interpreted (not compiled)
+│   ├── Dynamically typed
+│   ├── Multi-paradigm (OOP, functional)
+│   └── Case-sensitive
+├── 🌐 Web Integration
+│   ├── Runs in browsers
+│   ├── Interacts with HTML/CSS
+│   ├── DOM manipulation
+│   └── Event handling
+├── ⚡ Key Features
+│   ├── Variables and data types
+│   ├── Functions and scope
+│   ├── Control structures
+│   └── Objects and arrays
+└── 🚀 Modern Capabilities
+    ├── ES6+ features
+    ├── Async programming
+    ├── APIs and modules
+    └── Framework support</code></pre>
+                    </div>
+
+                    <div class="explanation-points">
+                        <div class="point-item">
+                            <h4>🎯 Client-Side Power</h4>
+                            <p>JavaScript runs in the browser, enabling real-time user interactions without server requests.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🔧 DOM Manipulation</h4>
+                            <p>JavaScript can read, modify, and create HTML elements dynamically.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>⚡ Event Handling</h4>
+                            <p>Respond to user actions like clicks, typing, and page loading.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🌍 Cross-Browser</h4>
+                            <p>Works consistently across modern web browsers with proper coding practices.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXAMPLE SECTION -->
+            <section class="lesson-section">
+                <h2>💡 Example</h2>
+                <div class="example-content">
+                    <h3>JavaScript in Action</h3>
+                    <p>Here are common ways JavaScript enhances web experiences:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>🎨 Interactive Elements</h4>
+                            <ul>
+                                <li>Dynamic content updates</li>
+                                <li>Form validation in real-time</li>
+                                <li>Image galleries with effects</li>
+                                <li>Interactive navigation menus</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🎮 User Experience</h4>
+                            <ul>
+                                <li>Smooth animations and transitions</li>
+                                <li>Real-time data updates</li>
+                                <li>Interactive charts and graphs</li>
+                                <li>Games and simulations</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🔧 Web Applications</h4>
+                            <ul>
+                                <li>Single-page applications (SPAs)</li>
+                                <li>Real-time chat features</li>
+                                <li>Dynamic form handling</li>
+                                <li>API integration and data fetching</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICAL CONTEXT SECTION -->
+            <section class="lesson-section">
+                <h2>🏠 Practical Context</h2>
+                <div class="practical-content">
+                    <h3>Why JavaScript Matters</h3>
+                    <p>JavaScript is essential for modern web development because:</p>
+                    
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <h4>🚀 User Engagement</h4>
+                            <p>Interactive elements keep users engaged and improve conversion rates.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>⚡ Performance</h4>
+                            <p>Client-side processing reduces server load and improves response times.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🎯 Modern Web Apps</h4>
+                            <p>Essential for building responsive, interactive single-page applications.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🔧 Career Opportunities</h4>
+                            <p>JavaScript skills are in high demand across web, mobile, and desktop development.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICE SECTION -->
+            <section class="lesson-section">
+                <h2>🧪 Practice</h2>
+                <div class="practice-content">
+                    <h3>Interactive JavaScript Playground</h3>
+                    <p>Experiment with JavaScript code and see results instantly:</p>
+                    
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>JavaScript Editor</h3>
+                            <textarea id="jsEditor">// Welcome to JavaScript!
+let message = "Hello, World!";
+let counter = 0;
+
+function showMessage() {
+    document.getElementById('output').innerHTML = message;
+    counter++;
+    document.getElementById('counter').textContent = counter;
+}
+
+function changeColor() {
+    const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#22c55e'];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    document.getElementById('demo-box').style.backgroundColor = randomColor;
+}
+
+// Interactive elements
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('JavaScript is working!');
+});</textarea>
+                            <button onclick="runJavaScript()" class="run-btn">Run Code</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Live Output</h3>
+                            <div id="jsOutput">
+                                <div id="demo-box" style="background: #3b82f6; color: white; padding: 20px; border-radius: 8px; text-align: center; margin-bottom: 10px;">
+                                    JavaScript Demo Area
+                                </div>
+                                <div id="output" style="background: #f8fafc; border: 1px solid #e2e8f0; padding: 10px; border-radius: 4px; margin-bottom: 10px;">
+                                    Output will appear here...
+                                </div>
+                                <button onclick="showMessage()" style="background: #3b82f6; color: white; border: none; padding: 8px 16px; border-radius: 4px; margin-right: 10px; cursor: pointer;">Show Message</button>
+                                <button onclick="changeColor()" style="background: #8b5cf6; color: white; border: none; padding: 8px 16px; border-radius: 4px; cursor: pointer;">Change Color</button>
+                                <div style="margin-top: 10px; font-size: 14px; color: #666;">
+                                    Button clicks: <span id="counter">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KNOWLEDGE CHECK SECTION -->
+            <section class="lesson-section">
+                <h2>❓ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <h3>Test Your Understanding</h3>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 1: What is the primary purpose of JavaScript?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) To style web pages</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) To add structure and content to web pages</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) To add interactivity and dynamic behavior to web pages</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) To manage web server operations</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q1', 'c')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 2: Where does JavaScript typically run?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span>A) Only on web servers</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span>B) Only in mobile apps</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span>C) In web browsers and servers (Node.js)</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span>D) Only in desktop applications</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q2', 'c')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON OUTCOME -->
+            <section class="lesson-section">
+                <h2>🎯 Learning Outcome</h2>
+                <div class="outcome-content">
+                    <h3>What You've Learned</h3>
+                    <div class="outcome-grid">
+                        <div class="outcome-item">
+                            <h4>🎯 JavaScript Purpose</h4>
+                            <p>You understand what JavaScript is and how it enhances web experiences.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🔧 Core Concepts</h4>
+                            <p>You know JavaScript's key features and capabilities in web development.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🌐 Integration</h4>
+                            <p>You understand how JavaScript works with HTML and CSS.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>⚡ Practical Applications</h4>
+                            <p>You can identify common use cases for JavaScript in modern websites.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON COMPLETE -->
+            <section class="lesson-complete" id="lessonComplete" style="display: none;">
+                <div class="complete-content">
+                    <h2>✅ Lesson Complete!</h2>
+                    <div class="complete-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Lesson Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2/2</span>
+                            <span class="stat-label">Questions Correct</span>
+                        </div>
+                    </div>
+                    
+                    <div class="complete-message">
+                        <h3>Excellent! You've taken your first step into JavaScript.</h3>
+                        <p>You now understand the fundamentals of JavaScript and its role in web development.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-        <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 06: JavaScript</a>
-            <button id="settingsBtn">⚙ Settings</button>
+
+        <!-- LESSON NAVIGATION -->
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                ⬅ Back to Chapter
+            </button>
+            <div class="lesson-counter">
+                <span class="current-lesson">1</span> of <span class="total-lessons">10</span>
+            </div>
+            <button class="nav-btn next-btn" id="nextBtn">
+                Next Lesson ➡
+            </button>
         </nav>
-    </header>
-
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-    </div>
-
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 06 • Lesson 01</span>
-            <h1>JavaScript Introduction & Runtime</h1>
-            <p>Discover how the Google V8 engine interprets code, executes through the call stack, and drives web interactivity.</p>
-
-            <div class="info-grid">
-                
-                <div class="summary-card">
-                    <h3>Execution</h3>
-                    <p>Single-threaded Call Stack</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Engine</h3>
-                    <p>Google V8 JIT Compilation</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Script Loading</h3>
-                    <p>defer vs async</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Console</h3>
-                    <p>console.log & DevTools</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>🎯 Learning Objectives</h2>
-            <ul class="chapter-list">
-                <li>✔ Understand the role of JavaScript in web architecture alongside HTML & CSS</li>
-<li>✔ Learn how modern browser engines execute JavaScript through the call stack</li>
-<li>✔ Use developer console methods (log, warn, table) for real-time inspection</li>
-<li>✔ Prevent render-blocking by applying the defer attribute on script tags</li>
-
-            </ul>
-        </section>
-
-        
-        <section class="chapter-section">
-            <h2>1. What is the Modern JavaScript Engine?</h2>
-            <p>JavaScript is an ECMAScript-standardized programming language that gives dynamic behavior to web documents. Under the hood, modern browsers like Google Chrome and Microsoft Edge use Google's V8 engine to compile JavaScript directly into native machine code using Just-In-Time (JIT) compilation.</p>
-            <ul class='chapter-list'><li>Single-Threaded: One call stack executes instructions sequentially without race conditions</li>
-<li>Event Loop: Background Web APIs handle network requests, timers, and user clicks smoothly</li>
-<li>EcmaScript (ES6+): Modern standards provide arrow functions, destructuring, modules, and classes</li>
-</ul>
-        </section>
-        <section class="chapter-section">
-            <h2>2. Script Placement and Non-Blocking Loading</h2>
-            <p>Placing a plain <script> in the <head> pauses HTML parsing. By adding the defer attribute, the browser downloads the script in parallel and executes it cleanly right after the DOM tree is assembled.</p>
-            <ul class='chapter-list'><li><script defer src='app.js'>: Recommended for predictable DOM readiness and high Lighthouse performance</li>
-<li><script async src='analytics.js'>: Ideal for independent tracking scripts where order doesn't matter</li>
-</ul>
-        </section>
-
-        <section class="chapter-section">
-            <h2>💻 Interactive Code Demo</h2>
-            <p>Review the snippet below, then try the hands-on practice challenge.</p>
-            <div class="code-playground">
-                <div class="editor-panel">
-                    <h3>Source Snippet</h3>
-                    <textarea id="htmlEditor">&lt;div style=&quot;padding: 20px; text-align: center;&quot;&gt;
-  &lt;h3 id=&quot;headline&quot; style=&quot;color: #4f46e5; margin: 0 0 10px;&quot;&gt;JavaScript is Running!&lt;/h3&gt;
-  &lt;p id=&quot;timestamp&quot; style=&quot;color: #64748b;&quot;&gt;Ready for interaction.&lt;/p&gt;
-  &lt;button id=&quot;actionBtn&quot; style=&quot;padding: 10px 18px; background: #4f46e5; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: 600;&quot;&gt;Click to Inspect Timestamp&lt;/button&gt;
-&lt;/div&gt;
-
-&lt;script&gt;
-  const btn = document.getElementById(&#x27;actionBtn&#x27;);
-  const timeEl = document.getElementById(&#x27;timestamp&#x27;);
-  btn.addEventListener(&#x27;click&#x27;, () =&gt; {
-    const now = new Date().toLocaleTimeString();
-    timeEl.textContent = &#x27;Last clicked at: &#x27; + now;
-    console.log(&#x27;User clicked at&#x27;, now);
-  });
-&lt;/script&gt;</textarea>
-                    <button id="runCodeBtn" class="btn primary" style="margin-top: 12px; align-self: flex-start;">Run Code ⚡</button>
-                </div>
-                <div class="preview-panel">
-                    <h3>Live Output</h3>
-                    <iframe id="previewWindow" title="Live Preview" style="width: 100%; height: 260px; border: none; border-radius: 8px; background: white;"></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter-section chapter-nav-links" style="display: flex; gap: 12px; margin-top: 24px;">
-            <a href="practice.html" class="btn primary">Start Practice Challenge ⚡</a>
-            <a href="../index.html" class="btn secondary">Back to Chapter Overview</a>
-        </section>
     </main>
+
     <footer>
-        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Lesson state management
+        let lessonState = {
+            id: "Lesson-01-JavaScript-Introduction",
+            chapter: "Chapter-06-JavaScript",
+            progress: 0,
+            completed: false,
+            quizAnswers: {}
+        };
+
+        // Load lesson state
+        function loadLessonState() {
+            const saved = localStorage.getItem(`lesson_${lessonState.id}`);
+            if (saved) {
+                const state = JSON.parse(saved);
+                lessonState = { ...lessonState, ...state };
+                updateUI();
+            }
+        }
+
+        // Save lesson state
+        function saveLessonState() {
+            localStorage.setItem(`lesson_${lessonState.id}`, JSON.stringify(lessonState));
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            progressFill.style.width = `${lessonState.progress}%`;
+            progressText.textContent = `${lessonState.progress}% Complete`;
+
+            // Update navigation
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = false; // Has chapter overview
+            nextBtn.disabled = !lessonState.completed;
+
+            // Show completion message
+            if (lessonState.completed) {
+                document.getElementById('lessonComplete').style.display = 'block';
+                nextBtn.innerHTML = 'Continue to Lesson 2 ➡';
+            }
+        }
+
+        // Run JavaScript code
+        function runJavaScript() {
+            const jsCode = document.getElementById('jsEditor').value;
+            
+            // Create a function to execute the code safely
+            try {
+                // Execute the JavaScript code
+                eval(jsCode);
+                
+                // Show success message
+                document.getElementById('output').innerHTML = '<span style="color: #22c55e;">✅ Code executed successfully!</span>';
+                
+                // Update progress
+                if (lessonState.progress < 80) {
+                    lessonState.progress = 80;
+                    saveLessonState();
+                    updateUI();
+                }
+            } catch (error) {
+                document.getElementById('output').innerHTML = `<span style="color: #ef4444;">❌ Error: ${error.message}</span>`;
+            }
+        }
+
+        // Show message function
+        function showMessage() {
+            const message = "Hello, World!";
+            document.getElementById('output').innerHTML = message;
+            
+            // Update counter
+            const counter = document.getElementById('counter');
+            counter.textContent = parseInt(counter.textContent) + 1;
+        }
+
+        // Change color function
+        function changeColor() {
+            const colors = ['#3b82f6', '#8b5cf6', '#ec4899', '#f59e0b', '#22c55e'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.getElementById('demo-box').style.backgroundColor = randomColor;
+        }
+
+        // Check quiz answers
+        function checkAnswer(questionId, correctAnswer) {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            if (!selected) return;
+
+            const isCorrect = selected.value === correctAnswer;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            lessonState.quizAnswers[questionId] = isCorrect;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">✅ Correct! Well done.</span>';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">❌ Try again. Review the explanation above.</span>';
+                feedback.className = 'feedback incorrect';
+            }
+
+            // Check if all questions are answered correctly
+            const allCorrect = Object.values(lessonState.quizAnswers).every(answer => answer === true);
+            if (allCorrect && Object.keys(lessonState.quizAnswers).length === 2) {
+                lessonState.progress = 100;
+                lessonState.completed = true;
+                saveLessonState();
+                updateUI();
+                
+                // Update chapter progress
+                updateChapterProgress();
+            }
+        }
+
+        // Update chapter progress
+        function updateChapterProgress() {
+            const chapterData = {
+                chapter: "Chapter-06-JavaScript",
+                lessons: [
+                    { id: "Lesson-01-JavaScript-Introduction", title: "JavaScript Introduction", status: "completed" },
+                    { id: "Lesson-02-Variables-Data-Types", title: "Variables & Data Types", status: "not-started" },
+                    { id: "Lesson-03-Operators-Conditions", title: "Operators & Conditions", status: "not-started" },
+                    { id: "Lesson-04-Functions", title: "Functions", status: "not-started" },
+                    { id: "Lesson-05-Arrays-Objects", title: "Arrays & Objects", status: "not-started" },
+                    { id: "Lesson-06-Loops", title: "Loops", status: "not-started" },
+                    { id: "Lesson-07-DOM-Manipulation", title: "DOM Manipulation", status: "not-started" },
+                    { id: "Lesson-08-Events", title: "Events", status: "not-started" },
+                    { id: "Lesson-09-Forms-Validation", title: "Forms & Validation", status: "not-started" },
+                    { id: "Lesson-10-Mini-Project", title: "Mini Project", status: "not-started" }
+                ]
+            };
+            
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Navigation handlers
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            // Navigate to chapter overview
+            window.location.href = '../../index.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (lessonState.completed) {
+                // Navigate to next lesson
+                window.location.href = '../Lesson-02-Variables-Data-Types/lesson.html';
+            } else {
+                // Show completion message
+                alert('Please complete the lesson first!');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) {
+                document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLessonState();
+        });
+    </script>
 </body>
 </html>

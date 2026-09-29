@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 01 | CSS Box Model - WebZoneBW.shop</title>
+    <title>Lesson 01 | HTML Basics - WebZoneBW.shop</title>
     <link rel="stylesheet" href="../../../Assets/css/main.css">
     <link rel="stylesheet" href="../../../Assets/css/lesson.css">
     <link rel="stylesheet" href="../../../Assets/css/responsive.css">
@@ -21,11 +21,11 @@
         <!-- LESSON HEADER -->
         <section class="lesson-header">
             <div class="lesson-meta">
-                <span class="chapter-badge">Chapter 03</span>
-                <span class="lesson-progress">📈 Lesson 1 of 7</span>
+                <span class="chapter-badge">Chapter 02</span>
+                <span class="lesson-progress">📈 Lesson 1 of 8</span>
             </div>
-            <h1>CSS Box Model</h1>
-            <p class="lesson-subtitle">Master the fundamental concept that governs all HTML element layout and styling.</p>
+            <h1>HTML Basics</h1>
+            <p class="lesson-subtitle">Master the fundamental building blocks of web pages with HTML elements and structure.</p>
             
             <!-- Progress bar -->
             <div class="lesson-progress-bar">
@@ -42,8 +42,8 @@
             <section class="lesson-section">
                 <h2>🧩 Concept</h2>
                 <div class="concept-box">
-                    <h3>Understanding the CSS Box Model</h3>
-                    <p>The CSS Box Model is the fundamental concept that describes how HTML elements are rendered. Every element is treated as a rectangular box with four layers: content, padding, border, and margin. Understanding this model is crucial for precise layout control and spacing.</p>
+                    <h3>Understanding HTML Elements</h3>
+                    <p>HTML (HyperText Markup Language) uses elements to define the structure and content of web pages. Each element consists of tags that tell browsers how to display content. Understanding these fundamentals is crucial for building effective, accessible websites.</p>
                 </div>
             </section>
 
@@ -51,45 +51,60 @@
             <section class="lesson-section">
                 <h2>📖 Explanation</h2>
                 <div class="explanation-content">
-                    <h3>The Four Layers of the Box Model</h3>
-                    <p>CSS Box Model consists of four concentric layers that control element appearance and spacing:</p>
+                    <h3>HTML Document Structure</h3>
+                    <p>An HTML document follows a specific hierarchy with different types of elements serving specific purposes:</p>
                     
                     <div class="code-example">
-                        <pre><code>CSS Box Model Structure:
-┌─────────────────────────────────────┐
-│           MARGIN (外边距)           │ ← 外部空间，影响与其他元素的距离
-├─────────────────────────────────────┤
-│          BORDER (边框)             │ ← 边框，围绕元素的可见边框
-├─────────────────────────────────────┤
-│         PADDING (内边距)           │ ← 内部空间，内容与边框的距离
-├─────────────────────────────────────┤
-│        CONTENT (内容)              │ ← 实际内容（文本、图片等）
-└─────────────────────────────────────┘
-
-CSS Properties:
-• width/height: Content area dimensions
-• padding: Space inside border
-• border: Element border
-• margin: Space outside border
-• box-sizing: Total width calculation</code></pre>
+                        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;header&gt;
+      &lt;h1&gt;Welcome to My Website&lt;/h1&gt;
+      &lt;nav&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="#home"&gt;Home&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#about"&gt;About&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="#contact"&gt;Contact&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/nav&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+      &lt;section&gt;
+        &lt;h2&gt;Main Content&lt;/h2&gt;
+        &lt;p&gt;This is a paragraph of text.&lt;/p&gt;
+        &lt;img src="image.jpg" alt="Description"&gt;
+      &lt;/section&gt;
+    &lt;/main&gt;
+    
+    &lt;footer&gt;
+      &lt;p&gt;&copy; 2025 My Website&lt;/p&gt;
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
                     </div>
 
                     <div class="explanation-points">
                         <div class="point-item">
-                            <h4>📝 Content</h4>
-                            <p>The actual content of the element (text, images, etc.). Sized with width/height properties.</p>
+                            <h4>📄 Document Type</h4>
+                            <p>DOCTYPE declaration specifies HTML5 document standard.</p>
                         </div>
                         <div class="point-item">
-                            <h4>🔲 Padding</h4>
-                            <p>Space between content and border. Creates breathing room inside the element.</p>
+                            <h4>🏠 Root Element</h4>
+                            <p>&lt;html&gt; tag wraps the entire document and specifies language.</p>
                         </div>
                         <div class="point-item">
-                            <h4>⬜ Border</h4>
-                            <p>The visible edge around the element. Can be styled with color, width, and style.</p>
+                            <h4>🧠 Head Section</h4>
+                            <p>Contains metadata, title, and character encoding.</p>
                         </div>
                         <div class="point-item">
-                            <h4>📏 Margin</h4>
-                            <p>Space outside the border. Separates the element from other elements.</p>
+                            <h4>📝 Body Section</h4>
+                            <p>Contains all visible content and page structure.</p>
                         </div>
                     </div>
                 </div>
@@ -99,35 +114,36 @@ CSS Properties:
             <section class="lesson-section">
                 <h2>💡 Example</h2>
                 <div class="example-content">
-                    <h3>Box Model in Action</h3>
-                    <p>Here's how different box model properties affect element appearance:</p>
+                    <h3>Common HTML Elements</h3>
+                    <p>Here are the most frequently used HTML elements and their purposes:</p>
                     
                     <div class="comparison-grid">
                         <div class="comparison-item">
-                            <h4>📏 Content Box</h4>
+                            <h4>📝 Text Elements</h4>
                             <ul>
-                                <li>Defined by width/height</li>
-                                <li>Contains actual content</li>
-                                <li>Does not include padding/border</li>
-                                <li>Default box-sizing: content-box</li>
+                                <li><strong>&lt;h1&gt; - &lt;h6&gt;</strong>: Headings (importance hierarchy)</li>
+                                <li><strong>&lt;p&gt;</strong>: Paragraphs of text</li>
+                                <li><strong>&lt;span&gt;</strong>: Inline text container</li>
+                                <li><strong>&lt;strong&gt;</strong>: Important text (bold)</li>
+                                <li><strong>&lt;em&gt;</strong>: Emphasized text (italic)</li>
                             </ul>
                         </div>
                         <div class="comparison-item">
-                            <h4>📦 Border Box</h4>
+                            <h4>🔗 Link Elements</h4>
                             <ul>
-                                <li>Includes padding and border</li>
-                                <li>Total = width + padding + border</li>
-                                <li>More predictable sizing</li>
-                                <li>Recommended: box-sizing: border-box</li>
+                                <li><strong>&lt;a&gt;</strong>: Hyperlinks to other pages</li>
+                                <li><strong>&lt;link&gt;</strong>: External resources (CSS, icons)</li>
+                                <li><strong>&lt;nav&gt;</strong>: Navigation sections</li>
+                                <li><strong>&lt;menu&gt;</strong>: List of commands</li>
                             </ul>
                         </div>
                         <div class="comparison-item">
-                            <h4>📐 Calculation Examples</h4>
+                            <h4>📊 Media Elements</h4>
                             <ul>
-                                <li>Content: 200px × 100px</li>
-                                <li>Padding: 20px all sides</li>
-                                <li>Border: 2px all sides</li>
-                                <li>Total: 244px × 144px</li>
+                                <li><strong>&lt;img&gt;</strong>: Images with alt text</li>
+                                <li><strong>&lt;video&gt;</strong>: Video content</li>
+                                <li><strong>&lt;audio&gt;</strong>: Audio content</li>
+                                <li><strong>&lt;iframe&gt;</strong>: Embedded content</li>
                             </ul>
                         </div>
                     </div>
@@ -138,25 +154,25 @@ CSS Properties:
             <section class="lesson-section">
                 <h2>🏠 Practical Context</h2>
                 <div class="practical-content">
-                    <h3>Why the Box Model Matters</h3>
-                    <p>Understanding the CSS box model is essential because:</p>
+                    <h3>Why HTML Basics Matter</h3>
+                    <p>Mastering HTML fundamentals is essential because:</p>
                     
                     <div class="context-grid">
                         <div class="context-item">
-                            <h4>🎯 Layout Precision</h4>
-                            <p>Accurate spacing and sizing prevents layout issues and visual inconsistencies.</p>
+                            <h4>🎯 Accessibility</h4>
+                            <p>Proper HTML structure ensures screen readers can interpret content correctly.</p>
                         </div>
                         <div class="context-item">
-                            <h4>🔧 Cross-Browser Compatibility</h4>
-                            <p>Different browsers handle box model calculations differently, requiring careful planning.</p>
+                            <h4>🔍 SEO Benefits</h4>
+                            <p>Search engines use HTML structure to understand page content and importance.</p>
                         </div>
                         <div class="context-item">
-                            <h4>📱 Responsive Design</h4>
-                            <p>Box model properties are fundamental for creating flexible, responsive layouts.</p>
+                            <h4>🎨 CSS Foundation</h4>
+                            <p>CSS selectors rely on HTML structure for styling and layout.</p>
                         </div>
                         <div class="context-item">
-                            <h4>⚡ Performance Optimization</h4>
-                            <p>Efficient box model usage reduces layout recalculations and improves rendering speed.</p>
+                            <h4>⚡ JavaScript Targeting</h4>
+                            <p>DOM manipulation requires proper HTML element structure.</p>
                         </div>
                     </div>
                 </div>
@@ -166,43 +182,40 @@ CSS Properties:
             <section class="lesson-section">
                 <h2>🧪 Practice</h2>
                 <div class="practice-content">
-                    <h3>Interactive Box Model Playground</h3>
-                    <p>Experiment with box model properties and see real-time changes:</p>
+                    <h3>Interactive HTML Playground</h3>
+                    <p>Write HTML code and see the result instantly:</p>
                     
                     <div class="code-playground">
                         <div class="editor-panel">
-                            <h3>CSS Editor</h3>
-                            <textarea id="cssEditor">.box-model-demo {
-    width: 200px;
-    height: 100px;
-    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    padding: 20px;
-    border: 3px solid #1e40af;
-    margin: 20px;
-    color: white;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    line-height: 60px;
-    box-sizing: border-box;
-}
-
-.total-size {
-    margin-top: 10px;
-    font-size: 12px;
-    color: #666;
-}</textarea>
-                            <button onclick="updateBoxModel()" class="run-btn">Update Styling</button>
+                            <h3>HTML Editor</h3>
+                            <textarea id="htmlEditor">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;My First HTML Page&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;header&gt;
+        &lt;h1&gt;Hello, World!&lt;/h1&gt;
+        &lt;p&gt;This is my first HTML page.&lt;/p&gt;
+    &lt;/header&gt;
+    
+    &lt;main&gt;
+        &lt;h2&gt;About Me&lt;/h2&gt;
+        &lt;p&gt;I'm learning HTML to build amazing websites.&lt;/p&gt;
+        &lt;img src="https://via.placeholder.com/300x200/007acc/ffffff?text=My+Image" alt="Placeholder image"&gt;
+    &lt;/main&gt;
+    
+    &lt;footer&gt;
+        &lt;p&gt;&copy; 2025 My Website&lt;/p&gt;
+    &lt;/footer&gt;
+&lt;/body&gt;
+&lt;/html&gt;</textarea>
+                            <button onclick="runHTML()" class="run-btn">Run Code</button>
                         </div>
                         <div class="preview-panel">
                             <h3>Live Preview</h3>
-                            <div id="boxPreview">
-                                <div class="box-model-demo" id="demoBox">
-                                    Content Area
-                                </div>
-                                <div class="total-size" id="totalSize">
-                                    Total Size: 200px × 100px
-                                </div>
-                            </div>
+                            <iframe id="previewWindow"></iframe>
                         </div>
                     </div>
                 </div>
@@ -215,23 +228,23 @@ CSS Properties:
                     <h3>Test Your Understanding</h3>
                     
                     <div class="quiz-question">
-                        <h4>Question 1: What does box-sizing: border-box do?</h4>
+                        <h4>Question 1: What is the purpose of the DOCTYPE declaration?</h4>
                         <div class="quiz-options">
                             <label class="quiz-option">
                                 <input type="radio" name="q1" value="a">
-                                <span>A) Makes the border invisible</span>
+                                <span>A) It sets the page title</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q1" value="b">
-                                <span>B) Includes padding and border in the total width/height</span>
+                                <span>B) It specifies the HTML document version and standard</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q1" value="c">
-                                <span>C) Removes the margin from calculations</span>
+                                <span>C) It includes CSS styles</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q1" value="d">
-                                <span>D) Changes the content color</span>
+                                <span>D) It defines the character encoding</span>
                             </label>
                         </div>
                         <button onclick="checkAnswer('q1', 'b')" class="check-btn">Check Answer</button>
@@ -239,26 +252,26 @@ CSS Properties:
                     </div>
 
                     <div class="quiz-question">
-                        <h4>Question 2: Which property creates space between content and border?</h4>
+                        <h4>Question 2: Which element contains all visible page content?</h4>
                         <div class="quiz-options">
                             <label class="quiz-option">
                                 <input type="radio" name="q2" value="a">
-                                <span>A) margin</span>
+                                <span>A) &lt;head&gt;</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q2" value="b">
-                                <span>B) padding</span>
+                                <span>B) &lt;meta&gt;</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q2" value="c">
-                                <span>C) border</span>
+                                <span>C) &lt;body&gt;</span>
                             </label>
                             <label class="quiz-option">
                                 <input type="radio" name="q2" value="d">
-                                <span>D) spacing</span>
+                                <span>D) &lt;html&gt;</span>
                             </label>
                         </div>
-                        <button onclick="checkAnswer('q2', 'b')" class="check-btn">Check Answer</button>
+                        <button onclick="checkAnswer('q2', 'c')" class="check-btn">Check Answer</button>
                         <div class="feedback" id="feedback-q2"></div>
                     </div>
                 </div>
@@ -271,20 +284,20 @@ CSS Properties:
                     <h3>What You've Learned</h3>
                     <div class="outcome-grid">
                         <div class="outcome-item">
-                            <h4>📦 Box Model Structure</h4>
-                            <p>You understand the four layers: content, padding, border, and margin.</p>
+                            <h4>📋 HTML Document Structure</h4>
+                            <p>You understand the basic HTML5 document structure with DOCTYPE, html, head, and body elements.</p>
                         </div>
                         <div class="outcome-item">
-                            <h4>📐 Sizing Calculations</h4>
-                            <p>You know how box-sizing affects total element dimensions.</p>
+                            <h4>🏗️ Semantic Elements</h4>
+                            <p>You know how to use semantic elements like header, main, section, and footer for proper structure.</p>
                         </div>
                         <div class="outcome-item">
-                            <h4>🎨 Layout Control</h4>
-                            <p>You can use padding, border, and margin for precise spacing.</p>
+                            <h4>🔗 Common HTML Tags</h4>
+                            <p>You can identify and use common HTML elements for text, links, and media.</p>
                         </div>
                         <div class="outcome-item">
-                            <h4>⚡ Best Practices</h4>
-                            <p>You understand why border-box is recommended for responsive design.</p>
+                            <h4>🎨 HTML Best Practices</h4>
+                            <p>You understand why proper HTML structure matters for accessibility and SEO.</p>
                         </div>
                     </div>
                 </div>
@@ -306,8 +319,8 @@ CSS Properties:
                     </div>
                     
                     <div class="complete-message">
-                        <h3>Excellent! You've mastered the CSS box model.</h3>
-                        <p>You now understand how to control element spacing and layout with precision.</p>
+                        <h3>Great job! You've mastered HTML basics.</h3>
+                        <p>You now understand the fundamental structure and elements needed to build web pages.</p>
                     </div>
                 </div>
             </section>
@@ -319,7 +332,7 @@ CSS Properties:
                 ⬅ Back to Chapter
             </button>
             <div class="lesson-counter">
-                <span class="current-lesson">1</span> of <span class="total-lessons">7</span>
+                <span class="current-lesson">1</span> of <span class="total-lessons">8</span>
             </div>
             <button class="nav-btn next-btn" id="nextBtn">
                 Next Lesson ➡
@@ -334,8 +347,8 @@ CSS Properties:
     <script>
         // Lesson state management
         let lessonState = {
-            id: "Lesson-01-Box-Model",
-            chapter: "Chapter-03-CSS",
+            id: "Lesson-01-HTML-Basics",
+            chapter: "Chapter-02-HTML",
             progress: 0,
             completed: false,
             quizAnswers: {}
@@ -378,28 +391,13 @@ CSS Properties:
             }
         }
 
-        // Update box model
-        function updateBoxModel() {
-            const cssCode = document.getElementById('cssEditor').value;
-            const styleElement = document.createElement('style');
-            styleElement.textContent = cssCode;
-            
-            // Remove previous style if exists
-            const existingStyle = document.getElementById('dynamicBoxStyle');
-            if (existingStyle) {
-                existingStyle.remove();
-            }
-            
-            styleElement.id = 'dynamicBoxStyle';
-            document.head.appendChild(styleElement);
-            
-            // Calculate and display total size
-            const demoBox = document.getElementById('demoBox');
-            const computedStyle = window.getComputedStyle(demoBox);
-            const width = computedStyle.width;
-            const height = computedStyle.height;
-            
-            document.getElementById('totalSize').textContent = `Total Size: ${width} × ${height}`;
+        // Run HTML code
+        function runHTML() {
+            const code = document.getElementById('htmlEditor').value;
+            const preview = document.getElementById('previewWindow');
+            const blob = new Blob([code], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            preview.src = url;
             
             // Update progress
             if (lessonState.progress < 80) {
@@ -443,15 +441,16 @@ CSS Properties:
         // Update chapter progress
         function updateChapterProgress() {
             const chapterData = {
-                chapter: "Chapter-03-CSS",
+                chapter: "Chapter-02-HTML",
                 lessons: [
-                    { id: "Lesson-01-Box-Model", title: "Box Model", status: "completed" },
-                    { id: "Lesson-02-Selectors-Specificity", title: "Selectors & Specificity", status: "not-started" },
-                    { id: "Lesson-03-Colors-Typography", title: "Colors & Typography", status: "not-started" },
-                    { id: "Lesson-04-Display-Positioning", title: "Display & Positioning", status: "not-started" },
-                    { id: "Lesson-05-Spacing-Visual-Styling", title: "Spacing & Visual Styling", status: "not-started" },
-                    { id: "Lesson-06-Practical-CSS-Page-Build", title: "Practical Page Build", status: "not-started" },
-                    { id: "Lesson-07-Advanced-Selectors", title: "Advanced Selectors", status: "not-started" }
+                    { id: "Lesson-01-HTML-Basics", title: "HTML Basics", status: "completed" },
+                    { id: "Lesson-02-Semantic-Elements", title: "Semantic Elements", status: "not-started" },
+                    { id: "Lesson-03-Forms-Input", title: "Forms & Input", status: "not-started" },
+                    { id: "Lesson-04-Tables-Lists", title: "Tables & Lists", status: "not-started" },
+                    { id: "Lesson-05-Multimedia", title: "Multimedia", status: "not-started" },
+                    { id: "Lesson-06-Accessibility", title: "Accessibility", status: "not-started" },
+                    { id: "Lesson-07-Best-Practices", title: "Best Practices", status: "not-started" },
+                    { id: "Lesson-08-Project-Build", title: "Project Build", status: "not-started" }
                 ]
             };
             
@@ -467,7 +466,7 @@ CSS Properties:
         document.getElementById('nextBtn').addEventListener('click', function() {
             if (lessonState.completed) {
                 // Navigate to next lesson
-                window.location.href = '../Lesson-02-Selectors-Specificity/lesson.html';
+                window.location.href = '../lesson-02-semantic-elements/lesson.html';
             } else {
                 // Show completion message
                 alert('Please complete the lesson first!');
@@ -487,29 +486,9 @@ CSS Properties:
         document.addEventListener('DOMContentLoaded', function() {
             loadLessonState();
             
-            // Auto-update box model on load
-            setTimeout(updateBoxModel, 500);
+            // Auto-run HTML on load
+            setTimeout(runHTML, 500);
         });
     </script>
-
-    <style>
-        .box-model-demo {
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        
-        .box-model-demo::before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            right: -3px;
-            bottom: -3px;
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #f59e0b);
-            border-radius: 8px;
-            z-index: -1;
-            opacity: 0.7;
-        }
-    </style>
 </body>
 </html>

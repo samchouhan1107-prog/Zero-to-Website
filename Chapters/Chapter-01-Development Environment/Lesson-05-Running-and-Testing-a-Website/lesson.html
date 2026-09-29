@@ -3,111 +3,557 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 05 | Running and Testing a Website - WZ Storehouse</title>
-    <link rel="stylesheet" href="../../../Assets/css/main.css">
-    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
-    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
-    <script src="../../../Assets/js/main.js" defer></script>
-    <script src="../../../Assets/js/lesson.js" defer></script>
+    <title>Lesson 05 | Running and Testing a Website - WebZoneBW.shop</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../Assets/css/responsive.css">
+    <link rel="stylesheet" href="../../Assets/css/w3schools-milkyway.css">
+    
+    <script src="../../Assets/js/main.js" defer></script>
+    <script src="../../Assets/js/lesson.js" defer></script>
+    <script src="../../Assets/js/navigation.js" defer></script>
 </head>
 <body class="lesson-page">
-    <header>
-        <div class="logo">
-            <a href="../../../index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
-        </div>
-        <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 01</a>
-            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
-        </nav>
-    </header>
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
 
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-    </div>
-
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 01 • Lesson 05</span>
+    <main class="container" id="main-content">
+        <!-- LESSON HEADER -->
+        <section class="lesson-header">
+            <div class="lesson-meta">
+                <span class="chapter-badge">Chapter 01</span>
+                <span class="lesson-progress">📈 Lesson 5 of 5</span>
+            </div>
             <h1>Running and Testing a Website</h1>
-            <p>Understand local HTTP servers vs the file:// protocol, cross-browser verification, mobile viewport checks, and W3C validation workflows.</p>
-
-            <div class="info-grid">
-                <div class="summary-card">
-                    <h3>Protocol</h3>
-                    <p>http:// vs file://</p>
+            <p class="lesson-subtitle">Learn how to run local development servers and test your websites effectively before deployment.</p>
+            
+            <!-- Progress bar -->
+            <div class="lesson-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
                 </div>
-                <div class="summary-card">
-                    <h3>Localhost</h3>
-                    <p>127.0.0.1:3000 / 5500</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Validation</h3>
-                    <p>W3C HTML / CSS Checker</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Estimated Time</h3>
-                    <p>30 Minutes</p>
-                </div>
+                <span class="progress-text">0% Complete</span>
             </div>
         </section>
 
-        <section class="chapter-section">
-            <h2>1. Why You Need a Local Server</h2>
-            <p>Double-clicking an HTML file opens it in your browser with the <code>file:///</code> protocol. While simple, <code>file:///</code> blocks modern web features like web fonts (CORS restrictions), JavaScript ES modules (<code>import/export</code>), and Fetch API requests due to browser security sandboxes.</p>
-            <p>Running via a local HTTP server (like VS Code Live Server or Node/Vite) serves pages over <code>http://localhost:port</code>, exactly replicating how production web hosts behave.</p>
-        </section>
+        <!-- LESSON CONTENT STRUCTURE -->
+        <div class="lesson-content">
+            <!-- CONCEPT SECTION -->
+            <section class="lesson-section">
+                <h2>🧩 Concept</h2>
+                <div class="concept-box">
+                    <h3>Understanding Local Development</h3>
+                    <p>Running a local development server allows you to test websites on your computer before deploying them to the internet. This is essential for debugging, testing features, and ensuring your site works correctly across different browsers and devices.</p>
+                </div>
+            </section>
 
-        <section class="chapter-section">
-            <h2>2. The Testing Checklist</h2>
-            <ul class="chapter-list">
-                <li><strong>Cross-Browser:</strong> Test your pages on Chromium (Chrome/Edge), Gecko (Firefox), and WebKit (Safari).</li>
-                <li><strong>Responsive Breakpoints:</strong> Test at 360px (mobile), 768px (tablet), 1024px (laptop), and 1440px+ (desktop).</li>
-                <li><strong>Console Cleanliness:</strong> Ensure 0 red JavaScript errors or 404 missing resource warnings in the DevTools Console.</li>
-                <li><strong>Cache Invalidation:</strong> Use <code>Ctrl+Shift+R</code> (or <code>Cmd+Shift+R</code> on Mac) to bypass the browser cache and load fresh assets.</li>
-            </ul>
-        </section>
+            <!-- EXPLANATION SECTION -->
+            <section class="lesson-section">
+                <h2>📖 Explanation</h2>
+                <div class="explanation-content">
+                    <h3>Why Local Development Servers Matter</h3>
+                    <p>Local servers provide the environment needed to test modern web features that don't work with simple file opening:</p>
+                    
+                    <div class="code-example">
+                        <pre><code>Local Server Benefits:
+├── 🔒 Same-Origin Policy Support
+│   ├── API requests from different domains
+│   ├── Local file access permissions
+│   └── Cookie and session handling
+├── ⚡ Live Reloading
+│   ├── Automatic page refresh
+│   ├── CSS hot-reloading
+│   └── JavaScript module support
+├── 🛠️ Development Features
+│   ├── Error debugging
+│   ├── Console access
+│   └── Network request inspection
+└── 🚀 Modern Web Standards
+    ├── ES6 modules
+    ├── Web APIs
+    └── Service workers</code></pre>
+                    </div>
 
-        <section class="chapter-section">
-            <h2>3. Code Example: Testing Meta &amp; Title</h2>
-            <div class="code-box">
-                <pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang="en"&gt;
-&lt;head&gt;
-    &lt;meta charset="UTF-8"&gt;
-    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
-    &lt;title&gt;My Tested Website&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-    &lt;p&gt;Server verified and ready for deployment!&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;</code></pre>
+                    <div class="explanation-points">
+                        <div class="point-item">
+                            <h4>🔒 Security Context</h4>
+                            <p>Local servers provide proper security context for testing APIs and modern features.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>⚡ Development Speed</h4>
+                            <p>Auto-reloading saves time by automatically refreshing pages when files change.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🛠️ Debugging Tools</h4>
+                            <p>Access to full debugging capabilities that aren't available with file:// URLs.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🌐 Network Simulation</h4>
+                            <p>Test how your site behaves with different network conditions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXAMPLE SECTION -->
+            <section class="lesson-section">
+                <h2>💡 Example</h2>
+                <div class="example-content">
+                    <h3>Popular Development Servers</h3>
+                    <p>Here are the most common tools for running local development servers:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>🔥 Live Server (VS Code)</h4>
+                            <ul>
+                                <li><strong>Easy Setup</strong> - One-click installation</li>
+                                <li><strong>Auto Reload</strong> - Live browser updates</li>
+                                <li><strong>HTTPS Support</strong> - SSL certificates</li>
+                                <li><strong>Port Configuration</strong> - Custom ports</li>
+                                <li><strong>Best for Beginners</strong></li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🐍 Python HTTP Server</h4>
+                            <ul>
+                                <li><strong>Built-in</strong> - No extra installation</li>
+                                <li><strong>Simple</strong> - Python 3: python -m http.server</li>
+                                <li><strong>Lightweight</strong> - Minimal resource usage</li>
+                                <li><strong>Quick Testing</strong> - For simple projects</li>
+                                <li><strong>Python Required</strong></li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>⚛️ Create React App</h4>
+                            <ul>
+                                <li><strong>React Optimized</strong> - For React projects</li>
+                                <li><strong>HMR</strong> - Hot Module Replacement</li>
+                                <li><strong>Dev Tools</strong> - Built-in debugging</li>
+                                <li><strong>Production Build</strong> - Optimized output</li>
+                                <li><strong>React Required</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICAL CONTEXT SECTION -->
+            <section class="lesson-section">
+                <h2>🏠 Practical Context</h2>
+                <div class="practical-content">
+                    <h3>Why This Matters for Professional Development</h3>
+                    <p>Local development is crucial because:</p>
+                    
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <h4>🐛 Early Bug Detection</h4>
+                            <p>Catch issues before users encounter them in production.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🔒 Security Testing</h4>
+                            <p>Test authentication and API security in a safe environment.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>📱 Cross-Browser Testing</h4>
+                            <p>Ensure compatibility across different browsers and devices.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🚀 Performance Optimization</h4>
+                            <p>Test and optimize loading performance before deployment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICE SECTION -->
+            <section class="lesson-section">
+                <h2>🧪 Practice</h2>
+                <div class="practice-content">
+                    <h3>Interactive Server Setup Guide</h3>
+                    <p>Follow these steps to set up and run a local development server:</p>
+                    
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>Server Setup Commands</h3>
+                            <textarea id="serverCommands"># Method 1: Live Server (Recommended)
+# 1. Install Live Server extension in VS Code
+# 2. Right-click index.html
+# 3. Select "Open with Live Server"
+# 4. Server starts automatically on port 5500
+
+# Method 2: Python HTTP Server
+# 1. Open terminal in project folder
+# 2. Run: python -m http.server 8000
+# 3. Open: http://localhost:8000
+
+# Method 3: Node.js Server
+# 1. Install Node.js (if not installed)
+# 2. Create server.js file:
+const http = require('http');
+const fs = require('fs');
+const path = require('path');
+
+const server = http.createServer((req, res) => {
+    const filePath = path.join(__dirname, 'index.html');
+    fs.readFile(filePath, (err, content) => {
+        res.writeHead(200, { 'Content-Type': 'text/html' });
+        res.end(content);
+    });
+});
+
+server.listen(3000, () => {
+    console.log('Server running on http://localhost:3000');
+});</textarea>
+                            <button onclick="setupServer()" class="run-btn">Setup Server</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Server Status</h3>
+                            <div id="serverStatus">
+                                <div class="server-status">
+                                    <h4>🔴 Server Not Started</h4>
+                                    <p>Click "Setup Server" to begin local development.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KNOWLEDGE CHECK SECTION -->
+            <section class="lesson-section">
+                <h2>❓ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <h3>Test Your Understanding</h3>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 1: Why can't you test APIs with file:// URLs?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) File URLs are too slow</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) Same-origin policy blocks cross-origin requests</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) File URLs don't support JavaScript</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) File URLs are read-only</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q1', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 2: What is the main benefit of live reloading?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span>A) Makes your code run faster</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span>B) Automatically refreshes the browser when files change</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span>C) Compresses your files</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span>D) Creates backup files</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q2', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON OUTCOME -->
+            <section class="lesson-section">
+                <h2>🎯 Learning Outcome</h2>
+                <div class="outcome-content">
+                    <h3>What You've Learned</h3>
+                    <div class="outcome-grid">
+                        <div class="outcome-item">
+                            <h4>🔥 Local Development Servers</h4>
+                            <p>You understand why local servers are essential for modern web development.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🛠️ Server Setup Methods</h4>
+                            <p>You know multiple ways to set up and run local development servers.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>⚡ Live Development Features</h4>
+                            <p>You understand auto-reloading and other development server benefits.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🌐 Testing Capabilities</h4>
+                            <p>You can test APIs, security, and performance in a local environment.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON COMPLETE -->
+            <section class="lesson-complete" id="lessonComplete" style="display: none;">
+                <div class="complete-content">
+                    <h2>✅ Chapter Complete! 🎉</h2>
+                    <div class="complete-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Lesson Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2/2</span>
+                            <span class="stat-label">Questions Correct</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">5/5</span>
+                            <span class="stat-label">Lessons Completed</span>
+                        </div>
+                    </div>
+                    
+                    <div class="complete-message">
+                        <h3>Congratulations! You've completed Chapter 01!</h3>
+                        <p>You now have all the essential tools and knowledge to start building professional web applications. Your development environment is fully set up and ready for the next chapters.</p>
+                        <div class="next-steps">
+                            <h4>🚀 What's Next:</h4>
+                            <p>Continue to Chapter 02: HTML to learn the fundamental building blocks of web pages.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- LESSON NAVIGATION -->
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                ⬅ Previous Lesson
+            </button>
+            <div class="lesson-counter">
+                <span class="current-lesson">5</span> of <span class="total-lessons">5</span>
             </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>4. Practice Challenge</h2>
-            <p>Create a live test verification card with system indicators:</p>
-            <a class="lesson-card" href="practice.html">
-                <h3>Open Lesson 05 Practice Challenge →</h3>
-                <p>Build a real-time site audit status badge.</p>
-            </a>
-        </section>
-
-        <section class="chapter-section chapter-nav-links">
-            <a href="../Lesson-04-Files-Folders-Project-Structure/lesson.html">⬅ Lesson 04: Files & Folders</a>
-            <a href="../../Chapter-02-HTML/index.html">Next: Chapter 02 HTML ➜</a>
-        </section>
+            <button class="nav-btn next-btn" id="nextBtn">
+                Continue to Chapter 02 ➡
+            </button>
+        </nav>
     </main>
 
     <footer>
-        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Lesson state management
+        let lessonState = {
+            id: "Lesson-05-Running-and-Testing-a-Website",
+            chapter: "Chapter-01-Development Environment",
+            progress: 0,
+            completed: false,
+            quizAnswers: {}
+        };
+
+        // Load lesson state
+        function loadLessonState() {
+            const saved = localStorage.getItem(`lesson_${lessonState.id}`);
+            if (saved) {
+                const state = JSON.parse(saved);
+                lessonState = { ...lessonState, ...state };
+                updateUI();
+            }
+        }
+
+        // Save lesson state
+        function saveLessonState() {
+            localStorage.setItem(`lesson_${lessonState.id}`, JSON.stringify(lessonState));
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            progressFill.style.width = `${lessonState.progress}%`;
+            progressText.textContent = `${lessonState.progress}% Complete`;
+
+            // Update navigation
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = false; // Has previous lesson
+            nextBtn.disabled = !lessonState.completed;
+
+            // Show completion message
+            if (lessonState.completed) {
+                document.getElementById('lessonComplete').style.display = 'block';
+                nextBtn.innerHTML = 'Continue to Chapter 02 ➡';
+            }
+        }
+
+        // Setup server
+        function setupServer() {
+            const status = document.getElementById('serverStatus');
+            status.innerHTML = `
+                <div class="server-status">
+                    <h4>🟢 Server Started Successfully!</h4>
+                    <div class="server-info">
+                        <p><strong>Method:</strong> Live Server (VS Code Extension)</p>
+                        <p><strong>URL:</strong> <a href="http://localhost:5500" target="_blank">http://localhost:5500</a></p>
+                        <p><strong>Features:</strong></p>
+                        <ul style="margin-left: 20px;">
+                            <li>✅ Auto-reloading</li>
+                            <li>✅ HTTPS support</li>
+                            <li>✅ Live preview</li>
+                            <li>✅ Error highlighting</li>
+                        </ul>
+                    </div>
+                    <div class="success-tip">
+                        <h4>💡 Pro Tip:</h4>
+                        <p>Right-click any HTML file and select "Open with Live Server" to start development instantly!</p>
+                    </div>
+                </div>
+            `;
+            
+            // Update progress
+            if (lessonState.progress < 80) {
+                lessonState.progress = 80;
+                saveLessonState();
+                updateUI();
+            }
+        }
+
+        // Check quiz answers
+        function checkAnswer(questionId, correctAnswer) {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            if (!selected) return;
+
+            const isCorrect = selected.value === correctAnswer;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            lessonState.quizAnswers[questionId] = isCorrect;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">✅ Correct! Well done.</span>';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">❌ Try again. Review the explanation above.</span>';
+                feedback.className = 'feedback incorrect';
+            }
+
+            // Check if all questions are answered correctly
+            const allCorrect = Object.values(lessonState.quizAnswers).every(answer => answer === true);
+            if (allCorrect && Object.keys(lessonState.quizAnswers).length === 2) {
+                lessonState.progress = 100;
+                lessonState.completed = true;
+                saveLessonState();
+                updateUI();
+                
+                // Update chapter progress
+                updateChapterProgress();
+            }
+        }
+
+        // Update chapter progress
+        function updateChapterProgress() {
+            const chapterData = {
+                chapter: "Chapter-01-Development Environment",
+                lessons: [
+                    { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "completed" },
+                    { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "completed" },
+                    { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "completed" },
+                    { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "completed" },
+                    { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "completed" }
+                ]
+            };
+            
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Navigation handlers
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            // Navigate to previous lesson
+            window.location.href = '../Lesson-04-Files-Folders-Project-Structure/lesson.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (lessonState.completed) {
+                // Navigate to next chapter
+                window.location.href = '../../Chapter-02-HTML/index.html';
+            } else {
+                // Show completion message
+                alert('Please complete the lesson first!');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) {
+                document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLessonState();
+        });
+    </script>
+
+    <style>
+        .server-status {
+            background: #f0fdf4;
+            border: 1px solid #22c55e;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+        
+        .server-info {
+            margin: 1rem 0;
+        }
+        
+        .server-info a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .server-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .success-tip {
+            background: #fef3c7;
+            border: 1px solid #f59e0b;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .success-tip h4 {
+            color: #92400e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .next-steps {
+            background: #e0f2fe;
+            border: 1px solid #0ea5e9;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .next-steps h4 {
+            color: #0369a1;
+            margin-bottom: 0.5rem;
+        }
+    </style>
 </body>
 </html>

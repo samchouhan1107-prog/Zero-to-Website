@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Navigation - WebZoneBW SC</title>
+    <link rel="stylesheet" href="/Assets/css/main.css">
+    <link rel="stylesheet" href="/Assets/css/site-nav.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Inter, system-ui, -apple-system, sans-serif;
+        }
+        
+        .test-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .test-section {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .test-section h2 {
+            color: #f8fafc;
+            margin-bottom: 1rem;
+        }
+        
+        .test-section p {
+            color: #94a3b8;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <!-- Test Navigation -->
+    <nav class="webzonebw-site-nav">
+        <div class="nav-header">
+            <a href="/" class="nav-logo">
+                <h1>WebZoneBW SC</h1>
+                <span class="tagline">Learning Studio</span>
+            </a>
+            
+            <button class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+                ☰
+            </button>
+            
+            <div class="nav-menu">
+                <a href="/" class="nav-item">Home</a>
+                <a href="/learn.html" class="nav-item active">Learn</a>
+                <a href="/developertools.html" class="nav-item">Tools</a>
+                <a href="/about.html" class="nav-item">About</a>
+                <a href="/contact.html" class="nav-item">Contact</a>
+                
+                <div class="nav-search">
+                    <input 
+                        type="text" 
+                        placeholder="Search lessons..." 
+                        aria-label="Search lessons and tools"
+                    >
+                    <button type="button" aria-label="Search">🔍</button>
+                </div>
+                
+                <div class="nav-user">
+                    <div class="user-avatar">U</div>
+                    <div class="user-menu">
+                        <div class="user-dropdown">
+                            <a href="/profile.html">Profile</a>
+                            <a href="/progress.html">Progress</a>
+                            <a href="/settings.html">Settings</a>
+                            <a href="/logout.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="nav-overlay"></div>
+    </nav>
+
+    <!-- Test Content -->
+    <div class="test-content">
+        <div class="test-section">
+            <h2>Navigation Test</h2>
+            <p>This page tests the navigation system. Try clicking the menu button to open the mobile menu, hover over navigation items, and test the search functionality.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Dark Mode Test</h2>
+            <p>Test the dark/light mode toggle. The navigation should adapt to both themes properly.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Responsive Test</h2>
+            <p>Resize the browser window to test responsive behavior. The navigation should collapse into a mobile menu on smaller screens.</p>
+        </div>
+        
+        <div class="test-section">
+            <h2>Accessibility Test</h2>
+            <p>Test keyboard navigation with Tab, Escape, and forward slash (/) keys. The navigation should be fully accessible.</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/Assets/js/site-nav.js" defer></script>
+</body>
+</html>

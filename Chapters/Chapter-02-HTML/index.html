@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chapter 01 | Development Environment - WebZoneBW.shop</title>
+    <title>Chapter 02 | HTML Fundamentals - WebZoneBW.shop</title>
     <link rel="stylesheet" href="../../Assets/css/main.css">
     <link rel="stylesheet" href="../../Assets/css/lesson.css">
     <link rel="stylesheet" href="../../Assets/css/responsive.css">
@@ -19,14 +19,14 @@
     <main class="container" id="main-content">
         <!-- CHAPTER HERO - LEARNING ROADMAP -->
         <section class="chapter-hero">
-            <div class="chapter-badge">Chapter 01</div>
-            <h1>Development Environment Setup</h1>
-            <p class="chapter-subtitle">Learn the essential tools and workflows for modern web development</p>
+            <div class="chapter-badge">Chapter 02</div>
+            <h1>HTML Fundamentals</h1>
+            <p class="chapter-subtitle">Master the building blocks of the web with semantic HTML5</p>
             
             <!-- CHAPTER METADATA -->
             <div class="chapter-meta">
                 <div class="lessons-info">
-                    <span class="lessons-count">📚 5 Lessons</span>
+                    <span class="lessons-count">📚 8 Lessons</span>
                     <span class="progress-info">📈 Progress: <span id="chapterProgress">0%</span></span>
                 </div>
                 <div class="difficulty-info">
@@ -34,7 +34,7 @@
                     <div class="difficulty-dots">
                         <span class="difficulty-dot active"></span>
                         <span class="difficulty-dot active"></span>
-                        <span class="difficulty-dot"></span>
+                        <span class="difficulty-dot active"></span>
                         <span class="difficulty-dot"></span>
                         <span class="difficulty-dot"></span>
                     </div>
@@ -49,28 +49,43 @@
                 <!-- Lesson states will be populated by JavaScript -->
                 <div class="path-stage" data-lesson="1">
                     <div class="stage-icon">📝</div>
-                    <div class="stage-title">Your First Webpage</div>
-                    <div class="stage-description">Create and preview HTML files</div>
+                    <div class="stage-title">HTML Basics</div>
+                    <div class="stage-description">Document structure and elements</div>
                 </div>
                 <div class="path-stage" data-lesson="2">
-                    <div class="stage-icon">💻</div>
-                    <div class="stage-title">Code Editor Setup</div>
-                    <div class="stage-description">Choose and configure your editor</div>
+                    <div class="stage-icon">🏗️</div>
+                    <div class="stage-title">Semantic Elements</div>
+                    <div class="stage-description">Meaningful HTML5 tags</div>
                 </div>
                 <div class="path-stage" data-lesson="3">
-                    <div class="stage-icon">🔍</div>
-                    <div class="stage-title">Browser Developer Tools</div>
-                    <div class="stage-description">Debug and inspect websites</div>
+                    <div class="stage-icon">📋</div>
+                    <div class="stage-title">Forms & Input</div>
+                    <div class="stage-description">User input and validation</div>
                 </div>
                 <div class="path-stage" data-lesson="4">
-                    <div class="stage-icon">📁</div>
-                    <div class="stage-title">Project Structure</div>
-                    <div class="stage-description">Organize files and folders</div>
+                    <div class="stage-icon">📊</div>
+                    <div class="stage-title">Tables & Lists</div>
+                    <div class="stage-description">Data structure and organization</div>
                 </div>
                 <div class="path-stage" data-lesson="5">
+                    <div class="stage-icon">🎨</div>
+                    <div class="stage-title">Multimedia</div>
+                    <div class="stage-description">Images, audio, and video</div>
+                </div>
+                <div class="path-stage" data-lesson="6">
+                    <div class="stage-icon">♿</div>
+                    <div class="stage-title">Accessibility</div>
+                    <div class="stage-description">Inclusive web design</div>
+                </div>
+                <div class="path-stage" data-lesson="7">
+                    <div class="stage-icon">🔗</div>
+                    <div class="stage-title">Best Practices</div>
+                    <div class="stage-description">HTML standards and conventions</div>
+                </div>
+                <div class="path-stage" data-lesson="8">
                     <div class="stage-icon">🚀</div>
-                    <div class="stage-title">Running & Testing</div>
-                    <div class="stage-description">Local development servers</div>
+                    <div class="stage-title">Project Build</div>
+                    <div class="stage-description">Complete HTML project</div>
                 </div>
             </div>
         </section>
@@ -78,24 +93,27 @@
         <!-- CHAPTER INTRODUCTION -->
         <section class="chapter-section">
             <h2>🎯 What You'll Learn</h2>
-            <p>This chapter introduces the essential tools and workflows you'll need to become an effective web developer. You'll learn how to set up your development environment, use code editors effectively, and understand how browsers work with your code.</p>
+            <p>This chapter dives deep into HTML fundamentals, teaching you how to create structured, semantic, and accessible web content. You'll learn everything from basic document structure to advanced HTML5 features and best practices.</p>
         </section>
 
         <!-- WHY IT MATTERS -->
         <section class="chapter-section">
             <h2>💡 Why This Matters</h2>
-            <p>A properly configured development environment is the foundation of all web development work. Just as a carpenter needs good tools, web developers need the right setup to write, test, and debug code efficiently.</p>
+            <p>HTML is the foundation of all web content. Proper HTML structure ensures your websites are accessible, search-engine friendly, and maintainable. Every professional web developer must master HTML fundamentals before moving to more advanced technologies.</p>
         </section>
 
         <!-- LEARNING OUTCOMES -->
         <section class="chapter-section">
             <h2>🧠 What You'll Understand</h2>
             <ul class="chapter-list">
-                <li>How browsers interpret and display HTML, CSS, and JavaScript</li>
-                <li>The purpose and importance of semantic HTML5 markup</li>
-                <li>How to use browser developer tools for debugging</li>
-                <li>Best practices for organizing project files and folders</li>
-                <li>How to run local development servers for testing</li>
+                <li>The purpose and structure of HTML documents</li>
+                <li>Semantic HTML5 elements and their proper usage</li>
+                <li>Form handling and user input validation</li>
+                <li>Data organization with tables and lists</li>
+                <li>Multimedia integration techniques</li>
+                <li>Accessibility best practices and standards</li>
+                <li>HTML coding conventions and best practices</li>
+                <li>Real-world project implementation</li>
             </ul>
         </section>
 
@@ -103,11 +121,14 @@
         <section class="chapter-section">
             <h2>🛠️ What You'll Be Able to Do</h2>
             <ul class="chapter-list">
-                <li>Create and save HTML files with proper structure</li>
-                <li>Configure and use a code editor efficiently</li>
-                <li>Inspect and debug web pages using browser tools</li>
-                <li>Organize projects with logical file structures</li>
-                <li>Test websites locally before deployment</li>
+                <li>Create well-structured HTML5 documents</li>
+                <li>Use semantic elements for better accessibility</li>
+                <li>Build functional forms with proper validation</li>
+                <li>Organize data with tables and structured lists</li>
+                <li>Integrate images, audio, and video effectively</li>
+                <li>Implement accessibility features and ARIA labels</li>
+                <li>Follow HTML coding standards and conventions</li>
+                <li>Build complete, professional HTML projects</li>
             </ul>
         </section>
 
@@ -131,8 +152,8 @@
         <!-- QUICK START -->
         <section class="quick-start">
             <h2>🚀 Quick Start</h2>
-            <p>Begin with <strong>Lesson 1: Your First Webpage</strong> to create your first HTML file and see how browsers display web content.</p>
-            <a href="Lesson-01-Your-First-Webpage/lesson.html" class="btn-primary">Start Lesson 1 →</a>
+            <p>Begin with <strong>Lesson 1: HTML Basics</strong> to understand document structure and fundamental HTML elements.</p>
+            <a href="lessons/lesson-01-html-basics/lesson.html" class="btn-primary">Start Lesson 1 →</a>
         </section>
     </main>
 
@@ -143,13 +164,16 @@
     <script>
         // Chapter progress tracking
         let chapterData = {
-            chapter: "Chapter-01-Development Environment",
+            chapter: "Chapter-02-HTML",
             lessons: [
-                { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "not-started" },
-                { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "not-started" },
-                { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "not-started" },
-                { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "not-started" },
-                { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+                { id: "Lesson-01-HTML-Basics", title: "HTML Basics", status: "not-started" },
+                { id: "Lesson-02-Semantic-Elements", title: "Semantic Elements", status: "not-started" },
+                { id: "Lesson-03-Forms-Input", title: "Forms & Input", status: "not-started" },
+                { id: "Lesson-04-Tables-Lists", title: "Tables & Lists", status: "not-started" },
+                { id: "Lesson-05-Multimedia", title: "Multimedia", status: "not-started" },
+                { id: "Lesson-06-Accessibility", title: "Accessibility", status: "not-started" },
+                { id: "Lesson-07-Best-Practices", title: "Best Practices", status: "not-started" },
+                { id: "Lesson-08-Project-Build", title: "Project Build", status: "not-started" }
             ]
         };
 
@@ -162,11 +186,14 @@
             } else {
                 // Initialize all lessons as not-started for fresh users
                 chapterData.lessons = [
-                    { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "not-started" },
-                    { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "not-started" },
-                    { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "not-started" },
-                    { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "not-started" },
-                    { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+                    { id: "Lesson-01-HTML-Basics", title: "HTML Basics", status: "not-started" },
+                    { id: "Lesson-02-Semantic-Elements", title: "Semantic Elements", status: "not-started" },
+                    { id: "Lesson-03-Forms-Input", title: "Forms & Input", status: "not-started" },
+                    { id: "Lesson-04-Tables-Lists", title: "Tables & Lists", status: "not-started" },
+                    { id: "Lesson-05-Multimedia", title: "Multimedia", status: "not-started" },
+                    { id: "Lesson-06-Accessibility", title: "Accessibility", status: "not-started" },
+                    { id: "Lesson-07-Best-Practices", title: "Best Practices", status: "not-started" },
+                    { id: "Lesson-08-Project-Build", title: "Project Build", status: "not-started" }
                 ];
             }
             updateUI();
@@ -211,7 +238,7 @@
             if (currentLesson) {
                 document.getElementById('currentLessonSection').style.display = 'block';
                 document.getElementById('currentLessonName').textContent = currentLesson.title;
-                document.getElementById('continueCurrentLesson').href = `${currentLesson.id}/lesson.html`;
+                document.getElementById('continueCurrentLesson').href = `lessons/${currentLesson.id}/lesson.html`;
             }
         }
 
@@ -229,7 +256,7 @@
                     <span class="lesson-status">${statusIcon}</span>
                 </div>
                 <h3>${lesson.title}</h3>
-                <a href="${lesson.id}/lesson.html" class="btn-primary lesson-link">
+                <a href="lessons/${lesson.id}/lesson.html" class="btn-primary lesson-link">
                     ${lesson.status === 'completed' ? 'Review' : 'Start'} Lesson
                 </a>
             `;

@@ -1,0 +1,729 @@
+/* ==================================================
+   WebZoneBW Learn Page - Classroom Experience
+   ================================================== */
+
+/* Learn Page Container */
+.learn-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    min-height: 100vh;
+}
+
+/* Override conflicting main.css styles for learn page */
+body {
+    background: #0f172a !important;
+    background-image: none !important;
+}
+
+body:not(.dark) {
+    background: #fcf7f7 !important;
+}
+
+.learn-container main {
+    padding: 0 !important;
+}
+
+/* Override main.css header styles */
+header {
+    display: none !important;
+}
+
+/* Ensure proper z-index for navigation */
+.webzonebw-site-nav {
+    z-index: 1000 !important;
+}
+
+/* Hero Section - Classroom Entry Point */
+.learn-hero {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 3rem 0;
+    background: rgba(15, 23, 42, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.learn-hero .badge {
+    display: inline-block;
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.learn-hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #f8fafc;
+    font-weight: 800;
+    line-height: 1.2;
+}
+
+.learn-hero h1 .subtitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #94a3b8;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+.learn-hero p {
+    font-size: 1.125rem;
+    color: #94a3b8;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* Learning Journey Card - Main Entry Point */
+.learning-journey {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+}
+
+.learning-journey::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #06b6d4);
+    border-radius: 20px 20px 0 0;
+}
+
+.learning-journey h2 {
+    color: #f8fafc;
+    font-size: 1.75rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.journey-stats {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.journey-progress {
+    flex: 1;
+    min-width: 250px;
+}
+
+.journey-progress h3 {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 6px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+.progress-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.progress-text {
+    color: #f8fafc;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.journey-cta {
+    flex-shrink: 0;
+}
+
+.journey-cta .btn {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+}
+
+.journey-cta .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 35px -5px rgba(59, 130, 246, 0.4);
+}
+
+.journey-cta .btn:active {
+    transform: translateY(0);
+}
+
+/* Learning Path - Clear Roadmap */
+.learning-path {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.learning-path h2 {
+    color: #f8fafc;
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 700;
+}
+
+.path-stages {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.path-stage {
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+    position: relative;
+}
+
+.path-stage:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 2px;
+    background: rgba(148, 163, 184, 0.3);
+}
+
+.path-stage.active .stage-icon {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-color: transparent;
+    color: white;
+    transform: scale(1.1);
+}
+
+.stage-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(59, 130, 246, 0.2);
+    border: 2px solid rgba(59, 130, 246, 0.4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin: 0 auto 1rem;
+    transition: all 0.3s ease;
+}
+
+.stage-title {
+    color: #f8fafc;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.stage-description {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* Search Section - Dedicated Find Area */
+.search-section {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.search-section h2 {
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.search-section p {
+    color: #94a3b8;
+    margin-bottom: 1.5rem;
+}
+
+.search-container {
+    position: relative;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-input {
+    width: 100%;
+    padding: 1rem 1rem 1rem 3rem;
+    background: rgba(15, 23, 42, 0.8);
+    border: 2px solid rgba(59, 130, 246, 0.3);
+    border-radius: 12px;
+    color: #f8fafc;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.search-icon {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #94a3b8;
+    font-size: 1.25rem;
+}
+
+/* Quick Explore - Clean Navigation */
+.quick-explore {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+}
+
+.quick-explore h2 {
+    color: #f8fafc;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.explore-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.explore-item {
+    background: rgba(15, 23, 42, 0.8);
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 12px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    text-decoration: none;
+    color: #f8fafc;
+}
+
+.explore-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+}
+
+.explore-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.explore-title {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+}
+
+.explore-description {
+    font-size: 0.875rem;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+
+/* Curriculum Grid */
+.curriculum-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.chapter-card {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.chapter-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow: 0 20px 40px -10px rgba(59, 130, 246, 0.3);
+}
+
+.chapter-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.125rem;
+}
+
+.chapter-icon {
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+}
+
+.chapter-title {
+    color: #3b82f6;
+    margin-bottom: 0.75rem;
+    font-size: 1.375rem;
+    font-weight: 700;
+}
+
+.chapter-description {
+    color: #94a3b8;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.chapter-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem;
+    color: #64748b;
+}
+
+.lessons-count {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.difficulty {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.difficulty-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #64748b;
+}
+
+.difficulty-dot.active {
+    background: #3b82f6;
+}
+
+.chapter-progress {
+    width: 100%;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.chapter-btn {
+    background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    color: white;
+    border: none;
+    padding: 0.875rem 1.5rem;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    width: 100%;
+}
+
+.chapter-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+}
+
+.chapter-btn:active {
+    transform: translateY(0);
+}
+
+.chapter-btn.completed {
+    background: linear-gradient(135deg, #22c55e, #16a34a);
+}
+
+/* Features Section */
+.features-section {
+    background: rgba(30, 41, 59, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 20px;
+    padding: 2.5rem;
+    margin-bottom: 3rem;
+}
+
+.features-title {
+    color: #f8fafc;
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 1.75rem;
+    font-weight: 700;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.feature-item {
+    text-align: center;
+    padding: 2rem;
+    background: rgba(15, 23, 42, 0.8);
+    border-radius: 16px;
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    transition: all 0.3s ease;
+}
+
+.feature-item:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.4);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.feature-title {
+    color: #3b82f6;
+    margin-bottom: 0.75rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.feature-description {
+    color: #94a3b8;
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .learn-container {
+        padding: 1rem;
+    }
+
+    .learn-hero {
+        padding: 2rem 0;
+    }
+
+    .learn-hero h1 {
+        font-size: 2rem;
+    }
+
+    .learn-hero h1 .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .learning-journey {
+        padding: 1.5rem;
+    }
+
+    .journey-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .journey-cta {
+        width: 100%;
+    }
+
+    .path-stages {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .path-stage:not(:last-child)::after {
+        display: none;
+    }
+
+    .curriculum-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .explore-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Dark Mode Adjustments */
+body.dark {
+    --background: #0f172a;
+    --surface: #1e293b;
+    --text: #f8fafc;
+    --muted: #94a3b8;
+    --border: rgba(255, 255, 255, 0.1);
+}
+
+/* Light Mode Adjustments */
+body:not(.dark) {
+    --background: #fcf7f7;
+    --surface: #ffffff;
+    --text: #1c0b0f;
+    --muted: #5e3a40;
+    --border: #e6ccd0;
+}
+
+/* Focus States */
+*:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}
+
+/* Accessibility */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Loading States */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Animation Classes */
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .learn-container {
+        padding: 0;
+    }
+    
+    .learning-journey,
+    .learning-path,
+    .search-section,
+    .quick-explore,
+    .curriculum-grid,
+    .features-section {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}

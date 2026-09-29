@@ -3,116 +3,495 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lesson 02 | Code Editor Setup & Productivity - WZ Storehouse</title>
-    <link rel="stylesheet" href="../../../Assets/css/main.css">
-    <link rel="stylesheet" href="../../../Assets/css/lesson.css">
-    <link rel="stylesheet" href="../../../Assets/css/ad-styles.css">
-    <script src="../../../Assets/js/main.js" defer></script>
-    <script src="../../../Assets/js/lesson.js" defer></script>
+    <title>Lesson 02 | Code Editor Setup - WebZoneBW.shop</title>
+    <link rel="stylesheet" href="../../Assets/css/main.css">
+    <link rel="stylesheet" href="../../Assets/css/lesson.css">
+    <link rel="stylesheet" href="../../Assets/css/responsive.css">
+    <link rel="stylesheet" href="../../Assets/css/w3schools-milkyway.css">
+    
+    <script src="../../Assets/js/main.js" defer></script>
+    <script src="../../Assets/js/lesson.js" defer></script>
+    <script src="../../Assets/js/navigation.js" defer></script>
 </head>
 <body class="lesson-page">
-    <header>
-        <div class="logo">
-            <a href="../../../index.html" class="logo-link">
-                <h1>WZ STOREHOUSE</h1>
-                <p>Learn • Practice • Build • Share</p>
-            </a>
+    <!-- Shared Navigation (rendered by site-nav.js) -->
+    <div id="webzonebw-site-nav"></div>
+
+    <main class="container" id="main-content">
+        <!-- LESSON HEADER -->
+        <section class="lesson-header">
+            <div class="lesson-meta">
+                <span class="chapter-badge">Chapter 01</span>
+                <span class="lesson-progress">📈 Lesson 2 of 5</span>
+            </div>
+            <h1>Code Editor Setup</h1>
+            <p class="lesson-subtitle">Choose, install, and configure your professional code editor for web development.</p>
+            
+            <!-- Progress bar -->
+            <div class="lesson-progress-bar">
+                <div class="progress-track">
+                    <div class="progress-fill" style="width: 0%"></div>
+                </div>
+                <span class="progress-text">0% Complete</span>
+            </div>
+        </section>
+
+        <!-- LESSON CONTENT STRUCTURE -->
+        <div class="lesson-content">
+            <!-- CONCEPT SECTION -->
+            <section class="lesson-section">
+                <h2>🧩 Concept</h2>
+                <div class="concept-box">
+                    <h3>Understanding Code Editors</h3>
+                    <p>A code editor is specialized software that helps you write, edit, and manage code with features like syntax highlighting, auto-completion, and debugging tools. The right editor significantly improves your coding efficiency and experience.</p>
+                </div>
+            </section>
+
+            <!-- EXPLANATION SECTION -->
+            <section class="lesson-section">
+                <h2>📖 Explanation</h2>
+                <div class="explanation-content">
+                    <h3>Why You Need a Code Editor</h3>
+                    <p>While you can write HTML in basic text editors like Notepad, a dedicated code editor provides essential features for professional web development:</p>
+                    
+                    <div class="code-example">
+                        <pre><code>Code Editor Features:
+├── Syntax Highlighting
+│   ├── HTML tags in blue
+│   ├── CSS properties in purple  
+│   └── JavaScript in yellow
+├── Auto-completion
+│   ├── Tag suggestions
+│   ├── Attribute hints
+│   └── CSS property names
+├── Error Detection
+│   ├── Missing closing tags
+│   ├── Invalid syntax
+│   └── Deprecated elements
+└── File Management
+    ├── Project organization
+    ├── Multiple file tabs
+    └── Search and replace</code></pre>
+                    </div>
+
+                    <div class="explanation-points">
+                        <div class="point-item">
+                            <h4>🎨 Syntax Highlighting</h4>
+                            <p>Color-codes different elements to make code readable and reduce errors.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>⚡ Auto-completion</h4>
+                            <p>Suggests code as you type, speeding up development and reducing typos.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>🔍 Error Detection</h4>
+                            <p>Highlights syntax issues and provides helpful error messages.</p>
+                        </div>
+                        <div class="point-item">
+                            <h4>📁 File Management</h4>
+                            <p>Organizes your project files and allows easy switching between them.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- EXAMPLE SECTION -->
+            <section class="lesson-section">
+                <h2>💡 Example</h2>
+                <div class="example-content">
+                    <h3>Popular Code Editors</h3>
+                    <p>Here are the most popular code editors for web development, each with unique strengths:</p>
+                    
+                    <div class="comparison-grid">
+                        <div class="comparison-item">
+                            <h4>🔥 Visual Studio Code</h4>
+                            <ul>
+                                <li><strong>Free & Open Source</strong></li>
+                                <li><strong>Extensive Extensions</strong></li>
+                                <li><strong>Integrated Terminal</strong></li>
+                                <li><strong>Git Integration</strong></li>
+                                <li><strong>Best for Beginners</strong></li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>💎 Sublime Text</h4>
+                            <ul>
+                                <li><strong>Extremely Fast</strong></li>
+                                <li><strong>Minimal Interface</strong></li>
+                                <li><strong>Multiple Selections</strong></li>
+                                <li><strong>Customizable</strong></li>
+                                <li><strong>Paid License</strong></li>
+                            </ul>
+                        </div>
+                        <div class="comparison-item">
+                            <h4>🍎 WebStorm</h4>
+                            <ul>
+                                <li><strong>JavaScript Focus</strong></li>
+                                <li><strong>Advanced Debugging</strong></li>
+                                <li><strong>Framework Support</strong></li>
+                                <li><strong>Intelligent Refactoring</strong></li>
+                                <li><strong>Paid License</strong></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICAL CONTEXT SECTION -->
+            <section class="lesson-section">
+                <h2>🏠 Practical Context</h2>
+                <div class="practical-content">
+                    <h3>Why This Matters for Your Career</h3>
+                    <p>Choosing the right code editor is crucial because:</p>
+                    
+                    <div class="context-grid">
+                        <div class="context-item">
+                            <h4>🚀 Productivity Boost</h4>
+                            <p>Good editors help you write 2-3x faster with auto-completion and shortcuts.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🎯 Error Prevention</h4>
+                            <p>Real-time error catching prevents hours of debugging time.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>👨‍💻 Industry Standard</h4>
+                            <p>VS Code is used by 70%+ of professional web developers.</p>
+                        </div>
+                        <div class="context-item">
+                            <h4>🔧 Extensibility</h4>
+                            <p>Extensions can add any functionality you need as you grow.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- PRACTICE SECTION -->
+            <section class="lesson-section">
+                <h2>🧪 Practice</h2>
+                <div class="practice-content">
+                    <h3>Interactive Editor Setup Guide</h3>
+                    <p>Follow these steps to install and configure Visual Studio Code:</p>
+                    
+                    <div class="code-playground">
+                        <div class="editor-panel">
+                            <h3>Installation Steps</h3>
+                            <textarea id="setupSteps">1. Download VS Code
+   Visit code.visualstudio.com
+   
+2. Install for Your OS
+   - Windows: .exe installer
+   - Mac: .dmg file  
+   - Linux: .deb or .rpm package
+   
+3. Launch VS Code
+   - Open the application
+   - Accept default settings
+   
+4. Install Essential Extensions
+   - Live Server (for preview)
+   - Prettier (for formatting)
+   - ESLint (for linting)
+   
+5. Create Your First Project
+   - File > New Folder
+   - Name it "my-first-website"
+   - Open folder in VS Code</textarea>
+                            <button onclick="runSetup()" class="run-btn">Setup Guide</button>
+                        </div>
+                        <div class="preview-panel">
+                            <h3>Setup Preview</h3>
+                            <div id="setupPreview">
+                                <div class="setup-step">
+                                    <h4>Step 1: Download VS Code</h4>
+                                    <p>Visit <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></p>
+                                    <div style="background: #007acc; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 10px 0;">
+                                        VS Code Download
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- KNOWLEDGE CHECK SECTION -->
+            <section class="lesson-section">
+                <h2>❓ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <h3>Test Your Understanding</h3>
+                    
+                    <div class="quiz-question">
+                        <h4>Question 1: What is the main benefit of syntax highlighting?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="a">
+                                <span>A) Makes code look colorful and pretty</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="b">
+                                <span>B) Helps identify different code elements and reduces errors</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="c">
+                                <span>C) Makes code run faster</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q1" value="d">
+                                <span>D) Automatically fixes your mistakes</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q1', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q1"></div>
+                    </div>
+
+                    <div class="quiz-question">
+                        <h4>Question 2: Which editor is recommended for beginners?</h4>
+                        <div class="quiz-options">
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="a">
+                                <span>A) Sublime Text (paid)</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="b">
+                                <span>B) Visual Studio Code (free)</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="c">
+                                <span>C) WebStorm (paid)</span>
+                            </label>
+                            <label class="quiz-option">
+                                <input type="radio" name="q2" value="d">
+                                <span>D) Notepad (built-in)</span>
+                            </label>
+                        </div>
+                        <button onclick="checkAnswer('q2', 'b')" class="check-btn">Check Answer</button>
+                        <div class="feedback" id="feedback-q2"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON OUTCOME -->
+            <section class="lesson-section">
+                <h2>🎯 Learning Outcome</h2>
+                <div class="outcome-content">
+                    <h3>What You've Learned</h3>
+                    <div class="outcome-grid">
+                        <div class="outcome-item">
+                            <h4>🎨 Code Editor Benefits</h4>
+                            <p>You understand why dedicated code editors are essential for web development.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🔥 VS Code Features</h4>
+                            <p>You know the key features that make VS Code the most popular choice for developers.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>⚡ Installation Process</h4>
+                            <p>You can install and configure VS Code with essential extensions for web development.</p>
+                        </div>
+                        <div class="outcome-item">
+                            <h4>🚀 Productivity Tools</h4>
+                            <p>You understand how code editors boost productivity and prevent common errors.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- LESSON COMPLETE -->
+            <section class="lesson-complete" id="lessonComplete" style="display: none;">
+                <div class="complete-content">
+                    <h2>✅ Lesson Complete!</h2>
+                    <div class="complete-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">100%</span>
+                            <span class="stat-label">Lesson Progress</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">2/2</span>
+                            <span class="stat-label">Questions Correct</span>
+                        </div>
+                    </div>
+                    
+                    <div class="complete-message">
+                        <h3>Excellent! You're ready to code with the right tools.</h3>
+                        <p>You now understand how to set up your development environment with a professional code editor.</p>
+                    </div>
+                </div>
+            </section>
         </div>
-        <nav>
-            <a href="../../../index.html">🏠 Home</a>
-            <a href="../index.html">⬅ Chapter 01</a>
-            <button id="settingsBtn" aria-label="Open settings panel">⚙ Settings</button>
+
+        <!-- LESSON NAVIGATION -->
+        <nav class="lesson-navigation" aria-label="Lesson navigation">
+            <button class="nav-btn prev-btn" id="prevBtn">
+                ⬅ Previous Lesson
+            </button>
+            <div class="lesson-counter">
+                <span class="current-lesson">2</span> of <span class="total-lessons">5</span>
+            </div>
+            <button class="nav-btn next-btn" id="nextBtn">
+                Next Lesson ➡
+            </button>
         </nav>
-    </header>
-
-    <div id="settingsPanel" class="settings-panel">
-        <h3>⚙ Settings</h3>
-        <button id="darkModeBtn">🌙 Dark Mode</button>
-        <button id="fontSizeBtn">🔤 Font Size</button>
-        <button id="closeSettingsBtn" class="close-btn">✖ Close</button>
-    </div>
-
-    <main class="container chapter-page">
-        <section class="chapter-hero">
-            <span class="chapter-badge">Chapter 01 • Lesson 02</span>
-            <h1>Code Editor Setup & Productivity</h1>
-            <p>Configure Visual Studio Code with essential extensions, linting, keyboard shortcuts, and Emmet autocomplete for high-speed development.</p>
-
-            <div class="info-grid">
-                <div class="summary-card">
-                    <h3>Editor Focus</h3>
-                    <p>VS Code / Modern IDE</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Extensions</h3>
-                    <p>Prettier &amp; Live Server</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Skill Boost</h3>
-                    <p>Emmet &amp; Hotkeys</p>
-                </div>
-                <div class="summary-card">
-                    <h3>Estimated Time</h3>
-                    <p>25 Minutes</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>1. Lesson Overview</h2>
-            <p>Professional developers don't write web code in Notepad. A configured code editor provides syntax highlighting, real-time error squiggles, auto-formatting, and keyboard shortcuts that multiply your coding speed.</p>
-        </section>
-
-        <section class="chapter-section">
-            <h2>2. Essential Extensions</h2>
-            <ul class="chapter-list">
-                <li><strong>Live Server:</strong> Launches a local development server with automatic reload whenever you save a file.</li>
-                <li><strong>Prettier - Code Formatter:</strong> Automatically cleans up indentation, quotation marks, and line breaks on save.</li>
-                <li><strong>Auto Rename Tag:</strong> Renames paired HTML tags simultaneously when you edit the opening or closing tag.</li>
-            </ul>
-        </section>
-
-        <section class="chapter-section">
-            <h2>3. Emmet Abbreviations</h2>
-            <p>VS Code includes Emmet out of the box. Typing shorthand expressions and pressing <code>Tab</code> expands into clean HTML instantly:</p>
-            <div class="code-box">
-                <pre><code>! ➔ Generates complete HTML5 boilerplate
-header>nav>ul>li*3>a ➔ Generates header with 3 navigation links
-.card>h2.title+p.desc ➔ Generates div.card with heading and paragraph</code></pre>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>4. Code Example</h2>
-            <div class="code-box">
-                <pre><code>&lt;!-- Generated with Emmet: main.container>article.post*2>h2+p+button --&gt;
-&lt;main class="container"&gt;
-    &lt;article class="post"&gt;
-        &lt;h2&gt;First Post&lt;/h2&gt;
-        &lt;p&gt;Built in VS Code with Emmet speed!&lt;/p&gt;
-        &lt;button&gt;Read More&lt;/button&gt;
-    &lt;/article&gt;
-&lt;/main&gt;</code></pre>
-            </div>
-        </section>
-
-        <section class="chapter-section">
-            <h2>5. Practice Challenge</h2>
-            <p>Test your editor structure skills by generating a multi-element layout in the interactive sandbox:</p>
-            <a class="lesson-card" href="practice.html">
-                <h3>Open Lesson 02 Practice Challenge →</h3>
-                <p>Build a clean article layout with structured semantic markup.</p>
-            </a>
-        </section>
-
-        <section class="chapter-section chapter-nav-links">
-            <a href="../Lesson-01-Your-First-Webpage/lesson.html">⬅ Lesson 01: Your First Webpage</a>
-            <a href="practice.html">Next: Practice Activity ➜</a>
-        </section>
     </main>
 
     <footer>
-        <p>WZ Storehouse | Version 2.0 | Developed by Sameer Chouhan | &copy; 2026 All Rights Reserved.</p>
+        <p>&copy; 2025 WebZoneBW.shop. All rights reserved.</p>
     </footer>
+
+    <script>
+        // Lesson state management
+        let lessonState = {
+            id: "Lesson-02-Code-Editor-Setup",
+            chapter: "Chapter-01-Development Environment",
+            progress: 0,
+            completed: false,
+            quizAnswers: {}
+        };
+
+        // Load lesson state
+        function loadLessonState() {
+            const saved = localStorage.getItem(`lesson_${lessonState.id}`);
+            if (saved) {
+                const state = JSON.parse(saved);
+                lessonState = { ...lessonState, ...state };
+                updateUI();
+            }
+        }
+
+        // Save lesson state
+        function saveLessonState() {
+            localStorage.setItem(`lesson_${lessonState.id}`, JSON.stringify(lessonState));
+        }
+
+        // Update UI based on state
+        function updateUI() {
+            // Update progress bar
+            const progressFill = document.querySelector('.progress-fill');
+            const progressText = document.querySelector('.progress-text');
+            progressFill.style.width = `${lessonState.progress}%`;
+            progressText.textContent = `${lessonState.progress}% Complete`;
+
+            // Update navigation
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            
+            prevBtn.disabled = false; // Has previous lesson
+            nextBtn.disabled = !lessonState.completed;
+
+            // Show completion message
+            if (lessonState.completed) {
+                document.getElementById('lessonComplete').style.display = 'block';
+                nextBtn.innerHTML = 'Continue to Lesson 3 ➡';
+            }
+        }
+
+        // Run setup steps
+        function runSetup() {
+            const preview = document.getElementById('setupPreview');
+            preview.innerHTML = `
+                <div class="setup-step">
+                    <h4>✅ Step 1: Download VS Code</h4>
+                    <p>Visit <a href="https://code.visualstudio.com" target="_blank">code.visualstudio.com</a></p>
+                    <div style="background: #007acc; color: white; padding: 20px; border-radius: 8px; text-align: center; margin: 10px 0;">
+                        VS Code Official Download
+                    </div>
+                </div>
+                <div class="setup-step">
+                    <h4>✅ Step 2: Installation Complete</h4>
+                    <p>Run the installer for your operating system</p>
+                </div>
+                <div class="setup-step">
+                    <h4>✅ Step 3: Launch VS Code</h4>
+                    <p>Open the application and accept default settings</p>
+                </div>
+            `;
+            
+            // Update progress
+            if (lessonState.progress < 80) {
+                lessonState.progress = 80;
+                saveLessonState();
+                updateUI();
+            }
+        }
+
+        // Check quiz answers
+        function checkAnswer(questionId, correctAnswer) {
+            const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+            if (!selected) return;
+
+            const isCorrect = selected.value === correctAnswer;
+            const feedback = document.getElementById(`feedback-${questionId}`);
+            
+            lessonState.quizAnswers[questionId] = isCorrect;
+            
+            if (isCorrect) {
+                feedback.innerHTML = '<span class="correct">✅ Correct! Well done.</span>';
+                feedback.className = 'feedback correct';
+            } else {
+                feedback.innerHTML = '<span class="incorrect">❌ Try again. Review the explanation above.</span>';
+                feedback.className = 'feedback incorrect';
+            }
+
+            // Check if all questions are answered correctly
+            const allCorrect = Object.values(lessonState.quizAnswers).every(answer => answer === true);
+            if (allCorrect && Object.keys(lessonState.quizAnswers).length === 2) {
+                lessonState.progress = 100;
+                lessonState.completed = true;
+                saveLessonState();
+                updateUI();
+                
+                // Update chapter progress
+                updateChapterProgress();
+            }
+        }
+
+        // Update chapter progress
+        function updateChapterProgress() {
+            const chapterData = {
+                chapter: "Chapter-01-Development Environment",
+                lessons: [
+                    { id: "Lesson-01-Your-First-Webpage", title: "Your First Webpage", status: "completed" },
+                    { id: "Lesson-02-Code-Editor-Setup", title: "Code Editor Setup", status: "completed" },
+                    { id: "Lesson-03-Browser-Developer-Tools", title: "Browser Developer Tools", status: "not-started" },
+                    { id: "Lesson-04-Files-Folders-Project-Structure", title: "Project Structure", status: "not-started" },
+                    { id: "Lesson-05-Running-and-Testing-a-Website", title: "Running & Testing", status: "not-started" }
+                ]
+            };
+            
+            localStorage.setItem(`progress_${chapterData.chapter}`, JSON.stringify(chapterData));
+        }
+
+        // Navigation handlers
+        document.getElementById('prevBtn').addEventListener('click', function() {
+            // Navigate to previous lesson
+            window.location.href = '../Lesson-01-Your-First-Webpage/lesson.html';
+        });
+
+        document.getElementById('nextBtn').addEventListener('click', function() {
+            if (lessonState.completed) {
+                // Navigate to next lesson
+                window.location.href = '../Lesson-03-Browser-Developer-Tools/lesson.html';
+            } else {
+                // Show completion message
+                alert('Please complete the lesson first!');
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight' && !document.getElementById('nextBtn').disabled) {
+                document.getElementById('nextBtn').click();
+            } else if (e.key === 'ArrowLeft' && !document.getElementById('prevBtn').disabled) {
+                document.getElementById('prevBtn').click();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLessonState();
+            
+            // Auto-run setup preview on load
+            setTimeout(runSetup, 500);
+        });
+    </script>
 </body>
 </html>
