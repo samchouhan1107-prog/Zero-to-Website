@@ -39,15 +39,8 @@
     <meta property="twitter:description" content="Free developer platform with interactive web tools, CSS visualizers, code sandboxes, and a complete web engineering curriculum." />
     <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
 
-    <!-- CRITICAL CSS - INLINE FOR ABOVE-THE-FOLD CONTENT -->
-    <style>
-      /* Critical CSS - Above the fold styles */
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-
-      :root {
-          --primary: #d90429;
-          --secondary: #ef233c;
-          --accent: #ff7b00;
+    <!-- UNIFIED CSS SYSTEM -->
+    <link rel="stylesheet" href="Assets/css/unified-style.css" />
           --background: #fcf7f7;
           --surface: #ffffff;
           --white: #ffffff;
@@ -219,15 +212,8 @@
     <link rel="preconnect" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://www.google-analytics.com" />
 
-    <!-- Non-critical CSS - Deferred Loading -->
-    <link rel="preload" href="/Assets/css/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/Assets/css/main.css"></noscript>
-    
-    <link rel="preload" href="/Assets/css/responsive.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/Assets/css/responsive.css"></noscript>
-    
-    <link rel="preload" href="/Assets/css/chat-responsive.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/Assets/css/chat-responsive.css"></noscript>
+    <!-- UNIFIED CSS SYSTEM - All styles consolidated -->
+    <link rel="stylesheet" href="Assets/css/unified-style.css" />
 
     <!-- Legal Disclosures -->
     <link rel="privacy-policy" href="https://webzonebw.shop/privacy-policy.html" />

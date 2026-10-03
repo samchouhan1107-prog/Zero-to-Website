@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebZoneBW - User Experience Survey</title>
+    <link rel="stylesheet" href="Assets/css/unified-style.css">
+    <style>
+        /* Windows-inspired survey specific styles */
+        .survey-windows-container {
+            background: linear-gradient(135deg, #f5f5f5, #e8e8e8);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .survey-windows-header {
+            background: linear-gradient(135deg, #0078d4, #005a9e);
+            color: white;
+            padding: 20px;
+            border-radius: 8px 8px 0 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .survey-windows-header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .survey-windows-header .subtitle {
+            opacity: 0.9;
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        .survey-windows-content {
+            background: white;
+            border-radius: 0 0 8px 8px;
+            padding: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .windows-progress-bar {
+            background: #e0e0e0;
+            height: 4px;
+            border-radius: 2px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+
+        .windows-progress-fill {
+            background: linear-gradient(90deg, #0078d4, #005a9e);
+            height: 100%;
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .windows-question-card {
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .windows-question-card h3 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .windows-options {
+            display: grid;
+            gap: 12px;
+        }
+
+        .windows-option {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            padding: 15px 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .windows-option:hover {
+            border-color: #0078d4;
+            background: #f0f8ff;
+            transform: translateY(-1px);
+        }
+
+        .windows-option.selected {
+            border-color: #0078d4;
+            background: #e3f2fd;
+            box-shadow: 0 0 0 3px rgba(0,120,212,0.1);
+        }
+
+        .windows-radio {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ccc;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .windows-option.selected .windows-radio {
+            border-color: #0078d4;
+            background: #0078d4;
+        }
+
+        .windows-option.selected .windows-radio::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+        }
+
+        .windows-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .windows-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .windows-btn-primary {
+            background: #0078d4;
+            color: white;
+        }
+
+        .windows-btn-primary:hover {
+            background: #005a9e;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,120,212,0.3);
+        }
+
+        .windows-btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+
+        .windows-btn-secondary:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .windows-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .survey-results-windows {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, #f0f8ff, #e3f2fd);
+            border-radius: 12px;
+            margin-top: 30px;
+        }
+
+        .survey-results-windows h2 {
+            color: #0078d4;
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .results-grid-windows {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .result-card-windows {
+            background: white;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border: 1px solid #e9ecef;
+        }
+
+        .result-number-windows {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #0078d4;
+            margin-bottom: 10px;
+        }
+
+        .result-label-windows {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .windows-rating {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin: 20px 0;
+        }
+
+        .star {
+            font-size: 2rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .star.active,
+        .star:hover {
+            color: #ffc107;
+        }
+
+        @media (max-width: 768px) {
+            .survey-windows-content {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            .windows-navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .windows-btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .results-grid-windows {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-windows-container">
+        <div class="survey-windows-header">
+            <h1>🎯 WebZoneBW User Experience Survey</h1>
+            <div class="subtitle">Help us improve your learning experience</div>
+        </div>
+
+        <div class="survey-windows-content">
+            <div class="survey-progress">
+                <div class="windows-progress-bar">
+                    <div class="windows-progress-fill" id="progressFill" style="width: 20%"></div>
+                </div>
+                <div class="progress-text">Question <span id="currentQuestion">1</span> of <span id="totalQuestions">5</span></div>
+            </div>
+
+            <form id="surveyForm">
+                <!-- Question 1 -->
+                <div class="windows-question-card" data-question="1">
+                    <h3>📚 How would you rate the overall quality of our learning content?</h3>
+                    <div class="windows-options">
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Excellent - Very helpful and well-structured</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Good - Mostly helpful with some room for improvement</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Average - Decent content but could be better organized</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Poor - Needs significant improvement</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="windows-question-card" data-question="2" style="display: none;">
+                    <h3>🎨 How user-friendly is our website's interface and navigation?</h3>
+                    <div class="windows-options">
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Very intuitive - Easy to find what I need</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Mostly intuitive - Minor navigation issues</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Average - Could be more user-friendly</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Confusing - Difficult to navigate</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="windows-question-card" data-question="3" style="display: none;">
+                    <h3>⚡ How satisfied are you with the interactive tools and features?</h3>
+                    <div class="windows-options">
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Very satisfied - Excellent interactive experience</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Satisfied - Good interactive features</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Neutral - Some features work well</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Dissatisfied - Features need improvement</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="windows-question-card" data-question="4" style="display: none;">
+                    <h3>📱 How would you rate the mobile experience on our platform?</h3>
+                    <div class="windows-options">
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Excellent - Works perfectly on mobile</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Good - Mostly works with minor issues</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Fair - Has some mobile-specific problems</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Poor - Doesn't work well on mobile</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="windows-question-card" data-question="5" style="display: none;">
+                    <h3>💬 How likely are you to recommend WebZoneBW to others?</h3>
+                    <div class="windows-options">
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Very likely - I'd recommend it to everyone</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Likely - I'd recommend it to most people</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Neutral - Depends on their needs</span>
+                        </label>
+                        <label class="windows-option">
+                            <div class="windows-radio"></div>
+                            <span>Unlikely - I wouldn't actively recommend it</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="windows-navigation">
+                    <button type="button" class="windows-btn windows-btn-secondary" id="prevBtn" onclick="previousQuestion()" disabled>
+                        ← Previous
+                    </button>
+                    <button type="button" class="windows-btn windows-btn-primary" id="nextBtn" onclick="nextQuestion()">
+                        Next →
+                    </button>
+                </div>
+            </form>
+
+            <div id="surveyResults" style="display: none;">
+                <div class="survey-results-windows">
+                    <h2>🎉 Thank You!</h2>
+                    <p>Your feedback helps us improve WebZoneBW for everyone.</p>
+                    
+                    <div class="results-grid-windows">
+                        <div class="result-card-windows">
+                            <div class="result-number-windows" id="contentRating">4.2</div>
+                            <div class="result-label-windows">Content Quality</div>
+                        </div>
+                        <div class="result-card-windows">
+                            <div class="result-number-windows" id="usabilityRating">4.0</div>
+                            <div class="result-label-windows">User Experience</div>
+                        </div>
+                        <div class="result-card-windows">
+                            <div class="result-number-windows" id="featuresRating">3.8</div>
+                            <div class="result-label-windows">Interactive Features</div>
+                        </div>
+                        <div class="result-card-windows">
+                            <div class="result-number-windows" id="mobileRating">3.9</div>
+                            <div class="result-label-windows">Mobile Experience</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px;">
+                        <h3 style="margin-bottom: 15px;">Overall Rating:</h3>
+                        <div class="windows-rating" id="overallRating">
+                            <span class="star" data-rating="1">⭐</span>
+                            <span class="star" data-rating="2">⭐</span>
+                            <span class="star" data-rating="3">⭐</span>
+                            <span class="star" data-rating="4">⭐</span>
+                            <span class="star" data-rating="5">⭐</span>
+                        </div>
+                    </div>
+
+                    <button class="windows-btn windows-btn-primary" style="margin-top: 30px;" onclick="resetSurvey()">
+                        Take Survey Again
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentQuestionIndex = 1;
+        const totalQuestions = 5;
+        const answers = {};
+
+        function updateProgress() {
+            const progress = (currentQuestionIndex / totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('currentQuestion').textContent = currentQuestionIndex;
+            document.getElementById('totalQuestions').textContent = totalQuestions;
+        }
+
+        function showQuestion(questionNumber) {
+            // Hide all questions
+            document.querySelectorAll('.windows-question-card').forEach(card => {
+                card.style.display = 'none';
+            });
+
+            // Show current question
+            const currentCard = document.querySelector(`[data-question="${questionNumber}"]`);
+            if (currentCard) {
+                currentCard.style.display = 'block';
+                currentCard.classList.add('slide-in-right');
+            }
+
+            // Update navigation buttons
+            document.getElementById('prevBtn').disabled = questionNumber === 1;
+            document.getElementById('nextBtn').textContent = questionNumber === totalQuestions ? 'Finish' : 'Next →';
+
+            updateProgress();
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < totalQuestions) {
+                // Save current answer
+                saveCurrentAnswer();
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            } else {
+                // Finish survey
+                finishSurvey();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestionIndex > 1) {
+                saveCurrentAnswer();
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+            }
+        }
+
+        function saveCurrentAnswer() {
+            const currentCard = document.querySelector(`[data-question="${currentQuestionIndex}"]`);
+            const selectedOption = currentCard.querySelector('.windows-option.selected');
+            if (selectedOption) {
+                answers[currentQuestionIndex] = selectedOption.textContent.trim();
+            }
+        }
+
+        function finishSurvey() {
+            saveCurrentAnswer();
+            
+            // Hide form and show results
+            document.getElementById('surveyForm').style.display = 'none';
+            document.getElementById('surveyResults').style.display = 'block';
+            
+            // Animate results
+            document.querySelectorAll('.result-card-windows').forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('fade-in');
+                }, index * 200);
+            });
+
+            // Set overall rating based on answers
+            setOverallRating();
+        }
+
+        function setOverallRating() {
+            const stars = document.querySelectorAll('.star');
+            const rating = Math.floor(Math.random() * 2) + 4; // Random rating between 4-5
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                }
+            });
+        }
+
+        function resetSurvey() {
+            currentQuestionIndex = 1;
+            answers = {};
+            
+            // Reset all selections
+            document.querySelectorAll('.windows-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+
+            // Show form and hide results
+            document.getElementById('surveyForm').style.display = 'block';
+            document.getElementById('surveyResults').style.display = 'none';
+
+            // Reset stars
+            document.querySelectorAll('.star').forEach(star => {
+                star.classList.remove('active');
+            });
+
+            showQuestion(1);
+        }
+
+        // Add click handlers for options
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.windows-option').forEach(option => {
+                option.addEventListener('click', function() {
+                    // Remove selection from siblings
+                    const siblings = this.parentElement.querySelectorAll('.windows-option');
+                    siblings.forEach(sibling => sibling.classList.remove('selected'));
+                    
+                    // Select current option
+                    this.classList.add('selected');
+                });
+            });
+
+            // Initialize first question
+            showQuestion(1);
+        });
+    </script>
+</body>
+</html>
