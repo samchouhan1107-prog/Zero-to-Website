@@ -245,10 +245,36 @@ export class OptimizedErrorBoundary extends React.Component<
   render(): React.ReactNode {
     if (this.state.hasError) {
       return this.props.fallback || (
-        <div className="error-boundary-fallback p-4 bg-red-50 border border-red-200 rounded-lg">
-          <h3 className="text-lg font-bold text-red-600 mb-2">Something went wrong</h3>
-          <p className="text-sm text-red-500">Please try refreshing the page.</p>
-        </div>
+        <main role="alert" className="flex min-h-screen items-center justify-center bg-app-canvas px-4 py-10 text-app-ink">
+          <section className="w-full max-w-xl border border-app-border bg-app-surface p-6 shadow-xl sm:p-8">
+            <p className="font-mono text-xs font-bold uppercase tracking-wider text-rose-500">Render error</p>
+            <h1 className="mt-2 text-2xl font-bold">This page could not be displayed</h1>
+            <p className="mt-3 text-sm leading-relaxed text-app-muted">
+              The app encountered an unexpected error while rendering. Reload the page or return to WebZoneBW home.
+            </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="min-h-10 rounded-md bg-app-amber px-4 text-sm font-semibold text-white hover:bg-app-amber-hover"
+              >
+                Reload page
+              </button>
+              <a
+                href="/"
+                className="inline-flex min-h-10 items-center rounded-md border border-app-border px-4 text-sm font-semibold text-app-ink hover:border-app-amber/50 hover:text-app-amber"
+              >
+                Go to home
+              </a>
+            </div>
+            {this.state.error?.message && (
+              <details className="mt-6 border-t border-app-border pt-4 text-xs text-app-muted">
+                <summary className="cursor-pointer font-semibold">Technical error details</summary>
+                <pre className="mt-2 overflow-x-auto whitespace-pre-wrap break-words font-mono">{this.state.error.message}</pre>
+              </details>
+            )}
+          </section>
+        </main>
       );
     }
 

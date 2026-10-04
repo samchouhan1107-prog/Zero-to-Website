@@ -1,62 +1,41 @@
-#!/bin/bash
-# WebZoneBW Backend Deployment Script
-# Deploys the Express API to Render.com via GitHub
+#!/usr/bin/env bash
+set -euo pipefail
 
-echo "🚀 WebZoneBW Backend Deployment"
-echo "================================"
-echo ""
-
-# Check if we're in the right directory
-if [ ! -f "server.ts" ]; then
-  echo "❌ Run this script from the project root"
+if [[ ! -f server.ts || ! -f package-lock.json ]]; then
+  echo "Run this script from the WebZoneBW project root." >&2
   exit 1
 fi
 
-# Step 1: Build
-echo "📦 Building project..."
+: "${VPS_HOST:?Set VPS_HOST to the hostname or IP of your VPS}"
+: "${VPS_USER:?Set VPS_USER to the SSH deployment account}"
+
+if [[ ! "$VPS_HOST" =~ ^[A-Za-z0-9.-]+$ ]]; then
+  echo "VPS_HOST must be a hostname or IPv4 address." >&2
+  exit 1
+fi
+
+if [[ ! "$VPS_USER" =~ ^[A-Za-z_][A-Za-z0-9_-]*$ ]]; then
+  echo "VPS_USER must be a valid Unix account name." >&2
+  exit 1
+fi
+
+if ! command -v ssh >/dev/null || ! command -v rsync >/dev/null; then
+  echo "Install ssh and rsync before deploying." >&2
+  exit 1
+fi
+
 npm run build
-if [ $? -ne 0 ]; then
-  echo "❌ Build failed"
-  exit 1
-fi
-echo "✅ Build successful"
-echo ""
+test -f dist/server.cjs
 
-# Step 2: Verify dist
-if [ ! -f "dist/server.cjs" ]; then
-  echo "❌ dist/server.cjs not found"
-  exit 1
-fi
-echo "✅ dist/server.cjs ready"
-echo ""
+rsync -az \
+  --exclude='.git/' \
+  --exclude='node_modules/' \
+  --exclude='.env' \
+  --exclude='.env.*' \
+  --exclude='/data/' \
+  ./ "$VPS_USER@$VPS_HOST:/opt/webzonebw/"
 
-# Step 3: Git push
-echo "📤 Pushing to GitHub..."
-git add -A
-git commit -m "deploy: backend ready for Render" || echo "No changes to commit"
-git push origin main
-echo "✅ Pushed to GitHub"
-echo ""
+ssh "$VPS_USER@$VPS_HOST" \
+  'cd /opt/webzonebw && npm ci --omit=dev && sudo -n systemctl restart webzonebw-api'
 
-# Step 4: Instructions
-echo "================================"
-echo "📋 DEPLOYMENT STEPS:"
-echo ""
-echo "1. Go to https://dashboard.render.com"
-echo "2. Click 'New +' → 'Web Service'"
-echo "3. Connect your GitHub repo: samchouhan1107-prog/Zero-to-Website"
-echo "4. Settings:"
-echo "   - Name: webzonebw-api"
-echo "   - Runtime: Node"
-echo "   - Build: npm run build"
-echo "   - Start: node dist/server.cjs"
-echo "5. Add environment variables:"
-echo "   NODE_ENV=production"
-echo "   CORS_ORIGIN=https://webzonebw.shop"
-echo "6. Click 'Create Web Service'"
-echo ""
-echo "7. Once deployed, get your API URL (e.g. https://webzonebw-api.onrender.com)"
-echo "8. Then rebuild frontend with:"
-echo "   VITE_API_URL=https://webzonebw-api.onrender.com/api npm run build"
-echo "9. Push updated dist to GitHub for GitHub Pages"
-echo "================================"
+echo "WebZoneBW API deployed to $VPS_HOST."

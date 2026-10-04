@@ -5,6 +5,7 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
+import { BLOG_POSTS } from "./src/data/blogData";
 import authRoutes from "./server/auth";
 import userRoutes from "./server/api";
 import { cleanupExpiredSessions } from "./server/db";
@@ -14,6 +15,46 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const CANONICAL_ORIGIN = 'https://webzonebw.shop';
+const NOT_FOUND_PAGE = path.join(process.cwd(), '404.html');
+const SPA_ROUTE_PATHS = new Set([
+  '/',
+  '/curriculum',
+  '/learn.html',
+  '/Workspace.html',
+  '/webtools.html',
+  '/imagetools.html',
+  '/developertools.html',
+  '/about.html',
+]);
+function isSpaRoute(pathname: string): boolean {
+  if (SPA_ROUTE_PATHS.has(pathname)) return true;
+
+  const lessonMatch = pathname.match(/^\/lessons\/([\w.-]+)\/?$/);
+  if (lessonMatch) {
+    return CHAPTERS_DATA.some((chapter) =>
+      chapter.lessons.some((lesson) => lesson.id === lessonMatch[1] || lesson.slug === lessonMatch[1]),
+    );
+  }
+
+  const blogMatch = pathname.match(/^\/blog\/([\w.-]+)\/?$/);
+  if (blogMatch) return BLOG_POSTS.some((post) => post.slug === blogMatch[1]);
+
+  return false;
+}
+
+function isExistingSiteFile(pathname: string): boolean {
+  const projectRoot = `${path.resolve(process.cwd())}${path.sep}`;
+  const candidates = [
+    path.resolve(process.cwd(), `.${pathname}`),
+    path.resolve(process.cwd(), 'public', `.${pathname}`),
+  ];
+
+  return candidates.some((candidate) =>
+    candidate.startsWith(projectRoot) &&
+    fs.existsSync(candidate) &&
+    fs.statSync(candidate).isFile(),
+  );
+}
 
 /**
  * Give crawlers and no-JavaScript visitors a truthful, lesson-specific document
@@ -593,6 +634,11 @@ async function startServer() {
         server: { middlewareMode: true },
         appType: "spa",
       });
+      app.use((req, res, next) => {
+        if (req.method !== 'GET' || !req.headers.accept?.includes('text/html')) return next();
+        if (isSpaRoute(req.path) || isExistingSiteFile(req.path)) return next();
+        return res.status(404).sendFile(NOT_FOUND_PAGE);
+      });
       app.use(vite.middlewares);
     } else {
       console.warn("[WARN] Vite not available, serving static dist");
@@ -611,6 +657,10 @@ async function startServer() {
 
     // SPA catch-all — only routes that don't match static files
     app.get("*", (req, res) => {
+      if (!isSpaRoute(req.path)) {
+        return res.status(404).sendFile(NOT_FOUND_PAGE);
+      }
+
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
       const requestedLessonId = typeof req.query.lesson === "string" ? req.query.lesson : undefined;
