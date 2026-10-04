@@ -336,7 +336,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                   ) && (
                     <div className="flex items-center gap-2 text-xs font-mono text-indigo-300">
                       <Sparkles className="w-4 h-4 text-amber-400 animate-pulse" />
-                      <span>WZ Storehouse Concept Animation Loop</span>
+                      <span>WebZoneBW concept animation</span>
                     </div>
                   )}
                 </div>

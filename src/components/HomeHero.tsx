@@ -31,6 +31,7 @@ export interface HomeHeroProps {
   onSelectLesson: (lessonId: string) => void;
   onOpenPracticeHub: () => void;
   onOpenVisualLab: (toolId?: string) => void;
+  onOpenWorkspace?: () => void;
   onOpenActivities?: () => void;
   onOpenTutor: () => void;
   onOpenMilestones: () => void;

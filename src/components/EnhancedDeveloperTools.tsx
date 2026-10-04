@@ -69,16 +69,67 @@ interface NetworkRequest {
   id: string;
   url: string;
   method: string;
-  status: number;
+  status: number | null;
   type: string;
   size: string;
   duration: string;
   timing: {
-    queued: number;
-    started: number;
-    firstByte: number;
+    dns: number;
+    connect: number;
+    timeToFirstByte: number;
     loaded: number;
   };
+}
+
+interface NavigationMetrics {
+  responseStart: number;
+  domContentLoaded: number;
+  loadComplete: number;
+  transferSize: number;
+}
+
+function readNavigationMetrics(): NavigationMetrics | null {
+  const navigation = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+  if (!navigation) return null;
+
+  return {
+    responseStart: navigation.responseStart,
+    domContentLoaded: navigation.domContentLoadedEventEnd,
+    loadComplete: navigation.loadEventEnd,
+    transferSize: navigation.transferSize,
+  };
+}
+
+function mapResourceTiming(entry: PerformanceResourceTiming): NetworkRequest {
+  const resourceWithStatus = entry as PerformanceResourceTiming & { responseStatus?: number };
+  const status = typeof resourceWithStatus.responseStatus === 'number'
+    ? resourceWithStatus.responseStatus
+    : null;
+
+  return {
+    id: `${entry.name}:${entry.startTime}`,
+    url: entry.name,
+    method: 'Not exposed',
+    status,
+    type: entry.initiatorType || 'other',
+    size: entry.transferSize > 0 ? `${entry.transferSize} B` : 'Not exposed / cached',
+    duration: `${entry.duration.toFixed(1)} ms`,
+    timing: {
+      dns: Math.max(0, entry.domainLookupEnd - entry.domainLookupStart),
+      connect: Math.max(0, entry.connectEnd - entry.connectStart),
+      timeToFirstByte: Math.max(0, entry.responseStart - entry.requestStart),
+      loaded: entry.duration,
+    },
+  };
+}
+
+function formatMilliseconds(value: number | null | undefined): string {
+  return value && value > 0 ? `${value.toFixed(0)} ms` : 'Not available';
+}
+
+function formatBytes(value: number | null | undefined): string {
+  if (!value) return 'Not exposed';
+  return value < 1024 ? `${value} B` : `${(value / 1024).toFixed(1)} KB`;
 }
 
 interface ConsoleMessage {
@@ -160,49 +211,6 @@ const DEV_TOOLS_TABS: DevToolTab[] = [
     label: 'Rendering Path',
     icon: BarChart3,
     description: 'Analyze critical rendering path and browser optimization'
-  }
-];
-
-const SAMPLE_NETWORK_REQUESTS: NetworkRequest[] = [
-  {
-    id: '1',
-    url: 'https://webzonebw.shop/',
-    method: 'GET',
-    status: 200,
-    type: 'document',
-    size: '1.8 KB',
-    duration: '12ms',
-    timing: { queued: 0, started: 1, firstByte: 8, loaded: 12 }
-  },
-  {
-    id: '2',
-    url: 'https://webzonebw.shop/styles.css',
-    method: 'GET',
-    status: 200,
-    type: 'stylesheet',
-    size: '4.2 KB',
-    duration: '25ms',
-    timing: { queued: 2, started: 3, firstByte: 18, loaded: 25 }
-  },
-  {
-    id: '3',
-    url: 'https://webzonebw.shop/script.js',
-    method: 'GET',
-    status: 200,
-    type: 'script',
-    size: '3.1 KB',
-    duration: '45ms',
-    timing: { queued: 5, started: 6, firstByte: 30, loaded: 45 }
-  },
-  {
-    id: '4',
-    url: 'https://api.example.com/data',
-    method: 'POST',
-    status: 200,
-    type: 'xhr',
-    size: '156 B',
-    duration: '234ms',
-    timing: { queued: 10, started: 15, firstByte: 200, loaded: 234 }
   }
 ];
 
@@ -292,13 +300,58 @@ export const EnhancedDeveloperTools: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security' | 'rendering-path'>('elements');
   const [consoleInput, setConsoleInput] = useState('');
   const [consoleLogs, setConsoleLogs] = useState<ConsoleMessage[]>(SAMPLE_CONSOLE_MESSAGES);
-  const [networkRequests, setNetworkRequests] = useState<NetworkRequest[]>(SAMPLE_NETWORK_REQUESTS);
+  const [networkRequests, setNetworkRequests] = useState<NetworkRequest[]>([]);
   const [memorySnapshots, setMemorySnapshots] = useState<MemorySnapshot[]>(SAMPLE_MEMORY_SNAPSHOTS);
   const [securityIssues, setSecurityIssues] = useState<SecurityIssue[]>(SAMPLE_SECURITY_ISSUES);
   const [isRecording, setIsRecording] = useState(false);
   const [expandedDetails, setExpandedDetails] = useState<string | null>(null);
   const [filterText, setFilterText] = useState('');
   const [viewMode, setViewMode] = useState<'table' | 'waterfall'>('waterfall');
+  const networkObserverRef = useRef<PerformanceObserver | null>(null);
+  const [navigationMetrics, setNavigationMetrics] = useState<NavigationMetrics | null>(readNavigationMetrics);
+  const [largestContentfulPaint, setLargestContentfulPaint] = useState<number | null>(null);
+  const [cumulativeLayoutShift, setCumulativeLayoutShift] = useState(0);
+
+  useEffect(() => {
+    if (typeof PerformanceObserver === 'undefined') return;
+
+    const observers: PerformanceObserver[] = [];
+    let layoutShiftTotal = 0;
+    const updateNavigationMetrics = () => setNavigationMetrics(readNavigationMetrics());
+    updateNavigationMetrics();
+    window.addEventListener('load', updateNavigationMetrics, { once: true });
+
+    try {
+      const lcpObserver = new PerformanceObserver((list) => {
+        const entries = list.getEntries();
+        const latestEntry = entries[entries.length - 1];
+        if (latestEntry) setLargestContentfulPaint(latestEntry.startTime);
+      });
+      lcpObserver.observe({ type: 'largest-contentful-paint', buffered: true });
+      observers.push(lcpObserver);
+    } catch {}
+
+    try {
+      const layoutObserver = new PerformanceObserver((list) => {
+        for (const entry of list.getEntries()) {
+          const shift = entry as PerformanceEntry & { hadRecentInput?: boolean; value?: number };
+          if (!shift.hadRecentInput && typeof shift.value === 'number') {
+            layoutShiftTotal += shift.value;
+          }
+        }
+        setCumulativeLayoutShift(layoutShiftTotal);
+      });
+      layoutObserver.observe({ type: 'layout-shift', buffered: true });
+      observers.push(layoutObserver);
+    } catch {}
+
+    return () => {
+      window.removeEventListener('load', updateNavigationMetrics);
+      observers.forEach((observer) => observer.disconnect());
+    };
+  }, []);
+
+  useEffect(() => () => networkObserverRef.current?.disconnect(), []);
 
   const executeConsoleCommand = (cmd: string) => {
     const trimmed = cmd.trim();
@@ -330,20 +383,33 @@ export const EnhancedDeveloperTools: React.FC = () => {
   };
 
   const toggleRecording = () => {
-    setIsRecording(!isRecording);
-    if (!isRecording) {
-      // Simulate capturing network activity
-      const newRequest: NetworkRequest = {
-        id: Date.now().toString(),
-        url: 'https://webzonebw.shop/api/data',
-        method: 'GET',
-        status: 200,
-        type: 'xhr',
-        size: '1.2 KB',
-        duration: '156ms',
-        timing: { queued: Date.now(), started: Date.now() + 10, firstByte: Date.now() + 100, loaded: Date.now() + 156 }
-      };
-      setNetworkRequests(prev => [newRequest, ...prev]);
+    if (isRecording) {
+      networkObserverRef.current?.disconnect();
+      networkObserverRef.current = null;
+      setIsRecording(false);
+      return;
+    }
+
+    const currentResources = performance.getEntriesByType('resource') as PerformanceResourceTiming[];
+    setNetworkRequests(currentResources.map(mapResourceTiming).slice(-100).reverse());
+
+    if (typeof PerformanceObserver !== 'undefined') {
+      try {
+        const observer = new PerformanceObserver((list) => {
+          const newRequests = list.getEntries()
+            .filter((entry): entry is PerformanceResourceTiming => entry.entryType === 'resource')
+            .map(mapResourceTiming);
+          setNetworkRequests((previous) => {
+            const seen = new Set(previous.map((request) => request.id));
+            return [...previous, ...newRequests.filter((request) => !seen.has(request.id))].slice(-100).reverse();
+          });
+        });
+        observer.observe({ type: 'resource' });
+        networkObserverRef.current = observer;
+        setIsRecording(true);
+      } catch {
+        setIsRecording(false);
+      }
     }
   };
 
@@ -377,7 +443,8 @@ export const EnhancedDeveloperTools: React.FC = () => {
     }
   };
 
-  const getStatusColor = (status: number) => {
+  const getStatusColor = (status: number | null) => {
+    if (status === null) return 'text-app-muted';
     if (status >= 200 && status < 300) return 'text-emerald-400';
     if (status >= 400) return 'text-rose-400';
     return 'text-amber-400';
@@ -385,9 +452,6 @@ export const EnhancedDeveloperTools: React.FC = () => {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'rendering-path':
-        return <CriticalRenderingPathInspector />;
-
       case 'elements':
         return (
           <div className="space-y-4">
@@ -484,6 +548,7 @@ export const EnhancedDeveloperTools: React.FC = () => {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={toggleRecording}
                   className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                     isRecording 
@@ -500,13 +565,16 @@ export const EnhancedDeveloperTools: React.FC = () => {
                   value={filterText}
                   onChange={(e) => setFilterText(e.target.value)}
                   placeholder="Filter requests..."
+                  aria-label="Filter captured browser resources"
                   className="px-2.5 py-1.5 bg-app-inset border border-app-border rounded text-xs focus:outline-none focus:border-blue-500"
                 />
               </div>
 
               <div className="flex items-center gap-2">
                 <button
+                  type="button"
                   onClick={() => setViewMode('table')}
+                  aria-label="Show requests as a table"
                   className={`p-1.5 rounded transition-colors ${
                     viewMode === 'table' ? 'bg-blue-500/10 text-blue-400' : 'text-app-muted hover:bg-app-surface'
                   }`}
@@ -514,7 +582,9 @@ export const EnhancedDeveloperTools: React.FC = () => {
                   <Grid className="w-4 h-4" />
                 </button>
                 <button
+                  type="button"
                   onClick={() => setViewMode('waterfall')}
+                  aria-label="Show requests as a waterfall list"
                   className={`p-1.5 rounded transition-colors ${
                     viewMode === 'waterfall' ? 'bg-blue-500/10 text-blue-400' : 'text-app-muted hover:bg-app-surface'
                   }`}
@@ -522,6 +592,11 @@ export const EnhancedDeveloperTools: React.FC = () => {
                   <List className="w-4 h-4" />
                 </button>
               </div>
+            </div>
+
+            <div className="space-y-1 text-xs text-app-muted" aria-live="polite">
+              <p>{isRecording ? 'Recording browser resource loads' : 'Capture is paused'} · {filteredNetworkRequests.length} resource{filteredNetworkRequests.length === 1 ? '' : 's'}</p>
+              <p>Resource Timing does not expose every HTTP method, status, or transfer size. Unavailable values are shown explicitly.</p>
             </div>
 
             {viewMode === 'table' ? (
@@ -538,9 +613,9 @@ export const EnhancedDeveloperTools: React.FC = () => {
                   </thead>
                   <tbody className="divide-y divide-app-border">
                     {filteredNetworkRequests.map((req) => (
-                      <tr key={req.id} className="hover:bg-app-inset cursor-pointer">
-                        <td className="p-2 font-mono text-cyan-300">{req.url}</td>
-                        <td className={`p-2 font-mono ${getStatusColor(req.status)}`}>{req.status}</td>
+                      <tr key={req.id} onClick={() => setExpandedDetails(expandedDetails === req.id ? null : req.id)} className="hover:bg-app-inset cursor-pointer">
+                        <td className="p-2 font-mono text-cyan-300 break-all">{req.url}</td>
+                        <td className={`p-2 font-mono ${getStatusColor(req.status)}`}>{req.status ?? 'Not exposed'}</td>
                         <td className="p-2 text-slate-400">{req.type}</td>
                         <td className="p-2 text-slate-400">{req.size}</td>
                         <td className="p-2 text-slate-400">{req.duration}</td>
@@ -552,17 +627,17 @@ export const EnhancedDeveloperTools: React.FC = () => {
             ) : (
               <div className="space-y-2">
                 {filteredNetworkRequests.map((req) => (
-                  <div key={req.id} className="bg-app-surface rounded-lg border border-app-border p-3">
+                  <button key={req.id} type="button" onClick={() => setExpandedDetails(expandedDetails === req.id ? null : req.id)} className="block w-full bg-app-surface text-left rounded-lg border border-app-border p-3">
                     <div className="flex items-center justify-between mb-2">
                       <div className="flex items-center gap-2">
                         <span className={`text-xs px-2 py-1 rounded ${getStatusColor(req.status)}`}>
-                          {req.status}
+                          {req.status ?? 'Status not exposed'}
                         </span>
                         <span className="text-xs text-slate-400">{req.method}</span>
                       </div>
                       <span className="text-xs text-slate-400">{req.duration}</span>
                     </div>
-                    <div className="text-xs font-mono text-cyan-300 mb-1">{req.url}</div>
+                    <div className="text-xs font-mono text-cyan-300 mb-1 break-all">{req.url}</div>
                     <div className="flex items-center gap-4 text-xs text-slate-400">
                       <span>Type: {req.type}</span>
                       <span>Size: {req.size}</span>
@@ -572,16 +647,21 @@ export const EnhancedDeveloperTools: React.FC = () => {
                       <div className="mt-2 pt-2 border-t border-app-border text-xs text-slate-400">
                         <div>Timing Details:</div>
                         <div className="grid grid-cols-2 gap-1 mt-1">
-                          <div>Queued: {req.timing.queued}ms</div>
-                          <div>Started: {req.timing.started}ms</div>
-                          <div>First Byte: {req.timing.firstByte}ms</div>
-                          <div>Loaded: {req.timing.loaded}ms</div>
+                          <div>DNS: {req.timing.dns.toFixed(1)} ms</div>
+                          <div>Connection: {req.timing.connect.toFixed(1)} ms</div>
+                          <div>Time to first byte: {req.timing.timeToFirstByte.toFixed(1)} ms</div>
+                          <div>Total: {req.timing.loaded.toFixed(1)} ms</div>
                         </div>
                       </div>
                     )}
-                  </div>
+                  </button>
                 ))}
               </div>
+            )}
+            {filteredNetworkRequests.length === 0 && (
+              <p className="border border-dashed border-app-border p-5 text-center text-sm text-app-muted">
+                {filterText ? 'No captured resources match this filter.' : 'No browser resources captured yet. Start recording to inspect this page’s requests.'}
+              </p>
             )}
           </div>
         );
@@ -590,50 +670,27 @@ export const EnhancedDeveloperTools: React.FC = () => {
         return (
           <div className="space-y-4">
             <div className="bg-app-surface rounded-lg p-4 border border-app-border">
-              <h4 className="text-sm font-semibold text-app-ink mb-3">Performance Timeline</h4>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                  <span className="text-xs">Loading: 1.2s</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  <span className="text-xs">Scripting: 0.8s</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-amber-500 rounded-full"></div>
-                  <span className="text-xs">Rendering: 0.5s</span>
-                </div>
-                <div className="flex items-center gap-3">
-                  <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                  <span className="text-xs">Painting: 0.3s</span>
-                </div>
-              </div>
+              <h4 className="text-sm font-semibold text-app-ink">This page’s navigation timing</h4>
+              <p className="mt-1 text-xs text-app-muted">Measured by the browser for the current document load.</p>
+              <dl className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                <div><dt className="text-xs text-app-muted">Response start</dt><dd className="mt-1 font-mono text-sm text-app-ink">{formatMilliseconds(navigationMetrics?.responseStart)}</dd></div>
+                <div><dt className="text-xs text-app-muted">DOM ready</dt><dd className="mt-1 font-mono text-sm text-app-ink">{formatMilliseconds(navigationMetrics?.domContentLoaded)}</dd></div>
+                <div><dt className="text-xs text-app-muted">Load event</dt><dd className="mt-1 font-mono text-sm text-app-ink">{formatMilliseconds(navigationMetrics?.loadComplete)}</dd></div>
+                <div><dt className="text-xs text-app-muted">Transferred</dt><dd className="mt-1 font-mono text-sm text-app-ink">{formatBytes(navigationMetrics?.transferSize)}</dd></div>
+              </dl>
             </div>
 
             <div className="bg-app-surface rounded-lg p-4 border border-app-border">
-              <h4 className="text-sm font-semibold text-app-ink mb-3">Core Web Vitals</h4>
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-xs">Largest Contentful Paint</span>
-                  <span className="text-xs text-emerald-400">Good (1.2s)</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs">First Input Delay</span>
-                  <span className="text-xs text-emerald-400">Good (50ms)</span>
-                </div>
-                <div className="flex items-center justify-between">
-                  <span className="text-xs">Cumulative Layout Shift</span>
-                  <span className="text-xs text-amber-400">Needs improvement (0.15)</span>
-                </div>
-              </div>
+              <h4 className="text-sm font-semibold text-app-ink">Observed page experience</h4>
+              <p className="mt-1 text-xs text-app-muted">Collected in this browser session; some browsers or page states may not expose these entries.</p>
+              <dl className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div><dt className="text-xs text-app-muted">Largest Contentful Paint</dt><dd className="mt-1 font-mono text-sm text-app-ink">{formatMilliseconds(largestContentfulPaint)}</dd></div>
+                <div><dt className="text-xs text-app-muted">Cumulative Layout Shift</dt><dd className="mt-1 font-mono text-sm text-app-ink">{cumulativeLayoutShift.toFixed(3)}</dd></div>
+              </dl>
+              <p className="mt-3 text-[11px] leading-relaxed text-app-subtle">These local measurements are diagnostic, not a field-data or Lighthouse score. CPU time and Interaction to Next Paint are not measured here.</p>
             </div>
-
-            <div className="bg-app-surface rounded-lg p-4 border border-app-border">
-              <h4 className="text-sm font-semibold text-app-ink mb-3">CPU Usage</h4>
-              <div className="h-20 bg-app-inset rounded border border-app-border flex items-center justify-center">
-                <div className="text-xs text-app-muted">CPU Usage Chart</div>
-              </div>
+            <div className="border-l-2 border-app-amber/60 bg-app-inset/60 px-4 py-3 text-xs leading-relaxed text-app-muted">
+              For comparable page-speed results, use the same URL, browser, device profile, cache state, and network throttling on every run.
             </div>
           </div>
         );

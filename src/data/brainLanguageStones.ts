@@ -94,7 +94,7 @@ export const BRAIN_CONCEPT_STONES: ConceptStone[] = [
     <p style="margin: 6px 0 0 0; font-size: 12px; color: #c7d2fe;">Your brain processes clear semantic rooms 10x faster than 50 generic div tags!</p>
   </main>
   <footer style="background: #1e293b; padding: 8px; border-radius: 8px; border: 1px solid #334155; font-size: 11px; color: #94a3b8;">
-    🦶 &lt;footer&gt; WebZone Storehouse Verified Foundation
+    🦶 &lt;footer&gt; WebZoneBW Verified Foundation
   </footer>
 </div>`,
       css: `/* Click Run or modify tags to see instant room updates */`,

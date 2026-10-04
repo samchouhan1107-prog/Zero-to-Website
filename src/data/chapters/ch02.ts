@@ -284,7 +284,7 @@ export const chapter02: Chapter = {
     </article>
   </main>
   <footer class="site-footer">
-    <p>&copy; 2026 WebZone Storehouse</p>
+    <p>&copy; 2026 WebZoneBW</p>
   </footer>
 </div>`,
         css: `.site-wrapper {

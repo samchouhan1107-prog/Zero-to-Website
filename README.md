@@ -1,4 +1,4 @@
-# WZ Storehouse
+# WebZoneBW
 
 ## Learn • Practice • Build • Share
 
@@ -6,7 +6,7 @@
 
 ## About
 
-WZ Storehouse is a developer learning platform designed to teach web development through structured lessons, visual explanations, hands-on coding exercises, and real-world projects.
+WebZoneBW is a developer learning platform designed to teach web development through structured lessons, visual explanations, hands-on coding exercises, and real-world projects.
 
 The goal is to provide learners with a complete roadmap from beginner to professional developer while maintaining clean project organization and industry-standard development practices.
 

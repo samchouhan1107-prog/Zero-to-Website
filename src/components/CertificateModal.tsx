@@ -404,10 +404,10 @@ export const CertificateModal: React.FC<CertificateModalProps> = ({
                     Official Certification of Achievement
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-serif font-black text-slate-900 dark:text-white">
-                    WebZone Storehouse Digital Academy
+                    WebZoneBW Digital Academy
                   </h2>
                   <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 uppercase tracking-wider">
-                    WebZone Storehouse Global Accreditation Authority
+                    WebZoneBW Certification Authority
                   </p>
                 </div>
 

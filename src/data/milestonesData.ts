@@ -100,7 +100,7 @@ export const XP_MILESTONES: XpMilestone[] = [
     rewardDescription: 'Unlocked Git DAG Branch Graph Simulator & Cloud Deployment Hub',
     unlockedPerks: [
       'Interactive Git Commit & Rebase Simulator',
-      'Official WZ Storehouse Grandmaster Seal',
+      'Official WebZoneBW Grandmaster Seal',
       'Lifetime Academic Honor Roll Recognition'
     ],
     motivationQuote: 'You have conquered the full spectrum of modern web development craftsmanship!',
@@ -109,7 +109,7 @@ export const XP_MILESTONES: XpMilestone[] = [
   {
     id: 'milestone-3000',
     xpRequired: 3000,
-    title: 'WZ Storehouse Fellow',
+    title: 'WebZoneBW Fellow',
     rank: 'Legendary Pioneer',
     badge: '🌟',
     rewardDescription: 'Unlocked All Masterclass Secrets & Infinite Prestige Rank',

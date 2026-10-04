@@ -331,5 +331,10 @@ export type ViewMode =
   | 'visual-lab'
   | 'video-studio'
   | 'curriculum'
+  | 'learn'
   | 'blog'
-  | 'workspace';
+  | 'workspace'
+  | 'webtools'
+  | 'imagetools'
+  | 'developertools'
+  | 'about';

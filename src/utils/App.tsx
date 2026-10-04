@@ -15,11 +15,7 @@ import { XP_MILESTONES } from "../data/milestonesData";
 import { calculateDailyStreak, getLocalDateString } from "./streakUtils";
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
-import { HomeHero } from "../components/HomeHero";
-import { LessonView } from "../components/LessonView";
-import { PracticeHub } from "../components/PracticeHub";
-import { VisualLab, VisualizerId } from "../components/VisualLab";
-import { ActivitiesView } from "../components/ActivitiesView";
+import type { VisualizerId } from "../components/VisualLab";
 import { SearchModal } from "../components/SearchModal";
 import { TutorModal } from "../components/TutorModal";
 import { SettingsModal } from "../components/SettingsModal";
@@ -38,20 +34,32 @@ import {
   PolicyTab,
 } from "../components/LegalComplianceModal";
 import { Footer } from "../components/Footer";
-import { BlogView } from "../components/BlogView";
-import { WorkspaceView } from "../components/WorkspaceView";
 import { AnimatedBackground } from "../components/AnimatedBackground";
-import { EnhancedDeveloperTools } from "../components/EnhancedDeveloperTools";
-import { LearnView } from "../components/LearnView";
-import { WebToolsView } from "../components/WebToolsView";
-import { ImageToolsView } from "../components/ImageToolsView";
-import { AboutView } from "../components/AboutView";
 import { BrainCardModal } from "../components/BrainCardModal";
 import { BrainCardFloatingButton } from "../components/BrainCardFloatingButton";
 import { useSEOMeta, SEO_PRESETS } from "./useSEOMeta";
 import { NEWS_UPDATES } from "../data/newsData";
 import { useAuth } from "./AuthContext";
 import * as authService from "./authService";
+
+const HomeHero = React.lazy(() => import("../components/HomeHero").then(({ HomeHero }) => ({ default: HomeHero })));
+const LessonView = React.lazy(() => import("../components/LessonView").then(({ LessonView }) => ({ default: LessonView })));
+const PracticeHub = React.lazy(() => import("../components/PracticeHub").then(({ PracticeHub }) => ({ default: PracticeHub })));
+const VisualLab = React.lazy(() => import("../components/VisualLab").then(({ VisualLab }) => ({ default: VisualLab })));
+const ActivitiesView = React.lazy(() => import("../components/ActivitiesView").then(({ ActivitiesView }) => ({ default: ActivitiesView })));
+const BlogView = React.lazy(() => import("../components/BlogView").then(({ BlogView }) => ({ default: BlogView })));
+const WorkspaceView = React.lazy(() => import("../components/WorkspaceView").then(({ WorkspaceView }) => ({ default: WorkspaceView })));
+const EnhancedDeveloperTools = React.lazy(() => import("../components/EnhancedDeveloperTools").then(({ EnhancedDeveloperTools }) => ({ default: EnhancedDeveloperTools })));
+const LearnView = React.lazy(() => import("../components/LearnView").then(({ LearnView }) => ({ default: LearnView })));
+const WebToolsView = React.lazy(() => import("../components/WebToolsView").then(({ WebToolsView }) => ({ default: WebToolsView })));
+const ImageToolsView = React.lazy(() => import("../components/ImageToolsView").then(({ ImageToolsView }) => ({ default: ImageToolsView })));
+const AboutView = React.lazy(() => import("../components/AboutView").then(({ AboutView }) => ({ default: AboutView })));
+
+const ViewLoadingState: React.FC = () => (
+  <div role="status" className="mx-auto flex min-h-40 w-full max-w-[1180px] items-center px-4 text-sm text-app-muted sm:px-6 lg:px-8">
+    Loading view…
+  </div>
+);
 
 const INITIAL_PROGRESS: UserProgress = {
   completedLessons: {},
@@ -796,22 +804,24 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <HomeHero
-                  chapters={chapters}
-                  progress={progress}
-                  onSelectLesson={handleSelectLesson}
-                  onOpenPracticeHub={() => navigateToView("practice-hub")}
-                  onOpenVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-                  onOpenActivities={() => handleNavigateActivities()}
-                  onOpenTutor={() => handleOpenTutor()}
-                  onOpenMilestones={() => setRoadmapOpen(true)}
-                  onOpenWorkspace={() => navigateToView("workspace")}
-                  onOpenSearch={(query) => {
-                    setSearchInitialQuery(query || "");
-                    setSearchOpen(true);
-                  }}
-                  selectedCategory={selectedCategory}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <HomeHero
+                    chapters={chapters}
+                    progress={progress}
+                    onSelectLesson={handleSelectLesson}
+                    onOpenPracticeHub={() => navigateToView("practice-hub")}
+                    onOpenVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+                    onOpenActivities={() => handleNavigateActivities()}
+                    onOpenTutor={() => handleOpenTutor()}
+                    onOpenMilestones={() => setRoadmapOpen(true)}
+                    onOpenWorkspace={() => navigateToView("workspace")}
+                    onOpenSearch={(query) => {
+                      setSearchInitialQuery(query || "");
+                      setSearchOpen(true);
+                    }}
+                    selectedCategory={selectedCategory}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -824,24 +834,26 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <LessonView
-                  lesson={activeLesson}
-                  chapter={activeChapter}
-                  onNavigateLesson={handleSelectLesson}
-                  onCompleteLesson={handleCompleteLesson}
-                  onNavigateActivities={handleNavigateActivities}
-                  isCompleted={!!progress.completedLessons[activeLesson.id]}
-                  isBookmarked={progress.bookmarks.includes(activeLesson.id)}
-                  onToggleBookmark={handleToggleBookmark}
-                  userNote={progress.notes[activeLesson.id] || ""}
-                  onSaveNote={handleSaveNote}
-                  onOpenTutor={handleOpenTutor}
-                  allChapters={chapters}
-                  completedLessons={progress.completedLessons}
-                  progress={progress}
-                  onUpdateProgress={(updated) => setProgress(updated)}
-                  onOpenCertificate={() => setCertificateOpen(true)}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <LessonView
+                    lesson={activeLesson}
+                    chapter={activeChapter}
+                    onNavigateLesson={handleSelectLesson}
+                    onCompleteLesson={handleCompleteLesson}
+                    onNavigateActivities={handleNavigateActivities}
+                    isCompleted={!!progress.completedLessons[activeLesson.id]}
+                    isBookmarked={progress.bookmarks.includes(activeLesson.id)}
+                    onToggleBookmark={handleToggleBookmark}
+                    userNote={progress.notes[activeLesson.id] || ""}
+                    onSaveNote={handleSaveNote}
+                    onOpenTutor={handleOpenTutor}
+                    allChapters={chapters}
+                    completedLessons={progress.completedLessons}
+                    progress={progress}
+                    onUpdateProgress={(updated) => setProgress(updated)}
+                    onOpenCertificate={() => setCertificateOpen(true)}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -854,14 +866,16 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <LearnView
-                  chapters={chapters}
-                  progress={progress}
-                  onSelectLesson={handleSelectLesson}
-                  onOpenPractice={() => navigateToView("practice-hub")}
-                  onOpenTutor={(topic) => handleOpenTutor(topic)}
-                  onNavigateHome={() => navigateToView("home")}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <LearnView
+                    chapters={chapters}
+                    progress={progress}
+                    onSelectLesson={handleSelectLesson}
+                    onOpenPractice={() => navigateToView("practice-hub")}
+                    onOpenTutor={(topic) => handleOpenTutor(topic)}
+                    onNavigateHome={() => navigateToView("home")}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -874,14 +888,16 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <ActivitiesView
-                  chapters={chapters}
-                  currentLessonId={currentLessonId}
-                  onSelectLesson={(lessonId) => setCurrentLessonId(lessonId)}
-                  onNavigateToLesson={handleSelectLesson}
-                  progress={progress}
-                  onCompleteActivity={handleCompleteActivity}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <ActivitiesView
+                    chapters={chapters}
+                    currentLessonId={currentLessonId}
+                    onSelectLesson={(lessonId) => setCurrentLessonId(lessonId)}
+                    onNavigateToLesson={handleSelectLesson}
+                    progress={progress}
+                    onCompleteActivity={handleCompleteActivity}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -894,11 +910,13 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <PracticeHub
-                  chapters={chapters}
-                  progress={progress}
-                  onCompleteChallenge={handleCompleteChallenge}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <PracticeHub
+                    chapters={chapters}
+                    progress={progress}
+                    onCompleteChallenge={handleCompleteChallenge}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -911,7 +929,9 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full"
               >
-                <VisualLab initialTool={selectedVisualizerTool} />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <VisualLab initialTool={selectedVisualizerTool} />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -924,12 +944,14 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <BlogView
-                  onNavigateHome={() => navigateToView("home")}
-                  onNavigateView={(view) => navigateToView(view as any)}
-                  onSelectLesson={handleSelectLesson}
-                  initialSlug={blogSlug}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <BlogView
+                    onNavigateHome={() => navigateToView("home")}
+                    onNavigateView={(view) => navigateToView(view as any)}
+                    onSelectLesson={handleSelectLesson}
+                    initialSlug={blogSlug}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -942,11 +964,13 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <WorkspaceView
-                  progress={progress}
-                  onOpenTutor={() => handleOpenTutor()}
-                  onNavigateHome={() => navigateToView("home")}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <WorkspaceView
+                    progress={progress}
+                    onOpenTutor={() => handleOpenTutor()}
+                    onNavigateHome={() => navigateToView("home")}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -959,7 +983,9 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <EnhancedDeveloperTools />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <EnhancedDeveloperTools />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -972,10 +998,12 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <ImageToolsView
-                  onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-                  onNavigateWorkspace={() => navigateToView("workspace")}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <ImageToolsView
+                    onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+                    onNavigateWorkspace={() => navigateToView("workspace")}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -988,11 +1016,13 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <WebToolsView
-                  onNavigateWorkspace={() => navigateToView("workspace")}
-                  onNavigateDevTools={() => navigateToView("developertools")}
-                  onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <WebToolsView
+                    onNavigateWorkspace={() => navigateToView("workspace")}
+                    onNavigateDevTools={() => navigateToView("developertools")}
+                    onNavigateVisualLab={(toolId) => handleOpenVisualLab(toolId)}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
 
@@ -1005,16 +1035,18 @@ export default function App() {
                 transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
                 className="w-full relative z-10"
               >
-                <AboutView
-                  onNavigateHome={() => navigateToView("home")}
-                  onNavigateLearn={() => navigateToView("learn")}
-                  onNavigateWorkspace={() => navigateToView("workspace")}
-                  onNavigateWebTools={() => navigateToView("webtools")}
-                  onNavigateImageTools={() => navigateToView("imagetools")}
-                  onNavigateDevTools={() => navigateToView("developertools")}
-                  onOpenLegal={handleOpenLegal}
-                  onOpenTutor={() => handleOpenTutor()}
-                />
+                <React.Suspense fallback={<ViewLoadingState />}>
+                  <AboutView
+                    onNavigateHome={() => navigateToView("home")}
+                    onNavigateLearn={() => navigateToView("learn")}
+                    onNavigateWorkspace={() => navigateToView("workspace")}
+                    onNavigateWebTools={() => navigateToView("webtools")}
+                    onNavigateImageTools={() => navigateToView("imagetools")}
+                    onNavigateDevTools={() => navigateToView("developertools")}
+                    onOpenLegal={handleOpenLegal}
+                    onOpenTutor={() => handleOpenTutor()}
+                  />
+                </React.Suspense>
               </motion.div>
             )}
           </AnimatePresence>

@@ -456,7 +456,7 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
   }
 
   return `${coreAnswer}\n\n` +
-    `*⚡ Note: Generated via WZ Storehouse Continuous Learning Engine.*`;
+    `*⚡ Note: Generated via WebZoneBW Continuous Learning Engine.*`;
 }
 
 // 24/7 Web Dev Tutor / Explainer & Doubt Resolver endpoint
@@ -472,11 +472,11 @@ app.post("/api/ai/explain", async (req, res) => {
     });
   }
 
-  const prompt = `You are the dedicated 24/7 Web Development Tutor for students studying the interactive textbook "WZ Storehouse".
+  const prompt = `You are the dedicated 24/7 Web Development Tutor for students studying the WebZoneBW curriculum.
 Your mission is to clarify any doubt, debug broken code, provide crystal-clear intuitive explanations, and guide students with actionable advice.
 
 Context:
-- Curriculum: WZ Storehouse Interactive Web Development Textbook
+- Curriculum: WebZoneBW Interactive Web Development Curriculum
 - Active Chapter/Context: ${chapterTitle || "Complete Web Curriculum (HTML, CSS, JS, DOM, React, Git)"}
 - Topic: ${topic || "Web Development Concept"}
 ${code ? `Student's Code Snippet:\n\`\`\`\n${code}\n\`\`\`\n` : ""}
@@ -633,7 +633,7 @@ async function startServer() {
   }
 
   app.listen(PORT, "0.0.0.0", () => {
-    console.log(`WZ Storehouse Server running on http://0.0.0.0:${PORT}`);
+    console.log(`WebZoneBW Server running on http://0.0.0.0:${PORT}`);
   });
 }
 

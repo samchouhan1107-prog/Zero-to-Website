@@ -17,7 +17,7 @@ const SAMPLE_DOM: DOMNode = {
       id: 'head-node',
       tag: 'head',
       children: [
-        { id: 'title-node', tag: 'title', text: 'WZ Storehouse' },
+        { id: 'title-node', tag: 'title', text: 'WebZoneBW' },
         { id: 'meta-node', tag: 'meta', text: 'charset="UTF-8"' },
       ],
     },

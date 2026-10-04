@@ -33,6 +33,7 @@ interface SidebarProps {
   onCloseMobile: () => void;
   activeView?: ViewMode;
   onNavigateHome?: () => void;
+  onNavigateLearn?: () => void;
   onOpenPracticeHub: () => void;
   onOpenVisualLab: () => void;
   onOpenActivities?: () => void;

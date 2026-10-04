@@ -400,7 +400,7 @@ router.post("/certificate", requireAuth, async (req: AuthRequest, res) => {
     id: certId,
     certificateId: certId,
     name: studentName,
-    courseName: "WebZone Storehouse Full-Stack Web Development Program",
+    courseName: "WebZoneBW Full-Stack Web Development Program",
     issueDate,
     verificationCode: `VERIFY-${certId.slice(-6)}`,
     xpEarned: progress.xpPoints || 120,

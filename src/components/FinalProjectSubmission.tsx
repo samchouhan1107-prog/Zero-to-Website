@@ -48,7 +48,7 @@ export const FinalProjectSubmission: React.FC<FinalProjectSubmissionProps> = ({
   const [htmlCode, setHtmlCode] = useState(`<section class="portfolio-hero">
   <div class="badge">🚀 Available for Hire</div>
   <h1>Student Web Developer</h1>
-  <p class="subtitle">Frontend Engineer &amp; Graduate of WebZone Storehouse Academy</p>
+  <p class="subtitle">Frontend Engineer &amp; Graduate of WebZoneBW Academy</p>
   <div class="skills-row">
     <span class="chip">HTML5</span>
     <span class="chip">CSS3 Grid / Flexbox</span>
@@ -285,7 +285,7 @@ h1 {
               </div>
               <p className="text-xs text-slate-400 leading-relaxed max-w-xl">
                 {progress.finalProjectDetails?.description ||
-                  'Your final capstone project has been reviewed, evaluated, and permanently verified on the WebZone Storehouse repository.'}
+                  'Your final capstone project has been reviewed, evaluated, and verified by WebZoneBW.'}
               </p>
               {progress.finalProjectDetails?.submittedAt && (
                 <p className="text-[11px] font-mono text-emerald-400/80">

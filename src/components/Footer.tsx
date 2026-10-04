@@ -34,6 +34,12 @@ interface FooterProps {
   onNavigateHome?: () => void;
   onNavigatePractice?: () => void;
   onNavigateVisualLab?: (toolId: VisualizerId) => void;
+  onNavigateWorkspace?: () => void;
+  onNavigateWebTools?: () => void;
+  onNavigateImageTools?: () => void;
+  onNavigateDeveloperTools?: () => void;
+  onNavigateLearn?: () => void;
+  onNavigateAbout?: () => void;
   onNavigateActivities?: () => void;
   onNavigateBlog?: () => void;
   onOpenMilestones?: () => void;

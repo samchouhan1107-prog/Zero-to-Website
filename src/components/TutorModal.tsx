@@ -57,7 +57,7 @@ export interface TutorMessage {
 const DEFAULT_WELCOME_MESSAGE: TutorMessage = {
   id: 'welcome-1',
   sender: 'tutor',
-  text: `👋 Hello student! I am your **24/7 Web Development Tutor**, available around the clock to resolve any doubts, clarify concepts, debug broken code, and guide you through the **WZ Storehouse** textbook.
+  text: `👋 Hello student! I am your **24/7 Web Development Tutor**, available around the clock to resolve any doubts, clarify concepts, debug broken code, and guide you through the **WebZoneBW** curriculum.
 
 ### 🌟 What I can help you with:
 - **Instant Doubt Resolution**: Clear up confusion on HTML, CSS Box Model, Flexbox, Grid, DOM events, Async JavaScript, and Git.
@@ -188,7 +188,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
           topic: textToSend,
           code: codeToSend,
           question: textToSend,
-          chapterTitle: 'WZ Storehouse Complete Curriculum',
+          chapterTitle: 'WebZoneBW Complete Curriculum',
         }),
       });
 
@@ -560,7 +560,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
                 Complete Textbook Knowledge Base
               </h4>
               <p className="text-slate-500 text-xs">
-                The 24/7 Tutor is trained on the entire WZ Storehouse curriculum across all chapters:
+                The 24/7 Tutor is trained on the entire WebZoneBW curriculum across all chapters:
               </p>
             </div>
 

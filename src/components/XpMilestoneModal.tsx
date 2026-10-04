@@ -75,7 +75,7 @@ export const XpMilestoneModal: React.FC<XpMilestoneModalProps> = ({
   if (!isOpen) return null;
 
   const handleShare = () => {
-    const text = `🎉 I just hit ${milestone.xpRequired} XP in WZ Storehouse and reached the rank of "${milestone.rank}: ${milestone.title}"! Master web development interactively at WZ Storehouse.`;
+    const text = `🎉 I just hit ${milestone.xpRequired} XP in WebZoneBW and reached the rank of "${milestone.rank}: ${milestone.title}"! Master web development interactively at WebZoneBW.`;
     if (navigator.clipboard) {
       navigator.clipboard.writeText(text);
       setCopied(true);
