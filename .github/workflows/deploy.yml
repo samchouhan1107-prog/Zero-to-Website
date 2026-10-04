@@ -30,6 +30,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Validate API endpoint
+        env:
+          VITE_API_URL: ${{ vars.VITE_API_URL }}
+        run: |
+          if [[ ! "$VITE_API_URL" =~ ^https://[^[:space:]]+/api$ ]]; then
+            echo "::error::Set the GitHub Actions variable VITE_API_URL to your HTTPS VPS API URL ending in /api."
+            exit 1
+          fi
+
       - name: Build
         run: npm run build
         env:
