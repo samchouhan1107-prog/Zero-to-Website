@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
 import authRoutes from "./server/auth";
 import userRoutes from "./server/api";
-import { cleanupExpiredSessions } from "./server/db";
+import { cleanupExpiredSessions, initializeDatabase } from "./server/db";
 
 dotenv.config();
 
