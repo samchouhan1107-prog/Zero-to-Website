@@ -25,11 +25,11 @@
 }
 
 /* Message bubbles responsive overflow */
-#tutor-modal-overlay .max-w-85\\% {
+#tutor-modal-overlay .message-bubble {
   max-width: 85%;
 }
 
-#tutor-modal-overlay .max-w-80\\% {
+#tutor-modal-overlay .message-bubble-secondary {
   max-width: 80%;
 }
 

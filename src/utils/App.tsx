@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useState, useEffect, useCallback, Suspense, lazy } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { CHAPTERS_DATA } from "../data/chaptersData";
 import { BLOG_POSTS } from "../data/blogData";
@@ -16,14 +16,8 @@ import { calculateDailyStreak, getLocalDateString } from "./streakUtils";
 import { Sidebar } from "../components/Sidebar";
 import { Header } from "../components/Header";
 import { HomeHero } from "../components/HomeHero";
-import { LessonView } from "../components/LessonView";
-import { PracticeHub } from "../components/PracticeHub";
-import { VisualLab, VisualizerId } from "../components/VisualLab";
-import { ActivitiesView } from "../components/ActivitiesView";
 import { SearchModal } from "../components/SearchModal";
-import { TutorModal } from "../components/TutorModal";
 import { SettingsModal } from "../components/SettingsModal";
-import { CertificateModal } from "../components/CertificateModal";
 import { XpMilestoneModal } from "../components/XpMilestoneModal";
 import { XpMilestonesRoadmapModal } from "../components/XpMilestonesRoadmapModal";
 import { CookieNotificationBanner } from "../components/CookieNotificationBanner";
@@ -37,17 +31,27 @@ import {
   LegalComplianceModal,
   PolicyTab,
 } from "../components/LegalComplianceModal";
+import { VisualizerId } from "../components/VisualLab";
 import { Footer } from "../components/Footer";
-import { BlogView } from "../components/BlogView";
-import { WorkspaceView } from "../components/WorkspaceView";
 import { AnimatedBackground } from "../components/AnimatedBackground";
-import { EnhancedDeveloperTools } from "../components/EnhancedDeveloperTools";
-import { LearnView } from "../components/LearnView";
-import { WebToolsView } from "../components/WebToolsView";
-import { ImageToolsView } from "../components/ImageToolsView";
-import { AboutView } from "../components/AboutView";
-import { BrainCardModal } from "../components/BrainCardModal";
+
+const LessonView = lazy(() => import("../components/LessonView").then(m => ({ default: m.LessonView })));
+const PracticeHub = lazy(() => import("../components/PracticeHub").then(m => ({ default: m.PracticeHub })));
+const VisualLab = lazy(() => import("../components/VisualLab").then(m => ({ default: m.VisualLab })));
+const ActivitiesView = lazy(() => import("../components/ActivitiesView").then(m => ({ default: m.ActivitiesView })));
+const TutorModal = lazy(() => import("../components/TutorModal").then(m => ({ default: m.TutorModal })));
+const CertificateModal = lazy(() => import("../components/CertificateModal").then(m => ({ default: m.CertificateModal })));
+const BlogView = lazy(() => import("../components/BlogView").then(m => ({ default: m.BlogView })));
+const WorkspaceView = lazy(() => import("../components/WorkspaceView").then(m => ({ default: m.WorkspaceView })));
+const EnhancedDeveloperTools = lazy(() => import("../components/EnhancedDeveloperTools").then(m => ({ default: m.EnhancedDeveloperTools })));
+const LearnView = lazy(() => import("../components/LearnView").then(m => ({ default: m.LearnView })));
+const WebToolsView = lazy(() => import("../components/WebToolsView").then(m => ({ default: m.WebToolsView })));
+const ImageToolsView = lazy(() => import("../components/ImageToolsView").then(m => ({ default: m.ImageToolsView })));
+const AboutView = lazy(() => import("../components/AboutView").then(m => ({ default: m.AboutView })));
+const BrainCardModal = lazy(() => import("../components/BrainCardModal").then(m => ({ default: m.BrainCardModal })));
 import { BrainCardFloatingButton } from "../components/BrainCardFloatingButton";
+import { ErrorBoundary } from "../components/ErrorBoundary";
+import { LoadingSkeleton } from "../components/LoadingSkeleton";
 import { useSEOMeta, SEO_PRESETS } from "./useSEOMeta";
 import { NEWS_UPDATES } from "../data/newsData";
 import { useAuth } from "./AuthContext";
@@ -105,8 +109,8 @@ export default function App() {
     [hasRealAccount],
   );
 
-  const handleOpenLegal = (tab: PolicyTab = "privacy") => {
-    setLegalModalTab(tab);
+  const handleOpenLegal = (tab: string = "privacy") => {
+    setLegalModalTab(tab as PolicyTab);
     setLegalModalOpen(true);
   };
 

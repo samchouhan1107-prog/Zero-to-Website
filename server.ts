@@ -64,18 +64,21 @@ const injectLessonSnapshot = (html: string, lessonId: string) => {
 app.use(express.json());
 
 // CORS — allow frontend (GitHub Pages) to call this API
-app.use((_req, res, next) => {
+app.use((_req: express.Request, res: express.Response, next: express.NextFunction): void => {
   const origin = process.env.CORS_ORIGIN || _req.headers.origin || '*';
   res.header('Access-Control-Allow-Origin', origin);
   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.header('Access-Control-Allow-Credentials', 'true');
-  if (_req.method === 'OPTIONS') return res.sendStatus(204);
+  if (_req.method === 'OPTIONS') {
+    res.sendStatus(204);
+    return;
+  }
   next();
 });
 
 // Security headers for production safety
-app.use((_req, res, next) => {
+app.use((_req: express.Request, res: express.Response, next: express.NextFunction): void => {
   res.header('X-Content-Type-Options', 'nosniff');
   res.header('X-Frame-Options', 'DENY');
   res.header('X-XSS-Protection', '1; mode=block');
@@ -470,16 +473,17 @@ function getFallbackTutorExplanation(topic?: string, question?: string, code?: s
 }
 
 // 24/7 Web Dev Tutor / Explainer & Doubt Resolver endpoint
-app.post("/api/ai/explain", async (req, res) => {
+app.post("/api/ai/explain", async (req: express.Request, res: express.Response): Promise<void> => {
   const { topic, code, question, chapterTitle } = req.body;
   const ai = getAi();
 
   if (!ai) {
-    return res.json({
+    res.json({
       success: true,
       fallback: true,
       explanation: getFallbackTutorExplanation(topic, question, code),
     });
+    return;
   }
 
   const prompt = `You are the dedicated 24/7 Web Development Tutor for students studying the interactive textbook "WZ Storehouse".
@@ -516,11 +520,12 @@ Guidelines for your response:
       explanation: getFallbackTutorExplanation(topic, question, code),
       notice: "Live model is experiencing temporary peak demand; answer served from built-in tutor engine.",
     });
+    return;
   }
 });
 
 // AI Code Review & Debugging endpoint
-app.post("/api/ai/review", async (req, res) => {
+app.post("/api/ai/review", async (req: express.Request, res: express.Response): Promise<void> => {
   const { html, css, js, challengeTitle } = req.body;
   const ai = getAi();
 
@@ -535,11 +540,12 @@ app.post("/api/ai/review", async (req, res) => {
   };
 
   if (!ai) {
-    return res.json({
+    res.json({
       success: true,
       fallback: true,
       feedback: staticFallbackFeedback,
     });
+    return;
   }
 
   const prompt = `You are a Senior Code Reviewer evaluating a student's practice exercise for "${challengeTitle || "Coding Exercise"}".

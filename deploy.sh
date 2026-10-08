@@ -23,11 +23,11 @@ echo "✅ Build successful"
 echo ""
 
 # Step 2: Verify dist
-if [ ! -f "dist/server.cjs" ]; then
-  echo "❌ dist/server.cjs not found"
+if [ ! -f "dist/server.js" ]; then
+  echo "❌ dist/server.js not found"
   exit 1
 fi
-echo "✅ dist/server.cjs ready"
+echo "✅ dist/server.js ready"
 echo ""
 
 # Step 3: Git push
@@ -49,7 +49,7 @@ echo "4. Settings:"
 echo "   - Name: webzonebw-api"
 echo "   - Runtime: Node"
 echo "   - Build: npm run build"
-echo "   - Start: node dist/server.cjs"
+echo "   - Start: node dist/server.js"
 echo "5. Add environment variables:"
 echo "   NODE_ENV=production"
 echo "   CORS_ORIGIN=https://webzonebw.shop"

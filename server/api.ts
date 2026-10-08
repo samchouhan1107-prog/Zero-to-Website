@@ -195,7 +195,7 @@ router.post("/submit-final-project", requireAuth, (req: AuthRequest, res) => {
 
   // Check if all chapters 00-10 are completed
   const allRequired = COURSE_LESSON_CHAIN.map((c) => c.id);
-  const allChaptersDone = allRequired.every((id) => !!completedLessons[id]);
+  const allChaptersDone = allRequired.every((id) => !!(completedLessons as Record<string, boolean>)[id]);
 
   let courseCompleted = progress.courseCompleted || allChaptersDone;
   let courseCompletedAt = progress.courseCompletedAt || (allChaptersDone ? now : undefined);
