@@ -1,40 +1,11 @@
-import tailwindcss from '@tailwindcss/vite';
-import react from '@vitejs/plugin-react';
-import path from 'path';
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import tailwindcss from '@tailwindcss/vite'
 
-export default defineConfig(() => ({
-  // Custom domain serves from root. GitHub Pages can override this with VITE_BASE.
-  base: process.env.VITE_BASE || '/',
-
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-
-  resolve: {
-    alias: {
-      '@': path.resolve(__dirname, '.'),
-    },
-  },
-
-  build: {
-    outDir: 'dist',
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'vendor-react': ['react', 'react-dom'],
-          'vendor-motion': ['motion'],
-          'vendor-lucide': ['lucide-react'],
-        },
-      },
-    },
-  },
-
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
   server: {
-    host: '0.0.0.0',
     port: 3000,
-    hmr: process.env.DISABLE_HMR !== 'true',
-    watch: process.env.DISABLE_HMR === 'true' ? null : {},
+    open: true,
   },
-}));
+})

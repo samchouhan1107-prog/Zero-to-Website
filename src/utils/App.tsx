@@ -239,19 +239,8 @@ export default function App() {
       const legalParam = params.get("legal") as PolicyTab | null;
       const blogParam = params.get("blog") as string | null;
 
-      // Also check pathname (e.g. /Chapters/Chapter-01-Development20Environment/Lesson-02-...)
-      const pathname = window.location.pathname || "";
-      let pathChapterMatch: string | null = null;
-      let pathLessonMatch: string | null = null;
-      if (pathname.includes("/Chapters/") || pathname.includes("/chapter/")) {
-        const parts = pathname.split("/").filter(Boolean);
-        for (const part of parts) {
-          if (/chapter/i.test(part)) pathChapterMatch = part;
-          if (/lesson/i.test(part)) pathLessonMatch = part;
-        }
-      }
-
       // Clean SEO routes: /lessons/:lessonId and /blog/:slug
+      const pathname = window.location.pathname;
       const cleanLessonMatch = pathname.match(/^\/lessons\/([\w.-]+)\/??$/);
       const cleanBlogMatch = pathname.match(/^\/blog\/([\w.-]+)\/??$/);
       if (cleanBlogMatch) {
@@ -262,6 +251,7 @@ export default function App() {
           return;
         }
       }
+      let pathLessonMatch: string | null = null;
       if (cleanLessonMatch) {
         pathLessonMatch = decodeURIComponent(cleanLessonMatch[1]);
       }
@@ -292,7 +282,7 @@ export default function App() {
         return;
       }
 
-      const chapterCandidate = rawChapterParam || pathChapterMatch;
+      const chapterCandidate = rawChapterParam;
       const lessonCandidate = rawLessonParam || pathLessonMatch;
 
       if (
