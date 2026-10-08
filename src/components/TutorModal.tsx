@@ -369,7 +369,7 @@ export const TutorModal: React.FC<TutorModalProps> = ({
 
                   {/* Message Bubble */}
                   <div
-                    className={`max-w-[85%] sm:max-w-[80%] rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed space-y-2 ${
+                    className={`w-[85%] sm:w-[80%] max-w-full rounded-2xl p-3 sm:p-4 text-xs sm:text-sm leading-relaxed space-y-2 ${
                       m.sender === 'student'
                         ? 'bg-indigo-600 text-white rounded-tr-none shadow-md shadow-indigo-600/10'
                         : 'bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-800 dark:text-slate-200 rounded-tl-none shadow-xs'

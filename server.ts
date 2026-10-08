@@ -74,6 +74,16 @@ app.use((_req, res, next) => {
   next();
 });
 
+// Security headers for production safety
+app.use((_req, res, next) => {
+  res.header('X-Content-Type-Options', 'nosniff');
+  res.header('X-Frame-Options', 'DENY');
+  res.header('X-XSS-Protection', '1; mode=block');
+  res.header('Referrer-Policy', 'strict-origin-when-cross-origin');
+  res.header('Permissions-Policy', 'geolocation=(), microphone=(), camera=()');
+  next();
+});
+
 // Auth & User API routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);

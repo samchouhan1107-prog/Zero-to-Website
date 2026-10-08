@@ -185,4 +185,30 @@ export const SEO_PRESETS = {
     canonical: 'https://webzonebw.shop/?view=blog',
     ogType: 'website',
   },
+  blogPost: (title: string, excerpt: string, slug: string, author: string, date: string, tags: string[]) => ({
+    title: `${title} — WebZoneBW SC`,
+    description: excerpt,
+    ogTitle: `${title} — WebZoneBW SC`,
+    ogDescription: excerpt,
+    canonical: `https://webzonebw.shop/?blog=${slug}`,
+    ogType: 'article',
+    jsonLd: {
+      '@context': 'https://schema.org',
+      '@type': 'BlogPosting',
+      headline: title,
+      description: excerpt,
+      author: {
+        '@type': 'Person',
+        name: author,
+      },
+      datePublished: date,
+      keywords: tags.join(', '),
+      url: `https://webzonebw.shop/?blog=${slug}`,
+      publisher: {
+        '@type': 'Organization',
+        name: 'WebZoneBW SC',
+        url: 'https://webzonebw.shop',
+      },
+    },
+  }),
 };

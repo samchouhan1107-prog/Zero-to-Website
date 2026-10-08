@@ -39,6 +39,12 @@ interface FooterProps {
   onOpenMilestones?: () => void;
   onOpenCertificate?: () => void;
   onOpenSearch?: () => void;
+  onNavigateWorkspace?: () => void;
+  onNavigateWebTools?: () => void;
+  onNavigateImageTools?: () => void;
+  onNavigateDeveloperTools?: () => void;
+  onNavigateLearn?: () => void;
+  onNavigateAbout?: () => void;
   chapters?: Chapter[];
 }
 

@@ -56,7 +56,7 @@ import {
   Wifi,
   WifiOff
 } from 'lucide-react';
-import { CriticalRenderingPathInspector } from './CriticalRenderingPathInspector';
+import { CriticalPathInspector } from './visualizers/CriticalPathInspector';
 
 interface DevToolTab {
   id: 'elements' | 'console' | 'sources' | 'network' | 'performance' | 'memory' | 'application' | 'security' | 'rendering-path';
@@ -386,7 +386,7 @@ export const EnhancedDeveloperTools: React.FC = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'rendering-path':
-        return <CriticalRenderingPathInspector />;
+        return <CriticalPathInspector />;
 
       case 'elements':
         return (
@@ -742,13 +742,6 @@ export const EnhancedDeveloperTools: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
-        );
-
-      case 'rendering-path':
-        return (
-          <div className="w-full">
-            <CriticalRenderingPathInspector />
           </div>
         );
 

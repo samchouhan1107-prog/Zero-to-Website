@@ -36,6 +36,7 @@ export interface HomeHeroProps {
   onOpenMilestones: () => void;
   onOpenSearch?: (query?: string) => void;
   selectedCategory?: string;
+  onOpenWorkspace?: () => void;
 }
 
 type ToolCategory =

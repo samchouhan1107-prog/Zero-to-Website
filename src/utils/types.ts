@@ -332,4 +332,9 @@ export type ViewMode =
   | 'video-studio'
   | 'curriculum'
   | 'blog'
-  | 'workspace';
+  | 'workspace'
+  | 'learn'
+  | 'webtools'
+  | 'imagetools'
+  | 'developertools'
+  | 'about';

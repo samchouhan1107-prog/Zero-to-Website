@@ -18,6 +18,7 @@ import {
   Search,
   Sparkles,
   Video,
+  Wrench,
   X,
   Zap,
 } from 'lucide-react';
@@ -33,6 +34,12 @@ interface SidebarProps {
   onCloseMobile: () => void;
   activeView?: ViewMode;
   onNavigateHome?: () => void;
+  onNavigateLearn?: () => void;
+  onNavigateWorkspace?: () => void;
+  onNavigateWebTools?: () => void;
+  onNavigateImageTools?: () => void;
+  onNavigateDeveloperTools?: () => void;
+  onNavigateAbout?: () => void;
   onOpenPracticeHub: () => void;
   onOpenVisualLab: () => void;
   onOpenActivities?: () => void;
@@ -51,6 +58,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
   onCloseMobile,
   activeView = 'lesson',
   onNavigateHome,
+  onNavigateLearn,
+  onNavigateWorkspace,
+  onNavigateWebTools,
+  onNavigateImageTools,
+  onNavigateDeveloperTools,
+  onNavigateAbout,
   onOpenPracticeHub,
   onOpenVisualLab,
   onOpenActivities,
@@ -225,6 +238,51 @@ export const Sidebar: React.FC<SidebarProps> = ({
               >
                 <GraduationCap className={`h-4 w-4 shrink-0 ${activeView === 'activities' ? 'text-cyan-400' : 'text-cyan-500/70'}`} />
                 <span className="truncate">Activities</span>
+              </button>
+            )}
+
+            {onNavigateWorkspace && (
+              <button
+                type="button"
+                onClick={() => closeAfter(onNavigateWorkspace)}
+                className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-left text-xs font-bold transition-all ${
+                  activeView === 'workspace'
+                    ? 'border border-blue-500/60 bg-blue-500/10 text-blue-400 shadow-xs'
+                    : 'border border-transparent bg-app-inset/60 text-app-muted hover:border-app-border hover:bg-app-inset hover:text-app-ink'
+                }`}
+              >
+                <Compass className={`h-4 w-4 shrink-0 ${activeView === 'workspace' ? 'text-blue-400' : 'text-blue-500/70'}`} />
+                <span className="truncate">Workspace</span>
+              </button>
+            )}
+
+            {onNavigateWebTools && (
+              <button
+                type="button"
+                onClick={() => closeAfter(onNavigateWebTools)}
+                className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-left text-xs font-bold transition-all ${
+                  activeView === 'webtools'
+                    ? 'border border-emerald-500/60 bg-emerald-500/10 text-emerald-400 shadow-xs'
+                    : 'border border-transparent bg-app-inset/60 text-app-muted hover:border-app-border hover:bg-app-inset hover:text-app-ink'
+                }`}
+              >
+                <Wrench className={`h-4 w-4 shrink-0 ${activeView === 'webtools' ? 'text-emerald-400' : 'text-emerald-500/70'}`} />
+                <span className="truncate">Web Tools</span>
+              </button>
+            )}
+
+            {onNavigateLearn && (
+              <button
+                type="button"
+                onClick={() => closeAfter(onNavigateLearn)}
+                className={`flex items-center gap-2 rounded-lg px-2.5 py-2 text-left text-xs font-bold transition-all ${
+                  activeView === 'learn'
+                    ? 'border border-amber-500/60 bg-amber-500/10 text-amber-400 shadow-xs'
+                    : 'border border-transparent bg-app-inset/60 text-app-muted hover:border-app-border hover:bg-app-inset hover:text-app-ink'
+                }`}
+              >
+                <BookOpen className={`h-4 w-4 shrink-0 ${activeView === 'learn' ? 'text-amber-400' : 'text-amber-500/70'}`} />
+                <span className="truncate">Learn</span>
               </button>
             )}
           </div>
