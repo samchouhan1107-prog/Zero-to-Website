@@ -1,0 +1,105 @@
+[
+  {
+    "id": "draft-ai-llm-mastery",
+    "courseTitle": "Full-Stack AI Engineer with Local & Cloud LLMs",
+    "creatorId": "default",
+    "creatorName": "Sameer Chouhan",
+    "creatorEmail": "",
+    "contentOwner": "Sameer Chouhan / WebZoneBW",
+    "publisherIdentity": "Sameer Chouhan / WebZoneBW",
+    "currentStage": "quality-review",
+    "targetAudience": "React & Node.js developers building production AI features",
+    "difficulty": "Intermediate",
+    "chaptersCount": 5,
+    "totalLessonsCount": 23,
+    "wordCount": 18450,
+    "hasSandboxPractices": true,
+    "hasAssessments": true,
+    "selectedLicences": [
+      "personal-learning",
+      "downloadable-learning",
+      "commercial-use",
+      "subscription-access"
+    ],
+    "pricingUsd": {
+      "personal-learning": 99,
+      "downloadable-learning": 149,
+      "commercial-use": 299,
+      "creator-distribution": 999,
+      "subscription-access": 19,
+      "limited-term-access": 79
+    },
+    "originalityScore": 96,
+    "originalityFlags": [
+      "Passed originality check: No unverified copyrighted materials detected."
+    ],
+    "qualityChecklist": {
+      "hasClearObjectives": true,
+      "hasDefinitionsAndMentalModels": true,
+      "hasWorkingCodeExamples": true,
+      "hasPracticeExercises": true,
+      "hasKnowledgeCheckpoints": true,
+      "hasKeyTakeaways": true,
+      "toneIsConversationalAndHuman": true,
+      "avoidsRoboticFiller": true
+    },
+    "ownershipVerified": true,
+    "rightsConfirmedByCreator": true,
+    "createdAt": "2026-03-01T10:00:00.000Z",
+    "updatedAt": "2026-11-13T13:42:38.457Z",
+    "nextMaintenanceDue": "2026-12-18T13:42:38.457Z",
+    "version": "1.0.0-rc1"
+  },
+  {
+    "id": "draft-modern-css-design-systems",
+    "courseTitle": "High-Performance Modern CSS Architecture & Design Systems",
+    "creatorId": "default",
+    "creatorName": "Sameer Chouhan",
+    "creatorEmail": "",
+    "contentOwner": "Sameer Chouhan / WebZoneBW",
+    "publisherIdentity": "Sameer Chouhan / WebZoneBW",
+    "currentStage": "published",
+    "targetAudience": "Frontend engineers and UI designers",
+    "difficulty": "Beginner",
+    "chaptersCount": 5,
+    "totalLessonsCount": 22,
+    "wordCount": 16200,
+    "hasSandboxPractices": true,
+    "hasAssessments": true,
+    "selectedLicences": [
+      "personal-learning",
+      "downloadable-learning",
+      "commercial-use",
+      "subscription-access"
+    ],
+    "pricingUsd": {
+      "personal-learning": 49,
+      "downloadable-learning": 79,
+      "commercial-use": 189,
+      "creator-distribution": 599,
+      "subscription-access": 12,
+      "limited-term-access": 39
+    },
+    "originalityScore": 99,
+    "originalityFlags": [
+      "Authentic human engineering prose verified."
+    ],
+    "qualityChecklist": {
+      "hasClearObjectives": true,
+      "hasDefinitionsAndMentalModels": true,
+      "hasWorkingCodeExamples": true,
+      "hasPracticeExercises": true,
+      "hasKnowledgeCheckpoints": true,
+      "hasKeyTakeaways": true,
+      "toneIsConversationalAndHuman": true,
+      "avoidsRoboticFiller": true
+    },
+    "ownershipVerified": true,
+    "rightsConfirmedByCreator": true,
+    "createdAt": "2026-02-15T08:00:00.000Z",
+    "updatedAt": "2026-11-13T13:42:38.457Z",
+    "publishedAt": "2026-03-01T00:00:00.000Z",
+    "nextMaintenanceDue": "2026-12-13T13:42:38.457Z",
+    "version": "1.1.0"
+  }
+]

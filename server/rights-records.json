@@ -1,0 +1,153 @@
+[
+  {
+    "contentId": "curriculum-core-webzone",
+    "contentTitle": "Zero-to-Website: Full-Stack Web Architecture Curriculum (Ch 00 - 10)",
+    "contentType": "course",
+    "ownershipType": "platform-owned",
+    "ownerName": "Sameer Chouhan / WebZoneBW",
+    "ownerContact": "",
+    "publisherName": "Sameer Chouhan / WebZoneBW",
+    "publisherContact": "",
+    "creationDate": "2026-01-15T00:00:00.000Z",
+    "publicationDate": "2026-02-01T00:00:00.000Z",
+    "lastReviewedDate": "2026-11-13T13:42:38.456Z",
+    "nextReviewDueDate": "2026-12-18T13:42:38.456Z",
+    "reviewCycleWeeks": 5,
+    "version": "2.4.0",
+    "revisionHistory": [
+      {
+        "version": "2.4.0",
+        "date": "2026-11-13T13:42:38.456Z",
+        "changedBy": "Sameer Chouhan / WebZoneBW",
+        "summary": "Complete human-centred CSS3 typography overhaul and ownership rights registry integration.",
+        "originalityVerified": true
+      },
+      {
+        "version": "2.0.0",
+        "date": "2026-02-01T00:00:00.000Z",
+        "changedBy": "Sameer Chouhan / WebZoneBW",
+        "summary": "Initial 11-track curriculum publication.",
+        "originalityVerified": true
+      }
+    ],
+    "availableLicences": [
+      "personal-learning",
+      "downloadable-learning",
+      "commercial-use",
+      "subscription-access"
+    ],
+    "pricingUsd": {
+      "personal-learning": 0,
+      "downloadable-learning": 29,
+      "commercial-use": 149,
+      "creator-distribution": 499,
+      "subscription-access": 19,
+      "limited-term-access": 0
+    },
+    "copyrightNotice": "© Sameer Chouhan / WebZoneBW. All rights reserved. Published via WebZoneBW Publishing.",
+    "originalityScore": 98,
+    "aiAssistedDisclosure": {
+      "isAiAssisted": true,
+      "humanReviewedAndFactChecked": true,
+      "reviewerName": "Sameer Chouhan",
+      "reviewDate": "2026-11-13T13:42:38.456Z",
+      "editorialNotes": "Synthesized with Gemini 3.7 Flash, thoroughly audited, structured, and verified against W3C and MDN Web Docs standards by human engineering editor."
+    }
+  },
+  {
+    "contentId": "course-ai-fullstack-cloud-llms",
+    "contentTitle": "Full-Stack AI Engineer with Local & Cloud LLMs",
+    "contentType": "course",
+    "ownershipType": "platform-owned",
+    "ownerName": "Sameer Chouhan / WebZoneBW",
+    "ownerContact": "",
+    "publisherName": "Sameer Chouhan / WebZoneBW",
+    "publisherContact": "",
+    "creationDate": "2026-11-13T13:42:38.456Z",
+    "publicationDate": "2026-11-13T13:42:38.456Z",
+    "lastReviewedDate": "2026-11-13T13:42:38.456Z",
+    "nextReviewDueDate": "2026-12-11T13:42:38.456Z",
+    "reviewCycleWeeks": 4,
+    "version": "1.0.0",
+    "revisionHistory": [
+      {
+        "version": "1.0.0",
+        "date": "2026-11-13T13:42:38.456Z",
+        "changedBy": "Sameer Chouhan / WebZoneBW",
+        "summary": "Initial course proposal and commercial licensing specification.",
+        "originalityVerified": true
+      }
+    ],
+    "availableLicences": [
+      "personal-learning",
+      "downloadable-learning",
+      "commercial-use",
+      "subscription-access"
+    ],
+    "pricingUsd": {
+      "personal-learning": 99,
+      "downloadable-learning": 149,
+      "commercial-use": 299,
+      "creator-distribution": 999,
+      "subscription-access": 19,
+      "limited-term-access": 79
+    },
+    "copyrightNotice": "© Sameer Chouhan / WebZoneBW. All rights reserved. Published via WebZoneBW Publishing.",
+    "originalityScore": 96,
+    "aiAssistedDisclosure": {
+      "isAiAssisted": true,
+      "humanReviewedAndFactChecked": true,
+      "reviewerName": "Sameer Chouhan",
+      "reviewDate": "2026-11-13T13:42:38.456Z",
+      "editorialNotes": "Full-stack LLM architectural course. Code examples and fallback logic verified on node 20+ runtime."
+    }
+  },
+  {
+    "contentId": "course-modern-css-design-systems",
+    "contentTitle": "High-Performance Modern CSS Architecture & Design Systems",
+    "contentType": "course",
+    "ownershipType": "platform-owned",
+    "ownerName": "Sameer Chouhan / WebZoneBW",
+    "ownerContact": "",
+    "publisherName": "Sameer Chouhan / WebZoneBW",
+    "publisherContact": "",
+    "creationDate": "2026-11-13T13:42:38.456Z",
+    "publicationDate": "2026-11-13T13:42:38.456Z",
+    "lastReviewedDate": "2026-11-13T13:42:38.456Z",
+    "nextReviewDueDate": "2026-12-18T13:42:38.456Z",
+    "reviewCycleWeeks": 5,
+    "version": "1.0.0",
+    "revisionHistory": [
+      {
+        "version": "1.0.0",
+        "date": "2026-11-13T13:42:38.456Z",
+        "changedBy": "Sameer Chouhan / WebZoneBW",
+        "summary": "Standard CSS3 grid, subgrid, fluid clamp typography, and zero-runtime design token system.",
+        "originalityVerified": true
+      }
+    ],
+    "availableLicences": [
+      "personal-learning",
+      "downloadable-learning",
+      "commercial-use",
+      "subscription-access"
+    ],
+    "pricingUsd": {
+      "personal-learning": 49,
+      "downloadable-learning": 79,
+      "commercial-use": 189,
+      "creator-distribution": 599,
+      "subscription-access": 12,
+      "limited-term-access": 39
+    },
+    "copyrightNotice": "© Sameer Chouhan / WebZoneBW. All rights reserved. Published via WebZoneBW Publishing.",
+    "originalityScore": 99,
+    "aiAssistedDisclosure": {
+      "isAiAssisted": false,
+      "humanReviewedAndFactChecked": true,
+      "reviewerName": "Sameer Chouhan",
+      "reviewDate": "2026-11-13T13:42:38.456Z",
+      "editorialNotes": "Created directly from production UI/UX engineering experience with standard CSS3 standards."
+    }
+  }
+]

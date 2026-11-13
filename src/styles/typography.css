@@ -1,0 +1,113 @@
+/* ==========================================================================
+   TYPOGRAPHY.CSS — Editorial Human-Centred Typography
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-strong);
+  font-weight: 700;
+  line-height: var(--leading-tight);
+  letter-spacing: -0.02em;
+}
+
+h1 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-4);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: var(--text-2xl);
+  margin-top: var(--space-8);
+  margin-bottom: var(--space-4);
+}
+
+h3 {
+  font-size: var(--text-xl);
+  margin-top: var(--space-6);
+  margin-bottom: var(--space-3);
+}
+
+h4 {
+  font-size: var(--text-lg);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+h5 {
+  font-size: var(--text-md);
+  margin-bottom: var(--space-2);
+}
+
+h6 {
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-subtle);
+}
+
+p {
+  color: var(--color-text);
+  line-height: var(--leading-normal);
+  margin-bottom: var(--space-4);
+}
+
+.lead-paragraph {
+  font-size: var(--text-md);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-muted);
+  max-width: var(--reading-measure);
+}
+
+strong, b {
+  font-weight: 700;
+  color: var(--color-text-strong);
+}
+
+em, i {
+  font-style: italic;
+}
+
+small {
+  font-size: var(--text-xs);
+  color: var(--color-text-subtle);
+}
+
+a.text-link {
+  color: var(--color-primary);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+a.text-link:hover {
+  color: var(--color-accent);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-8) 0;
+}
+
+blockquote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: var(--space-4);
+  margin: var(--space-4) 0;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+/* Inline code tags */
+:not(pre) > code {
+  background-color: var(--code-bg);
+  color: var(--color-accent);
+  border: 1px solid var(--code-border);
+  padding: 0.15em 0.4em;
+  border-radius: var(--radius-sm);
+  font-size: 0.88em;
+  font-family: var(--font-mono);
+  word-break: break-word;
+}

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "sub-scholar-default",
+    "userId": "default",
+    "studentEmail": "scholar@demo.local",
+    "studentName": "Active Scholar",
+    "subscribedTracks": [
+      "Core Curriculum",
+      "Full-Stack AI",
+      "Modern CSS Architecture"
+    ],
+    "deliveryCadence": "weekly",
+    "preferredFormat": "both",
+    "active": true,
+    "subscribedAt": "2026-11-13T13:42:38.457Z",
+    "unsubscribeToken": "unsub-scholar-token-12345"
+  }
+]

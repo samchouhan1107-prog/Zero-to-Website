@@ -1,0 +1,11 @@
+[
+  {
+    "id": "grant-default-core",
+    "userId": "default",
+    "contentId": "curriculum-core-webzone",
+    "licenceType": "personal-learning",
+    "grantedAt": "2026-11-13T13:42:38.457Z",
+    "expiresAt": null,
+    "status": "active"
+  }
+]

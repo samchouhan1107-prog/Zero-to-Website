@@ -1,0 +1,20 @@
+{
+  "short_name": "WebZoneBW",
+  "name": "WebZoneBW SC — Knowledge Base & Web Engineering",
+  "icons": [
+    {
+      "src": "/assets/aistudio/logo_8c2b321c.png",
+      "type": "image/png",
+      "sizes": "192x192 512x512"
+    },
+    {
+      "src": "/favicon.png",
+      "type": "image/png",
+      "sizes": "220x147"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "display": "standalone"
+}
