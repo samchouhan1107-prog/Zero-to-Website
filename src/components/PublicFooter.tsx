@@ -136,7 +136,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
                 className="btn-link"
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textAlign: 'left', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
               >
-                <span>Live Code (Browser Sandbox)</span>
+                <span>Live Code</span>
               </button>
             </li>
             <li>

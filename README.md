@@ -1,4 +1,4 @@
-# WZ Storehouse
+# Zero-to-website
 
 ## Learn • Practice • Build • Share
 
