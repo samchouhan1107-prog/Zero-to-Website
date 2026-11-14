@@ -23,7 +23,7 @@ export const CORE_FULLSTACK_COURSE: FeaturedCourseDefinition = {
   title: 'Full-Stack Modern Web Engineering & Production Systems',
   tagline: 'Master end-to-end full stack development from foundational HTML/CSS/TypeScript to reactive UI, Node.js backend architectures, and secure deployment.',
   level: 'Beginner to Advanced',
-  duration: '8 Modules • 32 Lessons',
+  duration: `${CHAPTERS_DATA.length} Chapters • ${CHAPTERS_DATA.reduce((acc, c) => acc + c.lessons.length, 0)} Lessons`,
   lessonsCount: CHAPTERS_DATA.reduce((acc, c) => acc + c.lessons.length, 0),
   description: 'The premier hands-on full-stack web engineering curriculum. Master clean architecture, reactive components, server APIs, state persistence, and enterprise software practices.',
   priceUsd: 49,

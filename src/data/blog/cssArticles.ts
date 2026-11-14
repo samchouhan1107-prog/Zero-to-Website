@@ -11,6 +11,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '12 min read',
     category: 'CSS',
     tags: ['CSS', 'Flexbox', 'Layout', 'Frontend', 'Web Design'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-04',
+      chapterLabel: 'CSS Flexbox Layout Engine',
+      lessonId: 'ch-04-l-01',
+      lessonTitle: 'Introduction to Flexbox',
+    },
     content: [
       {
         heading: 'The Layout Bottleneck: Why Traditional Flow Fails Dynamic Interfaces',
@@ -64,9 +71,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'Use Flexbox for component-level alignment (headers, navigation items, button groups, badge rows). Use CSS Grid for page skeletons, photo galleries, and card matrices where row and column alignment must lock simultaneously.',
         },
         internalLink: {
-          label: 'Test in Flexbox Visualizer',
-          target: 'visual-lab',
-          description: 'Adjust flex-direction, justify-content, and align-items interactively with live DOM updates in WebZoneBW VisualLab.',
+          label: 'Practice Flexbox in Live Code',
+          target: 'practice',
+          description: 'Adjust flex-direction, justify-content, and align-items directly inside Live Code with real-time browser rendering.',
         },
       },
       {
@@ -91,6 +98,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '14 min read',
     category: 'CSS',
     tags: ['CSS', 'Grid', 'Layout', 'Frontend', 'Web Design'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-05',
+      chapterLabel: 'CSS Grid Layout Architecture',
+      lessonId: 'ch-05-l-01',
+      lessonTitle: 'Grid Basics & Terminology',
+    },
     content: [
       {
         heading: 'The 2D Challenge: Why Component Grids Needed a New Engine',
@@ -147,9 +161,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'Notice how named grid areas serve as self-documenting code. Any engineer opening the stylesheet instantly understands the exact structural layout of the application.',
         },
         internalLink: {
-          label: 'Explore CSS Grid in VisualLab',
-          target: 'visual-lab',
-          description: 'Visualize CSS Grid tracks, gaps, and template areas dynamically in our interactive visual lab.',
+          label: 'Study Chapter 05: CSS Grid Layout Architecture',
+          target: 'lesson:ch-05-l-01',
+          description: 'Explore Grid Basics & Terminology, fr tracks, minmax(), and template areas in the structured curriculum.',
         },
       },
       {
@@ -173,6 +187,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'CSS',
     tags: ['CSS', 'Grid', 'Subgrid', 'Responsive', 'Web Design'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-02',
+      chapterLabel: 'Layout Architecture',
+      lessonId: 'css-02-05',
+      lessonTitle: 'Subgrid and Nested Layouts',
+    },
     content: [
       {
         heading: 'The Nested Alignment Problem: Why Subgrid Was Born',
@@ -221,9 +242,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'Using grid-auto-flow: dense changes the visual display order without changing the underlying DOM order. If your cards contain interactive links or form controls, tabbing through the page with a keyboard may jump visually around the screen in an unexpected sequence.',
         },
         internalLink: {
-          label: 'Open Web REPL Sandbox',
-          target: 'workspace',
-          description: 'Paste this subgrid snippet into the WebZoneBW Sandbox and observe real-time track synchronization as you modify card content.',
+          label: 'Open Live Code',
+          target: 'practice',
+          description: 'Paste this subgrid snippet into Live Code and observe real-time track synchronization as you modify card content.',
         },
       },
       {
@@ -247,6 +268,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '10 min read',
     category: 'CSS',
     tags: ['CSS', 'Container Queries', 'Responsive', 'Modern CSS', 'Design Systems'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-03',
+      chapterLabel: 'Responsive Design',
+      lessonId: 'css-03-03',
+      lessonTitle: 'Container Queries',
+    },
     content: [
       {
         heading: 'The Viewport Fallacy: Why @media Breaks Reusable Components',
@@ -294,9 +322,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'Using cqi (container query inline unit) enables truly autonomous design components. A card dropped anywhere in your web app scales its padding, typography, and button dimensions organically to fit its container.',
         },
         internalLink: {
-          label: 'Test Responsive Layouts in Web Tools',
-          target: 'webtools',
-          description: 'Explore the WebZoneBW Responsive Viewport and Media Engine to inspect multi-breakpoint behaviors.',
+          label: 'Study Container Queries Lesson',
+          target: 'lesson:css-03-03',
+          description: 'Continue into High-Performance Modern CSS Architecture to build component-driven responsive layouts.',
         },
       },
       {
@@ -320,6 +348,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '9 min read',
     category: 'CSS',
     tags: ['CSS', 'Cascade Layers', 'Specificity', 'Design Systems', 'Architecture'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-08',
+      chapterLabel: 'Module 8: Enterprise CSS Architecture and Code Organization',
+      lessonId: 'css-08-01',
+      lessonTitle: 'Cascade Layers (@layer) for Specificity Control',
+    },
     content: [
       {
         heading: 'The Specificity Nightmare: How CSS Codebases Rot Over Time',
@@ -368,9 +403,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'With Cascade Layers, third-party libraries can be sandboxed into a vendor layer, allowing your design system components to override them with simple, single-class selectors without fighting selector specificity wars.',
         },
         internalLink: {
-          label: 'Test Specificity in DOM Inspector',
-          target: 'developertools',
-          description: 'Inspect computed CSS cascade values and layer inheritance live in the WebZoneBW Developer Tools suite.',
+          label: 'Open Cascade Layers (@layer) Lesson',
+          target: 'lesson:css-08-01',
+          description: 'Master @layer precedence rules and enterprise stylesheet organization in the Modern CSS course.',
         },
       },
       {
@@ -394,6 +429,13 @@ export const CSS_ARTICLES: BlogPost[] = [
     readTime: '9 min read',
     category: 'CSS',
     tags: ['CSS', 'Animations', 'GPU', 'Performance', 'Transitions'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-06',
+      chapterLabel: 'Module 6: Animation, Micro-Interactions, and Motion',
+      lessonId: 'css-06-01',
+      lessonTitle: 'CSS Transitions and Easing Curves',
+    },
     content: [
       {
         heading: 'The Frame Rate Problem: Why Most CSS Animations Stutter (Jank)',
@@ -441,9 +483,9 @@ export const CSS_ARTICLES: BlogPost[] = [
           text: 'Always include a media query for users who experience vestibular motion sickness: @media (prefers-reduced-motion: reduce) { * { transition-duration: 0.01ms !important; animation-iteration-count: 1 !important; } }',
         },
         internalLink: {
-          label: 'Test in Critical Rendering Path Inspector',
-          target: 'webtools',
-          description: 'Measure DOM reflows and paint times live inside WebZoneBW rendering diagnostics tools.',
+          label: 'Test GPU Transitions in Live Code',
+          target: 'practice',
+          description: 'Experiment with transform, opacity, and cubic-bezier easing directly in Live Code.',
         },
       },
       {

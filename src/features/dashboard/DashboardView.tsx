@@ -174,7 +174,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
             <div className="metric-card">
               <div className="metric-label">
                 <Clock size={14} style={{ color: 'var(--color-primary)' }} />
-                <span>Study &amp; Sandbox Time</span>
+                <span>Study &amp; Live Code Time</span>
               </div>
               <div className="metric-value">{progress.studyMinutes || 45} min</div>
               <div className="metric-subtext">Active reading depth and code execution</div>

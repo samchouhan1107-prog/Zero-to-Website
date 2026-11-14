@@ -1,15 +1,31 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, Calendar, Clock, Tag, BookOpen, ArrowRight, Search } from 'lucide-react';
+import {
+  ArrowLeft,
+  ArrowRight,
+  BookOpen,
+  Calendar,
+  Clock,
+  Compass,
+  Search,
+  Sparkles,
+  Tag,
+} from 'lucide-react';
 import { BlogArticle } from '../../utils/types';
-import { FEATURED_ARTICLES, BLOG_ARTICLES } from '../../data/blogArticles';
+import { BLOG_ARTICLES, FEATURED_ARTICLES } from '../../data/blogArticles';
 import { LEGACY_BLOG_ARTICLES } from '../../data/blog/blogAdapter';
 import { EXTERNAL_TOOLS } from '../../data/externalTools';
 import type { BlogSection } from '../../data/blogData';
 import { SEO_PRESETS, useSEOMeta } from '../../utils/useSEOMeta';
+import {
+  BlogShellContext,
+  formatBlogDate,
+  resolveBlogTargetAction,
+} from './blogUtils';
 
 interface BlogViewProps {
   articles?: BlogArticle[];
   featuredArticles?: BlogArticle[];
+  shellContext?: BlogShellContext;
   onNavigate: (view: string) => void;
   onOpenLesson?: (lessonId: string) => void;
 }
@@ -44,19 +60,14 @@ function renderArticleContent(content: string, articleTitle: string): React.Reac
 
       if (index < lines.length) index += 1;
       blocks.push(
-        <pre
-          key={`code-${blocks.length}`}
-          style={{
-            overflowX: 'auto',
-            padding: 'var(--space-4)',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface-subtle)',
-            color: 'var(--color-text-strong)',
-            lineHeight: 1.6,
-          }}
-        >
-          <code>{codeLines.join('\n')}</code>
-        </pre>
+        <div key={`code-${blocks.length}`} className="blog-code-block">
+          <div className="blog-code-header">
+            <span>{language}</span>
+          </div>
+          <pre className="blog-code-pre">
+            <code>{codeLines.join('\n')}</code>
+          </pre>
+        </div>
       );
       continue;
     }
@@ -67,12 +78,33 @@ function renderArticleContent(content: string, articleTitle: string): React.Reac
       if (!(heading[1].length === 1 && headingText === articleTitle)) {
         const HeadingTag = heading[1].length >= 3 ? 'h3' : 'h2';
         blocks.push(
-          <HeadingTag key={`heading-${blocks.length}`} style={{ color: 'var(--color-text-strong)' }}>
+          <HeadingTag key={`heading-${blocks.length}`} className="blog-section-heading">
             {headingText}
           </HeadingTag>
         );
       }
       index += 1;
+      continue;
+    }
+
+    if (/^[-*]\s+/.test(trimmedLine) || /^\d+\.\s+/.test(trimmedLine)) {
+      const isOrdered = /^\d+\.\s+/.test(trimmedLine);
+      const listItems: string[] = [];
+      while (
+        index < lines.length &&
+        (/^[-*]\s+/.test(lines[index].trim()) || /^\d+\.\s+/.test(lines[index].trim()))
+      ) {
+        listItems.push(lines[index].trim().replace(/^([-*]|\d+\.)\s+/, ''));
+        index += 1;
+      }
+      const ListTag = isOrdered ? 'ol' : 'ul';
+      blocks.push(
+        <ListTag key={`list-${blocks.length}`} className="blog-section-list">
+          {listItems.map((item, idx) => (
+            <li key={idx}>{item.replace(/\*\*(.*?)\*\*/g, '$1')}</li>
+          ))}
+        </ListTag>
+      );
       continue;
     }
 
@@ -82,15 +114,17 @@ function renderArticleContent(content: string, articleTitle: string): React.Reac
       index < lines.length &&
       lines[index].trim() &&
       !/^\[([a-z]+)\]$/i.test(lines[index].trim()) &&
-      !/^#{1,3}\s+/.test(lines[index].trim())
+      !/^#{1,3}\s+/.test(lines[index].trim()) &&
+      !/^[-*]\s+/.test(lines[index].trim()) &&
+      !/^\d+\.\s+/.test(lines[index].trim())
     ) {
       paragraphLines.push(lines[index]);
       index += 1;
     }
 
     blocks.push(
-      <p key={`paragraph-${blocks.length}`} style={{ lineHeight: 1.75, color: 'var(--color-text-muted)' }}>
-        {paragraphLines.join(' ')}
+      <p key={`paragraph-${blocks.length}`} className="blog-section-text">
+        {paragraphLines.join(' ').replace(/\*\*(.*?)\*\*/g, '$1')}
       </p>
     );
   }
@@ -100,133 +134,130 @@ function renderArticleContent(content: string, articleTitle: string): React.Reac
 
 function renderStructuredContent(
   sections: BlogSection[],
-  onNavigate: (view: string) => void
+  onResolveTarget: (target: string) => void
 ): React.ReactNode[] {
-  const internalLinkViews: Record<string, string> = {
-    workspace: 'public-practice',
-    webtools: 'webtools',
-    learn: 'courses',
-    'visual-lab': 'public-practice',
-    developertools: 'webtools',
-  };
+  return sections.map((section, index) => (
+    <section key={`section-${index}`} className="blog-section">
+      {section.heading && <h2 className="blog-section-heading">{section.heading}</h2>}
 
-  return sections.flatMap((section, index) => {
-    const blocks: React.ReactNode[] = [];
-    if (section.heading) {
-      blocks.push(
-        <h2 key={`heading-${index}`} style={{ color: 'var(--color-text-strong)' }}>
-          {section.heading}
-        </h2>
-      );
-    }
-    if (section.text.trim()) {
-      blocks.push(
-        <p key={`text-${index}`} style={{ lineHeight: 1.75, color: 'var(--color-text-muted)', whiteSpace: 'pre-line' }}>
-          {section.text}
-        </p>
-      );
-    }
-    if (section.code) {
-      blocks.push(
-        <pre
-          key={`code-${index}`}
-          style={{
-            overflowX: 'auto',
-            padding: 'var(--space-4)',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface-subtle)',
-            color: 'var(--color-text-strong)',
-            lineHeight: 1.6,
-          }}
-        >
-          <code className={`language-${section.code.language}`}>{section.code.code}</code>
-        </pre>
-      );
-    }
-    if (section.list?.length) {
-      blocks.push(
-        <ul key={`list-${index}`} style={{ color: 'var(--color-text-muted)', lineHeight: 1.75 }}>
-          {section.list.map((item, itemIndex) => <li key={`${index}-${itemIndex}`}>{item}</li>)}
+      {section.text.trim() && <p className="blog-section-text">{section.text}</p>}
+
+      {section.list && section.list.length > 0 && (
+        <ul className="blog-section-list">
+          {section.list.map((item, itemIndex) => (
+            <li key={`${index}-${itemIndex}`}>{item}</li>
+          ))}
         </ul>
-      );
-    }
-    if (section.callout) {
-      blocks.push(
-        <aside
-          key={`callout-${index}`}
-          aria-label={section.callout.title || section.callout.type}
-          style={{
-            marginBlock: 'var(--space-4)',
-            padding: 'var(--space-4)',
-            borderLeft: '4px solid var(--color-accent)',
-            borderRadius: 'var(--radius-md)',
-            backgroundColor: 'var(--color-surface-subtle)',
-            color: 'var(--color-text-muted)',
-          }}
-        >
-          {section.callout.title && <strong>{section.callout.title}</strong>}
-          <p style={{ marginBottom: 0, lineHeight: 1.7 }}>{section.callout.text}</p>
-        </aside>
-      );
-    }
-    if (section.table) {
-      blocks.push(
-        <div key={`table-${index}`} style={{ overflowX: 'auto', marginBlock: 'var(--space-5)' }}>
-          <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--color-text-muted)' }}>
+      )}
+
+      {section.table && (
+        <div className="blog-table-wrap">
+          <table className="blog-table">
             <thead>
-              <tr>{section.table.headers.map((heading) => <th key={heading} scope="col" style={{ textAlign: 'left', padding: 'var(--space-3)', borderBottom: '1px solid var(--color-border)' }}>{heading}</th>)}</tr>
+              <tr>
+                {section.table.headers.map((heading) => (
+                  <th key={heading} scope="col">
+                    {heading}
+                  </th>
+                ))}
+              </tr>
             </thead>
             <tbody>
               {section.table.rows.map((row, rowIndex) => (
                 <tr key={`row-${rowIndex}`}>
                   {section.table?.headers.map((_, columnIndex) => (
-                    <td key={`cell-${columnIndex}`} style={{ verticalAlign: 'top', padding: 'var(--space-3)', borderBottom: '1px solid var(--color-border)' }}>
-                      {row[columnIndex] || ''}
-                    </td>
+                    <td key={`cell-${columnIndex}`}>{row[columnIndex] || ''}</td>
                   ))}
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-      );
-    }
-    if (section.checkpoint) {
-      blocks.push(
-        <aside key={`checkpoint-${index}`} className="blog-checkpoint" style={{ marginBlock: 'var(--space-5)', padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)' }}>
-          <h3 style={{ color: 'var(--color-text-strong)' }}>Quick check</h3>
-          <p style={{ color: 'var(--color-text-muted)' }}>{section.checkpoint.question}</p>
+      )}
+
+      {section.code && (
+        <div className="blog-code-block">
+          <div className="blog-code-header">
+            <span>{section.code.language}</span>
+          </div>
+          <pre className="blog-code-pre">
+            <code className={`language-${section.code.language}`}>{section.code.code}</code>
+          </pre>
+        </div>
+      )}
+
+      {section.callout && (
+        <aside
+          aria-label={section.callout.title || section.callout.type}
+          className={`blog-callout ${
+            section.callout.type === 'tip'
+              ? 'blog-callout--tip'
+              : section.callout.type === 'warning'
+              ? 'blog-callout--warning'
+              : ''
+          }`}
+        >
+          {section.callout.title && (
+            <strong className="blog-callout-title">{section.callout.title}</strong>
+          )}
+          <p className="blog-section-text" style={{ margin: 0 }}>
+            {section.callout.text}
+          </p>
+        </aside>
+      )}
+
+      {section.checkpoint && (
+        <aside className="blog-checkpoint" aria-label="Knowledge checkpoint">
+          <h3 className="blog-checkpoint-title">Quick Check</h3>
+          <p className="blog-section-text" style={{ margin: 0 }}>
+            {section.checkpoint.question}
+          </p>
           <details>
             <summary>Show answer</summary>
-            <p style={{ color: 'var(--color-text-muted)' }}>{section.checkpoint.answer}</p>
-            {section.checkpoint.hint && <p style={{ color: 'var(--color-text-subtle)' }}>Hint: {section.checkpoint.hint}</p>}
+            <div className="blog-checkpoint-answer">
+              <p style={{ margin: 0 }}>{section.checkpoint.answer}</p>
+              {section.checkpoint.hint && (
+                <p style={{ margin: '0.5rem 0 0', color: 'var(--color-text-subtle)' }}>
+                  Hint: {section.checkpoint.hint}
+                </p>
+              )}
+            </div>
           </details>
         </aside>
-      );
-    }
-    if (section.internalLink) {
-      const targetView = internalLinkViews[section.internalLink.target] || 'courses';
-      blocks.push(
-        <aside key={`internal-link-${index}`} style={{ marginBlock: 'var(--space-5)', padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)' }}>
-          <button type="button" className="btn btn-secondary" onClick={() => onNavigate(targetView)}>
-            {section.internalLink.label}
+      )}
+
+      {section.internalLink && (
+        <aside className="blog-internal-link-box" aria-label="Related course or practice link">
+          <div style={{ flex: '1 1 260px' }}>
+            {section.internalLink.description && (
+              <p className="blog-section-text" style={{ margin: 0, fontSize: 'var(--text-sm)' }}>
+                {section.internalLink.description}
+              </p>
+            )}
+          </div>
+          <button
+            type="button"
+            className="btn btn-secondary btn-sm"
+            onClick={() => onResolveTarget(section.internalLink!.target)}
+          >
+            <span>{section.internalLink.label}</span>
+            <ArrowRight size={14} aria-hidden="true" />
           </button>
-          {section.internalLink.description && <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>{section.internalLink.description}</p>}
         </aside>
-      );
-    }
-    if (section.resources?.length) {
-      const linkedTools = section.resources
-        .map((toolId) => EXTERNAL_TOOLS.find((tool) => tool.id === toolId))
-        .filter((tool): tool is (typeof EXTERNAL_TOOLS)[number] => Boolean(tool));
-      if (linkedTools.length) {
-        blocks.push(
-          <aside key={`resources-${index}`} aria-label="Official external tools" style={{ marginBlock: 'var(--space-5)', padding: 'var(--space-4)', border: '1px solid var(--color-border)', borderRadius: 'var(--radius-md)', backgroundColor: 'var(--color-surface-subtle)' }}>
-            <h3 style={{ marginTop: 0, color: 'var(--color-text-strong)' }}>Official tools for this guide</h3>
-            <ul style={{ display: 'grid', gap: 'var(--space-2)', margin: 0, paddingInlineStart: '1.25rem' }}>
+      )}
+
+      {section.resources && section.resources.length > 0 && (() => {
+        const linkedTools = section.resources
+          .map((toolId) => EXTERNAL_TOOLS.find((tool) => tool.id === toolId))
+          .filter((tool): tool is (typeof EXTERNAL_TOOLS)[number] => Boolean(tool));
+        if (!linkedTools.length) return null;
+        return (
+          <aside className="blog-resources-box" aria-label="Official external tools">
+            <h3>Official tools for this guide</h3>
+            <ul>
               {linkedTools.map((tool) => (
                 <li key={tool.id}>
-                  <a href={tool.officialUrl} target="_blank" rel="noopener noreferrer" style={{ color: 'var(--color-accent)' }}>
+                  <a href={tool.officialUrl} target="_blank" rel="noopener noreferrer">
                     {tool.name} <span aria-hidden="true">↗</span>
                   </a>
                   <span style={{ color: 'var(--color-text-muted)' }}> — {tool.purpose}</span>
@@ -235,47 +266,69 @@ function renderStructuredContent(
             </ul>
           </aside>
         );
-      }
-    }
-    return blocks;
-  });
+      })()}
+    </section>
+  ));
 }
 
 export const BlogView: React.FC<BlogViewProps> = ({
   articles = ALL_BLOG_ARTICLES,
   featuredArticles = FEATURED_ARTICLES,
+  shellContext = 'public',
   onNavigate,
   onOpenLesson,
 }) => {
   const [articleQuery, setArticleQuery] = useState('');
-  const [articleCategory, setArticleCategory] = useState('All categories');
+  const [articleCategory, setArticleCategory] = useState('All');
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(() => {
     if (typeof window === 'undefined') return null;
     return new URLSearchParams(window.location.search).get('blog');
   });
+
   const availableArticles = useMemo(
-    () => Array.from(new Map([...articles, ...featuredArticles].map((article) => [article.slug, article])).values()),
+    () =>
+      Array.from(
+        new Map([...articles, ...featuredArticles].map((article) => [article.slug, article])).values()
+      ),
     [articles, featuredArticles]
   );
-  const recentArticles = useMemo(
-    () => articles.filter((article) => !article.structuredContent).sort((a, b) => b.date.localeCompare(a.date)),
-    [articles]
-  );
+
   const articleCategories = useMemo(
-    () => Array.from(new Set(articles.map((article) => article.category))).sort((a, b) => a.localeCompare(b)),
+    () => [
+      'All',
+      ...Array.from(new Set(articles.map((article) => article.category))).sort((a, b) =>
+        a.localeCompare(b)
+      ),
+    ],
     [articles]
   );
+
   const filteredArticles = useMemo(() => {
     const normalizedQuery = articleQuery.trim().toLowerCase();
     return [...articles]
-      .filter((article) => articleCategory === 'All categories' || article.category === articleCategory)
-      .filter((article) => !normalizedQuery || [article.title, article.excerpt, article.category, article.author, ...article.tags].join(' ').toLowerCase().includes(normalizedQuery))
+      .filter((article) => articleCategory === 'All' || article.category === articleCategory)
+      .filter((article) => {
+        if (!normalizedQuery) return true;
+        const haystacks = [
+          article.title,
+          article.excerpt,
+          article.category,
+          article.author,
+          article.relatedChapter ?? '',
+          article.courseRef?.courseTitle ?? '',
+          article.courseRef?.chapterLabel ?? '',
+          article.courseRef?.lessonTitle ?? '',
+          ...article.tags,
+        ];
+        return haystacks.some((val) => val.toLowerCase().includes(normalizedQuery));
+      })
       .sort((a, b) => b.date.localeCompare(a.date));
   }, [articleCategory, articleQuery, articles]);
+
   const selectedArticle = selectedArticleId
-    ? availableArticles.find((article) => article.slug === selectedArticleId)
-      ?? availableArticles.find((article) => article.id === selectedArticleId)
-      ?? null
+    ? availableArticles.find((article) => article.slug === selectedArticleId) ??
+      availableArticles.find((article) => article.id === selectedArticleId) ??
+      null
     : null;
 
   useSEOMeta(
@@ -300,26 +353,44 @@ export const BlogView: React.FC<BlogViewProps> = ({
     return () => window.removeEventListener('popstate', syncArticleFromUrl);
   }, []);
 
+  const handleResolvedAction = (target: string) => {
+    const action = resolveBlogTargetAction(target, shellContext);
+    if (action.type === 'lesson') {
+      if (onOpenLesson) {
+        onOpenLesson(action.lessonId);
+      } else {
+        onNavigate(shellContext === 'public' ? 'courses' : 'learning');
+      }
+      return;
+    }
+    onNavigate(action.viewId);
+  };
+
   const openArticle = (article: BlogArticle) => {
     const url = new URL(window.location.href);
     url.searchParams.set('blog', article.slug);
-    url.searchParams.delete('view');
+    if (shellContext === 'studio') {
+      url.searchParams.set('view', 'blog');
+    } else {
+      url.searchParams.delete('view');
+    }
     window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
     setSelectedArticleId(article.slug);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const returnToBlog = () => {
     const url = new URL(window.location.href);
     url.searchParams.delete('blog');
-    url.searchParams.set('view', 'blog');
+    url.searchParams.set('view', shellContext === 'studio' ? 'blog' : 'public-blog');
     window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
     setSelectedArticleId(null);
-    onNavigate('blog');
+    onNavigate(shellContext === 'studio' ? 'blog' : 'public-blog');
   };
 
   const relatedArticles = selectedArticle
     ? articles
-      .filter((article) => article.slug !== selectedArticle.slug)
+        .filter((article) => article.slug !== selectedArticle.slug)
         .map((article) => ({
           article,
           sharedTags: article.tags.filter((tag) => selectedArticle.tags.includes(tag)).length,
@@ -334,113 +405,145 @@ export const BlogView: React.FC<BlogViewProps> = ({
     if (!selectedArticle) {
       return (
         <section className="app-main" aria-labelledby="blog-article-unavailable">
-          <button type="button" className="btn btn-secondary" onClick={returnToBlog}>
-            <ArrowLeft size={16} aria-hidden="true" />
-            Back to Blog
-          </button>
-          <h1 id="blog-article-unavailable">Article unavailable</h1>
-          <p>This article could not be found. Return to Blog to choose another article.</p>
+          <div className="blog-article-shell">
+            <div className="blog-breadcrumbs">
+              <button type="button" className="btn btn-secondary btn-sm" onClick={returnToBlog}>
+                <ArrowLeft size={16} aria-hidden="true" />
+                <span>Back to Blog</span>
+              </button>
+            </div>
+            <div className="blog-empty-state">
+              <h1 id="blog-article-unavailable" style={{ margin: 0 }}>
+                Article unavailable
+              </h1>
+              <p style={{ margin: 0, color: 'var(--color-text-muted)' }}>
+                This article could not be found. Return to the Blog library to choose another topic.
+              </p>
+            </div>
+          </div>
         </section>
       );
     }
 
+    const linkedLessonId = selectedArticle.courseRef?.lessonId || selectedArticle.relatedLessonId;
+
     return (
       <article className="app-main" aria-labelledby="blog-article-title">
-        <nav aria-label="Blog breadcrumbs" style={{ marginBottom: 'var(--space-5)' }}>
-          <button type="button" className="btn btn-secondary" onClick={returnToBlog}>
-            <ArrowLeft size={16} aria-hidden="true" />
-            Back to Blog
-          </button>
-        </nav>
+        <div className="blog-article-shell">
+          <nav className="blog-breadcrumbs" aria-label="Blog breadcrumbs">
+            <button type="button" className="btn btn-secondary btn-sm" onClick={returnToBlog}>
+              <ArrowLeft size={16} aria-hidden="true" />
+              <span>Back to Blog</span>
+            </button>
+            <span className="blog-results-meta">
+              {selectedArticle.category} · {selectedArticle.readTime}
+            </span>
+          </nav>
 
-        <header
-          style={{
-            maxWidth: '860px',
-            margin: '0 auto var(--space-8)',
-            paddingBottom: 'var(--space-6)',
-            borderBottom: '1px solid var(--color-border)',
-          }}
-        >
-          <p style={{ color: 'var(--color-accent)', fontWeight: 700 }}>{selectedArticle.category}</p>
-          <h1 id="blog-article-title" style={{ color: 'var(--color-text-strong)' }}>
-            {selectedArticle.title}
-          </h1>
-          <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>{selectedArticle.excerpt}</p>
-          <div
-            style={{
-              display: 'flex',
-              flexWrap: 'wrap',
-              gap: 'var(--space-4)',
-              color: 'var(--color-text-subtle)',
-              fontSize: 'var(--text-sm)',
-            }}
-          >
-            <span>{selectedArticle.author}</span>
-            <time dateTime={selectedArticle.date}>{selectedArticle.dateLabel || 'Published'} {selectedArticle.date}</time>
-            {selectedArticle.updatedAt && (
-              <time dateTime={selectedArticle.updatedAt}>Updated {selectedArticle.updatedAt}</time>
+          <header className="blog-article-header">
+            <div className="blog-article-meta">
+              <span className="badge badge-primary">{selectedArticle.category}</span>
+              <span>By {selectedArticle.author}</span>
+              <time dateTime={selectedArticle.date}>
+                {selectedArticle.dateLabel || 'Published'} {formatBlogDate(selectedArticle.date)}
+              </time>
+              {selectedArticle.updatedAt && (
+                <time dateTime={selectedArticle.updatedAt}>
+                  Updated {formatBlogDate(selectedArticle.updatedAt)}
+                </time>
+              )}
+              <span>{selectedArticle.readTime}</span>
+            </div>
+
+            <h1 id="blog-article-title" className="blog-article-title">
+              {selectedArticle.title}
+            </h1>
+
+            <p className="blog-article-excerpt">{selectedArticle.excerpt}</p>
+
+            {selectedArticle.tags.length > 0 && (
+              <div className="blog-tag-list" aria-label="Article tags">
+                {selectedArticle.tags.map((tag) => (
+                  <span key={tag} className="badge badge-subtle">
+                    {tag}
+                  </span>
+                ))}
+              </div>
             )}
-            <span>{selectedArticle.readTime}</span>
-            {selectedArticle.relatedChapter && <span>{selectedArticle.relatedChapter}</span>}
-          </div>
-          {selectedArticle.tags.length > 0 && (
-            <ul
-              aria-label="Article tags"
-              style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-2)', padding: 0, listStyle: 'none' }}
-            >
-              {selectedArticle.tags.map((tag) => (
-                <li key={tag} className="badge badge-subtle">{tag}</li>
-              ))}
-            </ul>
-          )}
-        </header>
 
-        <div style={{ maxWidth: '860px', margin: '0 auto' }}>
-          {selectedArticle.structuredContent
-            ? renderStructuredContent(selectedArticle.structuredContent, onNavigate)
-            : renderArticleContent(selectedArticle.content, selectedArticle.title)}
-          <section
-            aria-label="Continue learning with practice"
-            style={{
-              marginTop: 'var(--space-8)',
-              padding: 'var(--space-6)',
-              border: '1px solid var(--color-border)',
-              borderRadius: 'var(--radius-lg)',
-              backgroundColor: 'var(--color-surface)',
-            }}
-          >
-            <h2 style={{ marginTop: 0, color: 'var(--color-text-strong)' }}>Turn this idea into a skill</h2>
-            <p style={{ color: 'var(--color-text-muted)', lineHeight: 1.7 }}>
-              {selectedArticle.practiceChallenge || 'Choose one idea from this article and try it in the interactive coding space, or continue with a guided course.'}
+            {(selectedArticle.courseRef || selectedArticle.relatedChapter) && (
+              <div className="blog-course-card">
+                <div>
+                  <div style={{ fontSize: 'var(--text-xs)', fontWeight: 700, color: 'var(--color-text-subtle)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                    Matched Course Chapter
+                  </div>
+                  <div style={{ fontWeight: 700, color: 'var(--color-text-strong)', marginTop: '0.15rem' }}>
+                    {selectedArticle.courseRef?.chapterLabel || selectedArticle.relatedChapter}
+                    {selectedArticle.courseRef?.lessonTitle ? ` — ${selectedArticle.courseRef.lessonTitle}` : ''}
+                  </div>
+                </div>
+                {linkedLessonId && (
+                  <button
+                    type="button"
+                    className="btn btn-primary btn-sm"
+                    onClick={() => handleResolvedAction(`lesson:${linkedLessonId}`)}
+                  >
+                    <BookOpen size={14} aria-hidden="true" />
+                    <span>Open Related Lesson</span>
+                  </button>
+                )}
+              </div>
+            )}
+          </header>
+
+          <div className="blog-article-body">
+            {selectedArticle.structuredContent
+              ? renderStructuredContent(selectedArticle.structuredContent, handleResolvedAction)
+              : renderArticleContent(selectedArticle.content, selectedArticle.title)}
+          </div>
+
+          <section className="blog-practice-box" aria-label="Continue learning with practice">
+            <h2 style={{ margin: 0, fontSize: 'var(--text-xl)', color: 'var(--color-text-strong)' }}>
+              Turn this idea into a practical skill
+            </h2>
+            <p className="blog-section-text" style={{ margin: 0 }}>
+              {selectedArticle.practiceChallenge ||
+                'Try writing the core pattern from memory inside Live Code, or jump straight into the matching course lesson.'}
             </p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-3)' }}>
-              <button type="button" className="btn btn-primary" onClick={() => onNavigate('public-practice')}>
-                Practise in Live Code <ArrowRight size={16} aria-hidden="true" />
+            <div className="blog-practice-actions">
+              <button
+                type="button"
+                className="btn btn-primary btn-sm"
+                onClick={() => handleResolvedAction('practice')}
+              >
+                <span>Practise in Live Code</span>
+                <ArrowRight size={15} aria-hidden="true" />
               </button>
-              {selectedArticle.relatedLessonId && (
+              {linkedLessonId && (
                 <button
                   type="button"
-                  className="btn btn-secondary"
-                  onClick={() => {
-                    if (selectedArticle.relatedLessonId && onOpenLesson) {
-                      onOpenLesson(selectedArticle.relatedLessonId);
-                    } else {
-                      onNavigate('courses');
-                    }
-                  }}
+                  className="btn btn-secondary btn-sm"
+                  onClick={() => handleResolvedAction(`lesson:${linkedLessonId}`)}
                 >
-                  Open related lesson
+                  <span>Open Related Lesson</span>
                 </button>
               )}
-              <button type="button" className="btn btn-secondary" onClick={() => onNavigate('courses')}>
-                Explore Courses
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => handleResolvedAction('courses')}
+              >
+                <span>Explore Courses</span>
               </button>
             </div>
           </section>
+
           {relatedArticles.length > 0 && (
-            <nav aria-labelledby="related-articles-heading" style={{ marginTop: 'var(--space-8)' }}>
-              <h2 id="related-articles-heading" style={{ color: 'var(--color-text-strong)' }}>Related reading</h2>
-              <ul style={{ display: 'grid', gap: 'var(--space-3)', padding: 0, listStyle: 'none' }}>
+            <nav className="blog-related-card" aria-labelledby="related-articles-heading">
+              <h2 id="related-articles-heading" style={{ margin: 0, fontSize: 'var(--text-lg)', color: 'var(--color-text-strong)' }}>
+                Related reading
+              </h2>
+              <ul className="blog-related-list">
                 {relatedArticles.map((article) => (
                   <li key={article.slug}>
                     <a
@@ -449,7 +552,6 @@ export const BlogView: React.FC<BlogViewProps> = ({
                         event.preventDefault();
                         openArticle(article);
                       }}
-                      style={{ color: 'var(--color-accent)' }}
                     >
                       {article.title}
                     </a>
@@ -465,349 +567,206 @@ export const BlogView: React.FC<BlogViewProps> = ({
 
   return (
     <div className="app-main">
-      {/* Blog Header */}
-      <div className="blog-header" style={{ marginBottom: 'var(--space-8)', textAlign: 'center' }}>
-        <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', marginBottom: 'var(--space-4)' }}>
-          <BookOpen size={24} style={{ color: 'var(--color-accent)' }} />
-          <h1 style={{ margin: 0, fontSize: 'var(--text-2xl)', fontWeight: 800, color: 'var(--color-text-strong)' }}>
-            Blog
-          </h1>
-        </div>
-        <p style={{ fontSize: 'var(--text-base)', color: 'var(--color-text-muted)', maxWidth: '600px', margin: '0 auto' }}>
-          Read or watch a focused lesson, then put the idea into practice with guided courses and Live Code.
-        </p>
-        <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: 'var(--space-3)', marginTop: 'var(--space-5)' }}>
-          <button type="button" className="btn btn-primary" onClick={() => onNavigate('public-practice')}>
-            Practise in Live Code <ArrowRight size={16} aria-hidden="true" />
-          </button>
-          <button type="button" className="btn btn-secondary" onClick={() => onNavigate('courses')}>
-            Explore Courses
-          </button>
-        </div>
-      </div>
+      <div className="blog-shell">
+        {/* Editorial Hero Header */}
+        <header className="blog-hero">
+          <div className="blog-hero-top">
+            <div>
+              <div className="blog-hero-kicker">
+                <BookOpen size={15} aria-hidden="true" />
+                <span>Editorial Guides &amp; Lesson Deep-Dives</span>
+              </div>
+              <h1 className="blog-hero-title">Blog</h1>
+              <p className="blog-hero-subtitle">
+                Human-authored guides paired directly with course chapters. Read a focused explanation, inspect code examples, and jump straight into Live Code or the matching lesson.
+              </p>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.6rem' }}>
+              <button
+                type="button"
+                className="btn btn-primary btn-sm"
+                onClick={() => handleResolvedAction('practice')}
+              >
+                <span>Practise in Live Code</span>
+                <ArrowRight size={15} aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => handleResolvedAction('courses')}
+              >
+                <span>Explore Courses</span>
+              </button>
+            </div>
+          </div>
+        </header>
 
-      {/* Featured Articles */}
-      {featuredArticles.length > 0 && (
-        <section style={{ marginBottom: 'var(--space-10)' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: 'var(--space-5)' }}>
-            <Tag size={20} style={{ color: 'var(--color-accent)' }} />
-            <h2 style={{ margin: 0, fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-              Featured Articles
-            </h2>
+        {/* Search & Category Filter Toolbar */}
+        <section className="blog-toolbar" aria-label="Filter articles">
+          <div className="blog-search-row">
+            <div className="blog-search-box">
+              <label className="search-input-wrapper">
+                <Search size={16} aria-hidden="true" className="search-input-icon" />
+                <span className="sr-only">Search articles</span>
+                <input
+                  type="search"
+                  className="form-input search-input"
+                  value={articleQuery}
+                  onChange={(event) => setArticleQuery(event.target.value)}
+                  placeholder="Search titles, topics, chapters, or tags..."
+                />
+              </label>
+            </div>
+            <span className="blog-results-meta">
+              Showing {filteredArticles.length} of {articles.length} articles
+            </span>
           </div>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))', gap: 'var(--space-6)' }}>
-            {featuredArticles.map((article) => (
-              <article
-                key={article.slug}
-                className="blog-article-card featured"
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  backgroundColor: 'var(--color-surface)',
-                  borderRadius: 'var(--radius-lg)',
-                  border: '2px solid var(--color-accent)',
-                  overflow: 'hidden',
-                  cursor: 'pointer',
-                  transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.transform = 'translateY(-4px)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-lg)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.transform = 'translateY(0)';
-                  e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-                }}
-                role="link"
-                tabIndex={0}
-                aria-label={`Read article: ${article.title}`}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter') openArticle(article);
-                }}
-                onClick={() => openArticle(article)}
+          <div className="blog-category-bar" role="group" aria-label="Article categories">
+            {articleCategories.map((category) => (
+              <button
+                key={category}
+                type="button"
+                onClick={() => setArticleCategory(category)}
+                className={`blog-category-btn ${articleCategory === category ? 'active' : ''}`}
               >
-                {/* Article Image Placeholder */}
-                <div
-                  style={{
-                    height: '200px',
-                    backgroundColor: 'var(--color-surface-subtle)',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: 'var(--color-text-muted)',
-                    fontSize: 'var(--text-sm)',
-                  }}
-                >
-                  <BookOpen size={48} style={{ opacity: 0.5 }} />
-                </div>
-
-                <div style={{ padding: 'var(--space-5)' }}>
-                  {/* Category Badge */}
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '0.25rem 0.75rem',
-                      backgroundColor: 'var(--color-accent-subtle)',
-                      color: 'var(--color-accent)',
-                      borderRadius: 'var(--radius-full)',
-                      fontSize: 'var(--text-xs)',
-                      fontWeight: 700,
-                      marginBottom: 'var(--space-3)',
-                    }}
-                  >
-                    {article.category}
-                  </span>
-
-                  {/* Article Title */}
-                  <h3 style={{ margin: '0 0 var(--space-2) 0', fontSize: 'var(--text-lg)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-                    {article.title}
-                  </h3>
-
-                  {/* Article Excerpt */}
-                  <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: 'var(--space-4)' }}>
-                    {article.excerpt}
-                  </p>
-
-                  {/* Meta Info */}
-                  <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap', fontSize: 'var(--text-xs)', color: 'var(--color-text-subtle)' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <Calendar size={14} />
-                      <span>{article.date}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <Clock size={14} />
-                      <span>{article.readTime}</span>
-                    </div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                      <Tag size={14} />
-                      <span>{article.tags?.slice(0, 2).join(', ')}</span>
-                    </div>
-                  </div>
-                </div>
-              </article>
+                {category}
+              </button>
             ))}
           </div>
         </section>
-      )}
 
-      {/* Recent Articles */}
-      <section style={{ marginBottom: 'var(--space-10)' }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: 'var(--space-5)' }}>
-          <BookOpen size={20} style={{ color: 'var(--color-primary)' }} />
-          <h2 style={{ margin: 0, fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-            Recent Articles
-          </h2>
-        </div>
+        {/* Featured Guides (only when viewing default unfiltered list) */}
+        {featuredArticles.length > 0 && articleCategory === 'All' && !articleQuery.trim() && (
+          <section aria-labelledby="featured-blog-heading">
+            <div className="blog-section-label">
+              <Sparkles size={18} style={{ color: 'var(--color-primary)' }} aria-hidden="true" />
+              <h2 id="featured-blog-heading">Featured Guides</h2>
+            </div>
 
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-4)' }}>
-          {recentArticles.slice(0, 5).map((article) => (
-            <article
-              key={article.slug}
-              className="blog-article-card"
-              style={{
-                display: 'flex',
-                backgroundColor: 'var(--color-surface)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              }}
-              role="link"
-              tabIndex={0}
-              aria-label={`Read article: ${article.title}`}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') openArticle(article);
-              }}
-              onClick={() => openArticle(article)}
-            >
-              <div style={{ padding: 'var(--space-5)', flex: 1 }}>
-                {/* Category Badge */}
-                <span
-                  style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.75rem',
-                    backgroundColor: 'var(--color-primary-subtle)',
-                    color: 'var(--color-primary)',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: 700,
-                    marginBottom: 'var(--space-3)',
-                  }}
-                >
-                  {article.category}
-                </span>
+            <div className="blog-featured-grid">
+              {featuredArticles.map((article) => (
+                <article key={article.slug} className="blog-card">
+                  <div>
+                    <div className="blog-card-header">
+                      <span className="badge badge-primary">{article.category}</span>
+                      <span className="blog-card-readtime">
+                        <Clock size={12} aria-hidden="true" />
+                        {article.readTime}
+                      </span>
+                    </div>
 
-                {/* Article Title */}
-                <h3 style={{ margin: '0 0 var(--space-2) 0', fontSize: 'var(--text-md)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-                  {article.title}
-                </h3>
+                    <button
+                      type="button"
+                      className="blog-card-title-btn"
+                      onClick={() => openArticle(article)}
+                    >
+                      {article.title}
+                    </button>
 
-                {/* Article Excerpt */}
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: 'var(--space-4)' }}>
-                  {article.excerpt}
-                </p>
+                    <p className="blog-card-excerpt">{article.excerpt}</p>
 
-                {/* Meta Info */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-4)', flexWrap: 'wrap', fontSize: 'var(--text-xs)', color: 'var(--color-text-subtle)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Calendar size={14} />
-                    <span>{article.date}</span>
+                    {(article.courseRef?.chapterLabel || article.relatedChapter) && (
+                      <div className="blog-card-course-ref">
+                        <Compass size={13} aria-hidden="true" style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                        <span>{article.courseRef?.chapterLabel || article.relatedChapter}</span>
+                      </div>
+                    )}
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Clock size={14} />
-                    <span>{article.readTime}</span>
+
+                  <div className="blog-card-footer">
+                    <span className="blog-card-date">
+                      <Calendar size={12} aria-hidden="true" style={{ verticalAlign: 'middle', marginRight: '0.3rem' }} />
+                      {formatBlogDate(article.date)}
+                    </span>
+                    <button
+                      type="button"
+                      className="btn btn-secondary btn-sm"
+                      onClick={() => openArticle(article)}
+                    >
+                      <span>Read Guide</span>
+                      <ArrowRight size={13} aria-hidden="true" />
+                    </button>
                   </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Tag size={14} />
-                    <span>{article.tags?.slice(0, 2).join(', ')}</span>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: 'var(--space-5)',
-                  backgroundColor: 'var(--color-surface-subtle)',
-                  borderLeft: '1px solid var(--color-border)',
-                }}
-              >
-                <ArrowRight size={20} style={{ color: 'var(--color-text-muted)' }} />
-              </div>
-            </article>
-          ))}
-        </div>
-      </section>
-
-      {/* All Articles Section */}
-      <section>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: 'var(--space-5)' }}>
-          <BookOpen size={20} style={{ color: 'var(--color-info)' }} />
-          <h2 style={{ margin: 0, fontSize: 'var(--text-xl)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-            All Articles ({filteredArticles.length})
-          </h2>
-        </div>
-
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(100%, 14rem), 1fr))', gap: 'var(--space-3)', marginBottom: 'var(--space-5)' }}>
-          <label style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-2)', minWidth: 0 }}>
-            <Search size={17} aria-hidden="true" style={{ color: 'var(--color-text-subtle)', flexShrink: 0 }} />
-            <span className="sr-only">Search articles</span>
-            <input type="search" value={articleQuery} onChange={(event) => setArticleQuery(event.target.value)} placeholder="Search titles, topics, and tools" />
-          </label>
-          <label>
-            <span className="sr-only">Filter articles by category</span>
-            <select value={articleCategory} onChange={(event) => setArticleCategory(event.target.value)} style={{ width: '100%' }}>
-              <option>All categories</option>
-              {articleCategories.map((category) => <option key={category} value={category}>{category}</option>)}
-            </select>
-          </label>
-        </div>
-
-        {filteredArticles.length ? (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(100%, 18.75rem), 1fr))', gap: 'var(--space-5)' }}>
-          {filteredArticles.map((article) => (
-            <article
-              key={article.slug}
-              className="blog-article-card"
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                backgroundColor: 'var(--color-surface)',
-                borderRadius: 'var(--radius-md)',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                cursor: 'pointer',
-                transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.transform = 'translateY(-2px)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-md)';
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.transform = 'translateY(0)';
-                e.currentTarget.style.boxShadow = 'var(--shadow-sm)';
-              }}
-              role="link"
-              tabIndex={0}
-              aria-label={`Read article: ${article.title}`}
-              onKeyDown={(event) => {
-                if (event.key === 'Enter') openArticle(article);
-              }}
-              onClick={() => openArticle(article)}
-            >
-              {/* Article Image Placeholder */}
-              <div
-                style={{
-                  height: '140px',
-                  backgroundColor: 'var(--color-surface-subtle)',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  color: 'var(--color-text-muted)',
-                  fontSize: 'var(--text-sm)',
-                }}
-              >
-                <BookOpen size={32} style={{ opacity: 0.5 }} />
-              </div>
-
-              <div style={{ padding: 'var(--space-4)' }}>
-                {/* Category Badge */}
-                <span
-                  style={{
-                    display: 'inline-block',
-                    padding: '0.25rem 0.75rem',
-                    backgroundColor: 'var(--color-info-subtle)',
-                    color: 'var(--color-info)',
-                    borderRadius: 'var(--radius-full)',
-                    fontSize: 'var(--text-xs)',
-                    fontWeight: 700,
-                    marginBottom: 'var(--space-2)',
-                  }}
-                >
-                  {article.category}
-                </span>
-
-                {/* Article Title */}
-                <h3 style={{ margin: '0 0 var(--space-2) 0', fontSize: 'var(--text-md)', fontWeight: 700, color: 'var(--color-text-strong)' }}>
-                  {article.title}
-                </h3>
-
-                {/* Article Excerpt */}
-                <p style={{ fontSize: 'var(--text-sm)', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: 'var(--space-3)' }}>
-                  {article.excerpt}
-                </p>
-
-                {/* Meta Info */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: 'var(--space-3)', flexWrap: 'wrap', fontSize: 'var(--text-xs)', color: 'var(--color-text-subtle)' }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Calendar size={14} />
-                    <span>{article.date}</span>
-                  </div>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                    <Clock size={14} />
-                    <span>{article.readTime}</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-          ))}
-        </div>
-        ) : (
-          <p role="status" className="card">No articles match those filters. Try a different title, topic, tool, or category.</p>
+                </article>
+              ))}
+            </div>
+          </section>
         )}
-      </section>
+
+        {/* Filtered Article Catalogue */}
+        <section aria-labelledby="all-articles-heading">
+          <div className="blog-section-label">
+            <Tag size={18} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
+            <h2 id="all-articles-heading">
+              {articleCategory === 'All' ? 'All Articles' : `${articleCategory} Articles`} ({filteredArticles.length})
+            </h2>
+          </div>
+
+          {filteredArticles.length > 0 ? (
+            <div className="blog-grid">
+              {filteredArticles.map((article) => (
+                <article key={article.slug} className="blog-card">
+                  <div>
+                    <div className="blog-card-header">
+                      <span className="badge badge-subtle">{article.category}</span>
+                      <span className="blog-card-readtime">
+                        <Clock size={12} aria-hidden="true" />
+                        {article.readTime}
+                      </span>
+                    </div>
+
+                    <button
+                      type="button"
+                      className="blog-card-title-btn"
+                      onClick={() => openArticle(article)}
+                    >
+                      {article.title}
+                    </button>
+
+                    <p className="blog-card-excerpt">{article.excerpt}</p>
+
+                    {(article.courseRef?.chapterLabel || article.relatedChapter) && (
+                      <div className="blog-card-course-ref">
+                        <BookOpen size={13} aria-hidden="true" style={{ color: 'var(--color-primary)', flexShrink: 0 }} />
+                        <span>{article.courseRef?.chapterLabel || article.relatedChapter}</span>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="blog-card-footer">
+                    <span className="blog-card-date">{formatBlogDate(article.date)}</span>
+                    <button
+                      type="button"
+                      className="btn btn-subtle btn-sm"
+                      onClick={() => openArticle(article)}
+                    >
+                      <span>Read Article</span>
+                      <ArrowRight size={13} aria-hidden="true" />
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="blog-empty-state" role="status">
+              <p style={{ margin: 0, color: 'var(--color-text-muted)' }}>
+                No articles match those filters. Try another topic, chapter, or reset the category filter.
+              </p>
+              <button
+                type="button"
+                className="btn btn-secondary btn-sm"
+                onClick={() => {
+                  setArticleCategory('All');
+                  setArticleQuery('');
+                }}
+              >
+                Reset Filters
+              </button>
+            </div>
+          )}
+        </section>
+      </div>
     </div>
   );
 };

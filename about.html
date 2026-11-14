@@ -1,243 +1,178 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>About | Zero-to-Website — WebZoneBW SC</title>
+    <meta
+      name="description"
+      content="About Zero-to-Website (WebZoneBW SC): our mission, editorial curriculum, interactive Live Code environment, and publisher details."
+    />
+    <meta name="author" content="Sameer Chouhan / WebZoneBW" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://webzonebw.shop/about.html" />
 
-    <!-- Primary SEO Meta Tags -->
-    <title>About | WebZoneBW SC — Interactive Web Developer Platform</title>
-    <meta name="description" content="About WebZoneBW SC — Learn about our mission, vision, and comprehensive web development platform offering interactive tools, structured curriculum, and AI-powered learning experiences." />
-    <meta name="keywords" content="web development platform, interactive learning, AI tutor, coding education, web developer tools" />
-    <meta name="author" content="WebZoneBW" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-    <link rel="canonical" href="https://webzonebw.shop/?view=about" />
-
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://webzonebw.shop/?view=about" />
-    <meta property="og:title" content="About WebZoneBW SC — Interactive Web Developer Platform" />
-    <meta property="og:description" content="Learn about our mission, vision, and comprehensive web development platform offering interactive tools, structured curriculum, and AI-powered learning experiences." />
-    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:url" content="https://webzonebw.shop/about.html" />
+    <meta property="og:title" content="About | Zero-to-Website — WebZoneBW SC" />
+    <meta
+      property="og:description"
+      content="Learn how Zero-to-Website pairs structured chapters, interactive Live Code exercises, and editorial guides."
+    />
+    <meta property="og:image" content="/assets/sclogo/logo_8c2b321c.png" />
     <meta property="og:site_name" content="WebZoneBW SC" />
-    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter Card -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content="https://webzonebw.shop/?view=about" />
-    <meta property="twitter:title" content="About WebZoneBW SC — Interactive Web Developer Platform" />
-    <meta property="twitter:description" content="Learn about our mission, vision, and comprehensive web development platform offering interactive tools, structured curriculum, and AI-powered learning experiences." />
-    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="About | Zero-to-Website — WebZoneBW SC" />
+    <meta
+      name="twitter:description"
+      content="Structured web engineering courses, Live Code practice, and human-authored guides."
+    />
+    <meta name="twitter:image" content="/assets/sclogo/logo_8c2b321c.png" />
 
-    <!-- Critical CSS - Inline for above-the-fold content -->
+    <link rel="icon" type="image/png" href="/assets/sclogo/logo_8c2b321c.png" />
+
     <style>
       *,
       *::before,
       *::after {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      html {
-        -webkit-text-size-adjust: 100%;
-        -moz-tab-size: 4;
-        tab-size: 4;
-        scroll-behavior: smooth;
-      }
-
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        background-color: var(--bg-primary);
-        color: var(--text-primary);
-        line-height: 1.6;
-        min-height: 100vh;
-        overflow-x: hidden;
       }
 
       :root {
-        --primary: #d90429;
-        --secondary: #ef233c;
-        --accent: #ff7b00;
-        --bg-primary: #0a0a0a;
-        --bg-secondary: #121212;
-        --bg-tertiary: #1a1a1a;
-        --text-primary: #ffffff;
-        --text-secondary: #a0a0a0;
-        --border-color: #2a2a2a;
-        --radius-md: 8px;
-        --radius-lg: 12px;
-        --space-4: 1.5rem;
-        --space-6: 2rem;
-        --transition-normal: 220ms cubic-bezier(0.4, 0, 0.2, 1);
+        color-scheme: light dark;
+        --bg: #faf9f6;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --text: #1e293b;
+        --muted: #475569;
+        --primary: #6d28d9;
       }
 
-      [hidden] {
-        display: none !important;
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b0c10;
+          --surface: #14161f;
+          --border: #262a36;
+          --text: #e2e8f0;
+          --muted: #94a3b8;
+          --primary: #8b5cf6;
+        }
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
       }
 
       .skip-link {
         position: absolute;
         top: -40px;
         left: 0;
-        background: #d90429;
+        background: var(--primary);
         color: #ffffff;
-        padding: 8px 12px;
+        padding: 0.5rem 0.75rem;
         text-decoration: none;
-        border-radius: 0 0 var(--radius-md) 0;
-        z-index: 9999;
+        border-radius: 0 0 6px 0;
+        z-index: 100;
       }
 
       .skip-link:focus {
         top: 0;
       }
 
+      :focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
       .container {
-        max-inline-size: 1200px;
+        width: min(820px, 100%);
         margin: 0 auto;
-        padding: var(--space-4);
-        width: 100%;
+        padding: 2.5rem 1.5rem;
       }
 
-      header.site-header {
-        background: var(--bg-secondary);
-        padding: var(--space-6) 0;
-        border-block-end: 1px solid var(--border-color);
-        margin-bottom: 3rem;
+      main.card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 2rem;
       }
 
-      .logo {
-        text-align: center;
-        margin-bottom: 2rem;
+      h1 {
+        margin: 0 0 1rem;
+        font-size: clamp(1.75rem, 3vw, 2.25rem);
       }
 
-      .logo h1 {
-        font-size: 2.5rem;
-        color: var(--primary);
-        margin-bottom: 0.5rem;
-      }
-
-      .logo p {
-        color: var(--text-secondary);
-        font-size: 1.1rem;
-      }
-
-      main.site-main {
-        background: var(--bg-secondary);
-        padding: var(--space-6);
-        border-radius: var(--radius-lg);
-        border: 1px solid var(--border-color);
-      }
-
-      main.site-main h1 {
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
+      h2 {
+        margin: 2rem 0 0.75rem;
+        font-size: 1.3rem;
         color: var(--primary);
       }
 
-      main.site-main h2 {
-        font-size: 1.8rem;
-        margin: 2rem 0 1rem 0;
-        color: var(--accent);
+      p,
+      ul {
+        color: var(--muted);
       }
 
-      main.site-main p {
-        margin-bottom: 1.5rem;
-        line-height: 1.8;
+      a {
+        color: var(--primary);
       }
 
-      main.site-main ul {
-        margin-block-start: 2rem;
-        margin-block-end: 1.5rem;
-        padding-inline-start: 2rem;
+      nav.pagination {
+        margin-top: 2rem;
+        padding-top: 1.25rem;
+        border-block-start: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
       }
 
-      main.site-main li {
-        margin-bottom: 0.8rem;
-      }
-
-      main.site-main a {
-        color: var(--accent);
-        text-decoration: none;
-        text-decoration-skip-ink: auto;
-      }
-
-      main.site-main a:hover {
-        text-decoration: underline;
-      }
-
-      footer.site-footer {
-        text-align: center;
-        margin-top: var(--space-6);
-        padding: var(--space-4);
-        border-block-start: 1px solid var(--border-color);
-        color: var(--text-secondary);
-      }
-
-      @media (max-width: 768px) {
-        .container {
-          padding: 1rem;
-        }
-
-        main.site-main {
-          padding: 1.5rem;
-        }
-
-        .logo h1 {
-          font-size: 2rem;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
-          transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
+      @media (max-width: 640px) {
+        main.card {
+          padding: 1.35rem;
         }
       }
     </style>
   </head>
   <body>
-    <header class="site-header" role="banner">
-      <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-      <div class="container">
-        <div class="logo">
-          <h1>WebZoneBW SC</h1>
-          <p>Learn • Practice • Build • Share</p>
-        </div>
-      </div>
-    </header>
+    <div class="container">
+      <main class="card" id="main-content" tabindex="-1" aria-labelledby="about-heading">
+        <h1 id="about-heading">About Zero-to-Website</h1>
 
-    <main class="site-main container" id="main-content" tabindex="-1" role="main" aria-labelledby="about-heading">
-      <h1 id="about-heading">About WebZoneBW SC</h1>
+        <p>
+          Zero-to-Website (published by Sameer Chouhan / WebZoneBW) is an independent web engineering learning platform. It pairs structured course chapters with browser-based practice in <strong>Live Code</strong> and editorial study guides in the <strong>Blog</strong>.
+        </p>
 
-      <p>WebZoneBW SC is an independently operated web-development learning platform. It combines a sequenced curriculum with code practice and visual explainers so learners can move from an idea to a working webpage.</p>
+        <h2>What the platform provides</h2>
+        <ul>
+          <li>Sequenced chapters covering internet foundations, semantic HTML5, CSS layout systems, JavaScript, responsive engineering, Git, and deployment.</li>
+          <li><strong>Live Code</strong> interactive exercises for HTML, CSS, and JavaScript with immediate output and automated checkpoints.</li>
+          <li>Editorial Blog articles connected directly to relevant platform lessons and courses.</li>
+        </ul>
 
-      <h2>What the platform is for</h2>
-      <p>The core experience is learning by doing: start with a chapter, read an explanation and example, use the linked practice exercise, then return to improve a small project. The tools are learning aids, not substitutes for the lessons.</p>
+        <h2>Publisher and editorial standards</h2>
+        <p>
+          Sameer Chouhan / WebZoneBW maintains the curriculum, technical guides, and study material. Content is reviewed regularly to correct inaccuracies, improve code examples, and keep terminology aligned across lessons and documentation.
+        </p>
 
-      <ul>
-        <li>Lessons cover web foundations, HTML, CSS, layout, JavaScript, responsive design, Git, and deployment.</li>
-        <li>Practice challenges let learners write HTML, CSS, and JavaScript and see a preview.</li>
-        <li>Visualizers explain concepts such as the box model, rendering path, layout, and DOM structure.</li>
-      </ul>
+        <h2>Educational disclaimer</h2>
+        <p>
+          Code examples are provided for educational study. Verify security rules, production deployment configurations, and third-party API limits against official standards documentation before using patterns in production systems.
+        </p>
 
-      <h2>Who maintains it</h2>
-      <p>The WebZoneBW SC editorial team operates the platform and is responsible for its curriculum, examples, and public learning resources. To report an inaccurate example, a broken exercise, or an accessibility issue, contact <a href="mailto:contact@webzonebw.in">contact@webzonebw.in</a>.</p>
-
-      <h2>Editorial approach</h2>
-      <p>We publish material when it helps a learner understand or apply a specific web-development concept. Examples should explain the reasoning behind a technique, and practical exercises should reinforce a related lesson. Content is revised when a report or review identifies an error, unclear explanation, broken interaction, or outdated guidance.</p>
-
-      <h2>Using the material</h2>
-      <p>Code examples are educational starting points. Test them in your own project, consult the relevant browser and standards documentation for production decisions, and do not treat the platform as legal, security, or professional advice.</p>
-    </main>
-
-    <footer class="site-footer" role="contentinfo">
-      <p>Last updated: September 21, 2026 © WebZoneBW SC</p>
-    </footer>
+        <nav class="pagination" aria-label="Site navigation">
+          <a href="/">Home</a>
+          <a href="/contact.html">Contact</a>
+          <a href="/privacy-policy.html">Privacy Policy</a>
+          <a href="/terms-of-service.html">Terms of Service</a>
+        </nav>
+      </main>
+    </div>
   </body>
 </html>

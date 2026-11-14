@@ -262,7 +262,7 @@ export const MembershipView: React.FC<MembershipViewProps> = ({
             'Continuous Access: 1 new deep-dive lesson or expanded chapter released every week',
             'Full Access to all 11 core chapters (HTML5, Modern CSS3, DOM, REST APIs, Git & Deployment)',
             'Downloadable Offline PDF Study Packs with personal study licence and watermark',
-            'Interactive In-Browser Code Sandboxes with automated test verification',
+            'Interactive Live Code environment with automated test verification',
             'Priority AI Tutor Guidance and author question answering',
             'Permanent Lifetime Retention: Retain completed lessons even if subscription ends',
           ].map((item, i) => (

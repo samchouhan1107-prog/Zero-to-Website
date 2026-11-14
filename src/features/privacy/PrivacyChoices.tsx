@@ -64,7 +64,7 @@ function disableAnalytics(): void {
 export const PrivacyChoices: React.FC = () => {
   const [savedChoices, setSavedChoices] = useState<PrivacyChoicesRecord | null>(readChoices);
   const [analyticsEnabled, setAnalyticsEnabled] = useState(() => readChoices()?.analytics ?? false);
-  const [settingsOpen, setSettingsOpen] = useState(() => readChoices() === null);
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   useEffect(() => {
     if (savedChoices?.analytics) loadAnalytics();
@@ -90,7 +90,6 @@ export const PrivacyChoices: React.FC = () => {
     try {
       localStorage.setItem(CONSENT_KEY, JSON.stringify(nextChoices));
     } catch {
-      // If preferences cannot be saved, optional analytics stays disabled.
       if (analytics) return;
     }
     if (!analytics) disableAnalytics();
@@ -101,6 +100,69 @@ export const PrivacyChoices: React.FC = () => {
 
   return (
     <>
+      {savedChoices === null && !settingsOpen && (
+        <aside
+          role="region"
+          aria-label="Cookie and analytics preferences"
+          style={{
+            position: 'fixed',
+            right: 'var(--space-4)',
+            bottom: 'var(--space-4)',
+            zIndex: 40,
+            width: 'min(360px, calc(100vw - 2 * var(--space-4)))',
+            backgroundColor: 'var(--color-surface)',
+            border: '1px solid var(--color-border)',
+            borderRadius: 'var(--radius-lg)',
+            boxShadow: 'var(--shadow-lg)',
+            padding: 'var(--space-4)',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.65rem',
+          }}
+        >
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.5rem' }}>
+            <strong style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-strong)' }}>
+              Privacy &amp; Analytics
+            </strong>
+            <a
+              href="/cookie-policy.html"
+              style={{ fontSize: '11px', color: 'var(--color-primary)', textDecoration: 'underline' }}
+            >
+              Cookie policy
+            </a>
+          </div>
+          <p style={{ margin: 0, fontSize: '12px', lineHeight: 1.5, color: 'var(--color-text-muted)' }}>
+            Optional Google Analytics stays off unless you allow it.
+          </p>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.45rem' }}>
+            <button
+              type="button"
+              className="btn btn-primary btn-sm"
+              style={{ fontSize: '11px', padding: '0.35rem 0.7rem' }}
+              onClick={() => saveChoices(true)}
+            >
+              Allow
+            </button>
+            <button
+              type="button"
+              className="btn btn-secondary btn-sm"
+              style={{ fontSize: '11px', padding: '0.35rem 0.7rem' }}
+              onClick={() => saveChoices(false)}
+            >
+              Keep off
+            </button>
+            <button
+              type="button"
+              className="btn btn-subtle btn-sm"
+              style={{ fontSize: '11px', padding: '0.35rem 0.65rem' }}
+              onClick={() => setSettingsOpen(true)}
+            >
+              Settings
+            </button>
+          </div>
+        </aside>
+      )}
+
       {settingsOpen && (
         <div className="modal-overlay" onClick={() => setSettingsOpen(false)}>
           <div
@@ -149,11 +211,9 @@ export const PrivacyChoices: React.FC = () => {
               <button type="button" className="btn btn-secondary btn-sm" onClick={() => saveChoices(false)}>
                 Reject optional analytics
               </button>
-              {savedChoices && (
-                <button type="button" className="btn btn-secondary btn-sm" onClick={() => setSettingsOpen(false)}>
-                  Cancel
-                </button>
-              )}
+              <button type="button" className="btn btn-secondary btn-sm" onClick={() => setSettingsOpen(false)}>
+                Cancel
+              </button>
             </div>
           </div>
         </div>

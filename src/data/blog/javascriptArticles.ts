@@ -11,6 +11,13 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
     readTime: '15 min read',
     category: 'JavaScript',
     tags: ['JavaScript', 'DOM', 'Frontend', 'Web Development', 'Programming'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-08',
+      chapterLabel: 'Advanced DOM & Browser APIs',
+      lessonId: 'ch-08-l-01',
+      lessonTitle: 'Event Delegation, Bubbling & Capturing',
+    },
     content: [
       {
         heading: 'The DOM Bridge: How JavaScript Communicates with HTML',
@@ -63,9 +70,9 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
           text: 'Never assign untrusted user input to innerHTML or insertAdjacentHTML. Always use textContent or setAttribute to ensure the browser treats input strictly as plain characters rather than executable HTML script nodes.',
         },
         internalLink: {
-          label: 'Test in Web REPL Sandbox',
-          target: 'workspace',
-          description: 'Experiment with DocumentFragment benchmarks and event delegation directly inside WebZoneBW REPL.',
+          label: 'Practice DOM Manipulation in Live Code',
+          target: 'practice',
+          description: 'Experiment with DocumentFragment batching and event delegation directly inside Live Code.',
         },
       },
       {
@@ -89,6 +96,13 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
     readTime: '14 min read',
     category: 'JavaScript',
     tags: ['JavaScript', 'Event Loop', 'Async', 'Performance', 'V8'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-07',
+      chapterLabel: 'Advanced JavaScript & Async Systems',
+      lessonId: 'ch-07-l-01',
+      lessonTitle: 'Asynchronous JavaScript & The Event Loop',
+    },
     content: [
       {
         heading: 'The Concurrency Paradox: How Single-Threaded Code Stays Non-Blocking',
@@ -147,9 +161,9 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
           text: 'If you have heavy CPU calculations (e.g. data processing 100,000 items), chunk the workload across setTimeout(chunk, 0) or scheduler.yield() so the browser can breathe, run animations, and process user clicks between chunks.',
         },
         internalLink: {
-          label: 'Inspect Render Frames in Critical Rendering Path Inspector',
-          target: 'webtools',
-          description: 'Visualize how JavaScript task execution delays style recalculation and screen paints in WebZoneBW tools.',
+          label: 'Open Chapter 07: Asynchronous JavaScript & The Event Loop',
+          target: 'lesson:ch-07-l-01',
+          description: 'Study Call Stack, Microtasks, and Macrotask scheduling in Chapter 07 of the core curriculum.',
         },
       },
       {
@@ -173,6 +187,13 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'JavaScript',
     tags: ['JavaScript', 'Async', 'Promises', 'Fetch', 'Error Handling'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-07',
+      chapterLabel: 'Advanced JavaScript & Async Systems',
+      lessonId: 'ch-07-l-02',
+      lessonTitle: 'Promises & Async/Await',
+    },
     content: [
       {
         heading: 'The Network Reality: Networks Are Unreliable and Slow',
@@ -221,9 +242,9 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
           text: 'Notice Math.random() * 100 in the delay. This random jitter prevents thousands of client apps from retrying at the exact same millisecond, avoiding the "thundering herd" problem on your backend servers.',
         },
         internalLink: {
-          label: 'Practice Async JavaScript in Curriculum',
-          target: 'learn',
-          description: 'Dive into Chapter 06: Asynchronous Programming & API Architecture in WebZoneBW.',
+          label: 'Study Promises & Async/Await in Chapter 07',
+          target: 'lesson:ch-07-l-02',
+          description: 'Follow Chapter 07: Advanced JavaScript & Async Systems in Zero-to-Website.',
         },
       },
       {
@@ -247,6 +268,13 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
     readTime: '12 min read',
     category: 'JavaScript',
     tags: ['Storage', 'IndexedDB', 'LocalStorage', 'PWA', 'JavaScript'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-08',
+      chapterLabel: 'Advanced DOM & Browser APIs',
+      lessonId: 'ch-08-l-03',
+      lessonTitle: 'Client-Side Persistence: LocalStorage & SessionStorage',
+    },
     content: [
       {
         heading: 'The Persistence Challenge: Why One Storage Tool Cannot Fit All Needs',
@@ -295,9 +323,9 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
           text: 'Browsers may evict IndexedDB data under extreme storage pressure. To prevent eviction of critical user work, call navigator.storage.persist(). If granted, the browser promises never to delete your data automatically.',
         },
         internalLink: {
-          label: 'Test Brain Card Local Vault',
-          target: 'workspace',
-          description: 'Experience WebZoneBW Brain Card persistent snapshot storage and JSON export engine.',
+          label: 'Open Chapter 08: Client-Side Persistence',
+          target: 'lesson:ch-08-l-03',
+          description: 'Compare localStorage, sessionStorage, and browser persistence architecture in Chapter 08.',
         },
       },
       {
@@ -321,6 +349,13 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'TypeScript',
     tags: ['TypeScript', 'JavaScript', 'Types', 'Frontend', 'Code Quality'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-06',
+      chapterLabel: 'JavaScript Fundamentals & Logic',
+      lessonId: 'ch-06-l-05',
+      lessonTitle: 'Arrays, Objects & Modern Methods',
+    },
     content: [
       {
         heading: 'The Runtime Trap: Why Dynamic Typing Fails at Scale',
@@ -369,9 +404,9 @@ export const JAVASCRIPT_ARTICLES: BlogPost[] = [
           text: 'Always enable "strict": true in tsconfig.json. Without strict null checks (strictNullChecks), undefined and null can silently slip into variables, negating TypeScript\'s greatest safety advantage.',
         },
         internalLink: {
-          label: 'Test TypeScript in Web Tools',
-          target: 'developertools',
-          description: 'Explore code formatting and TypeScript compiler verification in WebZoneBW Developer Tools.',
+          label: 'Experiment with Typed Structures in Live Code',
+          target: 'practice',
+          description: 'Test clean interfaces, discriminated state patterns, and array transformations inside Live Code.',
         },
       },
       {

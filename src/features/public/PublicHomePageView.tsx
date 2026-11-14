@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Chapter } from '../../utils/types';
 import { VERIFIED_COURSE_OPPORTUNITIES } from '../../shared/courseIntelligenceTypes';
+import { FEATURED_COURSES } from '../../data/courses/allCourses';
 
 interface PublicHomePageViewProps {
   chapters: Chapter[];
@@ -30,11 +31,19 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
   onOpenLesson,
   onExploreCourseModal,
 }) => {
-  // Published Core Course
-  const coreChapterCount = chapters.length;
-  const coreLessonCount = chapters.reduce((acc, c) => acc + c.lessons.length, 0);
+  // Published Core Course (Ch 00–10) vs Full Platform Catalogue
+  const coreChapters = chapters.filter((c) => c.id.startsWith('ch-'));
+  const coreChapterCount = coreChapters.length;
+  const coreLessonCount = coreChapters.reduce((acc, c) => acc + c.lessons.length, 0);
+  const totalPlatformChapters = chapters.length;
   const chapter0 = chapters.find((c) => c.number === '00' || c.number === '0' || c.id === 'ch-00');
   const freeLessons = chapter0?.lessons || [];
+  const upcomingBlueprints = VERIFIED_COURSE_OPPORTUNITIES.filter(
+    (opp) =>
+      !FEATURED_COURSES.some(
+        (fc) => fc.id === opp.id || fc.title.trim().toLowerCase() === opp.title.trim().toLowerCase()
+      )
+  );
 
   return (
     <div className="public-home-container" style={{ paddingBottom: 'var(--space-12)' }}>
@@ -47,24 +56,19 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
           margin: '0 auto',
         }}
       >
-        {/* Subtle pill tag */}
-        <div
+        {/* Editorial kicker */}
+        <p
           style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: '0.5rem',
-            padding: '0.35rem 0.85rem',
-            borderRadius: 'var(--radius-full)',
-            backgroundColor: 'var(--color-primary-subtle)',
-            border: '1px solid var(--color-border)',
+            margin: '0 0 var(--space-4)',
             color: 'var(--color-primary)',
-            fontSize: 'var(--text-xs)',
+            fontSize: '11px',
             fontWeight: 700,
-            marginBottom: 'var(--space-6)',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
           }}
         >
-          <span>Modern Editorial Web Engineering Academy</span>
-        </div>
+          Modern Editorial Web Engineering Academy
+        </p>
 
         <h1
           className="font-heading"
@@ -205,18 +209,12 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
             </p>
           </div>
 
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-              gap: 'var(--space-4)',
-            }}
-          >
+          <div className="journey-grid">
             {[
               { step: '1', title: 'Discover', desc: 'Browse curated course syllabi and practical curriculum tracks.', badge: 'Free' },
               { step: '2', title: 'Explore', desc: 'Read course outlines, learning objectives, and code breakdown samples.', badge: 'Free' },
               { step: '3', title: 'Start Free', desc: 'Complete Chapter 00 foundations without account requirements.', badge: 'Free' },
-              { step: '4', title: 'Practise', desc: 'Test code in live browser sandboxes with automated checkpoints.', badge: 'Free' },
+              { step: '4', title: 'Practise', desc: 'Test code in Live Code with automated checkpoints.', badge: 'Free' },
               { step: '5', title: 'Unlock Premium', desc: 'Purchase individual courses or printable PDF study packs.', badge: 'One-Time' },
               { step: '6', title: 'Subscribe', desc: 'Join Weekly Membership for new lessons and continuous releases.', badge: '$19/mo' },
             ].map((s) => (
@@ -303,7 +301,7 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
             onClick={() => onNavigate('courses')}
             className="btn btn-subtle btn-sm"
           >
-            <span>View Full Syllabus ({coreChapterCount} Chapters)</span>
+            <span>View All Courses ({totalPlatformChapters} Modules)</span>
             <ChevronRight size={15} />
           </button>
         </div>
@@ -563,7 +561,7 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
               In editorial development. Outlined based on international engineering skill gaps and modern web standards.
             </p>
           </div>
-          <span className="badge badge-subtle">4 Tracks In Review</span>
+          <span className="badge badge-subtle">{upcomingBlueprints.length} Tracks In Review</span>
         </div>
 
         <div
@@ -573,7 +571,7 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
             gap: 'var(--space-5)',
           }}
         >
-          {VERIFIED_COURSE_OPPORTUNITIES.slice(0, 4).map((opp) => (
+          {upcomingBlueprints.map((opp) => (
             <div
               key={opp.id}
               className="card"
@@ -680,13 +678,13 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
               Weekly Learning Membership
             </h2>
             <p style={{ fontSize: 'var(--text-xs)', color: 'var(--color-text-muted)', lineHeight: 1.6, marginBottom: '1.25rem' }}>
-              Stay ahead of web engineering standards. Receive structured new lessons, expanded chapters, formatted offline PDF study sheets, and interactive sandbox labs delivered weekly.
+              Stay ahead of web engineering standards. Receive structured new lessons, expanded chapters, formatted offline PDF study sheets, and interactive Live Code exercises delivered weekly.
             </p>
 
             <div style={{ display: 'grid', gap: '0.4rem', fontSize: 'var(--text-xs)', color: 'var(--color-text-strong)', marginBottom: '1.25rem' }}>
               <div>✓ 1 New Deep-Dive Lesson or Expanded Chapter Every Week</div>
               <div>✓ Downloadable Printable PDF Textbook Study Packs with Personal Licence</div>
-              <div>✓ In-Browser Code Sandboxes with Automated Test Checkpoints</div>
+              <div>✓ Interactive Live Code Challenges with Automated Test Checkpoints</div>
               <div>✓ Transparent Monthly Billing: Cancel Anytime in 1 Click</div>
               <div>✓ Permanent Lifetime Access to All Completed Lessons</div>
             </div>

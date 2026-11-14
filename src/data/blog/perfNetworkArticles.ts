@@ -11,6 +11,13 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
     readTime: '13 min read',
     category: 'Performance',
     tags: ['Critical Rendering Path', 'Performance', 'DOM', 'CSSOM', 'Browser Internals'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-07',
+      chapterLabel: 'Module 7: Performance, Accessibility, and Core Web Vitals',
+      lessonId: 'css-07-02',
+      lessonTitle: 'Efficient CSS Architecture and Critical Rendering Path',
+    },
     content: [
       {
         heading: 'The Blank Screen Phase: What Happens Between Enter and First Pixel',
@@ -61,9 +68,9 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
           text: 'TCP connections start with an initial congestion window (initcwnd) of 10 packets (~14KB). If your initial HTML document, inline critical CSS, and title tag fit inside 14KB, the browser renders the first frame within a single network roundtrip!',
         },
         internalLink: {
-          label: 'Launch Critical Rendering Path Inspector',
-          target: 'webtools',
-          description: 'Inspect resource waterfall timing, DOM/CSSOM blocking durations, and paint milestones in WebZoneBW.',
+          label: 'Open Module 7: Critical Rendering Path',
+          target: 'lesson:css-07-02',
+          description: 'Study CSSOM evaluation, render-blocking resources, and fast first paint strategies in Module 7.',
         },
       },
       {
@@ -87,6 +94,13 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
     readTime: '12 min read',
     category: 'Performance',
     tags: ['Core Web Vitals', 'LCP', 'INP', 'CLS', 'Optimization'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-10',
+      chapterLabel: 'Capstone, Architecture & Production Deployment',
+      lessonId: 'ch-10-l-03',
+      lessonTitle: 'Performance Optimization & Core Web Vitals',
+    },
     content: [
       {
         heading: 'The Search Ranking Reality: Google Scores Real User Experience',
@@ -134,9 +148,9 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
           code: '/* Reserve space in CSS to guarantee ZERO layout shift */\n.hero-media-wrapper {\n  aspect-ratio: 16 / 9; /* Reserves exact bounding box before image loads */\n  width: 100%;\n  background-color: var(--app-inset);\n}\n\n/* Always specify width & height attributes on <img> tags */\nimg {\n  max-width: 100%;\n  height: auto;\n}',
         },
         internalLink: {
-          label: 'Run Core Web Vitals Audit',
-          target: 'webtools',
-          description: 'Measure your simulated LCP, INP, and CLS scores live in WebZoneBW Performance Tools.',
+          label: 'Open Chapter 10: Core Web Vitals',
+          target: 'lesson:ch-10-l-03',
+          description: 'Learn practical LCP, INP, and CLS optimization workflows in Chapter 10.',
         },
       },
       {
@@ -160,6 +174,13 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
     readTime: '8 min read',
     category: 'Performance',
     tags: ['Typography', 'Web Fonts', 'Performance', 'WOFF2', 'Core Web Vitals'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-07',
+      chapterLabel: 'Module 7: Performance, Accessibility, and Core Web Vitals',
+      lessonId: 'css-07-01',
+      lessonTitle: 'Eliminating Cumulative Layout Shifts (CLS) with Modern CSS',
+    },
     content: [
       {
         heading: 'The Font Penalty: Invisible Text and Layout Shifting',
@@ -208,9 +229,9 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
           text: 'Self-hosting your fonts on the same domain as your web application eliminates the DNS lookup, TLS handshake, and connection latency of external font providers like Google Fonts, while complying with GDPR privacy standards.',
         },
         internalLink: {
-          label: 'Test Typography in Box Model Studio',
-          target: 'visual-lab',
-          description: 'Visualize font line-height, padding, and layout metrics live inside WebZoneBW VisualLab.',
+          label: 'Study Layout Stability (CLS) in Module 7',
+          target: 'lesson:css-07-01',
+          description: 'Learn font-display, metric overrides, and intrinsic sizing to prevent layout jumps in Modern CSS.',
         },
       },
       {
@@ -234,6 +255,13 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
     readTime: '10 min read',
     category: 'Networking',
     tags: ['HTTP/3', 'HTTP/2', 'Networking', 'QUIC', 'Web Performance'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-00',
+      chapterLabel: 'How the Web Works',
+      lessonId: 'ch-00-l-02',
+      lessonTitle: 'Web Architecture & Client-Server Protocols',
+    },
     content: [
       {
         heading: 'The Transport Bottleneck: How Network Protocols Dictate Web Speed',
@@ -277,9 +305,9 @@ export const PERF_NETWORK_ARTICLES: BlogPost[] = [
           text: 'Leading edge networks (Cloudflare, AWS CloudFront, Fastly) support HTTP/3 with a single toggle. Enabling HTTP/3 immediately slashes connection establishment times on mobile networks by up to 300 milliseconds.',
         },
         internalLink: {
-          label: 'Inspect Network Requests in Web Tools',
-          target: 'webtools',
-          description: 'Analyze network request waterfalls and protocol timings in WebZoneBW Developer Tools.',
+          label: 'Review Client-Server Protocols in Chapter 00',
+          target: 'lesson:ch-00-l-02',
+          description: 'Trace HTTP requests, TLS handshakes, and server responses in Chapter 00.',
         },
       },
       {

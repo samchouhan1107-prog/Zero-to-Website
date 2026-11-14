@@ -59,7 +59,9 @@ export default function App() {
   const [activeView, setActiveView] = useState<string>(() => {
     if (typeof window === 'undefined') return 'home';
     const params = new URLSearchParams(window.location.search);
-    return params.has('blog') || params.get('view') === 'blog' ? 'blog' : 'home';
+    if (params.get('view') === 'blog') return 'blog';
+    if (params.has('blog') || params.get('view') === 'public-blog') return 'public-blog';
+    return 'home';
   });
   const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
   const [customLesson, setCustomLesson] = useState<StructuredLesson | null>(null);
@@ -164,13 +166,14 @@ export default function App() {
 
   // Keep document title synchronized with active public/studio view
   useEffect(() => {
-    if (activeView === 'blog') return;
+    if (activeView === 'blog' || activeView === 'public-blog') return;
     const viewTitles: Record<string, string> = {
       home: 'Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform',
       courses: 'Courses — Zero-to-Website | WebZoneBW SC',
       'free-lessons': 'Free Introductory Lessons — Zero-to-Website | WebZoneBW SC',
       membership: 'Weekly Learning Membership — Zero-to-Website | WebZoneBW SC',
       'public-practice': 'Live Code — Zero-to-Website | WebZoneBW SC',
+      practice: 'Live Code — Studio | Zero-to-Website | WebZoneBW SC',
       dashboard: 'Studio Dashboard — Zero-to-Website | WebZoneBW SC',
       merchant: 'Merchant & Payments — Zero-to-Website | WebZoneBW SC',
     };
@@ -189,18 +192,26 @@ export default function App() {
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const url = new URL(window.location.href);
-    if (activeView === 'blog') {
+    if (activeView === 'blog' || activeView === 'public-blog') {
       if (url.searchParams.has('blog')) {
-        url.searchParams.delete('view');
+        if (activeView === 'blog') {
+          url.searchParams.set('view', 'blog');
+        } else {
+          url.searchParams.delete('view');
+        }
       } else {
-        url.searchParams.set('view', 'blog');
+        url.searchParams.set('view', activeView);
       }
       window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
       return;
     }
-    if (url.searchParams.has('blog')) {
+    if (
+      url.searchParams.has('blog') ||
+      url.searchParams.get('view') === 'blog' ||
+      url.searchParams.get('view') === 'public-blog'
+    ) {
       url.searchParams.delete('blog');
-      if (url.searchParams.get('view') === 'blog') url.searchParams.delete('view');
+      url.searchParams.delete('view');
       window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
     }
   }, [activeView]);
@@ -293,7 +304,7 @@ export default function App() {
     addToast('Milestone Claimed!', '+100 Bonus XP earned!', 'success');
   };
 
-  const isPublicView = ['home', 'courses', 'free-lessons', 'membership', 'public-practice', 'blog'].includes(activeView);
+  const isPublicView = ['home', 'courses', 'free-lessons', 'membership', 'public-practice', 'public-blog'].includes(activeView);
   const isReaderView = activeView === 'lesson-reader';
 
   // Public Educational Layout (No admin sidebar, spacious reading and exploration)
@@ -416,9 +427,9 @@ export default function App() {
             </div>
           )}
 
-          {activeView === 'blog' && (
-            <div style={{ padding: 'var(--space-6)' }}>
-              <BlogView onNavigate={setActiveView} onOpenLesson={handleOpenLesson} />
+          {activeView === 'public-blog' && (
+            <div style={{ padding: 'var(--space-4) 0' }}>
+              <BlogView shellContext="public" onNavigate={setActiveView} onOpenLesson={handleOpenLesson} />
             </div>
           )}
 
@@ -574,6 +585,10 @@ export default function App() {
           />
         )}
 
+        {activeView === 'blog' && (
+          <BlogView shellContext="studio" onNavigate={setActiveView} onOpenLesson={handleOpenLesson} />
+        )}
+
         {activeView === 'assistant' && (
           <div className="app-main" style={{ height: 'calc(100vh - 100px)', padding: 'var(--space-4)' }}>
             <React.Suspense fallback={
@@ -614,31 +629,6 @@ export default function App() {
             onOpenLesson={handleOpenLesson}
             onOpenSettings={() => setSettingsOpen(true)}
           />
-        )}
-
-        {activeView === 'workspace' && (
-          <div className="app-main" style={{ height: 'calc(100vh - 100px)', padding: 'var(--space-4)' }}>
-            <h2 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-4)', color: 'var(--color-text-strong)' }}>
-              WebZoneBW Workspace
-            </h2>
-            <p style={{ fontSize: 'var(--text-base)', color: 'var(--color-text-muted)', marginBottom: 'var(--space-6)' }}>
-              Your personal development environment for managing projects, accessing tools, and tracking your learning journey.
-            </p>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
-              <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text-strong)' }}>Active Projects</h3>
-                <p style={{ color: 'var(--color-text-muted)' }}>No active projects yet. Start by opening a lesson or creating a new workspace.</p>
-              </div>
-              <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
-                <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text-strong)' }}>Quick Actions</h3>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                  <button className="btn btn-primary" onClick={() => setActiveView('learning')}>Learning Centre</button>
-                  <button className="btn btn-secondary" onClick={() => setActiveView('storehouse')}>My Storehouse</button>
-                  <button className="btn btn-secondary" onClick={() => setActiveView('practice')}>Practice Sandbox</button>
-                </div>
-              </div>
-            </div>
-          </div>
         )}
 
         {activeView === 'webtools' && (

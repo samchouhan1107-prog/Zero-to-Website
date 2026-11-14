@@ -11,9 +11,9 @@ interface PracticeClassViewProps {
 
 const STARTER_CODE = {
   html: `<div class="hero-card">
-  <span class="tag">Zero-to-Website Practice</span>
+  <span class="tag">Zero-to-Website Live Code</span>
   <h2>Pure CSS3 Architecture</h2>
-  <p>Edit HTML and CSS live. Changes compile instantly inside an isolated sandbox.</p>
+  <p>Edit HTML and CSS live. Changes compile instantly inside Live Code.</p>
   <button id="counter-btn" class="interactive-btn">
     Clicks: <span id="count-num">0</span>
   </button>

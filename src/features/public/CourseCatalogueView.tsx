@@ -250,6 +250,10 @@ export const CourseCatalogueView: React.FC<CourseCatalogueViewProps> = ({
   });
 
   const filteredUpcoming = VERIFIED_COURSE_OPPORTUNITIES.filter((opp) => {
+    const alreadyPublished = FEATURED_COURSES.some(
+      (fc) => fc.id === opp.id || fc.title.trim().toLowerCase() === opp.title.trim().toLowerCase()
+    );
+    if (alreadyPublished) return false;
     if (selectedStatus === 'published') return false;
     if (selectedCategory !== 'all') {
       if (selectedCategory === 'css' && opp.category !== 'frontend-css') return false;

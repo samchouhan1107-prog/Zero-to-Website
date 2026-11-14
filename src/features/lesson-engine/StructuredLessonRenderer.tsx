@@ -275,7 +275,7 @@ export const StructuredLessonRenderer: React.FC<StructuredLessonRendererProps> =
           {lesson.practice && (
             <span className="lesson-stat-chip">
               <Zap size={13} style={{ color: 'var(--color-success)' }} />
-              Practice Sandbox Included
+              Live Code Included
             </span>
           )}
           <span className="lesson-stat-chip">
