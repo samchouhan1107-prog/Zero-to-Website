@@ -59,7 +59,6 @@ export const HumanCentredSidebar: React.FC<HumanCentredSidebarProps> = ({
     { id: 'practice', label: 'Live Code', icon: Code2 },
     { id: 'blog', label: 'Blog', icon: BookOpen },
     { id: 'assistant', label: 'AI Assistant', icon: Bot },
-    { id: 'workspace', label: 'Workspace', icon: LayoutDashboard },
     { id: 'webtools', label: 'Web Tools', icon: Code2 },
     { id: 'campaign', label: 'Progress & Rewards', icon: Award },
     { id: 'achievements', label: 'Achievements', icon: Award },

@@ -165,7 +165,7 @@ h1 {
   border: 1px solid #e2e8f0;
 }
 /* Add your heading styles here */`,
-        starterJs: `console.log("Welcome to WebZone Interactive Sandbox!");`,
+        starterJs: `console.log("Welcome to Zero-to-Website Live Code!");`,
         solutionHtml: `<div class="card">
   <h1>My Web Journey Begins</h1>
   <p>I am excited to build responsive, accessible, and fast web applications.</p>
@@ -184,7 +184,7 @@ p {
   color: #475569;
   line-height: 1.6;
 }`,
-        solutionJs: `console.log("Welcome to WebZone Interactive Sandbox!");`,
+        solutionJs: `console.log("Welcome to Zero-to-Website Live Code!");`,
         hints: [
           'Headings use <h1>, <h2> up to <h6> tags in HTML.',
           'Paragraphs use the <p> tag.',

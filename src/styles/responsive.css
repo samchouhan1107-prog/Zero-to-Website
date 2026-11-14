@@ -181,6 +181,19 @@
   }
 }
 
+/* Public Learning Journey Grid: 3x2 Desktop -> 2x3 Tablet -> 1-col Mobile */
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+@media (max-width: 960px) {
+  .journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 /* Small Mobile (<= 420px) */
 @media (max-width: 420px) {
   .btn-lg {
@@ -189,6 +202,12 @@
   }
 
   .dashboard-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 640px) {
+  .journey-grid {
     grid-template-columns: 1fr;
   }
 }

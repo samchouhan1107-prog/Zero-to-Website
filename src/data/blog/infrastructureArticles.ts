@@ -53,7 +53,7 @@ export const INFRASTRUCTURE_ARTICLES: BlogArticle[] = [
       { text: 'A typical result includes an HTTP status line such as `HTTP/2 200` or `HTTP/1.1 301`, followed by headers. `200` means the server returned a successful response; `301` or `308` indicates a redirect. Exact protocol, headers, and timings vary. If the command times out, compare DNS and TCP checks before changing application code.' },
       { heading: 'Keep the investigation narrow', text: 'Record the hostname, timestamp, network you used, command, and relevant output. Compare from a second network only when authorized and useful. Avoid pasting cookies, access tokens, private IP inventories, or customer data into public tools. Public scanners and monitors can retain submitted hostnames or results.' },
       { heading: 'Related tools', text: '', resources: ['google-dig', 'powershell-test-netconnection', 'curl', 'cloudflare-speed-test', 'prometheus'] },
-      { heading: 'Connect this to the course', text: '', internalLink: { label: 'Review client-server protocols', target: 'learn', description: 'Chapter 00 introduces how clients, servers, HTTP, and network requests fit together.' } },
+      { heading: 'Connect this to the course', text: '', internalLink: { label: 'Review client-server protocols', target: 'lesson:ch-00-l-02', description: 'Chapter 00 introduces how clients, servers, HTTP, and network requests fit together.' } },
     ],
   }),
   makeArticle({

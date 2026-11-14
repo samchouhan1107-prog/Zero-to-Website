@@ -11,6 +11,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'Design',
     tags: ['Responsive Design', 'Mobile-First', 'CSS', 'Web Design', 'Frontend'],
+    courseRef: {
+      courseTitle: 'High-Performance Modern CSS Architecture & Design Systems',
+      chapterId: 'css-mod-03',
+      chapterLabel: 'Responsive Design',
+      lessonId: 'css-03-01',
+      lessonTitle: 'Mobile-First Architecture',
+    },
     content: [
       {
         heading: 'The Fragmented Screen Reality: Designing Beyond Fixed Breakpoints',
@@ -62,9 +69,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'Specifying width and height on <img> elements allows modern browsers to calculate the intrinsic aspect ratio before the image binary downloads, reserving space and keeping Cumulative Layout Shift (CLS) at exactly 0.',
         },
         internalLink: {
-          label: 'Test Responsive Layout in Web Tools',
-          target: 'webtools',
-          description: 'Simulate mobile, tablet, and 4K viewports inside the WebZoneBW Responsive Viewport Engine.',
+          label: 'Test Responsive Grids in Live Code',
+          target: 'practice',
+          description: 'Experiment with mobile-first layouts and clamp() fluid scales directly inside Live Code.',
         },
       },
       {
@@ -81,71 +88,78 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
   {
     id: 'blog-006',
     slug: 'getting-started-with-webzonebw',
-    title: 'Getting Started with WebZoneBW: Interactive Sandboxes, Visual Labs, and Full-Stack Path',
-    excerpt: 'Welcome to WebZoneBW. Learn how to navigate our full-stack curriculum, harness zero-install code sandboxes, master visual CSS studios, and unlock milestone credentials.',
-    author: 'WebZoneBW Editorial Team',
+    title: 'Getting Started with Zero-to-Website: Courses, Live Code, and Practice Tracks',
+    excerpt: 'Learn how to move cleanly from reading concepts in Chapters 00–10 to testing real HTML, CSS, and JavaScript inside Live Code and saving your notes in Storehouse.',
+    author: 'Sameer Chouhan',
     date: '2025-06-01',
-    readTime: '8 min read',
+    readTime: '7 min read',
     category: 'General',
-    tags: ['WebZoneBW', 'Tutorial', 'Getting Started', 'Web Development'],
+    tags: ['Zero-to-Website', 'Live Code', 'Getting Started', 'Web Development'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-00',
+      chapterLabel: 'How the Web Works',
+      lessonId: 'ch-00-l-01',
+      lessonTitle: 'What Is the Internet & Client-Server Architecture',
+    },
     content: [
       {
-        heading: 'The Modern Learning Dilemma: Passive Videos vs. Active Muscle Memory',
-        text: 'Most aspiring software engineers spend hundreds of hours stuck in "tutorial hell"—watching video courses and nodding along without ever developing the mental muscle memory required to write code independently. When faced with an empty code editor, they freeze. WebZoneBW was engineered specifically to bridge this gap through active, browser-based sandboxes, live visual diagnostic studios, and structured interactive curriculum tracks.',
+        heading: 'Breaking Out of Passive Tutorials',
+        text: 'Reading documentation or watching walkthroughs helps you recognize terminology, but real confidence comes from editing HTML, CSS, and JavaScript yourself and seeing what breaks when a single property changes. Zero-to-Website pairs clear explanations with immediate browser practice so every concept becomes something you can build with.',
       },
       {
-        heading: 'The Platform Architecture: 4 Interconnected Learning Engines',
-        text: 'WebZoneBW combines curriculum theory with real-time hands-on application across four integrated modules:',
+        heading: 'How the Platform Pieces Fit Together',
+        text: 'Whether you start from the public catalogue or the Studio workspace, your study flow connects four core tools:',
         list: [
-          '1. Structured Curriculum (Chapters 01 - 10): A sequential curriculum covering HTML5, CSS layout orchestration, modern JavaScript algorithms, DOM manipulation, asynchronous architecture, and production deployment.',
-          '2. Interactive Web REPL Sandbox: A live in-browser compiler for HTML, CSS, and TypeScript. Modify code and observe immediate visual renders with sub-millisecond feedback.',
-          '3. VisualLab Diagnostic Studios: Interactive visual playground tools for CSS Box Model margins, Flexbox alignment, CSS Grid tracks, and responsive breakpoints.',
-          '4. Brain Card & Developer Utilities: Built-in developer productivity tools including Windows space wiper command generators, 365-day daily bonuses, and local snapshot backup vaults.',
+          '1. Structured Courses (Chapters 00–10, Modern CSS, and AI Engineering): Sequenced lessons covering how the web works, semantics, Flexbox, Grid, JavaScript, browser APIs, and deployment.',
+          '2. Live Code: An isolated in-browser HTML, CSS, and JavaScript execution view with automated challenge checks and instant preview.',
+          '3. Interactive Concept Diagrams: Inline visual breakdowns inside lessons that clarify the box model, flexbox axes, grid tracks, and request flow.',
+          '4. Storehouse & Progress Records: Saved study notes, bookmarks, completed lessons, and XP streaks synced with the backend.',
         ],
       },
       {
-        heading: 'Navigating the Interactive Workspace',
-        text: 'Inside the WebZoneBW Workspace, you can write code, run automated test suites, and inspect computed output simultaneously.',
+        heading: 'Where to Start on Day One',
+        text: 'You do not need an account to begin reading Chapter 00 or testing snippets in Live Code.',
         table: {
-          headers: ['Feature', 'Purpose', 'How to Access'],
+          headers: ['Section', 'What You Do There', 'When to Open It'],
           rows: [
-            ['Curriculum Lessons', 'Theoretical concepts explained with clear scenarios and code', 'Click "Curriculum" in header navigation or select any chapter'],
-            ['Web REPL Sandbox', 'Full playground to test HTML, CSS, and JavaScript with instant preview', 'Click "Workspace" or use the top navigation bar'],
-            ['Visual Labs', 'Interactive visual manipulation of Flexbox, Grid, and Box Model', 'Select "VisualLab" from tools menu or lesson deep links'],
-            ['Certificate of Completion', 'Verified credential awarded upon completing curriculum milestones', 'Accessible via the Certificate badge in header and account menu'],
+            ['Free Lessons (Chapter 00)', 'Learn client-server basics, URLs, HTTP, and DNS foundations', 'Start here if you want a clear mental model first'],
+            ['Courses & Lesson Reader', 'Work chapter by chapter with examples, quizzes, and analogies', 'Use for daily structured progress'],
+            ['Live Code', 'Write HTML, CSS, and JavaScript side-by-side with live output', 'Open immediately after reading each lesson'],
+            ['Blog', 'Read deeper engineering guides tied to exact platform lessons', 'Use when revising a concept or debugging a pattern'],
           ],
         },
       },
       {
-        heading: 'Pause & Check: Active Learning Strategy',
-        text: 'How should you approach lessons to maximize retention?',
+        heading: 'Pause & Check: Active Study Habit',
+        text: 'A small habit makes every chapter stick far better than rereading notes:',
         checkpoint: {
-          question: 'What is the most effective way to retain concepts learned in each WebZoneBW chapter?',
-          answer: 'After reading each lesson, immediately click "Try in Web REPL Sandbox". Intentionally modify properties (e.g. change flex-direction or break a loop condition) to observe how the browser responds to errors. Active experimentation creates deep mental models that passive reading cannot match.',
-          hint: 'Breaking code and fixing it builds true engineering intuition.',
+          question: 'What should you do right after finishing a concept section in a lesson?',
+          answer: 'Open Live Code and change one variable, flex alignment, or DOM selector on purpose to verify that your mental prediction matches the rendered result. Testing edge cases quickly highlights gaps in understanding.',
+          hint: 'Compare what you expect to happen with what the browser actually renders.',
         },
       },
       {
-        heading: 'The 365-Day Brain Engine & Milestone Certification',
-        text: 'WebZoneBW rewards consistent daily progress. Claim your 24-hour daily bonus in the Brain Card modal to earn XP, unlock secret PC maintenance commands, and record persistent study notes. As you complete chapters, your verified progress qualifies you for the official WebZoneBW Certificate of Completion.',
+        heading: 'Saving Notes & Tracking Steady Progress',
+        text: 'As you complete lessons and verified challenges in Live Code, your completion count and XP update alongside your study notes and bookmarks in Storehouse.',
         callout: {
           type: 'tip',
           title: 'Zero Local Setup Required',
-          text: 'Every tool inside WebZoneBW runs entirely in your browser using WebAssembly and modern Web APIs. You can learn on a Chromebook, MacBook, Windows PC, or tablet without installing Node.js, Git, or complex toolchains.',
+          text: 'Everything in Chapter 00 and Live Code runs directly in your browser so you can practice HTML, CSS, and JavaScript immediately on desktop, tablet, or mobile.',
         },
         internalLink: {
-          label: 'Launch WebZoneBW Workspace Now',
-          target: 'workspace',
-          description: 'Jump directly into the Web REPL Sandbox and write your first interactive lines of code.',
+          label: 'Open Live Code Now',
+          target: 'practice',
+          description: 'Switch directly into Live Code to write and preview your first interactive snippet.',
         },
       },
       {
-        heading: 'Key Takeaways: Your Roadmap to Mastery',
-        text: 'Becoming a competent frontend engineer is a marathon of steady, daily practice. WebZoneBW provides the tooling, curriculum, and feedback loop to support you every step of the journey.',
+        heading: 'Key Takeaways: Your First Week',
+        text: 'Consistency beats intensity when learning web engineering. Short daily sessions compound rapidly.',
         list: [
-          'Start with Chapter 01 (Environment Setup) and Chapter 02 (HTML5 Semantic Architecture).',
-          'Reinforce every theoretical concept by building live experiments in the Web REPL.',
-          'Claim your daily Brain Card bonus to maintain your learning streak.',
+          'Read Chapter 00 first so HTTP, HTML, CSS, and JavaScript fit together cleanly.',
+          'Reproduce each small example in Live Code and experiment with variations.',
+          'Keep focused notes in Storehouse as you advance across chapters.',
         ],
       },
     ],
@@ -160,6 +174,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '13 min read',
     category: 'Security',
     tags: ['Security', 'CSP', 'CORS', 'HTTPS', 'OWASP'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-07',
+      chapterLabel: 'Advanced JavaScript & Async Systems',
+      lessonId: 'ch-07-l-03',
+      lessonTitle: 'Fetch API & Working with JSON',
+    },
     content: [
       {
         heading: 'The Security Threat Landscape: Why Good UI Code Is Not Enough',
@@ -212,9 +233,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'When a cookie is flagged as HttpOnly, JavaScript document.cookie CANNOT read or modify it. Even if an attacker executes an XSS payload on your page, they cannot steal the HttpOnly session token!',
         },
         internalLink: {
-          label: 'Audit Security Headers in Web Tools',
-          target: 'webtools',
-          description: 'Inspect HTTP response headers and security directives using WebZoneBW Developer Tools.',
+          label: 'Practice Fetch & Security Checks in Live Code',
+          target: 'practice',
+          description: 'Explore safe DOM rendering and JSON response handling in Live Code.',
         },
       },
       {
@@ -238,6 +259,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '10 min read',
     category: 'DevOps',
     tags: ['Git', 'Version Control', 'DevOps', 'GitHub', 'Workflow'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-10',
+      chapterLabel: 'Capstone, Architecture & Production Deployment',
+      lessonId: 'ch-10-l-04',
+      lessonTitle: 'Git & GitHub Professional Workflow',
+    },
     content: [
       {
         heading: 'The Commit Log Reality: Why Git History Is Documentation',
@@ -286,9 +314,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'An atomic commit does ONE thing completely. If your commit message contains the word "and" (e.g. "feat: add user profile page AND fix navbar css"), split it into two separate commits.',
         },
         internalLink: {
-          label: 'Practice in Curriculum Chapter 01',
-          target: 'learn',
-          description: 'Review Chapter 01: Development Environment Setup & Git Version Control in WebZoneBW.',
+          label: 'Study Git & GitHub Workflow in Chapter 10',
+          target: 'lesson:ch-10-l-04',
+          description: 'Open Chapter 10: Git & GitHub Professional Workflow inside Zero-to-Website.',
         },
       },
       {
@@ -312,6 +340,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'Tools',
     tags: ['DevTools', 'Debugging', 'Chrome', 'Performance', 'DOM'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-01',
+      chapterLabel: 'Development Environment & Tools',
+      lessonId: 'ch-01-l-03',
+      lessonTitle: 'Inspecting Pages with Browser DevTools',
+    },
     content: [
       {
         heading: 'Beyond console.log: The Professional Debugging Toolkit',
@@ -356,9 +391,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'Press Cmd+Shift+P (Mac) or Ctrl+Shift+P (Windows) in Chrome DevTools, type "Coverage", and press Enter. Click the reload button to measure exact byte utilization.',
         },
         internalLink: {
-          label: 'Inspect DOM in Developer Tools',
-          target: 'developertools',
-          description: 'Explore live DOM hierarchy tree inspection tools in the WebZoneBW Developer Tools suite.',
+          label: 'Study Browser DevTools in Chapter 01',
+          target: 'lesson:ch-01-l-03',
+          description: 'Walk through the Elements, Console, and Network panels inside Chapter 01.',
         },
       },
       {
@@ -382,6 +417,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '13 min read',
     category: 'PWA',
     tags: ['PWA', 'Service Workers', 'Offline', 'Mobile Web', 'Web Manifest'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-08',
+      chapterLabel: 'Advanced DOM & Browser APIs',
+      lessonId: 'ch-08-l-03',
+      lessonTitle: 'Client-Side Persistence: LocalStorage & SessionStorage',
+    },
     content: [
       {
         heading: 'The Offline Reality: Why Web Apps Need Service Workers',
@@ -431,9 +473,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'Setting display: "standalone" strips the browser URL bar, forward/back buttons, and navigation chrome, giving your web application the exact look, feel, and immersion of a native mobile app.',
         },
         internalLink: {
-          label: 'Test Offline Features in Workspace',
-          target: 'workspace',
-          description: 'Experience offline-capable sandboxes and client storage in WebZoneBW.',
+          label: 'Experiment with Storage APIs in Live Code',
+          target: 'practice',
+          description: 'Test client-side storage and offline fallback logic directly inside Live Code.',
         },
       },
       {
@@ -450,13 +492,20 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
   {
     id: 'blog-021',
     slug: 'developer-machine-pc-maintenance',
-    title: 'Essential Developer Machine Maintenance: Temp Purge, Prefetch, Space Wiper Scripts, and Node Cache Reclamation',
+    title: 'Essential Developer Machine Maintenance: Safe Temp Review and Node Cache Reclamation',
     excerpt: 'A cautious guide to checking disk usage, using Windows cleanup tools, and reviewing development caches without broad deletion scripts.',
     author: 'WebZoneBW Editorial Team',
     date: '2025-09-22',
     readTime: '10 min read',
     category: 'Maintenance',
-    tags: ['PC Maintenance', 'Space Wiper', 'Windows Run', 'Performance', 'Storage'],
+    tags: ['PC Maintenance', 'Disk Cleanup', 'Windows Run', 'Performance', 'Storage'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-01',
+      chapterLabel: 'Development Environment & Tools',
+      lessonId: 'ch-01-l-01',
+      lessonTitle: 'Setting Up a Clean Development Environment',
+    },
     content: [
       {
         heading: 'The Disk Bloat Reality: Why Developer PCs Degrade Over Time',
@@ -526,6 +575,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '12 min read',
     category: 'Architecture',
     tags: ['Architecture', 'Design Systems', 'Atomic Design', 'React', 'Component Design'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-09',
+      chapterLabel: 'Modern Tooling & Component Frameworks',
+      lessonId: 'ch-09-l-03',
+      lessonTitle: 'Introduction to React, JSX & Props',
+    },
     content: [
       {
         heading: 'The Spaghetti Component Trap: Why Large UIs Collapse',
@@ -579,9 +635,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'By coupling design tokens with CSS custom properties, switching between Dark Mode and Light Mode requires merely toggling a single class on the <html> root element, instantaneously recoloring every atom and organism.',
         },
         internalLink: {
-          label: 'Test Component Architecture in REPL',
-          target: 'workspace',
-          description: 'Build modular atomic components inside the WebZoneBW Sandbox environment.',
+          label: 'Prototype Modular UI in Live Code',
+          target: 'practice',
+          description: 'Build reusable component structures with CSS custom properties inside Live Code.',
         },
       },
       {
@@ -605,6 +661,13 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
     readTime: '11 min read',
     category: 'Deployment',
     tags: ['Vite', 'Deployment', 'CDN', 'Edge', 'Bundling'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-09',
+      chapterLabel: 'Modern Tooling & Component Frameworks',
+      lessonId: 'ch-09-l-02',
+      lessonTitle: 'Build Tools: Vite vs Webpack & Bundling Concepts',
+    },
     content: [
       {
         heading: 'The Bundling Paradigm Shift: Why Webpack Gave Way to Vite',
@@ -653,9 +716,9 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           text: 'Because Vite generates unique hash names (app-c3f8e1.js) for every build, you can cache them in the user browser for 1 full year (max-age=31536000). When you deploy a new version, the hash changes, forcing the browser to fetch the new file without any cache clearing issues.',
         },
         internalLink: {
-          label: 'Deploy Your Knowledge in Curriculum',
-          target: 'learn',
-          description: 'Follow Chapter 10: Production Bundling & Edge Deployment in WebZoneBW.',
+          label: 'Study Vite & Bundling in Chapter 09',
+          target: 'lesson:ch-09-l-02',
+          description: 'Open Chapter 09: Build Tools: Vite vs Webpack & Bundling Concepts in Zero-to-Website.',
         },
       },
       {
@@ -666,6 +729,69 @@ export const SYSTEM_ARTICLES: BlogPost[] = [
           'Implement route-based dynamic import() code-splitting to keep initial landing bundles tiny.',
           'Set immutable 1-year cache headers on hashed assets and must-revalidate on index.html.',
         ],
+      },
+    ],
+  },
+  {
+    id: 'blog-028',
+    slug: 'structured-json-output-and-prompt-contracts',
+    title: 'Structured JSON Responses from LLMs: Schema Contracts Without Parse Crashes',
+    excerpt: 'Why natural-language "return only JSON" prompts fail intermittently in production—and how native responseSchema contracts enforce reliable, machine-readable output.',
+    author: 'Sameer Chouhan',
+    date: '2026-11-10',
+    readTime: '8 min read',
+    category: 'AI Engineering',
+    tags: ['AI Engineering', 'Structured JSON', 'Prompt Engineering', 'Gemini API', 'Validation'],
+    courseRef: {
+      courseTitle: 'Applied AI Engineering & Production LLM Systems',
+      chapterId: 'ai-mod-04',
+      chapterLabel: 'Prompt Engineering and Structured Output',
+      lessonId: 'ai-04-04',
+      lessonTitle: 'Structured JSON Responses',
+    },
+    content: [
+      {
+        heading: 'Why Asking Nicely for JSON Breaks Real Applications',
+        text: 'When you ask a language model in plain text to "reply with JSON only", it works often enough during manual testing to create false confidence. Under temperature sampling in production, however, models occasionally wrap responses in markdown code fences, add a conversational greeting beforehand, or drop a required field. As soon as your server calls JSON.parse(), the unhandled exception crashes the request.',
+      },
+      {
+        heading: 'Replacing Hopeful Prompting with Schema Constraints',
+        text: 'Instead of relying on text instructions alone, modern AI SDKs allow you to bind an explicit schema alongside the MIME type application/json. During generation, constrained decoding masks out any token that would violate the JSON grammar or omit a required property.',
+        table: {
+          headers: ['Strategy', 'Syntax Reliability', 'Schema Enforcement', 'Production Suitability'],
+          rows: [
+            ['Text instruction ("Return JSON only")', 'Inconsistent under temperature', 'Weak — keys can be renamed or omitted', 'Prototypes and manual experiments only'],
+            ['Post-hoc regex extraction + repair', 'Moderate', 'Still fails on missing fields', 'Fragile patch over unpredictable text'],
+            ['Native responseSchema + application/json', 'Constrained to valid JSON', 'Required keys and types enforced', 'Recommended for automated pipelines'],
+          ],
+        },
+        code: {
+          language: 'typescript',
+          code: "import { GoogleGenAI, Type } from '@google/genai';\n\nconst ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });\n\nconst response = await ai.models.generateContent({\n  model: 'gemini-2.5-flash',\n  contents: 'Extract palette tokens from: midnight navy #0f172a and amber #d97706.',\n  config: {\n    responseMimeType: 'application/json',\n    responseSchema: {\n      type: Type.OBJECT,\n      properties: {\n        paletteName: { type: Type.STRING },\n        colors: {\n          type: Type.ARRAY,\n          items: {\n            type: Type.OBJECT,\n            properties: {\n              role: { type: Type.STRING },\n              hex: { type: Type.STRING },\n            },\n            required: ['role', 'hex'],\n          },\n        },\n      },\n      required: ['paletteName', 'colors'],\n    },\n  },\n});",
+        },
+      },
+      {
+        heading: 'Pause & Check: Treating Schema Output as Untrusted Input',
+        text: 'Even when an LLM returns syntactically valid JSON, good engineering still validates boundaries before saving to a database.',
+        checkpoint: {
+          question: 'Why should your server still validate semantic business rules after receiving responseSchema-constrained JSON?',
+          answer: 'Constrained decoding guarantees structural syntax and property types (for instance, a hex field is a string), but semantic validity (such as confirming the hex string is a valid 6-digit color code or checking bounds) belongs in application validation before trusting or persisting the data.',
+          hint: 'Syntax guarantees well-formed JSON; domain logic checks whether the values make sense.',
+        },
+      },
+      {
+        heading: 'Common Mistakes & Next Step',
+        text: 'Keep API keys strictly on your server route so browser clients never inspect credentials, and document property descriptions carefully because schemas double as instructions for the model.',
+        callout: {
+          type: 'tip',
+          title: 'Combine Descriptions with Required Arrays',
+          text: 'Every required property inside responseSchema prevents silent undefined crashes in downstream code, while concise property descriptions steer edge-case formatting.',
+        },
+        internalLink: {
+          label: 'Open Lesson: Structured JSON Responses',
+          target: 'lesson:ai-04-04',
+          description: 'Continue to Module 4 of Applied AI Engineering to practice OpenAPI extraction schemas step by step.',
+        },
       },
     ],
   },

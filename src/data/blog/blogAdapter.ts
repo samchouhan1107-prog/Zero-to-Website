@@ -24,6 +24,7 @@ const RELATED_LESSONS: Record<string, string> = {
   'blog-025': 'ch-00-l-02',
   'blog-026': 'ch-09-l-03',
   'blog-027': 'ch-09-l-02',
+  'blog-028': 'ai-04-04',
 };
 
 /**
@@ -42,7 +43,9 @@ export const LEGACY_BLOG_ARTICLES: BlogArticle[] = BLOG_POSTS.map((post) => ({
   category: post.category,
   readTime: post.readTime,
   featured: false,
-  relatedLessonId: RELATED_LESSONS[post.id],
+  relatedChapter: post.courseRef?.chapterLabel,
+  relatedLessonId: post.courseRef?.lessonId ?? RELATED_LESSONS[post.id],
+  courseRef: post.courseRef,
   tags: [...new Set([...post.tags, post.category])],
   structuredContent: post.content,
 }));

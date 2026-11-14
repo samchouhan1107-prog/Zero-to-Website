@@ -31,6 +31,14 @@ export interface BlogSection {
   resources?: string[];
 }
 
+export interface BlogCourseRef {
+  courseTitle: string;
+  chapterId: string;
+  chapterLabel: string;
+  lessonId: string;
+  lessonTitle: string;
+}
+
 export interface BlogPost {
   id: string;
   slug: string;
@@ -41,10 +49,11 @@ export interface BlogPost {
   readTime: string;
   category: string;
   tags: string[];
+  courseRef?: BlogCourseRef;
   content: BlogSection[];
 }
 
-// Concatenate and sort deterministically by id (blog-001 -> blog-027)
+// Concatenate and sort deterministically by id (blog-001 -> blog-028)
 const ALL_POSTS_RAW: BlogPost[] = [
   ...CSS_ARTICLES,
   ...HTML_ACCESSIBILITY_ARTICLES,

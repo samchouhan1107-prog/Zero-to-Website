@@ -1,5 +1,18 @@
 /* ==========================================================================
-   MAIN.CSS — Master CSS3 Design System for Zero-to-Website
+   MAIN.CSS — Master CSS3 Design System Entry Point for Zero-to-Website
+   Cascade Order (Top to Bottom):
+     1. reset.css           — Base HTML5 element normalization
+     2. variables.css       — Typography, spacing, radii, shadows & z-index tokens
+     3. themes.css          — Soft Porcelain (light) & Midnight Obsidian (dark) palettes
+     4. typography.css      — Headings, prose, inline code & reading measure
+     5. layout.css          — App shell, sidebar, public header & CSS Grid helpers
+     6. components.css      — Buttons, badges, cards, tabs, modals & toasts
+     7. forms.css           — Accessible inputs, selects, search fields & checkboxes
+     8. lesson-content.css  — Structured lesson blocks, quizzes & code previews
+     9. chat.css            — AI Learning Assistant conversation view
+    10. dashboard.css       — Dashboard metrics, continue banners & chapter cards
+    11. blog.css            — Editorial Blog listing, filters & article reader
+    12. responsive.css      — Breakpoint overrides (<=1200px, <=960px, <=640px, <=420px)
    ========================================================================== */
 
 @import "./reset.css";
@@ -12,4 +25,5 @@
 @import "./lesson-content.css";
 @import "./chat.css";
 @import "./dashboard.css";
+@import "./blog.css";
 @import "./responsive.css";

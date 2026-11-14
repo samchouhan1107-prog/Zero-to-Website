@@ -41,7 +41,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({
     { id: 'free-lessons', label: 'Free Lessons' },
     { id: 'membership', label: 'Weekly Membership' },
     { id: 'public-practice', label: 'Live Code' },
-    { id: 'blog', label: 'Blog' },
+    { id: 'public-blog', label: 'Blog' },
   ];
 
   const handleNavClick = (id: string) => {
@@ -145,12 +145,17 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({
                 key={link.id}
                 type="button"
                 onClick={() => handleNavClick(link.id)}
-                className={`btn btn-sm ${isActive ? 'btn-primary' : 'btn-subtle'}`}
+                className="btn btn-sm btn-subtle"
+                aria-current={isActive ? 'page' : undefined}
                 style={{
                   fontWeight: isActive ? 700 : 500,
+                  color: isActive ? 'var(--color-primary)' : 'var(--color-text-muted)',
+                  backgroundColor: isActive ? 'var(--color-primary-subtle)' : 'transparent',
                   borderRadius: 'var(--radius-md)',
-                  padding: '0.45rem 0.85rem',
+                  padding: '0.45rem 0.75rem',
                   fontSize: 'var(--text-sm)',
+                  whiteSpace: 'nowrap',
+                  flexShrink: 0,
                 }}
               >
                 {link.label}

@@ -50,7 +50,9 @@ export const HumanCentredHeader: React.FC<HumanCentredHeaderProps> = ({
       case 'storehouse':
         return 'Storehouse Archive';
       case 'practice':
-        return 'Practice Class';
+        return 'Live Code';
+      case 'blog':
+        return 'Blog';
       case 'assistant':
         return 'AI Learning Assistant';
       case 'campaign':
@@ -59,6 +61,7 @@ export const HumanCentredHeader: React.FC<HumanCentredHeaderProps> = ({
         return 'Achievement Engine';
       case 'analytics':
         return 'Analytics & Metrics';
+      case 'merchant':
       case 'merchant-payments':
         return 'Merchant & Payments';
       case 'publishing':

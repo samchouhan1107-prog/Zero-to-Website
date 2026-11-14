@@ -132,7 +132,7 @@ export const chapter04: Chapter = {
         starterHtml: `<div class="nav-bar">
   <div class="nav-item">Dashboard</div>
   <div class="nav-item">Lessons</div>
-  <div class="nav-item">Sandbox</div>
+  <div class="nav-item">Live Code</div>
 </div>`,
         starterCss: `.nav-bar {
   /* Add display: flex and gap here */
@@ -153,7 +153,7 @@ export const chapter04: Chapter = {
         solutionHtml: `<div class="nav-bar">
   <div class="nav-item">Dashboard</div>
   <div class="nav-item">Lessons</div>
-  <div class="nav-item">Sandbox</div>
+  <div class="nav-item">Live Code</div>
 </div>`,
         solutionCss: `.nav-bar {
   display: flex;

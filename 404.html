@@ -1,518 +1,241 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-      gtag("config", "G-L1KR6MWWP3");
-    </script>
-
-    <!-- Primary SEO Meta Tags -->
-    <title>404 - Page Not Found | WebZoneBW SC</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>404 — Page Not Found | Zero-to-Website (WebZoneBW SC)</title>
     <meta
       name="description"
-      content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools, tutorials, and web engineering curriculum."
+      content="The requested page could not be found on Zero-to-Website. Return to courses, Live Code, or the Blog."
     />
-    <meta
-      name="keywords"
-      content="404 error, page not found, web developer tools, CSS flexbox, CSS grid, HTML tutorials, JavaScript lessons, web development"
-    />
-    <meta name="author" content="WebZoneBW" />
+    <meta name="author" content="Sameer Chouhan / WebZoneBW" />
     <meta name="robots" content="noindex, follow" />
     <link rel="canonical" href="https://webzonebw.shop/404.html" />
 
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://webzonebw.shop/404.html" />
-    <meta property="og:title" content="404 - Page Not Found | WebZoneBW SC" />
+    <meta property="og:title" content="404 — Page Not Found | Zero-to-Website" />
     <meta
       property="og:description"
-      content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools and tutorials."
+      content="The requested page could not be found on Zero-to-Website. Explore courses, Live Code, or our engineering Blog."
     />
-    <meta property="og:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta property="og:image" content="/assets/sclogo/logo_8c2b321c.png" />
     <meta property="og:site_name" content="WebZoneBW SC" />
-    <meta property="og:locale" content="en_US" />
 
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:url" content="https://webzonebw.shop/404.html" />
-    <meta property="twitter:title" content="404 - Page Not Found | WebZoneBW SC" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="404 — Page Not Found | Zero-to-Website" />
     <meta
-      property="twitter:description"
-      content="Oops! The page you're looking for doesn't exist. Search our site or browse our developer tools and tutorials."
+      name="twitter:description"
+      content="Return to Zero-to-Website courses, Live Code, and engineering Blog articles."
     />
-    <meta property="twitter:image" content="https://webzonebw.shop/og-image.svg" />
+    <meta name="twitter:image" content="/assets/sclogo/logo_8c2b321c.png" />
 
-    <!-- AdSense -->
-    <meta name="google-adsense-account" content="ca-pub-2904917114665090" />
-
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2904917114665090"
-      crossorigin="anonymous"
-    ></script>
-
-    <!-- Legal Disclosures & Reach Out Connection -->
-    <link rel="privacy-policy" href="https://webzonebw.shop/privacy-policy.html" />
-    <link rel="terms-of-service" href="https://webzonebw.shop/terms-of-service.html" />
-    <link rel="copyright" href="https://webzonebw.shop/about.html" />
-    <link
-      rel="help"
-      href="https://webzonebw.in/"
-      title="Official WebZoneBW Reach Out &amp; Enquiry Reference"
-    />
-
-    <meta name="theme-color" content="#0f172a" />
-
-    <!-- Favicons -->
-    <link
-      rel="icon"
-      type="image/svg+xml"
-      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>"
-    />
-
-    <!-- Preconnect & Asset Loading Optimization -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      media="print"
-      onload="this.media = 'all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-      />
-    </noscript>
-    <link rel="preconnect" href="https://www.googletagmanager.com" />
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com" />
+    <link rel="icon" type="image/png" href="/assets/sclogo/logo_8c2b321c.png" />
+    <link rel="privacy-policy" href="/privacy-policy.html" />
+    <link rel="terms-of-service" href="/terms-of-service.html" />
 
     <style>
       *,
       *::before,
       *::after {
         box-sizing: border-box;
-        margin: 0;
-        padding: 0;
       }
 
-      html {
-        -webkit-text-size-adjust: 100%;
-        scroll-behavior: smooth;
+      :root {
+        color-scheme: light dark;
+        --bg: #faf9f6;
+        --surface: #ffffff;
+        --border: #e2e8f0;
+        --text: #1e293b;
+        --muted: #475569;
+        --primary: #6d28d9;
+        --primary-hover: #5b21b6;
       }
 
-      [hidden] {
-        display: none !important;
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0b0c10;
+          --surface: #14161f;
+          --border: #262a36;
+          --text: #e2e8f0;
+          --muted: #94a3b8;
+          --primary: #8b5cf6;
+          --primary-hover: #7c3aed;
+        }
       }
 
       body {
-        font-family: "Inter", system-ui, -apple-system, sans-serif;
-        background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-        color: #e2e8f0;
+        margin: 0;
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        overflow-x: hidden;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
       }
 
       .skip-link {
         position: absolute;
         top: -40px;
         left: 0;
-        background: #3b82f6;
+        background: var(--primary);
         color: #ffffff;
-        padding: 8px 12px;
+        padding: 0.5rem 0.75rem;
         text-decoration: none;
-        border-radius: 0 0 4px 0;
-        z-index: 9999;
+        border-radius: 0 0 6px 0;
+        z-index: 100;
       }
 
       .skip-link:focus {
         top: 0;
       }
 
-      .container {
-        max-inline-size: 800px;
+      :focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 2px;
+      }
+
+      main.container {
+        width: min(860px, 100%);
         margin: 0 auto;
-        padding: 2rem 1rem;
-        width: 100%;
+        padding: 3rem 1.5rem;
         flex: 1;
       }
 
-      .error-container {
+      .hero-box {
         text-align: center;
-        padding: 4rem 0;
+        margin-bottom: 2.5rem;
       }
 
       .error-code {
-        font-size: 8rem;
-        font-weight: 900;
-        color: #3b82f6;
+        font-size: clamp(4rem, 12vw, 6.5rem);
+        font-weight: 800;
         line-height: 1;
-        margin-bottom: 1rem;
-        text-shadow: 0 0 30px rgba(59, 130, 246, 0.3);
+        color: var(--primary);
+        margin-bottom: 0.75rem;
       }
 
-      .error-title {
-        font-size: 2.5rem;
-        font-weight: 700;
-        margin-bottom: 1rem;
-        color: #f1f5f9;
+      h1 {
+        margin: 0 0 0.75rem;
+        font-size: clamp(1.5rem, 3vw, 2.25rem);
       }
 
-      .error-message {
-        font-size: 1.25rem;
-        color: #94a3b8;
-        margin-bottom: 3rem;
-        line-height: 1.6;
-      }
-
-      .search-container {
-        background: rgba(30, 41, 59, 0.8);
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 2rem;
-        margin-bottom: 3rem;
-        backdrop-filter: blur(10px);
-      }
-
-      .search-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        color: #f1f5f9;
-      }
-
-      .search-box {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 1rem;
-      }
-
-      .search-input {
-        flex: 1;
-        padding: 1rem;
-        border: 2px solid #334155;
-        border-radius: 8px;
-        background: #1e293b;
-        color: #e2e8f0;
-        font-size: 1rem;
-        transition: border-color var(--transition-normal);
-      }
-
-      .search-input:focus {
-        outline: none;
-        border-color: #3b82f6;
-      }
-
-      .search-btn {
-        padding: 1rem 2rem;
-        background: #3b82f6;
-        color: white;
-        border: none;
-        border-radius: 8px;
-        font-size: 1rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background-color var(--transition-normal);
-      }
-
-      .search-btn:hover {
-        background: #2563eb;
+      .lead {
+        margin: 0 auto;
+        max-width: 54ch;
+        color: var(--muted);
       }
 
       .quick-links {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 1.5rem;
-        margin-bottom: 3rem;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2.5rem;
       }
 
-      .quick-link-card {
-        background: rgba(30, 41, 59, 0.6);
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 1.5rem;
-        text-decoration: none;
-        color: #e2e8f0;
-        transition: all var(--transition-normal);
-        backdrop-filter: blur(10px);
+      .quick-card {
         display: block;
+        padding: 1.25rem;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: inherit;
+        text-decoration: none;
+        transition: border-color 0.2s ease, transform 0.2s ease;
       }
 
-      .quick-link-card:hover {
-        background: rgba(59, 130, 246, 0.1);
-        border-color: #3b82f6;
+      .quick-card:hover {
+        border-color: var(--primary);
         transform: translateY(-2px);
       }
 
-      .quick-link-icon {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-      }
-
-      .quick-link-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
+      .quick-card strong {
         display: block;
+        margin-bottom: 0.35rem;
+        font-size: 1rem;
       }
 
-      .quick-link-desc {
-        font-size: 0.9rem;
-        color: #94a3b8;
-        line-height: 1.5;
-      }
-
-      .contact-info {
-        background: rgba(30, 41, 59, 0.8);
-        border: 1px solid #334155;
-        border-radius: 12px;
-        padding: 2rem;
-        text-align: center;
-        backdrop-filter: blur(10px);
-      }
-
-      .contact-title {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        color: #f1f5f9;
-      }
-
-      .contact-links {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        align-items: center;
-      }
-
-      .contact-link {
-        color: #3b82f6;
-        text-decoration: none;
-        font-weight: 500;
-        transition: color var(--transition-normal);
-      }
-
-      .contact-link:hover {
-        color: #2563eb;
+      .quick-card span {
+        font-size: 0.875rem;
+        color: var(--muted);
       }
 
       footer.site-footer {
-        background: rgba(15, 23, 42, 0.9);
-        border-block-start: 1px solid #334155;
-        padding: 2rem 0;
+        border-block-start: 1px solid var(--border);
+        padding: 1.5rem;
         text-align: center;
-        color: #94a3b8;
+        color: var(--muted);
+        font-size: 0.875rem;
       }
 
-      .footer-content {
-        max-inline-size: 800px;
-        margin: 0 auto;
-        padding: 0 1rem;
-      }
-
-      .footer-links {
+      footer nav {
         display: flex;
         justify-content: center;
-        gap: 2rem;
-        margin-bottom: 1rem;
+        gap: 1.25rem;
         flex-wrap: wrap;
+        margin-bottom: 0.75rem;
       }
 
-      .footer-link {
-        color: #94a3b8;
+      footer a {
+        color: var(--primary);
         text-decoration: none;
-        transition: color var(--transition-normal);
       }
 
-      .footer-link:hover {
-        color: #3b82f6;
-      }
-
-      @media (max-width: 768px) {
-        .error-code {
-          font-size: 6rem;
-        }
-
-        .error-title {
-          font-size: 2rem;
-        }
-
-        .search-box {
-          flex-direction: column;
-        }
-
-        .quick-links {
-          grid-template-columns: 1fr;
-        }
-
-        .footer-links {
-          flex-direction: column;
-          gap: 1rem;
-        }
+      footer a:hover {
+        text-decoration: underline;
       }
 
       @media (prefers-reduced-motion: reduce) {
         *,
         *::before,
         *::after {
-          animation-duration: 0.01ms !important;
-          animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
-          scroll-behavior: auto !important;
         }
-      }
-
-      :root {
-        --transition-normal: 220ms cubic-bezier(0.4, 0, 0.2, 1);
       }
     </style>
   </head>
   <body>
-    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <main class="container" id="main-content" tabindex="-1" role="main" aria-labelledby="error-heading">
-      <div class="error-container">
-        <div class="error-code">404</div>
-        <h1 id="error-heading" class="error-title">Page Not Found</h1>
-        <p class="error-message">
-          Oops! The page you're looking for doesn't exist or has been moved.
-          Don't worry, let's help you find what you need.
+    <main class="container" id="main-content" tabindex="-1">
+      <div class="hero-box">
+        <div class="error-code" aria-hidden="true">404</div>
+        <h1>Page Not Found</h1>
+        <p class="lead">
+          The page you requested could not be found or has moved. Choose one of the active sections below to continue learning on Zero-to-Website.
         </p>
       </div>
 
-      <div class="search-container">
-        <h2 class="search-title">🔍 Search WebZoneBW.shop</h2>
-        <form class="search-box" id="searchForm" role="search">
-          <input
-            type="search"
-            class="search-input"
-            placeholder="Search for tools, tutorials, or topics..."
-            id="searchInput"
-            name="q"
-            autocomplete="off"
-            aria-label="Search WebZoneBW.shop"
-            required
-          />
-          <button class="search-btn" type="submit" id="searchButton">Search</button>
-        </form>
-        <p style="color: #94a3b8; font-size: 0.9rem">
-          Try searching for: CSS Grid, JavaScript, HTML, Flexbox, Bootstrap,
-          etc.
-        </p>
-      </div>
-
-      <div class="quick-links">
-        <a href="/" class="quick-link-card">
-          <div class="quick-link-icon">🏠</div>
-          <div class="quick-link-title">Home</div>
-          <div class="quick-link-desc">
-            Start exploring our developer tools and tutorials
-          </div>
+      <nav class="quick-links" aria-label="Primary destination links">
+        <a href="/" class="quick-card">
+          <strong>Home</strong>
+          <span>Return to the main editorial web engineering landing page.</span>
         </a>
-
-        <a href="/learn.html" class="quick-link-card">
-          <div class="quick-link-icon">📚</div>
-          <div class="quick-link-title">Learn Web Development</div>
-          <div class="quick-link-desc">
-            Complete curriculum from HTML to advanced JavaScript
-          </div>
+        <a href="/?view=blog" class="quick-card">
+          <strong>Blog</strong>
+          <span>Read human-written engineering guides linked directly to lessons.</span>
         </a>
-
-        <a href="/webtools.html" class="quick-link-card">
-          <div class="quick-link-icon">🛠️</div>
-          <div class="quick-link-title">Developer Tools</div>
-          <div class="quick-link-desc">
-            Interactive CSS Grid, Flexbox, and HTML sandboxes
-          </div>
+        <a href="/about.html" class="quick-card">
+          <strong>About Zero-to-Website</strong>
+          <span>Learn about our curriculum, Live Code tools, and editorial mission.</span>
         </a>
-
-        <a href="/Workspace.html" class="quick-link-card">
-          <div class="quick-link-icon">💻</div>
-          <div class="quick-link-title">Workspace</div>
-          <div class="quick-link-desc">
-            Practice coding with live environments
-          </div>
+        <a href="/contact.html" class="quick-card">
+          <strong>Contact &amp; Disclosures</strong>
+          <span>View publisher identity and communication status.</span>
         </a>
-      </div>
-
-      <div class="contact-info">
-        <h3 class="contact-title">Still can't find what you're looking for?</h3>
-        <div class="contact-links">
-          <a href="/contact.html" class="contact-link">Contact Us</a>
-          <a href="https://webzonebw.in/" class="contact-link" target="_blank" rel="noopener noreferrer"
-            >Visit webzonebw.in for support</a
-          >
-          <a href="mailto:enquiry@webzonebw.in" class="contact-link"
-            >enquiry@webzonebw.in</a
-          >
-        </div>
-      </div>
+      </nav>
     </main>
 
-    <footer class="site-footer" role="contentinfo">
-      <div class="footer-content">
-        <nav class="footer-links" aria-label="Footer navigation">
-          <a href="/privacy-policy.html" class="footer-link">Privacy Policy</a>
-          <a href="/cookie-policy.html" class="footer-link">Cookie Policy</a>
-          <a href="/terms-of-service.html" class="footer-link">Terms of Service</a>
-          <a href="/about.html" class="footer-link">About</a>
-          <a href="/contact.html" class="footer-link">Contact</a>
-          <a href="https://webzonebw.in/" class="footer-link" target="_blank" rel="noopener noreferrer"
-            >Reach Out &amp; Enquiry</a
-          >
-        </nav>
-        <p>
-          &copy; 2026 WebZoneBW SC. Connected with
-          <a
-            href="https://webzonebw.in/"
-            style="color: #3b82f6; text-decoration: underline"
-            >webzonebw.in</a
-          >
-          for inquiries and data transparency.
-        </p>
-      </div>
+    <footer class="site-footer">
+      <nav aria-label="Legal navigation">
+        <a href="/privacy-policy.html">Privacy Policy</a>
+        <a href="/cookie-policy.html">Cookie Policy</a>
+        <a href="/terms-of-service.html">Terms of Service</a>
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+      </nav>
+      <p style="margin: 0">&copy; 2026 Zero-to-Website. Published by Sameer Chouhan / WebZoneBW.</p>
     </footer>
-
-    <script>
-      const searchForm = document.getElementById("searchForm");
-      const searchInput = document.getElementById("searchInput");
-
-      searchForm.addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        const query = searchInput.value.trim();
-        if (!query) {
-          searchInput.focus();
-          return;
-        }
-
-        const searchUrl =
-          "https://www.google.com/search?q=" +
-          encodeURIComponent(query + " site:webzonebw.shop");
-
-        window.open(searchUrl, "_blank", "noopener,noreferrer");
-      });
-
-      // Track 404 page views
-      if (typeof gtag !== "undefined") {
-        gtag("event", "page_view", {
-          page_title: "404 - Page Not Found",
-          page_location: window.location.href,
-        });
-      }
-    </script>
   </body>
 </html>

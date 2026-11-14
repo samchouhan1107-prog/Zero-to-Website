@@ -161,6 +161,16 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
             <li>
               <button
                 type="button"
+                onClick={() => onNavigate('public-blog')}
+                className="btn-link"
+                style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textAlign: 'left', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}
+              >
+                <span>Blog</span>
+              </button>
+            </li>
+            <li>
+              <button
+                type="button"
                 onClick={() => onNavigate('membership')}
                 className="btn-link"
                 style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', textAlign: 'left', display: 'inline-flex', alignItems: 'center', gap: '0.4rem' }}

@@ -13,6 +13,7 @@ export interface BlogArticle {
   featured: boolean;
   relatedChapter?: string;
   relatedLessonId?: string;
+  courseRef?: import('./blogData').BlogCourseRef;
   updatedAt?: string;
   practiceChallenge?: string;
   dateLabel?: string;

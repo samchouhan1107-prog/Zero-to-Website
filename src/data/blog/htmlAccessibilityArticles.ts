@@ -11,6 +11,13 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
     readTime: '10 min read',
     category: 'HTML',
     tags: ['HTML', 'SEO', 'Accessibility', 'Semantic HTML', 'Web Standards'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-02',
+      chapterLabel: 'HTML Fundamentals & Semantics',
+      lessonId: 'ch-02-l-01',
+      lessonTitle: 'What is HTML? Anatomy & Document Tree',
+    },
     content: [
       {
         heading: 'The "Div Soup" Dilemma: Why Search Engines and Screen Readers Struggle',
@@ -55,9 +62,9 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
           text: 'If you need small text that looks like a subtitle, use a <p> element with a CSS class (.text-sm or .text-muted). Never use an <h4> or <h5> purely because you want smaller text without a parent <h3> above it.',
         },
         internalLink: {
-          label: 'Inspect DOM Landmarks in Web REPL',
-          target: 'workspace',
-          description: 'Load your markup into the Web REPL Sandbox and inspect semantic landmark accessibility tree output.',
+          label: 'Test Semantic Markup in Live Code',
+          target: 'practice',
+          description: 'Load semantic landmark markup into Live Code and verify document structure immediately.',
         },
       },
       {
@@ -81,6 +88,13 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
     readTime: '9 min read',
     category: 'HTML',
     tags: ['HTML5', 'Semantics', 'Accessibility', 'SEO', 'Best Practices'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-02',
+      chapterLabel: 'HTML Fundamentals & Semantics',
+      lessonId: 'ch-02-l-02',
+      lessonTitle: 'HTML Elements & Semantic Layouts',
+    },
     content: [
       {
         heading: 'The Modern Web Consumer: Beyond Human Eyes',
@@ -120,13 +134,13 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
         },
         callout: {
           type: 'tip',
-          title: 'The AI Scraping Advantage',
-          text: 'AI search engines prioritize structured semantic markup when synthesizing answers. Explicit <dl> (definition lists), <table>, and <article> elements are indexed with 3x higher extraction accuracy than unsemantic markup.',
+          title: 'Structured Content Extraction',
+          text: 'Search crawlers and automated summarizers parse explicit <dl> (definition lists), <table>, and <article> elements far more reliably than nested generic <div> wrappers.',
         },
         internalLink: {
-          label: 'Launch Semantic HTML Lesson',
-          target: 'learn',
-          description: 'Follow Chapter 02: HTML Structure & Semantic Architecture in the WebZoneBW curriculum.',
+          label: 'Open Chapter 02: HTML Elements & Semantic Layouts',
+          target: 'lesson:ch-02-l-02',
+          description: 'Follow HTML Fundamentals & Semantics in the Zero-to-Website core curriculum.',
         },
       },
       {
@@ -150,6 +164,13 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
     readTime: '12 min read',
     category: 'Accessibility',
     tags: ['Accessibility', 'WCAG', 'a11y', 'Inclusive Design', 'ARIA'],
+    courseRef: {
+      courseTitle: 'Full-Stack Modern Web Engineering & Production Systems',
+      chapterId: 'ch-10',
+      chapterLabel: 'Capstone, Architecture & Production Deployment',
+      lessonId: 'ch-10-l-02',
+      lessonTitle: 'Testing & Accessibility (WCAG 2.1 AA)',
+    },
     content: [
       {
         heading: 'Accessibility Is Not an Edge Case: The Production Reality',
@@ -200,9 +221,9 @@ export const HTML_ACCESSIBILITY_ARTICLES: BlogPost[] = [
           text: 'When a form submits asynchronously, sighted users see a green toast notification. Screen reader users cannot see the toast unless it possesses role="status" or aria-live="polite", which prompts the screen reader to speak the message during the next natural audio pause.',
         },
         internalLink: {
-          label: 'Audit in Critical Rendering Path Inspector',
-          target: 'webtools',
-          description: 'Run accessibility and rendering audits in the WebZoneBW Inspector.',
+          label: 'Study Testing & Accessibility in Chapter 10',
+          target: 'lesson:ch-10-l-02',
+          description: 'Review keyboard navigation, focus management, and WCAG testing checklists in Chapter 10.',
         },
       },
       {

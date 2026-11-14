@@ -117,17 +117,17 @@ export function useSEOMeta(config: Partial<SEOMetaConfig>) {
 // Preset meta configs for each view
 export const SEO_PRESETS = {
   home: {
-    title: 'WebZoneBW SC — Free Interactive Web Developer Tools & Tutorials',
-    description: 'WebZoneBW SC is a free developer platform with interactive web tools, CSS visualizers, HTML/CSS/JS sandboxes, a complete web engineering curriculum, and an AI code tutor.',
-    ogTitle: 'WebZoneBW SC — Free Interactive Web Developer Tools & Tutorials',
-    ogDescription: 'Free developer platform with interactive web tools, CSS visualizers, code sandboxes, and a complete web engineering curriculum.',
+    title: 'Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform',
+    description: 'Zero-to-Website by Sameer Chouhan / WebZoneBW: interactive developer learning platform with structured courses, CSS visualizers, and Live Code practice.',
+    ogTitle: 'Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform',
+    ogDescription: 'Turn your curiosity into practical skills with structured courses, interactive Live Code practice, and web engineering guides.',
     canonical: 'https://webzonebw.shop/',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'WebSite',
       name: 'WebZoneBW SC',
       url: 'https://webzonebw.shop',
-      description: 'Free interactive web developer tools, CSS visualizers, code sandboxes, and a complete web engineering curriculum.',
+      description: 'Editorial web engineering platform with structured courses and interactive Live Code practice.',
       potentialAction: {
         '@type': 'SearchAction',
         target: 'https://webzonebw.shop/?search={search_term_string}',
@@ -137,33 +137,33 @@ export const SEO_PRESETS = {
   },
 
   practiceHub: {
-    title: 'Interactive Web REPL Sandbox — HTML, CSS & JavaScript | WebZoneBW SC',
-    description: 'Write, test, and preview HTML, CSS, and JavaScript code in real time with the WebZoneBW SC interactive REPL sandbox. Instant live preview with DOM isolation.',
-    ogTitle: 'Interactive Web REPL Sandbox — WebZoneBW SC',
-    ogDescription: 'Write and test HTML, CSS, and JavaScript code in real time with instant live preview.',
-    canonical: 'https://webzonebw.shop/?view=practice-hub',
+    title: 'Live Code — HTML, CSS & JavaScript | WebZoneBW SC',
+    description: 'Write, test, and preview HTML, CSS, and JavaScript code in real time with Zero-to-Website Live Code. Instant preview with isolated execution.',
+    ogTitle: 'Live Code — WebZoneBW SC',
+    ogDescription: 'Write and test HTML, CSS, and JavaScript code in real time with instant preview in Live Code.',
+    canonical: 'https://webzonebw.shop/?view=practice',
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
-      name: 'Interactive Web REPL Sandbox',
+      name: 'Live Code',
       applicationCategory: 'DeveloperApplication',
       operatingSystem: 'Web Browser',
-      url: 'https://webzonebw.shop/?view=practice-hub',
+      url: 'https://webzonebw.shop/?view=practice',
     },
   },
 
   visualLab: (tool?: string) => ({
     title: tool
       ? `${tool.toUpperCase()} Visualizer — Developer Tool | WebZoneBW SC`
-      : 'Visual Lab — Interactive Developer Tools | WebZoneBW SC',
+      : 'Interactive Visualizers — WebZoneBW SC',
     description: tool
-      ? `Explore the ${tool.toUpperCase()} visualizer tool on WebZoneBW SC. Interactive real-time visualization for web developers and designers.`
-      : 'Interactive developer visualizers for CSS Box Model, Flexbox, CSS Grid, DOM Tree, HTTP/DNS flow, and Git DAG on WebZoneBW SC.',
-    ogTitle: tool ? `${tool.toUpperCase()} Visualizer — WebZoneBW SC` : 'Visual Lab — WebZoneBW SC',
+      ? `Explore the ${tool.toUpperCase()} visualizer tool on WebZoneBW SC. Real-time visual explanation for web developers and learners.`
+      : 'Interactive developer visualizers for CSS Box Model, Flexbox, CSS Grid, DOM Tree, HTTP/DNS flow, and Git workflows on WebZoneBW SC.',
+    ogTitle: tool ? `${tool.toUpperCase()} Visualizer — WebZoneBW SC` : 'Interactive Visualizers — WebZoneBW SC',
     ogDescription: tool
       ? `Interactive ${tool.toUpperCase()} visualization tool for web developers.`
-      : 'Interactive developer visualizers for CSS, DOM, HTTP, and Git.',
-    canonical: tool ? `https://webzonebw.shop/?view=visual-lab&tool=${tool}` : 'https://webzonebw.shop/?view=visual-lab',
+      : 'Interactive visualizers for CSS, DOM, HTTP, and Git.',
+    canonical: tool ? `https://webzonebw.shop/?view=live-code&tool=${tool}` : 'https://webzonebw.shop/?view=live-code',
   }),
 
   lesson: (title: string, description: string, lessonId: string) => ({
