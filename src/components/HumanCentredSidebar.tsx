@@ -4,7 +4,7 @@ import {
   BookOpen,
   FolderArchive,
   Code2,
-  Sparkles,
+  Bot,
   Flame,
   Award,
   BarChart3,
@@ -57,7 +57,10 @@ export const HumanCentredSidebar: React.FC<HumanCentredSidebarProps> = ({
     { id: 'merchant', label: 'Merchant & Payments', icon: CreditCard },
     { id: 'storehouse', label: 'Storehouse', icon: FolderArchive, count: totalStorehouseCount },
     { id: 'practice', label: 'Live Code', icon: Code2 },
-    { id: 'assistant', label: 'AI Assistant', icon: Sparkles },
+    { id: 'blog', label: 'Blog', icon: BookOpen },
+    { id: 'assistant', label: 'AI Assistant', icon: Bot },
+    { id: 'workspace', label: 'Workspace', icon: LayoutDashboard },
+    { id: 'webtools', label: 'Web Tools', icon: Code2 },
     { id: 'campaign', label: 'Progress & Rewards', icon: Award },
     { id: 'achievements', label: 'Achievements', icon: Award },
     { id: 'analytics', label: 'Analytics', icon: BarChart3 },
@@ -109,7 +112,7 @@ export const HumanCentredSidebar: React.FC<HumanCentredSidebarProps> = ({
               title="WebZoneBW SC"
             >
               <img
-                src="/assets/aistudio/logo_8c2b321c.png"
+                src="/assets/sclogo/logo_8c2b321c.png"
                 alt="WebZoneBW SC"
                 style={{
                   width: '100%',

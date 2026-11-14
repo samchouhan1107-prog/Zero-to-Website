@@ -878,7 +878,7 @@ h1 {
         concept: 'Visual Depth and Polished Details',
         story: 'In modern architecture, high-end buildings do not use heavy ornate moldings. They use recessed shadow reveals — a tiny 1/2-inch reveal where the baseboard meets the hardwood floor. That subtle line gives the room visual depth and craftsmanship.',
         moral: 'Restraint in shadows and borders is the hallmark of modern visual craftsmanship.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'box-model',
       codeExample: {

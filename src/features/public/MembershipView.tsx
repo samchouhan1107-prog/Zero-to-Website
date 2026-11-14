@@ -6,7 +6,6 @@ import {
   Download,
   HelpCircle,
   Clock,
-  Sparkles,
 } from 'lucide-react';
 import { LicencePurchaseModal } from '../ownership-licensing/LicencePurchaseModal';
 import { useAuth } from '../../utils/AuthContext';
@@ -75,7 +74,6 @@ export const MembershipView: React.FC<MembershipViewProps> = ({
             marginBottom: 'var(--space-4)',
           }}
         >
-          <Sparkles size={14} />
           <span>Continuous Web Engineering Education</span>
         </span>
 

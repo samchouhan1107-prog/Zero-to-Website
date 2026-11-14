@@ -4,7 +4,6 @@ import {
   BookmarkCheck,
   CheckCircle2,
   Clock,
-  Sparkles,
   BookOpen,
   ArrowLeft,
   ArrowRight,

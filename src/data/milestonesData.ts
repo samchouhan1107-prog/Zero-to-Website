@@ -7,12 +7,8 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'Explorer Debut',
     rank: 'Web Novice',
     badge: '🧭',
-    rewardDescription: 'Unlocked Interactive Visual Lab & Practice Sandbox',
-    unlockedPerks: [
-      'Interactive 3D Visualizer Lab Access',
-      'Real-Time Client-Server Packet Simulator',
-      'Novice Coder Community Badge'
-    ],
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
     motivationQuote: 'Every expert software engineer started with a single HTML tag and a dream.',
     accentColor: 'indigo',
   },
@@ -22,12 +18,8 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'HTML & Semantic Craftsman',
     rank: 'Markup Apprentice',
     badge: '🧱',
-    rewardDescription: 'Unlocked DOM Tree Inspector & Semantic Hierarchy Analyzer',
-    unlockedPerks: [
-      'Interactive DOM Tree Generator',
-      'CSS Box Model Padding & Margin Studio',
-      'Checkpoint Quiz Mastery Multipliers'
-    ],
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
     motivationQuote: 'Semantic structure is the foundation of accessible, world-class digital experiences.',
     accentColor: 'amber',
   },
@@ -37,12 +29,8 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'CSS Styling Architect',
     rank: 'Cascade Virtuoso',
     badge: '🎨',
-    rewardDescription: 'Unlocked 3D Box Model Matrix & Flexbox Alignment Playground',
-    unlockedPerks: [
-      'Interactive Flexbox & CSS Grid Matrix Playground',
-      'Live Pseudo-Class & Hover State Debugger',
-      'Bronze Level Certificate Seal on Dashboard'
-    ],
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
     motivationQuote: 'You have mastered visual aesthetics, layout distribution, and modern CSS physics.',
     accentColor: 'pink',
   },
@@ -52,12 +40,8 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'JavaScript Logic Dynamo',
     rank: 'Script Engineer',
     badge: '⚡',
-    rewardDescription: 'Unlocked Async Event Loop Studio & JavaScript Live Sandbox',
-    unlockedPerks: [
-      'Interactive DOM Event Dispatcher',
-      'Async Request-Response Lifecycle Tracker',
-      'AI Gemini Code Mentor Priority Queries'
-    ],
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
     motivationQuote: 'Logic, functions, and state machines are now your playground.',
     accentColor: 'yellow',
   },
@@ -67,13 +51,9 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'Responsive Layout Pioneer',
     rank: 'Full-Stack Scholar',
     badge: '📱',
-    rewardDescription: 'Unlocked Multi-Device Responsive Viewport Emulator',
-    unlockedPerks: [
-      'Mobile/Tablet/Desktop Live Viewport Simulator',
-      'Silver Level Digital Credential Verification',
-      'Advanced CSS Grid Auto-Fit Generator'
-    ],
-    motivationQuote: 'One thousand XP! Your web apps scale flawlessly across any screen on earth.',
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
+    motivationQuote: 'Responsive design improves through testing on different screens.',
     accentColor: 'emerald',
   },
   {
@@ -82,12 +62,8 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'React & Component Ace',
     rank: 'Component Maestro',
     badge: '⚛️',
-    rewardDescription: 'Unlocked Component Lifecycle Engine & State Tree Inspector',
-    unlockedPerks: [
-      'Custom React Hook & State Visualizer',
-      'Gold Academic Distinction Plaque',
-      'Printable High-Resolution Certificate of Mastery'
-    ],
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
     motivationQuote: 'Decomposing complex UIs into clean, declarative reactive components is second nature.',
     accentColor: 'cyan',
   },
@@ -97,13 +73,9 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'Git Flow & Web Grandmaster',
     rank: 'Lead System Architect',
     badge: '👑',
-    rewardDescription: 'Unlocked Git DAG Branch Graph Simulator & Cloud Deployment Hub',
-    unlockedPerks: [
-      'Interactive Git Commit & Rebase Simulator',
-      'Official WZ Storehouse Grandmaster Seal',
-      'Lifetime Academic Honor Roll Recognition'
-    ],
-    motivationQuote: 'You have conquered the full spectrum of modern web development craftsmanship!',
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
+    motivationQuote: 'You are building a broad foundation across modern web development.',
     accentColor: 'purple',
   },
   {
@@ -112,13 +84,9 @@ export const XP_MILESTONES: XpMilestone[] = [
     title: 'WZ Storehouse Fellow',
     rank: 'Legendary Pioneer',
     badge: '🌟',
-    rewardDescription: 'Unlocked All Masterclass Secrets & Infinite Prestige Rank',
-    unlockedPerks: [
-      'Honorary Digital Fellow Badge',
-      'Diamond Verifiable Blockchain Credential ID',
-      'Infinite XP Prestige Aura'
-    ],
-    motivationQuote: 'A rare achievement reached by only the top 1% of dedicated web engineering scholars.',
+    rewardDescription: 'Claim this milestone for a one-time 100 XP bonus.',
+    unlockedPerks: [],
+    motivationQuote: 'Consistent practice builds skill over time. Keep learning and keep making things.',
     accentColor: 'rose',
   }
 ];

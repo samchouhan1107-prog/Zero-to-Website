@@ -620,7 +620,7 @@ code { color: #38bdf8; }`,
         concept: 'State Feedback',
         story: 'If an elevator has no floor display and no sound, stepping inside and pressing "Floor 40" is terrifying. You do not know if the elevator is moving or stuck between floors. A floor indicator showing "Floor 2... 3... 4..." gives you continuous reassurance that the system is functioning normally.',
         moral: 'Visual loading indicators eliminate user anxiety by providing continuous operational proof of life.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'network-flow',
       codeExample: {

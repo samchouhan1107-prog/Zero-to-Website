@@ -1,0 +1,11 @@
+[
+  {
+    "id": "stu-03b575974d79",
+    "name": "sameer",
+    "email": "sam.chouhan32@gmail.com",
+    "passwordHash": "61ce6d4070edad502aed3f4a7b1aa7b1:eb64ed5440b6c27d2269c330b21d48ea40a7d10fae93c90b4d463a0d0c5778159472f7dcc013f13e5a56b6a6cf6cbc8deee4e496f450cdae82f0637623ca1847",
+    "method": "email",
+    "createdAt": "2026-11-14T11:22:07.037Z",
+    "updatedAt": "2026-11-14T11:22:07.037Z"
+  }
+]

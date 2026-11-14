@@ -6,7 +6,6 @@ import {
   CheckCircle2,
   AlertTriangle,
   ArrowRight,
-  Sparkles,
   Layers,
   Scale,
   Calendar,
@@ -396,7 +395,6 @@ export const PublishingWorkflowView: React.FC<PublishingWorkflowViewProps> = ({
                 onClick={() => handleAdvanceStage('published')}
                 className="btn btn-accent btn-md"
               >
-                <Sparkles size={16} />
                 <span>Publish Course &amp; Queue Weekly Updates</span>
               </button>
             )}

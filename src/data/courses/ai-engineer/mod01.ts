@@ -55,7 +55,7 @@ export const aiModule01: Chapter = {
         concept: 'Next-Token Generation',
         story: 'Imagine an accomplished jazz musician who has listened to every recorded piece in history. When you play three opening chords, the pianist does not look up a rigid sheet music manual; instead, their muscle memory immediately suggests the most harmonically coherent next note, measure by measure.',
         moral: 'LLMs generate code and language via harmonic statistical resonance with their training weights, not rigid rule lookups.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'network-flow',
       codeExample: {

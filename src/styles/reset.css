@@ -1,7 +1,8 @@
 /* ==========================================================================
-   RESET.CSS — Standard Human-Centred Modern Reset
+   RESET.CSS — Standard HTML5 Modern Reset (CSS3)
    ========================================================================== */
 
+/* 1. Box sizing */
 *,
 *::before,
 *::after {
@@ -10,13 +11,16 @@
   padding: 0;
 }
 
+/* 2. Root element */
 html {
   -webkit-text-size-adjust: 100%;
   -moz-tab-size: 4;
   tab-size: 4;
   scroll-behavior: smooth;
+  line-height: 1.5;
 }
 
+/* 3. Body element */
 body {
   min-height: 100vh;
   line-height: 1.65;
@@ -27,8 +31,10 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: var(--text-base);
+  overflow-x: hidden;
 }
 
+/* 4. Media elements */
 img,
 picture,
 video,
@@ -36,8 +42,10 @@ canvas,
 svg {
   display: block;
   max-width: 100%;
+  height: auto;
 }
 
+/* 5. Form elements inherit font properties */
 input,
 button,
 textarea,
@@ -46,6 +54,7 @@ select {
   color: inherit;
 }
 
+/* 6. Text wrapping */
 p,
 h1,
 h2,
@@ -54,34 +63,58 @@ h4,
 h5,
 h6 {
   overflow-wrap: break-word;
+  word-wrap: break-word;
 }
 
+/* 7. Lists */
 ul,
 ol {
   list-style: none;
 }
 
+/* 8. Links */
 a {
   color: inherit;
   text-decoration: none;
 }
 
+/* 9. Button reset */
 button {
   background: none;
   border: none;
   cursor: pointer;
   text-align: inherit;
+  font-family: inherit;
 }
 
+/* 10. Tables */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
+/* 11. Code elements */
 pre,
 code,
 kbd,
 samp {
   font-family: var(--font-mono);
   font-size: 0.9em;
+}
+
+/* 12. Hidden attribute polyfill */
+[hidden] {
+  display: none !important;
+}
+
+/* 13. Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+/* 14. Prevent text selection on buttons */
+button,
+[role="button"] {
+  user-select: none;
 }

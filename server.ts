@@ -5,6 +5,9 @@ import { createServer as createViteServer } from "vite";
 import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
+import { BLOG_ARTICLES } from "./src/data/blogArticles";
+import { EXTERNAL_TOOLS } from "./src/data/externalTools";
+import type { BlogSection } from "./src/data/blogData";
 import authRoutes, { resolveAuthenticatedRequestUser } from "./server/auth";
 import userRoutes from "./server/api";
 import { cleanupExpiredSessions, initializeDatabase } from "./server/db";
@@ -76,6 +79,95 @@ const renderLessonSnapshot = (lessonId: string) => {
   return { title: `${lesson.title} | WebZoneBW SC`, description: lesson.tagline, canonical, content };
 };
 
+const renderBlogArticleContent = (source: string, articleTitle: string): string => {
+  const lines = source.split(/\r?\n/);
+  const blocks: string[] = [];
+  let index = 0;
+
+  while (index < lines.length) {
+    const line = lines[index].trim();
+    if (!line) {
+      index += 1;
+      continue;
+    }
+
+    const codeStart = line.match(/^\[([a-z]+)\]$/i);
+    if (codeStart) {
+      const closingTag = `[/${codeStart[1].toLowerCase()}]`;
+      const codeLines: string[] = [];
+      index += 1;
+      while (index < lines.length && lines[index].trim().toLowerCase() !== closingTag) {
+        codeLines.push(lines[index]);
+        index += 1;
+      }
+      if (index < lines.length) index += 1;
+      blocks.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      continue;
+    }
+
+    const heading = line.match(/^(#{1,3})\s+(.+)$/);
+    if (heading) {
+      const headingText = heading[2].trim();
+      if (!(heading[1].length === 1 && headingText === articleTitle)) {
+        const level = heading[1].length + 1;
+        blocks.push(`<h${level}>${escapeHtml(headingText)}</h${level}>`);
+      }
+      index += 1;
+      continue;
+    }
+
+    if (/^[-*]\s+/.test(line)) {
+      const items: string[] = [];
+      while (index < lines.length && /^\s*[-*]\s+/.test(lines[index])) {
+        items.push(`<li>${escapeHtml(lines[index].trim().replace(/^[-*]\s+/, ''))}</li>`);
+        index += 1;
+      }
+      blocks.push(`<ul>${items.join('')}</ul>`);
+      continue;
+    }
+
+    const paragraphLines = [line];
+    index += 1;
+    while (index < lines.length && lines[index].trim() &&
+      !/^\[([a-z]+)\]$/i.test(lines[index].trim()) &&
+      !/^#{1,3}\s+/.test(lines[index].trim()) &&
+      !/^\s*[-*]\s+/.test(lines[index])) {
+      paragraphLines.push(lines[index].trim());
+      index += 1;
+    }
+    blocks.push(`<p>${escapeHtml(paragraphLines.join(' '))}</p>`);
+  }
+
+  return blocks.join('');
+};
+
+const renderStructuredBlogContent = (sections: BlogSection[]): string => sections.map((section) => {
+  const blocks: string[] = [];
+  if (section.heading) blocks.push(`<h2>${escapeHtml(section.heading)}</h2>`);
+  if (section.text.trim()) blocks.push(`<p>${escapeHtml(section.text).replace(/\r?\n/g, '<br>')}</p>`);
+  if (section.code) blocks.push(`<pre><code class="language-${escapeHtml(section.code.language)}">${escapeHtml(section.code.code)}</code></pre>`);
+  if (section.list?.length) blocks.push(`<ul>${section.list.map((item) => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`);
+  if (section.callout) blocks.push(`<aside aria-label="${escapeHtml(section.callout.title || section.callout.type)}"><strong>${escapeHtml(section.callout.title || section.callout.type)}</strong><p>${escapeHtml(section.callout.text)}</p></aside>`);
+  if (section.table) {
+    const headers = section.table.headers.map((header) => `<th scope="col">${escapeHtml(header)}</th>`).join('');
+    const rows = section.table.rows.map((row) => `<tr>${row.map((cell) => `<td>${escapeHtml(cell)}</td>`).join('')}</tr>`).join('');
+    blocks.push(`<div class="table-scroll"><table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table></div>`);
+  }
+  if (section.checkpoint) blocks.push(`<details><summary>${escapeHtml(section.checkpoint.question)}</summary><p>${escapeHtml(section.checkpoint.answer)}</p>${section.checkpoint.hint ? `<p>Hint: ${escapeHtml(section.checkpoint.hint)}</p>` : ''}</details>`);
+  if (section.internalLink) {
+    const targetViews: Record<string, string> = { workspace: 'public-practice', webtools: 'webtools', learn: 'courses', 'visual-lab': 'public-practice', developertools: 'webtools' };
+    const targetView = targetViews[section.internalLink.target] || 'courses';
+    blocks.push(`<aside><a href="/?view=${encodeURIComponent(targetView)}">${escapeHtml(section.internalLink.label)}</a>${section.internalLink.description ? `<p>${escapeHtml(section.internalLink.description)}</p>` : ''}</aside>`);
+  }
+  if (section.resources?.length) {
+    const resources = section.resources.map((toolId) => EXTERNAL_TOOLS.find((tool) => tool.id === toolId)).filter((tool) => Boolean(tool));
+    if (resources.length) {
+      blocks.push(`<aside aria-label="Official external tools"><h2>Official tools for this guide</h2><ul>${resources.map((tool) => `<li><a href="${escapeHtml(tool!.officialUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(tool!.name)}</a> — ${escapeHtml(tool!.purpose)}</li>`).join('')}</ul></aside>`);
+    }
+  }
+  return blocks.join('');
+}).join('');
+
 const injectLessonSnapshot = (html: string, lessonId: string) => {
   const snapshot = renderLessonSnapshot(lessonId);
   if (!snapshot) return html;
@@ -93,6 +185,50 @@ const injectLessonSnapshot = (html: string, lessonId: string) => {
     .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/gi, '')
     .replace('<head>', `<head>\n    <link rel="canonical" href="${snapshot.canonical}" />`);
   return withOneCanonical.replace('<div id="root">', `<div id="root">${snapshot.content}`);
+};
+
+const injectBlogSnapshot = (html: string, slug: string) => {
+  const article = BLOG_ARTICLES.find((candidate) => candidate.slug === slug);
+  if (!article) return html;
+
+  const canonical = `${CANONICAL_ORIGIN}/?blog=${encodeURIComponent(article.slug)}`;
+  const title = `${article.title} | Zero-to-Website | WebZoneBW SC`;
+  const description = article.excerpt;
+  const articleBody = article.structuredContent
+    ? renderStructuredBlogContent(article.structuredContent)
+    : renderBlogArticleContent(article.content, article.title);
+  const dateLabel = article.dateLabel || 'Published';
+  const relatedLesson = article.relatedLessonId
+    ? `<p><a href="/?lesson=${encodeURIComponent(article.relatedLessonId)}">Open the related lesson</a></p>`
+    : '';
+  const content = `<main id="blog-server-content"><nav aria-label="Breadcrumb"><a href="/?view=blog">Blog</a></nav><article><header><p>${escapeHtml(article.category)} · ${escapeHtml(article.readTime)}</p><h1>${escapeHtml(article.title)}</h1><p>${escapeHtml(article.excerpt)}</p><p>By ${escapeHtml(article.author)} · <time datetime="${escapeHtml(article.date)}">${escapeHtml(dateLabel)} ${escapeHtml(article.date)}</time>${article.updatedAt ? ` · <time datetime="${escapeHtml(article.updatedAt)}">Updated ${escapeHtml(article.updatedAt)}</time>` : ''}</p></header>${articleBody}${relatedLesson}</article></main>`;
+  const jsonLd = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: article.title,
+    description: article.excerpt,
+    author: { '@type': 'Person', name: article.author },
+    datePublished: article.date,
+    ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
+    keywords: article.tags.join(', '),
+    url: canonical,
+    publisher: { '@type': 'Organization', name: 'WebZoneBW SC', url: CANONICAL_ORIGIN },
+  }).replace(/</g, '\\u003c');
+
+  const documentWithMetadata = html
+    .replace(/<title>[^<]*<\/title>/i, `<title>${escapeHtml(title)}</title>`)
+    .replace(/(<meta name="description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(description)}$2`)
+    .replace(/(<meta property="og:type" content=")[^"]*("\s*\/?>)/i, '$1article$2')
+    .replace(/(<meta property="og:url" content=")[^"]*("\s*\/?>)/i, `$1${canonical}$2`)
+    .replace(/(<meta property="og:title" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta property="og:description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(description)}$2`)
+    .replace(/(<meta property="twitter:url" content=")[^"]*("\s*\/?>)/i, `$1${canonical}$2`)
+    .replace(/(<meta property="twitter:title" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(title)}$2`)
+    .replace(/(<meta property="twitter:description" content=")[^"]*("\s*\/?>)/i, `$1${escapeHtml(description)}$2`);
+  const withCanonical = documentWithMetadata
+    .replace(/<link rel="canonical" href="[^"]*"\s*\/?>/gi, '')
+    .replace('<head>', `<head>\n    <link rel="canonical" href="${canonical}" />\n    <script id="dynamic-jsonld" type="application/ld+json">${jsonLd}</script>`);
+  return withCanonical.replace('<div id="root">', `<div id="root">${content}`);
 };
 
 app.use(
@@ -289,26 +425,18 @@ app.get("/sitemap.xml", (req, res) => {
     }
   }
 
-  // Legal Compliance & Policy Pages
-  addEntry(`${baseUrl}/?legal=privacy`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=terms`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=cookies`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=about`, "0.60", "monthly");
-  addEntry(`${baseUrl}/?legal=contact`, "0.60", "monthly");
-
-  // Static Legal Pages (crawlable HTML)
+  // Public information pages (served as standalone HTML documents)
   addEntry(`${baseUrl}/privacy-policy.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/terms-of-service.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/cookie-policy.html`, "0.70", "monthly");
   addEntry(`${baseUrl}/about.html`, "0.70", "monthly");
+  addEntry(`${baseUrl}/contact.html`, "0.70", "monthly");
 
   // Blog Posts — High-Value SEO Content
   addEntry(`${baseUrl}/?view=blog`, "0.90", "weekly");
-  addEntry(`${baseUrl}/?blog=complete-guide-css-flexbox`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=understanding-css-grid`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=html5-semantic-elements-seo`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=javascript-dom-manipulation`, "0.85", "monthly");
-  addEntry(`${baseUrl}/?blog=responsive-web-design-best-practices`, "0.85", "monthly");
+  for (const article of BLOG_ARTICLES) {
+    addEntry(`${baseUrl}/?blog=${encodeURIComponent(article.slug)}`, "0.85", "monthly");
+  }
 
   xml += `</urlset>`;
 
@@ -325,7 +453,7 @@ app.get("/robots.txt", (req, res) => {
       : "http";
   const baseUrl = `${protocol}://${host}`;
 
-  const robots = `# WebZoneBW SC - Search Engine Directives\nUser-agent: *\nAllow: /\n\n# Allow AdSense bot full access\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: Googlebot-Image\nAllow: /\n\n# Disallow admin and private paths\nDisallow: /api/\nDisallow: /server/\n\n# Sitemap\nSitemap: ${baseUrl}/sitemap.xml\n`;
+  const robots = `# WebZoneBW SC - Search Engine Directives\nUser-agent: *\nAllow: /\nDisallow: /api/\nDisallow: /server/\n\n# Allow Google Search and AdSense crawlers\nUser-agent: Googlebot\nAllow: /\n\nUser-agent: Mediapartners-Google\nAllow: /\n\nUser-agent: Google-Display-Ads-Bot\nAllow: /\n\n# Sitemap\nSitemap: ${baseUrl}/sitemap.xml\n`;
   res.header("Content-Type", "text/plain; charset=utf-8");
   res.send(robots);
 });
@@ -1106,10 +1234,12 @@ app.get("/api/downloads/lesson-pdf/:lessonId", (req, res) => {
 });
 
 async function startServer() {
-  const isProduction =
+  const forceDevelopment = process.argv.includes("--dev");
+  const isProduction = !forceDevelopment && (
     process.env.NODE_ENV === "production" ||
     process.argv[1]?.includes("dist") ||
-    process.argv[1]?.endsWith(".cjs");
+    process.argv[1]?.endsWith(".cjs")
+  );
 
   if (!isProduction) {
     if (createViteServer) {
@@ -1146,7 +1276,13 @@ async function startServer() {
             cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
           }
           res.header("Content-Type", "text/html; charset=utf-8");
-          res.send(requestedLessonId ? injectLessonSnapshot(cachedIndexHtml, requestedLessonId) : cachedIndexHtml);
+          const requestedBlogSlug = typeof req.query.blog === "string" ? req.query.blog : undefined;
+          const responseHtml = requestedLessonId
+            ? injectLessonSnapshot(cachedIndexHtml, requestedLessonId)
+            : requestedBlogSlug
+              ? injectBlogSnapshot(cachedIndexHtml, requestedBlogSlug)
+              : cachedIndexHtml;
+          res.send(responseHtml);
         } catch {
           res.sendFile(path.join(distPath, "index.html"));
         }

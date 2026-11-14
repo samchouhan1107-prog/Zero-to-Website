@@ -209,14 +209,14 @@ export const PracticeClassView: React.FC<PracticeClassViewProps> = () => {
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 'var(--space-3)' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: 'var(--text-xs)', fontWeight: 700, textTransform: 'uppercase', color: 'var(--color-text-muted)' }}>
               <Terminal size={14} />
-              <span>Live Browser Sandbox Output</span>
+              <span>Live Code Output</span>
             </div>
             <span className="badge badge-success">Active Render</span>
           </div>
           <iframe
             key={runNonce}
             srcDoc={fullSource}
-            title="Practice Sandbox Preview"
+            title="Live Code Preview"
             style={{
               flex: 1,
               width: '100%',

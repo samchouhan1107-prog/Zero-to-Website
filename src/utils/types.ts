@@ -338,3 +338,23 @@ export type ViewMode =
   | 'imagetools'
   | 'developertools'
   | 'about';
+
+export interface BlogArticle {
+  id: string;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  author: string;
+  date: string;
+  category: string;
+  readTime: string;
+  featured: boolean;
+  relatedChapter?: string;
+  relatedLessonId?: string;
+  updatedAt?: string;
+  practiceChallenge?: string;
+  dateLabel?: string;
+  structuredContent?: import('../data/blogData').BlogSection[];
+  tags: string[];
+}

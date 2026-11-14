@@ -28,6 +28,7 @@ export interface BlogSection {
     target: string;
     description?: string;
   };
+  resources?: string[];
 }
 
 export interface BlogPost {

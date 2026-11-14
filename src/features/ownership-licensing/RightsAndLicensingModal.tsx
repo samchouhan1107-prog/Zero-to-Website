@@ -11,7 +11,6 @@ import {
   X,
   ExternalLink,
   Clock,
-  Sparkles,
 } from 'lucide-react';
 import { STANDARD_LICENCES, LicenceType } from '../../shared/ownershipTypes';
 

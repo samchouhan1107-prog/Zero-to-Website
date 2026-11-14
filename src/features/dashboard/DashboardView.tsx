@@ -7,7 +7,6 @@ import {
   ArrowRight,
   FolderArchive,
   MessageSquare,
-  Sparkles,
   CheckCircle2,
   TrendingUp,
   DollarSign,
@@ -38,7 +37,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
   onOpenLesson,
   onOpenAssistant,
 }) => {
-  const [activeAreaTab, setActiveAreaTab] = useState<'all' | 'learning' | 'intelligence' | 'operations'>('all');
+  const [activeAreaTab, setActiveAreaTab] = useState<'all' | 'learning' | 'intelligence' | 'operations' | 'blog'>('all');
 
   const totalLessons = chapters.reduce((acc, ch) => acc + ch.lessons.length, 0);
   const completedCount = Object.keys(progress.completedLessons || {}).length;
@@ -142,6 +141,13 @@ export const DashboardView: React.FC<DashboardViewProps> = ({
           className={`btn btn-sm ${activeAreaTab === 'operations' ? 'btn-primary' : 'btn-secondary'}`}
         >
           Area C: Platform Operations &amp; Ledger
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveAreaTab('blog')}
+          className={`btn btn-sm ${activeAreaTab === 'blog' ? 'btn-primary' : 'btn-secondary'}`}
+        >
+          Knowledge Hub &amp; Blog
         </button>
       </div>
 

@@ -1,26 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
     <title>Contact | WebZoneBW SC</title>
-    <meta name="description" content="Contact WebZoneBW SC - Get in touch for support, feedback, or collaboration opportunities.">
-    <link rel="canonical" href="https://webzonebw.shop/contact.html">
+    <meta name="description" content="Contact WebZoneBW SC - Get in touch for support, feedback, or collaboration opportunities." />
+    <link rel="canonical" href="https://webzonebw.shop/contact.html" />
+
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: system-ui, sans-serif; background: #0a0a0a; color: #fff; line-height: 1.6; padding: 2rem; }
-        .container { max-width: 760px; margin: auto; }
-        a { color: #93c5fd; }
-        h1 { margin-bottom: 1rem; }
-        p { margin-bottom: 1rem; }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html {
+        -webkit-text-size-adjust: 100%;
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background: #0a0a0a;
+        color: #fff;
+        line-height: 1.6;
+        padding: 2rem;
+        overflow-x: hidden;
+      }
+
+      [hidden] {
+        display: none !important;
+      }
+
+      .skip-link {
+        position: absolute;
+        top: -40px;
+        left: 0;
+        background: #93c5fd;
+        color: #0a0a0a;
+        padding: 8px 12px;
+        text-decoration: none;
+        border-radius: 0 0 4px 0;
+        z-index: 9999;
+      }
+
+      .skip-link:focus {
+        top: 0;
+      }
+
+      .container {
+        max-inline-size: 760px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      h1 {
+        margin-bottom: 1rem;
+        font-size: 1.875rem;
+      }
+
+      p {
+        margin-bottom: 1rem;
+      }
+
+      a {
+        color: #93c5fd;
+        text-decoration-skip-ink: auto;
+      }
+
+      nav.pagination {
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-block-start: 1px solid #333;
+      }
+
+      nav.pagination a {
+        margin-inline-end: 1rem;
+      }
+
+      @media (max-width: 640px) {
+        body {
+          padding: 1rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
     </style>
-</head>
-<body>
-    <div class="container">
-        <h1>Contact WebZoneBW SC</h1>
-        <p>WebZoneBW SC is independently operated. For support, feedback, or collaboration, reach out to the editorial team.</p>
-        <p>Email: <a href="mailto:contact@webzonebw.in">contact@webzonebw.in</a></p>
-        <p><a href="/">Home</a> · <a href="/about.html">About</a> · <a href="/privacy-policy.html">Privacy</a></p>
-    </div>
-</body>
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+
+    <main class="container" id="main-content" tabindex="-1" role="main" aria-labelledby="contact-heading">
+      <h1 id="contact-heading">Contact WebZoneBW SC</h1>
+      <p>WebZoneBW SC is independently operated. For support, feedback, or collaboration, reach out to the editorial team.</p>
+      <p>Email: <a href="mailto:contact@webzonebw.in">contact@webzonebw.in</a></p>
+      <nav class="pagination" aria-label="Site navigation">
+        <p>
+          <a href="/">Home</a> · <a href="/about.html">About</a> · <a href="/privacy-policy.html">Privacy</a>
+        </p>
+      </nav>
+    </main>
+  </body>
 </html>

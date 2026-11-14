@@ -10,7 +10,7 @@ export const aiModule04: Chapter = {
   description: 'Transform conversational prose into deterministic machine interfaces. Master prompt taxonomy, few-shot prompting, chain-of-thought reasoning, constrained JSON schemas, Zod schema validation, and self-correction reflection loops.',
   estimatedHours: '4 hrs',
   accentColor: 'violet',
-  iconName: 'Sparkles',
+  iconName: 'Lightbulb',
   totalLessons: 5,
   lessons: [
     {
@@ -299,7 +299,7 @@ code { color: #38bdf8; }`,
         concept: 'Chain-of-Thought',
         story: 'If a student tries to calculate a 5-step calculus problem in their head and writes only the final number on the paper, they frequently make an arithmetic error. If the teacher requires them to write out each step on paper, their accuracy jumps from 50% to 95%.',
         moral: 'Giving the model scratchpad tokens to reason on paper improves logical precision exponentially.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'syntax-breakdown',
       codeExample: {

@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
   Lock,
   CheckCircle2,
   X,
 } from 'lucide-react';
+import privacyPolicyHtml from '../../privacy-policy.html?raw';
 
 interface PublicFooterProps {
   onNavigate: (view: string) => void;
@@ -17,6 +18,24 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
   onOpenSettings,
 }) => {
   const [policyTab, setPolicyTab] = useState<PolicyTab | null>(null);
+  const privacyPolicyMarkup = useMemo(
+    () => {
+      const mainMarkup = privacyPolicyHtml.match(/<main\b[^>]*>([\s\S]*?)<\/main>/i)?.[1] ?? '';
+      return mainMarkup
+        .replace(/<nav\b(?=[^>]*\bclass=["'][^"']*\bpagination\b[^"']*["'])[^>]*>[\s\S]*?<\/nav>/i, '')
+        .replace(/<h1\b[^>]*>[\s\S]*?<\/h1>\s*<p\b[^>]*class=["']policy-updated["'][^>]*>[\s\S]*?<\/p>/i, '');
+    },
+    [],
+  );
+
+  useEffect(() => {
+    if (!policyTab) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setPolicyTab(null);
+    };
+    window.addEventListener('keydown', closeOnEscape);
+    return () => window.removeEventListener('keydown', closeOnEscape);
+  }, [policyTab]);
 
   return (
     <footer
@@ -57,7 +76,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
               }}
             >
               <img
-                src="/assets/aistudio/logo_8c2b321c.png"
+                src="/assets/sclogo/logo_8c2b321c.png"
                 alt="WebZoneBW SC"
                 style={{
                   width: '100%',
@@ -262,20 +281,34 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
           >
             Disclaimers
           </button>
+          <span>•</span>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event('webzonebw:open-privacy-choices'))}
+            style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', color: 'inherit', fontSize: 'inherit' }}
+          >
+            Cookie settings
+          </button>
         </div>
       </div>
 
       {/* Policy & Publisher Modal */}
       {policyTab && (
         <div className="modal-overlay" onClick={() => setPolicyTab(null)}>
-          <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="modal-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="footer-policy-title"
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="modal-header">
-              <h3 style={{ margin: 0, fontSize: 'var(--text-lg)' }}>
+              <h3 id="footer-policy-title" style={{ margin: 0, fontSize: 'var(--text-lg)' }}>
                 {policyTab === 'privacy'
                   ? 'Privacy Policy'
                   : policyTab === 'terms'
-                  ? 'Terms of Service & Subscription Rules'
-                  : 'Publisher Disclaimers & Disclosures'}
+                    ? 'Terms of Service & Subscription Rules'
+                    : 'Publisher Disclaimers & Disclosures'}
               </h3>
               <button
                 type="button"
@@ -286,20 +319,12 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
                 <X size={18} />
               </button>
             </div>
+            {policyTab === 'privacy' ? (
+              <div className="modal-body privacy-policy-modal-content">
+                <div dangerouslySetInnerHTML={{ __html: privacyPolicyMarkup }} />
+              </div>
+            ) : (
             <div className="modal-body" style={{ fontSize: 'var(--text-xs)', lineHeight: 1.65, color: 'var(--color-text)' }}>
-              {policyTab === 'privacy' && (
-                <div style={{ display: 'grid', gap: '0.75rem' }}>
-                  <p style={{ margin: 0 }}>
-                    <strong>Data Handling:</strong> Learning progress, bookmarks, and notes are stored in your browser and synced to your authenticated student session. Payment card details are never collected or stored on Zero-to-Website servers.
-                  </p>
-                  <p style={{ margin: 0 }}>
-                    <strong>Audience Measurement:</strong> Google Analytics 4 (`G-L1KR6MWWP3`) is configured exclusively for aggregate website engagement measurement and is kept strictly separate from commercial checkout records.
-                  </p>
-                  <p style={{ margin: 0 }}>
-                    <strong>Email Communications:</strong> Automated outbound email delivery remains disabled until official domain verification is completed for Sameer Chouhan / WebZoneBW.
-                  </p>
-                </div>
-              )}
               {policyTab === 'terms' && (
                 <div style={{ display: 'grid', gap: '0.75rem' }}>
                   <p style={{ margin: 0 }}>
@@ -327,6 +352,7 @@ export const PublicFooter: React.FC<PublicFooterProps> = ({
                 </div>
               )}
             </div>
+            )}
             <div className="modal-footer">
               <button
                 type="button"

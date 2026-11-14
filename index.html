@@ -1,24 +1,13 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="light">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
 
     <!-- Google Fonts: Manrope (Headings) & Inter (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-L1KR6MWWP3"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-L1KR6MWWP3');
-    </script>
 
     <!-- Primary SEO Meta Tags -->
     <title>Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform</title>
@@ -33,7 +22,7 @@
     <meta property="og:url" content="https://webzonebw.shop/" />
     <meta property="og:title" content="Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform" />
     <meta property="og:description" content="Turn your curiosity into practical skills with clear web engineering lessons, guided courses, and interactive Live Code practice." />
-    <meta property="og:image" content="/assets/aistudio/logo_8c2b321c.png" />
+    <meta property="og:image" content="/assets/sclogo/logo_8c2b321c.png" />
     <meta property="og:site_name" content="WebZoneBW SC" />
     <meta property="og:locale" content="en_US" />
 
@@ -42,7 +31,7 @@
     <meta property="twitter:url" content="https://webzonebw.shop/" />
     <meta property="twitter:title" content="Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform" />
     <meta property="twitter:description" content="Turn your curiosity into practical skills with clear web engineering lessons, guided courses, and interactive Live Code practice." />
-    <meta property="twitter:image" content="/assets/aistudio/logo_8c2b321c.png" />
+    <meta property="twitter:image" content="/assets/sclogo/logo_8c2b321c.png" />
 
     <!-- Minimal Critical CSS for Initial Loader Only -->
     <style>
@@ -88,9 +77,8 @@
     <link rel="copyright" href="https://webzonebw.shop/about.html" />
 
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="/assets/aistudio/logo_8c2b321c.png" />
-    <link rel="shortcut icon" href="/favicon.ico" />
-    <link rel="apple-touch-icon" href="/assets/aistudio/logo_8c2b321c.png" />
+    <link rel="icon" type="image/png" href="/assets/sclogo/logo_8c2b321c.png" />
+    <link rel="apple-touch-icon" href="/assets/sclogo/logo_8c2b321c.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
     <link rel="alternate" hreflang="en" href="https://webzonebw.shop/" />
@@ -134,19 +122,19 @@
     </script>
   </head>
   <body>
-    <a href="#main-content" class="skip-link" aria-label="Skip to main content">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
     <div id="root">
-      <noscript id="main-content">
-        <div style="max-width:800px;margin:40px auto;padding:20px;font-family:system-ui,sans-serif;color:#1e293b;">
-          <h1>Zero-to-Website — WebZoneBW SC</h1>
+      <noscript>
+        <section id="main-content" aria-labelledby="noscript-heading" style="max-width:800px;margin:40px auto;padding:20px;font-family:system-ui,sans-serif;color:#1e293b;">
+          <h1 id="noscript-heading">Zero-to-Website — WebZoneBW SC</h1>
           <p>Turn your curiosity into practical skills. Explore clear lessons, useful ideas, and guided courses from beginner to confident creator.</p>
           <p>Published by Sameer Chouhan / WebZoneBW.</p>
-        </div>
+        </section>
       </noscript>
     </div>
 
-    <div id="loading" style="position:fixed;inset:0;background:var(--color-bg, #faf9f6);display:flex;align-items:center;justify-content:center;z-index:9999;pointer-events:none;">
+    <div id="loading" role="status" aria-label="Loading application" style="position:fixed;inset:0;background:var(--color-bg, #faf9f6);display:flex;align-items:center;justify-content:center;z-index:9999;pointer-events:none;">
       <div class="app-loader-spinner"></div>
     </div>
 

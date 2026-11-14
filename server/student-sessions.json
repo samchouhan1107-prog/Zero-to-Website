@@ -4,5 +4,11 @@
     "userId": "stu-demo-scholar",
     "createdAt": "2026-11-13T14:08:32.703Z",
     "expiresAt": "2026-12-13T14:08:32.703Z"
+  },
+  {
+    "token": "zts_7f350cf59dd57869b002264dcb9bf98d635d831d6bf02bca",
+    "userId": "stu-03b575974d79",
+    "createdAt": "2026-11-14T11:22:07.116Z",
+    "expiresAt": "2026-12-14T11:22:07.116Z"
   }
 ]

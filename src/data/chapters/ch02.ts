@@ -1012,7 +1012,7 @@ section {
         concept: 'Built-in Native Features vs Third-Party Clutter',
         story: 'Decades ago, carrying a screwdriver, knife, corkscrew, and scissors required a heavy leather bag full of separate tools. A Swiss Army knife packs precision tools into one elegant handle. Modern HTML5 features (<dialog>, <details>, <video>) give you sleek native tools that load instantaneously without 500KB of external npm libraries.',
         moral: 'Always check if HTML has a native element before downloading a heavy JavaScript library.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'semantic-html',
       codeExample: {

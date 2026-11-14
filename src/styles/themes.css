@@ -1,5 +1,5 @@
 /* ==========================================================================
-   THEMES.CSS — Soft Porcelain Light & Midnight Obsidian Dark Themes
+   THEMES.CSS — Soft Porcelain Light & Midnight Obsidian Dark Themes (CSS3)
    ========================================================================== */
 
 /* 1. Light Mode — Soft Porcelain */
@@ -133,7 +133,39 @@ html.dark {
   --scrollbar-thumb: #282a3c;
 }
 
-/* 3. Global Modern Editorial Typography */
+/* 3. Respect user OS preference */
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not(.dark) {
+    color-scheme: dark;
+    --color-bg: #0b0c10;
+    --color-canvas: #101117;
+    --color-surface: #14151f;
+    --color-surface-hover: #1e1f2d;
+    --color-surface-subtle: #181924;
+    --color-inset: #0e0f15;
+    --color-card: #14151f;
+    --color-border: #232535;
+    --color-border-subtle: #1a1c28;
+    --color-border-hover: #33364c;
+    --color-text: #e2e8f0;
+    --color-text-strong: #ffffff;
+    --color-text-muted: #94a3b8;
+    --color-text-subtle: #64748b;
+    --color-text-inverse: #0b0c10;
+    --color-primary: #8b5cf6;
+    --color-primary-hover: #a78bfa;
+    --color-primary-subtle: rgba(139, 92, 246, 0.15);
+    --color-accent: #38bdf8;
+    --color-accent-hover: #7dd3fc;
+    --color-accent-subtle: rgba(56, 189, 248, 0.15);
+    --header-bg: rgba(11, 12, 16, 0.94);
+    --sidebar-bg: #0f1016;
+    --callout-bg: #141620;
+    --scrollbar-thumb: #282a3c;
+  }
+}
+
+/* 4. Global Modern Editorial Typography */
 :root {
   --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -143,7 +175,12 @@ body {
   font-family: var(--font-body);
 }
 
-h1, h2, h3, h4, h5, h6,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
 .font-heading,
 .brand-title {
   font-family: var(--font-heading);

@@ -4,7 +4,6 @@ import {
   Target,
   DollarSign,
   Compass,
-  Sparkles,
   BarChart3,
   Layers,
   Clock,
@@ -376,7 +375,7 @@ export const CourseIntelligenceView: React.FC<CourseIntelligenceViewProps> = ({
       {/* 4. Section: AI Course Curriculum Synthesizer */}
       <div className="card" style={{ marginBottom: 'var(--space-10)', padding: 'var(--space-6)' }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
-          <Sparkles size={22} style={{ color: 'var(--color-primary)' }} />
+          <Compass size={22} style={{ color: 'var(--color-primary)' }} aria-hidden="true" />
           <h3 style={{ margin: 0, fontSize: 'var(--text-xl)', fontWeight: 800 }}>
             AI Course Curriculum &amp; Proposal Synthesizer
           </h3>
@@ -408,7 +407,7 @@ export const CourseIntelligenceView: React.FC<CourseIntelligenceViewProps> = ({
             disabled={isSynthesizing || !customTopic.trim()}
             className="btn btn-primary btn-md"
           >
-            <Sparkles size={16} />
+            <ArrowRight size={16} />
             <span>{isSynthesizing ? 'Synthesizing...' : 'Generate Course Proposal'}</span>
           </button>
         </form>

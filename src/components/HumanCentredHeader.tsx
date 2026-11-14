@@ -7,7 +7,7 @@ import {
   Flame,
   Search,
   Settings,
-  Sparkles,
+  Bot,
   BookOpen,
 } from 'lucide-react';
 import { AppTheme } from '../utils/types';
@@ -126,7 +126,7 @@ export const HumanCentredHeader: React.FC<HumanCentredHeaderProps> = ({
           className="btn btn-subtle btn-sm"
           title="Open AI Learning Assistant"
         >
-          <Sparkles size={15} style={{ color: 'var(--color-accent)' }} />
+          <Bot size={15} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
           <span className="app-header-assistant-label">Assistant</span>
         </button>
 

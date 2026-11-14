@@ -1,13 +1,19 @@
 /* ==========================================================================
-   TYPOGRAPHY.CSS — Editorial Human-Centred Typography
+   TYPOGRAPHY.CSS — Editorial Human-Centred Typography (CSS3)
    ========================================================================== */
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   color: var(--color-text-strong);
   font-weight: 700;
   line-height: var(--leading-tight);
   letter-spacing: -0.02em;
+  text-wrap: balance;
 }
 
 h1 {
@@ -50,6 +56,7 @@ p {
   color: var(--color-text);
   line-height: var(--leading-normal);
   margin-bottom: var(--space-4);
+  text-wrap: pretty;
 }
 
 .lead-paragraph {
@@ -57,14 +64,17 @@ p {
   line-height: var(--leading-relaxed);
   color: var(--color-text-muted);
   max-width: var(--reading-measure);
+  text-wrap: balance;
 }
 
-strong, b {
+strong,
+b {
   font-weight: 700;
   color: var(--color-text-strong);
 }
 
-em, i {
+em,
+i {
   font-style: italic;
 }
 
@@ -76,8 +86,10 @@ small {
 a.text-link {
   color: var(--color-primary);
   text-decoration: underline;
+  text-decoration: underline;
   text-underline-offset: 3px;
   text-decoration-thickness: 1px;
+  text-decoration-skip-ink: auto;
   transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
 }
 
@@ -94,7 +106,7 @@ hr {
 
 blockquote {
   border-left: 3px solid var(--color-accent);
-  padding-left: var(--space-4);
+  padding-inline-start: var(--space-4);
   margin: var(--space-4) 0;
   color: var(--color-text-muted);
   font-style: italic;
@@ -110,4 +122,11 @@ blockquote {
   font-size: 0.88em;
   font-family: var(--font-mono);
   word-break: break-word;
+  white-space: pre-wrap;
+}
+
+/* Selection styling */
+::selection {
+  background-color: var(--color-accent);
+  color: var(--color-text-inverse);
 }

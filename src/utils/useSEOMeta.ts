@@ -77,6 +77,8 @@ export function useSEOMeta(config: Partial<SEOMetaConfig>) {
 
     // Update canonical
     if (merged.canonical) {
+      setMetaContent('og:url', merged.canonical);
+      setMetaContent('twitter:url', merged.canonical);
       let canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
       if (canonicalEl) {
         canonicalEl.setAttribute('href', merged.canonical);
@@ -91,7 +93,24 @@ export function useSEOMeta(config: Partial<SEOMetaConfig>) {
     // Add JSON-LD structured data
     if (merged.jsonLd) {
       setJsonLd(merged.jsonLd, 'dynamic-jsonld');
+    } else {
+      const existingJsonLd = document.getElementById('dynamic-jsonld');
+      if (existingJsonLd) existingJsonLd.remove();
     }
+
+    return () => {
+      document.title = DEFAULT_META.title;
+      setMetaContent('description', DEFAULT_META.description);
+      setMetaContent('og:title', DEFAULT_META.ogTitle);
+      setMetaContent('og:description', DEFAULT_META.ogDescription);
+      setMetaContent('og:type', DEFAULT_META.ogType || 'website');
+      setMetaContent('og:url', 'https://webzonebw.shop/');
+      setMetaContent('twitter:url', 'https://webzonebw.shop/');
+      const canonicalEl = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      canonicalEl?.setAttribute('href', 'https://webzonebw.shop/');
+      const existingJsonLd = document.getElementById('dynamic-jsonld');
+      if (existingJsonLd) existingJsonLd.remove();
+    };
   }, [config.title, config.description]);
 }
 
@@ -185,7 +204,7 @@ export const SEO_PRESETS = {
     canonical: 'https://webzonebw.shop/?view=blog',
     ogType: 'website',
   },
-  blogPost: (title: string, excerpt: string, slug: string, author: string, date: string, tags: string[]) => ({
+  blogPost: (title: string, excerpt: string, slug: string, author: string, date: string, tags: string[], updatedAt?: string) => ({
     title: `${title} — WebZoneBW SC`,
     description: excerpt,
     ogTitle: `${title} — WebZoneBW SC`,
@@ -202,6 +221,7 @@ export const SEO_PRESETS = {
         name: author,
       },
       datePublished: date,
+      ...(updatedAt ? { dateModified: updatedAt } : {}),
       keywords: tags.join(', '),
       url: `https://webzonebw.shop/?blog=${slug}`,
       publisher: {

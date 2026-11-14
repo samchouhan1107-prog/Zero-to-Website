@@ -1,5 +1,16 @@
 [
   {
+    "userId": "stu-03b575974d79",
+    "contentId": "curriculum-core-webzone",
+    "licenceType": "subscription-access",
+    "purchasePriceUsd": 19,
+    "transactionId": "sbx_txn_84169d0ff53f",
+    "expiresAt": "2026-12-14T11:22:17.319Z",
+    "id": "grant-1794655337322-kz4js",
+    "grantedAt": "2026-11-14T11:22:17.322Z",
+    "status": "active"
+  },
+  {
     "id": "grant-default-core",
     "userId": "default",
     "contentId": "curriculum-core-webzone",

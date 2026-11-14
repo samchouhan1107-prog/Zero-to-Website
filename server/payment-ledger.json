@@ -1,7 +1,163 @@
 {
-  "orders": [],
-  "subscriptions": [],
-  "auditLogs": [],
+  "orders": [
+    {
+      "orderId": "ORD-MWGCFXRN-444D1E",
+      "idempotencyKey": "idem_a29dc8f8ac147d5dfabfae4e",
+      "userId": "stu-03b575974d79",
+      "studentName": "sameer",
+      "studentEmail": "sam.chouhan32@gmail.com",
+      "planId": "commercial-use-149",
+      "planTitle": "Commercial & Team Training Licence",
+      "contentId": "curriculum-core-webzone",
+      "licenceType": "commercial-use",
+      "provider": "webzone-sandbox",
+      "providerOrderRef": "sbx_sess_74f4e770424b",
+      "checkoutUrl": "/sandbox-merchant/checkout?orderId=ORD-MWGCFXRN-444D1E&session=sbx_sess_74f4e770424b",
+      "grossAmountUsd": 149,
+      "amountCents": 14900,
+      "currency": "USD",
+      "paymentStatus": "initiated",
+      "financialStatus": "Payment Initiated",
+      "merchantTransactionId": null,
+      "merchantPaymentMethodSummary": null,
+      "verificationTimeMs": null,
+      "verifiedAt": null,
+      "subscriptionId": null,
+      "subscriptionActivated": false,
+      "settlementStatus": "not_applicable",
+      "merchantFeeUsd": 0,
+      "netSettlementUsd": 0,
+      "payoutReference": null,
+      "settledAt": null,
+      "bankDepositNote": "Awaiting merchant payment completion. Bank settlement is reported only after merchant payout reconciliation.",
+      "failureReason": null,
+      "createdAt": "2026-11-14T11:50:02.675Z",
+      "updatedAt": "2026-11-14T11:50:02.675Z"
+    },
+    {
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "idempotencyKey": "idem_8fe3fbe42f2ebf25a6e936fb",
+      "userId": "stu-03b575974d79",
+      "studentName": "sameer",
+      "studentEmail": "sam.chouhan32@gmail.com",
+      "planId": "monthly-pack-19",
+      "planTitle": "Weekly Learning Membership — Monthly Pack",
+      "contentId": "curriculum-core-webzone",
+      "licenceType": "subscription-access",
+      "provider": "webzone-sandbox",
+      "providerOrderRef": "sbx_sess_b4faaebc7ed5",
+      "checkoutUrl": "/sandbox-merchant/checkout?orderId=ORD-MWGBG5QB-1707F7&session=sbx_sess_b4faaebc7ed5",
+      "grossAmountUsd": 19,
+      "amountCents": 1900,
+      "currency": "USD",
+      "paymentStatus": "succeeded",
+      "financialStatus": "Subscription Activated",
+      "merchantTransactionId": "sbx_txn_84169d0ff53f",
+      "merchantPaymentMethodSummary": "WebZone Merchant Sandbox Checkout",
+      "verificationTimeMs": 2,
+      "verifiedAt": "2026-11-14T11:22:17.319Z",
+      "subscriptionId": "SUB-MWGBG8RR-75B400",
+      "subscriptionActivated": true,
+      "settlementStatus": "settlement_pending",
+      "merchantFeeUsd": 0.85,
+      "netSettlementUsd": 18.15,
+      "payoutReference": null,
+      "settledAt": null,
+      "bankDepositNote": "Payment verified by merchant API. Settlement / bank payout pending clearing cycle.",
+      "failureReason": null,
+      "createdAt": "2026-11-14T11:22:13.379Z",
+      "updatedAt": "2026-11-14T11:22:17.319Z"
+    }
+  ],
+  "subscriptions": [
+    {
+      "subscriptionId": "SUB-MWGBG8RR-75B400",
+      "userId": "stu-03b575974d79",
+      "studentEmail": "sam.chouhan32@gmail.com",
+      "studentName": "sameer",
+      "planId": "monthly-pack-19",
+      "planTitle": "Weekly Learning Membership — Monthly Pack",
+      "contentId": "curriculum-core-webzone",
+      "licenceType": "subscription-access",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "merchantTransactionId": "sbx_txn_84169d0ff53f",
+      "verifiedAmountUsd": 19,
+      "currency": "USD",
+      "status": "active",
+      "startDate": "2026-11-14T11:22:17.319Z",
+      "expiresAt": "2026-12-14T11:22:17.319Z",
+      "nextRenewalDate": "2026-12-14T11:22:17.319Z",
+      "autoRenew": true,
+      "cancelledAt": null,
+      "refundedAt": null,
+      "createdAt": "2026-11-14T11:22:17.319Z",
+      "updatedAt": "2026-11-14T11:22:17.319Z"
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "aud-1794657002692-4ec78da1",
+      "timestamp": "2026-11-14T11:50:02.692Z",
+      "eventType": "ORDER_CREATED",
+      "actor": "student",
+      "message": "Created order ORD-MWGCFXRN-444D1E for Commercial & Team Training Licence ($149.00 USD) via webzone-sandbox.",
+      "orderId": "ORD-MWGCFXRN-444D1E",
+      "userId": "stu-03b575974d79"
+    },
+    {
+      "id": "aud-1794655337320-88713c7e",
+      "timestamp": "2026-11-14T11:22:17.320Z",
+      "eventType": "SUBSCRIPTION_ACTIVATED",
+      "actor": "system",
+      "message": "Automatically unlocked Weekly Learning Membership — Monthly Pack for sam.chouhan32@gmail.com (Sub: SUB-MWGBG8RR-75B400, Expires: 2026-12-14T11:22:17.319Z).",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "userId": "stu-03b575974d79",
+      "merchantTransactionId": "sbx_txn_84169d0ff53f"
+    },
+    {
+      "id": "aud-1794655337319-df626981",
+      "timestamp": "2026-11-14T11:22:17.319Z",
+      "eventType": "VERIFICATION_SUCCEEDED",
+      "actor": "merchant-api",
+      "message": "Verified payment for ORD-MWGBG5QB-1707F7 (Txn: sbx_txn_84169d0ff53f, $19.00 USD).",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "userId": "stu-03b575974d79",
+      "merchantTransactionId": "sbx_txn_84169d0ff53f"
+    },
+    {
+      "id": "aud-1794655337316-e6be270f",
+      "timestamp": "2026-11-14T11:22:17.317Z",
+      "eventType": "VERIFICATION_STARTED",
+      "actor": "merchant-api",
+      "message": "Verifying order ORD-MWGBG5QB-1707F7 via webzone-sandbox merchant API.",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "userId": "stu-03b575974d79"
+    },
+    {
+      "id": "aud-1794655337308-6964b93f",
+      "timestamp": "2026-11-14T11:22:17.308Z",
+      "eventType": "CHECKOUT_SUBMITTED",
+      "actor": "student",
+      "message": "Checkout submitted for ORD-MWGBG5QB-1707F7; awaiting server-side merchant verification.",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "userId": "stu-03b575974d79"
+    },
+    {
+      "id": "aud-1794655333381-e46243df",
+      "timestamp": "2026-11-14T11:22:13.381Z",
+      "eventType": "ORDER_CREATED",
+      "actor": "student",
+      "message": "Created order ORD-MWGBG5QB-1707F7 for Weekly Learning Membership — Monthly Pack ($19.00 USD) via webzone-sandbox.",
+      "orderId": "ORD-MWGBG5QB-1707F7",
+      "userId": "stu-03b575974d79"
+    }
+  ],
   "processedWebhookEventIds": [],
-  "sandboxIntents": {}
+  "sandboxIntents": {
+    "ORD-MWGBG5QB-1707F7": {
+      "scenario": "succeed",
+      "submittedAt": "2026-11-14T11:22:17.308Z",
+      "paymentMethodSummary": "WebZone Merchant Sandbox Checkout"
+    }
+  }
 }

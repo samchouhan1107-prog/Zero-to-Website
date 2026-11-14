@@ -69,7 +69,7 @@ dist/
 
 ### Build Failures
 - **Missing dist files**: Run `npm run build` again
-- **Node version**: Use Node 20.x
+- **Node version**: Use the exact version in `.node-version` (currently Node 26.13.1 LTS)
 - **Permissions**: Ensure write access to dist/
 
 ### Runtime Issues

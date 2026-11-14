@@ -11,7 +11,6 @@ import {
   X,
   ExternalLink,
   ChevronRight,
-  Sparkles,
 } from 'lucide-react';
 import { Chapter } from '../../utils/types';
 import { VERIFIED_COURSE_OPPORTUNITIES, CourseOpportunity } from '../../shared/courseIntelligenceTypes';

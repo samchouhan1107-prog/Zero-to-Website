@@ -4,7 +4,6 @@ import {
   CheckCircle2,
   Download,
   Printer,
-  Sparkles,
   ShieldCheck,
   Star,
   FileCheck,

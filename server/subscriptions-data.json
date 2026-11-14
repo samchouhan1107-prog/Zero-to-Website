@@ -1,5 +1,21 @@
 [
   {
+    "id": "sub-1794655337325-syvy",
+    "userId": "stu-03b575974d79",
+    "studentEmail": "sam.chouhan32@gmail.com",
+    "studentName": "sameer",
+    "subscribedTracks": [
+      "Core Curriculum",
+      "Full-Stack AI",
+      "Modern CSS Architecture"
+    ],
+    "deliveryCadence": "weekly",
+    "preferredFormat": "both",
+    "active": true,
+    "subscribedAt": "2026-11-14T11:22:17.324Z",
+    "unsubscribeToken": "unsub-1794655337325-nzdo0j"
+  },
+  {
     "id": "sub-scholar-default",
     "userId": "default",
     "studentEmail": "scholar@demo.local",

@@ -3,12 +3,7 @@
   "name": "WebZoneBW SC — Knowledge Base & Web Engineering",
   "icons": [
     {
-      "src": "/assets/aistudio/logo_8c2b321c.png",
-      "type": "image/png",
-      "sizes": "192x192 512x512"
-    },
-    {
-      "src": "/favicon.png",
+      "src": "/assets/sclogo/logo_8c2b321c.png",
       "type": "image/png",
       "sizes": "220x147"
     }

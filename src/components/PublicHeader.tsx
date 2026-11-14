@@ -4,7 +4,6 @@ import {
   Search,
   Sun,
   Moon,
-  Sparkles,
   ArrowRight,
   Menu,
   X,
@@ -42,6 +41,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({
     { id: 'free-lessons', label: 'Free Lessons' },
     { id: 'membership', label: 'Weekly Membership' },
     { id: 'public-practice', label: 'Live Code' },
+    { id: 'blog', label: 'Blog' },
   ];
 
   const handleNavClick = (id: string) => {
@@ -96,7 +96,7 @@ export const PublicHeader: React.FC<PublicHeaderProps> = ({
               }}
             >
               <img
-                src="/assets/aistudio/logo_8c2b321c.png"
+                src="/assets/sclogo/logo_8c2b321c.png"
                 alt="WebZoneBW SC Logo"
                 style={{
                   width: '100%',

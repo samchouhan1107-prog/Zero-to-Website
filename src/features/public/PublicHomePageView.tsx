@@ -5,7 +5,6 @@ import {
   CheckCircle2,
   Code2,
   Layers,
-  Sparkles,
   ShieldCheck,
   FileText,
   Clock,
@@ -64,7 +63,6 @@ export const PublicHomePageView: React.FC<PublicHomePageViewProps> = ({
             marginBottom: 'var(--space-6)',
           }}
         >
-          <Sparkles size={14} />
           <span>Modern Editorial Web Engineering Academy</span>
         </div>
 

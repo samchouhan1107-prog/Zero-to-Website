@@ -3,7 +3,7 @@ import {
   FolderArchive,
   Search,
   Plus,
-  Sparkles,
+  Bot,
   BookOpen,
   Trash2,
   ExternalLink,
@@ -386,7 +386,7 @@ export const StorehouseView: React.FC<StorehouseViewProps> = ({
             <div className="modal-body">
               <div style={{ marginBottom: 'var(--space-6)', padding: 'var(--space-4)', backgroundColor: 'var(--color-accent-subtle)', borderRadius: 'var(--radius-md)' }}>
                 <h4 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', margin: '0 0 0.5rem 0', color: 'var(--color-accent)' }}>
-                  <Sparkles size={16} />
+                  <Bot size={16} />
                   <span>Generate Complete Structured Lesson with AI</span>
                 </h4>
                 <p style={{ fontSize: 'var(--text-xs)', margin: '0 0 0.75rem 0' }}>

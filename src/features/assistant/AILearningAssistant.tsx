@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
   Send,
-  Sparkles,
   Bot,
   User,
   Copy,
@@ -258,7 +257,7 @@ export const AILearningAssistant: React.FC<AILearningAssistantProps> = ({
       <header className="chat-header">
         <div className="chat-header-title">
           <div className="chat-avatar assistant">
-            <Sparkles size={18} />
+            <Bot size={18} />
           </div>
           <div>
             <h3>AI Learning Assistant</h3>

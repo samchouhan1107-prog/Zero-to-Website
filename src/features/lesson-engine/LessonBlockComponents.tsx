@@ -10,7 +10,6 @@ import {
   Terminal,
   Zap,
   HelpCircle,
-  Sparkles,
 } from 'lucide-react';
 import {
   DefinitionBlockData,
@@ -31,7 +30,7 @@ export const ObjectivesBlock: React.FC<{ objectives: string[] }> = ({
   return (
     <aside className="lesson-objectives-box" aria-label="Learning Objectives">
       <div className="lesson-objectives-title">
-        <Sparkles size={16} />
+        <BookOpen size={16} aria-hidden="true" />
         <span>What You Will Learn</span>
       </div>
       <ul className="lesson-objectives-list">
@@ -253,7 +252,7 @@ export const PracticeExerciseBlock: React.FC<{
           style={{ width: '100%', marginTop: '1rem' }}
         >
           <Terminal size={18} />
-          <span>Launch Code Sandbox &amp; Verify (+50 XP)</span>
+          <span>Open Live Code &amp; Verify (+50 XP)</span>
         </button>
       )}
     </section>
@@ -360,7 +359,7 @@ export const SummaryBlock: React.FC<{ items: string[] }> = ({ items }) => {
   return (
     <aside className="lesson-summary-box" aria-label="Lesson Summary">
       <div className="lesson-summary-title">
-        <Sparkles size={18} style={{ color: 'var(--color-accent)' }} />
+        <CheckCircle2 size={18} style={{ color: 'var(--color-accent)' }} aria-hidden="true" />
         <span>Key Takeaways &amp; Next Steps</span>
       </div>
       <ul className="lesson-list lesson-list-bullet" style={{ margin: 0, paddingLeft: '1.25rem' }}>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, lazy, Suspense } from 'react';
 import { Chapter, UserProgress, AppTheme } from './types';
 import { ALL_PLATFORM_CHAPTERS } from '../data/courses/allCourses';
+import { XP_MILESTONES } from '../data/milestonesData';
 import { calculateDailyStreak, getLocalDateString } from './streakUtils';
 import { HumanCentredHeader } from '../components/HumanCentredHeader';
 import { HumanCentredSidebar } from '../components/HumanCentredSidebar';
@@ -9,24 +10,28 @@ import { LearningCentreView } from '../features/learning/LearningCentreView';
 import { LessonReaderView } from '../features/lesson-engine/LessonReaderView';
 import { StorehouseView } from '../features/storehouse/StorehouseView';
 import { PracticeClassView } from '../features/practice/PracticeClassView';
-import { AILearningAssistant } from '../features/assistant/AILearningAssistant';
 import { CampaignCentreView } from '../features/campaign/CampaignCentreView';
 import { AchievementEngineView } from '../features/achievements/AchievementEngineView';
 import { AnalyticsView } from '../features/analytics/AnalyticsView';
 import { UserProfileView } from '../features/profile/UserProfileView';
 import { CourseIntelligenceView } from '../features/course-intelligence/CourseIntelligenceView';
 import { PublishingWorkflowView } from '../features/publishing/PublishingWorkflowView';
+import { BlogView } from '../features/blog/BlogView';
 import { PublicHeader } from '../components/PublicHeader';
 import { PublicFooter } from '../components/PublicFooter';
 import { PublicHomePageView } from '../features/public/PublicHomePageView';
 import { CourseCatalogueView } from '../features/public/CourseCatalogueView';
 import { MembershipView } from '../features/public/MembershipView';
+import { ExternalToolsView } from '../features/webtools/ExternalToolsView';
 import { AuthAndSettingsModal } from '../features/auth/AuthAndSettingsModal';
 import { MerchantDashboardView } from '../features/analytics/MerchantDashboardView';
 import { StructuredLesson } from '../features/lesson-engine/types';
 import { fetchStorehouseItems } from '../features/storehouse/storehouseService';
 import { useAuth } from './AuthContext';
 import { getAuthHeaders } from './authService';
+
+// Dynamic import for AI Learning Assistant (lazy-loaded feature)
+const AILearningAssistant = lazy(() => import('../features/assistant/AILearningAssistant').then(m => ({ default: m.AILearningAssistant })));
 
 export interface ToastMessage {
   id: string;
@@ -51,7 +56,11 @@ const INITIAL_PROGRESS: UserProgress = {
 export default function App() {
   const { user, entitlement } = useAuth();
   const [chapters] = useState<Chapter[]>(ALL_PLATFORM_CHAPTERS);
-  const [activeView, setActiveView] = useState<string>('home');
+  const [activeView, setActiveView] = useState<string>(() => {
+    if (typeof window === 'undefined') return 'home';
+    const params = new URLSearchParams(window.location.search);
+    return params.has('blog') || params.get('view') === 'blog' ? 'blog' : 'home';
+  });
   const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
   const [customLesson, setCustomLesson] = useState<StructuredLesson | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
@@ -155,6 +164,7 @@ export default function App() {
 
   // Keep document title synchronized with active public/studio view
   useEffect(() => {
+    if (activeView === 'blog') return;
     const viewTitles: Record<string, string> = {
       home: 'Zero-to-Website — WebZoneBW SC | Editorial Web Engineering Platform',
       courses: 'Courses — Zero-to-Website | WebZoneBW SC',
@@ -175,6 +185,25 @@ export default function App() {
       document.title = viewTitles[activeView] || 'Zero-to-Website — WebZoneBW SC';
     }
   }, [activeView, currentLessonId, customLesson, chapters]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const url = new URL(window.location.href);
+    if (activeView === 'blog') {
+      if (url.searchParams.has('blog')) {
+        url.searchParams.delete('view');
+      } else {
+        url.searchParams.set('view', 'blog');
+      }
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+      return;
+    }
+    if (url.searchParams.has('blog')) {
+      url.searchParams.delete('blog');
+      if (url.searchParams.get('view') === 'blog') url.searchParams.delete('view');
+      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+  }, [activeView]);
 
   const addToast = (
     title: string,
@@ -251,7 +280,9 @@ export default function App() {
 
   const handleClaimMilestone = (milestoneId: string) => {
     const claimed = progress.claimedMilestones || [];
-    if (claimed.includes(milestoneId)) return;
+    const milestone = XP_MILESTONES.find((item) => item.id === milestoneId);
+    const currentXp = progress.xpPoints || 0;
+    if (!milestone || currentXp < milestone.xpRequired || claimed.includes(milestoneId)) return;
 
     const updated: UserProgress = {
       ...progress,
@@ -262,7 +293,7 @@ export default function App() {
     addToast('Milestone Claimed!', '+100 Bonus XP earned!', 'success');
   };
 
-  const isPublicView = ['home', 'courses', 'free-lessons', 'membership', 'public-practice'].includes(activeView);
+  const isPublicView = ['home', 'courses', 'free-lessons', 'membership', 'public-practice', 'blog'].includes(activeView);
   const isReaderView = activeView === 'lesson-reader';
 
   // Public Educational Layout (No admin sidebar, spacious reading and exploration)
@@ -382,6 +413,12 @@ export default function App() {
                   addToast('Challenge Complete!', `+${xp} XP awarded!`, 'success');
                 }}
               />
+            </div>
+          )}
+
+          {activeView === 'blog' && (
+            <div style={{ padding: 'var(--space-6)' }}>
+              <BlogView onNavigate={setActiveView} onOpenLesson={handleOpenLesson} />
             </div>
           )}
 
@@ -539,12 +576,18 @@ export default function App() {
 
         {activeView === 'assistant' && (
           <div className="app-main" style={{ height: 'calc(100vh - 100px)', padding: 'var(--space-4)' }}>
-            <AILearningAssistant
-              currentLessonTitle={
-                chapters.flatMap((c) => c.lessons).find((l) => l.id === currentLessonId)?.title
-              }
-              onOpenStorehouse={() => setActiveView('storehouse')}
-            />
+            <React.Suspense fallback={
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%' }}>
+                <div className="app-loader-spinner"></div>
+              </div>
+            }>
+              <AILearningAssistant
+                currentLessonTitle={
+                  chapters.flatMap((c) => c.lessons).find((l) => l.id === currentLessonId)?.title
+                }
+                onOpenStorehouse={() => setActiveView('storehouse')}
+              />
+            </React.Suspense>
           </div>
         )}
 
@@ -552,7 +595,7 @@ export default function App() {
           <CampaignCentreView
             progress={progress}
             onClaimMilestone={handleClaimMilestone}
-            onOpenLesson={handleOpenLesson}
+            onNavigateMembership={() => setActiveView('membership')}
           />
         )}
 
@@ -572,6 +615,36 @@ export default function App() {
             onOpenSettings={() => setSettingsOpen(true)}
           />
         )}
+
+        {activeView === 'workspace' && (
+          <div className="app-main" style={{ height: 'calc(100vh - 100px)', padding: 'var(--space-4)' }}>
+            <h2 style={{ fontSize: 'var(--text-xl)', marginBottom: 'var(--space-4)', color: 'var(--color-text-strong)' }}>
+              WebZoneBW Workspace
+            </h2>
+            <p style={{ fontSize: 'var(--text-base)', color: 'var(--color-text-muted)', marginBottom: 'var(--space-6)' }}>
+              Your personal development environment for managing projects, accessing tools, and tracking your learning journey.
+            </p>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: 'var(--space-4)' }}>
+              <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text-strong)' }}>Active Projects</h3>
+                <p style={{ color: 'var(--color-text-muted)' }}>No active projects yet. Start by opening a lesson or creating a new workspace.</p>
+              </div>
+              <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
+                <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text-strong)' }}>Quick Actions</h3>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
+                  <button className="btn btn-primary" onClick={() => setActiveView('learning')}>Learning Centre</button>
+                  <button className="btn btn-secondary" onClick={() => setActiveView('storehouse')}>My Storehouse</button>
+                  <button className="btn btn-secondary" onClick={() => setActiveView('practice')}>Practice Sandbox</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeView === 'webtools' && (
+          <ExternalToolsView onNavigate={setActiveView} />
+        )}
+
       </div>
 
       {/* Settings Modal */}

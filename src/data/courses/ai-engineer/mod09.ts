@@ -206,7 +206,7 @@ code { color: #38bdf8; }`,
         concept: 'Cloud Tool Assistant',
         story: 'A professional Bloomberg terminal does not just display static quotes. When a trader requests an analysis of a tech stock, the terminal pulls live SEC filings, queries real-time order books, calculates volatility metrics, and displays a streaming market synthesis in under 1 second.',
         moral: 'Frontier cloud models combined with fast function calling act as an intelligent real-time operating system for enterprise data.',
-        icon: 'Sparkles'
+        icon: 'Lightbulb'
       },
       visualType: 'network-flow',
       codeExample: {

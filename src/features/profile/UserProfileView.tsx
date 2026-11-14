@@ -5,7 +5,6 @@ import {
   Bookmark,
   FileEdit,
   Clock,
-  Sparkles,
   ArrowRight,
   ShieldCheck,
 } from 'lucide-react';

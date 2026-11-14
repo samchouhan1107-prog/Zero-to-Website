@@ -1,5 +1,5 @@
 /* ==========================================================================
-   LAYOUT.CSS — Semantic CSS Grid & Flexbox Architectural Layout
+   LAYOUT.CSS — Semantic CSS Grid & Flexbox Architectural Layout (CSS3)
    ========================================================================== */
 
 .app-root {
@@ -13,9 +13,9 @@
 
 /* Sidebar Shell */
 .app-sidebar {
-  width: var(--sidebar-width);
-  min-width: var(--sidebar-width);
-  max-width: var(--sidebar-width);
+  inline-size: var(--sidebar-width);
+  min-inline-size: var(--sidebar-width);
+  max-inline-size: var(--sidebar-width);
   box-sizing: border-box;
   height: 100vh;
   position: sticky;
@@ -23,18 +23,18 @@
   display: flex;
   flex-direction: column;
   background-color: var(--sidebar-bg);
-  border-right: 1px solid var(--color-border);
+  border-inline-end: 1px solid var(--color-border);
   z-index: var(--z-nav);
   flex-shrink: 0;
-  transition: width var(--transition-normal), min-width var(--transition-normal), max-width var(--transition-normal), transform var(--transition-normal);
+  transition: inline-size var(--transition-normal), min-inline-size var(--transition-normal), max-inline-size var(--transition-normal), transform var(--transition-normal);
   overflow: hidden;
 }
 
 /* Collapsed Sidebar Mode */
 .app-sidebar.collapsed {
-  width: var(--sidebar-collapsed-width);
-  min-width: var(--sidebar-collapsed-width);
-  max-width: var(--sidebar-collapsed-width);
+  inline-size: var(--sidebar-collapsed-width);
+  min-inline-size: var(--sidebar-collapsed-width);
+  max-inline-size: var(--sidebar-collapsed-width);
 }
 
 .app-sidebar.collapsed .sidebar-full-only {
@@ -42,7 +42,7 @@
 }
 
 .app-sidebar.collapsed .app-sidebar-header {
-  padding: 0 var(--space-2);
+  padding-inline: var(--space-2);
   justify-content: center;
 }
 
@@ -53,7 +53,7 @@
 .app-sidebar.collapsed .nav-item-btn {
   justify-content: center;
   padding: 0.65rem 0;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .app-sidebar.collapsed .app-sidebar-footer {
@@ -76,7 +76,7 @@
   transition: all var(--transition-fast);
   cursor: pointer;
   position: relative;
-  width: 100%;
+  inline-size: 100%;
   text-align: left;
   box-sizing: border-box;
   overflow: hidden;
@@ -113,7 +113,7 @@
 }
 
 .nav-item-label {
-  white-space: nowrap;
+  overflow-wrap: anywhere;
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 0.85rem;
@@ -130,7 +130,7 @@
 .app-sidebar.collapsed .nav-item-btn .nav-tooltip {
   display: block;
   position: absolute;
-  left: calc(100% + 10px);
+  inset-inline-start: calc(100% + 10px);
   top: 50%;
   transform: translateY(-50%) translateX(-4px);
   background-color: var(--color-surface);
@@ -157,11 +157,11 @@
 
 .app-sidebar-header {
   height: var(--header-height);
-  padding: 0 var(--space-4);
+  padding-inline: var(--space-4);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid var(--color-border-subtle);
+  border-block-end: 1px solid var(--color-border-subtle);
   flex-shrink: 0;
 }
 
@@ -176,7 +176,7 @@
 
 .app-sidebar-footer {
   padding: var(--space-3) var(--space-4);
-  border-top: 1px solid var(--color-border-subtle);
+  border-block-start: 1px solid var(--color-border-subtle);
   background-color: var(--color-surface-subtle);
   flex-shrink: 0;
   display: flex;
@@ -190,7 +190,7 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
-  width: 100%;
+  inline-size: 100%;
   min-height: 100vh;
   overflow-y: auto;
   overflow-x: hidden;
@@ -205,8 +205,8 @@
   background-color: var(--header-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--color-border);
-  padding: 0 var(--space-6);
+  border-block-end: 1px solid var(--color-border);
+  padding-inline: var(--space-6);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -226,7 +226,7 @@
   font-size: var(--text-sm);
   font-weight: 700;
   color: var(--color-text-strong);
-  white-space: nowrap;
+  overflow-wrap: anywhere;
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -249,9 +249,9 @@
 }
 
 .public-header-inner {
-  max-width: 1280px;
+  max-inline-size: 1280px;
   margin: 0 auto;
-  padding: 0 var(--space-6);
+  padding-inline: var(--space-6);
   height: 70px;
   display: flex;
   align-items: center;
@@ -281,7 +281,7 @@
 .app-main {
   flex: 1;
   padding: var(--space-8) var(--space-8);
-  max-width: var(--content-max-width);
+  max-inline-size: var(--content-max-width);
   width: 100%;
   margin: 0 auto;
   min-width: 0;
@@ -289,15 +289,14 @@
 }
 
 .app-main--full {
-  max-width: 100%;
+  max-inline-size: 100%;
   padding: var(--space-6);
 }
 
 /* Editorial Container */
 .reading-container {
-  max-width: var(--reading-measure);
-  margin-left: auto;
-  margin-right: auto;
+  max-inline-size: var(--reading-measure);
+  margin-inline: auto;
   width: 100%;
   min-width: 0;
 }
@@ -325,12 +324,29 @@
   justify-content: space-between;
 }
 
-.gap-1 { gap: var(--space-1); }
-.gap-2 { gap: var(--space-2); }
-.gap-3 { gap: var(--space-3); }
-.gap-4 { gap: var(--space-4); }
-.gap-6 { gap: var(--space-6); }
-.gap-8 { gap: var(--space-8); }
+.gap-1 {
+  gap: var(--space-1);
+}
+
+.gap-2 {
+  gap: var(--space-2);
+}
+
+.gap-3 {
+  gap: var(--space-3);
+}
+
+.gap-4 {
+  gap: var(--space-4);
+}
+
+.gap-6 {
+  gap: var(--space-6);
+}
+
+.gap-8 {
+  gap: var(--space-8);
+}
 
 .grid-auto-fit-cards {
   display: grid;
@@ -354,4 +370,17 @@
   display: grid;
   grid-template-columns: 280px 1fr;
   gap: var(--space-8);
+}
+
+/* Logical property shorthand utilities */
+.start-0 {
+  inset-inline-start: 0;
+}
+
+.end-0 {
+  inset-inline-end: 0;
+}
+
+.inset-0 {
+  inset: 0;
 }
