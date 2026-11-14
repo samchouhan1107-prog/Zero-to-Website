@@ -33,6 +33,22 @@ npm start
 
 `npm start` serves the production build and requires `npm run build` first. Optional environment variables are listed in `.env.example`; keep real credentials in the hosting provider's secret settings, never in source control.
 
+## Public page URLs
+
+The public sections have direct URLs and can be refreshed or shared:
+
+- Home: `/`
+- Courses: `/courses/`
+- Free Lessons: `/free-lessons/`
+- Weekly Membership: `/membership/`
+- Live Code: `/live-code/`
+- Blog: `/blog/`
+- Blog article: `/blog/<article-slug>/`
+
+Older `?view=` and `?blog=` links remain supported as aliases.
+
+The Express server generates `GET /sitemap.xml` from the current course and Blog data. It includes the public section URLs, legal pages, course and lesson URLs, the Blog index, and each unique article URL. `GET /robots.txt` points crawlers to that sitemap. There is no separate static sitemap file to keep in sync.
+
 ## Deployment
 
 The repository's hosting configuration is `render.yaml`. Read [DEPLOYMENT.md](DEPLOYMENT.md) before changing hosting or production settings. The GitHub Actions workflow validates the build; it does not deploy the application.

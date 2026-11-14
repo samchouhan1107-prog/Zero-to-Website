@@ -29,6 +29,7 @@ import { StructuredLesson } from '../features/lesson-engine/types';
 import { fetchStorehouseItems } from '../features/storehouse/storehouseService';
 import { useAuth } from './AuthContext';
 import { getAuthHeaders } from './authService';
+import { getViewFromLocation, getViewHref, PUBLIC_VIEW_PATHS } from './publicRoutes';
 
 // Dynamic import for AI Learning Assistant (lazy-loaded feature)
 const AILearningAssistant = lazy(() => import('../features/assistant/AILearningAssistant').then(m => ({ default: m.AILearningAssistant })));
@@ -56,12 +57,22 @@ const INITIAL_PROGRESS: UserProgress = {
 export default function App() {
   const { user, entitlement } = useAuth();
   const [chapters] = useState<Chapter[]>(ALL_PLATFORM_CHAPTERS);
-  const [activeView, setActiveView] = useState<string>(() => {
-    if (typeof window === 'undefined') return 'home';
-    const params = new URLSearchParams(window.location.search);
-    return params.has('blog') || params.get('view') === 'blog' ? 'blog' : 'home';
+  const [activeView, setActiveView] = useState<string>(() =>
+    typeof window === 'undefined' ? 'home' : getViewFromLocation(window.location)
+  );
+  const navigateToView = useCallback((view: string, params?: Record<string, string>) => {
+    const hasShareableRoute = Boolean(PUBLIC_VIEW_PATHS[view]) || (view === 'lesson-reader' && Boolean(params?.lesson));
+    if (typeof window !== 'undefined' && hasShareableRoute) {
+      const href = getViewHref(view, params);
+      const currentHref = `${window.location.pathname}${window.location.search}${window.location.hash}`;
+      if (href !== currentHref) window.history.pushState({}, '', href);
+    }
+    setActiveView(view);
+  }, []);
+  const [currentLessonId, setCurrentLessonId] = useState<string>(() => {
+    if (typeof window === 'undefined') return 'ch-00-l-01';
+    return new URLSearchParams(window.location.search).get('lesson') || 'ch-00-l-01';
   });
-  const [currentLessonId, setCurrentLessonId] = useState<string>('ch-00-l-01');
   const [customLesson, setCustomLesson] = useState<StructuredLesson | null>(null);
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [sidebarCollapsed, setSidebarCollapsed] = useState<boolean>(() => {
@@ -184,26 +195,38 @@ export default function App() {
     } else {
       document.title = viewTitles[activeView] || 'Zero-to-Website — WebZoneBW SC';
     }
+    const publicPath = PUBLIC_VIEW_PATHS[activeView];
+    if (publicPath) {
+      const descriptions: Record<string, string> = {
+        home: 'Learn web development with structured courses, guided lessons, practical projects, and Live Code.',
+        courses: 'Explore the Zero-to-Website web engineering curriculum, course chapters, and guided learning paths.',
+        'free-lessons': 'Start learning web development with free introductory lessons and practical exercises.',
+        membership: 'Explore the Weekly Learning Membership and access options for Zero-to-Website courses.',
+        'public-practice': 'Practise HTML, CSS, and JavaScript in the Zero-to-Website Live Code learning workspace.',
+      };
+      const description = descriptions[activeView] || 'Explore learning resources from Zero-to-Website by WebZoneBW.';
+      const canonical = `https://webzonebw.shop${publicPath}`;
+      document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:title"]')?.setAttribute('content', document.title);
+      document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonical);
+      document.querySelector('meta[property="twitter:title"]')?.setAttribute('content', document.title);
+      document.querySelector('meta[property="twitter:description"]')?.setAttribute('content', description);
+      document.querySelector('meta[property="twitter:url"]')?.setAttribute('content', canonical);
+      document.querySelector('link[rel="canonical"]')?.setAttribute('href', canonical);
+    }
   }, [activeView, currentLessonId, customLesson, chapters]);
 
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const url = new URL(window.location.href);
-    if (activeView === 'blog') {
-      if (url.searchParams.has('blog')) {
-        url.searchParams.delete('view');
-      } else {
-        url.searchParams.set('view', 'blog');
-      }
-      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-      return;
-    }
-    if (url.searchParams.has('blog')) {
-      url.searchParams.delete('blog');
-      if (url.searchParams.get('view') === 'blog') url.searchParams.delete('view');
-      window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
-    }
-  }, [activeView]);
+    const syncViewFromUrl = () => {
+      setActiveView(getViewFromLocation(window.location));
+      const lessonId = new URLSearchParams(window.location.search).get('lesson');
+      if (lessonId) setCurrentLessonId(lessonId);
+    };
+    window.addEventListener('popstate', syncViewFromUrl);
+    return () => window.removeEventListener('popstate', syncViewFromUrl);
+  }, []);
 
   const addToast = (
     title: string,
@@ -221,13 +244,13 @@ export default function App() {
   const handleOpenLesson = (lessonId: string) => {
     setCurrentLessonId(lessonId);
     setCustomLesson(null);
-    setActiveView('lesson-reader');
+    navigateToView('lesson-reader', { lesson: lessonId });
   };
 
   const handleOpenCustomLesson = (lesson: StructuredLesson) => {
     setCustomLesson(lesson);
     setCurrentLessonId(lesson.id);
-    setActiveView('lesson-reader');
+    navigateToView('lesson-reader');
   };
 
   const handleCompleteLesson = (lessonId: string) => {
@@ -306,12 +329,12 @@ export default function App() {
             if (view === 'settings') {
               setSettingsOpen(true);
             } else {
-              setActiveView(view);
+              navigateToView(view);
             }
           }}
           theme={theme}
           onToggleTheme={toggleTheme}
-          onOpenSearch={() => setActiveView('courses')}
+          onOpenSearch={() => navigateToView('courses')}
           onStartFree={() => handleOpenLesson('ch-00-l-01')}
           hasStudentProgress={Object.keys(progress.completedLessons || {}).length > 0}
         />
@@ -333,7 +356,7 @@ export default function App() {
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem' }}>
               <button
                 type="button"
-                onClick={() => setActiveView('courses')}
+                onClick={() => navigateToView('courses')}
                 className="btn btn-secondary btn-sm"
                 style={{ fontSize: '12px', padding: '0.3rem 0.65rem' }}
                 title="Return to Course Catalogue"
@@ -357,7 +380,7 @@ export default function App() {
                   </span>
                   <button
                     type="button"
-                    onClick={() => setActiveView('membership')}
+                    onClick={() => navigateToView('membership')}
                     className="btn btn-primary btn-sm"
                     style={{ fontSize: '12px', padding: '0.35rem 0.75rem' }}
                   >
@@ -373,7 +396,7 @@ export default function App() {
           {activeView === 'home' && (
             <PublicHomePageView
               chapters={chapters}
-              onNavigate={setActiveView}
+              onNavigate={navigateToView}
               onOpenLesson={handleOpenLesson}
             />
           )}
@@ -383,7 +406,7 @@ export default function App() {
               key="courses"
               chapters={chapters}
               onOpenLesson={handleOpenLesson}
-              onNavigateMembership={() => setActiveView('membership')}
+              onNavigateMembership={() => navigateToView('membership')}
             />
           )}
 
@@ -392,7 +415,7 @@ export default function App() {
               key="free-lessons"
               chapters={chapters}
               onOpenLesson={handleOpenLesson}
-              onNavigateMembership={() => setActiveView('membership')}
+              onNavigateMembership={() => navigateToView('membership')}
               showFreeOnly={true}
             />
           )}
@@ -418,7 +441,7 @@ export default function App() {
 
           {activeView === 'blog' && (
             <div style={{ padding: 'var(--space-6)' }}>
-              <BlogView onNavigate={setActiveView} onOpenLesson={handleOpenLesson} />
+              <BlogView onNavigate={navigateToView} onOpenLesson={handleOpenLesson} />
             </div>
           )}
 
@@ -432,9 +455,9 @@ export default function App() {
               onCompleteLesson={handleCompleteLesson}
               onToggleBookmark={handleToggleBookmark}
               onSaveNote={handleSaveNote}
-              onOpenSandbox={() => setActiveView('public-practice')}
+              onOpenSandbox={() => navigateToView('public-practice')}
               onOpenAssistant={(topic) => {
-                setActiveView('assistant');
+                navigateToView('assistant');
               }}
               onAddToast={addToast}
             />
@@ -446,7 +469,7 @@ export default function App() {
             if (view === 'settings') {
               setSettingsOpen(true);
             } else {
-              setActiveView(view);
+              navigateToView(view);
             }
           }}
           onOpenSettings={() => setSettingsOpen(true)}
@@ -494,7 +517,7 @@ export default function App() {
           if (view === 'settings') {
             setSettingsOpen(true);
           } else {
-            setActiveView(view);
+            navigateToView(view);
           }
         }}
         isDrawerOpen={mobileDrawerOpen}
@@ -514,10 +537,10 @@ export default function App() {
           onToggleTheme={toggleTheme}
           xpPoints={progress.xpPoints || 0}
           streakDays={progress.streakDays || 1}
-          onOpenSearch={() => setActiveView('learning')}
+          onOpenSearch={() => navigateToView('learning')}
           onOpenSettings={() => setSettingsOpen(true)}
-          onOpenAssistant={() => setActiveView('assistant')}
-          onNavigateHome={() => setActiveView('home')}
+          onOpenAssistant={() => navigateToView('assistant')}
+          onNavigateHome={() => navigateToView('home')}
           activeView={activeView}
         />
 
@@ -526,9 +549,9 @@ export default function App() {
           <DashboardView
             progress={progress}
             chapters={chapters}
-            onNavigateView={setActiveView}
+            onNavigateView={navigateToView}
             onOpenLesson={handleOpenLesson}
-            onOpenAssistant={() => setActiveView('assistant')}
+            onOpenAssistant={() => navigateToView('assistant')}
           />
         )}
 
@@ -560,7 +583,7 @@ export default function App() {
         {activeView === 'storehouse' && (
           <StorehouseView
             onOpenLesson={handleOpenCustomLesson}
-            onOpenAssistant={() => setActiveView('assistant')}
+            onOpenAssistant={() => navigateToView('assistant')}
           />
         )}
 
@@ -585,7 +608,7 @@ export default function App() {
                 currentLessonTitle={
                   chapters.flatMap((c) => c.lessons).find((l) => l.id === currentLessonId)?.title
                 }
-                onOpenStorehouse={() => setActiveView('storehouse')}
+                onOpenStorehouse={() => navigateToView('storehouse')}
               />
             </React.Suspense>
           </div>
@@ -595,7 +618,7 @@ export default function App() {
           <CampaignCentreView
             progress={progress}
             onClaimMilestone={handleClaimMilestone}
-            onNavigateMembership={() => setActiveView('membership')}
+            onNavigateMembership={() => navigateToView('membership')}
           />
         )}
 
@@ -632,9 +655,9 @@ export default function App() {
               <div style={{ padding: 'var(--space-4)', backgroundColor: 'var(--color-surface)', borderRadius: 'var(--radius-md)', border: '1px solid var(--color-border)' }}>
                 <h3 style={{ fontSize: 'var(--text-lg)', marginBottom: 'var(--space-2)', color: 'var(--color-text-strong)' }}>Quick Actions</h3>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-2)' }}>
-                  <button className="btn btn-primary" onClick={() => setActiveView('learning')}>Learning Centre</button>
-                  <button className="btn btn-secondary" onClick={() => setActiveView('storehouse')}>My Storehouse</button>
-                  <button className="btn btn-secondary" onClick={() => setActiveView('practice')}>Practice Sandbox</button>
+                  <button className="btn btn-primary" onClick={() => navigateToView('learning')}>Learning Centre</button>
+                  <button className="btn btn-secondary" onClick={() => navigateToView('storehouse')}>My Storehouse</button>
+                  <button className="btn btn-secondary" onClick={() => navigateToView('practice')}>Practice Sandbox</button>
                 </div>
               </div>
             </div>
@@ -642,7 +665,7 @@ export default function App() {
         )}
 
         {activeView === 'webtools' && (
-          <ExternalToolsView onNavigate={setActiveView} />
+          <ExternalToolsView onNavigate={navigateToView} />
         )}
 
       </div>

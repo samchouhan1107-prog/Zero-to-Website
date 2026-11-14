@@ -201,7 +201,7 @@ export const SEO_PRESETS = {
     description: 'In-depth articles, tutorials, and best practices for modern web development. Learn CSS, HTML, JavaScript, responsive design, and more from the WebZoneBW editorial team.',
     ogTitle: 'Blog — Web Development Tutorials | WebZoneBW SC',
     ogDescription: 'In-depth web development tutorials, guides, and best practices from the WebZoneBW editorial team.',
-    canonical: 'https://webzonebw.shop/?view=blog',
+    canonical: 'https://webzonebw.shop/blog/',
     ogType: 'website',
   },
   blogPost: (title: string, excerpt: string, slug: string, author: string, date: string, tags: string[], updatedAt?: string) => ({
@@ -209,7 +209,7 @@ export const SEO_PRESETS = {
     description: excerpt,
     ogTitle: `${title} — WebZoneBW SC`,
     ogDescription: excerpt,
-    canonical: `https://webzonebw.shop/?blog=${slug}`,
+    canonical: `https://webzonebw.shop/blog/${encodeURIComponent(slug)}/`,
     ogType: 'article',
     jsonLd: {
       '@context': 'https://schema.org',
@@ -223,7 +223,7 @@ export const SEO_PRESETS = {
       datePublished: date,
       ...(updatedAt ? { dateModified: updatedAt } : {}),
       keywords: tags.join(', '),
-      url: `https://webzonebw.shop/?blog=${slug}`,
+      url: `https://webzonebw.shop/blog/${encodeURIComponent(slug)}/`,
       publisher: {
         '@type': 'Organization',
         name: 'WebZoneBW SC',

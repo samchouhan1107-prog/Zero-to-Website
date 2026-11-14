@@ -6,6 +6,7 @@ import { GoogleGenAI } from "@google/genai";
 import dotenv from "dotenv";
 import { CHAPTERS_DATA } from "./src/data/chaptersData";
 import { BLOG_ARTICLES } from "./src/data/blogArticles";
+import { LEGACY_BLOG_ARTICLES } from "./src/data/blog/blogAdapter";
 import { EXTERNAL_TOOLS } from "./src/data/externalTools";
 import type { BlogSection } from "./src/data/blogData";
 import authRoutes, { resolveAuthenticatedRequestUser } from "./server/auth";
@@ -51,6 +52,9 @@ dotenv.config();
 const app = express();
 const PORT = Number(process.env.PORT) || 3000;
 const CANONICAL_ORIGIN = 'https://webzonebw.shop';
+const ALL_BLOG_ARTICLES = Array.from(
+  new Map([...BLOG_ARTICLES, ...LEGACY_BLOG_ARTICLES].map((article) => [article.slug, article])).values()
+);
 
 /**
  * Give crawlers and no-JavaScript visitors a truthful, lesson-specific document
@@ -188,10 +192,10 @@ const injectLessonSnapshot = (html: string, lessonId: string) => {
 };
 
 const injectBlogSnapshot = (html: string, slug: string) => {
-  const article = BLOG_ARTICLES.find((candidate) => candidate.slug === slug);
+  const article = ALL_BLOG_ARTICLES.find((candidate) => candidate.slug === slug);
   if (!article) return html;
 
-  const canonical = `${CANONICAL_ORIGIN}/?blog=${encodeURIComponent(article.slug)}`;
+  const canonical = `${CANONICAL_ORIGIN}/blog/${encodeURIComponent(article.slug)}/`;
   const title = `${article.title} | Zero-to-Website | WebZoneBW SC`;
   const description = article.excerpt;
   const articleBody = article.structuredContent
@@ -201,7 +205,7 @@ const injectBlogSnapshot = (html: string, slug: string) => {
   const relatedLesson = article.relatedLessonId
     ? `<p><a href="/?lesson=${encodeURIComponent(article.relatedLessonId)}">Open the related lesson</a></p>`
     : '';
-  const content = `<main id="blog-server-content"><nav aria-label="Breadcrumb"><a href="/?view=blog">Blog</a></nav><article><header><p>${escapeHtml(article.category)} · ${escapeHtml(article.readTime)}</p><h1>${escapeHtml(article.title)}</h1><p>${escapeHtml(article.excerpt)}</p><p>By ${escapeHtml(article.author)} · <time datetime="${escapeHtml(article.date)}">${escapeHtml(dateLabel)} ${escapeHtml(article.date)}</time>${article.updatedAt ? ` · <time datetime="${escapeHtml(article.updatedAt)}">Updated ${escapeHtml(article.updatedAt)}</time>` : ''}</p></header>${articleBody}${relatedLesson}</article></main>`;
+  const content = `<main id="blog-server-content"><nav aria-label="Breadcrumb"><a href="/blog/">Blog</a></nav><article><header><p>${escapeHtml(article.category)} · ${escapeHtml(article.readTime)}</p><h1>${escapeHtml(article.title)}</h1><p>${escapeHtml(article.excerpt)}</p><p>By ${escapeHtml(article.author)} · <time datetime="${escapeHtml(article.date)}">${escapeHtml(dateLabel)} ${escapeHtml(article.date)}</time>${article.updatedAt ? ` · <time datetime="${escapeHtml(article.updatedAt)}">Updated ${escapeHtml(article.updatedAt)}</time>` : ''}</p></header>${articleBody}${relatedLesson}</article></main>`;
   const jsonLd = JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
@@ -404,6 +408,10 @@ app.get("/sitemap.xml", (req, res) => {
 
   // Primary Landing Page
   addEntry(`${baseUrl}/`, "1.0", "daily");
+  addEntry(`${baseUrl}/courses/`, "0.95");
+  addEntry(`${baseUrl}/free-lessons/`, "0.90");
+  addEntry(`${baseUrl}/membership/`, "0.85");
+  addEntry(`${baseUrl}/live-code/`, "0.85");
 
   // Core Developer Tools & Visualizers
   addEntry(`${baseUrl}/?view=practice-hub`, "0.95");
@@ -433,9 +441,9 @@ app.get("/sitemap.xml", (req, res) => {
   addEntry(`${baseUrl}/contact.html`, "0.70", "monthly");
 
   // Blog Posts — High-Value SEO Content
-  addEntry(`${baseUrl}/?view=blog`, "0.90", "weekly");
-  for (const article of BLOG_ARTICLES) {
-    addEntry(`${baseUrl}/?blog=${encodeURIComponent(article.slug)}`, "0.85", "monthly");
+  addEntry(`${baseUrl}/blog/`, "0.90", "weekly");
+  for (const article of ALL_BLOG_ARTICLES) {
+    addEntry(`${baseUrl}/blog/${encodeURIComponent(article.slug)}/`, "0.85", "monthly");
   }
 
   xml += `</urlset>`;
@@ -1268,6 +1276,15 @@ async function startServer() {
       const userAgent = req.headers["user-agent"] || "";
       const isBot = BOT_USER_AGENTS.test(userAgent);
       const requestedLessonId = typeof req.query.lesson === "string" ? req.query.lesson : undefined;
+      const blogPathMatch = req.path.match(/^\/blog\/([^/]+)\/?$/i);
+      let blogSlugFromPath: string | undefined;
+      if (blogPathMatch) {
+        try {
+          blogSlugFromPath = decodeURIComponent(blogPathMatch[1]);
+        } catch {
+          blogSlugFromPath = undefined;
+        }
+      }
 
       if (isBot) {
         // Serve index.html with the pre-rendered noscript content for crawlers
@@ -1276,7 +1293,7 @@ async function startServer() {
             cachedIndexHtml = fs.readFileSync(path.join(distPath, "index.html"), "utf-8");
           }
           res.header("Content-Type", "text/html; charset=utf-8");
-          const requestedBlogSlug = typeof req.query.blog === "string" ? req.query.blog : undefined;
+          const requestedBlogSlug = typeof req.query.blog === "string" ? req.query.blog : blogSlugFromPath;
           const responseHtml = requestedLessonId
             ? injectLessonSnapshot(cachedIndexHtml, requestedLessonId)
             : requestedBlogSlug

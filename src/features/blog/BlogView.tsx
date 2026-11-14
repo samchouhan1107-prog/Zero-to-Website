@@ -6,6 +6,7 @@ import { LEGACY_BLOG_ARTICLES } from '../../data/blog/blogAdapter';
 import { EXTERNAL_TOOLS } from '../../data/externalTools';
 import type { BlogSection } from '../../data/blogData';
 import { SEO_PRESETS, useSEOMeta } from '../../utils/useSEOMeta';
+import { getBlogArticleHref, getBlogSlugFromLocation } from '../../utils/publicRoutes';
 
 interface BlogViewProps {
   articles?: BlogArticle[];
@@ -14,7 +15,9 @@ interface BlogViewProps {
   onOpenLesson?: (lessonId: string) => void;
 }
 
-const ALL_BLOG_ARTICLES: BlogArticle[] = [...BLOG_ARTICLES, ...LEGACY_BLOG_ARTICLES];
+const ALL_BLOG_ARTICLES: BlogArticle[] = Array.from(
+  new Map([...BLOG_ARTICLES, ...LEGACY_BLOG_ARTICLES].map((article) => [article.slug, article])).values()
+);
 
 function renderArticleContent(content: string, articleTitle: string): React.ReactNode[] {
   const lines = content.split(/\r?\n/);
@@ -251,7 +254,7 @@ export const BlogView: React.FC<BlogViewProps> = ({
   const [articleCategory, setArticleCategory] = useState('All categories');
   const [selectedArticleId, setSelectedArticleId] = useState<string | null>(() => {
     if (typeof window === 'undefined') return null;
-    return new URLSearchParams(window.location.search).get('blog');
+    return getBlogSlugFromLocation(window.location);
   });
   const availableArticles = useMemo(
     () => Array.from(new Map([...articles, ...featuredArticles].map((article) => [article.slug, article])).values()),
@@ -294,7 +297,7 @@ export const BlogView: React.FC<BlogViewProps> = ({
 
   useEffect(() => {
     const syncArticleFromUrl = () => {
-      setSelectedArticleId(new URLSearchParams(window.location.search).get('blog'));
+      setSelectedArticleId(getBlogSlugFromLocation(window.location));
     };
     window.addEventListener('popstate', syncArticleFromUrl);
     return () => window.removeEventListener('popstate', syncArticleFromUrl);
@@ -302,16 +305,16 @@ export const BlogView: React.FC<BlogViewProps> = ({
 
   const openArticle = (article: BlogArticle) => {
     const url = new URL(window.location.href);
-    url.searchParams.set('blog', article.slug);
-    url.searchParams.delete('view');
+    url.pathname = getBlogArticleHref(article.slug);
+    url.search = '';
     window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
     setSelectedArticleId(article.slug);
   };
 
   const returnToBlog = () => {
     const url = new URL(window.location.href);
-    url.searchParams.delete('blog');
-    url.searchParams.set('view', 'blog');
+    url.pathname = '/blog/';
+    url.search = '';
     window.history.replaceState({}, '', `${url.pathname}${url.search}${url.hash}`);
     setSelectedArticleId(null);
     onNavigate('blog');
@@ -444,7 +447,7 @@ export const BlogView: React.FC<BlogViewProps> = ({
                 {relatedArticles.map((article) => (
                   <li key={article.slug}>
                     <a
-                      href={`/?blog=${encodeURIComponent(article.slug)}`}
+                      href={getBlogArticleHref(article.slug)}
                       onClick={(event) => {
                         event.preventDefault();
                         openArticle(article);

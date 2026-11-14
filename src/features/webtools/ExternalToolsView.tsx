@@ -4,7 +4,7 @@ import { EXTERNAL_TOOL_CATEGORIES, EXTERNAL_TOOLS } from '../../data/externalToo
 import { INFRASTRUCTURE_ARTICLES } from '../../data/blog/infrastructureArticles';
 
 interface ExternalToolsViewProps {
-  onNavigate: (view: string) => void;
+  onNavigate: (view: string, params?: Record<string, string>) => void;
 }
 
 export const ExternalToolsView: React.FC<ExternalToolsViewProps> = ({ onNavigate }) => {
@@ -23,11 +23,7 @@ export const ExternalToolsView: React.FC<ExternalToolsViewProps> = ({ onNavigate
   const openArticle = (slug: string) => {
     const article = INFRASTRUCTURE_ARTICLES.find((candidate) => candidate.slug === slug);
     if (!article) return;
-    const url = new URL(window.location.href);
-    url.searchParams.set('blog', article.slug);
-    url.searchParams.delete('view');
-    window.history.pushState({}, '', `${url.pathname}${url.search}${url.hash}`);
-    onNavigate('blog');
+    onNavigate('blog', { slug: article.slug });
   };
 
   return (
