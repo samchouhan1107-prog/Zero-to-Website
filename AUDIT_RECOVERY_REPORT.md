@@ -1,5 +1,7 @@
 # Architecture Audit and Recovery Report — Zero-to-Website
 
+> **Historical snapshot — 7 November 2026.** This report records an earlier recovery checkpoint, not the current project state. Its `.recovery_backup/` reference is historical; that directory is not present in the current working tree. Use [README.md](README.md), [DEPLOYMENT.md](DEPLOYMENT.md), and the current source for today's architecture and deployment details.
+
 ## 1. Executive Summary & Recovery Point
 - **Platform Name**: Zero-to-Website (WebZoneBW SC / Storehouse)
 - **Recovery Point Created**: `.recovery_backup/` containing exact copy of all source, server, and config files prior to rebuild.

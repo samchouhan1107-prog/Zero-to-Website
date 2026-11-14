@@ -239,7 +239,7 @@ app.use(
   })
 );
 
-// CORS — allow frontend (GitHub Pages) to call this API
+// CORS — allow the configured frontend origin to call this API
 app.use((_req: express.Request, res: express.Response, next: express.NextFunction): void => {
   const origin = process.env.CORS_ORIGIN || _req.headers.origin || '*';
   res.header('Access-Control-Allow-Origin', origin);

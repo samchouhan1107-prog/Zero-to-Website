@@ -1,6 +1,0 @@
-{
-  "name": "WebZoneBW SC",
-  "description": "Zero-to-Website: Human-centred educational web engineering platform with structured lessons, standard CSS3 architecture, interactive sandboxes, persistent Storehouse, and AI learning assistant.",
-  "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
-}

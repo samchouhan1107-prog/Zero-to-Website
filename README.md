@@ -1,91 +1,42 @@
-# Zero-to-website
+# Zero-to-Website
 
-## Learn • Practice • Build • Share
+Zero-to-Website is WebZoneBW's learning platform for web development. It combines structured courses, lessons, a Blog, Live Code, student accounts, Storehouse, and creator publishing tools.
 
----
+## Project structure
 
-## About
+- `src/` — React and TypeScript application, feature views, styles, course data, and Blog content.
+- `server.ts` and `server/` — Express application, API routes, authentication, payments, publishing, and file-backed data stores.
+- `public/` — static assets and the web app manifest.
+- Root HTML files — Vite entry points for the main app and standalone informational pages.
+- `dist/` — generated build output. Do not edit it directly; it is recreated by the build.
 
-WZ Storehouse is a developer learning platform designed to teach web development through structured lessons, visual explanations, hands-on coding exercises, and real-world projects.
+The server currently stores several records in JSON files under `server/`. Preserve these files and review them carefully before sharing or committing changes. The Render configuration does not declare a persistent disk; confirm production storage and backup arrangements before relying on local JSON files for durable user data.
 
-The goal is to provide learners with a complete roadmap from beginner to professional developer while maintaining clean project organization and industry-standard development practices.
+## Requirements
 
----
+Use the Node.js version listed in `.node-version`. `package.json` also constrains the supported Node.js range.
 
-## Mission
+## Run locally
 
-To create a learning platform where every concept is:
+```sh
+npm ci
+npm run dev
+```
 
-- Easy to Understand
-- Visually Explained
-- Practiced Through Coding
-- Applied in Real Projects
+The local app listens on `http://localhost:3000` by default. Use these commands to check types and create a production build:
 
----
+```sh
+npm run lint
+npm run build
+npm start
+```
 
-## Learning Philosophy
+`npm start` serves the production build and requires `npm run build` first. Optional environment variables are listed in `.env.example`; keep real credentials in the hosting provider's secret settings, never in source control.
 
-Read
+## Deployment
 
-↓
+The repository's hosting configuration is `render.yaml`. Read [DEPLOYMENT.md](DEPLOYMENT.md) before changing hosting or production settings. The GitHub Actions workflow validates the build; it does not deploy the application.
 
-Understand
+## Maintainer
 
-↓
-
-Visualize
-
-↓
-
-Practice
-
-↓
-
-Build
-
-↓
-
-Repeat
-
----
-
-## Course Roadmap
-
-- Chapter 00 — Introduction
-- Chapter 01 — Development Environment
-- Chapter 02 — HTML
-- Chapter 03 — CSS
-- Chapter 04 — Flexbox
-- Chapter 05 — CSS Grid
-- Chapter 06 — JavaScript
-- Chapter 07 — Responsive Design
-- Chapter 08 — Bootstrap
-- Chapter 09 — Git & GitHub
-- Chapter 10 — Final Project
-
----
-
-## Technologies
-
-- HTML5
-- CSS3
-- JavaScript
-- Bootstrap
-- Git
-- GitHub
-
-Future Expansion:
-
-- Python
-- Linux
-- Cloud
-- Cybersecurity
-- AI
-
----
-
-## Developer
-
-Sameer Chouhan
-
-Version 1.0 Alpha
+Sameer Chouhan / WebZoneBW

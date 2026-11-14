@@ -15,6 +15,7 @@ coverage/
 .recovery_backup/
 .recovery_checkpoint_layout/
 .playwright-cli/
+PROJECT-TREE.txt
 
 # Ignore vscode AI rules
 .github/instructions/codacy.instructions.md

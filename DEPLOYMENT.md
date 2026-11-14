@@ -1,108 +1,51 @@
-# WebZoneBW SC - Production Deployment Guide
+# Deployment and Operations
 
-## Quick Start
+## Hosting configuration
 
-### 1. Local Build Test
-```bash
-# Test build locally
-bash test-deploy.sh
+The checked-in deployment descriptor is [`render.yaml`](render.yaml). The service builds with `npm run build` and starts with `node dist/server.js`. The Node.js version is configured in `.node-version` and constrained by `package.json`.
 
-# Full build and deploy
-bash deploy.sh
+The GitHub Actions workflow runs type checking and a production build. It does not publish a site. Production deployment remains controlled by the connected hosting service and its dashboard settings.
+
+## Validate a local build
+
+Run these commands from the repository root:
+
+```sh
+npm ci
+npm run lint
+npm run build
 ```
 
-### 2. GitHub Pages Deployment
-- Push to main/master branch
-- Automatic deployment via `.github/workflows/deploy.yml`
-- URL: `https://your-username.github.io/your-repo/`
+To run the built Express server locally, set any needed environment variables and run:
 
-### 3. Render.com Deployment
-```yaml
-# Use render.yaml for automatic deployment
-services:
-  - type: web
-    name: webzonebw-api
-    runtime: node
-    buildCommand: npm run build
-    startCommand: node dist/server.js
-    envVars:
-      - key: NODE_ENV
-        value: production
-      - key: CORS_ORIGIN
-        value: https://your-domain.com
-      - key: GEMINI_API_KEY
-        sync: false
+```sh
+npm start
 ```
 
-### 4. Vercel Deployment
-1. Link repo to Vercel
-2. Add environment variables:
-   - `NODE_ENV`: production
-   - `CORS_ORIGIN`: https://your-domain.com
-   - `GEMINI_API_KEY`: your_api_key
+The server uses the hosting-provided `PORT`, or port 3000 when it is not set.
 
-### 5. Netlify Deployment
-1. Link repo to Netlify
-2. Build command: `npm run build`
-3. Publish directory: `dist`
-4. Add environment variables
+## Environment variables
 
-## Environment Variables Required
+See `.env.example` for the names read by the current source. Values that contain credentials must be configured as secrets in the hosting provider, not committed to the repository.
 
-| Variable | Description | Required |
-|----------|-------------|----------|
-| `NODE_ENV` | production | ✅ |
-| `CORS_ORIGIN` | Your domain URL | ✅ |
-| `GEMINI_API_KEY` | Google AI API key | ❌ |
+| Variable | Purpose |
+| --- | --- |
+| `NODE_ENV` | Selects development or production server behavior. |
+| `PORT` | HTTP port supplied by the host; defaults to 3000. |
+| `CORS_ORIGIN` | Optional allowed frontend origin. |
+| `GEMINI_API_KEY` | Optional server-side Gemini access for AI features. |
+| `APP_ORIGIN` | Public origin used to form payment return URLs. |
+| `STRIPE_SECRET_KEY`, `STRIPE_WEBHOOK_SECRET` | Optional Stripe server credentials. |
+| `RAZORPAY_KEY_ID`, `RAZORPAY_KEY_SECRET` | Optional Razorpay server credentials. |
+| `MERCHANT_WEBHOOK_SECRET` | Optional merchant webhook verification secret. |
+| `VITE_API_URL` | Optional frontend API origin; leave blank for same-origin requests. |
 
-## Build Output
+Only configure payment credentials when the matching merchant integration is intentionally enabled. Never enter real credentials in `.env.example`.
 
-```
-dist/
-├── index.html          # SPA entry point
-├── assets/             # Built CSS/JS assets
-├── server.js           # Express server bundle
-└── server.js.map       # Source maps
-```
+## Persistent data warning
 
-## Common Issues
+Authentication, sessions, Storehouse, payments, subscriptions, publishing drafts, rights, and access grants use JSON files under `server/`. The checked-in `render.yaml` does **not** declare a persistent disk or external database. Confirm the host's storage behavior and configure durable storage and backups before treating those records as durable production data. Do not delete or overwrite the JSON files as part of a build or cleanup.
 
-### Build Failures
-- **Missing dist files**: Run `npm run build` again
-- **Node version**: Use the exact version in `.node-version` (currently Node 26.13.1 LTS)
-- **Permissions**: Ensure write access to dist/
+## Production verification
 
-### Runtime Issues
-- **CORS errors**: Set `CORS_ORIGIN` correctly
-- **AI API errors**: Check `GEMINI_API_KEY`
-- **Port conflicts**: Ensure port 3000 is available
-
-### Deployment Issues
-- **GitHub Pages**: Check repo settings → Pages → Source
-- **Render.com: Verify environment variables in dashboard
-- **Vercel/Netlify**: Ensure build command and directory settings
-
-## Monitoring
-
-### Health Checks
-- API: `GET /api/health`
-- SPA: Load main page and check routes
-
-### Logs
-- Render.com: Check service logs in dashboard
-- GitHub Pages: Check deployment logs
-- Local: `npm run dev` for development logs
-
-## Security Notes
-
-1. **API Keys**: Never commit `GEMINI_API_KEY` to repo
-2. **CORS**: Always set `CORS_ORIGIN` to your actual domain
-3. **Environment**: Use `NODE_ENV=production` in production
-
-## Rollback
-
-If deployment fails:
-1. Check GitHub Actions logs
-2. Revert git commit: `git revert <commit-hash>`
-3. Push to trigger redeploy
-4. For Render.com: Redeploy via dashboard
+After a hosting deployment, verify the public site, `/api/health`, authentication, Storehouse, student progress, publishing, and payment behavior in the deployed environment. A successful local build does not prove production data persistence or live merchant configuration.
